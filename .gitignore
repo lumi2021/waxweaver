@@ -1,0 +1,6 @@
+
+#Ignore godot c++ repository
+godot-cpp/
+
+#Ignore .godot folder
+theSandbox/.godot
