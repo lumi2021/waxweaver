@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://c5ikt4hqyhdoy"]
+
+[ext_resource type="Script" path="res://world_scenes/planet/planet.gd" id="1_8tc4r"]
+
+[node name="Planet" type="Node2D"]
+script = ExtResource("1_8tc4r")
+
+[node name="isVisible" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="ChunkContainer" type="Node2D" parent="."]
+
+[node name="EntityContainer" type="Node2D" parent="."]
+
+[connection signal="screen_entered" from="isVisible" to="." method="_on_is_visible_screen_entered"]
+[connection signal="screen_exited" from="isVisible" to="." method="_on_is_visible_screen_exited"]

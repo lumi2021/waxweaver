@@ -1,0 +1,382 @@
+[gd_scene load_steps=11 format=3 uid="uid://daqevwntvcp3o"]
+
+[ext_resource type="Script" path="res://ui_scenes/playerHUD/banner/hotbar_banner.gd" id="1_iyyfi"]
+[ext_resource type="PackedScene" uid="uid://cr7y1t1hoywt1" path="res://ui_scenes/playerHUD/inventory/inventory_slot.tscn" id="2_il2kt"]
+[ext_resource type="Texture2D" uid="uid://g2dpyvmk34cm" path="res://ui_scenes/playerHUD/crafting/outline.png" id="3_agtxv"]
+[ext_resource type="PackedScene" uid="uid://d6kj1g07b5ym" path="res://ui_scenes/playerHUD/crafting/crafting_icon.tscn" id="4_2t1ey"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lombr"]
+bg_color = Color(0.207843, 0.286275, 0.4, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yhha6"]
+bg_color = Color(0.239216, 0.329412, 0.458824, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o3p5s"]
+bg_color = Color(0.239216, 0.329412, 0.458824, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sesr6"]
+content_margin_left = 4.0
+content_margin_top = 0.0
+content_margin_right = 4.0
+content_margin_bottom = 0.0
+bg_color = Color(0.0823529, 0.113725, 0.156863, 1)
+corner_detail = 1
+
+[sub_resource type="Theme" id="Theme_yy38c"]
+VScrollBar/styles/grabber = SubResource("StyleBoxFlat_lombr")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxFlat_yhha6")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_o3p5s")
+VScrollBar/styles/scroll = SubResource("StyleBoxFlat_sesr6")
+VScrollBar/styles/scroll_focus = null
+VSlider/constants/center_grabber = 0
+
+[sub_resource type="LabelSettings" id="LabelSettings_bk67w"]
+font_size = 11
+font_color = Color(0.207843, 0.286275, 0.4, 1)
+
+[node name="HotbarBanner" type="Node2D"]
+z_index = 170
+script = ExtResource("1_iyyfi")
+
+[node name="blackBanner" type="ColorRect" parent="."]
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 261.0
+offset_bottom = 40.0
+color = Color(0, 0, 0, 1)
+
+[node name="Hotbar" type="Node2D" parent="."]
+position = Vector2(5, 5)
+
+[node name="slot0" parent="Hotbar" instance=ExtResource("2_il2kt")]
+
+[node name="slot1" parent="Hotbar" instance=ExtResource("2_il2kt")]
+position = Vector2(18, 0)
+slotToDisplay = 1
+
+[node name="slot2" parent="Hotbar" instance=ExtResource("2_il2kt")]
+position = Vector2(36, 0)
+slotToDisplay = 2
+
+[node name="slot3" parent="Hotbar" instance=ExtResource("2_il2kt")]
+position = Vector2(54, 0)
+slotToDisplay = 3
+
+[node name="slot4" parent="Hotbar" instance=ExtResource("2_il2kt")]
+position = Vector2(72, 0)
+slotToDisplay = 4
+
+[node name="slot5" parent="Hotbar" instance=ExtResource("2_il2kt")]
+position = Vector2(0, 17)
+slotToDisplay = 5
+
+[node name="slot6" parent="Hotbar" instance=ExtResource("2_il2kt")]
+position = Vector2(18, 17)
+slotToDisplay = 6
+
+[node name="slot7" parent="Hotbar" instance=ExtResource("2_il2kt")]
+position = Vector2(36, 17)
+slotToDisplay = 7
+
+[node name="slot8" parent="Hotbar" instance=ExtResource("2_il2kt")]
+position = Vector2(54, 17)
+slotToDisplay = 8
+
+[node name="slot9" parent="Hotbar" instance=ExtResource("2_il2kt")]
+position = Vector2(72, 17)
+slotToDisplay = 9
+
+[node name="holdingSlot" parent="." instance=ExtResource("2_il2kt")]
+z_index = 3
+position = Vector2(-24, 195)
+slotToDisplay = 49
+showOutline = false
+isHoldSlot = true
+
+[node name="Menu" type="Node2D" parent="."]
+visible = false
+position = Vector2(-1, -1)
+
+[node name="background" type="ColorRect" parent="Menu"]
+offset_top = 41.0
+offset_right = 262.0
+offset_bottom = 233.0
+color = Color(0, 0, 0, 0.898039)
+
+[node name="line" type="ColorRect" parent="Menu"]
+offset_left = 5.0
+offset_top = 42.0
+offset_right = 91.0
+offset_bottom = 43.0
+color = Color(0.0823529, 0.113725, 0.156863, 1)
+
+[node name="InventoryBody" type="Node2D" parent="Menu"]
+position = Vector2(6, 48)
+
+[node name="slot10" parent="Menu/InventoryBody" instance=ExtResource("2_il2kt")]
+slotToDisplay = 10
+
+[node name="slot11" parent="Menu/InventoryBody" instance=ExtResource("2_il2kt")]
+position = Vector2(18, 0)
+slotToDisplay = 11
+
+[node name="slot12" parent="Menu/InventoryBody" instance=ExtResource("2_il2kt")]
+position = Vector2(36, 0)
+slotToDisplay = 12
+
+[node name="slot13" parent="Menu/InventoryBody" instance=ExtResource("2_il2kt")]
+position = Vector2(54, 0)
+slotToDisplay = 13
+
+[node name="slot14" parent="Menu/InventoryBody" instance=ExtResource("2_il2kt")]
+position = Vector2(72, 0)
+slotToDisplay = 14
+
+[node name="slot15" parent="Menu/InventoryBody" instance=ExtResource("2_il2kt")]
+position = Vector2(0, 17)
+slotToDisplay = 15
+
+[node name="slot16" parent="Menu/InventoryBody" instance=ExtResource("2_il2kt")]
+position = Vector2(18, 17)
+slotToDisplay = 16
+
+[node name="slot17" parent="Menu/InventoryBody" instance=ExtResource("2_il2kt")]
+position = Vector2(36, 17)
+slotToDisplay = 17
+
+[node name="slot18" parent="Menu/InventoryBody" instance=ExtResource("2_il2kt")]
+position = Vector2(54, 17)
+slotToDisplay = 18
+
+[node name="slot19" parent="Menu/InventoryBody" instance=ExtResource("2_il2kt")]
+position = Vector2(72, 17)
+slotToDisplay = 19
+
+[node name="slot20" parent="Menu/InventoryBody" instance=ExtResource("2_il2kt")]
+position = Vector2(0, 34)
+slotToDisplay = 20
+
+[node name="slot21" parent="Menu/InventoryBody" instance=ExtResource("2_il2kt")]
+position = Vector2(18, 34)
+slotToDisplay = 21
+
+[node name="slot22" parent="Menu/InventoryBody" instance=ExtResource("2_il2kt")]
+position = Vector2(36, 34)
+slotToDisplay = 22
+
+[node name="slot23" parent="Menu/InventoryBody" instance=ExtResource("2_il2kt")]
+position = Vector2(54, 34)
+slotToDisplay = 23
+
+[node name="slot24" parent="Menu/InventoryBody" instance=ExtResource("2_il2kt")]
+position = Vector2(72, 34)
+slotToDisplay = 24
+
+[node name="slot25" parent="Menu/InventoryBody" instance=ExtResource("2_il2kt")]
+position = Vector2(0, 51)
+slotToDisplay = 25
+
+[node name="slot26" parent="Menu/InventoryBody" instance=ExtResource("2_il2kt")]
+position = Vector2(18, 51)
+slotToDisplay = 26
+
+[node name="slot27" parent="Menu/InventoryBody" instance=ExtResource("2_il2kt")]
+position = Vector2(36, 51)
+slotToDisplay = 27
+
+[node name="slot28" parent="Menu/InventoryBody" instance=ExtResource("2_il2kt")]
+position = Vector2(54, 51)
+slotToDisplay = 28
+
+[node name="slot29" parent="Menu/InventoryBody" instance=ExtResource("2_il2kt")]
+position = Vector2(72, 51)
+slotToDisplay = 29
+
+[node name="slot30" parent="Menu/InventoryBody" instance=ExtResource("2_il2kt")]
+position = Vector2(0, 68)
+slotToDisplay = 30
+
+[node name="slot31" parent="Menu/InventoryBody" instance=ExtResource("2_il2kt")]
+position = Vector2(18, 68)
+slotToDisplay = 31
+
+[node name="slot32" parent="Menu/InventoryBody" instance=ExtResource("2_il2kt")]
+position = Vector2(36, 68)
+slotToDisplay = 32
+
+[node name="slot33" parent="Menu/InventoryBody" instance=ExtResource("2_il2kt")]
+position = Vector2(54, 68)
+slotToDisplay = 33
+
+[node name="slot34" parent="Menu/InventoryBody" instance=ExtResource("2_il2kt")]
+position = Vector2(72, 68)
+slotToDisplay = 34
+
+[node name="slot35" parent="Menu/InventoryBody" instance=ExtResource("2_il2kt")]
+position = Vector2(0, 85)
+slotToDisplay = 35
+
+[node name="slot36" parent="Menu/InventoryBody" instance=ExtResource("2_il2kt")]
+position = Vector2(18, 85)
+slotToDisplay = 36
+
+[node name="slot37" parent="Menu/InventoryBody" instance=ExtResource("2_il2kt")]
+position = Vector2(36, 85)
+slotToDisplay = 37
+
+[node name="slot38" parent="Menu/InventoryBody" instance=ExtResource("2_il2kt")]
+position = Vector2(54, 85)
+slotToDisplay = 38
+
+[node name="slot39" parent="Menu/InventoryBody" instance=ExtResource("2_il2kt")]
+position = Vector2(72, 85)
+slotToDisplay = 39
+
+[node name="ArmorSlots" type="Node2D" parent="Menu"]
+position = Vector2(15, 161)
+
+[node name="slot40" parent="Menu/ArmorSlots" instance=ExtResource("2_il2kt")]
+slotToDisplay = 40
+
+[node name="slot41" parent="Menu/ArmorSlots" instance=ExtResource("2_il2kt")]
+position = Vector2(0, 19)
+slotToDisplay = 41
+
+[node name="slot42" parent="Menu/ArmorSlots" instance=ExtResource("2_il2kt")]
+position = Vector2(0, 38)
+slotToDisplay = 42
+
+[node name="AccessorySlots" type="Node2D" parent="Menu"]
+position = Vector2(52, 162)
+
+[node name="slot43" parent="Menu/AccessorySlots" instance=ExtResource("2_il2kt")]
+slotToDisplay = 43
+
+[node name="slot44" parent="Menu/AccessorySlots" instance=ExtResource("2_il2kt")]
+position = Vector2(0, 19)
+slotToDisplay = 44
+
+[node name="slot45" parent="Menu/AccessorySlots" instance=ExtResource("2_il2kt")]
+position = Vector2(0, 38)
+slotToDisplay = 45
+
+[node name="slot46" parent="Menu/AccessorySlots" instance=ExtResource("2_il2kt")]
+position = Vector2(17, 0)
+slotToDisplay = 46
+
+[node name="slot47" parent="Menu/AccessorySlots" instance=ExtResource("2_il2kt")]
+position = Vector2(17, 19)
+slotToDisplay = 47
+
+[node name="slot48" parent="Menu/AccessorySlots" instance=ExtResource("2_il2kt")]
+position = Vector2(17, 38)
+slotToDisplay = 48
+
+[node name="Crafting" type="Node2D" parent="Menu"]
+position = Vector2(99, 47)
+
+[node name="Outline" type="Sprite2D" parent="Menu/Crafting"]
+texture = ExtResource("3_agtxv")
+centered = false
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Menu/Crafting"]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 152.0
+offset_bottom = 114.0
+theme = SubResource("Theme_yy38c")
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="Menu/Crafting/ScrollContainer"]
+layout_mode = 2
+columns = 5
+
+[node name="CenterContainer" parent="Menu/Crafting/ScrollContainer/GridContainer" instance=ExtResource("4_2t1ey")]
+layout_mode = 2
+
+[node name="CenterContainer2" parent="Menu/Crafting/ScrollContainer/GridContainer" instance=ExtResource("4_2t1ey")]
+layout_mode = 2
+
+[node name="CenterContainer3" parent="Menu/Crafting/ScrollContainer/GridContainer" instance=ExtResource("4_2t1ey")]
+layout_mode = 2
+
+[node name="CenterContainer4" parent="Menu/Crafting/ScrollContainer/GridContainer" instance=ExtResource("4_2t1ey")]
+layout_mode = 2
+
+[node name="CenterContainer5" parent="Menu/Crafting/ScrollContainer/GridContainer" instance=ExtResource("4_2t1ey")]
+layout_mode = 2
+
+[node name="CenterContainer6" parent="Menu/Crafting/ScrollContainer/GridContainer" instance=ExtResource("4_2t1ey")]
+layout_mode = 2
+
+[node name="CenterContainer7" parent="Menu/Crafting/ScrollContainer/GridContainer" instance=ExtResource("4_2t1ey")]
+layout_mode = 2
+
+[node name="CenterContainer8" parent="Menu/Crafting/ScrollContainer/GridContainer" instance=ExtResource("4_2t1ey")]
+layout_mode = 2
+
+[node name="CenterContainer9" parent="Menu/Crafting/ScrollContainer/GridContainer" instance=ExtResource("4_2t1ey")]
+layout_mode = 2
+
+[node name="CenterContainer10" parent="Menu/Crafting/ScrollContainer/GridContainer" instance=ExtResource("4_2t1ey")]
+layout_mode = 2
+
+[node name="CenterContainer11" parent="Menu/Crafting/ScrollContainer/GridContainer" instance=ExtResource("4_2t1ey")]
+layout_mode = 2
+
+[node name="CenterContainer12" parent="Menu/Crafting/ScrollContainer/GridContainer" instance=ExtResource("4_2t1ey")]
+layout_mode = 2
+
+[node name="CenterContainer13" parent="Menu/Crafting/ScrollContainer/GridContainer" instance=ExtResource("4_2t1ey")]
+layout_mode = 2
+
+[node name="CenterContainer14" parent="Menu/Crafting/ScrollContainer/GridContainer" instance=ExtResource("4_2t1ey")]
+layout_mode = 2
+
+[node name="CenterContainer15" parent="Menu/Crafting/ScrollContainer/GridContainer" instance=ExtResource("4_2t1ey")]
+layout_mode = 2
+
+[node name="CenterContainer16" parent="Menu/Crafting/ScrollContainer/GridContainer" instance=ExtResource("4_2t1ey")]
+layout_mode = 2
+
+[node name="CenterContainer17" parent="Menu/Crafting/ScrollContainer/GridContainer" instance=ExtResource("4_2t1ey")]
+layout_mode = 2
+
+[node name="CenterContainer18" parent="Menu/Crafting/ScrollContainer/GridContainer" instance=ExtResource("4_2t1ey")]
+layout_mode = 2
+
+[node name="CenterContainer19" parent="Menu/Crafting/ScrollContainer/GridContainer" instance=ExtResource("4_2t1ey")]
+layout_mode = 2
+
+[node name="CenterContainer20" parent="Menu/Crafting/ScrollContainer/GridContainer" instance=ExtResource("4_2t1ey")]
+layout_mode = 2
+
+[node name="CenterContainer21" parent="Menu/Crafting/ScrollContainer/GridContainer" instance=ExtResource("4_2t1ey")]
+layout_mode = 2
+
+[node name="CenterContainer22" parent="Menu/Crafting/ScrollContainer/GridContainer" instance=ExtResource("4_2t1ey")]
+layout_mode = 2
+
+[node name="CenterContainer23" parent="Menu/Crafting/ScrollContainer/GridContainer" instance=ExtResource("4_2t1ey")]
+layout_mode = 2
+
+[node name="CenterContainer24" parent="Menu/Crafting/ScrollContainer/GridContainer" instance=ExtResource("4_2t1ey")]
+layout_mode = 2
+
+[node name="CenterContainer25" parent="Menu/Crafting/ScrollContainer/GridContainer" instance=ExtResource("4_2t1ey")]
+layout_mode = 2
+
+[node name="CenterContainer26" parent="Menu/Crafting/ScrollContainer/GridContainer" instance=ExtResource("4_2t1ey")]
+layout_mode = 2
+
+[node name="CenterContainer27" parent="Menu/Crafting/ScrollContainer/GridContainer" instance=ExtResource("4_2t1ey")]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Menu/Crafting"]
+offset_left = 9.0
+offset_top = 120.0
+offset_right = 148.0
+offset_bottom = 133.0
+text = "stone pickaxe"
+label_settings = SubResource("LabelSettings_bk67w")
