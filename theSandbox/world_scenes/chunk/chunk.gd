@@ -66,6 +66,8 @@ func tickUpdate():
 	
 	MUSTUPDATELIGHT = lightChanged
 	
+	print($CHUNKDRAW.generateTexturesFromData({}))
+	
 	return committedChanges
 
 
@@ -82,7 +84,7 @@ func drawData():
 		for y in range(CHUNKSIZE):
 			var imgPos = Vector2(x*8,y*8)
 			var worldPos = Vector2(x+(pos.x*CHUNKSIZE),y+(pos.y*CHUNKSIZE))
-			var blockSide = planet.positionLookup[x][y]
+			var blockSide = planet.positionLookup[worldPos.x][worldPos.y]
 			
 			##MainTile##
 			var blockId = planetData[worldPos.x][worldPos.y][0]
@@ -153,6 +155,7 @@ func _on_visible_on_screen_notifier_2d_screen_entered():
 		planet.visibleChunks.append(self)
 	mainLayerSprite.visible = onScreen
 	backLayerSprite.visible = onScreen
+	
 
 func _on_visible_on_screen_notifier_2d_screen_exited():
 	body.set_process(false)

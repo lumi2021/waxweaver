@@ -48,6 +48,7 @@ version_control/autoload_on_startup=true
 folder_colors={
 "res://addons/": "gray",
 "res://autoload/": "red",
+"res://bin/": "orange",
 "res://block_resources/": "yellow",
 "res://item_resources/": "green",
 "res://object_scenes/": "blue",

@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://c1b1vgh12jqww"]
+[gd_scene load_steps=26 format=3 uid="uid://c1b1vgh12jqww"]
 
 [ext_resource type="Script" path="res://object_scenes/player/player.gd" id="1_7l8c2"]
 [ext_resource type="Texture2D" uid="uid://bdal1quvajxp" path="res://object_scenes/player/sprites/layerHandBack.png" id="2_a2jo3"]
@@ -17,7 +17,6 @@
 [ext_resource type="Texture2D" uid="uid://bjd5c0gdm1qt2" path="res://object_scenes/player/sprites/layerEyeBlink.png" id="7_sxd0h"]
 [ext_resource type="Texture2D" uid="uid://dei6me4j1chus" path="res://object_scenes/player/sprites/layerHandFront.png" id="8_0olu2"]
 [ext_resource type="Texture2D" uid="uid://bbhygnshkya87" path="res://object_scenes/player/hand.png" id="10_pp7um"]
-[ext_resource type="Texture2D" uid="uid://ewvjm54mwe8u" path="res://icon.svg" id="18_mjjkv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8s1yf"]
 size = Vector2(6, 6)
@@ -308,11 +307,5 @@ top_level = true
 libraries = {
 "": SubResource("AnimationLibrary_4n17m")
 }
-
-[node name="GDExample" type="GDExample" parent="."]
-z_index = 150
-position = Vector2(19.3088, 11.1197)
-scale = Vector2(0.05, 0.05)
-texture = ExtResource("18_mjjkv")
 
 [connection signal="animation_finished" from="HandRoot/handSwing" to="." method="_on_hand_swing_animation_finished"]
