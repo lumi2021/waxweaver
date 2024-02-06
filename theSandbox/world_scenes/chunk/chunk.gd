@@ -66,8 +66,7 @@ func tickUpdate():
 	
 	MUSTUPDATELIGHT = lightChanged
 	
-	print($CHUNKDRAW.generateTexturesFromData({}))
-	
+
 	return committedChanges
 
 
@@ -82,27 +81,27 @@ func drawData():
 	clearCollisions()
 	for x in range(CHUNKSIZE):
 		for y in range(CHUNKSIZE):
-			var imgPos = Vector2(x*8,y*8)
-			var worldPos = Vector2(x+(pos.x*CHUNKSIZE),y+(pos.y*CHUNKSIZE))
-			var blockSide = planet.positionLookup[worldPos.x][worldPos.y]
+			var imgPos := Vector2(x*8,y*8)
+			var worldPos := Vector2(x+(pos.x*CHUNKSIZE),y+(pos.y*CHUNKSIZE))
+			var blockSide :int= getBlockPosition(worldPos.x,worldPos.y)
 			
 			##MainTile##
-			var blockId = planetData[worldPos.x][worldPos.y][0]
+			var blockId :int= planetData[worldPos.x][worldPos.y][0]
 			if ![0,7].has(blockId):
-				var blockImg = BlockData.data[blockId].texture.get_image()
+				var blockImg :Image= BlockData.data[blockId].texture.get_image()
 				blockImg.convert(Image.FORMAT_RGBA8)
 				
-				var shouldRotate = int(BlockData.data[blockId].rotateTextureToGravity)
+				var shouldRotate :int= int(BlockData.data[blockId].rotateTextureToGravity)
 				for i in range(blockSide*shouldRotate):
 					blockImg.rotate_90(0)
 				
-				var frame = scanBlockOpen(planetData,worldPos.x,worldPos.y,0) * int(BlockData.data[blockId].connectedTexture)
-				var blockRect = Rect2i(frame, 0, 8, 8)
+				var frame :int= scanBlockOpen(planetData,worldPos.x,worldPos.y,0) * int(BlockData.data[blockId].connectedTexture)
+				var blockRect := Rect2i(frame, 0, 8, 8)
 				
 				img.blend_rect(blockImg,blockRect,Vector2i(imgPos.x,imgPos.y))
 			
 				##Collision##
-				var blockHasCollision = int(BlockData.data[blockId].hasCollision)
+				var blockHasCollision :bool= BlockData.data[blockId].hasCollision
 				if blockHasCollision:
 					var collider = CollisionShape2D.new()
 					collider.shape = shape
@@ -111,23 +110,27 @@ func drawData():
 					continue
 			
 			##BackTile##
-			var backBlockId = planetData[worldPos.x][worldPos.y][1]
-			if ![0,7].has(backBlockId):
-				var backBlockImg = BlockData.data[backBlockId].texture.get_image()
-				backBlockImg.convert(Image.FORMAT_RGBA8)
+			var backBlockId :int= planetData[worldPos.x][worldPos.y][1]
+			if [0,7].has(backBlockId):
+				continue
+			
+			var backBlockImg :Image= BlockData.data[backBlockId].texture.get_image()
+			backBlockImg.convert(Image.FORMAT_RGBA8)
 				
-				var shouldRotateBack = int(BlockData.data[backBlockId].rotateTextureToGravity)
-				for i in range(blockSide*shouldRotateBack):
-					backBlockImg.rotate_90(0)
+			var shouldRotateBack :int= int(BlockData.data[backBlockId].rotateTextureToGravity)
+			for i in range(blockSide*shouldRotateBack):
+				backBlockImg.rotate_90(0)
 
-				var frameB = scanBlockOpen(planetData,worldPos.x,worldPos.y,1) * int(BlockData.data[backBlockId].connectedTexture)
-				var backBlockRect = Rect2i(frameB, 0, 8, 8)
+			var frameB :int= scanBlockOpen(planetData,worldPos.x,worldPos.y,1) * int(BlockData.data[backBlockId].connectedTexture)
+			var backBlockRect := Rect2i(frameB, 0, 8, 8)
 				
-				backImg.blend_rect(backBlockImg,backBlockRect,Vector2i(imgPos.x,imgPos.y))
+			backImg.blend_rect(backBlockImg,backBlockRect,Vector2i(imgPos.x,imgPos.y))
 			
 	mainLayerSprite.texture = ImageTexture.create_from_image(img)
 	backLayerSprite.texture = ImageTexture.create_from_image(backImg)
-
+	
+	print($CHUNKDRAW.generateTexturesFromData(planetData,pos,planet.positionLookup))
+	
 func getBlockPosition(x,y):
 	return planet.positionLookup[x][y]
 

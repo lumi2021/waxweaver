@@ -1,7 +1,6 @@
 #include "chunkdraw.h"
 #include <godot_cpp/core/class_db.hpp>
-#include <godot_cpp/classes/image.hpp>
-#include <godot_cpp/classes/resource_loader.hpp>
+
 
 using namespace godot;
 
@@ -18,7 +17,7 @@ CHUNKDRAW::~CHUNKDRAW() {
 	// Add your cleanup here.
 }
 
-int CHUNKDRAW::generateTexturesFromData(Array planetData,Vector2i pos,Array positionLookup[][128]){
+int CHUNKDRAW::generateTexturesFromData(Array planetData,Vector2i pos,Array positionLookup){
     Ref<Image> img = Image::create(64, 64, false, Image::FORMAT_RGBA8);
     Ref<Image> backImg = Image::create(64, 64, false, Image::FORMAT_RGBA8);
     
@@ -30,7 +29,8 @@ int CHUNKDRAW::generateTexturesFromData(Array planetData,Vector2i pos,Array posi
             Vector2 imgPos = Vector2i(x*8,y*8);
             int worldX = x+(pos.x*8);
             int worldY = y+(pos.y*8);
-            blockSide = positionLookup[worldX][worldY];
+            Array poop = positionLookup[worldX];
+            blockSide = poop[worldY];
         }
     }
 
