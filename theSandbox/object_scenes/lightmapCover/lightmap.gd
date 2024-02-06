@@ -8,7 +8,6 @@ var thread: Thread
 var readyToGo :bool= false
 
 var newImg = null
-var newMask = null
 
 func _ready():
 	GlobalRef.lightmap = self
@@ -17,7 +16,6 @@ func _ready():
 
 func _process(delta):
 	sprite.texture = newImg
-	sprite.material.set_shader_parameter("mask_texture",newMask)
 	
 func pushUpdate(planet,newPos):
 	if !readyToGo: return
@@ -36,7 +34,6 @@ func pushUpdate(planet,newPos):
 	thread.wait_to_finish()
 	position = newPos
 	sprite.texture = newImg
-	sprite.material.set_shader_parameter("mask_texture",newMask)
 	
 func updateLight(x,y,planet,newPos):
 	
@@ -53,12 +50,9 @@ func updateLight(x,y,planet,newPos):
 			var newX = clamp(x+imgX,0,data.size()-1)
 			var newY = clamp(y+imgY,0,data.size()-1)
 			var l = data[newX][newY]
-			var isAir = blockData[newX][newY][0] == 0 and blockData[newX][newY][1] == 0
 			img.set_pixel(imgX,imgY,Color(l,l,l,1.0))
-			airImg.set_pixel(imgX,imgY,Color(0,0,0,int(!isAir)))
 			
 	newImg = ImageTexture.create_from_image(img)
-	newMask = ImageTexture.create_from_image(airImg)
 	
 	return
 	
