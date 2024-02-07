@@ -14,6 +14,7 @@ class_name Player
 @onready var backgroundHolder = $CameraOrigin/Camera2D/Backgroundholder
 
 var rotated = 0
+var rotationDelayTicks = 0
 
 var gravity = 1000
 
@@ -65,7 +66,16 @@ func _process(delta):
 ######################################################################
 
 func onPlanetMovement(delta):
-	rotated = getPlanetPosition()
+	var newRotation = getPlanetPosition()
+	
+	if newRotation != rotated:
+		rotationDelayTicks -= 1
+		if rotationDelayTicks <= 0:
+			rotated = newRotation
+			rotationDelayTicks = 8
+	else:
+		rotationDelayTicks = 8 #frame delay
+	
 	sprite.rotation = lerp_angle(sprite.rotation,rotated*(PI/2),0.4)
 	$HandRoot.rotation = sprite.rotation
 	
