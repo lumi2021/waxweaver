@@ -34,7 +34,7 @@ func _process(delta):
 	if tweening:
 		return
 	
-	ticks += 1
+	ticks += 1 * delta * 144.0
 	rotSide = getPlanetPosition()
 	
 	var newVelocity = velocity.rotated(-rotSide*(PI/2))
