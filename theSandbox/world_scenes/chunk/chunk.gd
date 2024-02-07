@@ -129,7 +129,7 @@ func drawData():
 	mainLayerSprite.texture = ImageTexture.create_from_image(img)
 	backLayerSprite.texture = ImageTexture.create_from_image(backImg)
 	
-	print($CHUNKDRAW.generateTexturesFromData(planetData,pos,planet.positionLookup))
+	#print($CHUNKDRAW.generateTexturesFromData(planetData,pos,planet.positionLookup))
 	
 func getBlockPosition(x,y):
 	return planet.positionLookup[x][y]

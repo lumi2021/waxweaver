@@ -5,6 +5,7 @@
 #include <godot_cpp/classes/image.hpp>
 #include <godot_cpp/variant/array.hpp>
 #include <godot_cpp/classes/image_texture.hpp>
+//#include <godot_cpp/classes/ref.hpp>
 
 namespace godot {
 
@@ -12,7 +13,6 @@ class LIGHTMAP : public Sprite2D {
 	GDCLASS(LIGHTMAP, Sprite2D)
 
 private:
-	double time_passed;
     Array planetData;
 
 protected:
@@ -20,9 +20,11 @@ protected:
 
 public:
 	LIGHTMAP();
+    ~LIGHTMAP();
 
-    <Ref>ImageTexture generateLightTexture(int x, int y,Array lightData,Array);
+    void generateLightTexture(int x, int y,Array lightData);
 
+    void _process(double delta) override;
 };
 
 }

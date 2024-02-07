@@ -15,3 +15,7 @@ texture_filter = 2
 material = SubResource("ShaderMaterial_byedf")
 scale = Vector2(8, 8)
 centered = false
+
+[node name="LIGHTMAP" type="LIGHTMAP" parent="."]
+
+[connection signal="image_updated" from="LIGHTMAP" to="." method="_on_lightmap_image_updated"]

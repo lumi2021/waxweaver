@@ -3,43 +3,36 @@ extends Node2D
 @onready var sprite = $Sprite2D
 var size = 64
 
-var thread: Thread
-
-var readyToGo :bool= false
 
 var newImg = null
 
 func _ready():
 	GlobalRef.lightmap = self
-	set_process(false)
-	readyToGo = true
-
-func _process(delta):
-	sprite.texture = newImg
 	
+
 func pushUpdate(planet,newPos):
-	if !readyToGo: return
-	if thread != null:
-		if thread.is_alive():
-			return
+	
+	
 	var pSize = planet.SIZEINCHUNKS * 32 #Pixel diameter of planet
 	newPos += planet.position
 	var relativePos = (newPos - planet.global_position) + Vector2(pSize,pSize)
-	thread = Thread.new()
+
 	var newX = int(relativePos.x)/8
 	var newY = int(relativePos.y)/8
-	#updateLight(int(relativePos.x)/8,int(relativePos.y)/8,planet)
+
+	#updateLight(newX,newY,planet,newPos)
 	
-	thread.start(updateLight.bind(newX,newY,planet,newPos))
-	thread.wait_to_finish()
+	$LIGHTMAP.generateLightTexture(newX,newY,planet.lightData)
+	
 	position = newPos
-	sprite.texture = newImg
+
 	
 func updateLight(x,y,planet,newPos):
 	
+
 	if !is_instance_valid(planet):
 		return
-	
+
 	var data = planet.lightData
 	var blockData = planet.planetData
 	
@@ -55,8 +48,7 @@ func updateLight(x,y,planet,newPos):
 	newImg = ImageTexture.create_from_image(img)
 	
 	return
-	
-func _exit_tree():
-	if thread != null:
-		if thread.is_alive():
-			thread.wait_to_finish()
+
+
+func _on_lightmap_image_updated(node, image):
+	sprite.texture = ImageTexture.create_from_image(image)
