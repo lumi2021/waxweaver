@@ -72,6 +72,10 @@ func tickUpdate():
 
 func drawData():
 	#Texture
+	#$CHUNKDRAW.generateTexturesFromData(planet.planetData,pos,planet.positionLookup)
+	#return
+	
+	
 	var img = Image.create(64,64,false,Image.FORMAT_RGBA8)
 	var backImg = Image.create(64,64,false,Image.FORMAT_RGBA8)
 	var shape = RectangleShape2D.new()
@@ -129,7 +133,7 @@ func drawData():
 	mainLayerSprite.texture = ImageTexture.create_from_image(img)
 	backLayerSprite.texture = ImageTexture.create_from_image(backImg)
 	
-	#print($CHUNKDRAW.generateTexturesFromData(planetData,pos,planet.positionLookup))
+	
 	
 func getBlockPosition(x,y):
 	return planet.positionLookup[x][y]
@@ -166,3 +170,8 @@ func _on_visible_on_screen_notifier_2d_screen_exited():
 	planet.visibleChunks.erase(self)
 	mainLayerSprite.visible = onScreen
 	backLayerSprite.visible = onScreen
+
+
+func _on_chunkdraw_chunk_drawn(node, image, backImage):
+	mainLayerSprite.texture = ImageTexture.create_from_image(image)
+	backLayerSprite.texture = ImageTexture.create_from_image(backImage)

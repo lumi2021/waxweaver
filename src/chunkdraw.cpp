@@ -6,6 +6,7 @@ using namespace godot;
 
 void CHUNKDRAW::_bind_methods() {
     ClassDB::bind_method(D_METHOD("generateTexturesFromData","planetData","pos","positionLookup"), &CHUNKDRAW::generateTexturesFromData);
+    ADD_SIGNAL(MethodInfo("chunkDrawn", PropertyInfo(Variant::OBJECT, "node"), PropertyInfo(Variant::OBJECT, "image"), PropertyInfo(Variant::OBJECT, "backImage")));
 }
 
 CHUNKDRAW::CHUNKDRAW() {
@@ -23,6 +24,8 @@ int CHUNKDRAW::generateTexturesFromData(Array planetData,Vector2i pos,Array posi
     
     int blockSide = 0;
 
+    ResourceLoader rl;
+    Ref<Texture2D> blockRes = rl.load("res://block_resources/block_textures/dirt.png");
 
     for (int x = 0; x < 8; x++){
         for (int y = 0; y < 8; y++){
@@ -31,8 +34,30 @@ int CHUNKDRAW::generateTexturesFromData(Array planetData,Vector2i pos,Array posi
             int worldY = y+(pos.y*8);
             Array poop = positionLookup[worldX];
             blockSide = poop[worldY];
+
+            //Ref<Image> blockImg = Image::create(8, 8, false, Image::FORMAT_RGBA8);
+            //blockImg->load("res://block_resources/block_textures/dirt.png");
+
+            Ref<Image> blockImg = blockRes->get_image();
+            blockImg->convert(Image::FORMAT_RGBA8);
+
+            Rect2i blockRect = Rect2i(0,0,8,8);
+
+            
+
+            img->blend_rect(blockImg, blockRect, imgPos);
+
+
         }
     }
+
+
+    emit_signal("chunkDrawn", this, img, backImg);
+
+   // bool gay = block->has_method("onTick");
+
+    //if (gay==true){blockSide=1;}
+    //if (gay == false){blockSide=0;}
 
 
    return blockSide;

@@ -4,7 +4,10 @@
 #include <godot_cpp/classes/sprite2d.hpp>
 #include <godot_cpp/classes/image.hpp>
 #include <godot_cpp/classes/resource_loader.hpp>
+#include <godot_cpp/classes/resource.hpp>
+#include <godot_cpp/classes/texture2d.hpp>
 #include <godot_cpp/variant/array.hpp>
+#include <godot_cpp/variant/rect2i.hpp>
 
 namespace godot {
 
