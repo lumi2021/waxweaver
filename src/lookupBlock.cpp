@@ -47,6 +47,7 @@ Dictionary LOOKUPBLOCK::getBlockData(int id){
 
     Ref<BLOCK> g = allBlocks[id];
     data["thing"] = g->texture;
+    data["rotate"] = g->rotateTextureToGravity;
  
  
     return data;

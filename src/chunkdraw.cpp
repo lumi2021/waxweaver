@@ -46,7 +46,14 @@ Array CHUNKDRAW::generateTexturesFromData(Array planetData,Vector2i pos,Array po
                 Ref<Image> blockImg = blockRes->get_image();
                 blockImg->convert(Image::FORMAT_RGBA8);
 
-                int frame = scanBlockOpen(planetData,worldPos.x,worldPos.y,0) * int(BlockData.data[blockId].connectedTexture)
+                
+                bool rotate = blockData["rotate"];
+                for(int g = 0; g < blockSide; g++){
+                    blockImg->rotate_90(ClockDirection::CLOCKWISE);
+                }
+
+                //fix this
+                //int frame = scanBlockOpen(planetData,worldPos.x,worldPos.y,0) * int(BlockData.data[blockId].connectedTexture)
                 Rect2i blockRect = Rect2i(0,0,8,8);
 
                 
@@ -71,12 +78,12 @@ int scanBlockOpen(Array planetData,int x,int y,int layer){
 	int openT = 4;
 	int openB = 8;
 	//what the fuck is this
-	openL = 1 * int(!BlockData.data[planetData[x-(1*int(x != 0))][y][layer]].texturesConnectToMe)
-	openR = 2 * int(!BlockData.data[planetData[x+(1*int(x != planetData.size()-1))][y][layer]].texturesConnectToMe)
-	openT = 4 * int(!BlockData.data[planetData[x][y-(1 * int(y != 0))][layer]].texturesConnectToMe)
-	openB = 8 * int(!BlockData.data[planetData[x][y+(1 * int(y != planetData.size()-1))][layer]].texturesConnectToMe)
+	//openL = 1 * int(!BlockData.data[planetData[x-(1*int(x != 0))][y][layer]].texturesConnectToMe)
+	//openR = 2 * int(!BlockData.data[planetData[x+(1*int(x != planetData.size()-1))][y][layer]].texturesConnectToMe)
+	//openT = 4 * int(!BlockData.data[planetData[x][y-(1 * int(y != 0))][layer]].texturesConnectToMe)
+	//openB = 8 * int(!BlockData.data[planetData[x][y+(1 * int(y != planetData.size()-1))][layer]].texturesConnectToMe)
 	
-	return (openL + openR + openT + openB) * 8
+	return (openL + openR + openT + openB) * 8;
 }
 
 void CHUNKDRAW::_process(double delta) {

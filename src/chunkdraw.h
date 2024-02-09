@@ -29,6 +29,8 @@ public:
 
     Array generateTexturesFromData(Array planetData,Vector2i pos,Array positionLookup);
 
+	int scanBlockOpen(Array planetData,int x,int y,int layer);
+
 	void _process(double delta) override;
 };
 
