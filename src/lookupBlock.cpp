@@ -10,10 +10,32 @@ void LOOKUPBLOCK::_bind_methods() {
 }
 
 LOOKUPBLOCK::LOOKUPBLOCK() {
+    
     Ref<BLOCKAIR> air;
     air.instantiate();
     allBlocks.append(air);
     
+    Ref<BLOCKCAVEAIR> caveair;
+    caveair.instantiate();
+    allBlocks.append(caveair);
+    
+    Ref<BLOCKSTONE> stone;
+    stone.instantiate();
+    allBlocks.append(stone);
+
+    Ref<BLOCKDIRT> dirt;
+    dirt.instantiate();
+    allBlocks.append(dirt);
+
+    Ref<BLOCKGRASS> grass;
+    grass.instantiate();
+    allBlocks.append(grass);
+
+    Ref<BLOCKCORE> core;
+    core.instantiate();
+    allBlocks.append(core);
+
+
 
 }
 

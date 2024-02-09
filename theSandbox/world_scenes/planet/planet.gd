@@ -156,7 +156,7 @@ func generateEmptyArray():
 func airOrCaveAir(x,y):
 	var surface = SIZEINCHUNKS*2
 	#Returns 7 for cave air or 0 for surface air
-	return int(getBlockDistance(x,y) <= surface - 2) * 7
+	return int(getBlockDistance(x,y) <= surface - 2)
 
 func generateTerrain():
 	for x in range(SIZEINCHUNKS*8):
@@ -167,19 +167,19 @@ func generateTerrain():
 			var surface = (noise.get_noise_1d(side*2.0)*4.0) + (SIZEINCHUNKS*2)
 			
 			if getBlockDistance(x,y) <= surface:
-				planetData[x][y][0] = 1
-				planetData[x][y][1] = 1
-				lightData[x][y] = 0.0
-			elif getBlockDistance(x,y) <= surface + 4:
 				planetData[x][y][0] = 2
 				planetData[x][y][1] = 2
 				lightData[x][y] = 0.0
-			elif getBlockDistance(x,y) <= surface + 5:
+			elif getBlockDistance(x,y) <= surface + 4:
 				planetData[x][y][0] = 3
 				planetData[x][y][1] = 3
 				lightData[x][y] = 0.0
-			if getBlockDistance(x,y) <= 4:
+			elif getBlockDistance(x,y) <= surface + 5:
 				planetData[x][y][0] = 4
+				planetData[x][y][1] = 4
+				lightData[x][y] = 0.0
+			if getBlockDistance(x,y) <= 5:
+				planetData[x][y][0] = 5
 			
 			
 func createChunks():

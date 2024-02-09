@@ -10,42 +10,49 @@ void CHUNKDRAW::_bind_methods() {
 }
 
 CHUNKDRAW::CHUNKDRAW() {
-	// Initialize any variables here.
 	time_passed = 0.0;
+    cock = memnew(LOOKUPBLOCK);
 }
 
 CHUNKDRAW::~CHUNKDRAW() {
 	// Add your cleanup here.
 }
 
-int CHUNKDRAW::generateTexturesFromData(Array planetData,Vector2i pos,Array positionLookup){
+Array CHUNKDRAW::generateTexturesFromData(Array planetData,Vector2i pos,Array positionLookup){
     Ref<Image> img = Image::create(64, 64, false, Image::FORMAT_RGBA8);
     Ref<Image> backImg = Image::create(64, 64, false, Image::FORMAT_RGBA8);
     
-    int blockSide = 0;
-    
-    LOOKUPBLOCK *cock = memnew(LOOKUPBLOCK);
-    Dictionary blockData = cock->getBlockData(0);
-    Ref<Texture2D> blockRes = blockData["thing"];
+    Array images;
 
     for (int x = 0; x < 8; x++){
         for (int y = 0; y < 8; y++){
+            
             Vector2 imgPos = Vector2i(x*8,y*8);
             int worldX = x+(pos.x*8);
             int worldY = y+(pos.y*8);
-            Array poop = positionLookup[worldX];
-            blockSide = poop[worldY];
-
             
-            Ref<Image> blockImg = blockRes->get_image();
-            blockImg->convert(Image::FORMAT_RGBA8);
+            Array lookY = positionLookup[worldX];
+            int blockSide = lookY[worldY];
 
-            Rect2i blockRect = Rect2i(0,0,8,8);
+            Array dataX = planetData[worldX];
+            Array fullLayerData = dataX[worldY];
+           
+            int blockID = fullLayerData[0];
 
-            
+            if (blockID>1){
+                //ideally move blockimage conversion to block specific code
+                Dictionary blockData = cock->getBlockData(blockID);
+                Ref<Texture2D> blockRes = blockData["thing"];
+                Ref<Image> blockImg = blockRes->get_image();
+                blockImg->convert(Image::FORMAT_RGBA8);
 
-            img->blend_rect(blockImg, blockRect, imgPos);
+                int frame = scanBlockOpen(planetData,worldPos.x,worldPos.y,0) * int(BlockData.data[blockId].connectedTexture)
+                Rect2i blockRect = Rect2i(0,0,8,8);
 
+                
+
+                img->blend_rect(blockImg, blockRect, imgPos);
+            }
 
         }
     }
@@ -54,11 +61,23 @@ int CHUNKDRAW::generateTexturesFromData(Array planetData,Vector2i pos,Array posi
     emit_signal("chunkDrawn", this, img, backImg);
 
 
-   return blockSide;
+   return images;
 
 }
 
-
+int scanBlockOpen(Array planetData,int x,int y,int layer){
+	int openL = 1;
+	int openR = 2;
+	int openT = 4;
+	int openB = 8;
+	//what the fuck is this
+	openL = 1 * int(!BlockData.data[planetData[x-(1*int(x != 0))][y][layer]].texturesConnectToMe)
+	openR = 2 * int(!BlockData.data[planetData[x+(1*int(x != planetData.size()-1))][y][layer]].texturesConnectToMe)
+	openT = 4 * int(!BlockData.data[planetData[x][y-(1 * int(y != 0))][layer]].texturesConnectToMe)
+	openB = 8 * int(!BlockData.data[planetData[x][y+(1 * int(y != planetData.size()-1))][layer]].texturesConnectToMe)
+	
+	return (openL + openR + openT + openB) * 8
+}
 
 void CHUNKDRAW::_process(double delta) {
 	time_passed += delta;

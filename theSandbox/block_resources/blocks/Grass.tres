@@ -7,7 +7,7 @@
 script = ExtResource("1_3i2av")
 spreadChance = 1
 blocksCanSpreadTo = Array[int]([2])
-blockId = 3
+blockId = 4
 texture = ExtResource("2_qxu5n")
 rotateTextureToGravity = false
 connectedTexture = true

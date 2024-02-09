@@ -5,8 +5,14 @@
 #include "lightmap.h"
 #include "lookupBlock.h"
 
+//ADD BLOCKS HERE
 #include "block.h"
 #include "blockAir.h"
+#include "blockCaveAir.h"
+#include "blockStone.h"
+#include "blockDirt.h"
+#include "blockGrass.h"
+#include "blockCore.h"
 
 #include <gdextension_interface.h>
 #include <godot_cpp/core/defs.hpp>
@@ -24,8 +30,15 @@ void initialize_example_module(ModuleInitializationLevel p_level) {
 	ClassDB::register_class<LIGHTMAP>();
 	ClassDB::register_class<LOOKUPBLOCK>();
 
+	//ADD BLOCKS HERE
 	ClassDB::register_class<BLOCK>();
 	ClassDB::register_class<BLOCKAIR>();
+	ClassDB::register_class<BLOCKCAVEAIR>();
+	ClassDB::register_class<BLOCKSTONE>();
+	ClassDB::register_class<BLOCKDIRT>();
+	ClassDB::register_class<BLOCKGRASS>();
+	ClassDB::register_class<BLOCKCORE>();
+
 }
 
 void uninitialize_example_module(ModuleInitializationLevel p_level) {

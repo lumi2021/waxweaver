@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_g2duh")
-blockId = 7
+blockId = 1
 texture = ExtResource("2_akmnf")
 rotateTextureToGravity = false
 connectedTexture = false

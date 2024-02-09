@@ -5,11 +5,14 @@
 
 [resource]
 script = ExtResource("1_vviry")
-blockId = 1
+blockId = 2
 texture = ExtResource("1_t7sq4")
 rotateTextureToGravity = false
 connectedTexture = false
+texturesConnectToMe = true
 hasCollision = true
-testWiggle = false
 lightMultiplier = 0.8
 lightEmmission = 0.0
+itemToDrop = -1
+breakParticle = -1
+breakTime = 0.5

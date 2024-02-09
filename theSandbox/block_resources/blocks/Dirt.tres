@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_qlhig")
-blockId = 2
+blockId = 3
 texture = ExtResource("2_l6ylh")
 rotateTextureToGravity = false
 connectedTexture = false
@@ -14,3 +14,5 @@ hasCollision = true
 lightMultiplier = 0.9
 lightEmmission = 0.0
 itemToDrop = 0
+breakParticle = -1
+breakTime = 0.5

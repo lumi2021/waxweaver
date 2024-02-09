@@ -18,6 +18,7 @@ class CHUNKDRAW : public Sprite2D {
 private:
 	double time_passed;
     Array planetData;
+	LOOKUPBLOCK *cock;
 
 protected:
 	static void _bind_methods();
@@ -26,7 +27,7 @@ public:
 	CHUNKDRAW();
 	~CHUNKDRAW();
 
-    int generateTexturesFromData(Array planetData,Vector2i pos,Array positionLookup);
+    Array generateTexturesFromData(Array planetData,Vector2i pos,Array positionLookup);
 
 	void _process(double delta) override;
 };
