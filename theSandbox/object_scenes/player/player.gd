@@ -51,7 +51,9 @@ func _process(delta):
 		GlobalRef.lightmap.position = global_position - Vector2(256,256)
 		searchForBorders()
 		
-		
+	print($LOOKUPBLOCK.getBlockData(0)["thing"])
+	
+	
 	scrollBackgrounds(delta)
 	
 	if Input.is_action_pressed("mouse_left"):

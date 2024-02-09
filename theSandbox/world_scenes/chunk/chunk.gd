@@ -72,8 +72,8 @@ func tickUpdate():
 
 func drawData():
 	#Texture
-	#$CHUNKDRAW.generateTexturesFromData(planet.planetData,pos,planet.positionLookup)
-	#return
+	$CHUNKDRAW.generateTexturesFromData(planet.planetData,pos,planet.positionLookup)
+	return
 	
 	
 	var img = Image.create(64,64,false,Image.FORMAT_RGBA8)

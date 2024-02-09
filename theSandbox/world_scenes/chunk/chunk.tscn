@@ -20,7 +20,7 @@ collision_mask = 0
 rect = Rect2(-64, -64, 192, 192)
 
 [node name="CHUNKDRAW" type="CHUNKDRAW" parent="."]
-position = Vector2(3.65571, 7.3332)
+position = Vector2(0.0704675, 1.13832)
 
 [connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

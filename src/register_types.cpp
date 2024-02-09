@@ -3,6 +3,10 @@
 #include "gdexample.h"
 #include "chunkdraw.h"
 #include "lightmap.h"
+#include "lookupBlock.h"
+
+#include "block.h"
+#include "blockAir.h"
 
 #include <gdextension_interface.h>
 #include <godot_cpp/core/defs.hpp>
@@ -18,6 +22,10 @@ void initialize_example_module(ModuleInitializationLevel p_level) {
 	ClassDB::register_class<GDExample>();
 	ClassDB::register_class<CHUNKDRAW>();
 	ClassDB::register_class<LIGHTMAP>();
+	ClassDB::register_class<LOOKUPBLOCK>();
+
+	ClassDB::register_class<BLOCK>();
+	ClassDB::register_class<BLOCKAIR>();
 }
 
 void uninitialize_example_module(ModuleInitializationLevel p_level) {

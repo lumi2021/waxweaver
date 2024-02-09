@@ -309,4 +309,6 @@ libraries = {
 "": SubResource("AnimationLibrary_4n17m")
 }
 
+[node name="LOOKUPBLOCK" type="LOOKUPBLOCK" parent="."]
+
 [connection signal="animation_finished" from="HandRoot/handSwing" to="." method="_on_hand_swing_animation_finished"]

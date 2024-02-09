@@ -8,6 +8,7 @@
 #include <godot_cpp/classes/texture2d.hpp>
 #include <godot_cpp/variant/array.hpp>
 #include <godot_cpp/variant/rect2i.hpp>
+#include "lookupBlock.h"
 
 namespace godot {
 

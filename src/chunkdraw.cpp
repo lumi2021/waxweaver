@@ -23,9 +23,10 @@ int CHUNKDRAW::generateTexturesFromData(Array planetData,Vector2i pos,Array posi
     Ref<Image> backImg = Image::create(64, 64, false, Image::FORMAT_RGBA8);
     
     int blockSide = 0;
-
-    ResourceLoader rl;
-    Ref<Texture2D> blockRes = rl.load("res://block_resources/block_textures/dirt.png");
+    
+    LOOKUPBLOCK *cock = memnew(LOOKUPBLOCK);
+    Dictionary blockData = cock->getBlockData(0);
+    Ref<Texture2D> blockRes = blockData["thing"];
 
     for (int x = 0; x < 8; x++){
         for (int y = 0; y < 8; y++){
@@ -35,9 +36,7 @@ int CHUNKDRAW::generateTexturesFromData(Array planetData,Vector2i pos,Array posi
             Array poop = positionLookup[worldX];
             blockSide = poop[worldY];
 
-            //Ref<Image> blockImg = Image::create(8, 8, false, Image::FORMAT_RGBA8);
-            //blockImg->load("res://block_resources/block_textures/dirt.png");
-
+            
             Ref<Image> blockImg = blockRes->get_image();
             blockImg->convert(Image::FORMAT_RGBA8);
 
@@ -53,11 +52,6 @@ int CHUNKDRAW::generateTexturesFromData(Array planetData,Vector2i pos,Array posi
 
 
     emit_signal("chunkDrawn", this, img, backImg);
-
-   // bool gay = block->has_method("onTick");
-
-    //if (gay==true){blockSide=1;}
-    //if (gay == false){blockSide=0;}
 
 
    return blockSide;
