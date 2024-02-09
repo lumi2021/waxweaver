@@ -32,6 +32,9 @@ public:
 	~LOOKUPBLOCK();
     Dictionary getBlockData(int id);
 
+	bool isConnectedTexture(int id);
+	bool isTextureConnector(int id);
+
 };
 
 }

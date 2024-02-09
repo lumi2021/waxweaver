@@ -50,9 +50,6 @@ func _process(delta):
 		inSpaceMovement(delta)
 		GlobalRef.lightmap.position = global_position - Vector2(256,256)
 		searchForBorders()
-		
-	print($LOOKUPBLOCK.getBlockData(0)["thing"])
-	
 	
 	scrollBackgrounds(delta)
 	
@@ -107,6 +104,7 @@ func onPlanetMovement(delta):
 		if Input.is_action_just_pressed("jump"):
 			newVel.y = -275
 		camera.rotation = lerp_angle(camera.rotation,rotated*(PI/2),14*delta)
+
 	
 	velocity = newVel.rotated(rotated*(PI/2))
 

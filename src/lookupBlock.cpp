@@ -48,7 +48,22 @@ Dictionary LOOKUPBLOCK::getBlockData(int id){
     Ref<BLOCK> g = allBlocks[id];
     data["thing"] = g->texture;
     data["rotate"] = g->rotateTextureToGravity;
+    data["connectTexturesToMe"] = g->connectTexturesToMe;
+    data["connectedTexture"] = g->connectedTexture;
+    data["hasCollision"] = g->hasCollision;
  
  
     return data;
+}
+
+bool LOOKUPBLOCK::isConnectedTexture(int id){
+    Ref<BLOCK> g = allBlocks[id];
+
+    return g->connectedTexture;
+}
+
+bool LOOKUPBLOCK::isTextureConnector(int id){
+    Ref<BLOCK> g = allBlocks[id];
+
+    return g->connectTexturesToMe;
 }

@@ -3,6 +3,8 @@ extends Node
 @onready var groundItemScene = preload("res://object_scenes/ground_item/ground_item.tscn")
 @onready var blockBreakParticle = preload("res://object_scenes/particles/blockBreak/block_break_particles.tscn")
 
+var theChunker = null
+
 var data = {
 	0:load("res://block_resources/blocks/Air.tres"),
 	1:load("res://block_resources/blocks/CaveAir.tres"),
@@ -15,6 +17,13 @@ var data = {
 	8:load("res://block_resources/blocks/Water.tres"),
 	9:load("res://block_resources/blocks/Lava.tres"),
 }
+
+func _ready():
+	var ins = CHUNKDRAW.new()
+	theChunker = ins
+	add_child(ins)
+
+
 
 func spawnGroundItem(tilex:int,tiley:int,id:int,planet:Planet):
 	if id == -1:

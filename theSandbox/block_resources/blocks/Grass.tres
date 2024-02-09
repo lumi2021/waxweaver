@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_3i2av")
 spreadChance = 1
-blocksCanSpreadTo = Array[int]([2])
+blocksCanSpreadTo = Array[int]([3])
 blockId = 4
 texture = ExtResource("2_qxu5n")
 rotateTextureToGravity = false
@@ -16,5 +16,5 @@ hasCollision = true
 lightMultiplier = 0.9
 lightEmmission = 0.0
 itemToDrop = 0
-breakParticle = 2
+breakParticle = 3
 breakTime = 0.5

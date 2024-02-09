@@ -8,6 +8,12 @@
 #include <godot_cpp/classes/texture2d.hpp>
 #include <godot_cpp/variant/array.hpp>
 #include <godot_cpp/variant/rect2i.hpp>
+
+#include <godot_cpp/classes/static_body2d.hpp>
+#include <godot_cpp/classes/collision_shape2d.hpp>
+#include <godot_cpp/classes/rectangle_shape2d.hpp>
+
+
 #include "lookupBlock.h"
 
 namespace godot {
@@ -27,9 +33,11 @@ public:
 	CHUNKDRAW();
 	~CHUNKDRAW();
 
-    Array generateTexturesFromData(Array planetData,Vector2i pos,Array positionLookup);
+    Array generateTexturesFromData(Array planetData,Vector2i pos,Array positionLookup,Node *body,Ref<Shape2D> shape);
 
 	int scanBlockOpen(Array planetData,int x,int y,int layer);
+	Array getTileFromData(int x, int y, Array planetData);
+	int tileInRange(int x, int y, Array planetData);
 
 	void _process(double delta) override;
 };
