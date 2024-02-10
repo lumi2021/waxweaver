@@ -12,11 +12,11 @@ func onUse(tileX:int,tileY:int,planetDir:int,planet:Planet,lastTile:Vector2):
 	
 	var planetData = planet.planetData
 	
-	if ![0,7].has(planetData[tileX][tileY][0]):
+	if ![0,1].has(planetData[tileX][tileY][0]):
 		#Cancel is target tile isn't empty
 		return "failure"
 	
-	if ![0,7].has(planetData[tileX][tileY][1]):
+	if ![0,1].has(planetData[tileX][tileY][1]):
 		#Succeed if wall tile exists
 		var edit = Vector3(tileX,tileY,0)
 		planet.editTiles({edit:blockID})

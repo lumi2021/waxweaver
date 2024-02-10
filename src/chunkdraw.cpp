@@ -23,6 +23,7 @@ Array CHUNKDRAW::generateTexturesFromData(Array planetData,Vector2i pos,Array po
     Ref<Image> backImg = Image::create(64, 64, false, Image::FORMAT_RGBA8);
     
     Array images;
+    
     for (int x = 0; x < 8; x++){
         for (int y = 0; y < 8; y++){
             

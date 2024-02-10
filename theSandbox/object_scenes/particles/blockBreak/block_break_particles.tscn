@@ -8,6 +8,7 @@ _data = [Vector2(0, 0.538461), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [node name="BlockBreakParticles" type="CPUParticles2D"]
+amount = 5
 lifetime = 0.4
 explosiveness = 1.0
 texture = ExtResource("1_o88t4")
