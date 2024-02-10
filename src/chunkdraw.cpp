@@ -6,6 +6,7 @@ using namespace godot;
 
 void CHUNKDRAW::_bind_methods() {
     ClassDB::bind_method(D_METHOD("generateTexturesFromData","planetData","pos","positionLookup"), &CHUNKDRAW::generateTexturesFromData);
+    ClassDB::bind_method(D_METHOD("tickUpdate","planetData","pos","positionLookup","lightdata"), &CHUNKDRAW::tickUpdate);
     ADD_SIGNAL(MethodInfo("chunkDrawn", PropertyInfo(Variant::OBJECT, "node"), PropertyInfo(Variant::OBJECT, "image"), PropertyInfo(Variant::OBJECT, "backImage")));
 }
 
@@ -117,6 +118,58 @@ Array CHUNKDRAW::generateTexturesFromData(Array planetData,Vector2i pos,Array po
    return images;
 
 }
+
+void CHUNKDRAW::tickUpdate(Array planetData,Vector2i pos,Array positionLookup,Array lightData){
+    //Dictionary committedChanges;
+    //for(int x = 0; x < 8; x++){
+        //for(int y = 0; y < 8; y++){
+            //int worldX = x+(pos.x*8);
+            //int worldY = y+(pos.y*8);
+
+            //Array dataXhold = planetData[worldX];
+            //Array dataLayerHold = dataXhold[worldY];
+            //int blockID = dataLayerHold[0];
+
+            //Dictionary blockData = cock->getBlockData(blockID);
+            
+            //Array lookY = positionLookup[worldX];
+            //int blockSide = lookY[worldY];
+
+            //Array lightX = lightData[worldX];
+            //double currentLight = lightX[worldY];
+
+            //int hasPosL = worldX > 0;
+            //int hasPosR = worldX < lightData.size()-1;
+            //int hasPosT = worldY > 0;
+            //int hasPosB = worldY < lightData.size()-1;
+
+            //Array holdL = lightData[worldX-(1*hasPosL)];
+            //double lightL = holdL[worldY];
+
+            //Array holdR = lightData[worldX+(1*hasPosR)];
+            //double lightR = holdR[worldY];
+            
+            //double lightB = lightX[worldY+(1*hasPosB)];
+
+            //double lightT = lightX[worldY-(1*hasPosT)];
+
+            //average light values
+            //double mutliplier = blockData["lightMultiplier"];
+            //double newLight = ( ( lightB + lightL + lightR + lightT ) / 4.0 ) * mutliplier;
+            //double lightEmmission = blockData["lightEmmission"];
+            //newLight = std::max(newLight,lightEmmission);
+            //newLight = std::max(newLight,0.0);
+            //newLight = std::min(newLight,1.0);
+
+            //lightX[worldY] = newLight;
+
+    //    }
+
+   // }
+        
+}
+
+
 
 int CHUNKDRAW::scanBlockOpen(Array planetData,int x,int y,int layer){
 	int openL = 1;

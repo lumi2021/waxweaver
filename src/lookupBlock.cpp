@@ -51,6 +51,9 @@ Dictionary LOOKUPBLOCK::getBlockData(int id){
     data["connectTexturesToMe"] = g->connectTexturesToMe;
     data["connectedTexture"] = g->connectedTexture;
     data["hasCollision"] = g->hasCollision;
+
+    data["lightMultiplier"] = g->lightMultiplier;
+    data["lightEmmission"] = g->lightEmmission;
  
  
     return data;

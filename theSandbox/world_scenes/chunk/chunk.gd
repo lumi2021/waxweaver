@@ -30,44 +30,51 @@ func _ready():
 func tickUpdate():
 	var planetData :Array= planet.planetData
 	var lightData :Array= planet.lightData
-	var committedChanges := {}
+	var posLookup :Array = planet.positionLookup
+	#var committedChanges := {}
 	var lightChanged := false
-	for x in range(CHUNKSIZE):
-		for y in range(CHUNKSIZE):
-			var worldPos := Vector2(x+(pos.x*CHUNKSIZE),y+(pos.y*CHUNKSIZE))
-			var blockId :int= planetData[worldPos.x][worldPos.y][0]
-			var blockData :Resource= BlockData.data[blockId]
-			var changeDictionary :Dictionary= blockData.onTick(worldPos.x,worldPos.y,planetData,0,getBlockPosition(worldPos.x,worldPos.y))
-			
-			var currentLight = lightData[worldPos.x][worldPos.y]
-			
-			var hasPosX = [int(lightData.size() > worldPos.x + 1),int((worldPos.x - 1)>=0)]
-			var hasPosY = [int(lightData.size() > worldPos.y + 1),int((worldPos.y - 1)>=0)]
-			
-			var lightR = lightData[worldPos.x+(1*hasPosX[0])][worldPos.y]
-			var lightL = lightData[worldPos.x-(1*hasPosX[1])][worldPos.y]
-			var lightB = lightData[worldPos.x][worldPos.y+(1*hasPosY[0])]
-			var lightT = lightData[worldPos.x][worldPos.y-(1*hasPosY[1])]
-			
-			var newLight = ((lightR+lightL+lightT+lightB)/4.0)*blockData.lightMultiplier
-			newLight = max(newLight,blockData.lightEmmission)
-			
-			lightData[worldPos.x][worldPos.y] = clamp(newLight,0.0,1.0)
-			
-			lightChanged = bool(max(int(abs(newLight - currentLight)>=0.001),int(lightChanged)))
-			
-			var toss = false
-			for i in changeDictionary.keys():
-				if committedChanges.has(i):
-					toss = true
-			if !toss:
-				for i in changeDictionary.keys():
-					committedChanges[i] = changeDictionary[i]
 	
-	MUSTUPDATELIGHT = lightChanged
+	#MUSTUPDATELIGHT = true
+	#BlockData.theChunker.tickUpdate(planetData,pos,posLookup,lightData)
+	return {}
 	
-
-	return committedChanges
+	#
+	#for x in range(CHUNKSIZE):
+		#for y in range(CHUNKSIZE):
+			#var worldPos := Vector2(x+(pos.x*CHUNKSIZE),y+(pos.y*CHUNKSIZE))
+			#var blockId :int= planetData[worldPos.x][worldPos.y][0]
+			#var blockData :Resource= BlockData.data[blockId]
+			#var changeDictionary :Dictionary= blockData.onTick(worldPos.x,worldPos.y,planetData,0,getBlockPosition(worldPos.x,worldPos.y))
+			#
+			#var currentLight = lightData[worldPos.x][worldPos.y]
+			#
+			#var hasPosX = [int(lightData.size() > worldPos.x + 1),int((worldPos.x - 1)>=0)]
+			#var hasPosY = [int(lightData.size() > worldPos.y + 1),int((worldPos.y - 1)>=0)]
+			#
+			#var lightR = lightData[worldPos.x+(1*hasPosX[0])][worldPos.y]
+			#var lightL = lightData[worldPos.x-(1*hasPosX[1])][worldPos.y]
+			#var lightB = lightData[worldPos.x][worldPos.y+(1*hasPosY[0])]
+			#var lightT = lightData[worldPos.x][worldPos.y-(1*hasPosY[1])]
+			#
+			#var newLight = ((lightR+lightL+lightT+lightB)/4.0)*blockData.lightMultiplier
+			#newLight = max(newLight,blockData.lightEmmission)
+			#
+			#lightData[worldPos.x][worldPos.y] = clamp(newLight,0.0,1.0)
+			#
+			#lightChanged = bool(max(int(abs(newLight - currentLight)>=0.001),int(lightChanged)))
+			#
+			#var toss = false
+			#for i in changeDictionary.keys():
+				#if committedChanges.has(i):
+					#toss = true
+			#if !toss:
+				#for i in changeDictionary.keys():
+					#committedChanges[i] = changeDictionary[i]
+	#
+	#MUSTUPDATELIGHT = lightChanged
+	#
+#
+	#return committedChanges
 
 
 func drawData():
@@ -76,9 +83,9 @@ func drawData():
 	var shape = RectangleShape2D.new()
 	shape.size = Vector2(8,8)
 	clearCollisions()
-	var images = BlockData.theChunker.generateTexturesFromData(planet.planetData,pos,planet.positionLookup,body,shape)
-	mainLayerSprite.texture = ImageTexture.create_from_image(images[0])
-	backLayerSprite.texture = ImageTexture.create_from_image(images[1])
+	#var images = BlockData.theChunker.generateTexturesFromData(planet.planetData,pos,planet.positionLookup,body,shape)
+	#mainLayerSprite.texture = ImageTexture.create_from_image(images[0])
+	#backLayerSprite.texture = ImageTexture.create_from_image(images[1])
 	
 	return
 	

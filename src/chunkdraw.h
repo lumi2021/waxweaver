@@ -13,6 +13,7 @@
 #include <godot_cpp/classes/collision_shape2d.hpp>
 #include <godot_cpp/classes/rectangle_shape2d.hpp>
 
+#include <algorithm>
 
 #include "lookupBlock.h"
 
@@ -34,6 +35,7 @@ public:
 	~CHUNKDRAW();
 
     Array generateTexturesFromData(Array planetData,Vector2i pos,Array positionLookup,Node *body,Ref<Shape2D> shape);
+	void tickUpdate(Array planetData,Vector2i pos,Array positionLookup,Array lightData);
 
 	int scanBlockOpen(Array planetData,int x,int y,int layer);
 	Array getTileFromData(int x, int y, Array planetData);

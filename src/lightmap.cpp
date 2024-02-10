@@ -10,7 +10,7 @@ void LIGHTMAP::_bind_methods() {
 }
 
 LIGHTMAP::LIGHTMAP() {
-	// Initialize any variables here.
+	img = Image::create(64, 64, false, Image::FORMAT_RGBA8);
 }
 
 LIGHTMAP::~LIGHTMAP() {
@@ -20,8 +20,6 @@ LIGHTMAP::~LIGHTMAP() {
 
 
 void LIGHTMAP::generateLightTexture(int x, int y,Array lightData){
-   
-    Ref<Image> img = Image::create(64, 64, false, Image::FORMAT_RGBA8);
     
     int size = lightData.size()-1;
 

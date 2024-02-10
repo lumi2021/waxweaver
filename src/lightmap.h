@@ -14,6 +14,8 @@ class LIGHTMAP : public Sprite2D {
 
 private:
     Array planetData;
+    Ref<Image> img = nullptr;
+
 
 protected:
 	static void _bind_methods();
