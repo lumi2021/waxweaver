@@ -19,7 +19,7 @@ LIGHTMAP::~LIGHTMAP() {
 
 
 
-void LIGHTMAP::generateLightTexture(int x, int y,Array lightData){
+void LIGHTMAP::generateLightTexture(int x, int y,const Array &lightData){
     
     int size = lightData.size()-1;
 
@@ -31,13 +31,14 @@ void LIGHTMAP::generateLightTexture(int x, int y,Array lightData){
             int newX = std::clamp(x+imgX,0,size);
             int newY = std::clamp(y+imgY,0,size);
             
-            Array p = lightData[newX];
-            float l = p[newY];
+            Array holdData = lightData[newX];
+            float 𓆟 = holdData[newY];
+           // float l = 0.1;
 
             Color c = Color::hex(0x000000FF);
-            c.r = l;
-            c.g = l;
-            c.b = l;
+            c.r = 𓆟;
+            c.g = 𓆟;
+            c.b = 𓆟;
 
             img->set_pixel(imgX,imgY,c);
 

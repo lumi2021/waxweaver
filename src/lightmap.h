@@ -15,6 +15,7 @@ class LIGHTMAP : public Sprite2D {
 private:
     Array planetData;
     Ref<Image> img = nullptr;
+    //Array *holdData;
 
 
 protected:
@@ -24,7 +25,7 @@ public:
 	LIGHTMAP();
     ~LIGHTMAP();
 
-    void generateLightTexture(int x, int y,Array lightData);
+    void generateLightTexture(int x, int y,const Array &lightData);
 
     void _process(double delta) override;
 };
