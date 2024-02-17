@@ -95,7 +95,7 @@ func onPlanetMovement(delta):
 		dir += 1
 	
 	var newVel = velocity.rotated(-rotated*(PI/2))
-	newVel.x = lerp(newVel.x, dir * speed, 1.0-pow(2.0,(-delta/0.2)))
+	newVel.x = lerp(newVel.x, dir * speed, 1.0-pow(2.0,(-delta/0.04)))
 	newVel.y += gravity * delta
 	
 	newVel.y = min(newVel.y,300)
@@ -103,7 +103,7 @@ func onPlanetMovement(delta):
 	if onFloor:
 		if Input.is_action_just_pressed("jump"):
 			newVel.y = -275
-		camera.rotation = lerp_angle(camera.rotation,rotated*(PI/2),1.0-pow(2.0,(-delta/0.1)))
+		camera.rotation = lerp_angle(camera.rotation,rotated*(PI/2),1.0-pow(2.0,(-delta/0.06)))
 
 	
 	velocity = newVel.rotated(rotated*(PI/2))
@@ -245,10 +245,10 @@ func setAllPlayerFrames(frame:int):
 
 func squishSprites(target,delta):
 	for obj in sprite.get_children():
-		obj.scale.y = lerp(obj.scale.y,target,1.0-pow(2.0,(-delta/0.2)))
+		obj.scale.y = lerp(obj.scale.y,target,1.0-pow(2.0,(-delta/0.02)))
 		if obj == $PlayerLayers/eye:
 			obj.scale.y = 1.0
-			obj.position.y = lerp(obj.position.y,3.0+(3.0*int(target!=1.0)), 1.0-pow( 2.0,( -delta/0.2 ) ) )
+			obj.position.y = lerp(obj.position.y,3.0+(3.0*int(target!=1.0)), 1.0-pow( 2.0,( -delta/0.02 ) ) )
 
 func scrollBackgrounds(delta):
 	for layer in backgroundHolder.get_children():
