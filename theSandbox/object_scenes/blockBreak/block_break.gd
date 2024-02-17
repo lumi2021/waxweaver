@@ -21,7 +21,7 @@ func _ready():
 	
 	if blockData.connectedTexture:
 		$blockTexture.hframes = 16
-		$blockTexture.frame = scanBlockOpen(planet.planetData,tileX,tileY,0)
+		#$blockTexture.frame = scanBlockOpen(planet.planetData,tileX,tileY,0)
 		$Sprite.hframes = 16
 		$Sprite.frame = $blockTexture.frame
 		
@@ -58,10 +58,11 @@ func _process(delta):
 			$blockTexture.position.x = ((randi() % 3)-1) * (damage / breakTime)
 			$blockTexture.position.y = ((randi() % 3)-1) * (damage / breakTime)
 			
+			var arrayPosition = (tileX * planet.SIZEINCHUNKS * 8) + tileY
 			
 			if damage >= breakTime:
 				var edit = Vector3(tileX,tileY,0)
-				var tileData = BlockData.data[planet.planetData[tileX][tileY][0]]
+				var tileData = BlockData.data[planet.planetData[arrayPosition]]
 				tileData.breakTile(tileX,tileY,planet.planetData,0,planetDir,planet)
 				planet.editTiles( { edit: planet.airOrCaveAir(tileX,tileY) } )
 				queue_free()

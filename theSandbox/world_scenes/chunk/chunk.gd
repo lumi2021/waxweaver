@@ -82,9 +82,9 @@ func drawData():
 	var shape = RectangleShape2D.new()
 	shape.size = Vector2(8,8)
 	clearCollisions()
-	#var images = BlockData.theChunker.generateTexturesFromData(planet.planetData,pos,planet.positionLookup,body,shape)
-	#mainLayerSprite.texture = ImageTexture.create_from_image(images[0])
-	#backLayerSprite.texture = ImageTexture.create_from_image(images[1])
+	var images = BlockData.theChunker.generateTexturesFromData(planet.planetData,planet.backgroundLayerData,pos,planet.positionLookup,body,shape)
+	mainLayerSprite.texture = ImageTexture.create_from_image(images[0])
+	backLayerSprite.texture = ImageTexture.create_from_image(images[1])
 	
 	return
 	

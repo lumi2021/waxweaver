@@ -19,6 +19,7 @@ var chunkScene = preload("res://world_scenes/chunk/chunk.tscn")
 const SIZEINCHUNKS = 16 # (size * 8)^2 = number of tiles
 
 var planetData = []
+var backgroundLayerData = []
 var lightData = []
 var positionLookup = []
 var centerPoint = Vector2.ZERO
@@ -100,8 +101,12 @@ func _physics_process(delta):
 		shouldUpdateLight += int(chunk.MUSTUPDATELIGHT)
 		chunk.MUSTUPDATELIGHT = false
 		
+		
 		for change in committedChanges.keys():
-			planetData[change.x][change.y][int(change.z)] = committedChanges[change]
+			
+			var arrayPosition = (change.x * SIZEINCHUNKS * 8) + change.y
+			
+			planetData[arrayPosition] = committedChanges[change]
 			var foundChunk = chunkArray2D[change.x/8][change.y/8]
 			if !chunksToUpdate.has(foundChunk):
 				chunksToUpdate.append(foundChunk)
@@ -115,10 +120,15 @@ func _physics_process(delta):
 func editTiles(changeCommit):
 	var chunksToUpdate = []
 	for change in changeCommit.keys():
-		planetData[change.x][change.y][int(change.z)] = changeCommit[change]
+		
+		var arrayPosition = (change.x * SIZEINCHUNKS * 8) + change.y
+		
+		planetData[arrayPosition] = changeCommit[change]
 		
 		if int(change.z) == 0:
-			planetData[change.x][change.y][2] = GlobalRef.globalTick
+			## PUT MISSING GLOBAL TICK SHIT HERE !!
+			#planetData[change.x][change.y][2] = GlobalRef.globalTick
+			pass
 		
 		var foundChunk = chunkArray2D[change.x/8][change.y/8]
 		if !chunksToUpdate.has(foundChunk):
@@ -150,7 +160,7 @@ func generateEmptyArray():
 		#positionLookup.append([])
 		for y in range(SIZEINCHUNKS*8):
 			planetData.append(0) # TILE LAYER, BACKGROUND LAYER, LAST TICK SINCE UPDATED
-			#WE ARE REMOVING THE OTHER DATA FOR NOW!!!
+			backgroundLayerData.append(0)
 			lightData.append(0.0)
 			positionLookup.append(getBlockPosition(x,y))
 
@@ -170,19 +180,19 @@ func generateTerrain():
 			
 			if getBlockDistance(x,y) <= surface:
 				planetData[arrayPosition] = 2
-				#planetData[x][y][1] = 2
+				backgroundLayerData[arrayPosition] = 2
 				#lightData[x][y] = 0.0
 			elif getBlockDistance(x,y) <= surface + 4:
 				planetData[arrayPosition] = 3
-				#planetData[x][y][1] = 3
+				backgroundLayerData[arrayPosition] = 3
 				#lightData[x][y] = 0.0
 			elif getBlockDistance(x,y) <= surface + 5:
 				planetData[arrayPosition] = 4
-				#planetData[x][y][1] = 4
+				backgroundLayerData[arrayPosition] = 3
 				#lightData[x][y] = 0.0
 			if getBlockDistance(x,y) <= 5:
 				planetData[arrayPosition] = 5
-			
+				backgroundLayerData[arrayPosition] = 5
 			
 func createChunks():
 	for x in range(SIZEINCHUNKS):
