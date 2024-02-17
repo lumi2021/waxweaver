@@ -52,10 +52,6 @@ Dictionary LOOKUPBLOCK::getBlockData(int id){
     data["connectedTexture"] = g->connectedTexture;
     data["hasCollision"] = g->hasCollision;
 
-    data["lightMultiplier"] = g->lightMultiplier;
-    data["lightEmmission"] = g->lightEmmission;
- 
- 
     return data;
 }
 
@@ -69,4 +65,16 @@ bool LOOKUPBLOCK::isTextureConnector(int id){
     Ref<BLOCK> g = allBlocks[id];
 
     return g->connectTexturesToMe;
+}
+
+double LOOKUPBLOCK::getLightMultiplier(int id){
+    Ref<BLOCK> g = allBlocks[id];
+
+    return g->lightMultiplier;
+}
+
+double LOOKUPBLOCK::getLightEmmission(int id){
+    Ref<BLOCK> g = allBlocks[id];
+
+    return g->lightEmmission;
 }

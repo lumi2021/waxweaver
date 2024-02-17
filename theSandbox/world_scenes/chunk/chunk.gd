@@ -28,13 +28,10 @@ func _ready():
 	set_process(false)
 
 func tickUpdate():
-	var planetData :Array= planet.planetData
-	var lightData :Array= planet.lightData
-	var posLookup :Array = planet.positionLookup
 	#var committedChanges := {}
 	var lightChanged := false
-	#MUSTUPDATELIGHT = true
-	#BlockData.theChunker.tickUpdate(planetData,pos,posLookup,lightData)
+	MUSTUPDATELIGHT = true
+	BlockData.theChunker.tickUpdate(planet.planetData,pos,planet.positionLookup,planet.lightData)
 	return {}
 	
 	#

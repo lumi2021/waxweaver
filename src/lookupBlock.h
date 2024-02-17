@@ -34,6 +34,8 @@ public:
 
 	bool isConnectedTexture(int id);
 	bool isTextureConnector(int id);
+	double getLightMultiplier(int id);
+	double getLightEmmission(int id);
 
 };
 

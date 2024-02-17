@@ -119,47 +119,48 @@ Array CHUNKDRAW::generateTexturesFromData(Array planetData,Array backgroundLayer
 }
 
 void CHUNKDRAW::tickUpdate(Array planetData,Vector2i pos,Array positionLookup,Array lightData){
-    Dictionary committedChanges;
+
     for(int x = 0; x < 8; x++){
         for(int y = 0; y < 8; y++){
             int worldX = x+(pos.x*8);
             int worldY = y+(pos.y*8);
 
-            Array dataXhold = planetData[worldX];
-            Array dataLayerHold = dataXhold[worldY];
-            int blockID = dataLayerHold[0];
-
-            Dictionary blockData = cock->getBlockData(blockID);
+            int planetSize = 128; // THIS WILL BE PASSED IN INSTEAD LATER
+            int arrayPosition = (worldX * planetSize) + worldY;
             
-            Array lookY = positionLookup[worldX];
-            int blockSide = lookY[worldY];
+            int blockID = planetData[arrayPosition];
 
-            Array lightX = lightData[worldX];
-            double currentLight = lightX[worldY];
+            int blockSide = positionLookup[arrayPosition];
 
+            // SIMULATE LIGHT //
+           
+            double currentLight = lightData[arrayPosition];
             int hasPosL = worldX > 0;
-            int hasPosR = worldX < lightData.size()-1;
+            int hasPosR = worldX < planetSize-1;
             int hasPosT = worldY > 0;
-            int hasPosB = worldY < lightData.size()-1;
+            int hasPosB = worldY < planetSize-1;
 
-            Array holdL = lightData[worldX-(1*hasPosL)];
-            double lightL = holdL[worldY];
 
-            Array holdR = lightData[worldX+(1*hasPosR)];
-            double lightR = holdR[worldY];
+            int arrayPosL = ((worldX-(1*hasPosL)) * planetSize) + worldY;
+            double lightL = lightData[arrayPosL];
+
+            int arrayPosR = ((worldX+(1*hasPosR)) * planetSize) + worldY;
+            double lightR = lightData[arrayPosR];
             
-            double lightB = lightX[worldY+(1*hasPosB)];
+            int arrayPosB = (worldX * planetSize) + worldY + (1*hasPosB);
+            double lightB = lightData[arrayPosB];
 
-            double lightT = lightX[worldY-(1*hasPosT)];
+            int arrayPosT = (worldX * planetSize) + worldY - (1*hasPosT);
+            double lightT = lightData[arrayPosT];
 
             //average light values
-            double mutliplier = blockData["lightMultiplier"];
+            double mutliplier = cock->getLightMultiplier(blockID);
             double newLight = ( ( lightB + lightL + lightR + lightT ) / 4.0 ) * mutliplier;
-            double lightEmmission = blockData["lightEmmission"];
+            double lightEmmission = cock->getLightEmmission(blockID);
             newLight = std::max(newLight,lightEmmission);
             newLight = std::clamp(newLight,0.0,1.0);
 
-            lightX[worldY] = newLight;
+            lightData[arrayPosition] = newLight;
 
         }
 
