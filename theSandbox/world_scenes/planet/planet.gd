@@ -145,13 +145,14 @@ func generateEmptyArray():
 	centerPoint = Vector2(SIZEINCHUNKS*4,SIZEINCHUNKS*4) - Vector2(0.5,0.5)
 	
 	for x in range(SIZEINCHUNKS*8):
-		planetData.append([])
-		lightData.append([])
-		positionLookup.append([])
+		#planetData.append([])
+		#lightData.append([])
+		#positionLookup.append([])
 		for y in range(SIZEINCHUNKS*8):
-			planetData[x].append([0,0,0]) # TILE LAYER, BACKGROUND LAYER, LAST TICK SINCE UPDATED
-			lightData[x].append(0.0)
-			positionLookup[x].append(getBlockPosition(x,y))
+			planetData.append(0) # TILE LAYER, BACKGROUND LAYER, LAST TICK SINCE UPDATED
+			#WE ARE REMOVING THE OTHER DATA FOR NOW!!!
+			lightData.append(0.0)
+			positionLookup.append(getBlockPosition(x,y))
 
 func airOrCaveAir(x,y):
 	var surface = SIZEINCHUNKS*2
@@ -162,24 +163,25 @@ func generateTerrain():
 	for x in range(SIZEINCHUNKS*8):
 		for y in range(SIZEINCHUNKS*8):
 			#planetData[x][y] = getBlockPosition(x,y)
-			var quad = positionLookup[x][y]
+			var arrayPosition = (x*SIZEINCHUNKS*8) + y
+			var quad = positionLookup[arrayPosition]
 			var side = Vector2(x,y).rotated((PI/2)*quad).x
 			var surface = (noise.get_noise_1d(side*2.0)*4.0) + (SIZEINCHUNKS*2)
 			
 			if getBlockDistance(x,y) <= surface:
-				planetData[x][y][0] = 2
-				planetData[x][y][1] = 2
-				lightData[x][y] = 0.0
+				planetData[arrayPosition] = 2
+				#planetData[x][y][1] = 2
+				#lightData[x][y] = 0.0
 			elif getBlockDistance(x,y) <= surface + 4:
-				planetData[x][y][0] = 3
-				planetData[x][y][1] = 3
-				lightData[x][y] = 0.0
+				planetData[arrayPosition] = 3
+				#planetData[x][y][1] = 3
+				#lightData[x][y] = 0.0
 			elif getBlockDistance(x,y) <= surface + 5:
-				planetData[x][y][0] = 4
-				planetData[x][y][1] = 4
-				lightData[x][y] = 0.0
+				planetData[arrayPosition] = 4
+				#planetData[x][y][1] = 4
+				#lightData[x][y] = 0.0
 			if getBlockDistance(x,y) <= 5:
-				planetData[x][y][0] = 5
+				planetData[arrayPosition] = 5
 			
 			
 func createChunks():
@@ -212,7 +214,8 @@ func getBlockPosition(x,y):
 	return [0,1,3,2][dot1 + dot2]
 
 func getBlockDistance(x,y):
-	var quadtrant = positionLookup[x][y]
+	var arrayPosition = (x*SIZEINCHUNKS*8) + y
+	var quadtrant = positionLookup[arrayPosition]
 	var newPos = Vector2(x,y) - centerPoint
 	newPos = newPos.rotated((PI/2)*-quadtrant)
 	return -newPos.y

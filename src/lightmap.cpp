@@ -29,13 +29,14 @@ void LIGHTMAP::generateLightTexture(int x, int y,const Array &lightData){
         
         for (int imgY = 0; imgY < 64; imgY++){
 
-
+            int planetSize = 128; // THIS WILL BE PASSED IN INSTEAD LATER
 
             int newX = std::clamp(x+imgX,0,size);
             int newY = std::clamp(y+imgY,0,size);
             
-            Array holdData = lightData[newX];
-            float 🦶 = holdData[newY];
+            int arrayPosition = (newX*planetSize) + newY;
+
+            float 🦶 = lightData[arrayPosition];
             //holdData.clear();
 
            // float l = 0.1;
