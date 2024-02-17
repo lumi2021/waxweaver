@@ -33,7 +33,6 @@ func tickUpdate():
 	var posLookup :Array = planet.positionLookup
 	#var committedChanges := {}
 	var lightChanged := false
-	
 	#MUSTUPDATELIGHT = true
 	#BlockData.theChunker.tickUpdate(planetData,pos,posLookup,lightData)
 	return {}

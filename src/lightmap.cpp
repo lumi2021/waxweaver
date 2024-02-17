@@ -1,6 +1,7 @@
 #include "lightmap.h"
 #include <godot_cpp/core/class_db.hpp>
 #include <algorithm>
+#include <memory>
 
 using namespace godot;
 
@@ -21,9 +22,11 @@ LIGHTMAP::~LIGHTMAP() {
 
 void LIGHTMAP::generateLightTexture(int x, int y,const Array &lightData){
     
+    img = Image::create(64, 64, false, Image::FORMAT_RGBA8);
     int size = lightData.size()-1;
 
     for (int imgX = 0; imgX < 64; imgX++){
+        
         for (int imgY = 0; imgY < 64; imgY++){
 
 
@@ -32,13 +35,16 @@ void LIGHTMAP::generateLightTexture(int x, int y,const Array &lightData){
             int newY = std::clamp(y+imgY,0,size);
             
             Array holdData = lightData[newX];
-            float 𓆟 = holdData[newY];
+            float 🦶 = holdData[newY];
+            //holdData.clear();
+
            // float l = 0.1;
 
+
             Color c = Color::hex(0x000000FF);
-            c.r = 𓆟;
-            c.g = 𓆟;
-            c.b = 𓆟;
+            c.r = 🦶;
+            c.g = 🦶;
+            c.b = 🦶;
 
             img->set_pixel(imgX,imgY,c);
 
@@ -46,8 +52,8 @@ void LIGHTMAP::generateLightTexture(int x, int y,const Array &lightData){
         }
     }
 
-   emit_signal("image_updated", this, img);
-
+    emit_signal("image_updated", this, img);
+    
 }
 
 void LIGHTMAP::_process(double delta) {
