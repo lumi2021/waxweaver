@@ -19,7 +19,7 @@ CHUNKDRAW::~CHUNKDRAW() {
 	// Add your cleanup here.
 }
 
-Array CHUNKDRAW::generateTexturesFromData(Array planetData,Array backgroundLayerData,Vector2i pos,Array positionLookup,Node *body,Ref<Shape2D> shape){
+Array CHUNKDRAW::generateTexturesFromData(Array planetData,Array backgroundLayerData,Vector2i pos,Array positionLookup,Node *body,Ref<Shape2D> shape,Ref<Image> planetImg){
     Ref<Image> img = Image::create(64, 64, false, Image::FORMAT_RGBA8);
     Ref<Image> backImg = Image::create(64, 64, false, Image::FORMAT_RGBA8);
     

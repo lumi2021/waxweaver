@@ -19,6 +19,7 @@ var chunkScene = preload("res://world_scenes/chunk/chunk.tscn")
 const SIZEINCHUNKS = 16 # (size * 8)^2 = number of tiles
 
 var planetData = []
+var planetIMAGE : Image
 var backgroundLayerData = []
 var lightData = []
 var positionLookup = []
@@ -154,13 +155,20 @@ func tileToPos(pos):
 func generateEmptyArray():
 	centerPoint = Vector2(SIZEINCHUNKS*4,SIZEINCHUNKS*4) - Vector2(0.5,0.5)
 	
-	for x in range(SIZEINCHUNKS*8):
+	var s := SIZEINCHUNKS*8
+	
+	planetIMAGE = Image.create(s,s,false,Image.FORMAT_RGBA8)
+	
+	for x in range(s):
 		#planetData.append([])
 		#lightData.append([])
 		#positionLookup.append([])
-		for y in range(SIZEINCHUNKS*8):
+		for y in range(s):
 			planetData.append(0) # TILE LAYER, BACKGROUND LAYER, LAST TICK SINCE UPDATED
 			backgroundLayerData.append(0)
+			
+			planetIMAGE.set_pixel(x,y,Color8(0,0,0,0))
+			
 			lightData.append(0.0)
 			positionLookup.append(getBlockPosition(x,y))
 
@@ -181,18 +189,25 @@ func generateTerrain():
 			if getBlockDistance(x,y) <= surface:
 				planetData[arrayPosition] = 2
 				backgroundLayerData[arrayPosition] = 2
+				
+				planetIMAGE.set_pixel(x,y,idToColor(2,2))
 				#lightData[x][y] = 0.0
 			elif getBlockDistance(x,y) <= surface + 4:
 				planetData[arrayPosition] = 3
 				backgroundLayerData[arrayPosition] = 3
 				#lightData[x][y] = 0.0
+				planetIMAGE.set_pixel(x,y,idToColor(3,3))
 			elif getBlockDistance(x,y) <= surface + 5:
 				planetData[arrayPosition] = 4
 				backgroundLayerData[arrayPosition] = 3
+				planetIMAGE.set_pixel(x,y,idToColor(4,3))
+				
 				#lightData[x][y] = 0.0
 			if getBlockDistance(x,y) <= 5:
 				planetData[arrayPosition] = 5
 				backgroundLayerData[arrayPosition] = 5
+				
+				planetIMAGE.set_pixel(x,y,idToColor(5,5))
 			
 func createChunks():
 	for x in range(SIZEINCHUNKS):
@@ -251,3 +266,10 @@ func _on_is_visible_screen_exited():
 	
 	
 	clearOrbitingParents()
+
+func idToColor(id,backId):
+	var r = id % 256
+	var g = id / 256
+	var b = backId % 256
+	var a = backId / 256
+	return Color8(r,g,b,a)
