@@ -35,16 +35,16 @@ void LIGHTMAP::generateLightTexture(int x, int y,const Array &lightData){
             
             int arrayPosition = (newX*size) + newY;
 
-            float 🦶 = lightData[arrayPosition];
+            float l = lightData[arrayPosition];
             //holdData.clear();
 
            // float l = 0.1;
 
 
             Color c = Color::hex(0x000000FF);
-            c.r = 🦶;
-            c.g = 🦶;
-            c.b = 🦶;
+            c.r = l;
+            c.g = l;
+            c.b = l;
 
             img->set_pixel(imgX,imgY,c);
 
