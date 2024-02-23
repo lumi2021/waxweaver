@@ -35,14 +35,10 @@ public:
 	CHUNKDRAW();
 	~CHUNKDRAW();
 
-    Array generateTexturesFromData(Array planetData,Array backgroundLayerData,Vector2i pos,Array positionLookup,Node *body,Ref<Shape2D> shape);
+    Array generateTexturesFromData(PLANETDATA *planet,Vector2i pos,Node *body,Ref<Shape2D> shape);
 	void tickUpdate(PLANETDATA *planet,Vector2i pos);
 
-	int scanBlockOpen(Array data,int x,int y);
-	int getTileFromData(int x, int y, Array data);
-	int tileInRange(int x, int y, Array planetData);
-
-	void _process(double delta) override;
+	int scanBlockOpen(PLANETDATA *planet,int x,int y);
 };
 
 }

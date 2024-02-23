@@ -16,6 +16,9 @@ void PLANETDATA::_bind_methods() {
 
     ClassDB::bind_method(D_METHOD("getLightData","x","y"), &PLANETDATA::getLightData);
     ClassDB::bind_method(D_METHOD("setLightData","x","y","newValue"), &PLANETDATA::setLightData);
+
+    ClassDB::bind_method(D_METHOD("getPositionLookup","x","y"), &PLANETDATA::getPositionLookup);
+    ClassDB::bind_method(D_METHOD("setPositionLookup","x","y","newValue"), &PLANETDATA::setPositionLookup);
 }
 
 void PLANETDATA::createEmptyArrays(int size) {
@@ -26,6 +29,8 @@ void PLANETDATA::createEmptyArrays(int size) {
     bgData = new  int[bigSize];
     lightData = new  double[bigSize];
     timeData = new  int[bigSize];
+
+    positionLookup = new int[bigSize];
 
     planetSize = size;
 
@@ -106,7 +111,30 @@ bool PLANETDATA::setLightData(int x, int y, double newValue) {
     return true;
 }
 
+// POSITION LOOKUP //
+int PLANETDATA::getPositionLookup(int x, int y) {
 
+    int bigSize = planetSize * planetSize;
+
+    int xyToLarge = (x * planetSize) + y;
+    xyToLarge = std::clamp(xyToLarge,0,bigSize-1);
+    
+    int tile = positionLookup[xyToLarge];
+   
+    return tile;
+}
+
+bool PLANETDATA::setPositionLookup(int x, int y, int newValue) {
+
+    int bigSize = planetSize * planetSize;
+
+    int xyToLarge = (x * planetSize) + y;
+    xyToLarge = std::clamp(xyToLarge,0,bigSize-1);
+
+    positionLookup[xyToLarge] = newValue;
+   
+    return true;
+}
 
 
 

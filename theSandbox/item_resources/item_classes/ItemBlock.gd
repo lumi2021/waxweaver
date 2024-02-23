@@ -10,15 +10,16 @@ func onUse(tileX:int,tileY:int,planetDir:int,planet:Planet,lastTile:Vector2):
 		#Cancel if not on planet
 		return "failure"
 	
-	var planetData = planet.planetData
-	var backData = planet.backgroundLayerData
 	var arrayPosition = (tileX * planet.SIZEINCHUNKS * 8) + tileY
 	
-	if ![0,1].has(planetData[arrayPosition]):
+	var block = planet.DATAC.getTileData(tileX,tileY)
+	var bg = planet.DATAC.getBGData(tileX,tileY)
+	
+	if ![0,1].has(block):
 		#Cancel is target tile isn't empty
 		return "failure"
 	
-	if ![0,1].has(backData[arrayPosition]):
+	if ![0,1].has(bg):
 		#Succeed if wall tile exists
 		var edit = Vector3(tileX,tileY,0)
 		planet.editTiles({edit:blockID})
@@ -31,9 +32,8 @@ func onUse(tileX:int,tileY:int,planetDir:int,planet:Planet,lastTile:Vector2):
 		var tile = Vector2(tileX,tileY) + Vector2(int(s.x),int(s.y))
 		if tile.x < 0 or tile.x >= planet.SIZEINCHUNKS * 8 or tile.y < 0 or tile.y >= planet.SIZEINCHUNKS * 8:
 			continue
-		arrayPosition = (tile.x * planet.SIZEINCHUNKS * 8) + tile.y
 		
-		if ![0,1].has(planetData[arrayPosition]):
+		if ![0,1].has(planet.DATAC.getTileData(tile.x,tile.y)):
 			var edit = Vector3(tileX,tileY,0)
 			planet.editTiles({edit:blockID})
 			PlayerData.consumeSelected()

@@ -62,8 +62,8 @@ func _process(delta):
 			
 			if damage >= breakTime:
 				var edit = Vector3(tileX,tileY,0)
-				var tileData = BlockData.data[planet.planetData[arrayPosition]]
-				tileData.breakTile(tileX,tileY,planet.planetData,0,planetDir,planet)
+				var tileData = BlockData.data[planet.DATAC.getTileData(tileX,tileY)]
+				tileData.breakTile(tileX,tileY,0,planetDir,planet)
 				planet.editTiles( { edit: planet.airOrCaveAir(tileX,tileY) } )
 				queue_free()
 		else:

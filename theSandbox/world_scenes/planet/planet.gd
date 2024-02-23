@@ -20,11 +20,6 @@ var chunkScene = preload("res://world_scenes/chunk/chunk.tscn")
 
 const SIZEINCHUNKS = 16 # (size * 8)^2 = number of tiles
 
-var planetData = []
-var planetIMAGE : Image
-var backgroundLayerData = []
-var lightData = []
-var positionLookup = []
 var centerPoint = Vector2.ZERO
 
 #Noise
@@ -109,7 +104,7 @@ func _physics_process(delta):
 			
 			var arrayPosition = (change.x * SIZEINCHUNKS * 8) + change.y
 			
-			planetData[arrayPosition] = committedChanges[change]
+			DATAC.setTileData(change.x,change.y,committedChanges[change])
 			var foundChunk = chunkArray2D[change.x/8][change.y/8]
 			if !chunksToUpdate.has(foundChunk):
 				chunksToUpdate.append(foundChunk)
@@ -126,7 +121,7 @@ func editTiles(changeCommit):
 		
 		var arrayPosition = (change.x * SIZEINCHUNKS * 8) + change.y
 		
-		planetData[arrayPosition] = changeCommit[change]
+		DATAC.setTileData(change.x,change.y,changeCommit[change])
 		
 		if int(change.z) == 0:
 			## PUT MISSING GLOBAL TICK SHIT HERE !!
@@ -159,25 +154,15 @@ func generateEmptyArray():
 	
 	var s := SIZEINCHUNKS*8
 	
-	planetIMAGE = Image.create(s,s,false,Image.FORMAT_RGBA8)
-	
 	DATAC.createEmptyArrays(s)
 	
 	for x in range(s):
-		#planetData.append([])
-		#lightData.append([])
-		#positionLookup.append([])
 		for y in range(s):
-			planetData.append(0) # TILE LAYER, BACKGROUND LAYER, LAST TICK SINCE UPDATED
-			backgroundLayerData.append(0)
-			planetIMAGE.set_pixel(x,y,Color8(0,0,0,0))
-			lightData.append(0.0)
-			positionLookup.append(getBlockPosition(x,y))
-			
 			# c++
 			DATAC.setTileData(x,y,0)
 			DATAC.setBGData(x,y,0)
 			DATAC.setLightData(x,y,0.0)
+			DATAC.setPositionLookup(x,y,getBlockPosition(x,y))
 	
 func airOrCaveAir(x,y):
 	var surface = SIZEINCHUNKS*2
@@ -189,44 +174,24 @@ func generateTerrain():
 		for y in range(SIZEINCHUNKS*8):
 			#planetData[x][y] = getBlockPosition(x,y)
 			var arrayPosition = (x*SIZEINCHUNKS*8) + y
-			var quad = positionLookup[arrayPosition]
+			var quad = DATAC.getPositionLookup(x,y)
 			var side = Vector2(x,y).rotated((PI/2)*quad).x
 			var surface = (noise.get_noise_1d(side*2.0)*4.0) + (SIZEINCHUNKS*2)
 			
 			if getBlockDistance(x,y) <= surface:
-				planetData[arrayPosition] = 2
-				backgroundLayerData[arrayPosition] = 2
-				
-				planetIMAGE.set_pixel(x,y,idToColor(2,2))
-				#lightData[x][y] = 0.0
-				
 				DATAC.setTileData(x,y,2)
 				DATAC.setBGData(x,y,2)
 				
 			elif getBlockDistance(x,y) <= surface + 4:
-				planetData[arrayPosition] = 3
-				backgroundLayerData[arrayPosition] = 3
-				#lightData[x][y] = 0.0
-				planetIMAGE.set_pixel(x,y,idToColor(3,3))
-				
 				DATAC.setTileData(x,y,3)
 				DATAC.setBGData(x,y,3)
 				
 			elif getBlockDistance(x,y) <= surface + 5:
-				planetData[arrayPosition] = 4
-				backgroundLayerData[arrayPosition] = 3
-				planetIMAGE.set_pixel(x,y,idToColor(4,3))
-				
 				DATAC.setTileData(x,y,4)
 				DATAC.setBGData(x,y,3)
 				
 				#lightData[x][y] = 0.0
 			if getBlockDistance(x,y) <= 5:
-				planetData[arrayPosition] = 5
-				backgroundLayerData[arrayPosition] = 5
-				
-				planetIMAGE.set_pixel(x,y,idToColor(5,5))
-				
 				DATAC.setTileData(x,y,5)
 				DATAC.setBGData(x,y,5)
 			
@@ -261,7 +226,7 @@ func getBlockPosition(x,y):
 
 func getBlockDistance(x,y):
 	var arrayPosition = (x*SIZEINCHUNKS*8) + y
-	var quadtrant = positionLookup[arrayPosition]
+	var quadtrant = DATAC.getPositionLookup(x,y)
 	var newPos = Vector2(x,y) - centerPoint
 	newPos = newPos.rotated((PI/2)*-quadtrant)
 	return -newPos.y

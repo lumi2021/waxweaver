@@ -19,7 +19,7 @@ CHUNKDRAW::~CHUNKDRAW() {
 	// Add your cleanup here.
 }
 
-Array CHUNKDRAW::generateTexturesFromData(Array planetData,Array backgroundLayerData,Vector2i pos,Array positionLookup,Node *body,Ref<Shape2D> shape){
+Array CHUNKDRAW::generateTexturesFromData(PLANETDATA *planet,Vector2i pos,Node *body,Ref<Shape2D> shape){
     Ref<Image> img = Image::create(64, 64, false, Image::FORMAT_RGBA8);
     Ref<Image> backImg = Image::create(64, 64, false, Image::FORMAT_RGBA8);
     
@@ -32,13 +32,12 @@ Array CHUNKDRAW::generateTexturesFromData(Array planetData,Array backgroundLayer
             int worldX = x+(pos.x*8);
             int worldY = y+(pos.y*8);
 
-            int planetSize = 128; // THIS WILL BE PASSED IN INSTEAD LATER
-            int arrayPosition = (worldX * planetSize) + worldY;
+            int planetSize = planet->planetSize; // GETS PASSED IN
 
-            int blockSide = positionLookup[arrayPosition];
+            int blockSide = planet->getPositionLookup(worldX,worldY);
 
-            int blockID = planetData[arrayPosition];
-            int backBlockID = backgroundLayerData[arrayPosition];
+            int blockID = planet->getTileData(worldX,worldY);
+            int backBlockID = planet->getBGData(worldX,worldY);
 
             if (blockID>1){
                 //ideally move blockimage conversion to block specific code
@@ -56,7 +55,7 @@ Array CHUNKDRAW::generateTexturesFromData(Array planetData,Array backgroundLayer
                 }
 
                 int frame = 0;
-                if(blockData["connectedTexture"]){ frame = scanBlockOpen(planetData,worldX,worldY); }
+                if(blockData["connectedTexture"]){ frame = scanBlockOpen(planet,worldX,worldY); }
                 Rect2i blockRect = Rect2i(frame,0,8,8);
 
                 
@@ -95,7 +94,7 @@ Array CHUNKDRAW::generateTexturesFromData(Array planetData,Array backgroundLayer
                 }
 
                 int frame = 0;
-                if(blockData["connectedTexture"]){ frame = scanBlockOpen(backgroundLayerData,worldX,worldY); }
+                if(blockData["connectedTexture"]){ frame = scanBlockOpen(planet,worldX,worldY); }
                 Rect2i blockRect = Rect2i(frame,0,8,8);
 
                 
@@ -165,62 +164,29 @@ void CHUNKDRAW::tickUpdate(PLANETDATA *planet,Vector2i pos){
 
 
 
-int CHUNKDRAW::scanBlockOpen(Array data,int x,int y){
+int CHUNKDRAW::scanBlockOpen(PLANETDATA *planet,int x,int y){
 	int openL = 1;
 	int openR = 2;
 	int openT = 4;
 	int openB = 8;
 	//what the fuck is this
 
-    int blockID = getTileFromData(x-1, y, data);
+    int blockID = planet->getTileData(x-1,y);
     int connectTexturesToMe = !cock->isTextureConnector(blockID);
     openL = 1 * connectTexturesToMe;
 
-    blockID = getTileFromData(x+1, y, data);
+    blockID = planet->getTileData(x+1,y);
     connectTexturesToMe = !cock->isTextureConnector(blockID);
     openR = 2 * connectTexturesToMe;
 
 
-    blockID = getTileFromData(x, y-1, data);
+    blockID = planet->getTileData(x,y-1);
     connectTexturesToMe = !cock->isTextureConnector(blockID);
     openT = 4 * connectTexturesToMe;
 
-    blockID = getTileFromData(x, y+1, data);
+    blockID = planet->getTileData(x,y+1);
     connectTexturesToMe = !cock->isTextureConnector(blockID);
     openB = 8 * connectTexturesToMe;
 
 	return (openL + openR + openT + openB) * 8;
-}
-
-int CHUNKDRAW::getTileFromData(int x, int y, Array data){  
-    int size = 128; // CHANGE THIS TO NOT BE HARDCODED LATER !!!!
-    int arrayPosition = (x * size) + y;
-    
-    Array empty;
-
-    if(x < 0){return 0;}
-    if(x > size-1){return 0;}
-    if(y < 0){return 0;}
-    if(y > size-1){return 0;}
-    
-    int blockID = data[arrayPosition];
-
-    return blockID;
-}
-
-int CHUNKDRAW::tileInRange(int x, int y, Array planetData){
-    int size = 128; // CHANGE THIS TO NOT BE HARDCODED LATER !!!!
-
-    if(x < 0){return 0;}
-    if(x > size-1){return 0;}
-    if(y < 0){return 0;}
-    if(y > size-1){return 0;}
-
-    return 1;
-}
-
-
-
-void CHUNKDRAW::_process(double delta) {
-	
 }

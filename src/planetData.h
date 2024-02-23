@@ -19,6 +19,8 @@ private:
     double *lightData;
     int *timeData;
 
+    int *positionLookup;
+
 	
 protected:
 	static void _bind_methods();
@@ -38,10 +40,14 @@ public:
     double getLightData(int x,int y);
     int getTimeData(int x,int y);
 
+    int getPositionLookup(int x, int y);
+
     bool setTileData(int x,int y, int newValue);
     bool setBGData(int x,int y, int newValue);
     bool setLightData(int x,int y,double newValue);
     bool setTimeData(int x,int y,int newValue);
+
+    bool setPositionLookup(int x, int y, int newValue);
 
 
 };

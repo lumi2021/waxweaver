@@ -27,10 +27,10 @@ var airs = [0,7]
 func onTick(x,y,data,layer,dir):
 	return {}
 
-func onBreak(x,y,data,layer,dir):
+func onBreak(x,y,layer,dir):
 	pass
 
-func breakTile(x,y,data,layer,dir,planet):
+func breakTile(x,y,layer,dir,planet):
 	
 	BlockData.spawnGroundItem(x,y,itemToDrop,planet)
 	if breakParticle == -1:
@@ -38,4 +38,4 @@ func breakTile(x,y,data,layer,dir,planet):
 	else:
 		BlockData.spawnBreakParticle(x,y,breakParticle,planet)
 	
-	onBreak(x,y,data,layer,dir)
+	onBreak(x,y,layer,dir)
