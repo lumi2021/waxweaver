@@ -34,7 +34,7 @@ public:
 	CHUNKDRAW();
 	~CHUNKDRAW();
 
-    Array generateTexturesFromData(Array planetData,Array backgroundLayerData,Vector2i pos,Array positionLookup,Node *body,Ref<Shape2D> shape,Ref<Image> planetImg);
+    Array generateTexturesFromData(Array planetData,Array backgroundLayerData,Vector2i pos,Array positionLookup,Node *body,Ref<Shape2D> shape);
 	void tickUpdate(Array planetData,Vector2i pos,Array positionLookup,Array lightData);
 
 	int scanBlockOpen(Array data,int x,int y);
