@@ -5,6 +5,8 @@
 [node name="Planet" type="Node2D"]
 script = ExtResource("1_8tc4r")
 
+[node name="PLANETDATA" type="PLANETDATA" parent="."]
+
 [node name="isVisible" type="VisibleOnScreenNotifier2D" parent="."]
 
 [node name="ChunkContainer" type="Node2D" parent="."]

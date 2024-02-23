@@ -6,7 +6,7 @@ using namespace godot;
 
 void CHUNKDRAW::_bind_methods() {
     ClassDB::bind_method(D_METHOD("generateTexturesFromData","planetData","backgroundLayerData","pos","positionLookup"), &CHUNKDRAW::generateTexturesFromData);
-    ClassDB::bind_method(D_METHOD("tickUpdate","planetData","pos","positionLookup","lightdata"), &CHUNKDRAW::tickUpdate);
+    ClassDB::bind_method(D_METHOD("tickUpdate","planetDatac","pos"), &CHUNKDRAW::tickUpdate);
     ADD_SIGNAL(MethodInfo("chunkDrawn", PropertyInfo(Variant::OBJECT, "node"), PropertyInfo(Variant::OBJECT, "image"), PropertyInfo(Variant::OBJECT, "backImage")));
 }
 
@@ -118,40 +118,35 @@ Array CHUNKDRAW::generateTexturesFromData(Array planetData,Array backgroundLayer
 
 }
 
-void CHUNKDRAW::tickUpdate(Array planetData,Vector2i pos,Array positionLookup,Array lightData){
+void CHUNKDRAW::tickUpdate(PLANETDATA *planet,Vector2i pos){
 
     for(int x = 0; x < 8; x++){
         for(int y = 0; y < 8; y++){
             int worldX = x+(pos.x*8);
             int worldY = y+(pos.y*8);
 
-            int planetSize = 128; // THIS WILL BE PASSED IN INSTEAD LATER
-            int arrayPosition = (worldX * planetSize) + worldY;
+            int planetSize = planet->planetSize; // GETS PASSED IN
             
-            int blockID = planetData[arrayPosition];
+            int blockID = planet->getTileData(worldX,worldY);
 
-            int blockSide = positionLookup[arrayPosition];
+            //int blockSide = positionLookup[arrayPosition];
 
             // SIMULATE LIGHT //
            
-            double currentLight = lightData[arrayPosition];
+            double currentLight = planet->getLightData(worldX,worldY);
             int hasPosL = worldX > 0;
             int hasPosR = worldX < planetSize-1;
             int hasPosT = worldY > 0;
             int hasPosB = worldY < planetSize-1;
 
 
-            int arrayPosL = ((worldX-(1*hasPosL)) * planetSize) + worldY;
-            double lightL = lightData[arrayPosL];
+            double lightL = planet->getLightData(worldX - 1,worldY);
 
-            int arrayPosR = ((worldX+(1*hasPosR)) * planetSize) + worldY;
-            double lightR = lightData[arrayPosR];
+            double lightR = planet->getLightData(worldX + 1,worldY);
             
-            int arrayPosB = (worldX * planetSize) + worldY + (1*hasPosB);
-            double lightB = lightData[arrayPosB];
+            double lightB = planet->getLightData(worldX,worldY + 1);
 
-            int arrayPosT = (worldX * planetSize) + worldY - (1*hasPosT);
-            double lightT = lightData[arrayPosT];
+            double lightT = planet->getLightData(worldX,worldY - 1);
 
             //average light values
             double mutliplier = cock->getLightMultiplier(blockID);
@@ -160,7 +155,7 @@ void CHUNKDRAW::tickUpdate(Array planetData,Vector2i pos,Array positionLookup,Ar
             newLight = std::max(newLight,lightEmmission);
             newLight = std::clamp(newLight,0.0,1.0);
 
-            lightData[arrayPosition] = newLight;
+            planet->setLightData(worldX,worldY,newLight);
 
         }
 

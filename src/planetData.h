@@ -16,8 +16,9 @@ class PLANETDATA : public Node {
 private:
     int *tileData;
     int *bgData;
-    int *lightData;
+    double *lightData;
     int *timeData;
+
 	
 protected:
 	static void _bind_methods();
@@ -25,13 +26,24 @@ protected:
 public:
 
     //Data
-    
+    int planetSize;
 
 	PLANETDATA();
 	~PLANETDATA();
 
     void createEmptyArrays(int size);
     
+    int getTileData(int x,int y);
+    int getBGData(int x,int y);
+    double getLightData(int x,int y);
+    int getTimeData(int x,int y);
+
+    bool setTileData(int x,int y, int newValue);
+    bool setBGData(int x,int y, int newValue);
+    bool setLightData(int x,int y,double newValue);
+    bool setTimeData(int x,int y,int newValue);
+
+
 };
 
 }

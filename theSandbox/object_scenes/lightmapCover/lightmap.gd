@@ -19,7 +19,7 @@ func pushUpdate(planet,newPos):
 	var newX = int(relativePos.x)/8
 	var newY = int(relativePos.y)/8
 
-	cppLightmap.generateLightTexture(newX,newY,planet.lightData)
+	cppLightmap.generateLightTexture(newX,newY,planet.DATAC)
 	
 	position = newPos
 

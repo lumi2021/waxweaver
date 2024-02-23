@@ -16,6 +16,7 @@
 #include <algorithm>
 
 #include "lookupBlock.h"
+#include "planetData.h"
 
 namespace godot {
 
@@ -35,7 +36,7 @@ public:
 	~CHUNKDRAW();
 
     Array generateTexturesFromData(Array planetData,Array backgroundLayerData,Vector2i pos,Array positionLookup,Node *body,Ref<Shape2D> shape);
-	void tickUpdate(Array planetData,Vector2i pos,Array positionLookup,Array lightData);
+	void tickUpdate(PLANETDATA *planet,Vector2i pos);
 
 	int scanBlockOpen(Array data,int x,int y);
 	int getTileFromData(int x, int y, Array data);

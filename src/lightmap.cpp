@@ -20,10 +20,10 @@ LIGHTMAP::~LIGHTMAP() {
 
 
 
-void LIGHTMAP::generateLightTexture(int x, int y,const Array &lightData){
+void LIGHTMAP::generateLightTexture(int x, int y,PLANETDATA *planet){
     
     img = Image::create(64, 64, false, Image::FORMAT_RGBA8);
-    int size = 128; // THIS WILL BE PASSED IN INSTEAD LATER
+    int size = planet->planetSize; // THIS WILL BE PASSED IN INSTEAD LATER
 
     for (int imgX = 0; imgX < 64; imgX++){
         
@@ -35,10 +35,10 @@ void LIGHTMAP::generateLightTexture(int x, int y,const Array &lightData){
             
             int arrayPosition = (newX*size) + newY;
 
-            float l = lightData[arrayPosition];
+            float l = planet->getLightData(newX,newY);
             //holdData.clear();
 
-           // float l = 0.1;
+            //float l = 0.1;
 
 
             Color c = Color::hex(0x000000FF);

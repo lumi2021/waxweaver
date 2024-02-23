@@ -4,6 +4,7 @@
 #include "chunkdraw.h"
 #include "lightmap.h"
 #include "lookupBlock.h"
+#include "planetData.h"
 
 //ADD BLOCKS HERE
 #include "block.h"
@@ -29,6 +30,7 @@ void initialize_example_module(ModuleInitializationLevel p_level) {
 	ClassDB::register_class<CHUNKDRAW>();
 	ClassDB::register_class<LIGHTMAP>();
 	ClassDB::register_class<LOOKUPBLOCK>();
+	ClassDB::register_class<PLANETDATA>();
 
 	//ADD BLOCKS HERE
 	ClassDB::register_class<BLOCK>();

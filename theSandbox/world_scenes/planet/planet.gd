@@ -3,6 +3,8 @@ class_name Planet
 
 var system = null
 
+@onready var DATAC = $PLANETDATA
+
 @onready var chunkContainer = $ChunkContainer
 @onready var entityContainer = $EntityContainer
 
@@ -159,6 +161,8 @@ func generateEmptyArray():
 	
 	planetIMAGE = Image.create(s,s,false,Image.FORMAT_RGBA8)
 	
+	DATAC.createEmptyArrays(s)
+	
 	for x in range(s):
 		#planetData.append([])
 		#lightData.append([])
@@ -166,12 +170,15 @@ func generateEmptyArray():
 		for y in range(s):
 			planetData.append(0) # TILE LAYER, BACKGROUND LAYER, LAST TICK SINCE UPDATED
 			backgroundLayerData.append(0)
-			
 			planetIMAGE.set_pixel(x,y,Color8(0,0,0,0))
-			
 			lightData.append(0.0)
 			positionLookup.append(getBlockPosition(x,y))
-
+			
+			# c++
+			DATAC.setTileData(x,y,0)
+			DATAC.setBGData(x,y,0)
+			DATAC.setLightData(x,y,0.0)
+	
 func airOrCaveAir(x,y):
 	var surface = SIZEINCHUNKS*2
 	#Returns 7 for cave air or 0 for surface air
@@ -192,15 +199,26 @@ func generateTerrain():
 				
 				planetIMAGE.set_pixel(x,y,idToColor(2,2))
 				#lightData[x][y] = 0.0
+				
+				DATAC.setTileData(x,y,2)
+				DATAC.setBGData(x,y,2)
+				
 			elif getBlockDistance(x,y) <= surface + 4:
 				planetData[arrayPosition] = 3
 				backgroundLayerData[arrayPosition] = 3
 				#lightData[x][y] = 0.0
 				planetIMAGE.set_pixel(x,y,idToColor(3,3))
+				
+				DATAC.setTileData(x,y,3)
+				DATAC.setBGData(x,y,3)
+				
 			elif getBlockDistance(x,y) <= surface + 5:
 				planetData[arrayPosition] = 4
 				backgroundLayerData[arrayPosition] = 3
 				planetIMAGE.set_pixel(x,y,idToColor(4,3))
+				
+				DATAC.setTileData(x,y,4)
+				DATAC.setBGData(x,y,3)
 				
 				#lightData[x][y] = 0.0
 			if getBlockDistance(x,y) <= 5:
@@ -208,6 +226,9 @@ func generateTerrain():
 				backgroundLayerData[arrayPosition] = 5
 				
 				planetIMAGE.set_pixel(x,y,idToColor(5,5))
+				
+				DATAC.setTileData(x,y,5)
+				DATAC.setBGData(x,y,5)
 			
 func createChunks():
 	for x in range(SIZEINCHUNKS):
