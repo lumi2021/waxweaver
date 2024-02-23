@@ -50,7 +50,7 @@ func _process(delta):
 		var posHold = position
 		
 		if !orbitReverse:
-			orbitPeriod += orbitSpeed * 0.0001
+			orbitPeriod += orbitSpeed * 0.0001 * (delta*60)
 
 			position = orbiting.position + Vector2(orbitDistance,0).rotated(orbitPeriod)
 			position.x = int(position.x)
@@ -61,7 +61,7 @@ func _process(delta):
 			
 			posHold = orbiting.position
 			
-			orbitPeriod += orbitSpeed * 0.0001
+			orbitPeriod += orbitSpeed * 0.0001 * (delta*60)
 		
 			orbiting.position = position + Vector2(-orbitDistance,0).rotated(orbitPeriod)
 			orbiting.position.x = int(orbiting.position.x)

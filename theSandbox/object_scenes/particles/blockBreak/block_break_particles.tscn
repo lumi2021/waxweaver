@@ -11,6 +11,7 @@ point_count = 2
 amount = 5
 lifetime = 0.4
 explosiveness = 1.0
+fixed_fps = 30
 texture = ExtResource("1_o88t4")
 emission_shape = 3
 emission_rect_extents = Vector2(4, 4)

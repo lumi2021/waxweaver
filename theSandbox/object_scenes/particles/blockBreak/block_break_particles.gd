@@ -9,6 +9,6 @@ func _ready():
 	emitting = true
 
 func _process(delta):
-	ticks += 1
-	if ticks > 100:
+	ticks += delta * 60
+	if ticks > 45:
 		queue_free()
