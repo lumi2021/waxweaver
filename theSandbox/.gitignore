@@ -2,6 +2,7 @@
 .godot/
 .notes/
 .addons/godot-git-plugin/
+.export/
 
 # Godot-specific ignores
 .import/
