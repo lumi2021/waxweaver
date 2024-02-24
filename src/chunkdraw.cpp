@@ -7,6 +7,8 @@ using namespace godot;
 void CHUNKDRAW::_bind_methods() {
     ClassDB::bind_method(D_METHOD("generateTexturesFromData","planetData","backgroundLayerData","pos","positionLookup"), &CHUNKDRAW::generateTexturesFromData);
     ClassDB::bind_method(D_METHOD("tickUpdate","planetDatac","pos"), &CHUNKDRAW::tickUpdate);
+    ClassDB::bind_method(D_METHOD("getBlockDictionary","id"), &CHUNKDRAW::getBlockDictionary);
+    ClassDB::bind_method(D_METHOD("scanBlockOpen","planetDATAC","x","y"), &CHUNKDRAW::scanBlockOpen);
     ADD_SIGNAL(MethodInfo("chunkDrawn", PropertyInfo(Variant::OBJECT, "node"), PropertyInfo(Variant::OBJECT, "image"), PropertyInfo(Variant::OBJECT, "backImage")));
 }
 
@@ -17,6 +19,11 @@ CHUNKDRAW::CHUNKDRAW() {
 
 CHUNKDRAW::~CHUNKDRAW() {
 	// Add your cleanup here.
+}
+
+Dictionary CHUNKDRAW::getBlockDictionary(int id){
+    Dictionary blockData = cock->getBlockData(id);
+    return blockData;
 }
 
 Array CHUNKDRAW::generateTexturesFromData(PLANETDATA *planet,Vector2i pos,Node *body,Ref<Shape2D> shape){
@@ -42,12 +49,12 @@ Array CHUNKDRAW::generateTexturesFromData(PLANETDATA *planet,Vector2i pos,Node *
             if (blockID>1){
                 //ideally move blockimage conversion to block specific code
                 Dictionary blockData = cock->getBlockData(blockID);
-                Ref<Texture2D> blockRes = blockData["thing"];
+                Ref<Texture2D> blockRes = blockData["texture"];
                 Ref<Image> blockImg = blockRes->get_image();
                 blockImg->convert(Image::FORMAT_RGBA8);
 
                 
-                bool rotate = blockData["rotate"];
+                bool rotate = cock->isGravityRotate(blockID);
                 if (rotate){ 
                     for(int g = 0; g < blockSide; g++){
                         blockImg->rotate_90(ClockDirection::CLOCKWISE);
@@ -55,15 +62,15 @@ Array CHUNKDRAW::generateTexturesFromData(PLANETDATA *planet,Vector2i pos,Node *
                 }
 
                 int frame = 0;
-                if(blockData["connectedTexture"]){ frame = scanBlockOpen(planet,worldX,worldY); }
+                if( cock->isConnectedTexture(blockID) ){ frame = scanBlockOpen(planet,worldX,worldY); }
                 Rect2i blockRect = Rect2i(frame,0,8,8);
 
                 
 
                 img->blend_rect(blockImg, blockRect, imgPos);
 
-                //This is where collision stuff will go
-                if(blockData["hasCollision"]){
+                // THIS IS WHERE WE CREATE THE COLLISION //
+                if( cock->hasCollision(blockID) ) {
 
                     CollisionShape2D *collision;
                     collision = memnew(CollisionShape2D);
@@ -81,12 +88,12 @@ Array CHUNKDRAW::generateTexturesFromData(PLANETDATA *planet,Vector2i pos,Node *
             if (backBlockID>1){
                 //ideally move blockimage conversion to block specific code
                 Dictionary blockData = cock->getBlockData(backBlockID);
-                Ref<Texture2D> blockRes = blockData["thing"];
+                Ref<Texture2D> blockRes = blockData["texture"];
                 Ref<Image> blockImg = blockRes->get_image();
                 blockImg->convert(Image::FORMAT_RGBA8);
 
                 
-                bool rotate = blockData["rotate"];
+                bool rotate = cock->isGravityRotate(backBlockID);
                 if (rotate){ 
                     for(int g = 0; g < blockSide; g++){
                         blockImg->rotate_90(ClockDirection::CLOCKWISE);
@@ -94,7 +101,7 @@ Array CHUNKDRAW::generateTexturesFromData(PLANETDATA *planet,Vector2i pos,Node *
                 }
 
                 int frame = 0;
-                if(blockData["connectedTexture"]){ frame = scanBlockOpen(planet,worldX,worldY); }
+                if( cock->isConnectedTexture(backBlockID) ) { frame = scanBlockOpen(planet,worldX,worldY); }
                 Rect2i blockRect = Rect2i(frame,0,8,8);
 
                 

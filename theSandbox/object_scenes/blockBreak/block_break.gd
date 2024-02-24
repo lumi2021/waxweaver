@@ -11,36 +11,24 @@ var damage = 0
 var mineMultiplier := 1.0
 
 func _ready():
-	var blockData = BlockData.data[blockID]
-	$blockTexture.texture = blockData.texture
+	var blockData = BlockData.theChunker.getBlockDictionary(blockID)
+	$blockTexture.texture = blockData["texture"]
 	
-	if blockData.breakParticle == -1:
-		$particles.texture = blockData.texture
+	if blockData["breakParticleID"] == -1:
+		$particles.texture = blockData["texture"]
 	else:
-		$particles.texture = BlockData.data[blockData.breakParticle].texture
+		var particleData = BlockData.theChunker.getBlockDictionary(blockData["breakParticleID"])
+		$particles.texture = particleData["texture"]
 	
-	if blockData.connectedTexture:
+	if blockData["connectedTexture"]:
 		$blockTexture.hframes = 16
-		#$blockTexture.frame = scanBlockOpen(planet.planetData,tileX,tileY,0)
+		$blockTexture.frame = BlockData.theChunker.scanBlockOpen(planet.DATAC,tileX,tileY) / 8
 		$Sprite.hframes = 16
 		$Sprite.frame = $blockTexture.frame
 		
 		
-	$Sprite.texture = blockData.texture
+	$Sprite.texture = blockData["texture"]
 	
-func scanBlockOpen(planetData,x,y,layer):
-	var openL := 1
-	var openR := 2
-	var openT := 4
-	var openB := 8
-	
-	openL = 1 * int(!BlockData.data[planetData[x-(1*int(x != 0))][y][layer]].texturesConnectToMe)
-	openR = 2 * int(!BlockData.data[planetData[x+(1*int(x != planetData.size()-1))][y][layer]].texturesConnectToMe)
-	openT = 4 * int(!BlockData.data[planetData[x][y-(1 * int(y != 0))][layer]].texturesConnectToMe)
-	openB = 8 * int(!BlockData.data[planetData[x][y+(1 * int(y != planetData.size()-1))][layer]].texturesConnectToMe)
-	
-	return (openL+openR+openT+openB)
-
 
 func _process(delta):
 	
@@ -54,7 +42,7 @@ func _process(delta):
 		var itemData = ItemData.data[PlayerData.inventory[PlayerData.selectedSlot][0]]
 		if itemData is ItemMining:
 			damage += delta * itemData.miningMultiplier
-			var breakTime = BlockData.data[blockID].breakTime
+			var breakTime = BlockData.theChunker.getBlockDictionary(blockID)["breakTime"]
 			$blockTexture.position.x = ((randi() % 3)-1) * (damage / breakTime)
 			$blockTexture.position.y = ((randi() % 3)-1) * (damage / breakTime)
 			
@@ -62,8 +50,9 @@ func _process(delta):
 			
 			if damage >= breakTime:
 				var edit = Vector3(tileX,tileY,0)
-				var tileData = BlockData.data[planet.DATAC.getTileData(tileX,tileY)]
-				tileData.breakTile(tileX,tileY,0,planetDir,planet)
+				#var tileData = BlockData.data[planet.DATAC.getTileData(tileX,tileY)]
+				#tileData.breakTile(tileX,tileY,0,planetDir,planet)
+				BlockData.breakBlock(tileX,tileY,planet,blockID)
 				planet.editTiles( { edit: planet.airOrCaveAir(tileX,tileY) } )
 				queue_free()
 		else:

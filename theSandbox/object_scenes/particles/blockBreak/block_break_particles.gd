@@ -4,7 +4,7 @@ var textureID = 0
 var ticks = 0
 
 func _ready():
-	texture = BlockData.data[textureID].texture
+	texture = BlockData.theChunker.getBlockDictionary(textureID)["texture"]
 	one_shot = true
 	emitting = true
 

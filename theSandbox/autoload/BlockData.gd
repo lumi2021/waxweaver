@@ -5,25 +5,17 @@ extends Node
 
 var theChunker = null
 
-var data = {
-	0:load("res://block_resources/blocks/Air.tres"),
-	1:load("res://block_resources/blocks/CaveAir.tres"),
-	2:load("res://block_resources/blocks/Stone.tres"),
-	3:load("res://block_resources/blocks/Dirt.tres"),
-	4:load("res://block_resources/blocks/Grass.tres"),
-	5:load("res://block_resources/blocks/Core.tres"),
-	6:load("res://block_resources/blocks/Sand.tres"),
-	7:load("res://block_resources/blocks/Torch.tres"),
-	8:load("res://block_resources/blocks/Water.tres"),
-	9:load("res://block_resources/blocks/Lava.tres"),
-}
-
 func _ready():
 	var ins = CHUNKDRAW.new()
 	theChunker = ins
 	add_child(ins)
 
-
+func breakBlock(x,y,planet,blockID):
+	
+	var data = theChunker.getBlockDictionary(blockID)
+	
+	spawnBreakParticle(x,y,blockID,data["breakParticleID"],planet)
+	spawnGroundItem(x,y,data["itemToDrop"],planet)
 
 func spawnGroundItem(tilex:int,tiley:int,id:int,planet:Planet):
 	if id == -1:
@@ -33,8 +25,13 @@ func spawnGroundItem(tilex:int,tiley:int,id:int,planet:Planet):
 	ins.position = planet.tileToPos(Vector2(tilex,tiley))
 	planet.entityContainer.add_child(ins)
 
-func spawnBreakParticle(tilex:int,tiley:int,id:int,planet:Planet):
+func spawnBreakParticle(tilex:int,tiley:int,id:int,otherId:int,planet:Planet):
+	
+	var newId = id
+	if otherId != -1:
+		newId = otherId
+	
 	var ins = blockBreakParticle.instantiate()
-	ins.textureID = id
+	ins.textureID = newId
 	ins.position = planet.tileToPos(Vector2(tilex,tiley))
 	planet.entityContainer.add_child(ins)

@@ -39,6 +39,7 @@ public:
 	void tickUpdate(PLANETDATA *planet,Vector2i pos);
 
 	int scanBlockOpen(PLANETDATA *planet,int x,int y);
+	Dictionary getBlockDictionary(int id);
 };
 
 }

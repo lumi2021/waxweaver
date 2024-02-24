@@ -4,6 +4,7 @@
 #include <godot_cpp/classes/node.hpp>
 #include <godot_cpp/variant/array.hpp>
 #include <godot_cpp/variant/dictionary.hpp>
+#include <godot_cpp/classes/image.hpp>
 
 //Make sure to include blocks in here too
 #include "blockAir.h" // id 0
@@ -31,6 +32,12 @@ public:
 	LOOKUPBLOCK();
 	~LOOKUPBLOCK();
     Dictionary getBlockData(int id);
+
+
+	bool hasCollision(int id);
+	bool isGravityRotate(int id);
+
+	Ref<Image> getTextureImage(int id);
 
 	bool isConnectedTexture(int id);
 	bool isTextureConnector(int id);
