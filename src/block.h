@@ -24,6 +24,7 @@ public:
     int blockID;
 
     Ref<Texture2D> texture;
+    Ref<Image> texImage;
     bool rotateTextureToGravity;
     bool connectedTexture;
     bool connectTexturesToMe;
@@ -44,8 +45,11 @@ public:
 	~BLOCK();
 
     void setNewVariables();
+    void setTexture( const char* file );
 
     Dictionary onTick(int x, int y, Array planetData, int layer, int dir);
+
+
 
 };
 

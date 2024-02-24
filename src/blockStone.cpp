@@ -8,8 +8,7 @@ void BLOCKSTONE::_bind_methods() {
 
 BLOCKSTONE::BLOCKSTONE() {
 
-    ResourceLoader rl;
-    texture = rl.load("res://block_resources/block_textures/stone.png");
+    setTexture("res://block_resources/block_textures/stone.png");
 
 
     lightMultiplier = 0.8;

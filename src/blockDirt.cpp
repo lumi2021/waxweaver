@@ -8,8 +8,7 @@ void BLOCKDIRT::_bind_methods() {
 
 BLOCKDIRT::BLOCKDIRT() {
 
-    ResourceLoader rl;
-    texture = rl.load("res://block_resources/block_textures/dirt.png");
+    setTexture("res://block_resources/block_textures/dirt.png");
 
     itemToDrop = 0;
     rotateTextureToGravity = true;

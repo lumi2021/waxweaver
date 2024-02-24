@@ -47,12 +47,8 @@ Array CHUNKDRAW::generateTexturesFromData(PLANETDATA *planet,Vector2i pos,Node *
             int backBlockID = planet->getBGData(worldX,worldY);
 
             if (blockID>1){
-                //ideally move blockimage conversion to block specific code
-                Dictionary blockData = cock->getBlockData(blockID);
-                Ref<Texture2D> blockRes = blockData["texture"];
-                Ref<Image> blockImg = blockRes->get_image();
-                blockImg->convert(Image::FORMAT_RGBA8);
-
+                
+                Ref<Image> blockImg = cock->getTextureImage(blockID);
                 
                 bool rotate = cock->isGravityRotate(blockID);
                 if (rotate){ 
@@ -68,6 +64,13 @@ Array CHUNKDRAW::generateTexturesFromData(PLANETDATA *planet,Vector2i pos,Node *
                 
 
                 img->blend_rect(blockImg, blockRect, imgPos);
+
+                // unrotate it, this is hacky i know
+                if (rotate){ 
+                    for(int g = 0; g < blockSide; g++){
+                        blockImg->rotate_90(ClockDirection::COUNTERCLOCKWISE);
+                    }
+                }
 
                 // THIS IS WHERE WE CREATE THE COLLISION //
                 if( cock->hasCollision(blockID) ) {
@@ -86,13 +89,9 @@ Array CHUNKDRAW::generateTexturesFromData(PLANETDATA *planet,Vector2i pos,Node *
 
 
             if (backBlockID>1){
-                //ideally move blockimage conversion to block specific code
-                Dictionary blockData = cock->getBlockData(backBlockID);
-                Ref<Texture2D> blockRes = blockData["texture"];
-                Ref<Image> blockImg = blockRes->get_image();
-                blockImg->convert(Image::FORMAT_RGBA8);
-
                 
+                Ref<Image> blockImg = cock->getTextureImage(backBlockID);
+
                 bool rotate = cock->isGravityRotate(backBlockID);
                 if (rotate){ 
                     for(int g = 0; g < blockSide; g++){
@@ -107,6 +106,13 @@ Array CHUNKDRAW::generateTexturesFromData(PLANETDATA *planet,Vector2i pos,Node *
                 
 
                 backImg->blend_rect(blockImg, blockRect, imgPos);
+
+                // unrotate it
+                if (rotate){ 
+                    for(int g = 0; g < blockSide; g++){
+                        blockImg->rotate_90(ClockDirection::COUNTERCLOCKWISE);
+                    }
+                }
 
             }
 

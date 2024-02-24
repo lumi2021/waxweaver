@@ -10,8 +10,7 @@ BLOCK::BLOCK() {
     //Default Variables
     blockID = -1;
 
-    ResourceLoader rl;
-    texture = rl.load("res://block_resources/block_textures/error.png");
+    setTexture("res://block_resources/block_textures/error.png");
 
     rotateTextureToGravity = false;
     connectedTexture = false;
@@ -39,6 +38,15 @@ BLOCK::~BLOCK() {
 }
 
 void BLOCK::setNewVariables(){
+}
+
+void BLOCK::setTexture( const char* file ) {
+    ResourceLoader rl;
+    texture = rl.load(file);
+
+    texImage = texture->get_image();
+    texImage->convert(Image::FORMAT_RGBA8);
+
 }
 
 Dictionary BLOCK::onTick(int x, int y, Array planetData, int layer, int dir){

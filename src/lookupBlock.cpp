@@ -78,6 +78,12 @@ bool LOOKUPBLOCK::isConnectedTexture(int id){
     return g->connectedTexture;
 }
 
+Ref<Image> LOOKUPBLOCK::getTextureImage(int id){
+    Ref<BLOCK> g = allBlocks[id];
+
+    return g->texImage;
+}
+
 
 bool LOOKUPBLOCK::isTextureConnector(int id){
     Ref<BLOCK> g = allBlocks[id];

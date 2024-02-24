@@ -8,8 +8,7 @@ void BLOCKCAVEAIR::_bind_methods() {
 
 BLOCKCAVEAIR::BLOCKCAVEAIR() {
 
-    ResourceLoader rl;
-    texture = rl.load("res://block_resources/block_textures/air.png");
+    setTexture("res://block_resources/block_textures/air.png");
 
     connectTexturesToMe = false;
 

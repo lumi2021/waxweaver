@@ -8,8 +8,7 @@ void BLOCKAIR::_bind_methods() {
 
 BLOCKAIR::BLOCKAIR() {
 
-    ResourceLoader rl;
-    texture = rl.load("res://block_resources/block_textures/air.png");
+    setTexture("res://block_resources/block_textures/air.png");
 
     connectTexturesToMe = false;
 

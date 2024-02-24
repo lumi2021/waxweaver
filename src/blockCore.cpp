@@ -8,8 +8,9 @@ void BLOCKCORE::_bind_methods() {
 
 BLOCKCORE::BLOCKCORE() {
 
-    ResourceLoader rl;
-    texture = rl.load("res://block_resources/block_textures/core.png");
+    setTexture("res://block_resources/block_textures/core.png");
+
+    breakTime = 999999.0;
 
 }
 
