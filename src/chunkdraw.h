@@ -36,7 +36,7 @@ public:
 	~CHUNKDRAW();
 
     Array generateTexturesFromData(PLANETDATA *planet,Vector2i pos,Node *body,Ref<Shape2D> shape);
-	void tickUpdate(PLANETDATA *planet,Vector2i pos);
+	Array tickUpdate(PLANETDATA *planet,Vector2i pos);
 
 	int scanBlockOpen(PLANETDATA *planet,int x,int y);
 	Dictionary getBlockDictionary(int id);

@@ -7,6 +7,9 @@
 #include <godot_cpp/classes/resource.hpp>
 #include <godot_cpp/variant/array.hpp>
 #include <godot_cpp/variant/dictionary.hpp>
+#include <godot_cpp/variant/vector2i.hpp>
+
+#include "planetData.h"
 
 namespace godot {
 
@@ -47,7 +50,7 @@ public:
     void setNewVariables();
     void setTexture( const char* file );
 
-    Dictionary onTick(int x, int y, Array planetData, int layer, int dir);
+    Dictionary onTick(int x, int y, PLANETDATA *planet, int dir);
 
 
 

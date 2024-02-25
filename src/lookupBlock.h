@@ -44,6 +44,8 @@ public:
 	double getLightMultiplier(int id);
 	double getLightEmmission(int id);
 
+	Dictionary runOnTick(int x, int y, PLANETDATA *planet, int dir, int blockID);
+
 };
 
 }

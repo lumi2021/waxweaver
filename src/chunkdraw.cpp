@@ -130,7 +130,9 @@ Array CHUNKDRAW::generateTexturesFromData(PLANETDATA *planet,Vector2i pos,Node *
 
 }
 
-void CHUNKDRAW::tickUpdate(PLANETDATA *planet,Vector2i pos){
+Array CHUNKDRAW::tickUpdate(PLANETDATA *planet,Vector2i pos){
+
+    Array collectedChanges;
 
     for(int x = 0; x < 8; x++){
         for(int y = 0; y < 8; y++){
@@ -141,7 +143,10 @@ void CHUNKDRAW::tickUpdate(PLANETDATA *planet,Vector2i pos){
             
             int blockID = planet->getTileData(worldX,worldY);
 
-            //int blockSide = positionLookup[arrayPosition];
+            int blockSide = planet->getPositionLookup(worldX,worldY);
+
+
+            collectedChanges.append( cock->runOnTick(worldX,worldY,planet,blockSide,blockID) );
 
             // SIMULATE LIGHT //
            
@@ -172,6 +177,8 @@ void CHUNKDRAW::tickUpdate(PLANETDATA *planet,Vector2i pos){
         }
 
    }
+
+   return collectedChanges;
         
 }
 

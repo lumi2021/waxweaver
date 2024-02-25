@@ -1,6 +1,7 @@
 #include "blockGrass.h"
 #include <godot_cpp/core/class_db.hpp>
 
+
 using namespace godot;
 
 void BLOCKGRASS::_bind_methods() {
@@ -21,3 +22,12 @@ BLOCKGRASS::BLOCKGRASS() {
 BLOCKGRASS::~BLOCKGRASS() {
 }
 
+Dictionary BLOCKGRASS::onTick(int x, int y, PLANETDATA *planet, int dir) {
+
+
+    Dictionary changes = {};
+
+    changes["cunt!!"] = 5;
+
+    return changes;
+}

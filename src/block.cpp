@@ -1,6 +1,8 @@
 #include "block.h"
 #include <godot_cpp/core/class_db.hpp>
 
+#include <godot_cpp/variant/utility_functions.hpp>
+
 using namespace godot;
 
 void BLOCK::_bind_methods() {
@@ -49,7 +51,7 @@ void BLOCK::setTexture( const char* file ) {
 
 }
 
-Dictionary BLOCK::onTick(int x, int y, Array planetData, int layer, int dir){
+Dictionary BLOCK::onTick(int x, int y, PLANETDATA *planet, int dir){
     Dictionary changes = {};
     return changes;
 }

@@ -102,3 +102,10 @@ double LOOKUPBLOCK::getLightEmmission(int id){
 
     return g->lightEmmission;
 }
+
+Dictionary LOOKUPBLOCK::runOnTick(int x, int y, PLANETDATA *planet, int dir, int blockID){
+
+    Ref<BLOCK> g = allBlocks[blockID];
+
+    return g->onTick(x,y,planet,dir);
+}
