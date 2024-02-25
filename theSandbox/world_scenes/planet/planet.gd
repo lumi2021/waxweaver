@@ -183,17 +183,17 @@ func generateTerrain():
 				DATAC.setBGData(x,y,2)
 				
 			elif getBlockDistance(x,y) <= surface + 4:
-				DATAC.setTileData(x,y,3)
-				DATAC.setBGData(x,y,3)
+				DATAC.setTileData(x,y,2)
+				DATAC.setBGData(x,y,2)
 				
 			elif getBlockDistance(x,y) <= surface + 5:
 				DATAC.setTileData(x,y,4)
-				DATAC.setBGData(x,y,3)
+				DATAC.setBGData(x,y,4)
 				
 				#lightData[x][y] = 0.0
 			if getBlockDistance(x,y) <= 5:
-				DATAC.setTileData(x,y,5)
-				DATAC.setBGData(x,y,5)
+				DATAC.setTileData(x,y,2)
+				DATAC.setBGData(x,y,2)
 			
 func createChunks():
 	for x in range(SIZEINCHUNKS):

@@ -8,6 +8,7 @@
 
 //ADD BLOCKS HERE
 #include "block.h"
+// We don't necessarily NEED these, it will still work without but it will print ERRORS without them.
 #include "blockAir.h"
 #include "blockCaveAir.h"
 #include "blockStone.h"

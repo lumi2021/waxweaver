@@ -9,6 +9,7 @@ void LOOKUPBLOCK::_bind_methods() {
     ClassDB::bind_method(D_METHOD("getBlockData","id"), &LOOKUPBLOCK::getBlockData);
 }
 
+// ADD BLOCKS TO ARRAY IN HERE
 LOOKUPBLOCK::LOOKUPBLOCK() {
     
     Ref<BLOCKAIR> air;
@@ -34,8 +35,6 @@ LOOKUPBLOCK::LOOKUPBLOCK() {
     Ref<BLOCKCORE> core;
     core.instantiate();
     allBlocks.append(core);
-
-
 
 }
 
@@ -105,7 +104,14 @@ double LOOKUPBLOCK::getLightEmmission(int id){
 
 Dictionary LOOKUPBLOCK::runOnTick(int x, int y, PLANETDATA *planet, int dir, int blockID){
 
-    Ref<BLOCK> g = allBlocks[blockID];
+    //Ref<BLOCK> g = allBlocks[blockID];
 
-    return g->onTick(x,y,planet,dir);
+    return allBlocks[blockID]->onTick(x,y,planet,dir);
 }
+
+////////////////////////////////////////////////////////////////////
+///////////////////////// SIMULATION ///////////////////////////////
+////////////////////////////////////////////////////////////////////
+
+// This is where we will put the onTick simulation code.
+// Multiple Tiles should be able to run the same functions
