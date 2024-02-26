@@ -27,7 +27,7 @@ protected:
 public:
 	
 	Array allBlocks;
-
+	BLOCK *penis[6];
 
 	LOOKUPBLOCK();
 	~LOOKUPBLOCK();

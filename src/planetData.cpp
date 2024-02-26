@@ -41,8 +41,15 @@ int PLANETDATA::getTileData(int x, int y) {
 
     int bigSize = planetSize * planetSize;
 
+    if ( x != std::clamp(x,0,planetSize-1) ){
+        return 5;
+    }
+    if ( y != std::clamp(y,0,planetSize-1) ){
+        return 5;
+    }
+
     int xyToLarge = (x * planetSize) + y;
-    xyToLarge = std::clamp(xyToLarge,0,bigSize-1);
+    //xyToLarge = std::clamp(xyToLarge,0,bigSize-1);
     
     int tile = tileData[xyToLarge];
    

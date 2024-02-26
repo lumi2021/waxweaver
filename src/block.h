@@ -50,7 +50,7 @@ public:
     void setNewVariables();
     void setTexture( const char* file );
 
-    Dictionary onTick(int x, int y, PLANETDATA *planet, int dir);
+    virtual Dictionary onTick(int x, int y, PLANETDATA *planet, int dir);
 
 
 

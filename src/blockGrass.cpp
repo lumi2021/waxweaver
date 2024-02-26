@@ -27,7 +27,12 @@ Dictionary BLOCKGRASS::onTick(int x, int y, PLANETDATA *planet, int dir) {
 
     Dictionary changes = {};
 
-    changes["cunt!!"] = 5;
+    int freeRight = planet->getTileData(x+1,y);
+
+    if (freeRight < 2){
+        changes[Vector2i(x,y)] = freeRight;
+        changes[Vector2i(x+1,y)] = 4;
+    }
 
     return changes;
 }

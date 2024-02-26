@@ -31,8 +31,9 @@ func tickUpdate():
 	#var committedChanges := {}
 	var lightChanged := false
 	MUSTUPDATELIGHT = true
-	print(BlockData.theChunker.tickUpdate(planet.DATAC,pos))
-	return {}
+	
+	return BlockData.theChunker.tickUpdate(planet.DATAC,pos)
+	
 	
 	#
 	#for x in range(CHUNKSIZE):

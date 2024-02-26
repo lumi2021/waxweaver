@@ -93,21 +93,51 @@ func _physics_process(delta):
 	for chunk in visibleChunks:
 		if tick % 4 != chunk.id4:
 			continue
-
-		var committedChanges = chunk.tickUpdate()
 		
+		var changesArray = chunk.tickUpdate()
+		var committedChanges = {}
+		
+		for d in changesArray:
+			var toss = false
+			for i in d.keys():
+				if committedChanges.has(i):
+					toss = true
+			if !toss:
+				for i in d.keys():
+					committedChanges[i] = d[i]
+		
+		
+		#Updates light
 		shouldUpdateLight += int(chunk.MUSTUPDATELIGHT)
 		chunk.MUSTUPDATELIGHT = false
 		
 		
 		for change in committedChanges.keys():
 			
-			var arrayPosition = (change.x * SIZEINCHUNKS * 8) + change.y
+			#var arrayPosition = (change.x * SIZEINCHUNKS * 8) + change.y
 			
 			DATAC.setTileData(change.x,change.y,committedChanges[change])
 			var foundChunk = chunkArray2D[change.x/8][change.y/8]
 			if !chunksToUpdate.has(foundChunk):
 				chunksToUpdate.append(foundChunk)
+			
+			if int(change.x) % 8 == 0 and change.x > 8:
+				var foundChunkLEFT = chunkArray2D[(change.x/8)-1][change.y/8]
+				if !chunksToUpdate.has(foundChunkLEFT):
+					chunksToUpdate.append(foundChunkLEFT)
+			elif int(change.x) % 8 == 7 and change.x < (SIZEINCHUNKS*8)-8:
+				var foundChunkRIGHT = chunkArray2D[(change.x/8)+1][change.y/8]
+				if !chunksToUpdate.has(foundChunkRIGHT):
+					chunksToUpdate.append(foundChunkRIGHT)
+			
+			if int(change.y) % 8 == 0 and change.y > 8:
+				var foundChunkUP = chunkArray2D[change.x/8][(change.y/8)-1]
+				if !chunksToUpdate.has(foundChunkUP):
+					chunksToUpdate.append(foundChunkUP)
+			elif int(change.y) % 8 == 7 and change.y < (SIZEINCHUNKS*8)-8:
+				var foundChunkDOWN = chunkArray2D[change.x/8][(change.y/8)+1]
+				if !chunksToUpdate.has(foundChunkDOWN):
+					chunksToUpdate.append(foundChunkDOWN)
 	
 	if shouldUpdateLight > 0 and is_instance_valid(GlobalRef.player):
 		GlobalRef.player.updateLightStatic()
@@ -131,6 +161,8 @@ func editTiles(changeCommit):
 		var foundChunk = chunkArray2D[change.x/8][change.y/8]
 		if !chunksToUpdate.has(foundChunk):
 			chunksToUpdate.append(foundChunk)
+		
+	
 	for chunk in chunksToUpdate:
 		chunk.drawData()
 
@@ -183,17 +215,17 @@ func generateTerrain():
 				DATAC.setBGData(x,y,2)
 				
 			elif getBlockDistance(x,y) <= surface + 4:
-				DATAC.setTileData(x,y,2)
-				DATAC.setBGData(x,y,2)
+				DATAC.setTileData(x,y,3)
+				DATAC.setBGData(x,y,3)
 				
 			elif getBlockDistance(x,y) <= surface + 5:
 				DATAC.setTileData(x,y,4)
-				DATAC.setBGData(x,y,4)
+				DATAC.setBGData(x,y,3)
 				
 				#lightData[x][y] = 0.0
 			if getBlockDistance(x,y) <= 5:
-				DATAC.setTileData(x,y,2)
-				DATAC.setBGData(x,y,2)
+				DATAC.setTileData(x,y,5)
+				DATAC.setBGData(x,y,5)
 			
 func createChunks():
 	for x in range(SIZEINCHUNKS):

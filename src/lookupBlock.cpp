@@ -12,29 +12,37 @@ void LOOKUPBLOCK::_bind_methods() {
 // ADD BLOCKS TO ARRAY IN HERE
 LOOKUPBLOCK::LOOKUPBLOCK() {
     
-    Ref<BLOCKAIR> air;
-    air.instantiate();
-    allBlocks.append(air);
+    penis[0] = new BLOCKAIR();
+    penis[1] = new BLOCKCAVEAIR();
+    penis[2] = new BLOCKSTONE();
+    penis[3] = new BLOCKDIRT();
+    penis[4] = new BLOCKGRASS();
+    penis[5] = new BLOCKCORE();
     
-    Ref<BLOCKCAVEAIR> caveair;
-    caveair.instantiate();
-    allBlocks.append(caveair);
     
-    Ref<BLOCKSTONE> stone;
-    stone.instantiate();
-    allBlocks.append(stone);
+    //Ref<BLOCKAIR> air;
+    //air.instantiate();
+    //allBlocks.append(air);
+    
+    //Ref<BLOCKCAVEAIR> caveair;
+    //caveair.instantiate();
+    //allBlocks.append(caveair);
+    
+    //Ref<BLOCKSTONE> stone;
+    //stone.instantiate();
+    //allBlocks.append(stone);
 
-    Ref<BLOCKDIRT> dirt;
-    dirt.instantiate();
-    allBlocks.append(dirt);
+    //Ref<BLOCKDIRT> dirt;
+    //dirt.instantiate();
+    //allBlocks.append(dirt);
 
-    Ref<BLOCKGRASS> grass;
-    grass.instantiate();
-    allBlocks.append(grass);
+    //Ref<BLOCKGRASS> grass;
+    //grass.instantiate();
+    //allBlocks.append(grass);
 
-    Ref<BLOCKCORE> core;
-    core.instantiate();
-    allBlocks.append(core);
+    //Ref<BLOCKCORE> core;
+    //core.instantiate();
+    //allBlocks.append(core);
 
 }
 
@@ -44,7 +52,7 @@ LOOKUPBLOCK::~LOOKUPBLOCK() {
 Dictionary LOOKUPBLOCK::getBlockData(int id){
     Dictionary data ={};
 
-    Ref<BLOCK> g = allBlocks[id];
+    BLOCK* g = penis[id];
     data["texture"] = g->texture;
     data["rotateTextureToGravity"] = g->rotateTextureToGravity;
     data["connectTexturesToMe"] = g->connectTexturesToMe;
@@ -60,53 +68,53 @@ Dictionary LOOKUPBLOCK::getBlockData(int id){
 }
 
 bool LOOKUPBLOCK::hasCollision(int id){
-    Ref<BLOCK> g = allBlocks[id];
+    BLOCK* g = penis[id];
 
     return g->hasCollision;
 }
 
 bool LOOKUPBLOCK::isGravityRotate(int id){
-    Ref<BLOCK> g = allBlocks[id];
+    BLOCK* g = penis[id];
 
     return g->rotateTextureToGravity;
 }
 
 bool LOOKUPBLOCK::isConnectedTexture(int id){
-    Ref<BLOCK> g = allBlocks[id];
+    BLOCK* g = penis[id];
 
     return g->connectedTexture;
 }
 
 Ref<Image> LOOKUPBLOCK::getTextureImage(int id){
-    Ref<BLOCK> g = allBlocks[id];
+    BLOCK* g = penis[id];
 
     return g->texImage;
 }
 
 
 bool LOOKUPBLOCK::isTextureConnector(int id){
-    Ref<BLOCK> g = allBlocks[id];
+    BLOCK* g = penis[id];
 
     return g->connectTexturesToMe;
 }
 
 double LOOKUPBLOCK::getLightMultiplier(int id){
-    Ref<BLOCK> g = allBlocks[id];
+    BLOCK* g = penis[id];
 
     return g->lightMultiplier;
 }
 
 double LOOKUPBLOCK::getLightEmmission(int id){
-    Ref<BLOCK> g = allBlocks[id];
+    BLOCK* g = penis[id];
 
     return g->lightEmmission;
 }
 
 Dictionary LOOKUPBLOCK::runOnTick(int x, int y, PLANETDATA *planet, int dir, int blockID){
 
-    //Ref<BLOCK> g = allBlocks[blockID];
-
-    return allBlocks[blockID]->onTick(x,y,planet,dir);
+   // BLOCK* g = penis[blockID];
+   
+    return penis[blockID]->onTick(x,y,planet,dir);
 }
 
 ////////////////////////////////////////////////////////////////////
