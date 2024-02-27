@@ -94,7 +94,6 @@ func _physics_process(delta):
 	tick += 1
 	DATAC.setGlobalTick(GlobalRef.globalTick)
 	DATAC.getGlobalTick()
-	var chunksToUpdate = []
 	var shouldUpdateLight = 0
 	for chunk in visibleChunks:
 		if tick % 4 != chunk.id4:
@@ -112,64 +111,45 @@ func _physics_process(delta):
 				for i in d.keys():
 					committedChanges[i] = d[i]
 		
-		
 		#Updates light
 		shouldUpdateLight += int(chunk.MUSTUPDATELIGHT)
 		chunk.MUSTUPDATELIGHT = false
 		
-		
-		for change in committedChanges.keys():
-			
-			#var arrayPosition = (change.x * SIZEINCHUNKS * 8) + change.y
-			
-			DATAC.setTileData(change.x,change.y,committedChanges[change])
-			print(DATAC.getTimeData(change.x,change.y))
-			DATAC.setTimeData(change.x,change.y,GlobalRef.globalTick)
-			var foundChunk = chunkArray2D[change.x/8][change.y/8]
-			if !chunksToUpdate.has(foundChunk):
-				chunksToUpdate.append(foundChunk)
-			
-			if int(change.x) % 8 == 0 and change.x > 8:
-				var foundChunkLEFT = chunkArray2D[(change.x/8)-1][change.y/8]
-				if !chunksToUpdate.has(foundChunkLEFT):
-					chunksToUpdate.append(foundChunkLEFT)
-			elif int(change.x) % 8 == 7 and change.x < (SIZEINCHUNKS*8)-8:
-				var foundChunkRIGHT = chunkArray2D[(change.x/8)+1][change.y/8]
-				if !chunksToUpdate.has(foundChunkRIGHT):
-					chunksToUpdate.append(foundChunkRIGHT)
-			
-			if int(change.y) % 8 == 0 and change.y > 8:
-				var foundChunkUP = chunkArray2D[change.x/8][(change.y/8)-1]
-				if !chunksToUpdate.has(foundChunkUP):
-					chunksToUpdate.append(foundChunkUP)
-			elif int(change.y) % 8 == 7 and change.y < (SIZEINCHUNKS*8)-8:
-				var foundChunkDOWN = chunkArray2D[change.x/8][(change.y/8)+1]
-				if !chunksToUpdate.has(foundChunkDOWN):
-					chunksToUpdate.append(foundChunkDOWN)
+		editTiles(committedChanges)
 	
-	if shouldUpdateLight > 0 and is_instance_valid(GlobalRef.player):
-		GlobalRef.player.updateLightStatic()
-	
-	for chunk in chunksToUpdate:
-		chunk.drawData()
+	#if shouldUpdateLight > 0 and is_instance_valid(GlobalRef.player):
+	GlobalRef.player.updateLightStatic()
 
 func editTiles(changeCommit):
 	var chunksToUpdate = []
+	
 	for change in changeCommit.keys():
 		
-		var arrayPosition = (change.x * SIZEINCHUNKS * 8) + change.y
-		
 		DATAC.setTileData(change.x,change.y,changeCommit[change])
-		
-		if int(change.z) == 0:
-			## PUT MISSING GLOBAL TICK SHIT HERE !!
-			#planetData[change.x][change.y][2] = GlobalRef.globalTick
-			pass
+		DATAC.setTimeData(change.x,change.y,GlobalRef.globalTick)
 		
 		var foundChunk = chunkArray2D[change.x/8][change.y/8]
 		if !chunksToUpdate.has(foundChunk):
 			chunksToUpdate.append(foundChunk)
 		
+		#Theres gotta be a way to clean this up
+		if int(change.x) % 8 == 0 and change.x > 8:
+			var foundChunkLEFT = chunkArray2D[(change.x/8)-1][change.y/8]
+			if !chunksToUpdate.has(foundChunkLEFT):
+				chunksToUpdate.append(foundChunkLEFT)
+		elif int(change.x) % 8 == 7 and change.x < (SIZEINCHUNKS*8)-8:
+			var foundChunkRIGHT = chunkArray2D[(change.x/8)+1][change.y/8]
+			if !chunksToUpdate.has(foundChunkRIGHT):
+				chunksToUpdate.append(foundChunkRIGHT)
+			
+		if int(change.y) % 8 == 0 and change.y > 8:
+			var foundChunkUP = chunkArray2D[change.x/8][(change.y/8)-1]
+			if !chunksToUpdate.has(foundChunkUP):
+				chunksToUpdate.append(foundChunkUP)
+		elif int(change.y) % 8 == 7 and change.y < (SIZEINCHUNKS*8)-8:
+			var foundChunkDOWN = chunkArray2D[change.x/8][(change.y/8)+1]
+			if !chunksToUpdate.has(foundChunkDOWN):
+				chunksToUpdate.append(foundChunkDOWN)
 	
 	for chunk in chunksToUpdate:
 		chunk.drawData()

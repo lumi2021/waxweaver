@@ -27,12 +27,50 @@ Dictionary BLOCKGRASS::onTick(int x, int y, PLANETDATA *planet, int dir) {
 
     Dictionary changes = {};
 
-    if ( planet->getGlobalTick() - planet->getTimeData(x,y) > 60){
-        int freeRight = planet->getTileData(x+1,y);
+    if (std::rand() % 500 != 0) {
+        return changes;
+    }
 
-        if (freeRight < 2){
-            changes[Vector2i(x,y)] = freeRight;
-            changes[Vector2i(x+1,y)] = 4;
+    // Remove self if covered
+    int points = 0;
+    for (int i = 0; i < 4; i++){
+                    
+        Vector2 pee = Vector2(0,1).rotated(acos(0.0) * i);
+                   
+        if(planet->getTileData(x+pee.x,y+pee.y)>1){
+            
+            points += 1;
+
+        }
+    }
+    if (points == 4){
+        changes[Vector2i(Vector2(x,y))] = 3;
+        return changes;
+    }
+
+
+    for (int xx = 0; xx < 3; xx++){
+        for (int yy = 0; yy < 3; yy++){
+            Vector2 v = Vector2(xx-1,yy-1);
+            
+            if(planet->getTileData(x+v.x,y+v.y)==3){
+               // changes[Vector2i(Vector2(x+v.x,y+v.y))] = 4;
+
+                for (int i = 0; i < 4; i++){
+                    
+                    Vector2 pee = Vector2(0,1).rotated(acos(0.0) * i);
+                   
+                    if(planet->getTileData(x+v.x+pee.x,y+v.y+pee.y)<2){
+                   
+                        changes[Vector2i(Vector2(x+v.x,y+v.y))] = 4;
+                        break;
+
+                    }
+
+                }
+
+            }
+    
         }
     }
     

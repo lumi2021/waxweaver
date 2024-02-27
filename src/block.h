@@ -9,6 +9,7 @@
 #include <godot_cpp/variant/array.hpp>
 #include <godot_cpp/variant/dictionary.hpp>
 #include <godot_cpp/variant/vector2i.hpp>
+#include <godot_cpp/variant/vector2.hpp>
 
 #include "planetData.h"
 
