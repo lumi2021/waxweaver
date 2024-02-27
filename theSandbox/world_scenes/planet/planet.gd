@@ -88,6 +88,8 @@ func clearOrbitingParents():
 ##CHUNK SIMULATION
 func _physics_process(delta):
 	tick += 1
+	DATAC.setGlobalTick(GlobalRef.globalTick)
+	DATAC.getGlobalTick()
 	var chunksToUpdate = []
 	var shouldUpdateLight = 0
 	for chunk in visibleChunks:
@@ -117,6 +119,8 @@ func _physics_process(delta):
 			#var arrayPosition = (change.x * SIZEINCHUNKS * 8) + change.y
 			
 			DATAC.setTileData(change.x,change.y,committedChanges[change])
+			print(DATAC.getTimeData(change.x,change.y))
+			DATAC.setTimeData(change.x,change.y,GlobalRef.globalTick)
 			var foundChunk = chunkArray2D[change.x/8][change.y/8]
 			if !chunksToUpdate.has(foundChunk):
 				chunksToUpdate.append(foundChunk)
@@ -194,6 +198,7 @@ func generateEmptyArray():
 			DATAC.setTileData(x,y,0)
 			DATAC.setBGData(x,y,0)
 			DATAC.setLightData(x,y,0.0)
+			DATAC.setTimeData(x,y,0)
 			DATAC.setPositionLookup(x,y,getBlockPosition(x,y))
 	
 func airOrCaveAir(x,y):

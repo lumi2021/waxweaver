@@ -1,6 +1,7 @@
 #ifndef BLOCK_H
 #define BLOCK_H
 
+#include <algorithm>
 #include <godot_cpp/classes/texture2d.hpp>
 #include <godot_cpp/classes/image.hpp>
 #include <godot_cpp/classes/resource_loader.hpp>

@@ -21,6 +21,8 @@ private:
 
     int *positionLookup;
 
+    int globalTick;
+
 	
 protected:
 	static void _bind_methods();
@@ -49,6 +51,8 @@ public:
 
     bool setPositionLookup(int x, int y, int newValue);
 
+    void setGlobalTick(int tick);
+    int getGlobalTick();
 
 };
 

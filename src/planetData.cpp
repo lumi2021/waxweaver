@@ -17,6 +17,12 @@ void PLANETDATA::_bind_methods() {
     ClassDB::bind_method(D_METHOD("getLightData","x","y"), &PLANETDATA::getLightData);
     ClassDB::bind_method(D_METHOD("setLightData","x","y","newValue"), &PLANETDATA::setLightData);
 
+    ClassDB::bind_method(D_METHOD("getTimeData","x","y"), &PLANETDATA::getTimeData);
+    ClassDB::bind_method(D_METHOD("setTimeData","x","y","newValue"), &PLANETDATA::setTimeData);
+
+    ClassDB::bind_method(D_METHOD("setGlobalTick","tick"), &PLANETDATA::setGlobalTick);
+    ClassDB::bind_method(D_METHOD("getGlobalTick"), &PLANETDATA::getGlobalTick);
+
     ClassDB::bind_method(D_METHOD("getPositionLookup","x","y"), &PLANETDATA::getPositionLookup);
     ClassDB::bind_method(D_METHOD("setPositionLookup","x","y","newValue"), &PLANETDATA::setPositionLookup);
 }
@@ -33,6 +39,8 @@ void PLANETDATA::createEmptyArrays(int size) {
     positionLookup = new int[bigSize];
 
     planetSize = size;
+
+    
 
 }
 
@@ -118,6 +126,35 @@ bool PLANETDATA::setLightData(int x, int y, double newValue) {
     return true;
 }
 
+// TIME DATA //
+int PLANETDATA::getTimeData(int x, int y) {
+
+    if ( x != std::clamp(x,0,planetSize-1) ){
+        return 0;
+    }
+    if ( y != std::clamp(y,0,planetSize-1) ){
+        return 0;
+    }
+
+    int xyToLarge = (x * planetSize) + y;
+    
+    int tile = timeData[xyToLarge];
+   
+    return tile;
+}
+
+bool PLANETDATA::setTimeData(int x, int y, int newValue) {
+
+    int bigSize = planetSize * planetSize;
+
+    int xyToLarge = (x * planetSize) + y;
+    xyToLarge = std::clamp(xyToLarge,0,bigSize-1);
+
+    timeData[xyToLarge] = newValue;
+   
+    return true;
+}
+
 // POSITION LOOKUP //
 int PLANETDATA::getPositionLookup(int x, int y) {
 
@@ -143,6 +180,14 @@ bool PLANETDATA::setPositionLookup(int x, int y, int newValue) {
     return true;
 }
 
+// GLOBAL TICK //
+void PLANETDATA::setGlobalTick(int tick){
+    globalTick = tick;
+}
+
+int PLANETDATA::getGlobalTick(){
+    return globalTick;
+}
 
 
 PLANETDATA::PLANETDATA() {
@@ -150,6 +195,7 @@ PLANETDATA::PLANETDATA() {
     bgData = NULL;
     lightData = NULL;
     timeData = NULL;
+    globalTick = 0;
 }
 
 PLANETDATA::~PLANETDATA() {
