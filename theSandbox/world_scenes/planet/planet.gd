@@ -41,10 +41,12 @@ func _ready():
 	
 	$isVisible.rect = Rect2(SIZEINCHUNKS*-32,SIZEINCHUNKS*-32,SIZEINCHUNKS*64,SIZEINCHUNKS*64)
 	
+########################################################################
+############################## ORBITING ################################
+########################################################################
 
 func _process(delta):
 	##Orbit##
-	
 	if orbiting != null:
 		
 		var posHold = position
@@ -84,8 +86,10 @@ func clearOrbitingParents():
 	if orbiting != null:
 		orbiting.clearOrbitingParents()
 
+########################################################################
+########################## CHUNK SIMULATION ############################
+########################################################################
 
-##CHUNK SIMULATION
 func _physics_process(delta):
 	tick += 1
 	DATAC.setGlobalTick(GlobalRef.globalTick)
@@ -170,20 +174,10 @@ func editTiles(changeCommit):
 	for chunk in chunksToUpdate:
 		chunk.drawData()
 
-func posToTile(pos):
-	var planetRadius = SIZEINCHUNKS * 32 #32 is (chunk size * tile size)/2
-	var relativePos = pos + Vector2(planetRadius,planetRadius)
-	var sizeInTiles = SIZEINCHUNKS * 8
-	
-	var tilePos = Vector2(int(relativePos.x)/8,int(relativePos.y)/8)
-	if tilePos.x < 0 or tilePos.y < 0 or tilePos.x >= sizeInTiles or tilePos.y >= sizeInTiles:
-		return null
-	
-	return tilePos
 
-func tileToPos(pos):
-	var planetRadius = SIZEINCHUNKS * 32
-	return (pos * 8) - Vector2(planetRadius,planetRadius) + Vector2(4,4)
+########################################################################
+############################ GENERATION ################################
+########################################################################
 
 func generateEmptyArray():
 	centerPoint = Vector2(SIZEINCHUNKS*4,SIZEINCHUNKS*4) - Vector2(0.5,0.5)
@@ -200,11 +194,6 @@ func generateEmptyArray():
 			DATAC.setLightData(x,y,0.0)
 			DATAC.setTimeData(x,y,0)
 			DATAC.setPositionLookup(x,y,getBlockPosition(x,y))
-	
-func airOrCaveAir(x,y):
-	var surface = SIZEINCHUNKS*2
-	#Returns 7 for cave air or 0 for surface air
-	return int(getBlockDistance(x,y) <= surface - 2)
 
 func generateTerrain():
 	for x in range(SIZEINCHUNKS*8):
@@ -227,7 +216,6 @@ func generateTerrain():
 				DATAC.setTileData(x,y,4)
 				DATAC.setBGData(x,y,3)
 				
-				#lightData[x][y] = 0.0
 			if getBlockDistance(x,y) <= 5:
 				DATAC.setTileData(x,y,5)
 				DATAC.setBGData(x,y,5)
@@ -251,6 +239,10 @@ func clearChunks():
 	chunkArray2D = []
 	visibleChunks = []
 
+########################################################################
+################################ MATH ##################################
+########################################################################
+
 func getBlockPosition(x,y):
 	var angle1 = Vector2(1,1)
 	var angle2 = Vector2(-1,1)
@@ -271,6 +263,29 @@ func getBlockDistance(x,y):
 func getBlockRoundedDistance(x,y):
 	return (Vector2(x,y) - centerPoint).length()
 
+func airOrCaveAir(x,y):
+	var surface = SIZEINCHUNKS*2
+	#Returns 7 for cave air or 0 for surface air
+	return int(getBlockDistance(x,y) <= surface - 2)
+
+func posToTile(pos):
+	var planetRadius = SIZEINCHUNKS * 32 #32 is (chunk size * tile size)/2
+	var relativePos = pos + Vector2(planetRadius,planetRadius)
+	var sizeInTiles = SIZEINCHUNKS * 8
+	
+	var tilePos = Vector2(int(relativePos.x)/8,int(relativePos.y)/8)
+	if tilePos.x < 0 or tilePos.y < 0 or tilePos.x >= sizeInTiles or tilePos.y >= sizeInTiles:
+		return null
+	
+	return tilePos
+
+func tileToPos(pos):
+	var planetRadius = SIZEINCHUNKS * 32
+	return (pos * 8) - Vector2(planetRadius,planetRadius) + Vector2(4,4)
+
+########################################################################
+############################ VISIBILITY ################################
+########################################################################
 
 func _on_is_visible_screen_entered():
 	createChunks()
@@ -284,15 +299,5 @@ func _on_is_visible_screen_exited():
 	system.dumpObjectToSpace(GlobalRef.player)
 	GlobalRef.player.velocity += orbitVelocity
 	hasPlayer = false
-	
-	# calculateOrbitVelocity
-	
-	
 	clearOrbitingParents()
 
-func idToColor(id,backId):
-	var r = id % 256
-	var g = id / 256
-	var b = backId % 256
-	var a = backId / 256
-	return Color8(r,g,b,a)
