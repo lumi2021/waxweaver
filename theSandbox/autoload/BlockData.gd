@@ -4,11 +4,16 @@ extends Node
 @onready var blockBreakParticle = preload("res://object_scenes/particles/blockBreak/block_break_particles.tscn")
 
 var theChunker = null
+var theGenerator = null
 
 func _ready():
 	var ins = CHUNKDRAW.new()
 	theChunker = ins
 	add_child(ins)
+	
+	var g = PLANETGEN.new()
+	theGenerator = g
+	add_child(g)
 
 func breakBlock(x,y,planet,blockID):
 	

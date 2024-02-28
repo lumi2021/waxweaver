@@ -18,31 +18,6 @@ LOOKUPBLOCK::LOOKUPBLOCK() {
     penis[3] = new BLOCKDIRT();
     penis[4] = new BLOCKGRASS();
     penis[5] = new BLOCKCORE();
-    
-    
-    //Ref<BLOCKAIR> air;
-    //air.instantiate();
-    //allBlocks.append(air);
-    
-    //Ref<BLOCKCAVEAIR> caveair;
-    //caveair.instantiate();
-    //allBlocks.append(caveair);
-    
-    //Ref<BLOCKSTONE> stone;
-    //stone.instantiate();
-    //allBlocks.append(stone);
-
-    //Ref<BLOCKDIRT> dirt;
-    //dirt.instantiate();
-    //allBlocks.append(dirt);
-
-    //Ref<BLOCKGRASS> grass;
-    //grass.instantiate();
-    //allBlocks.append(grass);
-
-    //Ref<BLOCKCORE> core;
-    //core.instantiate();
-    //allBlocks.append(core);
 
 }
 
@@ -111,15 +86,7 @@ double LOOKUPBLOCK::getLightEmmission(int id){
 }
 
 Dictionary LOOKUPBLOCK::runOnTick(int x, int y, PLANETDATA *planet, int dir, int blockID){
-
-   // BLOCK* g = penis[blockID];
    
     return penis[blockID]->onTick(x,y,planet,dir);
+
 }
-
-////////////////////////////////////////////////////////////////////
-///////////////////////// SIMULATION ///////////////////////////////
-////////////////////////////////////////////////////////////////////
-
-// This is where we will put the onTick simulation code.
-// Multiple Tiles should be able to run the same functions

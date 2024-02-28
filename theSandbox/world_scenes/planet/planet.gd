@@ -176,6 +176,10 @@ func generateEmptyArray():
 			DATAC.setPositionLookup(x,y,getBlockPosition(x,y))
 
 func generateTerrain():
+	
+	BlockData.theGenerator.generateForestPlanet(DATAC)
+	return
+	
 	for x in range(SIZEINCHUNKS*8):
 		for y in range(SIZEINCHUNKS*8):
 			#planetData[x][y] = getBlockPosition(x,y)
@@ -234,7 +238,6 @@ func getBlockPosition(x,y):
 	return [0,1,3,2][dot1 + dot2]
 
 func getBlockDistance(x,y):
-	var arrayPosition = (x*SIZEINCHUNKS*8) + y
 	var quadtrant = DATAC.getPositionLookup(x,y)
 	var newPos = Vector2(x,y) - centerPoint
 	newPos = newPos.rotated((PI/2)*-quadtrant)

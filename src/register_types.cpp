@@ -5,6 +5,7 @@
 #include "lightmap.h"
 #include "lookupBlock.h"
 #include "planetData.h"
+#include "planetGen.h"
 
 //ADD BLOCKS HERE
 #include "block.h"
@@ -32,6 +33,7 @@ void initialize_example_module(ModuleInitializationLevel p_level) {
 	ClassDB::register_class<LIGHTMAP>();
 	ClassDB::register_class<LOOKUPBLOCK>();
 	ClassDB::register_class<PLANETDATA>();
+	ClassDB::register_class<PLANETGEN>();
 
 	//ADD BLOCKS HERE
 	ClassDB::register_class<BLOCK>();
