@@ -177,33 +177,9 @@ func generateEmptyArray():
 
 func generateTerrain():
 	
-	BlockData.theGenerator.generateForestPlanet(DATAC)
+	BlockData.theGenerator.generateLunarPlanet(DATAC,noise)
 	return
-	
-	for x in range(SIZEINCHUNKS*8):
-		for y in range(SIZEINCHUNKS*8):
-			#planetData[x][y] = getBlockPosition(x,y)
-			var arrayPosition = (x*SIZEINCHUNKS*8) + y
-			var quad = DATAC.getPositionLookup(x,y)
-			var side = Vector2(x,y).rotated((PI/2)*quad).x
-			var surface = (noise.get_noise_1d(side*2.0)*4.0) + (SIZEINCHUNKS*2)
-			
-			if getBlockDistance(x,y) <= surface:
-				DATAC.setTileData(x,y,2)
-				DATAC.setBGData(x,y,2)
-				
-			elif getBlockDistance(x,y) <= surface + 4:
-				DATAC.setTileData(x,y,3)
-				DATAC.setBGData(x,y,3)
-				
-			elif getBlockDistance(x,y) <= surface + 5:
-				DATAC.setTileData(x,y,4)
-				DATAC.setBGData(x,y,3)
-				
-			if getBlockDistance(x,y) <= 5:
-				DATAC.setTileData(x,y,5)
-				DATAC.setBGData(x,y,5)
-			
+
 func createChunks():
 	for x in range(SIZEINCHUNKS):
 		chunkArray2D.append([])
