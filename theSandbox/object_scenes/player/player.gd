@@ -28,6 +28,8 @@ var maxCameraDistance := 0
 
 var lastTileItemUsedOn := Vector2(-10,-10)
 
+var noClip = false
+
 ######################################################################
 ########################### BASIC FUNTIONS ###########################
 ######################################################################
@@ -44,6 +46,11 @@ func _ready():
 	
 
 func _process(delta):
+	
+	if Input.is_action_just_pressed("noclip"):
+		noClip = !noClip
+		$CollisionShape2D.disabled = noClip
+	
 	if is_instance_valid(planet):
 		onPlanetMovement(delta)
 	else:
@@ -65,6 +72,11 @@ func _process(delta):
 ######################################################################
 
 func onPlanetMovement(delta):
+	
+	if noClip:
+		noClipMovement()
+		return
+	
 	var newRotation = getPlanetPosition()
 	
 	if newRotation != rotated:
@@ -115,6 +127,10 @@ func onPlanetMovement(delta):
 	updateLight()
 
 func inSpaceMovement(delta):
+	if noClip:
+		noClipMovement()
+		return
+	
 	if system == null:
 		return
 	for planet in system.cosmicBodyContainer.get_children():
@@ -131,6 +147,24 @@ func inSpaceMovement(delta):
 
 		sprite.rotate(0.01)
 
+func noClipMovement():
+	var dir = Vector2.ZERO
+	if Input.is_action_pressed("move_left"):
+		dir.x -= 1
+	if Input.is_action_pressed("move_right"):
+		dir.x += 1
+	if Input.is_action_pressed("move_up"):
+		dir.y -= 1
+	if Input.is_action_pressed("move_down"):
+		dir.y += 1
+	
+	velocity = dir.normalized() * 700
+	move_and_slide()
+	
+	sprite.rotation = 0.0
+	camera.rotation = lerp_angle(camera.rotation,0,0.2)
+	cameraMovement()
+	
 func searchForBorders():
 	
 	var systemWidth = 65536

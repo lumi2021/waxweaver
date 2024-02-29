@@ -26,6 +26,7 @@ public:
 
     void generateForestPlanet(PLANETDATA *planet, FastNoiseLite *noise);
     void generateLunarPlanet(PLANETDATA *planet, FastNoiseLite *noise);
+    void generateSunPlanet(PLANETDATA *planet, FastNoiseLite *noise);
     
     
     double getBlockDistance(int x, int y, PLANETDATA *planet);

@@ -18,6 +18,7 @@ LOOKUPBLOCK::LOOKUPBLOCK() {
     penis[3] = new BLOCKDIRT();
     penis[4] = new BLOCKGRASS();
     penis[5] = new BLOCKCORE();
+    penis[6] = new BLOCKPLASMA();
 
 }
 

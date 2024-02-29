@@ -3,6 +3,9 @@ class_name Planet
 
 var system = null
 
+@export var planetType : String = "forest"
+@export var SIZEINCHUNKS :int = 16 # (size * 8)^2 = number of tiles
+
 @onready var DATAC = $PLANETDATA
 
 @onready var chunkContainer = $ChunkContainer
@@ -17,8 +20,6 @@ var orbitReverse = false
 var orbitVelocity = Vector2.ZERO
 
 var chunkScene = preload("res://world_scenes/chunk/chunk.tscn")
-
-const SIZEINCHUNKS = 16 # (size * 8)^2 = number of tiles
 
 var centerPoint = Vector2.ZERO
 
@@ -176,8 +177,12 @@ func generateEmptyArray():
 			DATAC.setPositionLookup(x,y,getBlockPosition(x,y))
 
 func generateTerrain():
+	match planetType:
+		"forest":BlockData.theGenerator.generateForestPlanet(DATAC,noise)
+		"lunar":BlockData.theGenerator.generateLunarPlanet(DATAC,noise)
+		"sun":BlockData.theGenerator.generateSunPlanet(DATAC,noise)
 	
-	BlockData.theGenerator.generateLunarPlanet(DATAC,noise)
+	
 	return
 
 func createChunks():

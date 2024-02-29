@@ -16,6 +16,7 @@
 #include "blockDirt.h"
 #include "blockGrass.h"
 #include "blockCore.h"
+#include "blockPlasma.h"
 
 #include <gdextension_interface.h>
 #include <godot_cpp/core/defs.hpp>
@@ -43,6 +44,7 @@ void initialize_example_module(ModuleInitializationLevel p_level) {
 	ClassDB::register_class<BLOCKDIRT>();
 	ClassDB::register_class<BLOCKGRASS>();
 	ClassDB::register_class<BLOCKCORE>();
+	ClassDB::register_class<BLOCKPLASMA>();
 
 }
 
