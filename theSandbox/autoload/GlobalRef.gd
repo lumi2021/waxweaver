@@ -1,9 +1,10 @@
 extends Node
 
 var player : Player = null
+var system  = null
 var lightmap = null
 
-var gravityConstant : float = 1000.0
+var gravityConstant : float = 2000
 
 var fastTick : float = 0.0
 var globalTick : int = 0

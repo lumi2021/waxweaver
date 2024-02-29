@@ -1,12 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://dpnd8ekgo4bj3"]
+[gd_scene load_steps=3 format=3 uid="uid://dpnd8ekgo4bj3"]
 
-[ext_resource type="PackedScene" uid="uid://c5ikt4hqyhdoy" path="res://world_scenes/planet/planet.tscn" id="1_blgvb"]
 [ext_resource type="Script" path="res://world_scenes/system/system.gd" id="1_vw61b"]
 [ext_resource type="PackedScene" uid="uid://c1b1vgh12jqww" path="res://object_scenes/player/player.tscn" id="2_xgfnh"]
 
-[node name="System" type="Node2D" node_paths=PackedStringArray("rootPlanet")]
+[node name="System" type="Node2D"]
 script = ExtResource("1_vw61b")
-rootPlanet = NodePath("CosmicBodies/planet")
 
 [node name="Objects" type="Node2D" parent="."]
 
@@ -15,22 +13,3 @@ position = Vector2(6054, -504)
 system = NodePath("../..")
 
 [node name="CosmicBodies" type="Node2D" parent="."]
-
-[node name="planet" parent="CosmicBodies" instance=ExtResource("1_blgvb")]
-planetType = "sun"
-SIZEINCHUNKS = 8
-
-[node name="planet2" parent="CosmicBodies" node_paths=PackedStringArray("orbiting") instance=ExtResource("1_blgvb")]
-position = Vector2(6000, 0)
-SIZEINCHUNKS = 24
-orbiting = NodePath("../planet")
-orbitSpeed = 2.0
-orbitDistance = 6000
-
-[node name="planet3" parent="CosmicBodies" node_paths=PackedStringArray("orbiting") instance=ExtResource("1_blgvb")]
-position = Vector2(8000, 0)
-planetType = "lunar"
-SIZEINCHUNKS = 8
-orbiting = NodePath("../planet2")
-orbitSpeed = 4.0
-orbitDistance = 2000

@@ -72,8 +72,11 @@ func _process(delta):
 		
 			orbitVelocity = orbiting.position - posHold
 		
+		if orbitPeriod > PI * 2:
+			orbitPeriod - (PI * 2)
+		
 		if hasPlayer:
-			GlobalRef.player.scrollBackgroundsSpace(orbitVelocity*-200,delta)
+			GlobalRef.player.scrollBackgroundsSpace(orbitVelocity*-1,delta)
 		
 		
 func reverseOrbitingParents():
@@ -255,6 +258,7 @@ func _on_is_visible_screen_entered():
 	createChunks()
 	system.reparentToPlanet(GlobalRef.player,self)
 	hasPlayer = true
+	GlobalRef.player.velocity -= orbitVelocity * 10
 	reverseOrbitingParents()
 
 

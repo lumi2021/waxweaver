@@ -143,9 +143,9 @@ func inSpaceMovement(delta):
 				
 		velocity += distance.normalized() * forceAmount
 
-		move_and_slide()
+	move_and_slide()
 
-		sprite.rotate(0.01)
+	sprite.rotate(0.02)
 
 func noClipMovement():
 	var dir = Vector2.ZERO
@@ -158,25 +158,33 @@ func noClipMovement():
 	if Input.is_action_pressed("move_down"):
 		dir.y += 1
 	
-	velocity = dir.normalized() * 700
+	velocity = dir.normalized() * 4000
 	move_and_slide()
 	
 	sprite.rotation = 0.0
 	camera.rotation = lerp_angle(camera.rotation,0,0.2)
 	cameraMovement()
 	
+	print(global_position)
+	
 func searchForBorders():
 	
 	var systemWidth = 65536
 	
+	
+	
 	if position.x < -(systemWidth/2):
 		position.x += systemWidth
+		GlobalRef.system.generateSystem()
 	if position.y < -(systemWidth/2):
 		position.y += systemWidth
+		GlobalRef.system.generateSystem()
 	if position.x > (systemWidth/2):
 		position.x -= systemWidth
+		GlobalRef.system.generateSystem()
 	if position.y > (systemWidth/2):
 		position.y -= systemWidth
+		GlobalRef.system.generateSystem()
 	
 func cameraMovement():
 	var g = to_local(get_global_mouse_position())
