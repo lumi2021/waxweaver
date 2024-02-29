@@ -215,6 +215,9 @@ func useItem():
 		$HandRoot/PlayerHand/itemSprite.texture = itemData.texture
 		return
 	
+	if !is_instance_valid(planet):
+		return
+	
 	var mousePos = planet.get_local_mouse_position()
 	var tile = planet.posToTile(mousePos)
 	
