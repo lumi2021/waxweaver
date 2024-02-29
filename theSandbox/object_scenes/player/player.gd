@@ -169,7 +169,7 @@ func noClipMovement():
 	
 func searchForBorders():
 	
-	var systemWidth = 65536
+	var systemWidth = 99900
 	
 	
 	

@@ -2,12 +2,12 @@ extends Node2D
 
 var mapDot = preload("res://ui_scenes/map/map_dot.tscn")
 
-func map(system):
+func map(system,cos):
 	
 	for child in get_children():
 		child.queue_free()
 	
-	for obj in system.cosmicBodyContainer.get_children():
+	for obj in cos:
 		var ins = mapDot.instantiate()
 		ins.tiedNode = obj
 		if obj == system.rootPlanet:

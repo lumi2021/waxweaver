@@ -42,19 +42,38 @@ func generateSystem():
 		
 		var c = sqrt((newPlanet.SIZEINCHUNKS * 64) * (newPlanet.SIZEINCHUNKS * 64) * 2)
 		var cPrevious = sqrt((lastPlanet.SIZEINCHUNKS * 64) * (lastPlanet.SIZEINCHUNKS * 64) * 2)
-		var distance = ((c + cPrevious)/2) + 800 + (randi() % 2800)
-		newPlanet.orbitDistance = distanceOverlap + distance
+		var distance = ((c + cPrevious)/2) + 3000 + (randi() % 2800)
 		
-		newPlanet.orbitSpeed = 300000.0 / (distanceOverlap + distance)
+		var shouldAddForMoon = 0
+		if randi() % 3 == 0:
+			#generate moon
+			var moon = planetScene.instantiate()
+			moon.planetType = "lunar"
+			moon.orbiting = newPlanet
+			moon.system = self
+			moon.SIZEINCHUNKS = 8
+			var m = sqrt((moon.SIZEINCHUNKS * 64) * (moon.SIZEINCHUNKS * 64) * 2) 
+			
+			moon.orbitDistance = (c + m * 2) + (randi() % 512)
+			moon.orbitSpeed = 600000.0 / (c + m)
+			moon.orbitPeriod = randf_range(0.0,PI * 2)
+			cosmicBodyContainer.add_child(moon)
+			
+			shouldAddForMoon = (moon.orbitDistance * 2.0) + 1024
+		
+		
+		newPlanet.orbitDistance = distanceOverlap + distance + shouldAddForMoon
+		newPlanet.orbitSpeed = 600000.0 / (distanceOverlap + distance)
 		newPlanet.orbitPeriod = randf_range(0.0,PI * 2)
 		
-		distanceOverlap += distance
+		distanceOverlap += distance + shouldAddForMoon
 		
 		
 		cosmicBodyContainer.add_child(newPlanet)
 		lastPlanet = newPlanet
 	
-	GlobalRef.player.map.map(self)
+	await get_tree().create_timer(0.5).timeout
+	GlobalRef.player.map.map(self,cosmicBodyContainer.get_children())
 
 func reparentToPlanet(object,planet):
 	print(object)
