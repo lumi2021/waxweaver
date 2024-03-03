@@ -21,6 +21,10 @@ LOOKUPBLOCK::LOOKUPBLOCK() {
     penis[6] = new BLOCKPLASMA();
     penis[7] = new BLOCKSAPLING();
     penis[8] = new BLOCKTREELOG();
+    penis[9] = new BLOCKLEAVES();
+    penis[10] = new BLOCKTREEBRANCHLEFT();
+    penis[11] = new BLOCKTREEBRANCHRIGHT();
+    penis[12] = new BLOCKTREEBRANCHLEAF();
 
 }
 

@@ -127,6 +127,9 @@ func _physics_process(delta):
 func editTiles(changeCommit):
 	var chunksToUpdate = []
 	
+	#if changeCommit.size() > 0:
+	#	print(changeCommit)
+	
 	for change in changeCommit.keys():
 		
 		DATAC.setTileData(change.x,change.y,changeCommit[change])

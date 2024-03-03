@@ -25,7 +25,10 @@ func _ready():
 		$blockTexture.frame = BlockData.theChunker.scanBlockOpen(planet.DATAC,tileX,tileY) / 8
 		$Sprite.hframes = 16
 		$Sprite.frame = $blockTexture.frame
-		
+	
+	if blockData["rotateTextureToGravity"]:
+		$blockTexture.rotation = (PI/2) * planet.getBlockPosition(tileX,tileY)
+		$Sprite.rotation = $blockTexture.rotation
 		
 	$Sprite.texture = blockData["texture"]
 	
