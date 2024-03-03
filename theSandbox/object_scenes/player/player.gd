@@ -67,6 +67,12 @@ func _process(delta):
 		$HandRoot/PlayerHand.visible = false
 		$PlayerLayers/handFront.visible = true
 	
+	#map toggle
+	if Input.is_action_just_pressed("map"):
+		$CameraOrigin/Camera2D/ColorRect2.visible = !$CameraOrigin/Camera2D/ColorRect2.visible
+		$CameraOrigin/Camera2D/SystemMap.visible = $CameraOrigin/Camera2D/ColorRect2.visible
+	
+	
 ######################################################################
 ############################## MOVEMENT ##############################
 ######################################################################
@@ -170,8 +176,6 @@ func noClipMovement():
 func searchForBorders():
 	
 	var systemWidth = 99900
-	
-	
 	
 	if position.x < -(systemWidth/2):
 		position.x += systemWidth

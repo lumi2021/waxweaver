@@ -14,6 +14,8 @@
 #include "blockGrass.h" // id 4
 #include "blockCore.h" // id 5
 #include "blockPlasma.h" // id 6
+#include "blockSapling.h" // id 7
+#include "blockTreeLog.h" // id 8
 
 namespace godot {
 
@@ -28,7 +30,7 @@ protected:
 public:
 	
 	Array allBlocks;
-	BLOCK *penis[7];
+	BLOCK *penis[9];
 
 	LOOKUPBLOCK();
 	~LOOKUPBLOCK();

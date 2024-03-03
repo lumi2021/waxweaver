@@ -33,12 +33,13 @@ func generateSystem():
 		newPlanet.orbiting = sun
 		newPlanet.system = self
 		
-		var s = (randi() % 4)
+		var s = (randi() % 5)
 		match s:
-			0: newPlanet.SIZEINCHUNKS = 12
-			1: newPlanet.SIZEINCHUNKS = 16
-			2: newPlanet.SIZEINCHUNKS = 24
-			3: newPlanet.SIZEINCHUNKS = 32
+			0: newPlanet.SIZEINCHUNKS = 16
+			1: newPlanet.SIZEINCHUNKS = 24
+			2: newPlanet.SIZEINCHUNKS = 32
+			3: newPlanet.SIZEINCHUNKS = 48
+			4: newPlanet.SIZEINCHUNKS = 64
 		
 		var c = sqrt((newPlanet.SIZEINCHUNKS * 64) * (newPlanet.SIZEINCHUNKS * 64) * 2)
 		var cPrevious = sqrt((lastPlanet.SIZEINCHUNKS * 64) * (lastPlanet.SIZEINCHUNKS * 64) * 2)
@@ -55,7 +56,7 @@ func generateSystem():
 			var m = sqrt((moon.SIZEINCHUNKS * 64) * (moon.SIZEINCHUNKS * 64) * 2) 
 			
 			moon.orbitDistance = (c + m * 2) + (randi() % 512)
-			moon.orbitSpeed = 600000.0 / (c + m)
+			moon.orbitSpeed = 30000.0 / (c + m)
 			moon.orbitPeriod = randf_range(0.0,PI * 2)
 			cosmicBodyContainer.add_child(moon)
 			
@@ -63,7 +64,7 @@ func generateSystem():
 		
 		
 		newPlanet.orbitDistance = distanceOverlap + distance + shouldAddForMoon
-		newPlanet.orbitSpeed = 600000.0 / (distanceOverlap + distance)
+		newPlanet.orbitSpeed = 30000.0 / (distanceOverlap + distance)
 		newPlanet.orbitPeriod = randf_range(0.0,PI * 2)
 		
 		distanceOverlap += distance + shouldAddForMoon

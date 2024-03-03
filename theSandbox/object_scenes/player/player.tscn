@@ -271,15 +271,14 @@ color = Color(0, 1, 0, 1)
 
 [node name="ColorRect2" type="ColorRect" parent="CameraOrigin/Camera2D"]
 z_index = 803
-offset_left = -76.0
-offset_top = 23.0
-offset_right = -34.0
-offset_bottom = 65.0
-color = Color(0, 0, 0, 0.580392)
+offset_left = -98.0
+offset_top = -98.0
+offset_right = 97.0
+offset_bottom = 97.0
+color = Color(0, 0, 0, 0.866667)
 
 [node name="SystemMap" parent="CameraOrigin/Camera2D" instance=ExtResource("3_1j4nq")]
 z_index = 803
-position = Vector2(-55, 44)
 
 [node name="Backgroundholder" type="Node2D" parent="CameraOrigin/Camera2D"]
 position = Vector2(-130, -115)

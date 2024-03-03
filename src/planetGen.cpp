@@ -42,6 +42,14 @@ void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
                 planet->setTileData(x,y,4);
                 planet->setBGData(x,y,3);
             }
+            else if (dis <= surface + 6){
+                if (std::rand() % 8 == 0){
+                    planet->setTileData(x,y,7);
+                }
+            
+            }
+
+
             if (dis <= 3){
                 planet->setTileData(x,y,5);
                 planet->setBGData(x,y,5);
@@ -67,7 +75,7 @@ void PLANETGEN::generateLunarPlanet(PLANETDATA *planet,FastNoiseLite *noise){
                 planet->setBGData(x,y,2);
             }
             if (dis <= 3){
-                planet->setTileData(x,y,5);
+                planet->setTileData(x,y,7);
                 planet->setBGData(x,y,5);
             }
         }
