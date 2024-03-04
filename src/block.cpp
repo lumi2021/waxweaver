@@ -1,4 +1,5 @@
 #include "block.h"
+#include "lookupBlock.h"
 #include <godot_cpp/core/class_db.hpp>
 
 #include <godot_cpp/variant/utility_functions.hpp>
@@ -56,4 +57,7 @@ Dictionary BLOCK::onTick(int x, int y, PLANETDATA *planet, int dir){
     return changes;
 }
 
+void BLOCK::setLookUp(LOOKUPBLOCK *g){
+    lookup = g;
 
+}

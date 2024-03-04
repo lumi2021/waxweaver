@@ -13,8 +13,10 @@
 
 #include "planetData.h"
 
+
 namespace godot {
 
+class LOOKUPBLOCK;
 class BLOCK : public Resource {
 	GDCLASS(BLOCK, Resource)
 
@@ -25,6 +27,8 @@ protected:
 	static void _bind_methods();
 
 public:
+
+    LOOKUPBLOCK *lookup;
 
     int blockID;
 
@@ -54,7 +58,7 @@ public:
 
     virtual Dictionary onTick(int x, int y, PLANETDATA *planet, int dir);
 
-
+    void setLookUp(LOOKUPBLOCK *g);
 
 };
 

@@ -3,6 +3,8 @@
 
 #include <godot_cpp/variant/utility_functions.hpp>
 
+#include "lookupBlock.h"
+
 using namespace godot;
 
 void BLOCKSAPLING::_bind_methods() {
@@ -67,7 +69,7 @@ Dictionary BLOCKSAPLING::onTick(int x, int y, PLANETDATA *planet, int dir){
 
                     if (existingTile < 2 || existingTile == 10 || existingTile == 11){
 
-                        if (map[getFromMap] == 0){continue;}
+                        if ( lookup->hasCollision(map[getFromMap]) ){continue;}
 
                         changes[coolPos] = map[getFromMap];
                     
@@ -91,7 +93,7 @@ Dictionary BLOCKSAPLING::onTick(int x, int y, PLANETDATA *planet, int dir){
 
                     if (existingTile < 2 || existingTile == 10 || existingTile == 11){
 
-                        if (map[getFromMap] == 0){continue;}
+                        if ( lookup->hasCollision(map[getFromMap]) ){continue;}
 
                         changes[coolPos] = map[getFromMap];
                     

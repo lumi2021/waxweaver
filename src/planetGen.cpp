@@ -75,7 +75,7 @@ void PLANETGEN::generateLunarPlanet(PLANETDATA *planet,FastNoiseLite *noise){
                 planet->setBGData(x,y,2);
             }
             if (dis <= 3){
-                planet->setTileData(x,y,7);
+                planet->setTileData(x,y,5);
                 planet->setBGData(x,y,5);
             }
         }

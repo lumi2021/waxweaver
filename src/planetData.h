@@ -6,8 +6,6 @@
 #include <godot_cpp/variant/dictionary.hpp>
 
 
-
-
 namespace godot {
 
 class PLANETDATA : public Node {
