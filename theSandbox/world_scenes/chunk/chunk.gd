@@ -14,11 +14,14 @@ var id4 :int= 0
 
 var MUSTUPDATELIGHT :bool= false
 
-var planet = null
+var planet :Planet= null
 
 func _ready():
 	
 	planet = get_parent().get_parent()
+	
+	pos = position
+	position = (pos * 64) - Vector2(planet.SIZEINCHUNKS*32,32*planet.SIZEINCHUNKS)
 	
 	drawData()
 

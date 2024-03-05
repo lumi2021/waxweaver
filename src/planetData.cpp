@@ -3,6 +3,8 @@
 #include <algorithm>
 #include <memory>
 
+#include <godot_cpp/classes/node2d.hpp>
+
 using namespace godot;
 
 void PLANETDATA::_bind_methods() {
@@ -25,6 +27,8 @@ void PLANETDATA::_bind_methods() {
 
     ClassDB::bind_method(D_METHOD("getPositionLookup","x","y"), &PLANETDATA::getPositionLookup);
     ClassDB::bind_method(D_METHOD("setPositionLookup","x","y","newValue"), &PLANETDATA::setPositionLookup);
+
+    ClassDB::bind_method(D_METHOD("createAllChunks","chunkScene","chunkContainer","sizeInChunks"), &PLANETDATA::createAllChunks);
 }
 
 void PLANETDATA::createEmptyArrays(int size) {
@@ -224,4 +228,31 @@ PLANETDATA::~PLANETDATA() {
         
     }
 
+}
+
+Array PLANETDATA::createAllChunks(PackedScene *chunkScene, Node *chunkContainer, int sizeInChunks){
+    Array FAGGOT;
+
+    for(int x = 0; x < sizeInChunks; x++){
+
+        Array BALLSEX;
+
+        for(int y = 0; y < sizeInChunks; y++){
+            Node2D *STINK = dynamic_cast<Node2D*>(chunkScene->instantiate());
+          
+           // Vector2 newPos = (Vector2(x,y) * 64) - Vector2(sizeInChunks*32,sizeInChunks*32);
+            
+            Vector2 newPos = Vector2(x,y);
+            STINK->set_position( newPos );
+            chunkContainer->add_child( STINK );
+            BALLSEX.append(STINK);
+        
+        }
+
+        FAGGOT.append(BALLSEX);
+
+    }
+
+
+    return FAGGOT;
 }

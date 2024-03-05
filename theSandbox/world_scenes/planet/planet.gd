@@ -192,6 +192,12 @@ func generateTerrain():
 	return
 
 func createChunks():
+	
+	chunkArray2D = DATAC.createAllChunks(chunkScene,chunkContainer,SIZEINCHUNKS)
+	set_physics_process(true)
+	
+	return
+	
 	for x in range(SIZEINCHUNKS):
 		chunkArray2D.append([])
 		for y in range(SIZEINCHUNKS):
@@ -200,7 +206,6 @@ func createChunks():
 			newChunk.position = (Vector2(x,y) * 64) - Vector2(SIZEINCHUNKS*32,SIZEINCHUNKS*32)
 			chunkContainer.add_child(newChunk)
 			chunkArray2D[x].append(newChunk)
-	set_physics_process(true)
 	
 	
 func clearChunks():

@@ -2,6 +2,7 @@
 #define PLANETDATA_H
 
 #include <godot_cpp/classes/node.hpp>
+#include <godot_cpp/classes/packed_scene.hpp>
 #include <godot_cpp/variant/array.hpp>
 #include <godot_cpp/variant/dictionary.hpp>
 
@@ -51,6 +52,8 @@ public:
 
     void setGlobalTick(int tick);
     int getGlobalTick();
+
+    Array createAllChunks(PackedScene *chunkScene, Node *chunkContainer, int sizeInChunks);
 
 };
 

@@ -70,7 +70,7 @@ void PLANETGEN::generateLunarPlanet(PLANETDATA *planet,FastNoiseLite *noise){
             double dis = getBlockDistance(x,y,planet);
             double surface = (noise->get_noise_1d(side*2.0) * 16.0)  + (planetSize / 4);
 
-            if (dis <= surface){
+            if (dis <= 999999){
                 planet->setTileData(x,y,2);
                 planet->setBGData(x,y,2);
             }
