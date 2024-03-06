@@ -55,6 +55,8 @@ public:
 
     Array createAllChunks(PackedScene *chunkScene, Node *chunkContainer, int sizeInChunks);
 
+    int findSpawnPosition();
+
 };
 
 }

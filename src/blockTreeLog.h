@@ -18,6 +18,9 @@ public:
 	BLOCKTREELOG();
 	~BLOCKTREELOG();
 
+	Dictionary onTick(int x, int y, PLANETDATA *planet, int dir);
+	Dictionary onBreak(int x, int y, PLANETDATA *planet, int dir);
+
 };
 
 }

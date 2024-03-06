@@ -14,11 +14,11 @@ size = Vector2(6, 6)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0vp2o"]
 shader = ExtResource("3_3fwy6")
-shader_parameter/color = Color(0.0156863, 0.0156863, 0.0588235, 0.384314)
-shader_parameter/width = 1.333
+shader_parameter/color = Color(0.109804, 0.0431373, 0.0666667, 0.392157)
+shader_parameter/width = 1.0
 shader_parameter/pattern = 2
 shader_parameter/inside = true
-shader_parameter/add_margins = true
+shader_parameter/add_margins = false
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_645kq"]
 blend_mode = 1
@@ -52,20 +52,18 @@ shape = SubResource("RectangleShape2D_lwjl3")
 modulate = Color(0.415686, 0.415686, 0.678431, 1)
 show_behind_parent = true
 position = Vector2(-1, 1)
-scale = Vector2(0.75, 0.75)
 texture = ExtResource("1_38qci")
 
 [node name="texture" type="Sprite2D" parent="textureRoot"]
 clip_children = 2
 material = SubResource("ShaderMaterial_0vp2o")
-scale = Vector2(0.75, 0.75)
 texture = ExtResource("1_38qci")
 
 [node name="tint" type="ColorRect" parent="textureRoot/texture"]
 material = SubResource("CanvasItemMaterial_645kq")
-offset_left = -4.0
+offset_left = -5.0
 offset_top = -8.0
-offset_right = 4.0
+offset_right = 5.0
 offset_bottom = 8.0
 color = Color(0.227451, 0.0470588, 0.207843, 0)
 

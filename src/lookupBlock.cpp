@@ -101,3 +101,9 @@ Dictionary LOOKUPBLOCK::runOnTick(int x, int y, PLANETDATA *planet, int dir, int
     return penis[blockID]->onTick(x,y,planet,dir);
 
 }
+
+Dictionary LOOKUPBLOCK::runOnBreak(int x, int y, PLANETDATA *planet, int dir, int blockID){
+   
+    return penis[blockID]->onBreak(x,y,planet,dir);
+
+}

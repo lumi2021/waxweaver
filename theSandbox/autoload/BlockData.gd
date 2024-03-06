@@ -21,6 +21,8 @@ func breakBlock(x,y,planet,blockID):
 	
 	spawnBreakParticle(x,y,blockID,data["breakParticleID"],planet)
 	spawnGroundItem(x,y,data["itemToDrop"],planet)
+	
+	planet.editTiles( theChunker.runBreak(planet.DATAC,Vector2i.ZERO,x,y,blockID) )
 
 func spawnGroundItem(tilex:int,tiley:int,id:int,planet:Planet):
 	if id == -1:

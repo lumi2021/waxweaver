@@ -22,9 +22,33 @@ BLOCKLEAVES::BLOCKLEAVES() {
 
     connectTexturesToMe = false;
 
+    itemToDrop = 3;
+
 }
 
 
 BLOCKLEAVES::~BLOCKLEAVES() {
 }
 
+Dictionary BLOCKLEAVES::onTick(int x, int y, PLANETDATA *planet, int dir){
+    Dictionary changes = {};
+
+    if(std::rand()%10>0){
+        return changes;
+    }
+
+    for(int scanX = -2; scanX < 3; scanX++){
+        for(int scanY = -2; scanY < 3; scanY++){
+            Vector2i newPos =  Vector2i(x,y) - Vector2i( Vector2(scanX,scanY).rotated(acos(0.0)*dir) );
+            int tile = planet->getTileData(newPos.x,newPos.y);
+            if( tile == 8 || tile == 12 ){
+                 return changes;
+            }
+
+        }
+    }
+
+    changes[Vector2i(x,y)] = -1;
+    return changes;
+
+}

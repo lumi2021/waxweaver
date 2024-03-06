@@ -7,6 +7,7 @@ using namespace godot;
 void CHUNKDRAW::_bind_methods() {
     ClassDB::bind_method(D_METHOD("generateTexturesFromData","planetData","backgroundLayerData","pos","positionLookup"), &CHUNKDRAW::generateTexturesFromData);
     ClassDB::bind_method(D_METHOD("tickUpdate","planetDatac","pos"), &CHUNKDRAW::tickUpdate);
+    ClassDB::bind_method(D_METHOD("runBreak","planetDatac","pos","x","y","id"), &CHUNKDRAW::runBreak);
     ClassDB::bind_method(D_METHOD("getBlockDictionary","id"), &CHUNKDRAW::getBlockDictionary);
     ClassDB::bind_method(D_METHOD("scanBlockOpen","planetDATAC","x","y"), &CHUNKDRAW::scanBlockOpen);
     ADD_SIGNAL(MethodInfo("chunkDrawn", PropertyInfo(Variant::OBJECT, "node"), PropertyInfo(Variant::OBJECT, "image"), PropertyInfo(Variant::OBJECT, "backImage")));
@@ -15,6 +16,10 @@ void CHUNKDRAW::_bind_methods() {
 CHUNKDRAW::CHUNKDRAW() {
 	time_passed = 0.0;
     cock = memnew(LOOKUPBLOCK);
+
+    getBorderImage("res://block_resources/block_textures/border.png");
+
+
 }
 
 CHUNKDRAW::~CHUNKDRAW() {
@@ -100,12 +105,14 @@ Array CHUNKDRAW::generateTexturesFromData(PLANETDATA *planet,Vector2i pos,Node *
                 }
 
                 int frame = 0;
-                if( cock->isConnectedTexture(backBlockID) ) { frame = scanBlockOpen(planet,worldX,worldY); }
+                if( cock->isConnectedTexture(backBlockID) ) { frame = scanBackOpen(planet,worldX,worldY); }
                 Rect2i blockRect = Rect2i(frame,0,8,8);
 
-                
-
                 backImg->blend_rect(blockImg, blockRect, imgPos);
+
+                Vector2i scan = scanForBorder(planet,worldX,worldY);
+
+                backImg->blend_rect(texImage, Rect2i(scan.x,scan.y,8,8), imgPos);
 
                 // unrotate it
                 if (rotate){ 
@@ -149,13 +156,6 @@ Array CHUNKDRAW::tickUpdate(PLANETDATA *planet,Vector2i pos){
             collectedChanges.append( cock->runOnTick(worldX,worldY,planet,blockSide,blockID) );
 
             // SIMULATE LIGHT //
-           
-            double currentLight = planet->getLightData(worldX,worldY);
-            int hasPosL = worldX > 0;
-            int hasPosR = worldX < planetSize-1;
-            int hasPosT = worldY > 0;
-            int hasPosB = worldY < planetSize-1;
-
 
             double lightL = planet->getLightData(worldX - 1,worldY);
 
@@ -169,6 +169,7 @@ Array CHUNKDRAW::tickUpdate(PLANETDATA *planet,Vector2i pos){
             double mutliplier = cock->getLightMultiplier(blockID);
             double newLight = ( ( lightB + lightL + lightR + lightT ) / 4.0 ) * mutliplier;
             double lightEmmission = cock->getLightEmmission(blockID);
+
             newLight = std::max(newLight,lightEmmission);
             newLight = std::clamp(newLight,0.0,1.0);
 
@@ -209,4 +210,97 @@ int CHUNKDRAW::scanBlockOpen(PLANETDATA *planet,int x,int y){
     openB = 8 * connectTexturesToMe;
 
 	return (openL + openR + openT + openB) * 8;
+}
+
+int CHUNKDRAW::scanBackOpen(PLANETDATA *planet,int x,int y){
+	int openL = 1;
+	int openR = 2;
+	int openT = 4;
+	int openB = 8;
+	//what the fuck is this
+
+    int blockID = planet->getBGData(x-1,y);
+    int connectTexturesToMe = !cock->isTextureConnector(blockID);
+    openL = 1 * connectTexturesToMe;
+
+    blockID = planet->getBGData(x+1,y);
+    connectTexturesToMe = !cock->isTextureConnector(blockID);
+    openR = 2 * connectTexturesToMe;
+
+
+    blockID = planet->getBGData(x,y-1);
+    connectTexturesToMe = !cock->isTextureConnector(blockID);
+    openT = 4 * connectTexturesToMe;
+
+    blockID = planet->getBGData(x,y+1);
+    connectTexturesToMe = !cock->isTextureConnector(blockID);
+    openB = 8 * connectTexturesToMe;
+
+	return (openL + openR + openT + openB) * 8;
+}
+
+Vector2i CHUNKDRAW::scanForBorder(PLANETDATA *planet,int x,int y){
+	int openL = 1;
+	int openR = 2;
+	int openT = 4;
+	int openB = 8;
+	
+    int openTL = 1;
+	int openTR = 2;
+	int openBL = 4;
+	int openBR = 8;
+
+
+    // Straight Directionals
+    int blockID = planet->getBGData(x-1,y);
+    int connectTexturesToMe = blockID < 2;
+    openL = 1 * connectTexturesToMe;
+
+    blockID = planet->getBGData(x+1,y);
+    connectTexturesToMe = blockID < 2;
+    openR = 2 * connectTexturesToMe;
+
+    blockID = planet->getBGData(x,y-1);
+    connectTexturesToMe = blockID < 2;
+    openT = 4 * connectTexturesToMe;
+
+    blockID = planet->getBGData(x,y+1);
+    connectTexturesToMe = blockID < 2;
+    openB = 8 * connectTexturesToMe;
+
+    // Diagonal Directionals
+    blockID = planet->getBGData(x-1,y-1);
+    connectTexturesToMe = blockID < 2;
+    openTL = 1 * connectTexturesToMe;
+
+    blockID = planet->getBGData(x+1,y-1);
+    connectTexturesToMe = blockID < 2;
+    openTR = 2 * connectTexturesToMe;
+
+    blockID = planet->getBGData(x-1,y+1);
+    connectTexturesToMe = blockID < 2;
+    openBL = 4 * connectTexturesToMe;
+
+    blockID = planet->getBGData(x+1,y+1);
+    connectTexturesToMe = blockID < 2;
+    openBR = 8 * connectTexturesToMe;
+
+	return Vector2i((openL + openR + openT + openB) * 8 , (openTL + openTR + openBL + openBR) * 8 ) ;
+}
+
+Dictionary CHUNKDRAW::runBreak(PLANETDATA *planet,Vector2i pos,int x, int y, int blockID){
+
+    int blockSide = planet->getPositionLookup(x,y);
+
+    return cock->runOnBreak(x,y,planet,blockSide,blockID);
+        
+}
+
+void CHUNKDRAW::getBorderImage( const char* file ) {
+    ResourceLoader rl;
+    texture = rl.load(file);
+
+    texImage = texture->get_image();
+    texImage->convert(Image::FORMAT_RGBA8);
+
 }

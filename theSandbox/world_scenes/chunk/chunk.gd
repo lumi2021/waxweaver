@@ -23,12 +23,13 @@ func _ready():
 	pos = position
 	position = (pos * 64) - Vector2(planet.SIZEINCHUNKS*32,32*planet.SIZEINCHUNKS)
 	
-	drawData()
 
 	id4 = (int(pos.x) % 2)+((int(pos.y) % 2)*2)
-	#id4 = (pos.x % 2)+((pos.y % 4)*2)
 	
 	set_process(false)
+	body.set_process(false)
+	
+	drawData()
 
 func tickUpdate():
 	
@@ -50,16 +51,11 @@ func drawData():
 	
 	return
 
-	
-func getBlockPosition(x,y):
-	return planet.positionLookup[x][y]
-
 func clearCollisions():
 	for i in body.get_children():
 		i.queue_free()
 
 func _on_visible_on_screen_notifier_2d_screen_entered():
-	body.set_process(true)
 	onScreen = true
 	if !planet.visibleChunks.has(self):
 		planet.visibleChunks.append(self)
@@ -68,7 +64,6 @@ func _on_visible_on_screen_notifier_2d_screen_entered():
 	
 
 func _on_visible_on_screen_notifier_2d_screen_exited():
-	body.set_process(false)
 	onScreen = false
 	planet.visibleChunks.erase(self)
 	mainLayerSprite.visible = onScreen

@@ -16,7 +16,7 @@ BLOCKTREEBRANCHLEAF::BLOCKTREEBRANCHLEAF() {
 
     hasCollision = false;
 
-    lightMultiplier = 1.0;
+   lightMultiplier = 1.0;
 
     rotateTextureToGravity = true;
 
@@ -28,3 +28,36 @@ BLOCKTREEBRANCHLEAF::BLOCKTREEBRANCHLEAF() {
 BLOCKTREEBRANCHLEAF::~BLOCKTREEBRANCHLEAF() {
 }
 
+Dictionary BLOCKTREEBRANCHLEAF::onBreak(int x, int y, PLANETDATA *planet, int dir){
+
+    Dictionary changes = {};
+
+    Vector2i newPos =  Vector2i(x,y) - Vector2i( Vector2(0,1).rotated(acos(0.0)*dir) );
+    int tileAbove = planet->getTileData(newPos.x,newPos.y);
+
+    if (tileAbove == 8 || tileAbove == 12){
+        changes[newPos] = -1;
+
+    }
+
+    newPos =  Vector2i(x,y) + Vector2i( Vector2(1,0).rotated(acos(0.0)*dir) );
+    int tileRight = planet->getTileData(newPos.x,newPos.y);
+
+    if (tileRight == 10 || tileRight == 11 || tileRight == 12){
+        changes[newPos] = -1;
+
+    }
+
+    newPos =  Vector2i(x,y) + Vector2i( Vector2(-1,0).rotated(acos(0.0)*dir) );
+    int tileLeft = planet->getTileData(newPos.x,newPos.y);
+
+    if (tileLeft == 10 || tileLeft == 11 || tileLeft == 12){
+        changes[newPos] = -1;
+
+    }
+   
+   
+   
+    return changes;
+
+}

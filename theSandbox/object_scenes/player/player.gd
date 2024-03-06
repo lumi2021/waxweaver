@@ -30,6 +30,8 @@ var lastTileItemUsedOn := Vector2(-10,-10)
 
 var noClip = false
 
+var tick = 0
+
 ######################################################################
 ########################### BASIC FUNTIONS ###########################
 ######################################################################
@@ -43,9 +45,13 @@ func _ready():
 	PlayerData.addItem(1,1)
 	PlayerData.addItem(2,1)
 	PlayerData.addItem(3,198)
-	
 
 func _process(delta):
+	
+
+	tick+=1
+	
+	
 	
 	if Input.is_action_just_pressed("noclip"):
 		noClip = !noClip
@@ -53,7 +59,7 @@ func _process(delta):
 	
 	if is_instance_valid(planet):
 		onPlanetMovement(delta)
-	else:
+	elif tick > 60:
 		inSpaceMovement(delta)
 		GlobalRef.lightmap.position = global_position - Vector2(256,256)
 		searchForBorders()
@@ -111,11 +117,9 @@ func onPlanetMovement(delta):
 		dir -= 1
 	if Input.is_action_pressed("move_right"):
 		dir += 1
-	
 	var newVel = velocity.rotated(-rotated*(PI/2))
 	newVel.x = lerp(newVel.x, dir * speed, 1.0-pow(2.0,(-delta/0.04)))
 	newVel.y += gravity * delta
-	
 	newVel.y = min(newVel.y,300)
 	
 	if onFloor:
@@ -125,7 +129,7 @@ func onPlanetMovement(delta):
 
 	
 	velocity = newVel.rotated(rotated*(PI/2))
-
+	
 	move_and_slide()
 	
 	playerAnimation(dir,newVel,delta)
@@ -170,8 +174,6 @@ func noClipMovement():
 	sprite.rotation = 0.0
 	camera.rotation = lerp_angle(camera.rotation,0,0.2)
 	cameraMovement()
-	
-	print(global_position)
 	
 func searchForBorders():
 	
@@ -231,10 +233,13 @@ func useItem():
 			if Input.is_action_just_pressed("mouse_left"):
 				itemData.onUse(tile.x,tile.y,getPlanetPosition(),planet,lastTileItemUsedOn)
 				itemSwingAnimation(itemData)
+				
+				
 		else:
 			itemData.onUse(tile.x,tile.y,getPlanetPosition(),planet,lastTileItemUsedOn)
 			if !$HandRoot/handSwing.is_playing():
 				itemSwingAnimation(itemData)
+			
 			
 		lastTileItemUsedOn = Vector2(tile.x,tile.y)
 

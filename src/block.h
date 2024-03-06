@@ -57,6 +57,7 @@ public:
     void setTexture( const char* file );
 
     virtual Dictionary onTick(int x, int y, PLANETDATA *planet, int dir);
+    virtual Dictionary onBreak(int x, int y, PLANETDATA *planet, int dir);
 
     void setLookUp(LOOKUPBLOCK *g);
 

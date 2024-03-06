@@ -53,6 +53,7 @@ public:
 	double getLightEmmission(int id);
 
 	Dictionary runOnTick(int x, int y, PLANETDATA *planet, int dir, int blockID);
+	Dictionary runOnBreak(int x, int y, PLANETDATA *planet, int dir, int blockID);
 
 };
 

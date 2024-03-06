@@ -34,7 +34,18 @@ var visibleChunks = []
 
 var hasPlayer = false
 
+var tickAlive = 0
+
+signal doneEditingTiles
+
 func _ready():
+	
+	if orbiting != null:
+		position = orbiting.position + Vector2(orbitDistance,0).rotated(orbitPeriod)
+		position.x = int(position.x)
+		position.y = int(position.y)
+	
+	
 	set_physics_process(false)
 	generateEmptyArray()
 	noise.seed = randi()
@@ -48,7 +59,7 @@ func _ready():
 
 func _process(delta):
 	##Orbit##
-	if orbiting != null:
+	if orbiting != null and tickAlive > 240:
 		
 		var posHold = position
 		
@@ -77,7 +88,7 @@ func _process(delta):
 		
 		if hasPlayer:
 			GlobalRef.player.scrollBackgroundsSpace(orbitVelocity*-1,delta)
-		
+	tickAlive += 1
 		
 func reverseOrbitingParents():
 	if orbiting == null:
@@ -127,13 +138,18 @@ func _physics_process(delta):
 func editTiles(changeCommit):
 	var chunksToUpdate = []
 	
-	#if changeCommit.size() > 0:
-	#	print(changeCommit)
-	
 	for change in changeCommit.keys():
 		
-		DATAC.setTileData(change.x,change.y,changeCommit[change])
-		DATAC.setTimeData(change.x,change.y,GlobalRef.globalTick)
+		if changeCommit[change] == -1:
+			var save:int = DATAC.getTileData(change.x,change.y)
+			DATAC.setTileData(change.x,change.y,airOrCaveAir(change.x,change.y))
+			BlockData.breakBlock(change.x,change.y,self,save)
+		elif changeCommit[change] == 0:
+			DATAC.setTileData(change.x,change.y,airOrCaveAir(change.x,change.y))
+			DATAC.setTimeData(change.x,change.y,GlobalRef.globalTick)
+		else:
+			DATAC.setTileData(change.x,change.y,changeCommit[change])
+			DATAC.setTimeData(change.x,change.y,GlobalRef.globalTick)
 		
 		var foundChunk = chunkArray2D[change.x/8][change.y/8]
 		if !chunksToUpdate.has(foundChunk):
@@ -160,8 +176,7 @@ func editTiles(changeCommit):
 	
 	for chunk in chunksToUpdate:
 		chunk.drawData()
-
-
+	
 ########################################################################
 ############################ GENERATION ################################
 ########################################################################
@@ -192,26 +207,17 @@ func generateTerrain():
 	return
 
 func createChunks():
-	
 	chunkArray2D = DATAC.createAllChunks(chunkScene,chunkContainer,SIZEINCHUNKS)
 	set_physics_process(true)
 	
-	return
-	
-	for x in range(SIZEINCHUNKS):
-		chunkArray2D.append([])
-		for y in range(SIZEINCHUNKS):
-			var newChunk = chunkScene.instantiate()
-			newChunk.pos = Vector2(x,y)
-			newChunk.position = (Vector2(x,y) * 64) - Vector2(SIZEINCHUNKS*32,SIZEINCHUNKS*32)
-			chunkContainer.add_child(newChunk)
-			chunkArray2D[x].append(newChunk)
-	
-	
 func clearChunks():
 	set_physics_process(false)
-	for chunk in chunkContainer.get_children():
-		chunk.queue_free()
+
+	chunkContainer.queue_free()
+	var new = Node2D.new()
+	add_child(new)
+	chunkContainer = new
+	
 	chunkArray2D = []
 	visibleChunks = []
 
@@ -240,7 +246,7 @@ func getBlockRoundedDistance(x,y):
 
 func airOrCaveAir(x,y):
 	var surface = SIZEINCHUNKS*2
-	#Returns 7 for cave air or 0 for surface air
+	#Returns 1 for cave air or 0 for surface air
 	return int(getBlockDistance(x,y) <= surface - 2)
 
 func posToTile(pos):
@@ -263,17 +269,28 @@ func tileToPos(pos):
 ########################################################################
 
 func _on_is_visible_screen_entered():
+	
+	if !is_instance_valid(GlobalRef.player):
+		return
+	
+	if planetType == "sun" and tickAlive < 240:
+		return
+	
 	createChunks()
 	system.reparentToPlanet(GlobalRef.player,self)
 	hasPlayer = true
-	GlobalRef.player.velocity -= orbitVelocity * 10
+	GlobalRef.player.velocity = Vector2.ZERO
 	reverseOrbitingParents()
 
 
 func _on_is_visible_screen_exited():
+
+	if planetType == "sun" and tickAlive < 240:
+		return
+
 	clearChunks()
 	system.dumpObjectToSpace(GlobalRef.player)
-	GlobalRef.player.velocity += orbitVelocity
+	#GlobalRef.player.velocity += orbitVelocity
 	hasPlayer = false
 	clearOrbitingParents()
 

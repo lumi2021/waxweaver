@@ -20,8 +20,16 @@ var tweening = false
 
 func _ready():
 	var itemData = ItemData.data[itemID]
-	texture.texture = itemData.texture
+	
+	var img = itemData.texture.get_image()
+	img.resize(int(img.get_width()*0.75),int(img.get_height()*0.75),0)
+	
+	texture.texture = ImageTexture.create_from_image(img)
+	back.texture = texture.texture
 	maxAmount = itemData.maxStackSize
+	
+	if !itemData is ItemBlock:
+		texture.material = null
 	
 	var randVelocity = Vector2(randi_range(-70,70),-60)
 	rotSide = getPlanetPosition()

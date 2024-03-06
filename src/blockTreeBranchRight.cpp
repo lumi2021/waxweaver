@@ -17,7 +17,7 @@ BLOCKTREEBRANCHRIGHT::BLOCKTREEBRANCHRIGHT() {
     hasCollision = false;
 
     lightMultiplier = 1.0;
-
+    
     rotateTextureToGravity = true;
 
     connectTexturesToMe = false;

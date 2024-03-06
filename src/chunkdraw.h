@@ -8,6 +8,7 @@
 #include <godot_cpp/classes/texture2d.hpp>
 #include <godot_cpp/variant/array.hpp>
 #include <godot_cpp/variant/rect2i.hpp>
+#include <godot_cpp/variant/vector2i.hpp>
 
 #include <godot_cpp/classes/static_body2d.hpp>
 #include <godot_cpp/classes/collision_shape2d.hpp>
@@ -28,6 +29,9 @@ private:
     Array planetData;
 	LOOKUPBLOCK *cock;
 
+	Ref<Texture2D> texture;
+    Ref<Image> texImage;
+
 protected:
 	static void _bind_methods();
 
@@ -37,9 +41,14 @@ public:
 
     Array generateTexturesFromData(PLANETDATA *planet,Vector2i pos,Node *body,Ref<Shape2D> shape);
 	Array tickUpdate(PLANETDATA *planet,Vector2i pos);
+	Dictionary runBreak(PLANETDATA *planet,Vector2i pos,int x,int y,int blockID);
 
 	int scanBlockOpen(PLANETDATA *planet,int x,int y);
+	int scanBackOpen(PLANETDATA *planet,int x,int y);
+	Vector2i scanForBorder(PLANETDATA *planet,int x,int y);
 	Dictionary getBlockDictionary(int id);
+
+	void getBorderImage( const char* file );
 };
 
 }

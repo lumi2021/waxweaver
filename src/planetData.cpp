@@ -29,6 +29,8 @@ void PLANETDATA::_bind_methods() {
     ClassDB::bind_method(D_METHOD("setPositionLookup","x","y","newValue"), &PLANETDATA::setPositionLookup);
 
     ClassDB::bind_method(D_METHOD("createAllChunks","chunkScene","chunkContainer","sizeInChunks"), &PLANETDATA::createAllChunks);
+
+    ClassDB::bind_method(D_METHOD("findSpawnPosition"), &PLANETDATA::findSpawnPosition);
 }
 
 void PLANETDATA::createEmptyArrays(int size) {
@@ -51,7 +53,6 @@ void PLANETDATA::createEmptyArrays(int size) {
 // TILE DATA //
 int PLANETDATA::getTileData(int x, int y) {
 
-    int bigSize = planetSize * planetSize;
 
     if ( x != std::clamp(x,0,planetSize-1) ){
         return 5;
@@ -61,7 +62,6 @@ int PLANETDATA::getTileData(int x, int y) {
     }
 
     int xyToLarge = (x * planetSize) + y;
-    //xyToLarge = std::clamp(xyToLarge,0,bigSize-1);
     
     int tile = tileData[xyToLarge];
    
@@ -108,10 +108,14 @@ bool PLANETDATA::setBGData(int x, int y, int newValue) {
 // LIGHT DATA //
 double PLANETDATA::getLightData(int x, int y) {
 
-    int bigSize = planetSize * planetSize;
+    if ( x != std::clamp(x,0,planetSize-1) ){
+        return 1.0;
+    }
+    if ( y != std::clamp(y,0,planetSize-1) ){
+        return 1.0;
+    }
 
     int xyToLarge = (x * planetSize) + y;
-    xyToLarge = std::clamp(xyToLarge,0,bigSize-1);
     
     double tile = lightData[xyToLarge];
    
@@ -255,4 +259,18 @@ Array PLANETDATA::createAllChunks(PackedScene *chunkScene, Node *chunkContainer,
 
 
     return FAGGOT;
+}
+
+int PLANETDATA::findSpawnPosition(){
+    
+    for(int y = 0; y < planetSize; y++){
+        int id = getTileData(planetSize/2,y);
+
+        if(id > 1){
+            return ((y - 4) * 8) - (planetSize * 4) + 4;
+        }
+
+    }
+
+    return 0;
 }

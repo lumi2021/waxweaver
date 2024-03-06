@@ -18,6 +18,8 @@ public:
 	BLOCKTREEBRANCHLEAF();
 	~BLOCKTREEBRANCHLEAF();
 
+	Dictionary onBreak(int x, int y, PLANETDATA *planet, int dir);
+
 };
 
 }
