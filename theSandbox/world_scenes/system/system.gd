@@ -35,9 +35,9 @@ func generateSystem():
 		
 		var s = (randi() % 5)
 		match s:
-			0: newPlanet.SIZEINCHUNKS = 16
-			1: newPlanet.SIZEINCHUNKS = 24
-			2: newPlanet.SIZEINCHUNKS = 32
+			0: newPlanet.SIZEINCHUNKS = 32
+			1: newPlanet.SIZEINCHUNKS = 32
+			2: newPlanet.SIZEINCHUNKS = 48
 			3: newPlanet.SIZEINCHUNKS = 48
 			4: newPlanet.SIZEINCHUNKS = 64
 		

@@ -10,6 +10,8 @@ var damage = 0
 
 var mineMultiplier := 1.0
 
+var baseRotation = 0
+
 func _ready():
 	var blockData = BlockData.theChunker.getBlockDictionary(blockID)
 	$blockTexture.texture = blockData["texture"]
@@ -28,6 +30,7 @@ func _ready():
 	
 	if blockData["rotateTextureToGravity"]:
 		$blockTexture.rotation = (PI/2) * planet.getBlockPosition(tileX,tileY)
+		baseRotation = $blockTexture.rotation
 		$Sprite.rotation = $blockTexture.rotation
 		
 	$Sprite.texture = blockData["texture"]
@@ -48,6 +51,7 @@ func _process(delta):
 			var breakTime = BlockData.theChunker.getBlockDictionary(blockID)["breakTime"]
 			$blockTexture.position.x = ((randi() % 3)-1) * (damage / breakTime)
 			$blockTexture.position.y = ((randi() % 3)-1) * (damage / breakTime)
+			$blockTexture.rotation = baseRotation + ((randi() % 3)-1) * (damage / breakTime) * 0.1
 			
 			var arrayPosition = (tileX * planet.SIZEINCHUNKS * 8) + tileY
 			

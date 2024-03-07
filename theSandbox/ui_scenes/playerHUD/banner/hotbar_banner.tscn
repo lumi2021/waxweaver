@@ -39,11 +39,11 @@ z_index = 170
 script = ExtResource("1_iyyfi")
 
 [node name="blackBanner" type="ColorRect" parent="."]
-offset_left = -1.0
-offset_top = -1.0
-offset_right = 261.0
+offset_left = -24.0
+offset_top = -26.0
+offset_right = 426.0
 offset_bottom = 40.0
-color = Color(0, 0, 0, 1)
+color = Color(0, 0, 0, 0.909804)
 
 [node name="Hotbar" type="Node2D" parent="."]
 position = Vector2(5, 5)

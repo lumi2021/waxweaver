@@ -4,11 +4,13 @@ extends Node2D
 @export var multiplierX : float = 1.0
 @export var multiplierY : float = 1.0
 
-var width = 240
-var height = 180
+@export var color : Color = Color.WHITE
+
+var width = 400
+var height = 400
 
 
-var mat = preload("res://ui_scenes/backgroundLayers/background_layer_material.tres")
+var mat = preload("res://ui_scenes/backgroundLayers/background_layer_material.tres").duplicate()
 
 func _ready():
 	if sprite == null:
@@ -22,9 +24,9 @@ func _ready():
 		ins.texture = sprite
 		ins.centered = false
 		ins.material = mat
-		ins.z_index = 4
 		ins.position.x = (i%2)*width
 		ins.position.y = int(i>1)*height
+		updateModulate(color)
 		add_child(ins)
 
 func updatePosition(moveDir):
@@ -37,3 +39,8 @@ func updatePosition(moveDir):
 		position.x -= width
 	if position.y > 0:
 		position.y -= height
+	
+
+# theres gotta be a better way to do this !!
+func updateModulate(newColor):
+	mat.set_shader_parameter("modulate",newColor)

@@ -26,6 +26,8 @@ BLOCKSAPLING::BLOCKSAPLING() {
 
     connectTexturesToMe = false;
 
+    itemToDrop = 3;
+
 }
 
 
@@ -37,10 +39,19 @@ Dictionary BLOCKSAPLING::onTick(int x, int y, PLANETDATA *planet, int dir){
     
     int timeAlive = planet->getGlobalTick() - planet->getTimeData(x,y);
 
+    Vector2i BREAK = Vector2i(Vector2(0,1).rotated(acos(0.0)*dir));
+    int whatsBelowMe = planet->getTileData(BREAK.x + x,BREAK.y + y);
+    if( !lookup->hasCollision(whatsBelowMe) ){
+        changes[Vector2i(x,y)] = -1;
+        return changes;
+
+    }
+
+
     if (timeAlive > 24){
 
 
-        int treeHeight = (std::rand() % 4) + 4;
+        int treeHeight = (std::rand() % 10) + 4; // ( random % variation ) + minimum
 
         for(int i = 0; i < treeHeight; i++){
 
@@ -67,13 +78,13 @@ Dictionary BLOCKSAPLING::onTick(int x, int y, PLANETDATA *planet, int dir){
                     
                     int existingTile = planet->getTileData(coolPos.x,coolPos.y);
 
-                    if ( lookup->hasCollision( existingTile ) ){continue;}
-                    if ( map[getFromMap] == 9 && existingTile > 1 ){continue;}
-                    if ( map[getFromMap] == 10 && existingTile > 1 ){continue;}
-                    if ( map[getFromMap] == 11 && existingTile > 1 ){continue;}
-                    if ( map[getFromMap] == 0 ){continue;}
+                    if (existingTile < 2 || existingTile == 10 || existingTile == 11){
 
-                    changes[coolPos] = map[getFromMap];
+                        if ( lookup->hasCollision(map[getFromMap]) ){continue;}
+
+                        changes[coolPos] = map[getFromMap];
+                    
+                    }
                     
                 }
             }
@@ -91,15 +102,13 @@ Dictionary BLOCKSAPLING::onTick(int x, int y, PLANETDATA *planet, int dir){
                     
                     int existingTile = planet->getTileData(coolPos.x,coolPos.y);
 
-                    if ( lookup->hasCollision( existingTile ) ){continue;}
-                    if ( map[getFromMap] == 9 && existingTile > 1 ){continue;}
-                    if ( map[getFromMap] == 10 && existingTile > 1 ){continue;}
-                    if ( map[getFromMap] == 11 && existingTile > 1 ){continue;}
-                    if ( map[getFromMap] == 0 ){continue;}
+                    if (existingTile < 2 || existingTile == 10 || existingTile == 11){
 
-                    changes[coolPos] = map[getFromMap];
+                        if ( lookup->hasCollision(map[getFromMap]) ){continue;}
+
+                        changes[coolPos] = map[getFromMap];
                     
-                    
+                    }
                     
                 }
             }

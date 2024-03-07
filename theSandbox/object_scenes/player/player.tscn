@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://c1b1vgh12jqww"]
+[gd_scene load_steps=27 format=3 uid="uid://c1b1vgh12jqww"]
 
 [ext_resource type="Script" path="res://object_scenes/player/player.gd" id="1_7l8c2"]
 [ext_resource type="Texture2D" uid="uid://bdal1quvajxp" path="res://object_scenes/player/sprites/layerHandBack.png" id="2_a2jo3"]
@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://bjd5c0gdm1qt2" path="res://object_scenes/player/sprites/layerEyeBlink.png" id="7_sxd0h"]
 [ext_resource type="Texture2D" uid="uid://dei6me4j1chus" path="res://object_scenes/player/sprites/layerHandFront.png" id="8_0olu2"]
 [ext_resource type="Texture2D" uid="uid://bbhygnshkya87" path="res://object_scenes/player/hand.png" id="10_pp7um"]
+[ext_resource type="Texture2D" uid="uid://dbhdavudrv6ie" path="res://ui_scenes/backgroundLayers/color.png" id="13_n3a2m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8s1yf"]
 size = Vector2(6, 6)
@@ -263,10 +264,10 @@ ignore_rotation = false
 
 [node name="ColorRect" type="ColorRect" parent="CameraOrigin/Camera2D"]
 z_index = -64
-offset_left = -173.0
-offset_top = -158.0
-offset_right = 173.0
-offset_bottom = 159.0
+offset_left = -317.0
+offset_top = -281.0
+offset_right = 327.0
+offset_bottom = 273.0
 color = Color(0, 1, 0, 1)
 
 [node name="ColorRect2" type="ColorRect" parent="CameraOrigin/Camera2D"]
@@ -283,25 +284,35 @@ visible = false
 z_index = 803
 
 [node name="Backgroundholder" type="Node2D" parent="CameraOrigin/Camera2D"]
-position = Vector2(-130, -115)
+position = Vector2(-200, -150)
+
+[node name="BackgroundLayer4" parent="CameraOrigin/Camera2D/Backgroundholder" instance=ExtResource("4_rvkhq")]
+position = Vector2(-200, -150)
+sprite = ExtResource("13_n3a2m")
+multiplierX = 0.0
+multiplierY = 0.0
+color = Color(0.0352941, 0.0392157, 0.0784314, 1)
 
 [node name="BackgroundLayer" parent="CameraOrigin/Camera2D/Backgroundholder" instance=ExtResource("4_rvkhq")]
+position = Vector2(-200, -150)
 sprite = ExtResource("4_a4xgr")
 multiplierX = 0.02
 multiplierY = 0.02
 
 [node name="BackgroundLayer2" parent="CameraOrigin/Camera2D/Backgroundholder" instance=ExtResource("4_rvkhq")]
+position = Vector2(-200, -150)
 sprite = ExtResource("6_io1jr")
 multiplierX = 0.04
 multiplierY = 0.04
 
 [node name="BackgroundLayer3" parent="CameraOrigin/Camera2D/Backgroundholder" instance=ExtResource("4_rvkhq")]
+position = Vector2(-200, -150)
 sprite = ExtResource("7_6vkfj")
 multiplierX = 0.1
 multiplierY = 0.1
 
 [node name="HotbarBanner" parent="CameraOrigin/Camera2D" instance=ExtResource("3_et7b7")]
-position = Vector2(-130, -115)
+position = Vector2(-201, -151)
 
 [node name="Lightmap" parent="." instance=ExtResource("3_37tb5")]
 top_level = true

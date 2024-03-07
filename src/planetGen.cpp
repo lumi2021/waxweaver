@@ -22,17 +22,23 @@ PLANETGEN::~PLANETGEN() {
 
 void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
     int planetSize = planet->planetSize;
+
+    int lastSpawnedTree = 16;
+
     for(int x = 0; x < planetSize; x++){
         for(int y = 0; y < planetSize; y++){
 
             int quad = planet->getPositionLookup(x,y);
             int side = Vector2(x,y).rotated(acos(0.0) * quad).x;
             double dis = getBlockDistance(x,y,planet);
-            double surface = (noise->get_noise_1d(side*2.0) * 4.0)  + (planetSize / 4);
+            double surface = (noise->get_noise_1d(side*2.0) * 8.0)  + (planetSize / 4);
 
             if (dis <= surface){
                 planet->setTileData(x,y,2);
                 planet->setBGData(x,y,2);
+
+
+
             }
             else if (dis <= surface + 4){
                 planet->setTileData(x,y,3);
@@ -43,10 +49,19 @@ void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
                 planet->setBGData(x,y,3);
             }
             else if (dis <= surface + 6){
-                if (std::rand() % 8 == 0){
+                if (std::rand() % lastSpawnedTree == 0){
                     planet->setTileData(x,y,7);
-                }
+                    lastSpawnedTree = 16;
+                }else{lastSpawnedTree--;}
             
+            }
+
+            double r = (std::abs(dis - (planetSize / 6) ) ) / (planetSize / 6.0);
+
+            int caveSize = 2;
+            double n = noise->get_noise_2d(x * caveSize, y * caveSize) + r;
+            if ( n < 0.15 && n > -0.15 ){
+                planet->setTileData(x,y, airOrCaveAir(x,y,planet) );
             }
 
 
@@ -68,7 +83,7 @@ void PLANETGEN::generateLunarPlanet(PLANETDATA *planet,FastNoiseLite *noise){
             int quad = planet->getPositionLookup(x,y);
             int side = Vector2(x,y).rotated(acos(0.0) * quad).x;
             double dis = getBlockDistance(x,y,planet);
-            double surface = (noise->get_noise_1d(side*4.0) * 16.0)  + (planetSize / 4);
+            double surface = (noise->get_noise_1d(side*4.0) * 12.0)  + (planetSize / 4);
 
             if (dis <= surface){
                 planet->setTileData(x,y,2);
@@ -110,4 +125,11 @@ double PLANETGEN::getBlockDistance(int x, int y, PLANETDATA *planet){
 
 
     return -newPos.y;
+}
+
+int PLANETGEN::airOrCaveAir(int x,int y, PLANETDATA *planet){
+    int planetSize = planet->planetSize;
+    int surface = (planetSize / 4);
+    int b = getBlockDistance(x, y, planet) <= surface - 2;
+    return b;
 }

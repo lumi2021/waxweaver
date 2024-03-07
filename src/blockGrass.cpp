@@ -1,6 +1,6 @@
 #include "blockGrass.h"
 #include <godot_cpp/core/class_db.hpp>
-
+#include "lookupBlock.h"
 
 using namespace godot;
 
@@ -36,8 +36,8 @@ Dictionary BLOCKGRASS::onTick(int x, int y, PLANETDATA *planet, int dir) {
     for (int i = 0; i < 4; i++){
                     
         Vector2 pee = Vector2(0,1).rotated(acos(0.0) * i);
-                   
-        if(planet->getTileData(x+pee.x,y+pee.y)>1){
+        
+        if(lookup->hasCollision(planet->getTileData(x+pee.x,y+pee.y))){
             
             points += 1;
 

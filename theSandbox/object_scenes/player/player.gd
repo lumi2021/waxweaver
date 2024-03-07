@@ -167,8 +167,9 @@ func noClipMovement():
 		dir.y -= 1
 	if Input.is_action_pressed("move_down"):
 		dir.y += 1
-	
-	velocity = dir.normalized() * 4000
+
+	var speed = 1000 + (int(!is_instance_valid(planet)) * 3000)
+	velocity = dir.normalized() * speed
 	move_and_slide()
 	
 	sprite.rotation = 0.0
@@ -198,7 +199,7 @@ func cameraMovement():
 	if g.length() > maxCameraDistance:
 		g = g.normalized() * maxCameraDistance
 	
-	cameraOrigin.position = Vector2(0,-20).rotated(camera.rotation) + (g*0.5)
+	cameraOrigin.position = Vector2(0,-40).rotated(camera.rotation) + (g*0.5)
 	cameraOrigin.position.x = int(cameraOrigin.position.x)
 	cameraOrigin.position.y = int(cameraOrigin.position.y)
 
@@ -353,9 +354,12 @@ func isUnderCeiling():
 func updateLight():
 	if !is_instance_valid(planet):
 		return
+		
+	
+	
 	var currentChunk = Vector2(int(position.x+1024)/64,int(position.y+1024)/64)
 	if previousChunk != currentChunk:
-		var newPos = (currentChunk * 64) - Vector2(1024,1024) - Vector2(256,256)
+		var newPos = (currentChunk * 64) - Vector2(1024,1024) - Vector2(288,288)
 		GlobalRef.lightmap.pushUpdate(planet,newPos)
 	previousChunk = currentChunk
 
@@ -363,6 +367,6 @@ func updateLightStatic():
 	if !is_instance_valid(planet):
 		return
 	var currentChunk = Vector2(int(position.x+1024)/64,int(position.y+1024)/64)
-	var newPos = (currentChunk * 64) - Vector2(1024,1024) - Vector2(256,256)
+	var newPos = (currentChunk * 64) - Vector2(1024,1024) - Vector2(288,288)
 	GlobalRef.lightmap.pushUpdate(planet,newPos)
 	previousChunk = currentChunk

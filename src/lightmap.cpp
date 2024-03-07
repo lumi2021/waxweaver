@@ -11,7 +11,7 @@ void LIGHTMAP::_bind_methods() {
 }
 
 LIGHTMAP::LIGHTMAP() {
-	img = Image::create(64, 64, false, Image::FORMAT_RGBA8);
+	img = Image::create(72, 72, false, Image::FORMAT_RGBA8);
 }
 
 LIGHTMAP::~LIGHTMAP() {
@@ -22,12 +22,12 @@ LIGHTMAP::~LIGHTMAP() {
 
 void LIGHTMAP::generateLightTexture(int x, int y,PLANETDATA *planet){
     
-    img = Image::create(64, 64, false, Image::FORMAT_RGBA8);
+    //img = Image::create(72, 72, false, Image::FORMAT_RGBA8);
     int size = planet->planetSize;
 
-    for (int imgX = 0; imgX < 64; imgX++){
+    for (int imgX = 0; imgX < 72; imgX++){
         
-        for (int imgY = 0; imgY < 64; imgY++){
+        for (int imgY = 0; imgY < 72; imgY++){
 
             float l = planet->getLightData(x+imgX,y+imgY);
            

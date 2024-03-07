@@ -4,3 +4,4 @@
 
 [resource]
 shader = ExtResource("1_72mn0")
+shader_parameter/modulate = Color(1, 1, 1, 1)

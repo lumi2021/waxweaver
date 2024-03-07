@@ -2,7 +2,6 @@ extends Node2D
 
 @onready var sprite = $Sprite2D
 @onready var cppLightmap = $LIGHTMAP
-var size = 64
 
 
 var newImg = null

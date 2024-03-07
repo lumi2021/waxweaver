@@ -24,15 +24,16 @@ PlayerData="*res://autoload/PlayerData.gd"
 
 [debug]
 
+settings/stdout/print_fps=true
 gdscript/warnings/unused_parameter=0
 gdscript/warnings/integer_division=0
 
 [display]
 
-window/size/viewport_width=260
-window/size/viewport_height=230
-window/size/window_width_override=520
-window/size/window_height_override=460
+window/size/viewport_width=400
+window/size/viewport_height=300
+window/size/window_width_override=800
+window/size/window_height_override=600
 window/stretch/mode="viewport"
 
 [editor]
