@@ -1,4 +1,5 @@
 #include "blockTreeLog.h"
+#include "lookupBlock.h"
 #include <godot_cpp/core/class_db.hpp>
 
 using namespace godot;
@@ -33,10 +34,10 @@ Dictionary BLOCKTREELOG::onTick(int x, int y, PLANETDATA *planet, int dir){
     
     Dictionary changes = {};
 
-    Vector2i newPos =  Vector2i(x,y) + Vector2i( Vector2(0,1).rotated(acos(0.0)*dir) );
-    int tileBelow = planet->getTileData(newPos.x,newPos.y);
+    Vector2i BREAK = Vector2i(Vector2(0,1).rotated(acos(0.0)*dir));
+    int tileBelow = planet->getTileData(BREAK.x + x,BREAK.y + y);
 
-    if (tileBelow < 2 ){
+    if ( !lookup->hasCollision(tileBelow) && tileBelow != 8){
         changes[Vector2i(x,y)] = -1;
 
     }
@@ -52,7 +53,7 @@ Dictionary BLOCKTREELOG::onBreak(int x, int y, PLANETDATA *planet, int dir){
     Vector2i newPos =  Vector2i(x,y) - Vector2i( Vector2(0,1).rotated(acos(0.0)*dir) );
     int tileAbove = planet->getTileData(newPos.x,newPos.y);
 
-    if (tileAbove == 8 || tileAbove == 12){
+    if (tileAbove == 12){
         changes[newPos] = -1;
 
     }
