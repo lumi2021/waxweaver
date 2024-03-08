@@ -13,7 +13,7 @@ BLOCKGRASS::BLOCKGRASS() {
 
     connectedTexture = true;
 
-    itemToDrop = 0;
+    itemToDrop = 3;
     breakParticleID = 3;
 
 }

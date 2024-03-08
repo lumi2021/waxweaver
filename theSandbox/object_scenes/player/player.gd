@@ -43,15 +43,12 @@ func _ready():
 	PlayerData.updateInventory.connect(setBackItemTexture)
 	
 	PlayerData.addItem(1,1)
-	PlayerData.addItem(2,1)
-	PlayerData.addItem(3,198)
+	PlayerData.addItem(0,1)
+	PlayerData.addItem(7,99)
 
 func _process(delta):
 	
-
 	tick+=1
-	
-	
 	
 	if Input.is_action_just_pressed("noclip"):
 		noClip = !noClip
@@ -84,6 +81,14 @@ func _process(delta):
 ######################################################################
 
 func onPlanetMovement(delta):
+	
+	var maxDis = sqrt(pow(planet.SIZEINCHUNKS*32,2) * 2) + 620
+	var distance = planet.global_position - global_position
+	
+	if distance.length() > maxDis:
+		planet.detachPlayer()
+		return
+	
 	
 	if noClip:
 		noClipMovement()
@@ -150,7 +155,14 @@ func inSpaceMovement(delta):
 				
 		var distance = planet.global_position - global_position
 		var forceAmount = ((gravityConstant*mass*playerMass)/(distance.length()*distance.length()))*delta*144
-				
+		
+		# Attach player to planet
+		var minimumDis = sqrt(pow(planet.SIZEINCHUNKS*32,2) * 2) + 570
+		if distance.length() <= minimumDis:
+			planet.attachPlayer()
+			return
+		
+		
 		velocity += distance.normalized() * forceAmount
 
 	move_and_slide()

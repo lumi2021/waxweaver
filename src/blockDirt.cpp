@@ -10,7 +10,7 @@ BLOCKDIRT::BLOCKDIRT() {
 
     setTexture("res://block_resources/block_textures/dirt.png");
 
-    itemToDrop = 0;
+    itemToDrop = 3;
     rotateTextureToGravity = true;
 
 }

@@ -22,7 +22,7 @@ BLOCKLEAVES::BLOCKLEAVES() {
 
     connectTexturesToMe = false;
 
-    itemToDrop = 3;
+    itemToDrop = 7;
 
 }
 

@@ -151,7 +151,7 @@ func editTiles(changeCommit):
 			DATAC.setTileData(change.x,change.y,changeCommit[change])
 			DATAC.setTimeData(change.x,change.y,GlobalRef.globalTick)
 		
-		var foundChunk = chunkArray2D[change.x/8][change.y/8]
+		var foundChunk = chunkArray2D[clamp(change.x/8,0,SIZEINCHUNKS-1)][clamp(change.y/8,0,SIZEINCHUNKS-1)]
 		if !chunksToUpdate.has(foundChunk):
 			chunksToUpdate.append(foundChunk)
 		
@@ -269,12 +269,13 @@ func tileToPos(pos):
 ########################################################################
 
 func _on_is_visible_screen_entered():
-	
+	pass
+
+
+func attachPlayer():
 	if !is_instance_valid(GlobalRef.player):
 		return
 	
-	if planetType == "sun" and tickAlive < 240:
-		return
 	
 	createChunks()
 	system.reparentToPlanet(GlobalRef.player,self)
@@ -284,9 +285,9 @@ func _on_is_visible_screen_entered():
 
 
 func _on_is_visible_screen_exited():
+	pass
 
-	if planetType == "sun" and tickAlive < 240:
-		return
+func detachPlayer():
 
 	clearChunks()
 	system.dumpObjectToSpace(GlobalRef.player)

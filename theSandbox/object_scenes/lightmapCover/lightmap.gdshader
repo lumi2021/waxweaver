@@ -11,7 +11,12 @@ void fragment() {
 	vec4 tex = texture(TEXTURE,UV);
 	vec4 new = tex;
 	
-	if (screen.rgb != vec3(0.0,1.0,0.0)){
+	if(screen.r < 0.01 && screen.g > 0.99 && screen.b < 0.01 ){
+		
+		COLOR = screen;
+		
+	}
+	else{
 		new.r = tex.r*9.0;
 		new.g = tex.g*8.2;
 		new.b = tex.b*9.5;
@@ -20,8 +25,6 @@ void fragment() {
 		new = floor(new * 10.0)/10.0;
 	
 		COLOR = multiply(screen,new);
-	}
-	else{COLOR = screen;
 	}
 }
 

@@ -26,7 +26,7 @@ BLOCKSAPLING::BLOCKSAPLING() {
 
     connectTexturesToMe = false;
 
-    itemToDrop = 3;
+    itemToDrop = 7;
 
 }
 

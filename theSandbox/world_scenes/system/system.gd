@@ -94,8 +94,11 @@ func generateSystem():
 		var pee = lastPlanet.DATAC.findSpawnPosition()
 		print(pee)
 		player.position = Vector2(4,pee) + lastPlanet.position
+		
 
 		player.map.map(self,cosmicBodyContainer.get_children())
+		
+		lastPlanet.attachPlayer()
 
 func reparentToPlanet(object,planet):
 	print(object)

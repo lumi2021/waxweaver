@@ -7,7 +7,7 @@ void fragment() {
 	vec4 screen = texture(screen_texture,SCREEN_UV);
 	vec4 tex = texture(TEXTURE,UV);
 	COLOR = vec4(0.0);
-	if(screen.r < 0.01 && screen.g > 0.01 && screen.b < 0.01 ){
+	if(screen.r < 0.01 && screen.g > 0.99 && screen.b < 0.01 ){
 		COLOR = tex * modulate;
 	}
 	

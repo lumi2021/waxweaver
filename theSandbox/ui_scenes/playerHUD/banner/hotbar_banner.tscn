@@ -43,10 +43,10 @@ offset_left = -24.0
 offset_top = -26.0
 offset_right = 426.0
 offset_bottom = 40.0
-color = Color(0, 0, 0, 0.909804)
+color = Color(0, 0, 0, 0.87451)
 
 [node name="Hotbar" type="Node2D" parent="."]
-position = Vector2(5, 5)
+position = Vector2(7, 6)
 
 [node name="slot0" parent="Hotbar" instance=ExtResource("2_il2kt")]
 
@@ -94,24 +94,24 @@ showOutline = false
 isHoldSlot = true
 
 [node name="Menu" type="Node2D" parent="."]
-visible = false
 position = Vector2(-1, -1)
 
 [node name="background" type="ColorRect" parent="Menu"]
+offset_left = -23.0
 offset_top = 41.0
-offset_right = 262.0
-offset_bottom = 233.0
-color = Color(0, 0, 0, 0.898039)
+offset_right = 196.0
+offset_bottom = 154.0
+color = Color(0, 0, 0, 0.835294)
 
 [node name="line" type="ColorRect" parent="Menu"]
-offset_left = 5.0
+offset_left = 8.0
 offset_top = 42.0
-offset_right = 91.0
+offset_right = 92.0
 offset_bottom = 43.0
 color = Color(0.0823529, 0.113725, 0.156863, 1)
 
 [node name="InventoryBody" type="Node2D" parent="Menu"]
-position = Vector2(6, 48)
+position = Vector2(8, 49)
 
 [node name="slot10" parent="Menu/InventoryBody" instance=ExtResource("2_il2kt")]
 slotToDisplay = 10
@@ -233,7 +233,7 @@ position = Vector2(72, 85)
 slotToDisplay = 39
 
 [node name="ArmorSlots" type="Node2D" parent="Menu"]
-position = Vector2(15, 161)
+position = Vector2(113, 49)
 
 [node name="slot40" parent="Menu/ArmorSlots" instance=ExtResource("2_il2kt")]
 slotToDisplay = 40
@@ -247,7 +247,7 @@ position = Vector2(0, 38)
 slotToDisplay = 42
 
 [node name="AccessorySlots" type="Node2D" parent="Menu"]
-position = Vector2(52, 162)
+position = Vector2(150, 50)
 
 [node name="slot43" parent="Menu/AccessorySlots" instance=ExtResource("2_il2kt")]
 slotToDisplay = 43
@@ -273,6 +273,7 @@ position = Vector2(17, 38)
 slotToDisplay = 48
 
 [node name="Crafting" type="Node2D" parent="Menu"]
+visible = false
 position = Vector2(99, 47)
 
 [node name="Outline" type="Sprite2D" parent="Menu/Crafting"]
