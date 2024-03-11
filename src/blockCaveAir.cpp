@@ -14,8 +14,8 @@ BLOCKCAVEAIR::BLOCKCAVEAIR() {
 
     hasCollision = false;
 
-    lightMultiplier = 0.999;
-    lightEmmission = 0.02;
+    lightMultiplier = 0.9;
+    lightEmmission = 0.0;
 }
 
 

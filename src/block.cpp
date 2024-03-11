@@ -21,7 +21,7 @@ BLOCK::BLOCK() {
 
     hasCollision = true;
 
-    lightMultiplier = 0.9;
+    lightMultiplier = 0.6;
     lightEmmission = 0.0;
 
     // -1 drops nothing

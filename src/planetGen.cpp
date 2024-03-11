@@ -51,6 +51,7 @@ void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
             else if (dis <= surface + 6){
                 if (std::rand() % lastSpawnedTree == 0){
                     planet->setTileData(x,y,7);
+                    planet->setTimeData(x,y,-16000);
                     lastSpawnedTree = 16;
                 }else{lastSpawnedTree--;}
             

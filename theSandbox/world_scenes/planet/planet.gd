@@ -281,6 +281,7 @@ func attachPlayer():
 	system.reparentToPlanet(GlobalRef.player,self)
 	hasPlayer = true
 	GlobalRef.player.velocity = Vector2.ZERO
+	GlobalRef.player.planet = self
 	reverseOrbitingParents()
 
 
@@ -292,6 +293,7 @@ func detachPlayer():
 	clearChunks()
 	system.dumpObjectToSpace(GlobalRef.player)
 	#GlobalRef.player.velocity += orbitVelocity
+	GlobalRef.player.planet = null
 	hasPlayer = false
 	clearOrbitingParents()
 

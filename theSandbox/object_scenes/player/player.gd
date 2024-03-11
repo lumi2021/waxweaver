@@ -330,13 +330,17 @@ func scrollBackgroundsSpace(vel,delta):
 ######################################################################
 
 func getPlanetPosition():
-	var angle1 = Vector2(1,1)
-	var angle2 = Vector2(-1,1)
+	if is_instance_valid(planet):
+		var p = planet.posToTile(position)
+		return planet.DATAC.getPositionLookup(p.x,p.y)
+	return 0
+	#var angle1 = Vector2(1,1)
+	#var angle2 = Vector2(-1,1)
 	
-	var dot1 = int(position.dot(angle1) >= 0)
-	var dot2 = int(position.dot(angle2) > 0) * 2
+	#var dot1 = int(position.dot(angle1) >= 0)
+	#var dot2 = int(position.dot(angle2) > 0) * 2
 	
-	return [0,1,3,2][dot1 + dot2]
+	#return [0,1,3,2][dot1 + dot2]
 
 func isOnFloor():
 	#improve this

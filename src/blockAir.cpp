@@ -14,8 +14,8 @@ BLOCKAIR::BLOCKAIR() {
 
     hasCollision = false;
 
-    lightMultiplier = 0.97;
-    lightEmmission = 0.4;
+    lightMultiplier = 0.9;
+    lightEmmission = 5.0;
 }
 
 

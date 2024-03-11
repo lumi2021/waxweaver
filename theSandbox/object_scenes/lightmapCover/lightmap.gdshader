@@ -17,13 +17,19 @@ void fragment() {
 		
 	}
 	else{
-		new.r = tex.r*9.0;
-		new.g = tex.g*8.2;
-		new.b = tex.b*9.5;
+		//new = tex;
+		new.r = tex.r*1.125;
+		new.g = tex.g*1.05;
+		new.b = tex.b*1.115;
+		
 	
 		new = clamp(new,vec4(0.0),vec4(1.0));
-		new = floor(new * 10.0)/10.0;
-	
+		new = floor(new * 16.0)/16.0; // banding
+		
+		if(new.r > 0.9){ new.r = 1.0; }
+		if(new.g > 0.9){ new.g = 1.0; }
+		if(new.b > 0.9){ new.b = 1.0; }
+		
 		COLOR = multiply(screen,new);
 	}
 }

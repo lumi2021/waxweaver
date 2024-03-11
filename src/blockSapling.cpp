@@ -21,6 +21,7 @@ BLOCKSAPLING::BLOCKSAPLING() {
     hasCollision = false;
 
     lightMultiplier = 1.0;
+    lightEmmission = 2.8;
 
     rotateTextureToGravity = true;
 
@@ -36,7 +37,8 @@ BLOCKSAPLING::~BLOCKSAPLING() {
 
 Dictionary BLOCKSAPLING::onTick(int x, int y, PLANETDATA *planet, int dir){
     Dictionary changes = {};
-    
+
+
     int timeAlive = planet->getGlobalTick() - planet->getTimeData(x,y);
 
     Vector2i BREAK = Vector2i(Vector2(0,1).rotated(acos(0.0)*dir));
@@ -48,7 +50,7 @@ Dictionary BLOCKSAPLING::onTick(int x, int y, PLANETDATA *planet, int dir){
     }
 
 
-    if (timeAlive > 24){
+    if (timeAlive > 4000){
 
 
         int treeHeight = (std::rand() % 10) + 4; // ( random % variation ) + minimum

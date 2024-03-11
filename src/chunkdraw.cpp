@@ -149,6 +149,7 @@ Array CHUNKDRAW::tickUpdate(PLANETDATA *planet,Vector2i pos){
             int planetSize = planet->planetSize; // GETS PASSED IN
             
             int blockID = planet->getTileData(worldX,worldY);
+            int bgID = planet->getBGData(worldX,worldY);
 
             int blockSide = planet->getPositionLookup(worldX,worldY);
 
@@ -156,24 +157,29 @@ Array CHUNKDRAW::tickUpdate(PLANETDATA *planet,Vector2i pos){
             collectedChanges.append( cock->runOnTick(worldX,worldY,planet,blockSide,blockID) );
 
             // SIMULATE LIGHT //
-
             double lightL = planet->getLightData(worldX - 1,worldY);
 
             double lightR = planet->getLightData(worldX + 1,worldY);
-            
+                
             double lightB = planet->getLightData(worldX,worldY + 1);
 
             double lightT = planet->getLightData(worldX,worldY - 1);
 
             //average light values
             double mutliplier = cock->getLightMultiplier(blockID);
-            double newLight = ( ( lightB + lightL + lightR + lightT ) / 4.0 ) * mutliplier;
+            double avgn = (lightL + lightR + lightB + lightT)/4.0;
+            double newLight = ( std::max({ lightB , lightL , lightR , lightT }) + avgn  ) * mutliplier * 0.5;
             double lightEmmission = cock->getLightEmmission(blockID);
 
+            if(blockID == 0 && bgID > 1){
+                lightEmmission = 0.0;
+            }
+
             newLight = std::max(newLight,lightEmmission);
-            newLight = std::clamp(newLight,0.0,1.0);
 
             planet->setLightData(worldX,worldY,newLight);
+
+            
 
         }
 
