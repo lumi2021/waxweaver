@@ -112,8 +112,9 @@ func _physics_process(delta):
 	var shouldUpdateLight = 0
 	for chunk in visibleChunks:
 		if tick % 4 != chunk.id4:
+			chunk.flicker(false)
 			continue
-		
+		chunk.flicker(true)
 		var changesArray = chunk.tickUpdate()
 		var committedChanges = {}
 		
@@ -139,17 +140,27 @@ func editTiles(changeCommit):
 	var chunksToUpdate = []
 	
 	for change in changeCommit.keys():
+		var c = changeCommit[change]
+		match c:
+			-1:
+				var save:int = DATAC.getTileData(change.x,change.y)
+				DATAC.setTileData(change.x,change.y,airOrCaveAir(change.x,change.y))
+				BlockData.breakBlock(change.x,change.y,self,save)
+			0:
+				DATAC.setTileData(change.x,change.y,airOrCaveAir(change.x,change.y))
+				DATAC.setTimeData(change.x,change.y,GlobalRef.globalTick)
+			-99999:
+				var save:int = DATAC.getBGData(change.x,change.y)
+				DATAC.setBGData(change.x,change.y,0)
+				BlockData.breakBlock(change.x,change.y,self,save)
+			_: #Default
+				if c < -1:
+					DATAC.setBGData(change.x,change.y,abs(c))
+				else:
+					DATAC.setTileData(change.x,change.y,c)
+				DATAC.setTimeData(change.x,change.y,GlobalRef.globalTick)
 		
-		if changeCommit[change] == -1:
-			var save:int = DATAC.getTileData(change.x,change.y)
-			DATAC.setTileData(change.x,change.y,airOrCaveAir(change.x,change.y))
-			BlockData.breakBlock(change.x,change.y,self,save)
-		elif changeCommit[change] == 0:
-			DATAC.setTileData(change.x,change.y,airOrCaveAir(change.x,change.y))
-			DATAC.setTimeData(change.x,change.y,GlobalRef.globalTick)
-		else:
-			DATAC.setTileData(change.x,change.y,changeCommit[change])
-			DATAC.setTimeData(change.x,change.y,GlobalRef.globalTick)
+		
 		
 		var foundChunk = chunkArray2D[clamp(change.x/8,0,SIZEINCHUNKS-1)][clamp(change.y/8,0,SIZEINCHUNKS-1)]
 		if !chunksToUpdate.has(foundChunk):
@@ -176,7 +187,13 @@ func editTiles(changeCommit):
 	
 	for chunk in chunksToUpdate:
 		chunk.drawData()
-	
+
+func setLight(x,y,level):
+	var currentLight = DATAC.getLightData(x,y)
+	if level >= abs(currentLight):
+		DATAC.setLightData(x,y,level * -1.0)
+
+
 ########################################################################
 ############################ GENERATION ################################
 ########################################################################

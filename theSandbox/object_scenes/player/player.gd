@@ -56,6 +56,9 @@ func _process(delta):
 	
 	if is_instance_valid(planet):
 		onPlanetMovement(delta)
+		var pos = planet.posToTile(position)
+		planet.setLight(pos.x,pos.y,0.5)
+	
 	elif tick > 60:
 		inSpaceMovement(delta)
 		GlobalRef.lightmap.position = global_position - Vector2(256,256)
@@ -252,7 +255,6 @@ func useItem():
 			itemData.onUse(tile.x,tile.y,getPlanetPosition(),planet,lastTileItemUsedOn)
 			if !$HandRoot/handSwing.is_playing():
 				itemSwingAnimation(itemData)
-			
 			
 		lastTileItemUsedOn = Vector2(tile.x,tile.y)
 

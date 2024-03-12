@@ -1,18 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://cq6k7eeybndp6"]
+[gd_scene load_steps=3 format=3 uid="uid://cq6k7eeybndp6"]
 
 [ext_resource type="Script" path="res://object_scenes/lightmapCover/lightmap.gd" id="1_jgjjb"]
-[ext_resource type="Shader" path="res://object_scenes/lightmapCover/lightmap.gdshader" id="2_wq3a7"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_byedf"]
-shader = ExtResource("2_wq3a7")
+[ext_resource type="Material" uid="uid://cdwh8i1rhf0k3" path="res://object_scenes/lightmapCover/lightmap.tres" id="2_k1ric"]
 
 [node name="Lightmap" type="Node2D"]
 z_index = 2
 script = ExtResource("1_jgjjb")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture_filter = 2
-material = SubResource("ShaderMaterial_byedf")
+texture_filter = 1
+material = ExtResource("2_k1ric")
 scale = Vector2(8, 8)
 centered = false
 

@@ -1,0 +1,6 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://cdwh8i1rhf0k3"]
+
+[ext_resource type="Shader" path="res://object_scenes/lightmapCover/lightmap.gdshader" id="1_yvk04"]
+
+[resource]
+shader = ExtResource("1_yvk04")

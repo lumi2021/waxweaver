@@ -68,3 +68,7 @@ func _on_visible_on_screen_notifier_2d_screen_exited():
 	planet.visibleChunks.erase(self)
 	mainLayerSprite.visible = onScreen
 	backLayerSprite.visible = onScreen
+
+#debug
+func flicker(show):
+	$Icon.visible = show

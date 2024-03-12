@@ -29,7 +29,7 @@ void LIGHTMAP::generateLightTexture(int x, int y,PLANETDATA *planet){
         
         for (int imgY = 0; imgY < 72; imgY++){
 
-            float l = planet->getLightData(x+imgX,y+imgY);
+            float l = std::abs(planet->getLightData(x+imgX,y+imgY));
            
             Color c = Color::hex(0x000000FF);
             c.r = l;

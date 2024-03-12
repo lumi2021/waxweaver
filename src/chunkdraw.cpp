@@ -157,13 +157,20 @@ Array CHUNKDRAW::tickUpdate(PLANETDATA *planet,Vector2i pos){
             collectedChanges.append( cock->runOnTick(worldX,worldY,planet,blockSide,blockID) );
 
             // SIMULATE LIGHT //
-            double lightL = planet->getLightData(worldX - 1,worldY);
 
-            double lightR = planet->getLightData(worldX + 1,worldY);
+            double cLight = planet->getLightData(worldX,worldY);
+            if (cLight < 0.0){
+                planet->setLightData(worldX,worldY,std::abs(cLight));
+                continue;
+            }
+
+            double lightL = std::abs(planet->getLightData(worldX - 1,worldY));
+
+            double lightR = std::abs(planet->getLightData(worldX + 1,worldY));
                 
-            double lightB = planet->getLightData(worldX,worldY + 1);
+            double lightB = std::abs(planet->getLightData(worldX,worldY + 1));
 
-            double lightT = planet->getLightData(worldX,worldY - 1);
+            double lightT = std::abs(planet->getLightData(worldX,worldY - 1));
 
             //average light values
             double mutliplier = cock->getLightMultiplier(blockID);

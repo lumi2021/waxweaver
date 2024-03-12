@@ -11,6 +11,8 @@ BLOCKSTONE::BLOCKSTONE() {
     setTexture("res://block_resources/block_textures/stone.png");
 
     itemToDrop = 2;
+    rotateTextureToGravity = true;
+
 }
 
 

@@ -24,25 +24,3 @@ func pushUpdate(planet,newPos):
 
 func _on_lightmap_image_updated(node, image):
 	sprite.texture = ImageTexture.create_from_image(image)
-
-
-##Depricated light code in gdscript
-#func updateLight(x,y,planet,newPos):
-	#if !is_instance_valid(planet):
-		#return
-#
-	#var data = planet.lightData
-	#var blockData = planet.planetData
-	#
-	#var img = Image.create(size,size,false,Image.FORMAT_L8)
-	#var airImg = Image.create(size,size,false,Image.FORMAT_LA8)
-	#for imgX in range(size):
-		#for imgY in range(size):
-			#var newX = clamp(x+imgX,0,data.size()-1)
-			#var newY = clamp(y+imgY,0,data.size()-1)
-			#var l = data[newX][newY]
-			#img.set_pixel(imgX,imgY,Color(l,l,l,1.0))
-			#
-	#newImg = ImageTexture.create_from_image(img)
-	#
-	#return
