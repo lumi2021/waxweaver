@@ -19,7 +19,7 @@ var ticks = 0
 var tweening = false
 
 func _ready():
-	var itemData = ItemData.data[itemID]
+	var itemData = ItemData.getItem(itemID)
 	
 	var img = itemData.texture.get_image()
 	img.resize(int(img.get_width()*0.75),int(img.get_height()*0.75),0)
@@ -71,12 +71,12 @@ func _on_area_2d_body_entered(body):
 	
 	if tweening:
 		return
-	
-	
 	tweenAndDestroy(body.position,true)
 
 
 func _on_stack_body_entered(body):
+	
+	## Stack with items of same type ##
 	
 	if tweening or body == self:
 		return

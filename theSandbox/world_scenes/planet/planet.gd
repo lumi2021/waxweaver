@@ -112,9 +112,8 @@ func _physics_process(delta):
 	var shouldUpdateLight = 0
 	for chunk in visibleChunks:
 		if tick % 4 != chunk.id4:
-			chunk.flicker(false)
 			continue
-		chunk.flicker(true)
+		
 		var changesArray = chunk.tickUpdate()
 		var committedChanges = {}
 		
@@ -188,7 +187,7 @@ func editTiles(changeCommit):
 	for chunk in chunksToUpdate:
 		chunk.drawData()
 
-func setLight(x,y,level):
+func setLight(x,y,level): ## Useful for settings dynamic moving lights
 	var currentLight = DATAC.getLightData(x,y)
 	if level >= abs(currentLight):
 		DATAC.setLightData(x,y,level * -1.0)

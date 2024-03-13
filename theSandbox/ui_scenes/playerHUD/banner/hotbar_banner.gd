@@ -2,6 +2,8 @@ extends Node2D
 
 @onready var holdSlot = $holdingSlot
 
+@onready var crafting = $Menu/Crafting
+
 var invOpen = false
 
 func _ready():
@@ -20,6 +22,9 @@ func _process(delta):
 	if Input.is_action_just_pressed("inventory"):
 		invOpen = !invOpen
 		$Menu.visible = invOpen
+		
+		if invOpen:
+			crafting.createCraftingIcons()
 	
 	if Input.is_action_just_pressed("scroll_up"):
 		PlayerData.selectedSlot -= 1
@@ -35,6 +40,8 @@ func _process(delta):
 			slot.updateSelected()
 	
 func clickedSlot(slot):
+	if !invOpen:
+		return
 	if PlayerData.inventory[49][0] == -1:
 		PlayerData.swapItem(slot,49)
 		return
@@ -56,6 +63,8 @@ func clickedSlot(slot):
 		PlayerData.emit_signal("updateInventory")
 
 func splitSlot(slot):
+	if !invOpen:
+		return
 	#If Hand slot is empty
 	if PlayerData.inventory[49][0] == -1:
 		var amount = PlayerData.inventory[slot][1]

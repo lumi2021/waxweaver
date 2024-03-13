@@ -53,11 +53,9 @@ func _process(delta):
 	if Input.is_action_just_pressed("noclip"):
 		noClip = !noClip
 		$CollisionShape2D.disabled = noClip
-	
+
 	if is_instance_valid(planet):
 		onPlanetMovement(delta)
-		var pos = planet.posToTile(position)
-		planet.setLight(pos.x,pos.y,0.5)
 	
 	elif tick > 60:
 		inSpaceMovement(delta)

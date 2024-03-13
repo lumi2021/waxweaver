@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://ui_scenes/playerHUD/banner/hotbar_banner.gd" id="1_iyyfi"]
 [ext_resource type="PackedScene" uid="uid://cr7y1t1hoywt1" path="res://ui_scenes/playerHUD/inventory/inventory_slot.tscn" id="2_il2kt"]
 [ext_resource type="Texture2D" uid="uid://g2dpyvmk34cm" path="res://ui_scenes/playerHUD/crafting/outline.png" id="3_agtxv"]
-[ext_resource type="PackedScene" uid="uid://d6kj1g07b5ym" path="res://ui_scenes/playerHUD/crafting/crafting_icon.tscn" id="4_2t1ey"]
+[ext_resource type="Script" path="res://ui_scenes/playerHUD/banner/Crafting.gd" id="3_i82mf"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lombr"]
 bg_color = Color(0.207843, 0.286275, 0.4, 1)
@@ -94,7 +94,6 @@ showOutline = false
 isHoldSlot = true
 
 [node name="Menu" type="Node2D" parent="."]
-visible = false
 position = Vector2(-1, -1)
 
 [node name="background" type="ColorRect" parent="Menu"]
@@ -274,8 +273,8 @@ position = Vector2(17, 38)
 slotToDisplay = 48
 
 [node name="Crafting" type="Node2D" parent="Menu"]
-visible = false
-position = Vector2(99, 47)
+position = Vector2(221, 50)
+script = ExtResource("3_i82mf")
 
 [node name="Outline" type="Sprite2D" parent="Menu/Crafting"]
 texture = ExtResource("3_agtxv")
@@ -293,87 +292,6 @@ vertical_scroll_mode = 2
 [node name="GridContainer" type="GridContainer" parent="Menu/Crafting/ScrollContainer"]
 layout_mode = 2
 columns = 5
-
-[node name="CenterContainer" parent="Menu/Crafting/ScrollContainer/GridContainer" instance=ExtResource("4_2t1ey")]
-layout_mode = 2
-
-[node name="CenterContainer2" parent="Menu/Crafting/ScrollContainer/GridContainer" instance=ExtResource("4_2t1ey")]
-layout_mode = 2
-
-[node name="CenterContainer3" parent="Menu/Crafting/ScrollContainer/GridContainer" instance=ExtResource("4_2t1ey")]
-layout_mode = 2
-
-[node name="CenterContainer4" parent="Menu/Crafting/ScrollContainer/GridContainer" instance=ExtResource("4_2t1ey")]
-layout_mode = 2
-
-[node name="CenterContainer5" parent="Menu/Crafting/ScrollContainer/GridContainer" instance=ExtResource("4_2t1ey")]
-layout_mode = 2
-
-[node name="CenterContainer6" parent="Menu/Crafting/ScrollContainer/GridContainer" instance=ExtResource("4_2t1ey")]
-layout_mode = 2
-
-[node name="CenterContainer7" parent="Menu/Crafting/ScrollContainer/GridContainer" instance=ExtResource("4_2t1ey")]
-layout_mode = 2
-
-[node name="CenterContainer8" parent="Menu/Crafting/ScrollContainer/GridContainer" instance=ExtResource("4_2t1ey")]
-layout_mode = 2
-
-[node name="CenterContainer9" parent="Menu/Crafting/ScrollContainer/GridContainer" instance=ExtResource("4_2t1ey")]
-layout_mode = 2
-
-[node name="CenterContainer10" parent="Menu/Crafting/ScrollContainer/GridContainer" instance=ExtResource("4_2t1ey")]
-layout_mode = 2
-
-[node name="CenterContainer11" parent="Menu/Crafting/ScrollContainer/GridContainer" instance=ExtResource("4_2t1ey")]
-layout_mode = 2
-
-[node name="CenterContainer12" parent="Menu/Crafting/ScrollContainer/GridContainer" instance=ExtResource("4_2t1ey")]
-layout_mode = 2
-
-[node name="CenterContainer13" parent="Menu/Crafting/ScrollContainer/GridContainer" instance=ExtResource("4_2t1ey")]
-layout_mode = 2
-
-[node name="CenterContainer14" parent="Menu/Crafting/ScrollContainer/GridContainer" instance=ExtResource("4_2t1ey")]
-layout_mode = 2
-
-[node name="CenterContainer15" parent="Menu/Crafting/ScrollContainer/GridContainer" instance=ExtResource("4_2t1ey")]
-layout_mode = 2
-
-[node name="CenterContainer16" parent="Menu/Crafting/ScrollContainer/GridContainer" instance=ExtResource("4_2t1ey")]
-layout_mode = 2
-
-[node name="CenterContainer17" parent="Menu/Crafting/ScrollContainer/GridContainer" instance=ExtResource("4_2t1ey")]
-layout_mode = 2
-
-[node name="CenterContainer18" parent="Menu/Crafting/ScrollContainer/GridContainer" instance=ExtResource("4_2t1ey")]
-layout_mode = 2
-
-[node name="CenterContainer19" parent="Menu/Crafting/ScrollContainer/GridContainer" instance=ExtResource("4_2t1ey")]
-layout_mode = 2
-
-[node name="CenterContainer20" parent="Menu/Crafting/ScrollContainer/GridContainer" instance=ExtResource("4_2t1ey")]
-layout_mode = 2
-
-[node name="CenterContainer21" parent="Menu/Crafting/ScrollContainer/GridContainer" instance=ExtResource("4_2t1ey")]
-layout_mode = 2
-
-[node name="CenterContainer22" parent="Menu/Crafting/ScrollContainer/GridContainer" instance=ExtResource("4_2t1ey")]
-layout_mode = 2
-
-[node name="CenterContainer23" parent="Menu/Crafting/ScrollContainer/GridContainer" instance=ExtResource("4_2t1ey")]
-layout_mode = 2
-
-[node name="CenterContainer24" parent="Menu/Crafting/ScrollContainer/GridContainer" instance=ExtResource("4_2t1ey")]
-layout_mode = 2
-
-[node name="CenterContainer25" parent="Menu/Crafting/ScrollContainer/GridContainer" instance=ExtResource("4_2t1ey")]
-layout_mode = 2
-
-[node name="CenterContainer26" parent="Menu/Crafting/ScrollContainer/GridContainer" instance=ExtResource("4_2t1ey")]
-layout_mode = 2
-
-[node name="CenterContainer27" parent="Menu/Crafting/ScrollContainer/GridContainer" instance=ExtResource("4_2t1ey")]
-layout_mode = 2
 
 [node name="Label" type="Label" parent="Menu/Crafting"]
 offset_left = 9.0

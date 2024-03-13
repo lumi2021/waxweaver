@@ -81,3 +81,14 @@ func consumeSelected():
 		inventory[selectedSlot] = [-1,-1]
 	emit_signal("updateInventory")
 
+func getItemTotals():
+	var items = []
+	var amounts = []
+	for i in inventory:
+		if inventory[i][0] == -1: continue
+		if items.has(inventory[i][0]):
+			amounts[items.find(inventory[i][0])] += inventory[i][1]
+		else:
+			items.append(inventory[i][0])
+			amounts.append(inventory[i][1])
+	return [items,amounts]

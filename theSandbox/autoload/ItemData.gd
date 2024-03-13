@@ -9,3 +9,8 @@ var data = {
 	3:load("res://item_resources/items/block_items/DirtItem.tres"),
 	7:load("res://item_resources/items/block_items/SaplingItem.tres"),
 }
+
+func getItem(id):
+	if data.has(id):
+		return data[id]
+	return data[0]

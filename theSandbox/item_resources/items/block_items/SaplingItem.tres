@@ -10,3 +10,4 @@ id = 7
 texture = ExtResource("2_dxlc7")
 maxStackSize = 99
 clickToUse = false
+materialIn = Array[int]([0])

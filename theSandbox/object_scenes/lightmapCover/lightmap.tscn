@@ -8,7 +8,7 @@ z_index = 2
 script = ExtResource("1_jgjjb")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture_filter = 1
+texture_filter = 2
 material = ExtResource("2_k1ric")
 scale = Vector2(8, 8)
 centered = false

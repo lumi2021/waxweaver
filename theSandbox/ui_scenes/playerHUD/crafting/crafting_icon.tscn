@@ -1,11 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://d6kj1g07b5ym"]
+[gd_scene load_steps=6 format=3 uid="uid://d6kj1g07b5ym"]
 
+[ext_resource type="Script" path="res://ui_scenes/playerHUD/crafting/crafting_icon.gd" id="1_56o23"]
 [ext_resource type="Texture2D" uid="uid://cfpnwrfbjmq36" path="res://ui_scenes/playerHUD/crafting/craftingIcon.png" id="1_vtg8b"]
 [ext_resource type="Texture2D" uid="uid://1ef0ri8u4vs4" path="res://item_resources/item_textures/pickaxeStone.png" id="2_vaagm"]
+[ext_resource type="FontFile" uid="uid://c3vw44vws5n61" path="res://zeeg/font/I-pixel-u.ttf" id="4_onaqv"]
 
-[node name="CenterContainer" type="CenterContainer"]
+[sub_resource type="LabelSettings" id="LabelSettings_ym6xf"]
+resource_local_to_scene = true
+font = ExtResource("4_onaqv")
+font_size = 8
+font_color = Color(0.854902, 0.878431, 0.901961, 1)
+outline_size = 5
+outline_color = Color(0.0823529, 0.113725, 0.156863, 1)
+
+[node name="CraftingIcon" type="CenterContainer"]
 offset_right = 32.0
 offset_bottom = 32.0
+script = ExtResource("1_56o23")
 
 [node name="CraftingIcon" type="TextureRect" parent="."]
 layout_mode = 2
@@ -16,3 +27,14 @@ stretch_mode = 3
 layout_mode = 2
 texture = ExtResource("2_vaagm")
 stretch_mode = 3
+
+[node name="txt" type="Node2D" parent="."]
+
+[node name="txt" type="Label" parent="txt"]
+offset_left = 3.0
+offset_top = 15.0
+offset_right = 26.0
+offset_bottom = 25.0
+text = "99"
+label_settings = SubResource("LabelSettings_ym6xf")
+horizontal_alignment = 2
