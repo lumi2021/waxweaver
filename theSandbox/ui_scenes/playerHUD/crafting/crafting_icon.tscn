@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://d6kj1g07b5ym"]
+[gd_scene load_steps=7 format=3 uid="uid://d6kj1g07b5ym"]
 
 [ext_resource type="Script" path="res://ui_scenes/playerHUD/crafting/crafting_icon.gd" id="1_56o23"]
 [ext_resource type="Texture2D" uid="uid://cfpnwrfbjmq36" path="res://ui_scenes/playerHUD/crafting/craftingIcon.png" id="1_vtg8b"]
 [ext_resource type="Texture2D" uid="uid://1ef0ri8u4vs4" path="res://item_resources/item_textures/pickaxeStone.png" id="2_vaagm"]
+[ext_resource type="Texture2D" uid="uid://h87l0uysg6fy" path="res://ui_scenes/playerHUD/crafting/cantCraft.png" id="3_ldm44"]
 [ext_resource type="FontFile" uid="uid://c3vw44vws5n61" path="res://zeeg/font/I-pixel-u.ttf" id="4_onaqv"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ym6xf"]
@@ -20,11 +21,20 @@ script = ExtResource("1_56o23")
 
 [node name="CraftingIcon" type="TextureRect" parent="."]
 layout_mode = 2
+mouse_filter = 0
 texture = ExtResource("1_vtg8b")
+stretch_mode = 3
+
+[node name="CantCraft" type="TextureRect" parent="."]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("3_ldm44")
 stretch_mode = 3
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("2_vaagm")
 stretch_mode = 3
 
@@ -38,3 +48,5 @@ offset_bottom = 25.0
 text = "99"
 label_settings = SubResource("LabelSettings_ym6xf")
 horizontal_alignment = 2
+
+[connection signal="gui_input" from="CraftingIcon" to="." method="_on_crafting_icon_gui_input"]

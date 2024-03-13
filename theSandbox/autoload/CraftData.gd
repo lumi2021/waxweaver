@@ -7,7 +7,12 @@ var data = {
 		"ingredients":[3,7],
 		"ingAmounts":[10,1],
 	},
-
+	1:{
+		"crafts":3,
+		"amount":99,
+		"ingredients":[7],
+		"ingAmounts":[1],
+	},
 }
 
 func getCraft(id):

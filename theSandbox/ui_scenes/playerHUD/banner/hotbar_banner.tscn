@@ -94,6 +94,7 @@ showOutline = false
 isHoldSlot = true
 
 [node name="Menu" type="Node2D" parent="."]
+visible = false
 position = Vector2(-1, -1)
 
 [node name="background" type="ColorRect" parent="Menu"]
@@ -273,18 +274,19 @@ position = Vector2(17, 38)
 slotToDisplay = 48
 
 [node name="Crafting" type="Node2D" parent="Menu"]
-position = Vector2(221, 50)
+position = Vector2(6, 157)
 script = ExtResource("3_i82mf")
 
 [node name="Outline" type="Sprite2D" parent="Menu/Crafting"]
+visible = false
 texture = ExtResource("3_agtxv")
 centered = false
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Menu/Crafting"]
 offset_left = 4.0
 offset_top = 4.0
-offset_right = 152.0
-offset_bottom = 114.0
+offset_right = 180.0
+offset_bottom = 136.0
 theme = SubResource("Theme_yy38c")
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 2
@@ -294,9 +296,14 @@ layout_mode = 2
 columns = 5
 
 [node name="Label" type="Label" parent="Menu/Crafting"]
+visible = false
 offset_left = 9.0
 offset_top = 120.0
 offset_right = 148.0
 offset_bottom = 133.0
 text = "stone pickaxe"
 label_settings = SubResource("LabelSettings_bk67w")
+
+[node name="Timer" type="Timer" parent="Menu/Crafting"]
+wait_time = 0.5
+one_shot = true

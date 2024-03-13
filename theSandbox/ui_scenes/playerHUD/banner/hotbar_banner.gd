@@ -17,6 +17,8 @@ func _ready():
 	for slot in $Menu/AccessorySlots.get_children():
 		slot.parent = self
 	
+	$Menu.visible = false
+	
 func _process(delta):
 	holdSlot.position = to_local(get_global_mouse_position()) - Vector2(6,6)
 	if Input.is_action_just_pressed("inventory"):
