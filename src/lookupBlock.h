@@ -20,6 +20,7 @@
 #include "blockTreeBranchLeft.h" // id 10
 #include "blockTreeBranchRight.h" // id 11
 #include "blockTreeBranchLeaf.h" // id 12
+#include "blockWood.h" // id 13
 
 namespace godot {
 
@@ -35,7 +36,7 @@ public:
 	
 	Array allBlocks;
 
-	BLOCK *penis[13];
+	BLOCK *penis[14];
 
 	LOOKUPBLOCK();
 	~LOOKUPBLOCK();
