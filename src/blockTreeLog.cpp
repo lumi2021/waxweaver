@@ -23,6 +23,8 @@ BLOCKTREELOG::BLOCKTREELOG() {
 
     connectTexturesToMe = false;
 
+    itemToDrop = 13;
+
 }
 
 

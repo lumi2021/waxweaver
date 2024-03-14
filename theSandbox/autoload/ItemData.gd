@@ -8,6 +8,7 @@ var data = {
 	2:load("res://item_resources/items/block_items/StoneItem.tres"),
 	3:load("res://item_resources/items/block_items/DirtItem.tres"),
 	7:load("res://item_resources/items/block_items/SaplingItem.tres"),
+	13:load("res://item_resources/items/block_items/WoodItem.tres"),
 }
 
 func getItem(id):

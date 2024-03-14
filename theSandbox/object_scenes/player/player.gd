@@ -45,6 +45,7 @@ func _ready():
 	PlayerData.addItem(1,1)
 	PlayerData.addItem(0,1)
 	PlayerData.addItem(7,99)
+	PlayerData.addItem(13,99)
 
 func _process(delta):
 	
