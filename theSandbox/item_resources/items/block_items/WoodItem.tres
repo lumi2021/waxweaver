@@ -10,4 +10,4 @@ id = 13
 texture = ExtResource("2_e0n1w")
 maxStackSize = 99
 clickToUse = false
-materialIn = Array[int]([])
+materialIn = Array[int]([2])

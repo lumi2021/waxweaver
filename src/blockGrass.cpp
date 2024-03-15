@@ -77,3 +77,15 @@ Dictionary BLOCKGRASS::onTick(int x, int y, PLANETDATA *planet, int dir) {
     return changes;
     
 }
+
+Dictionary BLOCKGRASS::onBreak(int x, int y, PLANETDATA *planet, int dir){
+    
+    Dictionary changes = {};
+
+    Vector2i newPos =  Vector2i(x,y) - Vector2i( Vector2(0,1).rotated(acos(0.0)*dir) );
+    int tile = planet->getTileData(newPos.x,newPos.y);
+    if(tile == 8){
+        changes[newPos] = -1;
+    }
+    return changes;
+}

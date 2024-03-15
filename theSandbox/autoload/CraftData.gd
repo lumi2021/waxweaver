@@ -13,6 +13,12 @@ var data = {
 		"ingredients":[7],
 		"ingAmounts":[1],
 	},
+	2:{ # wood wall
+		"crafts":-13,
+		"amount":1,
+		"ingredients":[13],
+		"ingAmounts":[1],
+	},
 }
 
 func getCraft(id):
