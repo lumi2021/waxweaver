@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://c1b1vgh12jqww"]
+[gd_scene load_steps=28 format=3 uid="uid://c1b1vgh12jqww"]
 
 [ext_resource type="Script" path="res://object_scenes/player/player.gd" id="1_7l8c2"]
 [ext_resource type="Texture2D" uid="uid://bdal1quvajxp" path="res://object_scenes/player/sprites/layerHandBack.png" id="2_a2jo3"]
@@ -146,8 +146,12 @@ _data = {
 "walk": SubResource("Animation_0sji6")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_dk4gh"]
+radius = 4.0
+
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
+collision_mask = 17
 script = ExtResource("1_7l8c2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -239,11 +243,13 @@ texture = ExtResource("10_pp7um")
 [node name="FloorCast1" type="RayCast2D" parent="FloorAngles"]
 position = Vector2(-3, 3)
 target_position = Vector2(0, 2)
+collision_mask = 17
 hit_from_inside = true
 
 [node name="FloorCast2" type="RayCast2D" parent="FloorAngles"]
 position = Vector2(3, 3)
 target_position = Vector2(0, 2)
+collision_mask = 17
 hit_from_inside = true
 
 [node name="CeilingAngles" type="Node2D" parent="."]
@@ -251,10 +257,12 @@ hit_from_inside = true
 [node name="cCast1" type="RayCast2D" parent="CeilingAngles"]
 position = Vector2(-3, -3)
 target_position = Vector2(0, -3)
+collision_mask = 17
 
 [node name="cCast2" type="RayCast2D" parent="CeilingAngles"]
 position = Vector2(3, -3)
 target_position = Vector2(0, -3)
+collision_mask = 17
 
 [node name="CameraOrigin" type="Node2D" parent="."]
 position = Vector2(0, -40)
@@ -321,5 +329,12 @@ top_level = true
 libraries = {
 "": SubResource("AnimationLibrary_4n17m")
 }
+
+[node name="MouseOver" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MouseOver"]
+shape = SubResource("CircleShape2D_dk4gh")
 
 [connection signal="animation_finished" from="HandRoot/handSwing" to="." method="_on_hand_swing_animation_finished"]

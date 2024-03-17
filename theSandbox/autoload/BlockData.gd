@@ -24,7 +24,13 @@ func breakBlock(x,y,planet,blockID):
 	
 	planet.editTiles( theChunker.runBreak(planet.DATAC,Vector2i.ZERO,x,y,blockID) )
 
-func spawnGroundItem(tilex:int,tiley:int,id:int,planet:Planet):
+func breakWall(x,y,planet,blockID):
+	
+	var data = theChunker.getBlockDictionary(blockID)
+	spawnBreakParticle(x,y,blockID,data["breakParticleID"],planet)
+
+
+func spawnGroundItem(tilex:int,tiley:int,id:int,planet):
 	if id == -1:
 		return
 	var ins = groundItemScene.instantiate()
@@ -32,7 +38,7 @@ func spawnGroundItem(tilex:int,tiley:int,id:int,planet:Planet):
 	ins.position = planet.tileToPos(Vector2(tilex,tiley))
 	planet.entityContainer.add_child(ins)
 
-func spawnBreakParticle(tilex:int,tiley:int,id:int,otherId:int,planet:Planet):
+func spawnBreakParticle(tilex:int,tiley:int,id:int,otherId:int,planet):
 	
 	var newId = id
 	if otherId != -1:

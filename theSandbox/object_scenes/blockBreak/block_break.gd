@@ -1,6 +1,6 @@
 extends Node2D
 
-var planet : Planet = null
+var planet = null
 var planetDir = 0
 var tileX = 0
 var tileY = 0

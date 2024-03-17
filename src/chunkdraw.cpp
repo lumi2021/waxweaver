@@ -5,7 +5,7 @@
 using namespace godot;
 
 void CHUNKDRAW::_bind_methods() {
-    ClassDB::bind_method(D_METHOD("generateTexturesFromData","planetData","backgroundLayerData","pos","positionLookup"), &CHUNKDRAW::generateTexturesFromData);
+    ClassDB::bind_method(D_METHOD("generateTexturesFromData","planetData","backgroundLayerData","pos","positionLookup","shipchunk"), &CHUNKDRAW::generateTexturesFromData);
     ClassDB::bind_method(D_METHOD("tickUpdate","planetDatac","pos"), &CHUNKDRAW::tickUpdate);
     ClassDB::bind_method(D_METHOD("runBreak","planetDatac","pos","x","y","id"), &CHUNKDRAW::runBreak);
     ClassDB::bind_method(D_METHOD("getBlockDictionary","id"), &CHUNKDRAW::getBlockDictionary);
@@ -31,7 +31,7 @@ Dictionary CHUNKDRAW::getBlockDictionary(int id){
     return blockData;
 }
 
-Array CHUNKDRAW::generateTexturesFromData(PLANETDATA *planet,Vector2i pos,Node *body,Ref<Shape2D> shape){
+Array CHUNKDRAW::generateTexturesFromData(PLANETDATA *planet,Vector2i pos,Node *body,Ref<Shape2D> shape,bool shipChunk){
     Ref<Image> img = Image::create(64, 64, false, Image::FORMAT_RGBA8);
     Ref<Image> backImg = Image::create(64, 64, false, Image::FORMAT_RGBA8);
     
@@ -84,6 +84,10 @@ Array CHUNKDRAW::generateTexturesFromData(PLANETDATA *planet,Vector2i pos,Node *
                     collision = memnew(CollisionShape2D);
                     collision->set_shape(shape);
                     Vector2 offset = Vector2(4,4);
+                    if (shipChunk){
+                        images.append(collision);
+                        offset = Vector2((pos.x*64)+4,(pos.y*64)+4);
+                    }
                     collision->set_position(imgPos + offset);
                     body->add_child(collision);
 

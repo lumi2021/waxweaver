@@ -13,6 +13,8 @@ class_name Player
 @onready var map = $CameraOrigin/Camera2D/SystemMap
 @onready var backgroundHolder = $CameraOrigin/Camera2D/Backgroundholder
 
+@onready var shipDEBUG = preload("res://world_scenes/ship/ship.tscn")
+
 var rotated = 0
 var rotationDelayTicks = 0
 
@@ -44,6 +46,7 @@ func _ready():
 	
 	PlayerData.addItem(1,1)
 	PlayerData.addItem(0,1)
+	PlayerData.addItem(1000,1)
 	PlayerData.addItem(7,99)
 	PlayerData.addItem(13,99)
 
@@ -65,6 +68,7 @@ func _process(delta):
 	
 	scrollBackgrounds(delta)
 	
+	$MouseOver.global_position = get_global_mouse_position()
 	if Input.is_action_pressed("mouse_left"):
 		useItem()
 	else:
@@ -76,6 +80,11 @@ func _process(delta):
 	if Input.is_action_just_pressed("map"):
 		$CameraOrigin/Camera2D/ColorRect2.visible = !$CameraOrigin/Camera2D/ColorRect2.visible
 		$CameraOrigin/Camera2D/SystemMap.visible = $CameraOrigin/Camera2D/ColorRect2.visible
+	
+	if Input.is_action_just_pressed("spawnDebugShip"):
+		var ins = shipDEBUG.instantiate()
+		get_parent().add_child(ins)
+		ins.global_position = get_global_mouse_position() - Vector2(128,128)
 	
 	
 ######################################################################
@@ -108,6 +117,7 @@ func onPlanetMovement(delta):
 	
 	sprite.rotation = lerp_angle(sprite.rotation,rotated*(PI/2),0.4)
 	$HandRoot.rotation = sprite.rotation
+	up_direction = Vector2(0,-1).rotated(rotated*(PI/2))
 	
 	var underCeiling = isUnderCeiling()
 	var onFloor = isOnFloor()
@@ -236,22 +246,46 @@ func useItem():
 		$HandRoot/PlayerHand/itemSprite.texture = itemData.texture
 		return
 	
-	if !is_instance_valid(planet):
-		return
+	var areas = $MouseOver.get_overlapping_areas()
+	var ship = null
+	var editBody = planet
+	if areas.size() > 0:
+		ship = areas[0].get_parent()
+		var mousePos = ship.get_local_mouse_position()
+		var tile = ship.posToTile(mousePos)
+		print(tile)
+		if tile != null:
+			if ship.DATAC.getBGData(tile.x,tile.y) > 1:
+				editBody = ship
+			elif ship.DATAC.getTileData(tile.x,tile.y) > 1:
+				editBody = ship
+			else:
+				for x in range(3):
+					for y in range(3):
+						if ship.DATAC.getTileData(tile.x+x-1,tile.y+y-1) > 1:
+							editBody = ship
+							break
+						if ship.DATAC.getBGData(tile.x+x-1,tile.y+y-1) > 1:
+							editBody = ship
+							break
 	
-	var mousePos = planet.get_local_mouse_position()
-	var tile = planet.posToTile(mousePos)
+	
+	#if !is_instance_valid(planet) and !is_instance_valid(ship):
+	#	return
+	
+	var mousePos = editBody.get_local_mouse_position()
+	var tile = editBody.posToTile(mousePos)
 	
 	if itemData != null and tile != null:
 		
 		if itemData.clickToUse:
 			if Input.is_action_just_pressed("mouse_left"):
-				itemData.onUse(tile.x,tile.y,getPlanetPosition(),planet,lastTileItemUsedOn)
+				itemData.onUse(tile.x,tile.y,getPlanetPosition(),editBody,lastTileItemUsedOn)
 				itemSwingAnimation(itemData)
 				
 				
 		else:
-			itemData.onUse(tile.x,tile.y,getPlanetPosition(),planet,lastTileItemUsedOn)
+			itemData.onUse(tile.x,tile.y,getPlanetPosition(),editBody,lastTileItemUsedOn)
 			if !$HandRoot/handSwing.is_playing():
 				itemSwingAnimation(itemData)
 			
@@ -331,17 +365,18 @@ func scrollBackgroundsSpace(vel,delta):
 ######################################################################
 
 func getPlanetPosition():
-	if is_instance_valid(planet):
-		var p = planet.posToTile(position)
-		return planet.DATAC.getPositionLookup(p.x,p.y)
-	return 0
-	#var angle1 = Vector2(1,1)
-	#var angle2 = Vector2(-1,1)
-	
-	#var dot1 = int(position.dot(angle1) >= 0)
-	#var dot2 = int(position.dot(angle2) > 0) * 2
-	
-	#return [0,1,3,2][dot1 + dot2]
+	if !is_instance_valid(planet):
+		return 0
+	var p = planet.posToTile(position)
+	if p == null:
+		var angle1 = Vector2(1,1)
+		var angle2 = Vector2(-1,1)
+		
+		var dot1 = int(position.dot(angle1) >= 0)
+		var dot2 = int(position.dot(angle2) > 0) * 2
+		
+		return [0,1,3,2][dot1 + dot2]
+	return planet.DATAC.getPositionLookup(p.x,p.y)
 
 func isOnFloor():
 	#improve this

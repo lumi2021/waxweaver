@@ -3,7 +3,7 @@ class_name ItemMining
 
 @export var miningMultiplier = 1.0
 
-func onUse(tileX:int,tileY:int,planetDir:int,planet:Planet,lastTile:Vector2):
+func onUse(tileX:int,tileY:int,planetDir:int,planet,lastTile:Vector2):
 	
 	if lastTile == Vector2(tileX,tileY):
 		return

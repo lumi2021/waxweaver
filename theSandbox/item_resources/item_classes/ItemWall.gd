@@ -4,7 +4,7 @@ class_name ItemWall
 @export var blockID := 0
 
 
-func onUse(tileX:int,tileY:int,planetDir:int,planet:Planet,lastTile:Vector2):
+func onUse(tileX:int,tileY:int,planetDir:int,planet,lastTile:Vector2):
 	
 	if planet == null:
 		#Cancel if not on planet
@@ -15,18 +15,18 @@ func onUse(tileX:int,tileY:int,planetDir:int,planet:Planet,lastTile:Vector2):
 	var block = planet.DATAC.getTileData(tileX,tileY)
 	var bg = planet.DATAC.getBGData(tileX,tileY)
 	
-	if block > 1 and bg < 2:
-		#Succeed if block tile exists
-		var edit = Vector3(tileX,tileY,0)
-		planet.editTiles({edit:blockID})
-		PlayerData.consumeSelected()
-		return "success"
 	
 	if bg > 1:
 		#fail if wall tile exists
 		return "failure"
 	else:
-	
+		
+		if block > 1:
+			#Succeed if block tile exists
+			var edit = Vector3(tileX,tileY,0)
+			planet.editTiles({edit:blockID})
+			PlayerData.consumeSelected()
+			return "success"
 	
 		for i in range(4):
 			#Search neighboring tiles
@@ -36,6 +36,12 @@ func onUse(tileX:int,tileY:int,planetDir:int,planet:Planet,lastTile:Vector2):
 				continue
 			
 			if planet.DATAC.getBGData(tile.x,tile.y) > 1:
+				var edit = Vector3(tileX,tileY,0)
+				planet.editTiles({edit:blockID})
+				PlayerData.consumeSelected()
+				return "success"
+			
+			if planet.DATAC.getTileData(tile.x,tile.y) > 1:
 				var edit = Vector3(tileX,tileY,0)
 				planet.editTiles({edit:blockID})
 				PlayerData.consumeSelected()

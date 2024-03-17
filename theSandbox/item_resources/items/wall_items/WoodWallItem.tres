@@ -1,13 +1,13 @@
 [gd_resource type="Resource" script_class="ItemWall" load_steps=3 format=3 uid="uid://e0kp6wypkqsr"]
 
 [ext_resource type="Script" path="res://item_resources/item_classes/ItemWall.gd" id="1_jyhdi"]
-[ext_resource type="Texture2D" uid="uid://cfw5hakdpt7uw" path="res://block_resources/block_textures/woodPlank.png" id="2_5ebtt"]
+[ext_resource type="Texture2D" uid="uid://pch4e50mj54" path="res://block_resources/wall_item_textures/woodPlank.png" id="2_d5gsa"]
 
 [resource]
 script = ExtResource("1_jyhdi")
 blockID = -13
 id = -13
-texture = ExtResource("2_5ebtt")
+texture = ExtResource("2_d5gsa")
 maxStackSize = 99
 clickToUse = false
 materialIn = Array[int]([])

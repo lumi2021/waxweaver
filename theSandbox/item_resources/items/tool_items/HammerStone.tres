@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ItemHammer" load_steps=3 format=3 uid="uid://drnm00u6tt71w"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemHammer.gd" id="1_su2bb"]
+[ext_resource type="Texture2D" uid="uid://bk0q5u7e2pvwu" path="res://item_resources/item_textures/hammerStone.png" id="2_jlqr2"]
+
+[resource]
+script = ExtResource("1_su2bb")
+id = 1000
+texture = ExtResource("2_jlqr2")
+maxStackSize = 1
+clickToUse = false
+materialIn = Array[int]([])

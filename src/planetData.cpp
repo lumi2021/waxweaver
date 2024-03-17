@@ -55,10 +55,10 @@ int PLANETDATA::getTileData(int x, int y) {
 
 
     if ( x != std::clamp(x,0,planetSize-1) ){
-        return 5;
+        return 0;
     }
     if ( y != std::clamp(y,0,planetSize-1) ){
-        return 5;
+        return 0;
     }
 
     int xyToLarge = (x * planetSize) + y;

@@ -12,5 +12,5 @@ class_name Item
 ## Crafting recipe ids that this item is used in
 @export var materialIn : Array[int] = []
 
-func onUse(tileX:int,tileY:int,planetDir:int,planet:Planet,lastTile:Vector2):
+func onUse(tileX:int,tileY:int,planetDir:int,planet,lastTile:Vector2):
 	pass

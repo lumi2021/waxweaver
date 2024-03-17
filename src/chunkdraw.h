@@ -39,7 +39,7 @@ public:
 	CHUNKDRAW();
 	~CHUNKDRAW();
 
-    Array generateTexturesFromData(PLANETDATA *planet,Vector2i pos,Node *body,Ref<Shape2D> shape);
+    Array generateTexturesFromData(PLANETDATA *planet,Vector2i pos,Node *body,Ref<Shape2D> shape,bool shipChunk);
 	Array tickUpdate(PLANETDATA *planet,Vector2i pos);
 	Dictionary runBreak(PLANETDATA *planet,Vector2i pos,int x,int y,int blockID);
 

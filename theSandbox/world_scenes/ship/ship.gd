@@ -1,0 +1,164 @@
+extends CharacterBody2D
+
+@onready var DATAC = $PLANETDATA
+var chunkScene = preload("res://world_scenes/ship/shipChunk/shipChunk.tscn")
+@onready var chunkContainer = $ChunkContainer
+@onready var entityContainer = $EntityContainer
+var chunkArray2D :Array= []
+var allChunks :Array = []
+
+var SIZEINCHUNKS :int= 4
+
+var tick = 0
+
+func _ready():
+	generateEmptyArray()
+	print("Successfully made array")
+	createChunks()
+	print("Successfully created Chunks")
+
+func _process(delta):
+	var dir = Vector2.ZERO
+	dir.x = int(Input.is_action_pressed("ui_right")) - int(Input.is_action_pressed("ui_left"))
+	dir.y = int(Input.is_action_pressed("ui_down")) - int(Input.is_action_pressed("ui_up"))
+	
+	velocity = lerp(velocity,dir.normalized() * 200,0.2)
+	move_and_slide()
+
+func generateEmptyArray():
+	
+	var s := SIZEINCHUNKS * 8
+	
+	DATAC.createEmptyArrays(s)
+	
+	var testDick = {
+		Vector2(13,13):2,Vector2(14,13):2,Vector2(15,13):2,
+		Vector2(16,13):2,Vector2(17,13):2,Vector2(18,13):2,
+		Vector2(13,18):2,Vector2(14,18):2,Vector2(15,18):2,
+		Vector2(16,18):2,Vector2(17,18):2,Vector2(18,18):2,
+		Vector2(13,14):2,Vector2(13,15):2,Vector2(13,16):2,Vector2(13,17):2,
+		Vector2(18,14):2,Vector2(18,15):2,Vector2(18,16):2,Vector2(18,17):2
+	}
+	
+	for x in range(s):
+		for y in range(s):
+			# c++
+			if testDick.has(Vector2(x,y)):
+				DATAC.setTileData(x,y,testDick[Vector2(x,y)])
+			else:
+				DATAC.setTileData(x,y,0)
+			DATAC.setBGData(x,y,0)
+			DATAC.setLightData(x,y,0.0)
+			DATAC.setTimeData(x,y,0)
+			DATAC.setPositionLookup(x,y,0)
+
+func createChunks():
+	chunkArray2D = []
+	for x in range(SIZEINCHUNKS):
+		chunkArray2D.append([])
+		for y in range(SIZEINCHUNKS):
+			var ins = chunkScene.instantiate()
+			ins.pos = Vector2(x,y)
+			ins.ship = self
+			chunkArray2D[x].append(ins)
+			allChunks.append(ins)
+			chunkContainer.add_child(ins)
+			
+
+
+########################################################################
+########################## CHUNK SIMULATION ############################
+########################################################################
+
+func _physics_process(delta):
+	tick += 1
+	DATAC.setGlobalTick(GlobalRef.globalTick)
+
+	for chunk in allChunks:
+		if tick % 4 != chunk.id4:
+			continue
+		
+		var changesArray = chunk.tickUpdate()
+		var committedChanges = {}
+		
+		for d in changesArray:
+			var toss = false
+			for i in d.keys():
+				if committedChanges.has(i):
+					toss = true
+			if !toss:
+				for i in d.keys():
+					committedChanges[i] = d[i]
+		
+		editTiles(committedChanges)
+
+
+func editTiles(changeCommit):
+	var chunksToUpdate = []
+	
+	for change in changeCommit.keys():
+		var c = changeCommit[change]
+		match c:
+			-1:
+				var save:int = DATAC.getTileData(change.x,change.y)
+				DATAC.setTileData(change.x,change.y,0)
+				BlockData.breakBlock(change.x,change.y,self,save)
+			0:
+				DATAC.setTileData(change.x,change.y,0)
+				DATAC.setTimeData(change.x,change.y,GlobalRef.globalTick)
+			-99999:
+				var save:int = DATAC.getBGData(change.x,change.y)
+				DATAC.setBGData(change.x,change.y,0)
+				BlockData.breakWall(change.x,change.y,self,save)
+			_: #Default
+				if c < -1:
+					DATAC.setBGData(change.x,change.y,abs(c))
+				else:
+					DATAC.setTileData(change.x,change.y,c)
+				DATAC.setTimeData(change.x,change.y,GlobalRef.globalTick)
+		
+		
+		
+		var foundChunk = chunkArray2D[clamp(change.x/8,0,SIZEINCHUNKS-1)][clamp(change.y/8,0,SIZEINCHUNKS-1)]
+		if !chunksToUpdate.has(foundChunk):
+			chunksToUpdate.append(foundChunk)
+		
+		#Theres gotta be a way to clean this up
+		if int(change.x) % 8 == 0 and change.x > 8:
+			var foundChunkLEFT = chunkArray2D[(change.x/8)-1][change.y/8]
+			if !chunksToUpdate.has(foundChunkLEFT):
+				chunksToUpdate.append(foundChunkLEFT)
+		elif int(change.x) % 8 == 7 and change.x < (SIZEINCHUNKS*8)-8:
+			var foundChunkRIGHT = chunkArray2D[(change.x/8)+1][change.y/8]
+			if !chunksToUpdate.has(foundChunkRIGHT):
+				chunksToUpdate.append(foundChunkRIGHT)
+			
+		if int(change.y) % 8 == 0 and change.y > 8:
+			var foundChunkUP = chunkArray2D[change.x/8][(change.y/8)-1]
+			if !chunksToUpdate.has(foundChunkUP):
+				chunksToUpdate.append(foundChunkUP)
+		elif int(change.y) % 8 == 7 and change.y < (SIZEINCHUNKS*8)-8:
+			var foundChunkDOWN = chunkArray2D[change.x/8][(change.y/8)+1]
+			if !chunksToUpdate.has(foundChunkDOWN):
+				chunksToUpdate.append(foundChunkDOWN)
+	
+	for chunk in chunksToUpdate:
+		chunk.drawData()
+
+#################################################################
+############################# MATH #############################
+##################################################################
+
+func posToTile(pos): # uses relative local position
+	if pos.x != clamp(pos.x,0,SIZEINCHUNKS * 64):
+		return null # returns null if outside boundaries
+	if pos.y != clamp(pos.y,0,SIZEINCHUNKS * 64):
+		return null # returns null if outside boundaries
+	
+	return Vector2(int(pos.x)/8,int(pos.y)/8)
+
+func tileToPos(pos):
+	return (pos * 8) + Vector2(4,4)
+
+func getBlockPosition(x,y):
+	return 0

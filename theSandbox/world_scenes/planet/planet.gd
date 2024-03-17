@@ -51,7 +51,6 @@ func _ready():
 	noise.seed = randi()
 	generateTerrain()
 	
-	$isVisible.rect = Rect2(SIZEINCHUNKS*-32,SIZEINCHUNKS*-32,SIZEINCHUNKS*64,SIZEINCHUNKS*64)
 	
 ########################################################################
 ############################## ORBITING ################################
@@ -151,7 +150,7 @@ func editTiles(changeCommit):
 			-99999:
 				var save:int = DATAC.getBGData(change.x,change.y)
 				DATAC.setBGData(change.x,change.y,0)
-				BlockData.breakBlock(change.x,change.y,self,save)
+				BlockData.breakWall(change.x,change.y,self,save)
 			_: #Default
 				if c < -1:
 					DATAC.setBGData(change.x,change.y,abs(c))
@@ -284,14 +283,10 @@ func tileToPos(pos):
 ############################ VISIBILITY ################################
 ########################################################################
 
-func _on_is_visible_screen_entered():
-	pass
-
 
 func attachPlayer():
 	if !is_instance_valid(GlobalRef.player):
 		return
-	
 	
 	createChunks()
 	system.reparentToPlanet(GlobalRef.player,self)
@@ -300,9 +295,6 @@ func attachPlayer():
 	GlobalRef.player.planet = self
 	reverseOrbitingParents()
 
-
-func _on_is_visible_screen_exited():
-	pass
 
 func detachPlayer():
 
