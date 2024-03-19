@@ -10,10 +10,9 @@ shader = ExtResource("2_yo1vl")
 script = ExtResource("1_8j2mj")
 
 [node name="backLayer" type="Sprite2D" parent="."]
-z_index = -5
+z_index = -1
 material = SubResource("ShaderMaterial_dtd3g")
 centered = false
 
 [node name="mainLayer" type="Sprite2D" parent="."]
-z_index = -1
 centered = false

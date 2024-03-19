@@ -55,7 +55,6 @@ func _ready():
 func _process(delta):
 	
 	tick+=1
-	print(state)
 	
 	match state:
 		0: #On planet
@@ -187,7 +186,8 @@ func onShipMovement(delta):
 	if onFloor:
 		if Input.is_action_just_pressed("jump"):
 			newVel.y = -275
-		GlobalRef.camera.rotation = lerp_angle(GlobalRef.camera.rotation,shipOn.rotation,1.0-pow(2.0,(-delta/0.06)))
+		if int(Input.is_action_pressed("rotateShipRight")) - int(Input.is_action_pressed("rotateShipLeft")) == 0:
+			GlobalRef.camera.rotation = lerp_angle(GlobalRef.camera.rotation,shipOn.rotation,1.0-pow(2.0,(-delta/0.2)))
 
 	velocity = newVel.rotated(shipOn.rotation)
 	
@@ -207,7 +207,7 @@ func inSpaceMovement(delta):
 	
 	sprite.rotate(1.0 * delta)
 	
-	GlobalRef.camera.rotation = 0
+	GlobalRef.camera.rotation = lerp_angle(GlobalRef.camera.rotation,0,1.0-pow(2.0,(-delta/0.2)))
 	
 	move_and_slide()
 	ensureCamPosition()
@@ -354,6 +354,11 @@ func ensureCamPosition():
 	cameraOrigin.position.x = int(cameraOrigin.position.x)
 	cameraOrigin.position.y = int(cameraOrigin.position.y)
 	GlobalRef.camera.global_position = to_global(cameraOrigin.position)
+	
+	if shipOn:
+		GlobalRef.camera.cpass(shipOn.velocity)
+	else:
+		GlobalRef.camera.cpass(velocity)
 
 ######################################################################
 ############################## ITEMS #################################
@@ -381,7 +386,6 @@ func useItem():
 		ship = areas[0].get_parent()
 		var mousePos = ship.get_local_mouse_position()
 		var tile = ship.posToTile(mousePos)
-		print(tile)
 		if tile != null:
 			if ship.DATAC.getBGData(tile.x,tile.y) > 1:
 				editBody = ship

@@ -25,7 +25,7 @@ func _process(delta):
 	dir.y = int(Input.is_action_pressed("ui_down")) - int(Input.is_action_pressed("ui_up"))
 	
 	chunkContainer.rotation = lerp(chunkContainer.rotation,0.05*dir.x,0.2)
-	dir = dir.rotated(targetRot*(PI/2))
+	dir = dir.rotated(rotation)
 	
 	if get_parent().is_in_group("planet"):
 		velocity = lerp(velocity,dir.normalized() * 300,0.05)
@@ -38,6 +38,8 @@ func _process(delta):
 	
 	velocity = get_real_velocity()
 	
+	var prevRot = rotation
+	
 	if get_parent().is_in_group("planet"):
 		var angle1 = Vector2(1,1)
 		var angle2 = Vector2(-1,1)
@@ -46,14 +48,13 @@ func _process(delta):
 		var dot2 = int(position.dot(angle2) > 0) * 2
 		
 		targetRot = [0,1,3,2][dot1 + dot2]
+		rotation = lerp_angle(rotation,targetRot*(PI/2),0.04)
 	else:
-		targetRot = 0
-	
-	var prevRot = rotation
-	rotation = lerp_angle(rotation,targetRot*(PI/2),0.04)
-	var rotDif = prevRot - rotation
+		var rotDir = int(Input.is_action_pressed("rotateShipRight")) - int(Input.is_action_pressed("rotateShipLeft"))
+		rotate(rotDir * 1.0 * delta)
 	
 	if GlobalRef.player.shipOn == self:
+		var rotDif = prevRot - rotation
 		var dif = (global_position - glo)
 		GlobalRef.player.position += dif
 		#GlobalRef.player.camera.position -= dif
