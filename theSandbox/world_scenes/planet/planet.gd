@@ -32,7 +32,6 @@ var chunkArray2D = []
 
 var visibleChunks = []
 
-var hasPlayer = false
 
 var tickAlive = 0
 
@@ -84,9 +83,7 @@ func _process(delta):
 		
 		if orbitPeriod > PI * 2:
 			orbitPeriod - (PI * 2)
-		
-		if hasPlayer:
-			GlobalRef.player.scrollBackgroundsSpace(orbitVelocity*-1,delta)
+	
 	tickAlive += 1
 		
 func reverseOrbitingParents():
@@ -283,25 +280,11 @@ func tileToPos(pos):
 ############################ VISIBILITY ################################
 ########################################################################
 
-
-func attachPlayer():
-	if !is_instance_valid(GlobalRef.player):
-		return
-	
+func loadPlanet():
 	createChunks()
-	system.reparentToPlanet(GlobalRef.player,self)
-	hasPlayer = true
-	GlobalRef.player.velocity = Vector2.ZERO
-	GlobalRef.player.planet = self
 	reverseOrbitingParents()
 
-
-func detachPlayer():
-
+func unloadPlanet():
 	clearChunks()
-	system.dumpObjectToSpace(GlobalRef.player)
-	#GlobalRef.player.velocity += orbitVelocity
-	GlobalRef.player.planet = null
-	hasPlayer = false
 	clearOrbitingParents()
-
+	

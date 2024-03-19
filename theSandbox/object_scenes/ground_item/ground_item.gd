@@ -18,6 +18,8 @@ var ticks = 0
 
 var tweening = false
 
+var body
+
 func _ready():
 	var itemData = ItemData.getItem(itemID)
 	
@@ -34,6 +36,8 @@ func _ready():
 	var randVelocity = Vector2(randi_range(-70,70),-60)
 	rotSide = getPlanetPosition()
 	velocity = randVelocity.rotated(rotSide*(PI/2))
+	
+	body = get_parent().get_parent()
 	
 	determineAmount()
 	
@@ -59,13 +63,18 @@ func _process(delta):
 	back.offset.y = texture.offset.y
 	
 func getPlanetPosition():
-	var angle1 = Vector2(1,1)
-	var angle2 = Vector2(-1,1)
-	
-	var dot1 = int(position.dot(angle1) >= 0)
-	var dot2 = int(position.dot(angle2) > 0) * 2
-	
-	return [0,1,3,2][dot1 + dot2]
+	if !is_instance_valid(body):
+		return 0
+	var p = body.posToTile(position)
+	if p == null:
+		var angle1 = Vector2(1,1)
+		var angle2 = Vector2(-1,1)
+		
+		var dot1 = int(position.dot(angle1) >= 0)
+		var dot2 = int(position.dot(angle2) > 0) * 2
+		
+		return [0,1,3,2][dot1 + dot2]
+	return body.DATAC.getPositionLookup(p.x,p.y)
 
 func _on_area_2d_body_entered(body):
 	

@@ -1,0 +1,66 @@
+[gd_scene load_steps=9 format=3 uid="uid://d083d45d28pl3"]
+
+[ext_resource type="Script" path="res://ui_scenes/camera/game_camera.gd" id="1_ponhy"]
+[ext_resource type="PackedScene" uid="uid://cwctu1ofv35ix" path="res://ui_scenes/map/system_map.tscn" id="1_pyc65"]
+[ext_resource type="PackedScene" uid="uid://bbgqoqp0b8tdu" path="res://ui_scenes/backgroundLayers/background_layer.tscn" id="2_a258p"]
+[ext_resource type="Texture2D" uid="uid://dbhdavudrv6ie" path="res://ui_scenes/backgroundLayers/color.png" id="3_xrc7h"]
+[ext_resource type="Texture2D" uid="uid://b4n7qxstm1edx" path="res://ui_scenes/backgroundLayers/stars.png" id="4_sdxgs"]
+[ext_resource type="Texture2D" uid="uid://d1771x22kyqwk" path="res://ui_scenes/backgroundLayers/stars2.png" id="5_mfvj6"]
+[ext_resource type="Texture2D" uid="uid://li65l7fwxo8u" path="res://ui_scenes/backgroundLayers/spaceFog.png" id="6_2gl5n"]
+[ext_resource type="PackedScene" uid="uid://daqevwntvcp3o" path="res://ui_scenes/playerHUD/banner/hotbar_banner.tscn" id="7_mxwda"]
+
+[node name="GAME CAMERA" type="Camera2D"]
+ignore_rotation = false
+script = ExtResource("1_ponhy")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -64
+offset_left = -317.0
+offset_top = -281.0
+offset_right = 327.0
+offset_bottom = 273.0
+color = Color(0, 1, 0, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+visible = false
+z_index = 803
+offset_left = -98.0
+offset_top = -98.0
+offset_right = 97.0
+offset_bottom = 97.0
+color = Color(0, 0, 0, 0.866667)
+
+[node name="SystemMap" parent="." instance=ExtResource("1_pyc65")]
+visible = false
+z_index = 803
+
+[node name="Backgroundholder" type="Node2D" parent="."]
+position = Vector2(-200, -150)
+
+[node name="BackgroundLayer4" parent="Backgroundholder" instance=ExtResource("2_a258p")]
+position = Vector2(-200, -150)
+sprite = ExtResource("3_xrc7h")
+multiplierX = 0.0
+multiplierY = 0.0
+color = Color(0.0352941, 0.0392157, 0.0784314, 1)
+
+[node name="BackgroundLayer" parent="Backgroundholder" instance=ExtResource("2_a258p")]
+position = Vector2(-200, -150)
+sprite = ExtResource("4_sdxgs")
+multiplierX = 0.02
+multiplierY = 0.02
+
+[node name="BackgroundLayer2" parent="Backgroundholder" instance=ExtResource("2_a258p")]
+position = Vector2(-200, -150)
+sprite = ExtResource("5_mfvj6")
+multiplierX = 0.04
+multiplierY = 0.04
+
+[node name="BackgroundLayer3" parent="Backgroundholder" instance=ExtResource("2_a258p")]
+position = Vector2(-200, -150)
+sprite = ExtResource("6_2gl5n")
+multiplierX = 0.1
+multiplierY = 0.1
+
+[node name="HotbarBanner" parent="." instance=ExtResource("7_mxwda")]
+position = Vector2(-201, -151)

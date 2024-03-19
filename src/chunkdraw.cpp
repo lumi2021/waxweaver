@@ -86,7 +86,7 @@ Array CHUNKDRAW::generateTexturesFromData(PLANETDATA *planet,Vector2i pos,Node *
                     Vector2 offset = Vector2(4,4);
                     if (shipChunk){
                         images.append(collision);
-                        offset = Vector2((pos.x*64)+4,(pos.y*64)+4);
+                        offset = Vector2((pos.x*64)+4,(pos.y*64)+4) - Vector2(planetSize*4,planetSize*4);
                     }
                     collision->set_position(imgPos + offset);
                     body->add_child(collision);

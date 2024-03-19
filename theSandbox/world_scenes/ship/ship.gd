@@ -11,6 +11,8 @@ var SIZEINCHUNKS :int= 4
 
 var tick = 0
 
+var targetRot = 0
+
 func _ready():
 	generateEmptyArray()
 	print("Successfully made array")
@@ -22,9 +24,45 @@ func _process(delta):
 	dir.x = int(Input.is_action_pressed("ui_right")) - int(Input.is_action_pressed("ui_left"))
 	dir.y = int(Input.is_action_pressed("ui_down")) - int(Input.is_action_pressed("ui_up"))
 	
-	velocity = lerp(velocity,dir.normalized() * 200,0.2)
+	chunkContainer.rotation = lerp(chunkContainer.rotation,0.05*dir.x,0.2)
+	dir = dir.rotated(targetRot*(PI/2))
+	
+	if get_parent().is_in_group("planet"):
+		velocity = lerp(velocity,dir.normalized() * 300,0.05)
+	else:
+		velocity += dir.normalized() * 2
+	
+	var glo = global_position
+	
 	move_and_slide()
-
+	
+	velocity = get_real_velocity()
+	
+	if get_parent().is_in_group("planet"):
+		var angle1 = Vector2(1,1)
+		var angle2 = Vector2(-1,1)
+		
+		var dot1 = int(position.dot(angle1) >= 0)
+		var dot2 = int(position.dot(angle2) > 0) * 2
+		
+		targetRot = [0,1,3,2][dot1 + dot2]
+	else:
+		targetRot = 0
+	
+	var prevRot = rotation
+	rotation = lerp_angle(rotation,targetRot*(PI/2),0.04)
+	var rotDif = prevRot - rotation
+	
+	if GlobalRef.player.shipOn == self:
+		var dif = (global_position - glo)
+		GlobalRef.player.position += dif
+		#GlobalRef.player.camera.position -= dif
+		
+		var what = to_local(GlobalRef.player.global_position).rotated(-rotDif)
+		GlobalRef.player.global_position = to_global(what)
+		GlobalRef.player.scrollBackgroundsSpace(velocity,delta)
+		GlobalRef.player.ensureCamPosition()
+		 
 func generateEmptyArray():
 	
 	var s := SIZEINCHUNKS * 8
@@ -32,8 +70,8 @@ func generateEmptyArray():
 	DATAC.createEmptyArrays(s)
 	
 	var testDick = {
-		Vector2(13,13):2,Vector2(14,13):2,Vector2(15,13):2,
-		Vector2(16,13):2,Vector2(17,13):2,Vector2(18,13):2,
+		#Vector2(13,13):2,Vector2(14,13):2,Vector2(15,13):2,
+		#Vector2(16,13):2,Vector2(17,13):2,Vector2(18,13):2,
 		Vector2(13,18):2,Vector2(14,18):2,Vector2(15,18):2,
 		Vector2(16,18):2,Vector2(17,18):2,Vector2(18,18):2,
 		Vector2(13,14):2,Vector2(13,15):2,Vector2(13,16):2,Vector2(13,17):2,
@@ -48,6 +86,8 @@ func generateEmptyArray():
 			else:
 				DATAC.setTileData(x,y,0)
 			DATAC.setBGData(x,y,0)
+			if x >= 13 and x <= 18 and y >= 13 and y <= 18:
+				DATAC.setBGData(x,y,13)
 			DATAC.setLightData(x,y,0.0)
 			DATAC.setTimeData(x,y,0)
 			DATAC.setPositionLookup(x,y,0)
@@ -150,15 +190,20 @@ func editTiles(changeCommit):
 ##################################################################
 
 func posToTile(pos): # uses relative local position
-	if pos.x != clamp(pos.x,0,SIZEINCHUNKS * 64):
+	var r := SIZEINCHUNKS * 32
+	if pos.x != clamp(pos.x,-r,r):
 		return null # returns null if outside boundaries
-	if pos.y != clamp(pos.y,0,SIZEINCHUNKS * 64):
+	if pos.y != clamp(pos.y,-r,r):
 		return null # returns null if outside boundaries
 	
-	return Vector2(int(pos.x)/8,int(pos.y)/8)
+	var relativePos = pos + Vector2(r,r)
+	
+	return Vector2(int(relativePos.x)/8,int(relativePos.y)/8)
 
 func tileToPos(pos):
-	return (pos * 8) + Vector2(4,4)
+	var r := SIZEINCHUNKS * 32
+	
+	return (pos * 8) + Vector2(4,4) - Vector2(r,r)
 
 func getBlockPosition(x,y):
 	return 0

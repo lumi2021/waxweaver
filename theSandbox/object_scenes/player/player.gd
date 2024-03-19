@@ -7,11 +7,7 @@ class_name Player
 @onready var sprite = $PlayerLayers
 @onready var backItem = $BackItem
 @onready var animationPlayer = $AnimationPlayer
-@onready var camera = $CameraOrigin/Camera2D
 @onready var cameraOrigin = $CameraOrigin
-
-@onready var map = $CameraOrigin/Camera2D/SystemMap
-@onready var backgroundHolder = $CameraOrigin/Camera2D/Backgroundholder
 
 @onready var shipDEBUG = preload("res://world_scenes/ship/ship.tscn")
 
@@ -22,7 +18,12 @@ var gravity = 1000
 
 var previousChunk = Vector2.ZERO
 
-var planet :Node2D = null
+var planetOn :Node2D = null
+var shipOn :Node2D = null
+##States: 0 = ON PLANET, 1 = ON SHIP IN SPACE, 
+##      2 = ON SHIP ON PLANET, 3 = IN SPACE
+var state = 0 
+
 
 var animTick = 0
 
@@ -48,26 +49,35 @@ func _ready():
 	PlayerData.addItem(0,1)
 	PlayerData.addItem(1000,1)
 	PlayerData.addItem(7,99)
-	PlayerData.addItem(13,99)
+	PlayerData.addItem(13,198)
+	PlayerData.addItem(-13,198)
 
 func _process(delta):
 	
 	tick+=1
+	print(state)
 	
-	if Input.is_action_just_pressed("noclip"):
-		noClip = !noClip
-		$CollisionShape2D.disabled = noClip
+	match state:
+		0: #On planet
+			onPlanetMovement(delta)
+			findShipToAttachTo()
+			detachFromPlanetToSpace()
+		1: #On ship in space
+			if detachFromShip(): return
+			onShipMovement(delta)
+			findPlanetToAttachInShip()
+		2: # On ship on planet
+			onShipMovement(delta)
+			detachFromShip()
+			shipDetachFromPlanet()
+		3: # In space
+			if findShipToAttachTo(): return
+			inSpaceMovement(delta)
+			findPlanetToAttachInSpace()
 
-	if is_instance_valid(planet):
-		onPlanetMovement(delta)
-	
-	elif tick > 60:
-		inSpaceMovement(delta)
-		GlobalRef.lightmap.position = global_position - Vector2(256,256)
-		searchForBorders()
-	
 	scrollBackgrounds(delta)
 	
+	## Ignore below for now ##
 	$MouseOver.global_position = get_global_mouse_position()
 	if Input.is_action_pressed("mouse_left"):
 		useItem()
@@ -78,32 +88,19 @@ func _process(delta):
 	
 	#map toggle
 	if Input.is_action_just_pressed("map"):
-		$CameraOrigin/Camera2D/ColorRect2.visible = !$CameraOrigin/Camera2D/ColorRect2.visible
-		$CameraOrigin/Camera2D/SystemMap.visible = $CameraOrigin/Camera2D/ColorRect2.visible
+		GlobalRef.camera.mapbg.visible = !GlobalRef.camera.mapbg.visible
+		GlobalRef.camera.map.visible = GlobalRef.camera.mapbg.visible
 	
 	if Input.is_action_just_pressed("spawnDebugShip"):
 		var ins = shipDEBUG.instantiate()
 		get_parent().add_child(ins)
-		ins.global_position = get_global_mouse_position() - Vector2(128,128)
-	
+		ins.global_position = get_global_mouse_position()
 	
 ######################################################################
 ############################## MOVEMENT ##############################
 ######################################################################
 
 func onPlanetMovement(delta):
-	
-	var maxDis = sqrt(pow(planet.SIZEINCHUNKS*32,2) * 2) + 620
-	var distance = planet.global_position - global_position
-	
-	if distance.length() > maxDis:
-		planet.detachPlayer()
-		return
-	
-	
-	if noClip:
-		noClipMovement()
-		return
 	
 	var newRotation = getPlanetPosition()
 	
@@ -119,8 +116,8 @@ func onPlanetMovement(delta):
 	$HandRoot.rotation = sprite.rotation
 	up_direction = Vector2(0,-1).rotated(rotated*(PI/2))
 	
-	var underCeiling = isUnderCeiling()
-	var onFloor = isOnFloor()
+	var underCeiling = isUnderCeiling(rotated*(PI/2))
+	var onFloor = isOnFloor(rotated*(PI/2))
 	var speed = PlayerData.speed
 	
 	if underCeiling:
@@ -142,7 +139,7 @@ func onPlanetMovement(delta):
 	if onFloor:
 		if Input.is_action_just_pressed("jump"):
 			newVel.y = -275
-		camera.rotation = lerp_angle(camera.rotation,rotated*(PI/2),1.0-pow(2.0,(-delta/0.06)))
+		GlobalRef.camera.rotation = lerp_angle(GlobalRef.camera.rotation,rotated*(PI/2),1.0-pow(2.0,(-delta/0.06)))
 
 	
 	velocity = newVel.rotated(rotated*(PI/2))
@@ -150,56 +147,72 @@ func onPlanetMovement(delta):
 	move_and_slide()
 	
 	playerAnimation(dir,newVel,delta)
-	cameraMovement()
 	updateLight()
+	
+	ensureCamPosition()
+
+func onShipMovement(delta):
+	
+	var newRotation = shipOn.rotation
+	
+	sprite.rotation = lerp_angle(sprite.rotation,shipOn.rotation,0.4)
+	$HandRoot.rotation = sprite.rotation
+	up_direction = Vector2(0,-1).rotated(shipOn.rotation)
+	
+	var underCeiling = isUnderCeiling(shipOn.rotation)
+	var onFloor = isOnFloor(shipOn.rotation)
+	var speed = PlayerData.speed
+	
+	if planetOn != null:
+		rotationDelayTicks = -10
+		rotated = getPlanetPosition()
+	
+	if underCeiling:
+		speed = 25.0
+		squishSprites(0.68,delta)
+	else:
+		squishSprites(1.0,delta)
+	
+	var dir = 0
+	if Input.is_action_pressed("move_left"):
+		dir -= 1
+	if Input.is_action_pressed("move_right"):
+		dir += 1
+	
+	var newVel = velocity.rotated(-shipOn.rotation)
+	newVel.x = lerp(newVel.x, dir * speed, 1.0-pow(2.0,(-delta/0.04)))
+	newVel.y += gravity * delta
+	newVel.y = min(newVel.y,300)
+	
+	if onFloor:
+		if Input.is_action_just_pressed("jump"):
+			newVel.y = -275
+		GlobalRef.camera.rotation = lerp_angle(GlobalRef.camera.rotation,shipOn.rotation,1.0-pow(2.0,(-delta/0.06)))
+
+	velocity = newVel.rotated(shipOn.rotation)
+	
+	move_and_slide()
+	
+	playerAnimation(dir,newVel,delta)
+	updateLight()
+	
+	ensureCamPosition()
 
 func inSpaceMovement(delta):
-	if noClip:
-		noClipMovement()
-		return
-	
-	if system == null:
-		return
-	for planet in system.cosmicBodyContainer.get_children():
-		var gravityConstant :float= GlobalRef.gravityConstant
-		var mass :float= planet.mass
-		var playerMass := 1.0
-				
-		var distance = planet.global_position - global_position
-		var forceAmount = ((gravityConstant*mass*playerMass)/(distance.length()*distance.length()))*delta*144
-		
-		# Attach player to planet
-		var minimumDis = sqrt(pow(planet.SIZEINCHUNKS*32,2) * 2) + 570
-		if distance.length() <= minimumDis:
-			planet.attachPlayer()
-			return
-		
-		
-		velocity += distance.normalized() * forceAmount
-
-	move_and_slide()
-
-	sprite.rotate(0.02)
-
-func noClipMovement():
 	var dir = Vector2.ZERO
-	if Input.is_action_pressed("move_left"):
-		dir.x -= 1
-	if Input.is_action_pressed("move_right"):
-		dir.x += 1
-	if Input.is_action_pressed("move_up"):
-		dir.y -= 1
-	if Input.is_action_pressed("move_down"):
-		dir.y += 1
-
-	var speed = 1000 + (int(!is_instance_valid(planet)) * 3000)
-	velocity = dir.normalized() * speed
+	dir.x = int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left"))
+	dir.y = int(Input.is_action_pressed("move_down")) - int(Input.is_action_pressed("move_up"))
+	
+	velocity += dir.normalized() * 2
+	
+	sprite.rotate(1.0 * delta)
+	
+	GlobalRef.camera.rotation = 0
+	
 	move_and_slide()
-	
-	sprite.rotation = 0.0
-	camera.rotation = lerp_angle(camera.rotation,0,0.2)
-	cameraMovement()
-	
+	ensureCamPosition()
+
+
 func searchForBorders():
 	
 	var systemWidth = 99900
@@ -217,15 +230,130 @@ func searchForBorders():
 		position.y -= systemWidth
 		GlobalRef.system.generateSystem()
 	
-func cameraMovement():
-	var g = to_local(get_global_mouse_position())
+func detachFromShip():
+	if state == 1 or state == 2:
+		#Code for dismounting ship
+		var pos = shipOn.posToTile(shipOn.to_local(global_position))
+		if pos == null:
+			#reparent(shipOn.get_parent())
+			velocity += shipOn.velocity
+			move_and_slide()
+			ensureCamPosition()
+			shipOn = null
+			if planetOn == null:
+				state = 3
+			else:
+				state = 0
+			return true
+		if shipOn.DATAC.getBGData(pos.x,pos.y) < 2: #If background is air
+			#reparent(shipOn.get_parent())
+			velocity += shipOn.velocity
+			move_and_slide()
+			ensureCamPosition()
+			shipOn = null
+			if planetOn == null:
+				state = 3
+			else:
+				state = 0
+			return true
+	return false
+
+func findShipToAttachTo():
+	var areas = $ShipCollider.get_overlapping_areas()
+	if areas.size() <= 0:
+		return false
 	
-	if g.length() > maxCameraDistance:
-		g = g.normalized() * maxCameraDistance
+	var ship = areas[0].get_parent()
+	var pos = ship.posToTile(ship.to_local(global_position))
+	if pos == null:
+		return false
+	if ship.DATAC.getBGData(pos.x,pos.y) > 1: #If background is solid
+		shipOn = ship
+		velocity -= shipOn.velocity
+		move_and_slide()
+		if planetOn == null:
+			state = 1
+		else:
+			state = 2
+		return true
 	
-	cameraOrigin.position = Vector2(0,-40).rotated(camera.rotation) + (g*0.5)
+	return false
+
+## IF PLAYER IS OUTSIDE SHIP
+func findPlanetToAttachInSpace():
+	if planetOn != null:
+		return
+	for planet in system.cosmicBodyContainer.get_children():
+		var distance = planet.global_position - global_position
+		var minimumDis = sqrt(pow(planet.SIZEINCHUNKS*32,2) * 2) + 570
+		if distance.length() <= minimumDis:
+			attachToPlanet(planet)
+			state = 0
+			return
+
+func detachFromPlanetToSpace():
+	if planetOn == null:
+		return
+	var maxDis = sqrt(pow(planetOn.SIZEINCHUNKS*32,2) * 2) + 620
+	var distance = planetOn.global_position - global_position
+	if distance.length() > maxDis:
+		detachFromPlanet()
+		state = 3
+
+## IF PLAYER IS INSIDE SHIP
+func findPlanetToAttachInShip():
+	if planetOn != null:
+		return
+	for planet in system.cosmicBodyContainer.get_children():
+		var distance = planet.global_position - global_position
+		var minimumDis = sqrt(pow(planet.SIZEINCHUNKS*32,2) * 2) + 570
+		if distance.length() <= minimumDis:
+			planet.loadPlanet()
+			planetOn = planet
+			#shipOn.
+			reparent(planet.entityContainer)
+			shipOn.reparent(planet.entityContainer)
+			state = 2
+			return
+
+func shipDetachFromPlanet():
+	if planetOn == null:
+		return
+	var maxDis = sqrt(pow(planetOn.SIZEINCHUNKS*32,2) * 2) + 620
+	var distance = planetOn.global_position - global_position
+	if distance.length() > maxDis:
+		var s = planetOn
+		planetOn = null
+		s.unloadPlanet()
+		var relativePosition = shipOn.to_local(global_position)
+		reparent(system.objectContainer)
+		shipOn.reparent(system.objectContainer)
+		
+		global_position = shipOn.global_position + relativePosition
+		
+		state = 1
+
+func attachToPlanet(planet:Planet):
+	planet.loadPlanet()
+	planetOn = planet
+	reparent(planetOn.entityContainer)
+
+func detachFromPlanet():
+	var s = planetOn
+	planetOn = null
+	s.unloadPlanet()
+	reparent(system.objectContainer)
+
+
+
+func ensureCamPosition():
+	#camera.global_position = cameraOrigin.global_position
+	cameraOrigin.position = Vector2(0,-40).rotated(GlobalRef.camera.rotation)
+	#if shipOn != null:
+	#	cameraOrigin.position += shipOn.velocity
 	cameraOrigin.position.x = int(cameraOrigin.position.x)
 	cameraOrigin.position.y = int(cameraOrigin.position.y)
+	GlobalRef.camera.global_position = to_global(cameraOrigin.position)
 
 ######################################################################
 ############################## ITEMS #################################
@@ -248,7 +376,7 @@ func useItem():
 	
 	var areas = $MouseOver.get_overlapping_areas()
 	var ship = null
-	var editBody = planet
+	var editBody = planetOn
 	if areas.size() > 0:
 		ship = areas[0].get_parent()
 		var mousePos = ship.get_local_mouse_position()
@@ -272,6 +400,9 @@ func useItem():
 	
 	#if !is_instance_valid(planet) and !is_instance_valid(ship):
 	#	return
+	
+	if editBody == null:
+		return
 	
 	var mousePos = editBody.get_local_mouse_position()
 	var tile = editBody.posToTile(mousePos)
@@ -326,7 +457,11 @@ func playerAnimation(dir,newVel,delta):
 	
 	backItem.visible = PlayerData.selectedSlot != 0
 	
-	if !isOnFloor():
+	var flor = isOnFloor(rotated*(PI/2))
+	if shipOn != null:
+		flor = isOnFloor(shipOn.rotation)
+	
+	if !flor:
 		if newVel.y <= 0:
 			animationPlayer.play("jump")
 			return
@@ -353,21 +488,21 @@ func squishSprites(target,delta):
 			obj.position.y = lerp(obj.position.y,3.0+(3.0*int(target!=1.0)), 1.0-pow( 2.0,( -delta/0.02 ) ) )
 
 func scrollBackgrounds(delta):
-	for layer in backgroundHolder.get_children():
-		layer.updatePosition(velocity.rotated(-camera.rotation)*-delta)
+	for layer in GlobalRef.camera.backgroundHolder.get_children():
+		layer.updatePosition(velocity.rotated(-GlobalRef.camera.rotation)*-delta)
 
 func scrollBackgroundsSpace(vel,delta):
-	for layer in backgroundHolder.get_children():
-		layer.updatePosition(vel.rotated(-camera.rotation)*-delta)
+	for layer in GlobalRef.camera.backgroundHolder.get_children():
+		layer.updatePosition(vel.rotated(-GlobalRef.camera.rotation)*-delta)
 
 ######################################################################
 ############################### MATHS ################################
 ######################################################################
 
 func getPlanetPosition():
-	if !is_instance_valid(planet):
+	if !is_instance_valid(planetOn):
 		return 0
-	var p = planet.posToTile(position)
+	var p = planetOn.posToTile(position)
 	if p == null:
 		var angle1 = Vector2(1,1)
 		var angle2 = Vector2(-1,1)
@@ -376,11 +511,14 @@ func getPlanetPosition():
 		var dot2 = int(position.dot(angle2) > 0) * 2
 		
 		return [0,1,3,2][dot1 + dot2]
-	return planet.DATAC.getPositionLookup(p.x,p.y)
+	return planetOn.DATAC.getPositionLookup(p.x,p.y)
 
-func isOnFloor():
+func isOnFloor(rot):
 	#improve this
-	$FloorAngles.rotation = rotated*(PI/2)
+	$FloorAngles.rotation = rot
+	
+	$FloorAngles/FloorCast1.force_raycast_update()
+	$FloorAngles/FloorCast2.force_raycast_update()
 	
 	if $FloorAngles/FloorCast1.is_colliding():
 		return true
@@ -388,9 +526,12 @@ func isOnFloor():
 		return true
 	return false
 
-func isUnderCeiling():
+func isUnderCeiling(rot):
 	#improve this
-	$CeilingAngles.rotation = rotated*(PI/2)
+	$CeilingAngles.rotation = rot
+	
+	$CeilingAngles/cCast1.force_raycast_update()
+	$CeilingAngles/cCast2.force_raycast_update()
 	
 	if $CeilingAngles/cCast1.is_colliding():
 		return true
@@ -404,21 +545,29 @@ func isUnderCeiling():
 ######################################################################
 
 func updateLight():
-	if !is_instance_valid(planet):
+	if !is_instance_valid(planetOn):
 		return
-		
 	
+	var pos = position
+	#if state == 2:
+	#	pos += shipOn.position
 	
-	var currentChunk = Vector2(int(position.x+1024)/64,int(position.y+1024)/64)
+	var currentChunk = Vector2(int(pos.x+1024)/64,int(pos.y+1024)/64)
 	if previousChunk != currentChunk:
 		var newPos = (currentChunk * 64) - Vector2(1024,1024) - Vector2(288,288)
-		GlobalRef.lightmap.pushUpdate(planet,newPos)
+		GlobalRef.lightmap.pushUpdate(planetOn,newPos)
 	previousChunk = currentChunk
 
 func updateLightStatic():
-	if !is_instance_valid(planet):
+	if !is_instance_valid(planetOn):
 		return
-	var currentChunk = Vector2(int(position.x+1024)/64,int(position.y+1024)/64)
+	
+	var pos = position
+	#if state == 2:
+	#	pos += shipOn.position
+	
+	
+	var currentChunk = Vector2(int(pos.x+1024)/64,int(pos.y+1024)/64)
 	var newPos = (currentChunk * 64) - Vector2(1024,1024) - Vector2(288,288)
-	GlobalRef.lightmap.pushUpdate(planet,newPos)
+	GlobalRef.lightmap.pushUpdate(planetOn,newPos)
 	previousChunk = currentChunk

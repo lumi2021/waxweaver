@@ -83,8 +83,9 @@ func generateSystem():
 	
 	await get_tree().create_timer(0.25).timeout
 	
+	#Spawns player position
 	if is_instance_valid(GlobalRef.player):
-		GlobalRef.player.map.map(self,cosmicBodyContainer.get_children())
+		GlobalRef.camera.map.map(self,cosmicBodyContainer.get_children())
 	else:
 		
 		var player = load("res://object_scenes/player/player.tscn").instantiate()
@@ -96,30 +97,30 @@ func generateSystem():
 		player.position = Vector2(4,pee) + lastPlanet.position
 		
 
-		player.map.map(self,cosmicBodyContainer.get_children())
+		GlobalRef.camera.map.map(self,cosmicBodyContainer.get_children())
 		
-		lastPlanet.attachPlayer()
+		player.attachToPlanet(lastPlanet)
 
-func reparentToPlanet(object,planet):
-	print(object)
-	print(planet)
-	if !objectContainer.get_children().has(object):
-		return
-	
-	if object == GlobalRef.player:
-		object.planet = planet
-	object.reparent(planet.entityContainer)
-
-
-func dumpObjectToSpace(object):
-	object.reparent(objectContainer)
-	if object == GlobalRef.player:
-		object.planet = null
-		resetObjectPositions()
-
-func resetObjectPositions():
-	var rootPosition = rootPlanet.position
-	for planet in cosmicBodyContainer.get_children():
-		planet.position -= rootPosition
-	for object in objectContainer.get_children():
-		object.position -= rootPosition
+#func reparentToPlanet(object,planet):
+	#print(object)
+	#print(planet)
+	#if !objectContainer.get_children().has(object):
+		#return
+	#
+	#if object == GlobalRef.player:
+		#object.planet = planet
+	#object.reparent(planet.entityContainer)
+#
+#
+#func dumpObjectToSpace(object):
+	#object.reparent(objectContainer)
+	#if object == GlobalRef.player:
+		#object.planet = null
+		#resetObjectPositions()
+#
+#func resetObjectPositions():
+	#var rootPosition = rootPlanet.position
+	#for planet in cosmicBodyContainer.get_children():
+		#planet.position -= rootPosition
+	#for object in objectContainer.get_children():
+		#object.position -= rootPosition

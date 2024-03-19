@@ -19,7 +19,7 @@ var collisionArray = []
 
 func _ready():
 	
-	position = pos * 64
+	position = (pos * 64) - Vector2(ship.SIZEINCHUNKS * 32,ship.SIZEINCHUNKS * 32)
 	
 
 	id4 = (int(pos.x) % 2)+((int(pos.y) % 2)*2)
@@ -37,7 +37,7 @@ func drawData():
 	
 	#CreateShape
 	var shape = RectangleShape2D.new()
-	shape.size = Vector2(8,8)
+	shape.size = Vector2(7.9,7.9)
 	
 	for c in collisionArray:
 		c.queue_free()

@@ -1,6 +1,7 @@
 extends Node
 
 var player : Player = null
+var camera = null
 var system  = null
 var lightmap = null
 
