@@ -114,6 +114,10 @@ func _physics_process(delta):
 		var committedChanges = {}
 		
 		for d in changesArray:
+			if d is bool:
+				if d:
+					chunk.drawLiquid()
+				continue
 			var toss = false
 			for i in d.keys():
 				if committedChanges.has(i):
@@ -207,6 +211,7 @@ func generateEmptyArray():
 			DATAC.setBGData(x,y,0)
 			DATAC.setLightData(x,y,0.0)
 			DATAC.setTimeData(x,y,0)
+			DATAC.setWaterData(x,y,0.0)
 			DATAC.setPositionLookup(x,y,getBlockPosition(x,y))
 
 func generateTerrain():

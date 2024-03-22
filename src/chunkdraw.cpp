@@ -6,6 +6,7 @@ using namespace godot;
 
 void CHUNKDRAW::_bind_methods() {
     ClassDB::bind_method(D_METHOD("generateTexturesFromData","planetData","backgroundLayerData","pos","positionLookup","shipchunk"), &CHUNKDRAW::generateTexturesFromData);
+    ClassDB::bind_method(D_METHOD("drawLiquid","planetData","pos","shipchunk"), &CHUNKDRAW::drawLiquid);
     ClassDB::bind_method(D_METHOD("tickUpdate","planetDatac","pos"), &CHUNKDRAW::tickUpdate);
     ClassDB::bind_method(D_METHOD("runBreak","planetDatac","pos","x","y","id"), &CHUNKDRAW::runBreak);
     ClassDB::bind_method(D_METHOD("getBlockDictionary","id"), &CHUNKDRAW::getBlockDictionary);
@@ -18,6 +19,7 @@ CHUNKDRAW::CHUNKDRAW() {
     cock = memnew(LOOKUPBLOCK);
 
     getBorderImage("res://block_resources/block_textures/border.png");
+    getWaterImage("res://block_resources/block_textures/water.png");
 
 
 }
@@ -137,13 +139,40 @@ Array CHUNKDRAW::generateTexturesFromData(PLANETDATA *planet,Vector2i pos,Node *
     images.append(img);
     images.append(backImg);
 
+
    return images;
+
+}
+
+Array CHUNKDRAW::drawLiquid(PLANETDATA *planet,Vector2i pos,bool shipChunk){
+
+    Ref<Image> waterImg = Image::create(64, 64, false, Image::FORMAT_RGBA8);
+    
+    Array images;
+    
+    for (int x = 0; x < 8; x++){
+        for (int y = 0; y < 8; y++){
+            
+            Vector2 imgPos = Vector2i(x*8,y*8);
+            int worldX = x+(pos.x*8);
+            int worldY = y+(pos.y*8);
+
+            int blockSide = planet->getPositionLookup(worldX,worldY);
+
+            Vector2i goop = getWaterImgPos(planet,worldX,worldY,blockSide);
+            waterImg->blend_rect(watertexImage, Rect2i(goop.x * 8,goop.y * 8,8,8), imgPos);
+        }
+    }
+
+    images.append(waterImg);
+    return images;
 
 }
 
 Array CHUNKDRAW::tickUpdate(PLANETDATA *planet,Vector2i pos){
 
     Array collectedChanges;
+    bool shouldRedrawLiquid = false;
 
     for(int x = 0; x < 8; x++){
         for(int y = 0; y < 8; y++){
@@ -159,6 +188,80 @@ Array CHUNKDRAW::tickUpdate(PLANETDATA *planet,Vector2i pos){
 
 
             collectedChanges.append( cock->runOnTick(worldX,worldY,planet,blockSide,blockID) );
+
+            // SIMULATE WATER //
+
+            double water = planet->getWaterData(worldX,worldY);
+            double beginningWater = water;
+            
+            if (water < 0.01){ // skip if water level is too low
+                if(water > -0.01){
+                    planet->setWaterData(worldX,worldY,0.0);
+                }else{
+                    planet->setWaterData(worldX,worldY,std::abs(water));
+                }
+            }else if(cock->hasCollision( blockID )){
+                planet->setWaterData(worldX,worldY,0.0);
+                shouldRedrawLiquid = true;
+            }else{
+                Vector2i blockBelow = Vector2i(worldX,worldY) + Vector2i( Vector2(0,1).rotated( acos(0.0) * blockSide ) );
+                bool belowHasCollider = cock->hasCollision( planet->getTileData(blockBelow.x,blockBelow.y) );
+                double waterLevelBelow = std::abs(planet->getWaterData(blockBelow.x,blockBelow.y));
+
+                if (belowHasCollider){
+                    waterLevelBelow = 20.0;
+                }
+
+                double combined = water + waterLevelBelow;
+
+                if (combined < 1.0){
+                    planet->setWaterData(worldX,worldY,0.0);
+                    planet->setWaterData(blockBelow.x,blockBelow.y,-combined);
+                }
+                else{
+                    if (!belowHasCollider){
+                    planet->setWaterData(blockBelow.x,blockBelow.y,-1.0);
+                    planet->setWaterData(worldX,worldY,(combined - 1.0) * -1);
+                    
+                    water = combined - 1.0;
+                    }
+
+                    Vector2i blockRight = Vector2i(worldX,worldY) + Vector2i( Vector2(1,0).rotated( acos(0.0) * blockSide ) );
+                    Vector2i blockLeft = Vector2i(worldX,worldY) + Vector2i( Vector2(-1,0).rotated( acos(0.0) * blockSide ) );
+
+                    int rightHasCollider = cock->hasCollision( planet->getTileData(blockRight.x,blockRight.y) );
+                    int leftHasCollider = cock->hasCollision( planet->getTileData(blockLeft.x,blockLeft.y) );
+
+                    int coolValue = rightHasCollider + ( leftHasCollider * 2 );
+                    if(coolValue == 2){
+                        double waterLevelRight = std::abs(planet->getWaterData(blockRight.x,blockRight.y));
+                        double coolAverage = (waterLevelRight + water)/2.0;
+                        planet->setWaterData(worldX,worldY,-coolAverage);
+                        planet->setWaterData(blockRight.x,blockRight.y,-coolAverage);
+                    }
+                    else if(coolValue == 1){
+                        double waterLevelLeft = std::abs(planet->getWaterData(blockLeft.x,blockLeft.y));
+                        double coolAverage = (waterLevelLeft + water)/2.0;
+                        planet->setWaterData(worldX,worldY,-coolAverage);
+                        planet->setWaterData(blockLeft.x,blockLeft.y,-coolAverage);
+                    }
+                    else if(coolValue == 0){
+                        double waterLevelRight = std::abs(planet->getWaterData(blockRight.x,blockRight.y));
+                        double waterLevelLeft = std::abs(planet->getWaterData(blockLeft.x,blockLeft.y));
+                        double coolAverage = (waterLevelRight + waterLevelLeft + water)/3.0;
+                        planet->setWaterData(worldX,worldY,-coolAverage);
+                        planet->setWaterData(blockLeft.x,blockLeft.y,-coolAverage);
+                        planet->setWaterData(blockRight.x,blockRight.y,-coolAverage);
+                    }
+                }
+            
+            }
+
+            water = planet->getWaterData(worldX,worldY);
+            if( std::abs( std::abs(beginningWater) - std::abs(water) ) >= 0.01) {
+                shouldRedrawLiquid = true;
+            }
+
 
             // SIMULATE LIGHT //
 
@@ -190,13 +293,15 @@ Array CHUNKDRAW::tickUpdate(PLANETDATA *planet,Vector2i pos){
 
             planet->setLightData(worldX,worldY,newLight);
 
-            
+            /////////////////////////////
 
         }
 
    }
 
-   return collectedChanges;
+    collectedChanges.append(shouldRedrawLiquid);
+
+    return collectedChanges;
         
 }
 
@@ -320,4 +425,50 @@ void CHUNKDRAW::getBorderImage( const char* file ) {
     texImage = texture->get_image();
     texImage->convert(Image::FORMAT_RGBA8);
 
+}
+
+void CHUNKDRAW::getWaterImage( const char* file ) {
+    ResourceLoader rl;
+    watertexture = rl.load(file);
+
+    watertexImage = watertexture->get_image();
+    watertexImage->convert(Image::FORMAT_RGBA8);
+
+}
+
+Vector2i CHUNKDRAW::getWaterImgPos(PLANETDATA *planet,int x,int y, int blockSide){
+    Vector2i posi = Vector2i(0,0);
+    double water = planet->getWaterData(x,y);
+   // if(abs(water) < 0.05){ return posi; }
+
+    Vector2i blockBelow = Vector2i(x,y) + Vector2i( Vector2(0,1).rotated( acos(0.0) * blockSide ) );
+    int sideOfBelow = planet->getPositionLookup(blockBelow.x,blockBelow.y);
+
+   
+    posi.x = std::ceil(std::abs(water * 8.0));
+    
+    
+    
+    if(sideOfBelow == blockSide){
+        posi.y = blockSide;
+    }else{
+        int cornerID = blockSide + (sideOfBelow*2);
+        posi.y = blockSide;
+        switch(cornerID){
+            case 1:
+                posi.y = 5;
+                break;
+            case 5:
+                posi.y = 6;
+                break;
+            case 6:
+                posi.y = 4;
+                break;
+            case 8:
+                posi.y = 7;
+                break;
+
+        }   
+    }
+    return posi;
 }

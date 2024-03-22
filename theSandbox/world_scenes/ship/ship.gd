@@ -71,12 +71,9 @@ func generateEmptyArray():
 	DATAC.createEmptyArrays(s)
 	
 	var testDick = {
-		#Vector2(13,13):2,Vector2(14,13):2,Vector2(15,13):2,
-		#Vector2(16,13):2,Vector2(17,13):2,Vector2(18,13):2,
-		Vector2(13,18):2,Vector2(14,18):2,Vector2(15,18):2,
-		Vector2(16,18):2,Vector2(17,18):2,Vector2(18,18):2,
-		Vector2(13,14):2,Vector2(13,15):2,Vector2(13,16):2,Vector2(13,17):2,
-		Vector2(18,14):2,Vector2(18,15):2,Vector2(18,16):2,Vector2(18,17):2
+		Vector2(13,18):13,Vector2(14,18):13,Vector2(15,18):13,
+		Vector2(16,18):13,Vector2(17,18):13,Vector2(18,18):13,
+		Vector2(13,17):13,Vector2(18,17):13,
 	}
 	
 	for x in range(s):
@@ -87,10 +84,11 @@ func generateEmptyArray():
 			else:
 				DATAC.setTileData(x,y,0)
 			DATAC.setBGData(x,y,0)
-			if x >= 13 and x <= 18 and y >= 13 and y <= 18:
+			if x >= 13 and x <= 18 and y >= 15 and y <= 18:
 				DATAC.setBGData(x,y,13)
 			DATAC.setLightData(x,y,0.0)
 			DATAC.setTimeData(x,y,0)
+			DATAC.setWaterData(x,y,0.0)
 			DATAC.setPositionLookup(x,y,0)
 
 func createChunks():
@@ -123,6 +121,10 @@ func _physics_process(delta):
 		var committedChanges = {}
 		
 		for d in changesArray:
+			if d is bool:
+				if d:
+					chunk.drawLiquid()
+				continue
 			var toss = false
 			for i in d.keys():
 				if committedChanges.has(i):

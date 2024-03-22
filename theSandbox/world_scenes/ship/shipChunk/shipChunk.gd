@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var mainLayerSprite = $mainLayer
 @onready var backLayerSprite = $backLayer
+@onready var waterLayerSprite = $waterLayer
 
 const CHUNKSIZE :int= 8
 
@@ -44,6 +45,7 @@ func drawData():
 	
 	# Call c++
 	var images :Array= BlockData.theChunker.generateTexturesFromData(ship.DATAC,pos,ship,shape,true)
+	
 	mainLayerSprite.texture = ImageTexture.create_from_image(images[images.size()-2])
 	backLayerSprite.texture = ImageTexture.create_from_image(images[images.size()-1])
 	
@@ -52,3 +54,6 @@ func drawData():
 	
 	collisionArray = images
 
+func drawLiquid():
+	var images = BlockData.theChunker.drawLiquid(ship.DATAC,pos,true)
+	waterLayerSprite.texture = ImageTexture.create_from_image(images[0])

@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var mainLayerSprite = $mainLayer
 @onready var backLayerSprite = $backLayer
+@onready var waterLayerSprite = $waterLayer
 @onready var body = $StaticBody2D
 
 const CHUNKSIZE :int= 8
@@ -50,6 +51,10 @@ func drawData():
 	backLayerSprite.texture = ImageTexture.create_from_image(images[1])
 	
 	return
+
+func drawLiquid():
+	var images = BlockData.theChunker.drawLiquid(planet.DATAC,pos,false)
+	waterLayerSprite.texture = ImageTexture.create_from_image(images[0])
 
 func clearCollisions():
 	for i in body.get_children():

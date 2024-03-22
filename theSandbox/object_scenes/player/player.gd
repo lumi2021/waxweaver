@@ -329,7 +329,7 @@ func shipDetachFromPlanet():
 		reparent(system.objectContainer)
 		shipOn.reparent(system.objectContainer)
 		
-		global_position = shipOn.global_position + relativePosition
+		global_position = shipOn.global_position + relativePosition.rotated(shipOn.rotation)
 		
 		state = 1
 
@@ -418,11 +418,12 @@ func useItem():
 				itemData.onUse(tile.x,tile.y,getPlanetPosition(),editBody,lastTileItemUsedOn)
 				itemSwingAnimation(itemData)
 				
-				
 		else:
 			itemData.onUse(tile.x,tile.y,getPlanetPosition(),editBody,lastTileItemUsedOn)
 			if !$HandRoot/handSwing.is_playing():
 				itemSwingAnimation(itemData)
+			
+			editBody.DATAC.setWaterData(tile.x,tile.y,1.0)
 			
 		lastTileItemUsedOn = Vector2(tile.x,tile.y)
 

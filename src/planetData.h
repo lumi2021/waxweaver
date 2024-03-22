@@ -13,10 +13,12 @@ class PLANETDATA : public Node {
 	GDCLASS(PLANETDATA, Node)
 
 private:
-    int *tileData;
-    int *bgData;
-    double *lightData;
-    int *timeData;
+    int *tileData;      // block tile data
+    int *bgData;        // background tile data
+    double *lightData;  // light value data
+    int *timeData;      // global tick data
+    double *waterData;  // water liquid data
+    int *infoData;      // misc int info data
 
     int *positionLookup;
 
@@ -39,6 +41,7 @@ public:
     int getTileData(int x,int y);
     int getBGData(int x,int y);
     double getLightData(int x,int y);
+    double getWaterData(int x,int y);
     int getTimeData(int x,int y);
 
     int getPositionLookup(int x, int y);
@@ -46,6 +49,7 @@ public:
     bool setTileData(int x,int y, int newValue);
     bool setBGData(int x,int y, int newValue);
     bool setLightData(int x,int y,double newValue);
+    bool setWaterData(int x,int y,double newValue);
     bool setTimeData(int x,int y,int newValue);
 
     bool setPositionLookup(int x, int y, int newValue);

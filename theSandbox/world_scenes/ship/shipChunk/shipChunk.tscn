@@ -1,10 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://u8tr2xmowgle"]
+[gd_scene load_steps=5 format=3 uid="uid://u8tr2xmowgle"]
 
 [ext_resource type="Script" path="res://world_scenes/ship/shipChunk/shipChunk.gd" id="1_8j2mj"]
 [ext_resource type="Shader" path="res://world_scenes/chunk/chunk.gdshader" id="2_yo1vl"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dtd3g"]
 shader = ExtResource("2_yo1vl")
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_o7lcd"]
+blend_mode = 3
 
 [node name="ShipChunk" type="Node2D"]
 script = ExtResource("1_8j2mj")
@@ -15,4 +18,9 @@ material = SubResource("ShaderMaterial_dtd3g")
 centered = false
 
 [node name="mainLayer" type="Sprite2D" parent="."]
+centered = false
+
+[node name="waterLayer" type="Sprite2D" parent="."]
+z_index = 64
+material = SubResource("CanvasItemMaterial_o7lcd")
 centered = false

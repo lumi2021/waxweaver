@@ -32,6 +32,9 @@ private:
 	Ref<Texture2D> texture;
     Ref<Image> texImage;
 
+	Ref<Texture2D> watertexture;
+    Ref<Image> watertexImage;
+
 protected:
 	static void _bind_methods();
 
@@ -40,6 +43,7 @@ public:
 	~CHUNKDRAW();
 
     Array generateTexturesFromData(PLANETDATA *planet,Vector2i pos,Node *body,Ref<Shape2D> shape,bool shipChunk);
+	Array drawLiquid(PLANETDATA *planet,Vector2i pos,bool shipChunk);
 	Array tickUpdate(PLANETDATA *planet,Vector2i pos);
 	Dictionary runBreak(PLANETDATA *planet,Vector2i pos,int x,int y,int blockID);
 
@@ -49,6 +53,10 @@ public:
 	Dictionary getBlockDictionary(int id);
 
 	void getBorderImage( const char* file );
+	void getWaterImage( const char* file );
+
+	Vector2i getWaterImgPos(PLANETDATA *planet,int x,int y,int blockSide);
+
 };
 
 }
