@@ -26,8 +26,9 @@ LOOKUPBLOCK::LOOKUPBLOCK() {
     penis[11] = new BLOCKTREEBRANCHRIGHT();
     penis[12] = new BLOCKTREEBRANCHLEAF();
     penis[13] = new BLOCKWOOD();
+    penis[14] = new BLOCKSAND();
 
-    for(int i = 0; i < 14; i++){
+    for(int i = 0; i < 15; i++){
         penis[i]->setLookUp(this);
     }
 

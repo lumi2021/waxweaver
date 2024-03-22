@@ -53,6 +53,7 @@ func drawData():
 	images.remove_at(images.size()-1)
 	
 	collisionArray = images
+	
 
 func drawLiquid():
 	var images = BlockData.theChunker.drawLiquid(ship.DATAC,pos,true)

@@ -50,6 +50,7 @@ func drawData():
 	mainLayerSprite.texture = ImageTexture.create_from_image(images[0])
 	backLayerSprite.texture = ImageTexture.create_from_image(images[1])
 	
+	drawLiquid()
 	return
 
 func drawLiquid():

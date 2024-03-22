@@ -11,6 +11,7 @@ void PLANETGEN::_bind_methods() {
 }
 
 PLANETGEN::PLANETGEN() {
+    lookup = memnew(LOOKUPBLOCK);
 }
 
 PLANETGEN::~PLANETGEN() {
@@ -65,6 +66,24 @@ void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
                 planet->setTileData(x,y, airOrCaveAir(x,y,planet) );
             }
 
+            double lakeSurface = (noise->get_noise_1d((2000 + ( planetSize * quad * 0.75)) + (side*0.75)) * 64.0)  + (planetSize / 4);
+            if (dis >= lakeSurface && dis <= surface + 5){
+                
+                planet->setTileData(x,y, 4 );
+                planet->setBGData(x,y,3);
+
+                if ( dis <= (planetSize / 4) + 3 && dis >= lakeSurface + 6) {
+                    planet->setTileData(x,y, 14 );
+                }
+                
+                if (dis >= lakeSurface + 8){
+                    planet->setTileData(x,y, airOrCaveAir(x,y,planet) );
+                    planet->setBGData(x,y,0);
+                    if ( dis <= (planetSize / 4) + 2) {
+                        planet->setWaterData(x,y,1.0);
+                    }
+                }
+            }
 
             if (dis <= 3){
                 planet->setTileData(x,y,5);

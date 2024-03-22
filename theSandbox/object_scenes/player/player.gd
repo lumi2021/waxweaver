@@ -134,11 +134,19 @@ func onPlanetMovement(delta):
 	newVel.x = lerp(newVel.x, dir * speed, 1.0-pow(2.0,(-delta/0.04)))
 	newVel.y += gravity * delta
 	newVel.y = min(newVel.y,300)
+	var tile = planetOn.posToTile(position)
 	
-	if onFloor:
-		if Input.is_action_just_pressed("jump"):
-			newVel.y = -275
-		GlobalRef.camera.rotation = lerp_angle(GlobalRef.camera.rotation,rotated*(PI/2),1.0-pow(2.0,(-delta/0.06)))
+	if abs(planetOn.DATAC.getWaterData(tile.x,tile.y)) > 0.2:
+		newVel.y = min(newVel.y,50)
+		if Input.is_action_pressed("jump"):
+			newVel.y = -100.0
+		if onFloor:
+			GlobalRef.camera.rotation = lerp_angle(GlobalRef.camera.rotation,rotated*(PI/2),1.0-pow(2.0,(-delta/0.06)))
+	else:
+		if onFloor:
+			if Input.is_action_just_pressed("jump"):
+				newVel.y = -275
+			GlobalRef.camera.rotation = lerp_angle(GlobalRef.camera.rotation,rotated*(PI/2),1.0-pow(2.0,(-delta/0.06)))
 
 	
 	velocity = newVel.rotated(rotated*(PI/2))
@@ -423,7 +431,6 @@ func useItem():
 			if !$HandRoot/handSwing.is_playing():
 				itemSwingAnimation(itemData)
 			
-			editBody.DATAC.setWaterData(tile.x,tile.y,1.0)
 			
 		lastTileItemUsedOn = Vector2(tile.x,tile.y)
 

@@ -9,6 +9,7 @@
 #include <algorithm>
 
 #include "planetData.h"
+#include "lookupBlock.h"
 
 namespace godot {
 
@@ -16,6 +17,7 @@ class PLANETGEN : public Sprite2D {
 	GDCLASS(PLANETGEN, Sprite2D)
 
 private:
+    LOOKUPBLOCK *lookup;
 
 protected:
 	static void _bind_methods();
