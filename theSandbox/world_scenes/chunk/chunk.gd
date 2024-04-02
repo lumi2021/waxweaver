@@ -68,12 +68,18 @@ func _on_visible_on_screen_notifier_2d_screen_entered():
 	mainLayerSprite.visible = onScreen
 	backLayerSprite.visible = onScreen
 	
+	for b in body.get_children():
+		b.disabled = false
+	
 
 func _on_visible_on_screen_notifier_2d_screen_exited():
 	onScreen = false
 	planet.visibleChunks.erase(self)
 	mainLayerSprite.visible = onScreen
 	backLayerSprite.visible = onScreen
+	
+	for b in body.get_children():
+		b.disabled = true
 
 #debug
 func flicker(show):

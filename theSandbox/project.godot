@@ -234,6 +234,11 @@ rotateShipLeft={
 2d_physics/layer_3="groundItems"
 2d_physics/layer_5="ship"
 2d_physics/layer_6="isShip"
+2d_physics/layer_8="enemy"
+
+[physics]
+
+2d/solver/solver_iterations=4
 
 [rendering]
 

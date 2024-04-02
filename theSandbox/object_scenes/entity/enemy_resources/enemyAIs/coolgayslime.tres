@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="SlimeAI" load_steps=2 format=3 uid="uid://birb8qnusvjlh"]
+
+[ext_resource type="Script" path="res://object_scenes/entity/enemy_resources/enemyAIs/slimeAI.gd" id="1_pmw6g"]
+
+[resource]
+script = ExtResource("1_pmw6g")
+gravity = 1000
+maxHealth = 100
+defense = 0
+knockbackResist = 0
+attackDamage = 10
+hitboxSize = 6

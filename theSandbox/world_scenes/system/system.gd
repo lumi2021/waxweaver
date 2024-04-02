@@ -33,7 +33,7 @@ func generateSystem():
 		newPlanet.orbiting = sun
 		newPlanet.system = self
 		
-		var s = (randi() % 5)
+		var s = 4 #(randi() % 5)
 		match s:
 			0: newPlanet.SIZEINCHUNKS = 32
 			1: newPlanet.SIZEINCHUNKS = 32

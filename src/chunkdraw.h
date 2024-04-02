@@ -6,13 +6,18 @@
 #include <godot_cpp/classes/resource_loader.hpp>
 #include <godot_cpp/classes/resource.hpp>
 #include <godot_cpp/classes/texture2d.hpp>
+#include <godot_cpp/classes/bit_map.hpp>
 #include <godot_cpp/variant/array.hpp>
 #include <godot_cpp/variant/rect2i.hpp>
 #include <godot_cpp/variant/vector2i.hpp>
+#include <godot_cpp/variant/packed_vector2_array.hpp>
 
 #include <godot_cpp/classes/static_body2d.hpp>
 #include <godot_cpp/classes/collision_shape2d.hpp>
+#include <godot_cpp/classes/collision_polygon2d.hpp>
 #include <godot_cpp/classes/rectangle_shape2d.hpp>
+
+#include <godot_cpp/variant/utility_functions.hpp>
 
 #include <algorithm>
 
@@ -28,6 +33,7 @@ private:
 	double time_passed;
     Array planetData;
 	LOOKUPBLOCK *cock;
+	BitMap *bitm;
 
 	Ref<Texture2D> texture;
     Ref<Image> texImage;

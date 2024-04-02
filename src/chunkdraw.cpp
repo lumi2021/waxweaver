@@ -17,6 +17,7 @@ void CHUNKDRAW::_bind_methods() {
 CHUNKDRAW::CHUNKDRAW() {
 	time_passed = 0.0;
     cock = memnew(LOOKUPBLOCK);
+    bitm = memnew(BitMap);
 
     getBorderImage("res://block_resources/block_textures/border.png");
     getWaterImage("res://block_resources/block_textures/water.png");
@@ -38,99 +39,113 @@ Array CHUNKDRAW::generateTexturesFromData(PLANETDATA *planet,Vector2i pos,Node *
     Ref<Image> backImg = Image::create(64, 64, false, Image::FORMAT_RGBA8);
     
     Array images;
-    
-    for (int x = 0; x < 8; x++){
-        for (int y = 0; y < 8; y++){
-            
-            Vector2 imgPos = Vector2i(x*8,y*8);
-            int worldX = x+(pos.x*8);
-            int worldY = y+(pos.y*8);
+    for (int sect = 0; sect < 4; sect++){
 
-            int planetSize = planet->planetSize; // GETS PASSED IN
+        Ref<Image> colliderImg = Image::create(16, 64, false, Image::FORMAT_RGBA8);
+        colliderImg->fill(Color::hex(0x00000000));
 
-            int blockSide = planet->getPositionLookup(worldX,worldY);
-
-            int blockID = planet->getTileData(worldX,worldY);
-            int backBlockID = planet->getBGData(worldX,worldY);
-
-            if (blockID>1){
+        for (int x = 0; x < 2; x++){
+            for (int y = 0; y < 8; y++){
                 
-                Ref<Image> blockImg = cock->getTextureImage(blockID);
-                
-                bool rotate = cock->isGravityRotate(blockID);
-                if (rotate){ 
-                    for(int g = 0; g < blockSide; g++){
-                        blockImg->rotate_90(ClockDirection::CLOCKWISE);
+                Vector2 imgPos = Vector2i(((sect*2) + x)*8,y*8);
+                int worldX = (sect*2) + x +(pos.x*8);
+                int worldY = y+(pos.y*8);
+
+                int planetSize = planet->planetSize; // GETS PASSED IN
+
+                int blockSide = planet->getPositionLookup(worldX,worldY);
+
+                int blockID = planet->getTileData(worldX,worldY);
+                int backBlockID = planet->getBGData(worldX,worldY);
+
+                if (blockID>1){
+                    
+                    Ref<Image> blockImg = cock->getTextureImage(blockID);
+                    
+                    bool rotate = cock->isGravityRotate(blockID);
+                    if (rotate){ 
+                        for(int g = 0; g < blockSide; g++){
+                            blockImg->rotate_90(ClockDirection::CLOCKWISE);
+                        }
                     }
+
+                    int frame = 0;
+                    if( cock->isConnectedTexture(blockID) ){ frame = scanBlockOpen(planet,worldX,worldY); }
+                    Rect2i blockRect = Rect2i(frame,0,8,8);
+
+                    
+
+                    img->blend_rect(blockImg, blockRect, imgPos);
+
+                    // unrotate it, this is hacky i know
+                    if (rotate){ 
+                        for(int g = 0; g < blockSide; g++){
+                            blockImg->rotate_90(ClockDirection::COUNTERCLOCKWISE);
+                        }
+                    }
+                    
+                    if( cock->hasCollision(blockID) ) {
+                        colliderImg->fill_rect(Rect2i(x*8,y*8,8,8),Color::hex(0xFFFFFFFF));
+                        continue;
+                    }
+
                 }
 
-                int frame = 0;
-                if( cock->isConnectedTexture(blockID) ){ frame = scanBlockOpen(planet,worldX,worldY); }
-                Rect2i blockRect = Rect2i(frame,0,8,8);
 
-                
+                if (backBlockID>1){
+                    
+                    Ref<Image> blockImg = cock->getTextureImage(backBlockID);
 
-                img->blend_rect(blockImg, blockRect, imgPos);
-
-                // unrotate it, this is hacky i know
-                if (rotate){ 
-                    for(int g = 0; g < blockSide; g++){
-                        blockImg->rotate_90(ClockDirection::COUNTERCLOCKWISE);
+                    bool rotate = cock->isGravityRotate(backBlockID);
+                    if (rotate){ 
+                        for(int g = 0; g < blockSide; g++){
+                            blockImg->rotate_90(ClockDirection::CLOCKWISE);
+                        }
                     }
-                }
 
-                // THIS IS WHERE WE CREATE THE COLLISION //
-                if( cock->hasCollision(blockID) ) {
+                    int frame = 0;
+                    if( cock->isConnectedTexture(backBlockID) ) { frame = scanBackOpen(planet,worldX,worldY); }
+                    Rect2i blockRect = Rect2i(frame,0,8,8);
 
-                    CollisionShape2D *collision;
-                    collision = memnew(CollisionShape2D);
-                    collision->set_shape(shape);
-                    Vector2 offset = Vector2(4,4);
-                    if (shipChunk){
-                        images.append(collision);
-                        offset = Vector2((pos.x*64)+4,(pos.y*64)+4) - Vector2(planetSize*4,planetSize*4);
+                    backImg->blend_rect(blockImg, blockRect, imgPos);
+
+                    Vector2i scan = scanForBorder(planet,worldX,worldY);
+
+                    backImg->blend_rect(texImage, Rect2i(scan.x,scan.y,8,8), imgPos);
+
+                    // unrotate it
+                    if (rotate){ 
+                        for(int g = 0; g < blockSide; g++){
+                            blockImg->rotate_90(ClockDirection::COUNTERCLOCKWISE);
+                        }
                     }
-                    collision->set_position(imgPos + offset);
-                    body->add_child(collision);
 
-                    continue;
                 }
 
             }
+        }
+
+        // Collision Sector Code //
+
+        bitm->create_from_image_alpha(colliderImg, 0.5);
+        Array polygons = bitm->opaque_to_polygons( Rect2(Vector2(0 , 0), Vector2(16 , 64) ) , 1.0);
+
+        for( int i = 0; i < polygons.size(); i++ ){
+            CollisionPolygon2D *col ;
+            col = memnew(CollisionPolygon2D);
+
+            PackedVector2Array cunt = polygons[i];
 
 
-            if (backBlockID>1){
-                
-                Ref<Image> blockImg = cock->getTextureImage(backBlockID);
+            col->set_polygon( cunt );
 
-                bool rotate = cock->isGravityRotate(backBlockID);
-                if (rotate){ 
-                    for(int g = 0; g < blockSide; g++){
-                        blockImg->rotate_90(ClockDirection::CLOCKWISE);
-                    }
-                }
-
-                int frame = 0;
-                if( cock->isConnectedTexture(backBlockID) ) { frame = scanBackOpen(planet,worldX,worldY); }
-                Rect2i blockRect = Rect2i(frame,0,8,8);
-
-                backImg->blend_rect(blockImg, blockRect, imgPos);
-
-                Vector2i scan = scanForBorder(planet,worldX,worldY);
-
-                backImg->blend_rect(texImage, Rect2i(scan.x,scan.y,8,8), imgPos);
-
-                // unrotate it
-                if (rotate){ 
-                    for(int g = 0; g < blockSide; g++){
-                        blockImg->rotate_90(ClockDirection::COUNTERCLOCKWISE);
-                    }
-                }
-
-            }
+            col->set_position( Vector2( sect*16.0 , 0.0 ) );
+            body->add_child(col);
 
         }
+
     }
+
 
 
     //emit_signal("chunkDrawn", this, img, backImg);

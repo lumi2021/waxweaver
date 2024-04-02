@@ -32,6 +32,7 @@ var chunkArray2D = []
 
 var visibleChunks = []
 
+var chunkDictionary = {}
 
 var tickAlive = 0
 
@@ -106,7 +107,8 @@ func _physics_process(delta):
 	DATAC.setGlobalTick(GlobalRef.globalTick)
 	DATAC.getGlobalTick()
 	var shouldUpdateLight = 0
-	for chunk in visibleChunks:
+	for key in chunkDictionary:
+		var chunk = chunkDictionary[key]
 		if tick % 4 != chunk.id4:
 			continue
 		
@@ -159,7 +161,7 @@ func editTiles(changeCommit):
 					DATAC.setTileData(change.x,change.y,c)
 				DATAC.setTimeData(change.x,change.y,GlobalRef.globalTick)
 		
-		
+		return
 		
 		var foundChunk = chunkArray2D[clamp(change.x/8,0,SIZEINCHUNKS-1)][clamp(change.y/8,0,SIZEINCHUNKS-1)]
 		if !chunksToUpdate.has(foundChunk):
@@ -223,6 +225,26 @@ func generateTerrain():
 	
 	return
 
+func loadChunkArea(pos):
+	var radius :int = 9
+	var cool = []
+	for x in range(radius):
+		for y in range(radius):
+			var trueCoords :Vector2 = pos + Vector2( x - (radius/2) , y - (radius/2) )
+			
+			if !chunkDictionary.has(trueCoords):
+				var ins = chunkScene.instantiate()
+				ins.position = trueCoords
+				chunkDictionary[trueCoords] = ins
+				chunkContainer.add_child(ins)
+			cool.append(trueCoords)
+	
+	#for chunk in chunkDictionary.keys():
+	#	if !cool.has(chunk):
+	#		chunkDictionary[chunk].queue_free()
+	#		chunkDictionary.erase(chunk)
+	
+	
 func createChunks():
 	chunkArray2D = DATAC.createAllChunks(chunkScene,chunkContainer,SIZEINCHUNKS)
 	set_physics_process(true)
@@ -286,8 +308,10 @@ func tileToPos(pos):
 ########################################################################
 
 func loadPlanet():
-	createChunks()
+	#createChunks()
+	set_physics_process(true)
 	reverseOrbitingParents()
+	
 
 func unloadPlanet():
 	clearChunks()

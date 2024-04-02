@@ -9,7 +9,7 @@ class_name Player
 @onready var animationPlayer = $AnimationPlayer
 @onready var cameraOrigin = $CameraOrigin
 
-@onready var shipDEBUG = preload("res://world_scenes/ship/ship.tscn")
+@onready var shipDEBUG = preload("res://object_scenes/entity/enemy.tscn")
 
 var rotated = 0
 var rotationDelayTicks = 0
@@ -551,6 +551,12 @@ func isUnderCeiling(rot):
 		return true
 	return false
 
+func enteredNewChunk(newChunk):
+	var planetRadius = planetOn.SIZEINCHUNKS * 32
+	var newPos = (newChunk * 64) - Vector2(planetRadius,planetRadius) - Vector2(288,288)
+	GlobalRef.lightmap.pushUpdate(planetOn,newPos)
+	planetOn.loadChunkArea(newChunk)
+
 ######################################################################
 ############################# LIGHTS #################################
 ##################### DO NOT TOUCH !!!!!!!!!!!!#######################
@@ -561,13 +567,11 @@ func updateLight():
 		return
 	
 	var pos = position
-	#if state == 2:
-	#	pos += shipOn.position
+	var planetRadius = planetOn.SIZEINCHUNKS * 32
 	
-	var currentChunk = Vector2(int(pos.x+1024)/64,int(pos.y+1024)/64)
+	var currentChunk = Vector2(int(pos.x+planetRadius)/64,int(pos.y+planetRadius)/64)
 	if previousChunk != currentChunk:
-		var newPos = (currentChunk * 64) - Vector2(1024,1024) - Vector2(288,288)
-		GlobalRef.lightmap.pushUpdate(planetOn,newPos)
+		enteredNewChunk(currentChunk)
 	previousChunk = currentChunk
 
 func updateLightStatic():
@@ -582,4 +586,3 @@ func updateLightStatic():
 	var currentChunk = Vector2(int(pos.x+1024)/64,int(pos.y+1024)/64)
 	var newPos = (currentChunk * 64) - Vector2(1024,1024) - Vector2(288,288)
 	GlobalRef.lightmap.pushUpdate(planetOn,newPos)
-	previousChunk = currentChunk
