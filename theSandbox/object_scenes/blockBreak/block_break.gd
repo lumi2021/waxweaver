@@ -2,8 +2,8 @@ extends Node2D
 
 var planet = null
 var planetDir = 0
-var tileX = 0
-var tileY = 0
+var tileX :int= 0
+var tileY :int= 0
 var blockID = 0
 
 var damage = 0
@@ -56,7 +56,7 @@ func _process(delta):
 			var arrayPosition = (tileX * planet.SIZEINCHUNKS * 8) + tileY
 			
 			if damage >= breakTime:
-				var edit = Vector3(tileX,tileY,0)
+				var edit = Vector2i(tileX,tileY)
 				planet.editTiles( { edit: -1 } )
 				queue_free()
 		else:

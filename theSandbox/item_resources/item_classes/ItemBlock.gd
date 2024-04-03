@@ -21,7 +21,7 @@ func onUse(tileX:int,tileY:int,planetDir:int,planet,lastTile:Vector2):
 	
 	if ![0,1].has(bg):
 		#Succeed if wall tile exists
-		var edit = Vector3(tileX,tileY,0)
+		var edit = Vector2i(tileX,tileY)
 		planet.editTiles({edit:blockID})
 		PlayerData.consumeSelected()
 		return "success"
@@ -34,7 +34,7 @@ func onUse(tileX:int,tileY:int,planetDir:int,planet,lastTile:Vector2):
 			continue
 		
 		if ![0,1].has(planet.DATAC.getTileData(tile.x,tile.y)):
-			var edit = Vector3(tileX,tileY,0)
+			var edit = Vector2i(tileX,tileY)
 			planet.editTiles({edit:blockID})
 			PlayerData.consumeSelected()
 			return "success"

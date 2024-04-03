@@ -267,6 +267,7 @@ collision_mask = 17
 position = Vector2(0, -40)
 
 [node name="Lightmap" parent="." instance=ExtResource("3_37tb5")]
+visible = false
 top_level = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

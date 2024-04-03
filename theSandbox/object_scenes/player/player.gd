@@ -32,6 +32,7 @@ var maxCameraDistance := 0
 var lastTileItemUsedOn := Vector2(-10,-10)
 
 var noClip = false
+var noClipSpeed = 200
 
 var tick = 0
 
@@ -95,11 +96,40 @@ func _process(delta):
 		get_parent().add_child(ins)
 		ins.global_position = get_global_mouse_position()
 	
+	if Input.is_action_just_pressed("noclip"):
+		noClip = !noClip
+		$CollisionShape2D.disabled = noClip
+	
 ######################################################################
 ############################## MOVEMENT ##############################
 ######################################################################
 
+func noClipMovement(delta):
+	var dir = Vector2.ZERO
+	dir.x = int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left"))
+	dir.y = int(Input.is_action_pressed("move_down")) - int(Input.is_action_pressed("move_up"))
+	
+	if Input.is_action_just_pressed("scroll_up"):
+		noClipSpeed += 100
+	elif Input.is_action_just_pressed("scroll_down"):
+		noClipSpeed -= 100
+		noClipSpeed = max(0,noClipSpeed)
+		
+	
+	velocity = dir.normalized() * noClipSpeed
+	move_and_slide()
+	
+	
+	GlobalRef.camera.rotation = 0
+	ensureCamPosition()
+	updateLight()
+
+
 func onPlanetMovement(delta):
+	
+	if noClip:
+		noClipMovement(delta)
+		return
 	
 	var newRotation = getPlanetPosition()
 	
@@ -136,17 +166,18 @@ func onPlanetMovement(delta):
 	newVel.y = min(newVel.y,300)
 	var tile = planetOn.posToTile(position)
 	
-	if abs(planetOn.DATAC.getWaterData(tile.x,tile.y)) > 0.2:
-		newVel.y = min(newVel.y,50)
-		if Input.is_action_pressed("jump"):
-			newVel.y = -100.0
-		if onFloor:
-			GlobalRef.camera.rotation = lerp_angle(GlobalRef.camera.rotation,rotated*(PI/2),1.0-pow(2.0,(-delta/0.06)))
-	else:
-		if onFloor:
-			if Input.is_action_just_pressed("jump"):
-				newVel.y = -275
-			GlobalRef.camera.rotation = lerp_angle(GlobalRef.camera.rotation,rotated*(PI/2),1.0-pow(2.0,(-delta/0.06)))
+	if tile != null:
+		if abs(planetOn.DATAC.getWaterData(tile.x,tile.y)) > 0.2:
+			newVel.y = min(newVel.y,50)
+			if Input.is_action_pressed("jump"):
+				newVel.y = -100.0
+			if onFloor:
+				GlobalRef.camera.rotation = lerp_angle(GlobalRef.camera.rotation,rotated*(PI/2),1.0-pow(2.0,(-delta/0.06)))
+		else:
+			if onFloor:
+				if Input.is_action_just_pressed("jump"):
+					newVel.y = -275
+				GlobalRef.camera.rotation = lerp_angle(GlobalRef.camera.rotation,rotated*(PI/2),1.0-pow(2.0,(-delta/0.06)))
 
 	
 	velocity = newVel.rotated(rotated*(PI/2))
@@ -159,6 +190,10 @@ func onPlanetMovement(delta):
 	ensureCamPosition()
 
 func onShipMovement(delta):
+	
+	if noClip:
+		noClipMovement(delta)
+		return
 	
 	var newRotation = shipOn.rotation
 	
@@ -207,6 +242,11 @@ func onShipMovement(delta):
 	ensureCamPosition()
 
 func inSpaceMovement(delta):
+	
+	if noClip:
+		noClipMovement(delta)
+		return
+	
 	var dir = Vector2.ZERO
 	dir.x = int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left"))
 	dir.y = int(Input.is_action_pressed("move_down")) - int(Input.is_action_pressed("move_up"))

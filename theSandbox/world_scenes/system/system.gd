@@ -23,7 +23,7 @@ func generateSystem():
 	cosmicBodyContainer.add_child(sun)
 	rootPlanet = sun
 	
-	var planetAmount = 4  #(randi() % 5) + 1
+	var planetAmount = 1  #(randi() % 5) + 1
 	var lastPlanet = sun
 	var distanceOverlap = 0
 	for i in range(planetAmount):
@@ -33,52 +33,28 @@ func generateSystem():
 		newPlanet.orbiting = sun
 		newPlanet.system = self
 		
-		var s = 4 #(randi() % 5)
+		var s = 3#(randi() % 5)
 		match s:
-			0: newPlanet.SIZEINCHUNKS = 32
-			1: newPlanet.SIZEINCHUNKS = 32
-			2: newPlanet.SIZEINCHUNKS = 48
-			3: newPlanet.SIZEINCHUNKS = 48
-			4: newPlanet.SIZEINCHUNKS = 64
+			0: newPlanet.SIZEINCHUNKS = 48
+			1: newPlanet.SIZEINCHUNKS = 64
+			2: newPlanet.SIZEINCHUNKS = 128
+			3: newPlanet.SIZEINCHUNKS = 256
+			4: newPlanet.SIZEINCHUNKS = 512
 		
 		var c = sqrt((newPlanet.SIZEINCHUNKS * 64) * (newPlanet.SIZEINCHUNKS * 64) * 2)
 		var cPrevious = sqrt((lastPlanet.SIZEINCHUNKS * 64) * (lastPlanet.SIZEINCHUNKS * 64) * 2)
 		var distance = ((c + cPrevious)/2) + 2000 + (randi() % 2800)
 		
-		var shouldAddForMoon = 0
-		var moon = null
-		if randi() % 3 == 0:
-			#generate moon
-			moon = planetScene.instantiate()
-			moon.planetType = "lunar"
-			moon.orbiting = newPlanet
-			moon.system = self
-			moon.SIZEINCHUNKS = 8
-			var m = sqrt((moon.SIZEINCHUNKS * 64) * (moon.SIZEINCHUNKS * 64) * 2) 
-			
-			moon.orbitDistance = (c + m * 2) + (randi() % 512)
-			moon.orbitSpeed = 30000.0 / (c + m)
-			moon.orbitPeriod = randf_range(0.0,PI * 2)
-			
-			shouldAddForMoon = (moon.orbitDistance * 2.0) + 2048
-			
-		
-		elif distanceOverlap + distance + shouldAddForMoon > 49950 - newPlanet.SIZEINCHUNKS * 64:
-			newPlanet.queue_free()
-			if moon != null:
-				moon.queue_free()
-			break
 
-		newPlanet.orbitDistance = distanceOverlap + distance + shouldAddForMoon
+		newPlanet.orbitDistance = distanceOverlap + distance
 		newPlanet.orbitSpeed = 30000.0 / (distanceOverlap + distance)
 		newPlanet.orbitPeriod = randf_range(0.0,PI * 2)
 		
-		distanceOverlap += distance + shouldAddForMoon
+		distanceOverlap += distance
 		
 		
 		cosmicBodyContainer.add_child(newPlanet)
-		if moon != null:
-			cosmicBodyContainer.add_child(moon)
+
 		lastPlanet = newPlanet
 	
 	await get_tree().create_timer(0.25).timeout

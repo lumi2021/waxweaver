@@ -132,14 +132,14 @@ func _physics_process(delta):
 		shouldUpdateLight += int(chunk.MUSTUPDATELIGHT)
 		chunk.MUSTUPDATELIGHT = false
 		
-		editTiles(committedChanges)
+		if committedChanges.size() > 0:
+			editTiles(committedChanges)
 	
 	#if shouldUpdateLight > 0 and is_instance_valid(GlobalRef.player):
 	GlobalRef.player.updateLightStatic()
 
 func editTiles(changeCommit):
 	var chunksToUpdate = []
-	
 	for change in changeCommit.keys():
 		var c = changeCommit[change]
 		match c:
@@ -161,34 +161,30 @@ func editTiles(changeCommit):
 					DATAC.setTileData(change.x,change.y,c)
 				DATAC.setTimeData(change.x,change.y,GlobalRef.globalTick)
 		
-		return
-		
-		var foundChunk = chunkArray2D[clamp(change.x/8,0,SIZEINCHUNKS-1)][clamp(change.y/8,0,SIZEINCHUNKS-1)]
-		if !chunksToUpdate.has(foundChunk):
-			chunksToUpdate.append(foundChunk)
+		var chunkVector = Vector2( change.x/8 , change.y/8 )
+		if !chunksToUpdate.has(chunkVector):
+			chunksToUpdate.append(chunkVector)
 		
 		#Theres gotta be a way to clean this up
-		if int(change.x) % 8 == 0 and change.x > 8:
-			var foundChunkLEFT = chunkArray2D[(change.x/8)-1][change.y/8]
-			if !chunksToUpdate.has(foundChunkLEFT):
-				chunksToUpdate.append(foundChunkLEFT)
-		elif int(change.x) % 8 == 7 and change.x < (SIZEINCHUNKS*8)-8:
-			var foundChunkRIGHT = chunkArray2D[(change.x/8)+1][change.y/8]
-			if !chunksToUpdate.has(foundChunkRIGHT):
-				chunksToUpdate.append(foundChunkRIGHT)
-			
-		if int(change.y) % 8 == 0 and change.y > 8:
-			var foundChunkUP = chunkArray2D[change.x/8][(change.y/8)-1]
-			if !chunksToUpdate.has(foundChunkUP):
-				chunksToUpdate.append(foundChunkUP)
-		elif int(change.y) % 8 == 7 and change.y < (SIZEINCHUNKS*8)-8:
-			var foundChunkDOWN = chunkArray2D[change.x/8][(change.y/8)+1]
-			if !chunksToUpdate.has(foundChunkDOWN):
-				chunksToUpdate.append(foundChunkDOWN)
+		if int(change.x) % 8 == 0:
+			if !chunksToUpdate.has(chunkVector + Vector2( -1 , 0 )):
+				chunksToUpdate.append(chunkVector + Vector2( -1 , 0 ))
+		elif int(change.x) % 8 == 7:
+			if !chunksToUpdate.has(chunkVector + Vector2( 1 , 0 )):
+				chunksToUpdate.append(chunkVector + Vector2( 1 , 0 ))
+		if int(change.y) % 8 == 0:
+			if !chunksToUpdate.has(chunkVector + Vector2( 0 , -1 )):
+				chunksToUpdate.append(chunkVector + Vector2( 0 , -1 ))
+		elif int(change.y) % 8 == 7:
+			if !chunksToUpdate.has(chunkVector + Vector2( 0 , 1 )):
+				chunksToUpdate.append(chunkVector + Vector2( 0 , 1 ))
 	
-	for chunk in chunksToUpdate:
-		chunk.drawData()
-
+		if c == 13 or c == -1:
+			print(chunksToUpdate)
+	for vec in chunksToUpdate:
+		if chunkDictionary.has(vec):
+			chunkDictionary[vec].drawData()
+			
 func setLight(x,y,level): ## Useful for settings dynamic moving lights
 	var currentLight = DATAC.getLightData(x,y)
 	if level >= abs(currentLight):
@@ -226,23 +222,30 @@ func generateTerrain():
 	return
 
 func loadChunkArea(pos):
-	var radius :int = 9
+	var radius :int = 11
 	var cool = []
 	for x in range(radius):
 		for y in range(radius):
 			var trueCoords :Vector2 = pos + Vector2( x - (radius/2) , y - (radius/2) )
+			
+			if trueCoords.x != clamp(trueCoords.x,0,SIZEINCHUNKS-1):
+				continue
+			if trueCoords.y != clamp(trueCoords.y,0,SIZEINCHUNKS-1):
+				continue
 			
 			if !chunkDictionary.has(trueCoords):
 				var ins = chunkScene.instantiate()
 				ins.position = trueCoords
 				chunkDictionary[trueCoords] = ins
 				chunkContainer.add_child(ins)
+			
 			cool.append(trueCoords)
 	
-	#for chunk in chunkDictionary.keys():
-	#	if !cool.has(chunk):
-	#		chunkDictionary[chunk].queue_free()
-	#		chunkDictionary.erase(chunk)
+	for chunk in chunkDictionary.keys():
+		if !cool.has(chunk):
+			chunkDictionary[chunk].queue_free()
+			chunkDictionary.erase(chunk)
+			#await get_tree().create_timer(0.1).timeout
 	
 	
 func createChunks():

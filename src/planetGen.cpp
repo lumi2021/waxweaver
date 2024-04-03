@@ -31,8 +31,9 @@ void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
 
             int quad = planet->getPositionLookup(x,y);
             int side = Vector2(x,y).rotated(acos(0.0) * quad).x;
+            int baseSurface = std::max( planetSize / 4, (planetSize/2) - 128 );
             double dis = getBlockDistance(x,y,planet);
-            double surface = (noise->get_noise_1d(side*2.0) * 8.0)  + (planetSize / 4);
+            double surface = (noise->get_noise_1d(side*2.0) * 8.0)  +  baseSurface;
 
             if (dis <= surface){
                 planet->setTileData(x,y,2);
@@ -58,28 +59,28 @@ void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
             
             }
 
-            double r = (std::abs(dis - (planetSize / 6) ) ) / (planetSize / 6.0);
+            double r = (std::abs(dis - (baseSurface * 0.6 ) ) ) / (baseSurface * 0.75);
 
             int caveSize = 2;
             double n = noise->get_noise_2d(x * caveSize, y * caveSize) + r;
-            if ( n < 0.15 && n > -0.15 ){
+            if ( n < 0.25 && n > -0.25 ){
                 planet->setTileData(x,y, airOrCaveAir(x,y,planet) );
             }
 
-            double lakeSurface = (noise->get_noise_1d((2000 + ( planetSize * quad * 0.75)) + (side*0.75)) * 64.0)  + (planetSize / 4);
+            double lakeSurface = (noise->get_noise_1d((2000 + ( planetSize * quad * 0.75)) + (side*0.75)) * 64.0)  + baseSurface;
             if (dis >= lakeSurface && dis <= surface + 5){
                 
                 planet->setTileData(x,y, 4 );
                 planet->setBGData(x,y,3);
 
-                if ( dis <= (planetSize / 4) + 3 && dis >= lakeSurface + 6) {
+                if ( dis <= baseSurface + 3 && dis >= lakeSurface + 6) {
                     planet->setTileData(x,y, 14 );
                 }
                 
                 if (dis >= lakeSurface + 8){
                     planet->setTileData(x,y, airOrCaveAir(x,y,planet) );
                     planet->setBGData(x,y,0);
-                    if ( dis <= (planetSize / 4) + 2) {
+                    if ( dis <= baseSurface + 2) {
                         planet->setWaterData(x,y,1.0);
                     }
                 }

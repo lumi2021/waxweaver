@@ -13,6 +13,7 @@
 
 [node name="GAME CAMERA" type="Camera2D"]
 ignore_rotation = false
+zoom = Vector2(0.5, 0.5)
 script = ExtResource("1_ponhy")
 
 [node name="Compass" type="Sprite2D" parent="."]
