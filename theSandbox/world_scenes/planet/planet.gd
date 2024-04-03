@@ -179,8 +179,6 @@ func editTiles(changeCommit):
 			if !chunksToUpdate.has(chunkVector + Vector2( 0 , 1 )):
 				chunksToUpdate.append(chunkVector + Vector2( 0 , 1 ))
 	
-		if c == 13 or c == -1:
-			print(chunksToUpdate)
 	for vec in chunksToUpdate:
 		if chunkDictionary.has(vec):
 			chunkDictionary[vec].drawData()
