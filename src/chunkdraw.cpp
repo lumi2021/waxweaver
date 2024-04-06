@@ -473,6 +473,11 @@ Vector2i CHUNKDRAW::getWaterImgPos(PLANETDATA *planet,int x,int y, int blockSide
    
     posi.x = std::ceil(std::abs(water * 8.0));
     
+    Vector2i tileABOVE = Vector2i(x,y) + Vector2i( Vector2(0,-1).rotated( acos(0.0) * blockSide ) );
+    double waterlevelabove = planet->getWaterData(tileABOVE.x,tileABOVE.y);
+    if (abs(waterlevelabove) > 0.0 && abs(water) > 0.0){
+        posi.x = 9;
+    }
     
     
     if(sideOfBelow == blockSide){
