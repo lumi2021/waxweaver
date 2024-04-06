@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://b4nfmpvnob0og"]
+[gd_scene load_steps=6 format=3 uid="uid://b4nfmpvnob0og"]
 
 [ext_resource type="Script" path="res://object_scenes/entity/enemy.gd" id="1_sw5hh"]
 [ext_resource type="Resource" uid="uid://birb8qnusvjlh" path="res://object_scenes/entity/enemy_resources/enemyAIs/coolgayslime.tres" id="2_8cxpt"]
 [ext_resource type="PackedScene" uid="uid://bpg7s0ksq17yw" path="res://object_scenes/entity/class/entity_stats.tscn" id="2_qx22g"]
+[ext_resource type="Script" path="res://object_scenes/entity/AmIAllowedToExist.gd" id="4_r88kc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bsfip"]
 size = Vector2(6, 6)
@@ -13,6 +14,9 @@ script = ExtResource("1_sw5hh")
 scriptAI = ExtResource("2_8cxpt")
 
 [node name="EntityStats" parent="." instance=ExtResource("2_qx22g")]
+
+[node name="AmIAllowedToExist" type="Node" parent="."]
+script = ExtResource("4_r88kc")
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_bsfip")

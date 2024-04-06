@@ -36,7 +36,7 @@ public:
 	PLANETDATA();
 	~PLANETDATA();
 
-    void createEmptyArrays(int size);
+    void createEmptyArrays(int size, Vector2 centerPoint);
     
     int getTileData(int x,int y);
     int getBGData(int x,int y);
@@ -60,6 +60,7 @@ public:
     Array createAllChunks(PackedScene *chunkScene, Node *chunkContainer, int sizeInChunks);
 
     int findSpawnPosition();
+    int getBlockPosition(int x,int y,Vector2 centerPoint);
 
 };
 

@@ -14,6 +14,16 @@ func _ready():
 	var g = PLANETGEN.new()
 	theGenerator = g
 	add_child(g)
+	
+	theChunker.attemptSpawnEnemy.connect(attemptSpawnEnemy)
+
+func attemptSpawnEnemy(planet,tile:Vector2,blockID:int,dir:int):
+	var bro = tile + Vector2(0,1).rotated((PI/2)*dir)
+	if planet.getTileData(bro.x,bro.y) > 1:
+		var ins = load("res://object_scenes/entity/enemy.tscn").instantiate()
+		ins.position = planet.get_parent().tileToPos(tile)
+		planet.get_parent().entityContainer.add_child(ins)
+		print("GOOBER SPAWNED AT : " + str(tile))
 
 func breakBlock(x,y,planet,blockID):
 	

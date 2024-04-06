@@ -50,7 +50,7 @@ public:
 
     Array generateTexturesFromData(PLANETDATA *planet,Vector2i pos,Node *body,Ref<Shape2D> shape,bool shipChunk);
 	Array drawLiquid(PLANETDATA *planet,Vector2i pos,bool shipChunk);
-	Array tickUpdate(PLANETDATA *planet,Vector2i pos);
+	Array tickUpdate(PLANETDATA *planet,Vector2i pos,bool onScreen);
 	Dictionary runBreak(PLANETDATA *planet,Vector2i pos,int x,int y,int blockID);
 
 	int scanBlockOpen(PLANETDATA *planet,int x,int y);

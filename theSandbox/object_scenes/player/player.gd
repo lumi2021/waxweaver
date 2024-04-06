@@ -9,7 +9,7 @@ class_name Player
 @onready var animationPlayer = $AnimationPlayer
 @onready var cameraOrigin = $CameraOrigin
 
-@onready var shipDEBUG = preload("res://object_scenes/entity/enemy.tscn")
+@onready var shipDEBUG = preload("res://world_scenes/ship/ship.tscn")
 
 var rotated = 0
 var rotationDelayTicks = 0

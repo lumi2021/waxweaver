@@ -12,6 +12,7 @@ void CHUNKDRAW::_bind_methods() {
     ClassDB::bind_method(D_METHOD("getBlockDictionary","id"), &CHUNKDRAW::getBlockDictionary);
     ClassDB::bind_method(D_METHOD("scanBlockOpen","planetDATAC","x","y"), &CHUNKDRAW::scanBlockOpen);
     ADD_SIGNAL(MethodInfo("chunkDrawn", PropertyInfo(Variant::OBJECT, "node"), PropertyInfo(Variant::OBJECT, "image"), PropertyInfo(Variant::OBJECT, "backImage")));
+    ADD_SIGNAL(MethodInfo("attemptSpawnEnemy", PropertyInfo(Variant::OBJECT, "planetData") , PropertyInfo(Variant::VECTOR2, "tile") , PropertyInfo(Variant::INT, "id") , PropertyInfo(Variant::INT, "blockSide") ));
 }
 
 CHUNKDRAW::CHUNKDRAW() {
@@ -138,8 +139,12 @@ Array CHUNKDRAW::generateTexturesFromData(PLANETDATA *planet,Vector2i pos,Node *
 
 
             col->set_polygon( cunt );
-
-            col->set_position( Vector2( sect*16.0 , 0.0 ) );
+            if(shipChunk){
+                col->set_position( Vector2( sect*16.0 , 0.0 ) + (pos*64) - Vector2( 128 , 128 ) ); //replace last vector with ship chunk size * 32
+                images.append(col);
+            }else{
+                col->set_position( Vector2( sect*16.0 , 0.0 ) );
+            }
             body->add_child(col);
 
         }
@@ -184,7 +189,7 @@ Array CHUNKDRAW::drawLiquid(PLANETDATA *planet,Vector2i pos,bool shipChunk){
 
 }
 
-Array CHUNKDRAW::tickUpdate(PLANETDATA *planet,Vector2i pos){
+Array CHUNKDRAW::tickUpdate(PLANETDATA *planet,Vector2i pos,bool onScreen){
 
     Array collectedChanges;
     bool shouldRedrawLiquid = false;
@@ -203,6 +208,12 @@ Array CHUNKDRAW::tickUpdate(PLANETDATA *planet,Vector2i pos){
 
 
             collectedChanges.append( cock->runOnTick(worldX,worldY,planet,blockSide,blockID) );
+
+            if(!onScreen && std::rand() % 5000 == 0 && blockID < 2){
+                emit_signal("attemptSpawnEnemy", planet, Vector2(worldX,worldY), blockID, blockSide); // this is where ill put the enemy spawn
+
+            }
+           
 
             // SIMULATE WATER //
 

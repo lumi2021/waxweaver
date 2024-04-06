@@ -66,9 +66,10 @@ func _process(delta):
 		 
 func generateEmptyArray():
 	
+	var centerPoint = Vector2(SIZEINCHUNKS*4,SIZEINCHUNKS*4) - Vector2(0.5,0.5)
 	var s := SIZEINCHUNKS * 8
 	
-	DATAC.createEmptyArrays(s)
+	DATAC.createEmptyArrays(s,centerPoint)
 	
 	var testDick = {
 		Vector2(13,18):13,Vector2(14,18):13,Vector2(15,18):13,

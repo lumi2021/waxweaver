@@ -33,13 +33,14 @@ func generateSystem():
 		newPlanet.orbiting = sun
 		newPlanet.system = self
 		
-		var s = 3#(randi() % 5)
+		var s = 5#(randi() % 5)
 		match s:
-			0: newPlanet.SIZEINCHUNKS = 48
-			1: newPlanet.SIZEINCHUNKS = 64
+			0: newPlanet.SIZEINCHUNKS = 64
+			1: newPlanet.SIZEINCHUNKS = 96
 			2: newPlanet.SIZEINCHUNKS = 128
 			3: newPlanet.SIZEINCHUNKS = 256
-			4: newPlanet.SIZEINCHUNKS = 512
+			4: newPlanet.SIZEINCHUNKS = 256
+			5: newPlanet.SIZEINCHUNKS = 256
 		
 		var c = sqrt((newPlanet.SIZEINCHUNKS * 64) * (newPlanet.SIZEINCHUNKS * 64) * 2)
 		var cPrevious = sqrt((lastPlanet.SIZEINCHUNKS * 64) * (lastPlanet.SIZEINCHUNKS * 64) * 2)

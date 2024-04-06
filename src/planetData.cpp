@@ -36,7 +36,7 @@ void PLANETDATA::_bind_methods() {
     ClassDB::bind_method(D_METHOD("findSpawnPosition"), &PLANETDATA::findSpawnPosition);
 }
 
-void PLANETDATA::createEmptyArrays(int size) {
+void PLANETDATA::createEmptyArrays(int size, Vector2 centerPoint) {
 
     int bigSize = size * size;
 
@@ -51,7 +51,19 @@ void PLANETDATA::createEmptyArrays(int size) {
 
     planetSize = size;
 
-    
+    for(int x = 0; x < size; x++){
+        for(int y = 0; y < size; y++){
+            setTileData(x,y,0);
+            setBGData(x,y,0);
+            setLightData(x,y,0.0);
+            setTimeData(x,y,0);
+            setWaterData(x,y,0.0);
+            setPositionLookup(x,y, getBlockPosition(x,y, centerPoint ) );
+        
+        }
+    }
+
+
 
 }
 
@@ -312,4 +324,23 @@ int PLANETDATA::findSpawnPosition(){
     }
 
     return 0;
+}
+
+int PLANETDATA::getBlockPosition(int x,int y,Vector2 centerPoint){
+    Vector2 angle1 = Vector2(1,1);
+    Vector2 angle2 = Vector2(-1,1);
+    Vector2 newPos = Vector2(x,y) - centerPoint;
+
+    int dot1 = newPos.dot(angle1) >= 0;
+    int dot2 = newPos.dot(angle2) > 0;
+    dot2 = dot2 * 2;
+
+    Array nuts;
+    nuts.append(0);
+    nuts.append(1);
+    nuts.append(3);
+    nuts.append(2);
+    
+    return nuts[dot1 + dot2];
+
 }

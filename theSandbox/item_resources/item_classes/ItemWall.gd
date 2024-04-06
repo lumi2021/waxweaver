@@ -23,7 +23,7 @@ func onUse(tileX:int,tileY:int,planetDir:int,planet,lastTile:Vector2):
 		
 		if block > 1:
 			#Succeed if block tile exists
-			var edit = Vector3(tileX,tileY,0)
+			var edit = Vector2i(tileX,tileY)
 			planet.editTiles({edit:blockID})
 			PlayerData.consumeSelected()
 			return "success"
@@ -36,13 +36,13 @@ func onUse(tileX:int,tileY:int,planetDir:int,planet,lastTile:Vector2):
 				continue
 			
 			if planet.DATAC.getBGData(tile.x,tile.y) > 1:
-				var edit = Vector3(tileX,tileY,0)
+				var edit = Vector2i(tileX,tileY)
 				planet.editTiles({edit:blockID})
 				PlayerData.consumeSelected()
 				return "success"
 			
 			if planet.DATAC.getTileData(tile.x,tile.y) > 1:
-				var edit = Vector3(tileX,tileY,0)
+				var edit = Vector2i(tileX,tileY)
 				planet.editTiles({edit:blockID})
 				PlayerData.consumeSelected()
 				return "success"

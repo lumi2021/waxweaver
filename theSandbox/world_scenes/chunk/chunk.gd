@@ -36,7 +36,7 @@ func tickUpdate():
 	
 	MUSTUPDATELIGHT = true
 	# call c++ and return
-	return BlockData.theChunker.tickUpdate(planet.DATAC,pos)
+	return BlockData.theChunker.tickUpdate(planet.DATAC,pos,onScreen)
 
 func drawData():
 	
@@ -63,24 +63,16 @@ func clearCollisions():
 
 func _on_visible_on_screen_notifier_2d_screen_entered():
 	onScreen = true
-	if !planet.visibleChunks.has(self):
-		planet.visibleChunks.append(self)
 	mainLayerSprite.visible = onScreen
 	backLayerSprite.visible = onScreen
-	
-	for b in body.get_children():
-		b.disabled = false
 	
 
 func _on_visible_on_screen_notifier_2d_screen_exited():
 	onScreen = false
-	planet.visibleChunks.erase(self)
 	mainLayerSprite.visible = onScreen
 	backLayerSprite.visible = onScreen
 	
-	for b in body.get_children():
-		b.disabled = true
-
+	
 #debug
 func flicker(show):
 	$Icon.visible = show

@@ -68,7 +68,7 @@ void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
             }
 
             double lakeSurface = (noise->get_noise_1d((2000 + ( planetSize * quad * 0.75)) + (side*0.75)) * 64.0)  + baseSurface;
-            if (dis >= lakeSurface && dis <= surface + 5){
+            if (dis >= lakeSurface && dis <= surface + 6){
                 
                 planet->setTileData(x,y, 4 );
                 planet->setBGData(x,y,3);

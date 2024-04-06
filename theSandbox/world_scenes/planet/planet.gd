@@ -28,10 +28,6 @@ var noise = FastNoiseLite.new()
 
 var tick = 0
 
-var chunkArray2D = []
-
-var visibleChunks = []
-
 var chunkDictionary = {}
 
 var tickAlive = 0
@@ -198,17 +194,7 @@ func generateEmptyArray():
 	
 	var s := SIZEINCHUNKS*8
 	
-	DATAC.createEmptyArrays(s)
-	
-	for x in range(s):
-		for y in range(s):
-			# c++
-			DATAC.setTileData(x,y,0)
-			DATAC.setBGData(x,y,0)
-			DATAC.setLightData(x,y,0.0)
-			DATAC.setTimeData(x,y,0)
-			DATAC.setWaterData(x,y,0.0)
-			DATAC.setPositionLookup(x,y,getBlockPosition(x,y))
+	DATAC.createEmptyArrays(s,centerPoint)
 
 func generateTerrain():
 	match planetType:
@@ -246,10 +232,6 @@ func loadChunkArea(pos):
 			#await get_tree().create_timer(0.1).timeout
 	
 	
-func createChunks():
-	chunkArray2D = DATAC.createAllChunks(chunkScene,chunkContainer,SIZEINCHUNKS)
-	set_physics_process(true)
-	
 func clearChunks():
 	set_physics_process(false)
 
@@ -258,9 +240,8 @@ func clearChunks():
 	add_child(new)
 	chunkContainer = new
 	
-	chunkArray2D = []
-	visibleChunks = []
-
+	chunkDictionary = {}
+	
 ########################################################################
 ################################ MATH ##################################
 ########################################################################
