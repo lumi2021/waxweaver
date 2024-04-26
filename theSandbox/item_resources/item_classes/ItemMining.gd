@@ -1,4 +1,4 @@
-extends Item
+extends ItemDamage
 class_name ItemMining
 
 @export var miningMultiplier = 1.0

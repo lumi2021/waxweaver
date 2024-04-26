@@ -474,7 +474,11 @@ func useItem():
 			
 		lastTileItemUsedOn = Vector2(tile.x,tile.y)
 
-func itemSwingAnimation(itemData):
+func itemSwingAnimation(itemData:Resource):
+	if itemData is ItemDamage:
+		print(itemData.animSpeed)
+		$HandRoot/handSwing.speed_scale = itemData.animSpeed
+		$HandRoot/PlayerHand/ATTACKBOX/CollisionShape2D.disabled = false
 	$HandRoot/handSwing.play("swing")
 	$HandRoot/PlayerHand/itemSprite.texture = itemData.texture
 	$HandRoot/PlayerHand.visible = true
@@ -486,6 +490,7 @@ func _on_hand_swing_animation_finished(anim_name):
 	if itemData == null:
 		$HandRoot/PlayerHand.visible = false
 		$PlayerLayers/handFront.visible = true
+		$HandRoot/PlayerHand/ATTACKBOX/CollisionShape2D.disabled = true
 		return
 	
 	if !itemData.clickToUse and Input.is_action_pressed("mouse_left"):
@@ -494,6 +499,7 @@ func _on_hand_swing_animation_finished(anim_name):
 	
 	$HandRoot/PlayerHand.visible = false
 	$PlayerLayers/handFront.visible = true
+	$HandRoot/PlayerHand/ATTACKBOX/CollisionShape2D.disabled = true
 
 ######################################################################
 ############################ ANIMATION ###############################

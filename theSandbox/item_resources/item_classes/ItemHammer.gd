@@ -1,4 +1,4 @@
-extends Item
+extends ItemDamage
 class_name ItemHammer
 
 func onUse(tileX:int,tileY:int,planetDir:int,planet,lastTile:Vector2):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://c1b1vgh12jqww"]
+[gd_scene load_steps=23 format=3 uid="uid://c1b1vgh12jqww"]
 
 [ext_resource type="Script" path="res://object_scenes/player/player.gd" id="1_7l8c2"]
 [ext_resource type="Texture2D" uid="uid://bdal1quvajxp" path="res://object_scenes/player/sprites/layerHandBack.png" id="2_a2jo3"]
@@ -36,6 +36,9 @@ tracks/0/keys = {
 _data = {
 "swing": SubResource("Animation_1pmq4")
 }
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fhe1y"]
+size = Vector2(18, 4)
 
 [sub_resource type="Animation" id="Animation_vctuh"]
 resource_name = "fall"
@@ -224,7 +227,6 @@ libraries = {
 
 [node name="PlayerHand" type="Node2D" parent="HandRoot"]
 position = Vector2(-2, -2)
-rotation = 0.785398
 
 [node name="itemSprite" type="Sprite2D" parent="HandRoot/PlayerHand"]
 position = Vector2(1, -1)
@@ -236,6 +238,13 @@ offset = Vector2(8, -8)
 modulate = Color(1, 0.784314, 0.333333, 1)
 position = Vector2(2, -2)
 texture = ExtResource("10_pp7um")
+
+[node name="ATTACKBOX" type="Area2D" parent="HandRoot/PlayerHand"]
+rotation = -0.785398
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HandRoot/PlayerHand/ATTACKBOX"]
+position = Vector2(9, 0)
+shape = SubResource("RectangleShape2D_fhe1y")
 
 [node name="FloorAngles" type="Node2D" parent="."]
 
