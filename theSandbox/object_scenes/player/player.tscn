@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://c1b1vgh12jqww"]
+[gd_scene load_steps=26 format=3 uid="uid://c1b1vgh12jqww"]
 
 [ext_resource type="Script" path="res://object_scenes/player/player.gd" id="1_7l8c2"]
 [ext_resource type="Texture2D" uid="uid://bdal1quvajxp" path="res://object_scenes/player/sprites/layerHandBack.png" id="2_a2jo3"]
@@ -11,6 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://bjd5c0gdm1qt2" path="res://object_scenes/player/sprites/layerEyeBlink.png" id="7_sxd0h"]
 [ext_resource type="Texture2D" uid="uid://dei6me4j1chus" path="res://object_scenes/player/sprites/layerHandFront.png" id="8_0olu2"]
 [ext_resource type="Texture2D" uid="uid://bbhygnshkya87" path="res://object_scenes/player/hand.png" id="10_pp7um"]
+[ext_resource type="PackedScene" uid="uid://c05kukkqfrg40" path="res://object_scenes/entity/components/hitbox.tscn" id="12_wduni"]
+[ext_resource type="Script" path="res://object_scenes/entity/components/health_component.gd" id="14_6s78u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8s1yf"]
 size = Vector2(6, 6)
@@ -146,6 +148,9 @@ _data = {
 radius = 4.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jcs3x"]
+size = Vector2(6, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8bj8a"]
 size = Vector2(6, 6)
 
 [node name="Player" type="CharacterBody2D"]
@@ -297,4 +302,19 @@ collision_mask = 32
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShipCollider"]
 shape = SubResource("RectangleShape2D_jcs3x")
 
+[node name="Hitbox" parent="." node_paths=PackedStringArray("healthComponent", "colliderShape") instance=ExtResource("12_wduni")]
+modulate = Color(0.298039, 0.811765, 0, 1)
+healthComponent = NodePath("../HealthComponent")
+enemyBox = false
+invincTime = 1.0
+colliderShape = NodePath("CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_8bj8a")
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("14_6s78u")
+isPlayer = true
+
 [connection signal="animation_finished" from="HandRoot/handSwing" to="." method="_on_hand_swing_animation_finished"]
+[connection signal="healthChanged" from="HealthComponent" to="." method="_on_health_component_health_changed"]

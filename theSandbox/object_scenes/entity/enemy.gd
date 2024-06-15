@@ -19,6 +19,3 @@ func _ready():
 
 func _process(delta):
 	scriptAI.onFrame(delta,self)
-
-func updateHealth():
-	pass

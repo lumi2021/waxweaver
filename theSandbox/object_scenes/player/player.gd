@@ -36,6 +36,8 @@ var noClipSpeed = 200
 
 var tick = 0
 
+var beingKnockedback = false
+
 ######################################################################
 ########################### BASIC FUNTIONS ###########################
 ######################################################################
@@ -161,7 +163,10 @@ func onPlanetMovement(delta):
 	if Input.is_action_pressed("move_right"):
 		dir += 1
 	var newVel = velocity.rotated(-rotated*(PI/2))
-	newVel.x = lerp(newVel.x, dir * speed, 1.0-pow(2.0,(-delta/0.04)))
+	if beingKnockedback:
+		newVel.x = lerp(newVel.x, dir * speed, 0.025)
+	else:
+		newVel.x = lerp(newVel.x, dir * speed, 1.0-pow(2.0,(-delta/0.04)))
 	newVel.y += gravity * delta
 	newVel.y = min(newVel.y,300)
 	var tile = planetOn.posToTile(position)
@@ -188,6 +193,10 @@ func onPlanetMovement(delta):
 	updateLight()
 	
 	ensureCamPosition()
+	
+	
+	if is_on_floor() and beingKnockedback:
+		beingKnockedback = false
 
 func onShipMovement(delta):
 	
@@ -632,3 +641,7 @@ func updateLightStatic():
 	var currentChunk = Vector2(int(pos.x+1024)/64,int(pos.y+1024)/64)
 	var newPos = (currentChunk * 64) - Vector2(1024,1024) - Vector2(288,288)
 	GlobalRef.lightmap.pushUpdate(planetOn,newPos)
+
+
+func _on_health_component_health_changed():
+	PlayerData.sendHealthUpdate($HealthComponent.health,$HealthComponent.maxHealth)

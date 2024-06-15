@@ -22,6 +22,7 @@ ItemData="*res://autoload/ItemData.gd"
 CraftData="*res://autoload/CraftData.gd"
 GlobalRef="*res://autoload/GlobalRef.gd"
 PlayerData="*res://autoload/PlayerData.gd"
+Indicators="*res://autoload/Indicators.gd"
 
 [debug]
 
@@ -235,6 +236,10 @@ rotateShipLeft={
 2d_physics/layer_5="ship"
 2d_physics/layer_6="isShip"
 2d_physics/layer_8="enemy"
+2d_physics/layer_9="hitbox"
+2d_physics/layer_10="layer10"
+2d_physics/layer_13="hurtbox"
+2d_physics/layer_14="layer14"
 
 [physics]
 

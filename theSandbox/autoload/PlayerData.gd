@@ -1,5 +1,10 @@
 extends Node
 
+## HEALTH ##
+var maxHealth :int= 100
+var currentHealth :int= 100
+signal updateHealth
+
 ## MOVEMENT ##
 var speed = 100.0
 
@@ -145,3 +150,8 @@ func craftItem(craftData):
 			return false # can not craft again
 	
 	return true # can craft again
+
+func sendHealthUpdate(newHealth,newMax):
+	maxHealth = newMax
+	currentHealth = newHealth
+	emit_signal("updateHealth")

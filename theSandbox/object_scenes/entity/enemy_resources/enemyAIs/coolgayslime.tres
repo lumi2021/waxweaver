@@ -5,8 +5,3 @@
 [resource]
 script = ExtResource("1_pmw6g")
 gravity = 1000
-maxHealth = 100
-defense = 0
-knockbackResist = 0
-attackDamage = 10
-hitboxSize = 6

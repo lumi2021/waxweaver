@@ -1,9 +1,9 @@
-extends EnemyResource
+extends EnemyAI
 class_name SlimeAI
 
 @export var gravity := 100
 
-func onFrame(delta,enemy):
+func onFrame(delta,enemy:CharacterBody2D):
 	var quad = getWorldPosition(enemy)
 	enemy.up_direction = Vector2(0,-1).rotated(quad*(PI/2))
 	var newVel = enemy.velocity.rotated(quad*-(PI/2))
@@ -21,13 +21,13 @@ func onFrame(delta,enemy):
 	enemy.velocity = newVel.rotated(quad*(PI/2))
 	enemy.move_and_slide()
 	
-func onHit(delta,enemy):
+func onHit(enemy):
 	pass
 
-func onDeath(delta,enemy):
+func onDeath(enemy):
 	pass
 
-func onSpawn(delta,enemy):
+func onSpawn(enemy):
 	pass
 
 func getWorldPosition(enemy):

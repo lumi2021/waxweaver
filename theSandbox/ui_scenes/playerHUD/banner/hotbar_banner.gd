@@ -19,6 +19,9 @@ func _ready():
 	
 	$Menu.visible = false
 	
+	# connect health bar
+	PlayerData.connect("updateHealth",updateHealth)
+	
 func _process(delta):
 	holdSlot.position = to_local(get_global_mouse_position()) - Vector2(6,6)
 	if Input.is_action_just_pressed("inventory"):
@@ -104,5 +107,7 @@ func splitSlot(slot):
 		PlayerData.emit_signal("updateInventory")
 		return
 		
-		
-		
+func updateHealth():
+	$HealthBar/healthText.text = str(PlayerData.currentHealth) + " / " + str(PlayerData.maxHealth)
+	$HealthBar/bar.scale.x = PlayerData.currentHealth / 2.0
+	$HealthBar/barShadow.scale.x = PlayerData.maxHealth / 2.0
