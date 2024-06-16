@@ -13,7 +13,19 @@ var data = {
 	14:load("res://item_resources/items/block_items/SandItem.tres"),
 	
 	1000:load("res://item_resources/items/tool_items/HammerStone.tres"),
+	1001:load("res://item_resources/items/tool_items/DebugSword.tres"),
 }
+
+var heldItemAnims = {
+	"itemSwing" : load("res://item_resources/item_held_scenes/item_swing.tscn"),
+}
+
+func matchItemAnimation(id):
+	var d = getItem(id)
+	if d is ItemDamage:
+		return "itemSwing"
+	
+	return null
 
 func getItem(id):
 	if data.has(id):

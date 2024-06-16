@@ -31,16 +31,20 @@ func _process(delta):
 		if invOpen:
 			crafting.createCraftingIcons()
 	
+	# hotbar scrolling
+	var curSlot = PlayerData.selectedSlot
 	if Input.is_action_just_pressed("scroll_up"):
-		PlayerData.selectedSlot -= 1
-		if PlayerData.selectedSlot < 0:
-			PlayerData.selectedSlot = 9
+		curSlot -= 1
+		if curSlot < 0:
+			curSlot = 9
+		PlayerData.selectSlot(curSlot)
 		for slot in $Hotbar.get_children():
 			slot.updateSelected()
-	if Input.is_action_just_pressed("scroll_down"):
-		PlayerData.selectedSlot += 1
-		if PlayerData.selectedSlot > 9:
-			PlayerData.selectedSlot = 0
+	elif Input.is_action_just_pressed("scroll_down"):
+		curSlot += 1
+		if curSlot > 9:
+			curSlot = 0
+		PlayerData.selectSlot(curSlot)
 		for slot in $Hotbar.get_children():
 			slot.updateSelected()
 	

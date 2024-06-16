@@ -5,8 +5,12 @@
 
 [resource]
 script = ExtResource("1_su2bb")
+damage = 50
+animSpeed = 10.0
+hitboxLength = 16
+hitboxWidth = 8
 id = 1000
 texture = ExtResource("2_jlqr2")
 maxStackSize = 1
-clickToUse = false
+clickToUse = true
 materialIn = Array[int]([])

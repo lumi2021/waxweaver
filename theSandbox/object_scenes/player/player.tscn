@@ -1,46 +1,16 @@
-[gd_scene load_steps=26 format=3 uid="uid://c1b1vgh12jqww"]
+[gd_scene load_steps=19 format=3 uid="uid://c1b1vgh12jqww"]
 
 [ext_resource type="Script" path="res://object_scenes/player/player.gd" id="1_7l8c2"]
-[ext_resource type="Texture2D" uid="uid://bdal1quvajxp" path="res://object_scenes/player/sprites/layerHandBack.png" id="2_a2jo3"]
-[ext_resource type="Texture2D" uid="uid://1ef0ri8u4vs4" path="res://item_resources/item_textures/pickaxeStone.png" id="2_sxcrt"]
+[ext_resource type="Texture2D" uid="uid://dsqy1vjtqj0pm" path="res://object_scenes/player/sprites/fullbody.png" id="3_5ck88"]
 [ext_resource type="PackedScene" uid="uid://cq6k7eeybndp6" path="res://object_scenes/lightmapCover/lightmap.tscn" id="3_37tb5"]
-[ext_resource type="Texture2D" uid="uid://b6gsjyt0j3jus" path="res://object_scenes/player/sprites/layerShirt.png" id="3_vs5p5"]
-[ext_resource type="Texture2D" uid="uid://l1hy80jqh3c8" path="res://object_scenes/player/sprites/layerPants.png" id="4_2l72k"]
-[ext_resource type="Texture2D" uid="uid://4venxjq1gy4m" path="res://object_scenes/player/sprites/layerHead.png" id="5_hktle"]
+[ext_resource type="Texture2D" uid="uid://8or0mhmcnuym" path="res://object_scenes/player/sprites/pupil.png" id="5_64d8m"]
 [ext_resource type="Texture2D" uid="uid://c47fuirjhvx43" path="res://object_scenes/player/sprites/layerEye.png" id="6_uk1hk"]
-[ext_resource type="Texture2D" uid="uid://bjd5c0gdm1qt2" path="res://object_scenes/player/sprites/layerEyeBlink.png" id="7_sxd0h"]
 [ext_resource type="Texture2D" uid="uid://dei6me4j1chus" path="res://object_scenes/player/sprites/layerHandFront.png" id="8_0olu2"]
-[ext_resource type="Texture2D" uid="uid://bbhygnshkya87" path="res://object_scenes/player/hand.png" id="10_pp7um"]
 [ext_resource type="PackedScene" uid="uid://c05kukkqfrg40" path="res://object_scenes/entity/components/hitbox.tscn" id="12_wduni"]
 [ext_resource type="Script" path="res://object_scenes/entity/components/health_component.gd" id="14_6s78u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8s1yf"]
 size = Vector2(6, 6)
-
-[sub_resource type="Animation" id="Animation_1pmq4"]
-resource_name = "swing"
-length = 0.25
-step = 0.01
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerHand:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [-1.18508, 0.785398]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_pmhhj"]
-_data = {
-"swing": SubResource("Animation_1pmq4")
-}
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_fhe1y"]
-size = Vector2(18, 4)
 
 [sub_resource type="Animation" id="Animation_vctuh"]
 resource_name = "fall"
@@ -58,6 +28,18 @@ tracks/0/keys = {
 "args": [5],
 "method": &"setAllPlayerFrames"
 }]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerLayers/eye/Pupil:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-0.5, -9.5)]
 }
 
 [sub_resource type="Animation" id="Animation_w13ke"]
@@ -77,6 +59,18 @@ tracks/0/keys = {
 "method": &"setAllPlayerFrames"
 }]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerLayers/eye/Pupil:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-0.5, -9.5)]
+}
 
 [sub_resource type="Animation" id="Animation_hqg3u"]
 resource_name = "jump"
@@ -94,6 +88,18 @@ tracks/0/keys = {
 "args": [6],
 "method": &"setAllPlayerFrames"
 }]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerLayers/eye/Pupil:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-0.5, -9.5)]
 }
 
 [sub_resource type="Animation" id="Animation_0sji6"]
@@ -126,18 +132,34 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("BackItem:position")
-tracks/1/interp = 0
+tracks/1/path = NodePath("PlayerLayers/eye/Pupil:position")
+tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"transitions": PackedFloat32Array(0, 0, 0, 0),
 "update": 0,
-"values": [Vector2(0, -1), Vector2(0, 0), Vector2(0, -1), Vector2(0, 0)]
+"values": [Vector2(-0.5, -10.5), Vector2(-0.5, -9.5), Vector2(-0.5, -10.5), Vector2(-0.5, -9.5)]
+}
+
+[sub_resource type="Animation" id="Animation_t2x0d"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerLayers/eye/Pupil:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-0.5, -9.5)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4n17m"]
 _data = {
+"RESET": SubResource("Animation_t2x0d"),
 "fall": SubResource("Animation_vctuh"),
 "idle": SubResource("Animation_w13ke"),
 "jump": SubResource("Animation_hqg3u"),
@@ -164,92 +186,41 @@ script = ExtResource("1_7l8c2")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_8s1yf")
 
-[node name="BackItem" type="Sprite2D" parent="."]
-position = Vector2(0, -1)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_sxcrt")
-offset = Vector2(-5.333, -3.433)
-flip_h = true
-flip_v = true
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("14_6s78u")
+isPlayer = true
 
-[node name="PlayerLayers" type="CanvasGroup" parent="."]
+[node name="PlayerLayers" type="Node2D" parent="."]
 
-[node name="handBack" type="Sprite2D" parent="PlayerLayers"]
+[node name="body" type="Sprite2D" parent="PlayerLayers"]
 modulate = Color(1, 0.784314, 0.333333, 1)
 position = Vector2(0, 3)
-texture = ExtResource("2_a2jo3")
-offset = Vector2(0, -8)
-hframes = 7
-
-[node name="shirt" type="Sprite2D" parent="PlayerLayers"]
-modulate = Color(1, 0.784314, 0.333333, 1)
-position = Vector2(0, 3)
-texture = ExtResource("3_vs5p5")
-offset = Vector2(0, -8)
-hframes = 7
-
-[node name="pants" type="Sprite2D" parent="PlayerLayers"]
-modulate = Color(1, 0.784314, 0.333333, 1)
-position = Vector2(0, 3)
-texture = ExtResource("4_2l72k")
-offset = Vector2(0, -8)
-hframes = 7
-
-[node name="head" type="Sprite2D" parent="PlayerLayers"]
-modulate = Color(1, 0.784314, 0.333333, 1)
-position = Vector2(0, 3)
-texture = ExtResource("5_hktle")
+texture = ExtResource("3_5ck88")
 offset = Vector2(0, -8)
 hframes = 7
 
 [node name="eye" type="Sprite2D" parent="PlayerLayers"]
+clip_children = 2
 position = Vector2(0, 3)
 texture = ExtResource("6_uk1hk")
 offset = Vector2(0, -8)
 hframes = 7
 
-[node name="eyeBlink" type="Sprite2D" parent="PlayerLayers"]
-visible = false
-position = Vector2(0, 3)
-texture = ExtResource("7_sxd0h")
-offset = Vector2(0, -8)
-hframes = 7
+[node name="Pupil" type="Sprite2D" parent="PlayerLayers/eye"]
+position = Vector2(-0.5, -9.5)
+texture = ExtResource("5_64d8m")
 
 [node name="handFront" type="Sprite2D" parent="PlayerLayers"]
-visible = false
 modulate = Color(1, 0.784314, 0.333333, 1)
 position = Vector2(0, 3)
 texture = ExtResource("8_0olu2")
 offset = Vector2(0, -8)
 hframes = 7
 
-[node name="HandRoot" type="Node2D" parent="."]
+[node name="itemWorldRotation" type="Node2D" parent="."]
 
-[node name="handSwing" type="AnimationPlayer" parent="HandRoot"]
-libraries = {
-"": SubResource("AnimationLibrary_pmhhj")
-}
-
-[node name="PlayerHand" type="Node2D" parent="HandRoot"]
+[node name="heldItemRoot" type="Node2D" parent="itemWorldRotation"]
 position = Vector2(-2, -2)
-
-[node name="itemSprite" type="Sprite2D" parent="HandRoot/PlayerHand"]
-position = Vector2(1, -1)
-scale = Vector2(0.8, 0.8)
-texture = ExtResource("2_sxcrt")
-offset = Vector2(8, -8)
-
-[node name="Hand" type="Sprite2D" parent="HandRoot/PlayerHand"]
-modulate = Color(1, 0.784314, 0.333333, 1)
-position = Vector2(2, -2)
-texture = ExtResource("10_pp7um")
-
-[node name="ATTACKBOX" type="Area2D" parent="HandRoot/PlayerHand"]
-rotation = -0.785398
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HandRoot/PlayerHand/ATTACKBOX"]
-position = Vector2(9, 0)
-shape = SubResource("RectangleShape2D_fhe1y")
 
 [node name="FloorAngles" type="Node2D" parent="."]
 
@@ -306,15 +277,10 @@ shape = SubResource("RectangleShape2D_jcs3x")
 modulate = Color(0.298039, 0.811765, 0, 1)
 healthComponent = NodePath("../HealthComponent")
 enemyBox = false
-invincTime = 1.0
+invincTime = 0.5
 colliderShape = NodePath("CollisionShape2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("RectangleShape2D_8bj8a")
 
-[node name="HealthComponent" type="Node" parent="."]
-script = ExtResource("14_6s78u")
-isPlayer = true
-
-[connection signal="animation_finished" from="HandRoot/handSwing" to="." method="_on_hand_swing_animation_finished"]
 [connection signal="healthChanged" from="HealthComponent" to="." method="_on_health_component_health_changed"]

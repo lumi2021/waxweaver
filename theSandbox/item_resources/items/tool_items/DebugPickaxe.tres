@@ -6,8 +6,8 @@
 [resource]
 script = ExtResource("1_tnqt7")
 miningMultiplier = 10000.0
-damage = 5
-animSpeed = 4.0
+damage = 1
+animSpeed = 20.0
 hitboxLength = 16
 hitboxWidth = 8
 id = 1

@@ -5,7 +5,6 @@ class_name Player
 @export var system : Node2D
 
 @onready var sprite = $PlayerLayers
-@onready var backItem = $BackItem
 @onready var animationPlayer = $AnimationPlayer
 @onready var cameraOrigin = $CameraOrigin
 
@@ -35,8 +34,14 @@ var noClip = false
 var noClipSpeed = 200
 
 var tick = 0
+var blinkTick = 0
 
 var beingKnockedback = false
+
+var wasInWater = false
+
+@onready var itemRoot = $itemWorldRotation/heldItemRoot
+var heldItemAnim :itemHeldClass = null
 
 ######################################################################
 ########################### BASIC FUNTIONS ###########################
@@ -45,15 +50,17 @@ var beingKnockedback = false
 
 func _ready():
 	GlobalRef.player = self
+	PlayerData.connect("selectedSlotChanged",swapSlot)
 	
-	PlayerData.updateInventory.connect(setBackItemTexture)
-	
+	PlayerData.addItem(1001,1)
 	PlayerData.addItem(1,1)
 	PlayerData.addItem(0,1)
 	PlayerData.addItem(1000,1)
 	PlayerData.addItem(7,99)
 	PlayerData.addItem(13,198)
 	PlayerData.addItem(-13,198)
+	
+	PlayerData.selectSlot(0)
 
 func _process(delta):
 	
@@ -81,12 +88,12 @@ func _process(delta):
 	
 	## Ignore below for now ##
 	$MouseOver.global_position = get_global_mouse_position()
+	runItemProcess()
 	if Input.is_action_pressed("mouse_left"):
 		useItem()
 	else:
 		lastTileItemUsedOn = Vector2(-10,-10)
-		$HandRoot/PlayerHand.visible = false
-		$PlayerLayers/handFront.visible = true
+
 	
 	#map toggle
 	if Input.is_action_just_pressed("map"):
@@ -144,7 +151,7 @@ func onPlanetMovement(delta):
 		rotationDelayTicks = 8 #frame delay
 	
 	sprite.rotation = lerp_angle(sprite.rotation,rotated*(PI/2),0.4)
-	$HandRoot.rotation = sprite.rotation
+	$itemWorldRotation.rotation = sprite.rotation
 	up_direction = Vector2(0,-1).rotated(rotated*(PI/2))
 	
 	var underCeiling = isUnderCeiling(rotated*(PI/2))
@@ -172,13 +179,19 @@ func onPlanetMovement(delta):
 	var tile = planetOn.posToTile(position)
 	
 	if tile != null:
+		# if in water
 		if abs(planetOn.DATAC.getWaterData(tile.x,tile.y)) > 0.2:
+			wasInWater = true
 			newVel.y = min(newVel.y,50)
 			if Input.is_action_pressed("jump"):
 				newVel.y = -100.0
 			if onFloor:
 				GlobalRef.camera.rotation = lerp_angle(GlobalRef.camera.rotation,rotated*(PI/2),1.0-pow(2.0,(-delta/0.06)))
 		else:
+			if wasInWater:
+				newVel.y += -150.0
+				wasInWater = false
+			
 			if onFloor:
 				if Input.is_action_just_pressed("jump"):
 					newVel.y = -275
@@ -207,7 +220,7 @@ func onShipMovement(delta):
 	var newRotation = shipOn.rotation
 	
 	sprite.rotation = lerp_angle(sprite.rotation,shipOn.rotation,0.4)
-	$HandRoot.rotation = sprite.rotation
+	$itemWorldRotation.rotation = sprite.rotation
 	up_direction = Vector2(0,-1).rotated(shipOn.rotation)
 	
 	var underCeiling = isUnderCeiling(shipOn.rotation)
@@ -425,17 +438,12 @@ func useItem():
 	
 	var itemData = PlayerData.getSelectedItemData()
 	if itemData == null:
-		$HandRoot/PlayerHand.visible = false
 		$PlayerLayers/handFront.visible = true
-		$HandRoot/handSwing.stop()
 		return
 	
+
 	
-	if Input.is_action_just_pressed("anyInventoryKey"):
-		$HandRoot/handSwing.stop()
-		$HandRoot/PlayerHand/itemSprite.texture = itemData.texture
-		return
-	
+	# Determine whether or not to target ship
 	var areas = $MouseOver.get_overlapping_areas()
 	var ship = null
 	var editBody = planetOn
@@ -458,10 +466,6 @@ func useItem():
 							editBody = ship
 							break
 	
-	
-	#if !is_instance_valid(planet) and !is_instance_valid(ship):
-	#	return
-	
 	if editBody == null:
 		return
 	
@@ -473,42 +477,43 @@ func useItem():
 		if itemData.clickToUse:
 			if Input.is_action_just_pressed("mouse_left"):
 				itemData.onUse(tile.x,tile.y,getPlanetPosition(),editBody,lastTileItemUsedOn)
-				itemSwingAnimation(itemData)
-				
 		else:
 			itemData.onUse(tile.x,tile.y,getPlanetPosition(),editBody,lastTileItemUsedOn)
-			if !$HandRoot/handSwing.is_playing():
-				itemSwingAnimation(itemData)
-			
-			
+		
 		lastTileItemUsedOn = Vector2(tile.x,tile.y)
 
-func itemSwingAnimation(itemData:Resource):
-	if itemData is ItemDamage:
-		print(itemData.animSpeed)
-		$HandRoot/handSwing.speed_scale = itemData.animSpeed
-		$HandRoot/PlayerHand/ATTACKBOX/CollisionShape2D.disabled = false
-	$HandRoot/handSwing.play("swing")
-	$HandRoot/PlayerHand/itemSprite.texture = itemData.texture
-	$HandRoot/PlayerHand.visible = true
-	$PlayerLayers/handFront.visible = false
+func swapSlot():
+	# clear previousAnimation
+	for i in itemRoot.get_children():
+		i.queue_free()
+	
+	var itemID = PlayerData.getSelectedItemID()
+	var s = ItemData.matchItemAnimation(itemID)
+	
+	if s == null:
+		heldItemAnim = null
+		return
+	
+	var ins = ItemData.heldItemAnims[s].instantiate()
+	ins.itemID = itemID
+	ins.handColor = $PlayerLayers/body.modulate
+	
+	heldItemAnim = ins
+	itemRoot.add_child(ins)
 
-func _on_hand_swing_animation_finished(anim_name):
-	var itemData = PlayerData.getSelectedItemData()
-	
-	if itemData == null:
-		$HandRoot/PlayerHand.visible = false
-		$PlayerLayers/handFront.visible = true
-		$HandRoot/PlayerHand/ATTACKBOX/CollisionShape2D.disabled = true
+func runItemProcess():
+	if !is_instance_valid(heldItemAnim):
 		return
 	
-	if !itemData.clickToUse and Input.is_action_pressed("mouse_left"):
-		$HandRoot/handSwing.play(anim_name)
-		return
+	$PlayerLayers/handFront.visible = !heldItemAnim.visible
 	
-	$HandRoot/PlayerHand.visible = false
-	$PlayerLayers/handFront.visible = true
-	$HandRoot/PlayerHand/ATTACKBOX/CollisionShape2D.disabled = true
+	if Input.is_action_just_pressed("mouse_left"):
+		heldItemAnim.onFirstUse()
+	
+	if Input.is_action_pressed("mouse_left"):
+		heldItemAnim.onUsing()
+	else:
+		heldItemAnim.onNotUsing()
 
 ######################################################################
 ############################ ANIMATION ###############################
@@ -518,11 +523,32 @@ func playerAnimation(dir,newVel,delta):
 	#improve this later
 	if dir != 0:
 		sprite.scale.x = dir
-		backItem.flip_h = dir == 1
-		backItem.offset.x = 5.33333 * -dir
-		$HandRoot.scale.x = dir
+		$itemWorldRotation.scale.x = dir
 	
-	backItem.visible = PlayerData.selectedSlot != 0
+	var glob = global_position - get_global_mouse_position()
+	var gay = glob.rotated(-GlobalRef.camera.rotation)
+	var newDir = (int(gay.x < 0) * 2) - 1
+	
+	# rotate player if using item
+	if Input.is_action_pressed("mouse_left"):
+		sprite.scale.x = newDir
+		$itemWorldRotation.scale.x = newDir
+	
+	$PlayerLayers/eye/Pupil.offset = gay.normalized() * Vector2(-sprite.scale.x,-1)
+	
+	# silly blink
+	blinkTick += 1
+	if blinkTick > 120:
+		if randi() % 60 == 0:
+			$PlayerLayers/eye.visible = false
+			blinkTick = -5
+			if randi() % 6 == 0:
+				blinkTick = -15
+			
+	if blinkTick == 0 or blinkTick == -10:
+		$PlayerLayers/eye.visible = true
+	elif blinkTick == -5:
+		$PlayerLayers/eye.visible = false
 	
 	var flor = isOnFloor(rotated*(PI/2))
 	if shipOn != null:
@@ -539,9 +565,6 @@ func playerAnimation(dir,newVel,delta):
 		animationPlayer.play("idle")
 	elif animationPlayer.current_animation != "walk":
 			animationPlayer.play("walk")
-
-func setBackItemTexture():
-	backItem.texture = ItemData.data[PlayerData.inventory[0][0]].texture
 
 func setAllPlayerFrames(frame:int):
 	for obj in sprite.get_children():

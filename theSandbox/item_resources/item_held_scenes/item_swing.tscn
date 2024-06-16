@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://bs18dnn7rrvnt"]
+
+[ext_resource type="Script" path="res://item_resources/item_held_scenes/item_swing.gd" id="1_vpor5"]
+[ext_resource type="Texture2D" uid="uid://ns4wubunaahm" path="res://item_resources/item_textures/SWORD.png" id="1_wqmpt"]
+[ext_resource type="Texture2D" uid="uid://bbhygnshkya87" path="res://object_scenes/player/hand.png" id="2_yqhsd"]
+[ext_resource type="PackedScene" uid="uid://8jw6pruiu3cf" path="res://object_scenes/entity/components/hurtbox.tscn" id="3_epa84"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oq2lk"]
+size = Vector2(22, 4)
+
+[node name="itemSwing" type="Node2D" node_paths=PackedStringArray("sprite", "handSprite")]
+script = ExtResource("1_vpor5")
+sprite = NodePath("holder/sprite")
+handSprite = NodePath("holder/handSprite")
+
+[node name="holder" type="Node2D" parent="."]
+
+[node name="sprite" type="Sprite2D" parent="holder"]
+position = Vector2(1, -1)
+texture = ExtResource("1_wqmpt")
+offset = Vector2(8, -8)
+
+[node name="handSprite" type="Sprite2D" parent="holder"]
+modulate = Color(1, 0.784314, 0.333333, 1)
+position = Vector2(2, -2)
+texture = ExtResource("2_yqhsd")
+
+[node name="Hurtbox" parent="holder" instance=ExtResource("3_epa84")]
+rotation = -0.785398
+enemyBox = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="holder/Hurtbox"]
+position = Vector2(13, 0)
+shape = SubResource("RectangleShape2D_oq2lk")

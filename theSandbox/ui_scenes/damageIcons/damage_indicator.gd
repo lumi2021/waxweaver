@@ -10,6 +10,7 @@ var tick = 0
 var flashSpeed = 0.1
 
 func _ready():
+	rotation = GlobalRef.camera.rotation
 	$Label.text = str(number)
 	velocity = Vector2(1,0).rotated(randf_range(-PI,PI))
 	velocity.y = abs(velocity.y) * -2.5

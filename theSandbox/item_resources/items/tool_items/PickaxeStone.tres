@@ -5,6 +5,13 @@
 
 [resource]
 script = ExtResource("1_ak4lg")
+miningMultiplier = 1.0
+damage = 0
+animSpeed = 5.0
+hitboxLength = 16
+hitboxWidth = 8
 id = 2
 texture = ExtResource("2_sf7ke")
 maxStackSize = 1
+clickToUse = false
+materialIn = Array[int]([])

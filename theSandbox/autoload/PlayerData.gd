@@ -14,6 +14,7 @@ var speed = 100.0
 var inventory = {} #0-39 inventory, 40-42 armor, 43-48 acces, 49 held
 signal updateInventory
 signal onlyUpdateCraft
+signal selectedSlotChanged
 var selectedSlot = 0
 
 func _ready():
@@ -83,6 +84,9 @@ func swapItem(slot1,slot2):
 
 func getSelectedItemData():
 	return ItemData.data[inventory[selectedSlot][0]]
+
+func getSelectedItemID():
+	return inventory[selectedSlot][0]
 
 func consumeSelected():
 	inventory[selectedSlot][1] -= 1
@@ -155,3 +159,7 @@ func sendHealthUpdate(newHealth,newMax):
 	maxHealth = newMax
 	currentHealth = newHealth
 	emit_signal("updateHealth")
+
+func selectSlot(newSlot):
+	selectedSlot = newSlot
+	emit_signal("selectedSlotChanged")

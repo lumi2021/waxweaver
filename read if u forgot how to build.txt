@@ -1,0 +1,14 @@
+TO BUILD FOR WINDOWS DO
+
+scons platform=windows
+
+( add "target=template_release" var if u want)
+
+
+TO BUILD FOR WEB DO
+
+emsdk_env.bat
+
+ THEN DO
+ 
+scons platform=web target=template_release
