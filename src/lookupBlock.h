@@ -22,6 +22,9 @@
 #include "blockTreeBranchLeaf.h" // id 12
 #include "blockWood.h" // id 13
 #include "blockSand.h" // id 14
+#include "blockTableWood.h" // id 15
+
+// adding a new block? make sure you increment the PENIS array !
 
 namespace godot {
 
@@ -37,7 +40,7 @@ public:
 	
 	Array allBlocks;
 
-	BLOCK *penis[15];
+	BLOCK *penis[16]; // must be largest id + 1
 
 	LOOKUPBLOCK();
 	~LOOKUPBLOCK();
@@ -51,6 +54,7 @@ public:
 
 	bool isConnectedTexture(int id);
 	bool isTextureConnector(int id);
+	bool isMultitile(int id);
 	double getLightMultiplier(int id);
 	double getLightEmmission(int id);
 

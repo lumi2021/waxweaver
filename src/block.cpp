@@ -33,6 +33,8 @@ BLOCK::BLOCK() {
     // in seconds
     breakTime = 0.5;
 
+    multitile = false;
+
     setNewVariables();
 
 }

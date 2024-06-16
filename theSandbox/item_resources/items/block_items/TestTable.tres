@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ItemMultitile" load_steps=3 format=3 uid="uid://caj4wfar7eeqt"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemMultitile.gd" id="1_l5ooy"]
+[ext_resource type="Texture2D" uid="uid://bo5pvyuiihqkj" path="res://block_resources/block_textures/error.png" id="2_lrljn"]
+
+[resource]
+script = ExtResource("1_l5ooy")
+blockID = 15
+size = Vector2(3, 2)
+grounded = true
+needsWalls = false
+id = 15
+texture = ExtResource("2_lrljn")
+maxStackSize = 99
+clickToUse = false
+materialIn = Array[int]([])

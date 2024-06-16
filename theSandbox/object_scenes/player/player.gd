@@ -59,8 +59,10 @@ func _ready():
 	PlayerData.addItem(7,99)
 	PlayerData.addItem(13,198)
 	PlayerData.addItem(-13,198)
+	PlayerData.addItem(15,1)
 	
 	PlayerData.selectSlot(0)
+	
 
 func _process(delta):
 	

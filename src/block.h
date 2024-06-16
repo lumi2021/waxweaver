@@ -49,6 +49,8 @@ public:
 
     double breakTime;
 
+    bool multitile;
+
 
 	BLOCK();
 	~BLOCK();

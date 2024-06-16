@@ -59,31 +59,31 @@ Array CHUNKDRAW::generateTexturesFromData(PLANETDATA *planet,Vector2i pos,Node *
                 int blockID = planet->getTileData(worldX,worldY);
                 int backBlockID = planet->getBGData(worldX,worldY);
 
+                int blockInfo = planet->getInfoData(worldX,worldY);
+
                 if (blockID>1){
                     
                     Ref<Image> blockImg = cock->getTextureImage(blockID);
+                    Ref<Image> individualBlock = Image::create(8, 8, false, Image::FORMAT_RGBA8);
                     
-                    bool rotate = cock->isGravityRotate(blockID);
-                    if (rotate){ 
-                        for(int g = 0; g < blockSide; g++){
-                            blockImg->rotate_90(ClockDirection::CLOCKWISE);
-                        }
-                    }
 
                     int frame = 0;
                     if( cock->isConnectedTexture(blockID) ){ frame = scanBlockOpen(planet,worldX,worldY); }
+                    if( cock->isMultitile(blockID) ){ frame = blockInfo * 8; }
                     Rect2i blockRect = Rect2i(frame,0,8,8);
+                    individualBlock = blockImg->get_region(blockRect);
 
-                    
-
-                    img->blend_rect(blockImg, blockRect, imgPos);
-
-                    // unrotate it, this is hacky i know
+                    bool rotate = cock->isGravityRotate(blockID);
                     if (rotate){ 
                         for(int g = 0; g < blockSide; g++){
-                            blockImg->rotate_90(ClockDirection::COUNTERCLOCKWISE);
+                            individualBlock->rotate_90(ClockDirection::CLOCKWISE);
                         }
                     }
+                    
+
+                    img->blend_rect(individualBlock, Rect2i(0,0,8,8), imgPos);
+
+
                     
                     if( cock->hasCollision(blockID) ) {
                         colliderImg->fill_rect(Rect2i(x*8,y*8,8,8),Color::hex(0xFFFFFFFF));

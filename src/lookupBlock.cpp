@@ -27,8 +27,9 @@ LOOKUPBLOCK::LOOKUPBLOCK() {
     penis[12] = new BLOCKTREEBRANCHLEAF();
     penis[13] = new BLOCKWOOD();
     penis[14] = new BLOCKSAND();
+    penis[15] = new BLOCKTABLEWOOD();
 
-    for(int i = 0; i < 15; i++){
+    for(int i = 0; i < 16; i++){ // make sure u increase me too !!
         penis[i]->setLookUp(this);
     }
 
@@ -84,6 +85,12 @@ bool LOOKUPBLOCK::isTextureConnector(int id){
     BLOCK* g = penis[id];
 
     return g->connectTexturesToMe;
+}
+
+bool LOOKUPBLOCK::isMultitile(int id){
+    BLOCK* g = penis[id];
+
+    return g->multitile;
 }
 
 double LOOKUPBLOCK::getLightMultiplier(int id){

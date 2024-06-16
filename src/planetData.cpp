@@ -22,6 +22,9 @@ void PLANETDATA::_bind_methods() {
     ClassDB::bind_method(D_METHOD("getTimeData","x","y"), &PLANETDATA::getTimeData);
     ClassDB::bind_method(D_METHOD("setTimeData","x","y","newValue"), &PLANETDATA::setTimeData);
 
+    ClassDB::bind_method(D_METHOD("getInfoData","x","y"), &PLANETDATA::getInfoData);
+    ClassDB::bind_method(D_METHOD("setInfoData","x","y","newValue"), &PLANETDATA::setInfoData);
+
     ClassDB::bind_method(D_METHOD("setGlobalTick","tick"), &PLANETDATA::setGlobalTick);
     ClassDB::bind_method(D_METHOD("getGlobalTick"), &PLANETDATA::getGlobalTick);
 
@@ -58,6 +61,7 @@ void PLANETDATA::createEmptyArrays(int size, Vector2 centerPoint) {
             setLightData(x,y,0.0);
             setTimeData(x,y,0);
             setWaterData(x,y,0.0);
+            setInfoData(x,y,0);
             setPositionLookup(x,y, getBlockPosition(x,y, centerPoint ) );
         
         }
@@ -210,6 +214,35 @@ bool PLANETDATA::setWaterData(int x, int y, double newValue) {
     int xyToLarge = (x * planetSize) + y;
 
     waterData[xyToLarge] = newValue;
+   
+    return true;
+}
+
+// INFO DATA //
+int PLANETDATA::getInfoData(int x, int y) {
+
+    if ( x != std::clamp(x,0,planetSize-1) ){
+        return 0;
+    }
+    if ( y != std::clamp(y,0,planetSize-1) ){
+        return 0;
+    }
+
+    int xyToLarge = (x * planetSize) + y;
+    
+    int tile = infoData[xyToLarge];
+   
+    return tile;
+}
+
+bool PLANETDATA::setInfoData(int x, int y, int newValue) {
+
+    int bigSize = planetSize * planetSize;
+
+    int xyToLarge = (x * planetSize) + y;
+    xyToLarge = std::clamp(xyToLarge,0,bigSize-1);
+
+    infoData[xyToLarge] = newValue;
    
     return true;
 }

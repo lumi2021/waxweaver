@@ -11,6 +11,7 @@ var data = {
 	13:load("res://item_resources/items/block_items/WoodItem.tres"),
 	-13:load("res://item_resources/items/wall_items/WoodWallItem.tres"),
 	14:load("res://item_resources/items/block_items/SandItem.tres"),
+	15:load("res://item_resources/items/block_items/TestTable.tres"),
 	
 	1000:load("res://item_resources/items/tool_items/HammerStone.tres"),
 	1001:load("res://item_resources/items/tool_items/DebugSword.tres"),

@@ -43,6 +43,7 @@ public:
     double getLightData(int x,int y);
     double getWaterData(int x,int y);
     int getTimeData(int x,int y);
+    int getInfoData(int x,int y);
 
     int getPositionLookup(int x, int y);
 
@@ -51,6 +52,7 @@ public:
     bool setLightData(int x,int y,double newValue);
     bool setWaterData(int x,int y,double newValue);
     bool setTimeData(int x,int y,int newValue);
+    bool setInfoData(int x,int y,int newValue);
 
     bool setPositionLookup(int x, int y, int newValue);
 
