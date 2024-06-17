@@ -18,6 +18,8 @@ public:
 	BLOCKTABLEWOOD();
 	~BLOCKTABLEWOOD();
 
+	Dictionary onBreak(int x, int y, PLANETDATA *planet, int dir);
+
 };
 
 }
