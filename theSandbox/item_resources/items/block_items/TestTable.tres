@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_l5ooy")
-blockID = 15
+blockID = 16
 size = Vector2(3, 2)
 grounded = true
 needsWalls = false

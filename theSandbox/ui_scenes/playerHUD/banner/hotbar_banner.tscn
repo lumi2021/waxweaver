@@ -104,7 +104,6 @@ showOutline = false
 isHoldSlot = true
 
 [node name="Menu" type="Node2D" parent="."]
-visible = false
 position = Vector2(-1, -1)
 
 [node name="background" type="ColorRect" parent="Menu"]
@@ -299,7 +298,6 @@ offset_right = 180.0
 offset_bottom = 136.0
 theme = SubResource("Theme_yy38c")
 horizontal_scroll_mode = 0
-vertical_scroll_mode = 2
 
 [node name="GridContainer" type="GridContainer" parent="Menu/Crafting/ScrollContainer"]
 layout_mode = 2

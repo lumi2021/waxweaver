@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemBlock" load_steps=3 format=3 uid="uid://cdtfsl3jpc4vv"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemBlock.gd" id="1_gru72"]
+[ext_resource type="Texture2D" uid="uid://c3h8hh2ebvhpq" path="res://block_resources/block_textures/torch.png" id="2_j7gaa"]
+
+[resource]
+script = ExtResource("1_gru72")
+blockID = 15
+id = 15
+texture = ExtResource("2_j7gaa")
+maxStackSize = 99
+clickToUse = false
+materialIn = Array[int]([])

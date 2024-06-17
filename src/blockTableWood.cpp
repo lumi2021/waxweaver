@@ -14,7 +14,7 @@ BLOCKTABLEWOOD::BLOCKTABLEWOOD() {
     rotateTextureToGravity = true;
     hasCollision = false;
     connectTexturesToMe = false;
-    lightMultiplier = 1.0;
+    lightMultiplier = 0.99;
 
 }
 

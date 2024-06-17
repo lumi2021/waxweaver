@@ -21,7 +21,6 @@ BLOCKSAPLING::BLOCKSAPLING() {
     hasCollision = false;
 
     lightMultiplier = 1.0;
-    lightEmmission = 2.8;
 
     rotateTextureToGravity = true;
 

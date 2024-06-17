@@ -58,8 +58,9 @@ func _ready():
 	PlayerData.addItem(1000,1)
 	PlayerData.addItem(7,99)
 	PlayerData.addItem(13,198)
-	PlayerData.addItem(-13,198)
-	PlayerData.addItem(15,1)
+	PlayerData.addItem(-13,99)
+	PlayerData.addItem(15,99)
+	PlayerData.addItem(16,99)
 	
 	PlayerData.selectSlot(0)
 	
