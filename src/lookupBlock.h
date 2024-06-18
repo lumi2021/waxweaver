@@ -24,6 +24,7 @@
 #include "blockSand.h" // id 14
 #include "blockTorch.h" // id 15
 #include "blockTableWood.h" // id 16
+#include "blockTallGrass.h" // id 17
 
 // adding a new block? make sure you increment the PENIS array !
 
@@ -41,7 +42,7 @@ public:
 	
 	Array allBlocks;
 
-	BLOCK *penis[17]; // must be largest id + 1
+	BLOCK *penis[18]; // must be largest id + 1
 
 	LOOKUPBLOCK();
 	~LOOKUPBLOCK();
@@ -56,6 +57,7 @@ public:
 	bool isConnectedTexture(int id);
 	bool isTextureConnector(int id);
 	bool isMultitile(int id);
+	bool isAnimated(int id);
 	double getLightMultiplier(int id);
 	double getLightEmmission(int id);
 

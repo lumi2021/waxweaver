@@ -7,6 +7,12 @@ using namespace godot;
 
 void LOOKUPBLOCK::_bind_methods() {
     ClassDB::bind_method(D_METHOD("getBlockData","id"), &LOOKUPBLOCK::getBlockData);
+
+    ClassDB::bind_method(D_METHOD("isMultitile","id"), &LOOKUPBLOCK::isMultitile);
+    ClassDB::bind_method(D_METHOD("isAnimated","id"), &LOOKUPBLOCK::isMultitile);
+    ClassDB::bind_method(D_METHOD("hasCollision","id"), &LOOKUPBLOCK::hasCollision);
+    ClassDB::bind_method(D_METHOD("isGravityRotate","id"), &LOOKUPBLOCK::isGravityRotate);
+    ClassDB::bind_method(D_METHOD("getTextureImage","id"), &LOOKUPBLOCK::getTextureImage);
 }
 
 // ADD BLOCKS TO ARRAY IN HERE
@@ -29,8 +35,9 @@ LOOKUPBLOCK::LOOKUPBLOCK() {
     penis[14] = new BLOCKSAND();
     penis[15] = new BLOCKTORCH();
     penis[16] = new BLOCKTABLEWOOD();
+    penis[17] = new BLOCKTALLGRASS();
 
-    for(int i = 0; i < 17; i++){ // make sure u increase me too !!
+    for(int i = 0; i < 18; i++){ // make sure u increase me too !!
         penis[i]->setLookUp(this);
     }
 
@@ -53,6 +60,8 @@ Dictionary LOOKUPBLOCK::getBlockData(int id){
     data["breakTime"]= g->breakTime;
     data["lightMultiplier"] = g->lightMultiplier;
     data["lightEmmission"] = g->lightEmmission;
+    data["multitile"] = g->multitile;
+    data["animated"] = g->animated;
 
     return data;
 }
@@ -92,6 +101,12 @@ bool LOOKUPBLOCK::isMultitile(int id){
     BLOCK* g = penis[id];
 
     return g->multitile;
+}
+
+bool LOOKUPBLOCK::isAnimated(int id){
+    BLOCK* g = penis[id];
+
+    return g->animated;
 }
 
 double LOOKUPBLOCK::getLightMultiplier(int id){

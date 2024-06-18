@@ -13,6 +13,10 @@ var mineMultiplier := 1.0
 var baseRotation = 0
 
 func _ready():
+	
+	if !is_instance_valid(planet):
+		return
+	
 	var blockData = BlockData.theChunker.getBlockDictionary(blockID)
 	$blockTexture.texture = blockData["texture"]
 	
@@ -24,9 +28,18 @@ func _ready():
 	
 	if blockData["connectedTexture"]:
 		$blockTexture.hframes = 16
-		$blockTexture.frame = BlockData.theChunker.scanBlockOpen(planet.DATAC,tileX,tileY) / 8
+		$blockTexture.frame = BlockData.theChunker.scanBlockOpen(planet.DATAC,tileX,tileY,planetDir * int(blockData["rotateTextureToGravity"])) / 8
 		$Sprite.hframes = 16
 		$Sprite.frame = $blockTexture.frame
+	elif blockData["multitile"]:
+		$blockTexture.hframes = $blockTexture.texture.get_size().x / 8
+		$blockTexture.frame = planet.DATAC.getInfoData(tileX,tileY)
+		$Sprite.hframes = $blockTexture.hframes
+		$Sprite.frame = $blockTexture.frame
+	
+	if blockData["animated"]:
+		$blockTexture.vframes = 3
+		$Sprite.vframes = 3
 	
 	if blockData["rotateTextureToGravity"]:
 		$blockTexture.rotation = (PI/2) * planet.getBlockPosition(tileX,tileY)

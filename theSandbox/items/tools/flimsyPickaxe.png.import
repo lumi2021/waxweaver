@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bk0q5u7e2pvwu"
-path="res://.godot/imported/hammerStone.png-5e73ba770c00da3cd6fa99d090017175.ctex"
+uid="uid://cycvbqopkroj5"
+path="res://.godot/imported/flimsyPickaxe.png-ed2e5e003eaec389be6cf2e571030ac3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://item_resources/item_textures/hammerStone.png"
-dest_files=["res://.godot/imported/hammerStone.png-5e73ba770c00da3cd6fa99d090017175.ctex"]
+source_file="res://items/tools/flimsyPickaxe.png"
+dest_files=["res://.godot/imported/flimsyPickaxe.png-ed2e5e003eaec389be6cf2e571030ac3.ctex"]
 
 [params]
 

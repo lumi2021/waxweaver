@@ -2,21 +2,20 @@ extends Node
 
 var data = {
 	-1:null,
-	0:load("res://item_resources/items/tool_items/DebugPickaxe.tres"),
-	1:load("res://item_resources/items/tool_items/PickaxeStone.tres"),
-	
 	# block items
-	2:load("res://item_resources/items/block_items/StoneItem.tres"),
-	3:load("res://item_resources/items/block_items/DirtItem.tres"),
-	7:load("res://item_resources/items/block_items/SaplingItem.tres"),
-	13:load("res://item_resources/items/block_items/WoodItem.tres"),
-	-13:load("res://item_resources/items/wall_items/WoodWallItem.tres"),
-	14:load("res://item_resources/items/block_items/SandItem.tres"),
-	15:load("res://item_resources/items/block_items/TorchItem.tres"),
-	16:load("res://item_resources/items/block_items/TestTable.tres"),
+	2:load("res://items/blocks/StoneItem.tres"),
+	3:load("res://items/blocks/DirtItem.tres"),
+	7:load("res://items/blocks/SaplingItem.tres"),
+	13:load("res://items/blocks/WoodItem.tres"),
+	-13:load("res://items/walls/WoodWallItem.tres"),
+	14:load("res://items/blocks/SandItem.tres"),
+	15:load("res://items/torches/TorchItem.tres"),
+	16:load("res://items/blocks/TestTable.tres"),
 	
-	1000:load("res://item_resources/items/tool_items/HammerStone.tres"),
-	1001:load("res://item_resources/items/tool_items/DebugSword.tres"),
+	# item ids
+	3000:load("res://items/tools/FlimsySword.tres"),
+	3001:load("res://items/tools/FlimsyPickaxe.tres"),
+	3002:load("res://items/tools/FlimsyHammer.tres"),
 }
 
 var heldItemAnims = {

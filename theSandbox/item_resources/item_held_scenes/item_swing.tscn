@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://bs18dnn7rrvnt"]
+[gd_scene load_steps=5 format=3 uid="uid://bs18dnn7rrvnt"]
 
 [ext_resource type="Script" path="res://item_resources/item_held_scenes/item_swing.gd" id="1_vpor5"]
-[ext_resource type="Texture2D" uid="uid://ns4wubunaahm" path="res://item_resources/item_textures/SWORD.png" id="1_wqmpt"]
 [ext_resource type="Texture2D" uid="uid://bbhygnshkya87" path="res://object_scenes/player/hand.png" id="2_yqhsd"]
 [ext_resource type="PackedScene" uid="uid://8jw6pruiu3cf" path="res://object_scenes/entity/components/hurtbox.tscn" id="3_epa84"]
 
@@ -17,7 +16,6 @@ handSprite = NodePath("holder/handSprite")
 
 [node name="sprite" type="Sprite2D" parent="holder"]
 position = Vector2(1, -1)
-texture = ExtResource("1_wqmpt")
 offset = Vector2(8, -8)
 
 [node name="handSprite" type="Sprite2D" parent="holder"]

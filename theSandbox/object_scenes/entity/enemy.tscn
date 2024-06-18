@@ -23,6 +23,7 @@ collision_layer = 128
 script = ExtResource("4_r88kc")
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_k1lls")]
+maxHealth = 15
 
 [node name="AIComponent" parent="." instance=ExtResource("3_8a0ra")]
 aiCode = ExtResource("2_8cxpt")

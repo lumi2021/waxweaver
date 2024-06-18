@@ -10,9 +10,9 @@ BLOCKLEAVES::BLOCKLEAVES() {
 
     setTexture("res://block_resources/block_textures/leaves.png");
 
-    breakTime = 0.1;
+    breakTime = 0.5;
 
-    breakParticleID = -1;
+    breakParticleID = 12;
 
     hasCollision = false;
 
@@ -20,7 +20,8 @@ BLOCKLEAVES::BLOCKLEAVES() {
 
     rotateTextureToGravity = true;
 
-    connectTexturesToMe = false;
+    connectTexturesToMe = true;
+    connectedTexture = true;
 
     itemToDrop = 7;
 

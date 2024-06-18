@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://pch4e50mj54"
-path="res://.godot/imported/woodPlank.png-3c28e0776303f14e3ceae0c8cf4bda49.ctex"
+uid="uid://d1gwtiy7uv0x7"
+path="res://.godot/imported/torchItem.png-a9f5a91fbbcdc7f04d21d654f3ea2643.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://block_resources/wall_item_textures/woodPlank.png"
-dest_files=["res://.godot/imported/woodPlank.png-3c28e0776303f14e3ceae0c8cf4bda49.ctex"]
+source_file="res://items/torches/torchItem.png"
+dest_files=["res://.godot/imported/torchItem.png-a9f5a91fbbcdc7f04d21d654f3ea2643.ctex"]
 
 [params]
 

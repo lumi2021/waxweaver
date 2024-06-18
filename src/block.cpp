@@ -34,6 +34,7 @@ BLOCK::BLOCK() {
     breakTime = 0.5;
 
     multitile = false;
+    animated = false;
 
     setNewVariables();
 

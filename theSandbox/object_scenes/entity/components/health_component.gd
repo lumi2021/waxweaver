@@ -4,7 +4,7 @@ class_name HealthComponent
 ## COOL EXPORTS ##
 #self explanitory
 @export var maxHealth :int= 100
-var health :int= maxHealth
+var health :int= 0
 # simple knockback multiplier
 @export var knockbackResist :float = 1.0
 
@@ -14,6 +14,9 @@ var health :int= maxHealth
 @export var isPlayer :bool = false
 
 signal healthChanged
+
+func _ready():
+	health = maxHealth
 
 func heal(amount):
 	health += amount
@@ -36,7 +39,7 @@ func damage(amount):
 	
 	emit_signal("healthChanged")
 	
-	if health != max(health,0):
+	if health <= 0:
 		die()
 
 func dealKnockback(amount:float,dir:Vector2):
@@ -52,6 +55,7 @@ func dealKnockback(amount:float,dir:Vector2):
 	
 
 func die():
+	dropItem(3002)
 	parent.queue_free()
 
 func getWorldPosition():
@@ -63,3 +67,11 @@ func getWorldPosition():
 	
 	
 	return [0,1,3,2][dot1 + dot2]
+
+func dropItem(itemID):
+	if itemID == -1:
+		return
+	var ins = BlockData.groundItemScene.instantiate()
+	ins.itemID = itemID
+	ins.position = parent.position
+	parent.get_parent().add_child(ins)

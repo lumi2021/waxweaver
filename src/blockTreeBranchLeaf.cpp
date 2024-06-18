@@ -20,7 +20,7 @@ BLOCKTREEBRANCHLEAF::BLOCKTREEBRANCHLEAF() {
 
     rotateTextureToGravity = true;
 
-    connectTexturesToMe = false;
+    connectTexturesToMe = true;
 
 }
 

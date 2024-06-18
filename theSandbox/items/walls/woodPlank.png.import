@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://funnkblrnibs"
-path="res://.godot/imported/testPickaxe.png-dd44cb26a0c51fbef3f5e079fc730add.ctex"
+uid="uid://pch4e50mj54"
+path="res://.godot/imported/woodPlank.png-d8783fcd76545410d777baf2744fbdeb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://item_resources/item_textures/testPickaxe.png"
-dest_files=["res://.godot/imported/testPickaxe.png-dd44cb26a0c51fbef3f5e079fc730add.ctex"]
+source_file="res://items/walls/woodPlank.png"
+dest_files=["res://.godot/imported/woodPlank.png-d8783fcd76545410d777baf2744fbdeb.ctex"]
 
 [params]
 

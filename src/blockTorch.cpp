@@ -29,6 +29,9 @@ BLOCKTORCH::BLOCKTORCH() {
 
     itemToDrop = 15;
 
+    animated = true;
+    multitile = true;
+
 }
 
 

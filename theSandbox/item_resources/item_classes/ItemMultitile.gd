@@ -29,7 +29,7 @@ func checkAvailableArea(startX,startY,dimensions:Vector2,planet,originalDir):
 			var rot = find + Vector2( i, size.y ).rotated(originalDir*(PI/2))
 			var worldPos = Vector2i( rot.x, rot.y)
 			var block = planet.DATAC.getTileData(worldPos.x,worldPos.y)
-			if [0,1].has(block):
+			if !BlockData.theChunker.getBlockDictionary(block)["hasCollision"]:
 				return false
 	
 	

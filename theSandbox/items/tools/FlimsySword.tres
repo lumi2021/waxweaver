@@ -1,16 +1,15 @@
 [gd_resource type="Resource" script_class="ItemDamage" load_steps=3 format=3 uid="uid://ul5cu6wslhwi"]
 
 [ext_resource type="Script" path="res://item_resources/item_classes/ItemDamage.gd" id="1_xdeia"]
-[ext_resource type="Texture2D" uid="uid://ns4wubunaahm" path="res://item_resources/item_textures/SWORD.png" id="2_dusvs"]
+[ext_resource type="Texture2D" uid="uid://dbs4ktm2l71km" path="res://items/tools/flimsySword.png" id="2_ve5la"]
 
 [resource]
 script = ExtResource("1_xdeia")
-damage = 4
+damage = 3
 animSpeed = 5.0
-hitboxLength = 16
-hitboxWidth = 8
-id = 0
-texture = ExtResource("2_dusvs")
+weaponScale = 1.0
+itemName = "Flimsy Sword"
+texture = ExtResource("2_ve5la")
 maxStackSize = 1
 clickToUse = false
 materialIn = Array[int]([])

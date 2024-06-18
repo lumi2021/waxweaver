@@ -56,7 +56,12 @@ void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
                     planet->setTimeData(x,y,-16000);
                     lastSpawnedTree = 16;
                 }else{lastSpawnedTree--;}
-            
+
+                if (std::rand() % 4 == 0){
+                    planet->setTileData(x,y,17);
+                }
+
+
             }
 
             double r = (std::abs(dis - (baseSurface * 0.6 ) ) ) / (baseSurface * 0.75);

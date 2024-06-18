@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ns4wubunaahm"
-path="res://.godot/imported/SWORD.png-0c1e6ebb494a7fb4f82d43fa0851cb4a.ctex"
+uid="uid://cg2tm25ccngd0"
+path="res://.godot/imported/tallGrass.png-3922cb9586f41b6b6a69e4cd9a4af2a0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://item_resources/item_textures/SWORD.png"
-dest_files=["res://.godot/imported/SWORD.png-0c1e6ebb494a7fb4f82d43fa0851cb4a.ctex"]
+source_file="res://items/blocks/foliage/tallGrass.png"
+dest_files=["res://.godot/imported/tallGrass.png-3922cb9586f41b6b6a69e4cd9a4af2a0.ctex"]
 
 [params]
 

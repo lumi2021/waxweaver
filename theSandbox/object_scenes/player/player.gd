@@ -52,14 +52,9 @@ func _ready():
 	GlobalRef.player = self
 	PlayerData.connect("selectedSlotChanged",swapSlot)
 	
-	PlayerData.addItem(1001,1)
-	PlayerData.addItem(1,1)
-	PlayerData.addItem(0,1)
-	PlayerData.addItem(1000,1)
-	PlayerData.addItem(7,99)
-	PlayerData.addItem(13,198)
-	PlayerData.addItem(-13,99)
-	PlayerData.addItem(15,99)
+	PlayerData.addItem(3000,1)
+	PlayerData.addItem(3001,1)
+	PlayerData.addItem(15,198)
 	PlayerData.addItem(16,99)
 	
 	PlayerData.selectSlot(0)

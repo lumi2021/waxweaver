@@ -10,7 +10,7 @@ void CHUNKDRAW::_bind_methods() {
     ClassDB::bind_method(D_METHOD("tickUpdate","planetDatac","pos"), &CHUNKDRAW::tickUpdate);
     ClassDB::bind_method(D_METHOD("runBreak","planetDatac","pos","x","y","id"), &CHUNKDRAW::runBreak);
     ClassDB::bind_method(D_METHOD("getBlockDictionary","id"), &CHUNKDRAW::getBlockDictionary);
-    ClassDB::bind_method(D_METHOD("scanBlockOpen","planetDATAC","x","y"), &CHUNKDRAW::scanBlockOpen);
+    ClassDB::bind_method(D_METHOD("scanBlockOpen","planetDATAC","x","y","dir"), &CHUNKDRAW::scanBlockOpen);
     ADD_SIGNAL(MethodInfo("chunkDrawn", PropertyInfo(Variant::OBJECT, "node"), PropertyInfo(Variant::OBJECT, "image"), PropertyInfo(Variant::OBJECT, "backImage")));
     ADD_SIGNAL(MethodInfo("attemptSpawnEnemy", PropertyInfo(Variant::OBJECT, "planetData") , PropertyInfo(Variant::VECTOR2, "tile") , PropertyInfo(Variant::INT, "id") , PropertyInfo(Variant::INT, "blockSide") ));
 }
@@ -38,6 +38,7 @@ Dictionary CHUNKDRAW::getBlockDictionary(int id){
 Array CHUNKDRAW::generateTexturesFromData(PLANETDATA *planet,Vector2i pos,Node *body,Ref<Shape2D> shape,bool shipChunk){
     Ref<Image> img = Image::create(64, 64, false, Image::FORMAT_RGBA8);
     Ref<Image> backImg = Image::create(64, 64, false, Image::FORMAT_RGBA8);
+    Ref<Image> animImg = Image::create(192, 64, false, Image::FORMAT_RGBA8);
     
     Array images;
     for (int sect = 0; sect < 4; sect++){
@@ -61,27 +62,51 @@ Array CHUNKDRAW::generateTexturesFromData(PLANETDATA *planet,Vector2i pos,Node *
 
                 int blockInfo = planet->getInfoData(worldX,worldY);
 
+                // draw main tile
                 if (blockID>1){
                     
-                    Ref<Image> blockImg = cock->getTextureImage(blockID);
+                    Ref<Image> blockImg = cock->getTextureImage(blockID); // get block texture
                     Ref<Image> individualBlock = Image::create(8, 8, false, Image::FORMAT_RGBA8);
                     
-
+                    bool rotate = cock->isGravityRotate(blockID);
+                    int s = rotate; // make sure connected texture doesn't always rotate
+                    
                     int frame = 0;
-                    if( cock->isConnectedTexture(blockID) ){ frame = scanBlockOpen(planet,worldX,worldY); }
+                    if( cock->isConnectedTexture(blockID) ){ frame = scanBlockOpen(planet,worldX,worldY,blockSide * s); }
                     if( cock->isMultitile(blockID) ){ frame = blockInfo * 8; }
                     Rect2i blockRect = Rect2i(frame,0,8,8);
                     individualBlock = blockImg->get_region(blockRect);
 
-                    bool rotate = cock->isGravityRotate(blockID);
                     if (rotate){ 
                         for(int g = 0; g < blockSide; g++){
                             individualBlock->rotate_90(ClockDirection::CLOCKWISE);
                         }
                     }
                     
+                    if( cock->isAnimated(blockID) ){
+                        // is animated texture
+                        animImg->blend_rect(individualBlock, Rect2i(0,0,8,8), imgPos); 
+                        
+                        
+                        for(int i = 1; i < 3; i++){
+                            blockRect = Rect2i(frame,8*i,8,8);
+                            individualBlock = blockImg->get_region(blockRect);
 
-                    img->blend_rect(individualBlock, Rect2i(0,0,8,8), imgPos);
+                            if (rotate){ 
+                                for(int g = 0; g < blockSide; g++){
+                                    individualBlock->rotate_90(ClockDirection::CLOCKWISE);
+                                }
+                            }
+                            animImg->blend_rect(individualBlock, Rect2i(0,0,8,8), imgPos + Vector2i(64 * i,0));
+                        }
+
+                    
+                    }
+                    else{ 
+                    
+                        img->blend_rect(individualBlock, Rect2i(0,0,8,8), imgPos); 
+                    
+                    }
 
 
                     
@@ -92,6 +117,9 @@ Array CHUNKDRAW::generateTexturesFromData(PLANETDATA *planet,Vector2i pos,Node *
 
                 }
 
+
+                // draw background
+                // imrpove this so it doesn't have to do that ugly rotate thing
 
                 if (backBlockID>1){
                     
@@ -121,6 +149,7 @@ Array CHUNKDRAW::generateTexturesFromData(PLANETDATA *planet,Vector2i pos,Node *
                         }
                     }
 
+                
                 }
 
             }
@@ -152,12 +181,9 @@ Array CHUNKDRAW::generateTexturesFromData(PLANETDATA *planet,Vector2i pos,Node *
     }
 
 
-
-    //emit_signal("chunkDrawn", this, img, backImg);
-
-
     images.append(img);
     images.append(backImg);
+    images.append(animImg);
 
 
    return images;
@@ -337,27 +363,31 @@ Array CHUNKDRAW::tickUpdate(PLANETDATA *planet,Vector2i pos,bool onScreen){
 
 
 
-int CHUNKDRAW::scanBlockOpen(PLANETDATA *planet,int x,int y){
+int CHUNKDRAW::scanBlockOpen(PLANETDATA *planet,int x,int y,int dir){
 	int openL = 1;
 	int openR = 2;
 	int openT = 4;
 	int openB = 8;
 	//what the fuck is this
 
-    int blockID = planet->getTileData(x-1,y);
+    Vector2i L = Vector2i( Vector2(-1,0).rotated(acos(0.0)*dir)  );
+
+    int blockID = planet->getTileData(x+L.x,y+L.y);
     int connectTexturesToMe = !cock->isTextureConnector(blockID);
     openL = 1 * connectTexturesToMe;
 
-    blockID = planet->getTileData(x+1,y);
+    Vector2i R = Vector2i( Vector2(1,0).rotated(acos(0.0)*dir)  );
+    blockID = planet->getTileData(x+R.x,y+R.y);
     connectTexturesToMe = !cock->isTextureConnector(blockID);
     openR = 2 * connectTexturesToMe;
 
-
-    blockID = planet->getTileData(x,y-1);
+    Vector2i T = Vector2i( Vector2(0,-1).rotated(acos(0.0)*dir)  );
+    blockID = planet->getTileData(x+T.x,y+T.y);
     connectTexturesToMe = !cock->isTextureConnector(blockID);
     openT = 4 * connectTexturesToMe;
 
-    blockID = planet->getTileData(x,y+1);
+    Vector2i B = Vector2i( Vector2(0,1).rotated(acos(0.0)*dir)  );
+    blockID = planet->getTileData(x+B.x,y+B.y);
     connectTexturesToMe = !cock->isTextureConnector(blockID);
     openB = 8 * connectTexturesToMe;
 

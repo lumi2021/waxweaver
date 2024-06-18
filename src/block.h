@@ -50,6 +50,7 @@ public:
     double breakTime;
 
     bool multitile;
+    bool animated;
 
 
 	BLOCK();
