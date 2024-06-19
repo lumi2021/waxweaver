@@ -18,6 +18,7 @@ var health :int= 0
 @export var isPlayer :bool = false
 
 signal healthChanged
+signal smacked
 
 func _ready():
 	health = maxHealth
@@ -42,6 +43,8 @@ func damage(amount):
 		Indicators.damnPopup(amount,parent.global_position)
 	
 	emit_signal("healthChanged")
+	emit_signal("smacked")
+	
 	
 	if health <= 0:
 		die()
@@ -58,7 +61,6 @@ func dealKnockback(amount:float,dir:Vector2):
 	if isPlayer:
 		parent.beingKnockedback = true
 	
-
 func die():
 	rollDrops()
 	CreatureData.creatureDeleted(parent)

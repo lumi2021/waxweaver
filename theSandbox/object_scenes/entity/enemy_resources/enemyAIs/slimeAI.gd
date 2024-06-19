@@ -1,7 +1,7 @@
 extends EnemyAI
 class_name SlimeAI
 
-@export var gravity := 100
+@export var gravity := 1000
 
 func onFrame(delta,enemy:CharacterBody2D):
 	var quad = getWorldPosition(enemy)
