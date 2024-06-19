@@ -1,9 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://b4nfmpvnob0og"]
+[gd_scene load_steps=9 format=3 uid="uid://b4nfmpvnob0og"]
 
 [ext_resource type="Resource" uid="uid://birb8qnusvjlh" path="res://object_scenes/entity/enemy_resources/enemyAIs/coolgayslime.tres" id="2_8cxpt"]
 [ext_resource type="PackedScene" uid="uid://clix3ugcvjxn3" path="res://object_scenes/entity/components/ai_component.tscn" id="3_8a0ra"]
 [ext_resource type="PackedScene" uid="uid://meikam2oyy13" path="res://object_scenes/entity/components/health_component.tscn" id="3_k1lls"]
-[ext_resource type="Script" path="res://object_scenes/entity/AmIAllowedToExist.gd" id="4_r88kc"]
 [ext_resource type="PackedScene" uid="uid://c05kukkqfrg40" path="res://object_scenes/entity/components/hitbox.tscn" id="5_mi11u"]
 [ext_resource type="PackedScene" uid="uid://8jw6pruiu3cf" path="res://object_scenes/entity/components/hurtbox.tscn" id="6_v4b5j"]
 
@@ -19,11 +18,10 @@ size = Vector2(6, 6)
 [node name="Enemy" type="CharacterBody2D"]
 collision_layer = 128
 
-[node name="AmIAllowedToExist" type="Node" parent="."]
-script = ExtResource("4_r88kc")
-
 [node name="HealthComponent" parent="." instance=ExtResource("3_k1lls")]
 maxHealth = 15
+dropItemArray = Array[int]([15, 15, 3002, 16])
+dropChanceArray = Array[int]([1, 1, 10, 5])
 
 [node name="AIComponent" parent="." instance=ExtResource("3_8a0ra")]
 aiCode = ExtResource("2_8cxpt")

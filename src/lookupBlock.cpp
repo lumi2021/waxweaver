@@ -36,11 +36,12 @@ LOOKUPBLOCK::LOOKUPBLOCK() {
     penis[15] = new BLOCKTORCH();
     penis[16] = new BLOCKTABLEWOOD();
     penis[17] = new BLOCKTALLGRASS();
+    penis[18] = new BLOCKORECOPPER();
 
-    for(int i = 0; i < 18; i++){ // make sure u increase me too !!
-        penis[i]->setLookUp(this);
+    //int arraySize = sizeof(penis) / sizeof(int);
+    for(BLOCK *i : penis){ // make sure u increase me too !!
+        i->setLookUp(this);
     }
-
 }
 
 LOOKUPBLOCK::~LOOKUPBLOCK() {

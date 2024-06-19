@@ -9,7 +9,7 @@ _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.44655, 0.0, 0, 0]
 point_count = 2
 
 [node name="BlockBreak" type="Node2D"]
-z_index = 2
+z_index = -1
 script = ExtResource("1_o2xuf")
 
 [node name="Sprite" type="Sprite2D" parent="."]

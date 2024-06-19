@@ -33,6 +33,7 @@ public:
     
     double getBlockDistance(int x, int y, PLANETDATA *planet);
     int airOrCaveAir(int x,int y, PLANETDATA *planet);
+    void generateOre(PLANETDATA *planet,int x,int y,int oreID,int replaceID,int cycles);
 	
 };
 

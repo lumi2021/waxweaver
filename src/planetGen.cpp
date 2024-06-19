@@ -26,6 +26,8 @@ void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
 
     int lastSpawnedTree = 16;
 
+    // first pass
+    // basic terrain, lakes and oceans
     for(int x = 0; x < planetSize; x++){
         for(int y = 0; y < planetSize; y++){
 
@@ -38,9 +40,6 @@ void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
             if (dis <= surface){
                 planet->setTileData(x,y,2);
                 planet->setBGData(x,y,2);
-
-
-
             }
             else if (dis <= surface + 4){
                 planet->setTileData(x,y,3);
@@ -49,19 +48,6 @@ void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
             else if (dis <= surface + 5){
                 planet->setTileData(x,y,4);
                 planet->setBGData(x,y,3);
-            }
-            else if (dis <= surface + 6){
-                if (std::rand() % lastSpawnedTree == 0){
-                    planet->setTileData(x,y,7);
-                    planet->setTimeData(x,y,-16000);
-                    lastSpawnedTree = 16;
-                }else{lastSpawnedTree--;}
-
-                if (std::rand() % 4 == 0){
-                    planet->setTileData(x,y,17);
-                }
-
-
             }
 
             double r = (std::abs(dis - (baseSurface * 0.6 ) ) ) / (baseSurface * 0.75);
@@ -72,6 +58,7 @@ void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
                 planet->setTileData(x,y, airOrCaveAir(x,y,planet) );
             }
 
+            // lake / ocean stuff
             double lakeSurface = (noise->get_noise_1d((2000 + ( planetSize * quad * 0.75)) + (side*0.75)) * 64.0)  + baseSurface;
             if (dis >= lakeSurface && dis <= surface + 6){
                 
@@ -88,7 +75,9 @@ void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
                     if ( dis <= baseSurface + 2) {
                         planet->setWaterData(x,y,1.0);
                     }
+
                 }
+            
             }
 
             if (dis <= 3){
@@ -97,6 +86,51 @@ void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
             }
         }
     }
+
+
+    // second pass
+    // foliage and ores
+    for(int x = 0; x < planetSize; x++){
+        for(int y = 0; y < planetSize; y++){
+
+            int quad = planet->getPositionLookup(x,y);
+            int side = Vector2(x,y).rotated(acos(0.0) * quad).x;
+            int baseSurface = std::max( planetSize / 4, (planetSize/2) - 128 );
+            double dis = getBlockDistance(x,y,planet);
+
+            if (planet->getTileData(x,y) == 4){
+                Vector2i up = Vector2i( Vector2(0,-1).rotated(acos(0.0)*quad) );
+                if( planet->getTileData(x+up.x,y+up.y) == 0 ){
+                    
+                    // valid spot for foliage
+                    int r = std::rand();
+                    if(r % 4 == 0){
+                        planet->setTileData(x+up.x,y+up.y,17); // spawn grass
+                    }
+
+                    if(r % 10 == 0){
+                        planet->setTileData(x+up.x,y+up.y,7);
+                        planet->setTimeData(x+up.x,y+up.y,-16000); // spawn foliage
+                    }
+
+                }
+
+            }
+
+            if(dis < baseSurface - 16){
+                if(std::rand() % 500 == 0){
+                    generateOre(planet,x,y,18,2,3); // generate copper
+                }
+
+            }
+
+
+
+
+
+        }
+    }
+
 }
 
 /////////////////// MOON LUNAR GENERATION /////////////////
@@ -158,4 +192,38 @@ int PLANETGEN::airOrCaveAir(int x,int y, PLANETDATA *planet){
     int surface = (planetSize / 4);
     int b = getBlockDistance(x, y, planet) <= surface - 2;
     return b;
+}
+
+void PLANETGEN::generateOre(PLANETDATA *planet,int x,int y,int oreID,int replaceID,int cycles){
+    if( planet->getTileData(x,y) != replaceID ){
+        return;
+    }
+
+    // set original ore
+    planet->setTileData(x,y,oreID);
+
+    Vector2i offset = Vector2i(0,0);
+
+    for(int c = 0; c < cycles; c++){
+        // run through cycles
+
+        offset = offset + Vector2i( Vector2(1,1).rotated( acos(0.0) * (std::rand() % 4) ) );
+
+
+        for(int d = 0; d < 4; d++){
+
+            Vector2i coolerOffset = Vector2i( Vector2(1,0).rotated( acos(0.0)*d ) );
+            Vector2i pos = offset + Vector2i(x,y) + coolerOffset;
+
+            if( planet->getTileData(pos.x,pos.y) == replaceID ){
+                planet->setTileData(pos.x,pos.y,oreID);
+            }
+
+
+        }
+
+        
+    
+    }
+
 }

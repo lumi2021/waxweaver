@@ -8,4 +8,5 @@ func _process(delta):
 	var chunk = Vector2(int(tile.x)/8,int(tile.y)/8)
 	if !planet.chunkDictionary.has(chunk):
 		parent.queue_free()
+		CreatureData.enemyDeleted(parent.creaturePoints)
 	

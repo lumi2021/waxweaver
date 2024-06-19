@@ -3,14 +3,16 @@ extends Node
 var data = {
 	-1:null,
 	# block items
-	2:load("res://items/blocks/StoneItem.tres"),
-	3:load("res://items/blocks/DirtItem.tres"),
-	7:load("res://items/blocks/SaplingItem.tres"),
-	13:load("res://items/blocks/WoodItem.tres"),
+	2:load("res://items/blocks/natural/StoneItem.tres"),
+	3:load("res://items/blocks/natural/DirtItem.tres"),
+	7:load("res://items/blocks/foliage/SaplingItem.tres"),
+	13:load("res://items/blocks/building/WoodItem.tres"),
 	-13:load("res://items/walls/WoodWallItem.tres"),
-	14:load("res://items/blocks/SandItem.tres"),
+	14:load("res://items/blocks/natural/SandItem.tres"),
 	15:load("res://items/torches/TorchItem.tres"),
 	16:load("res://items/blocks/TestTable.tres"),
+	
+	18:load("res://items/blocks/ores/CopperOre.tres"),
 	
 	# item ids
 	3000:load("res://items/tools/FlimsySword.tres"),
