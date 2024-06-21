@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var container = $ScrollContainer/GridContainer
 @onready var iconScene = preload("res://ui_scenes/playerHUD/crafting/crafting_icon.tscn")
+@onready var ingredientScene = preload("res://ui_scenes/playerHUD/crafting/crafting_ingredient_preview.tscn")
 
 @onready var banner = get_parent().get_parent()
 
@@ -22,7 +23,7 @@ func createCraftingIcons():
 	var craftsToDisplay = []
 	for i in range(inv[0].size()):
 		var itemdata = ItemData.getItem(inv[0][i]) # item data
-		var amount = inv[1][i] # amount in inventory rn
+		#var amount = inv[1][i] # amount in inventory rn
 		for craft in itemdata.materialIn:
 			if !craftsToDisplay.has(craft):
 				craftsToDisplay.append(craft)
@@ -54,3 +55,37 @@ func clearIcons():
 
 func setData(data):
 	pass
+
+func displayCraftingInfo(craftid):
+	if craftid == null:
+		$itemInfo.visible = false
+		return
+	
+	var craftd = CraftData.getCraft(craftid)
+	var itemdata = ItemData.getItem(craftd["crafts"])
+	$itemInfo/itemName.text = itemdata.itemName
+	
+	
+	for c in $itemInfo/ingHolder.get_children():
+		c.queue_free()
+		
+	var i = 0
+	for ing in craftd["ingredients"]:
+		
+		var item = ItemData.getItem(ing)
+		var ins = ingredientScene.instantiate()
+		ins.amount = craftd["ingAmounts"][i]
+		ins.spr = item.texture
+		ins.itemName = item.itemName
+		
+		ins.position.y = i * 16
+		
+		ins.has = PlayerData.checkForIngredient(ing,ins.amount)
+		
+		$itemInfo/ingHolder.add_child(ins)
+		
+		i += 1
+	
+	
+	
+	$itemInfo.visible = true

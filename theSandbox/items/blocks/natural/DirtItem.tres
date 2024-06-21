@@ -6,8 +6,8 @@
 [resource]
 script = ExtResource("1_fd7bo")
 blockID = 3
-id = 0
+itemName = "Dirt"
 texture = ExtResource("2_7dfe1")
 maxStackSize = 99
 clickToUse = false
-materialIn = Array[int]([0])
+materialIn = Array[int]([])

@@ -26,6 +26,7 @@
 #include "blockTableWood.h" // id 16
 #include "blockTallGrass.h" // id 17
 #include "blockOreCopper.h" // id 18
+#include "blockChair.h" // id 19
 
 // adding a new block? make sure you increment the PENIS array !
 
@@ -43,7 +44,7 @@ public:
 	
 	Array allBlocks;
 
-	BLOCK *penis[19]; // must be largest id + 1
+	BLOCK *penis[20]; // must be largest id + 1
 
 	LOOKUPBLOCK();
 	~LOOKUPBLOCK();

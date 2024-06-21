@@ -15,10 +15,16 @@ func onUse(tileX:int,tileY:int,planetDir:int,planet,lastTile:Vector2):
 		#Cancel if not on planet
 		return "failure"
 	
-	var o = planet.DATAC.getPositionLookup(tileX,tileY)
+	var alter := Vector2(tileX,tileY) + Vector2(0,-size.y + 1).rotated((PI/2)*planetDir)
+	
+	if planet is Ship:
+		alter = Vector2(tileX,tileY) + Vector2(0,-size.y + 1)
+	
+	var o = planet.DATAC.getPositionLookup(alter.x,alter.y)
 	var d = size.rotated(o*(PI/2))
-	if checkAvailableArea(tileX,tileY,d,planet,o):
-		planet.editTiles(makeCoolEditArray(tileX,tileY,d,planet,o%2==0))
+	if checkAvailableArea(alter.x,alter.y,d,planet,o):
+		PlayerData.consumeSelected()
+		planet.editTiles(makeCoolEditArray(alter.x,alter.y,d,planet,o%2==0))
 	
 # returns whether or not block can be placed
 func checkAvailableArea(startX,startY,dimensions:Vector2,planet,originalDir):

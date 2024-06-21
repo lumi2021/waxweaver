@@ -46,19 +46,23 @@ func onFrame(delta,enemy:CharacterBody2D):
 		dir = targetdir
 		anim(enemy)
 		
+		var mult = (2 - state) * 0.5
+		
 		if enemy.is_on_floor():
-			newVel.x = lerp(newVel.x,speed * targetdir,0.05)
+			newVel.x = lerp(newVel.x,speed * targetdir * mult,0.05)
 				
 			if enemy.is_on_wall():
 				newVel.y = -200
 				wasOnWallTicks = 6
 			
 			var dis = abs(pose.x - posa.x)
-			if dis < 24:
-				newVel.y = -150
+			var ydis = abs(pose.y - posa.y)
+			if dis < 24 and ydis < 48:
+				newVel.y = -170
 				newVel.x += targetdir * 10.0
 				if enemyQuad == quad:
 					state = 0
+					
 			
 		
 		elif wasOnWallTicks > 0:

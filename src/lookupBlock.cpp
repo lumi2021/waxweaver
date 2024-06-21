@@ -37,6 +37,7 @@ LOOKUPBLOCK::LOOKUPBLOCK() {
     penis[16] = new BLOCKTABLEWOOD();
     penis[17] = new BLOCKTALLGRASS();
     penis[18] = new BLOCKORECOPPER();
+    penis[19] = new BLOCKCHAIR();
 
     //int arraySize = sizeof(penis) / sizeof(int);
     for(BLOCK *i : penis){ // make sure u increase me too !!

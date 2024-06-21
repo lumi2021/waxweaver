@@ -141,11 +141,16 @@ func consumeFromSlots(slots:Array,amount:int):
 func craftItem(craftData):
 	if inventory[49][0] != -1 and inventory[49][0] != craftData["crafts"]:
 		return
+	
+	var maxStack = ItemData.getItem(craftData["crafts"]).maxStackSize
+	if inventory[49][1] + craftData["amount"] > maxStack:
+		return
+		
 	consumeItems(craftData["ingredients"],craftData["ingAmounts"])
 	if inventory[49][0] == -1:
 		inventory[49] = [ craftData["crafts"],craftData["amount"] ]
 	else:
-		if inventory[49][1] + craftData["amount"] <= ItemData.getItem(craftData["crafts"]).maxStackSize:
+		if inventory[49][1] + craftData["amount"] <= maxStack:
 			inventory[49][1] += craftData["amount"]
 	emit_signal("updateInventory")
 	
@@ -163,3 +168,14 @@ func sendHealthUpdate(newHealth,newMax):
 func selectSlot(newSlot):
 	selectedSlot = newSlot
 	emit_signal("selectedSlotChanged")
+
+func checkForIngredient(itemID,amount):
+	var foundAmount = 0
+	var slots = []
+	for i in range(49):
+		if inventory[i][0] == itemID:
+			foundAmount += inventory[i][1]
+			slots.append(i)
+		if foundAmount >= amount:
+			return true
+	return false

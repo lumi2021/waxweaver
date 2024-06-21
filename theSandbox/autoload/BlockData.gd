@@ -38,6 +38,11 @@ func breakWall(x,y,planet,blockID):
 func spawnGroundItem(tilex:int,tiley:int,id:int,planet):
 	if id == -1:
 		return
+		
+	if id == 19: # is chair
+		id = 6000 + ( planet.DATAC.getInfoData(tilex,tiley) / 4)
+	
+	
 	var ins = groundItemScene.instantiate()
 	ins.itemID = id
 	ins.position = planet.tileToPos(Vector2(tilex,tiley))

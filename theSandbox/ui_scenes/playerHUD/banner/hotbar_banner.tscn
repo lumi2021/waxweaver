@@ -2,13 +2,21 @@
 
 [ext_resource type="Script" path="res://ui_scenes/playerHUD/banner/hotbar_banner.gd" id="1_iyyfi"]
 [ext_resource type="PackedScene" uid="uid://cr7y1t1hoywt1" path="res://ui_scenes/playerHUD/inventory/inventory_slot.tscn" id="2_il2kt"]
-[ext_resource type="Texture2D" uid="uid://g2dpyvmk34cm" path="res://ui_scenes/playerHUD/crafting/outline.png" id="3_agtxv"]
 [ext_resource type="Script" path="res://ui_scenes/playerHUD/banner/Crafting.gd" id="3_i82mf"]
+[ext_resource type="FontFile" uid="uid://n3r2v6m6uh2n" path="res://zeeg/font/GrapeSoda.ttf" id="5_3w5al"]
 [ext_resource type="Texture2D" uid="uid://i6l5rsnepvoc" path="res://ui_scenes/playerHUD/healthBar/white.png" id="5_ryv7v"]
 [ext_resource type="FontFile" uid="uid://c3vw44vws5n61" path="res://zeeg/font/I-pixel-u.ttf" id="6_bqidn"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_bk67w"]
+font = ExtResource("5_3w5al")
+font_color = Color(0.839216, 0.839216, 0.839216, 1)
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 3
+shadow_color = Color(0, 0, 0, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lombr"]
-bg_color = Color(0.207843, 0.286275, 0.4, 1)
+bg_color = Color(0.239216, 0.329412, 0.458824, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yhha6"]
 bg_color = Color(0.239216, 0.329412, 0.458824, 1)
@@ -17,12 +25,16 @@ bg_color = Color(0.239216, 0.329412, 0.458824, 1)
 bg_color = Color(0.239216, 0.329412, 0.458824, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sesr6"]
-content_margin_left = 4.0
+content_margin_left = 1.0
 content_margin_top = 0.0
 content_margin_right = 4.0
 content_margin_bottom = 0.0
-bg_color = Color(0.0823529, 0.113725, 0.156863, 1)
-corner_detail = 1
+bg_color = Color(0.231373, 0.25098, 0.329412, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 2
+anti_aliasing = false
 
 [sub_resource type="Theme" id="Theme_yy38c"]
 VScrollBar/styles/grabber = SubResource("StyleBoxFlat_lombr")
@@ -31,10 +43,6 @@ VScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_o3p5s")
 VScrollBar/styles/scroll = SubResource("StyleBoxFlat_sesr6")
 VScrollBar/styles/scroll_focus = null
 VSlider/constants/center_grabber = 0
-
-[sub_resource type="LabelSettings" id="LabelSettings_bk67w"]
-font_size = 11
-font_color = Color(0.207843, 0.286275, 0.4, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_utrlr"]
 font = ExtResource("6_bqidn")
@@ -286,31 +294,28 @@ slotToDisplay = 48
 position = Vector2(6, 157)
 script = ExtResource("3_i82mf")
 
-[node name="Outline" type="Sprite2D" parent="Menu/Crafting"]
+[node name="itemInfo" type="Node2D" parent="Menu/Crafting"]
 visible = false
-texture = ExtResource("3_agtxv")
-centered = false
+
+[node name="itemName" type="Label" parent="Menu/Crafting/itemInfo"]
+offset_left = 68.0
+offset_top = 4.0
+offset_right = 226.0
+offset_bottom = 22.0
+label_settings = SubResource("LabelSettings_bk67w")
+
+[node name="ingHolder" type="Node2D" parent="Menu/Crafting/itemInfo"]
+position = Vector2(76, 31)
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Menu/Crafting"]
-offset_left = 4.0
-offset_top = 4.0
-offset_right = 180.0
-offset_bottom = 136.0
+offset_right = 63.0
+offset_bottom = 141.0
 theme = SubResource("Theme_yy38c")
 horizontal_scroll_mode = 0
 
 [node name="GridContainer" type="GridContainer" parent="Menu/Crafting/ScrollContainer"]
 layout_mode = 2
-columns = 5
-
-[node name="Label" type="Label" parent="Menu/Crafting"]
-visible = false
-offset_left = 9.0
-offset_top = 120.0
-offset_right = 148.0
-offset_bottom = 133.0
-text = "stone pickaxe"
-label_settings = SubResource("LabelSettings_bk67w")
+columns = 2
 
 [node name="Timer" type="Timer" parent="Menu/Crafting"]
 wait_time = 0.5

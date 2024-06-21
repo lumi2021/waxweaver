@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://5egaymbvltmg"]
+
+[ext_resource type="Script" path="res://item_resources/Item.gd" id="1_mw10o"]
+[ext_resource type="Texture2D" uid="uid://cehll7catxghq" path="res://items/material/wax.png" id="2_iskey"]
+
+[resource]
+script = ExtResource("1_mw10o")
+itemName = "Wax"
+texture = ExtResource("2_iskey")
+maxStackSize = 99
+clickToUse = false
+materialIn = Array[int]([1, 2])

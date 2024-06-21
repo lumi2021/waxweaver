@@ -79,7 +79,7 @@ func _process(delta):
 			orbitVelocity = orbiting.position - posHold
 		
 		if orbitPeriod > PI * 2:
-			orbitPeriod - (PI * 2)
+			orbitPeriod -= (PI * 2)
 	
 	tickAlive += 1
 		

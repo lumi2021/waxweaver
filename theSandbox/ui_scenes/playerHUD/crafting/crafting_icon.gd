@@ -33,12 +33,7 @@ func vis():
 	$CraftingIcon.visible = canCraft
 	$CantCraft.visible = !canCraft
 	
-	
-func _on_crafting_icon_gui_input(event):
-	if event is InputEventMouseButton:
-		if event["pressed"] and canCraft:
-			canCraft = PlayerData.craftItem(data)
-			vis()
+
 
 func updateMe():
 	for i in data["ingredients"].size():
@@ -47,3 +42,19 @@ func updateMe():
 			return # can not craft again
 	canCraft = true # can craft again
 	vis()
+
+
+func _on_craft_button_mouse_entered():
+	get_parent().get_parent().get_parent().displayCraftingInfo(craftID)
+
+
+func _on_craft_button_mouse_exited():
+	get_parent().get_parent().get_parent().displayCraftingInfo(null)
+
+
+func _on_craft_button_pressed():
+	if canCraft:
+		var cra = PlayerData.craftItem(data)
+		if cra != null:
+			canCraft = cra
+		vis()

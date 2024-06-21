@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Ship
 
 @onready var DATAC = $PLANETDATA
 var chunkScene = preload("res://world_scenes/ship/shipChunk/shipChunk.tscn")
@@ -20,12 +21,25 @@ func _ready():
 	print("Successfully created Chunks")
 
 func _process(delta):
+	
+	var active = true
+	if !is_instance_valid(GlobalRef.player):
+		active = false # disable if player doesnt exist
+	if GlobalRef.player.shipOn != self:
+		active = false # disable if not on ship/on wrong ship
+	if GlobalRef.player.movementState != 1:
+		active = false # disable if not sitting
+	
 	var dir = Vector2.ZERO
-	dir.x = int(Input.is_action_pressed("ui_right")) - int(Input.is_action_pressed("ui_left"))
-	dir.y = int(Input.is_action_pressed("ui_down")) - int(Input.is_action_pressed("ui_up"))
+	dir.x = int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left"))
+	dir.y = int(Input.is_action_pressed("move_down")) - int(Input.is_action_pressed("move_up"))
+	
+	if !active:
+		dir = Vector2.ZERO
 	
 	chunkContainer.rotation = lerp(chunkContainer.rotation,0.05*dir.x,0.2)
 	dir = dir.rotated(rotation)
+	
 	
 	if get_parent().is_in_group("planet"):
 		velocity = lerp(velocity,dir.normalized() * 300,0.05)
@@ -49,7 +63,7 @@ func _process(delta):
 		
 		targetRot = [0,1,3,2][dot1 + dot2]
 		rotation = lerp_angle(rotation,targetRot*(PI/2),0.04)
-	else:
+	elif active:
 		var rotDir = int(Input.is_action_pressed("rotateShipRight")) - int(Input.is_action_pressed("rotateShipLeft"))
 		rotate(rotDir * 1.0 * delta)
 	
@@ -208,6 +222,13 @@ func tileToPos(pos):
 	var r := SIZEINCHUNKS * 32
 	
 	return (pos * 8) + Vector2(4,4) - Vector2(r,r)
+
+func tileToPosRotated(pos):
+	var r := SIZEINCHUNKS * 32
+	
+	var newPos = (pos * 8) + Vector2(4,4) - Vector2(r,r)
+	
+	return newPos.rotated(rotation)
 
 func getBlockPosition(x,y):
 	return 0

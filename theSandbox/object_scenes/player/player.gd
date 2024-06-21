@@ -23,9 +23,10 @@ var shipOn :Node2D = null
 ##      2 = ON SHIP ON PLANET, 3 = IN SPACE
 var state = 0 
 
+## States: 0 = REGULAR, 1 = SITTING, 2 = LADDER
+var movementState = 0
 
 var animTick = 0
-
 var maxCameraDistance := 0
 
 var lastTileItemUsedOn := Vector2(-10,-10)
@@ -54,8 +55,7 @@ func _ready():
 	
 	PlayerData.addItem(3000,1)
 	PlayerData.addItem(3001,1)
-	PlayerData.addItem(15,198)
-	PlayerData.addItem(16,99)
+	PlayerData.addItem(6001,1)
 	
 	PlayerData.selectSlot(0)
 	
@@ -66,18 +66,22 @@ func _process(delta):
 	
 	match state:
 		0: #On planet
-			onPlanetMovement(delta)
+			z_index = 0
+			determineMovementState(delta)
 			findShipToAttachTo()
 			detachFromPlanetToSpace()
 		1: #On ship in space
+			z_index = 1
 			if detachFromShip(): return
-			onShipMovement(delta)
+			determineMovementState(delta)
 			findPlanetToAttachInShip()
 		2: # On ship on planet
-			onShipMovement(delta)
+			z_index = 1
+			determineMovementState(delta)
 			detachFromShip()
 			shipDetachFromPlanet()
 		3: # In space
+			z_index = 0
 			if findShipToAttachTo(): return
 			inSpaceMovement(delta)
 			findPlanetToAttachInSpace()
@@ -91,7 +95,9 @@ func _process(delta):
 		useItem()
 	else:
 		lastTileItemUsedOn = Vector2(-10,-10)
-
+	
+	if Input.is_action_just_pressed("mouse_right"):
+		onRightClick()
 	
 	#map toggle
 	if Input.is_action_just_pressed("map"):
@@ -107,9 +113,26 @@ func _process(delta):
 		noClip = !noClip
 		$CollisionShape2D.disabled = noClip
 	
+	#var glob = global_position - get_global_mouse_position()
+	#var gay = glob.rotated(-GlobalRef.camera.rotation)
+	#GlobalRef.playerSide = int(gay.x > 0)
+	
+	
 ######################################################################
 ############################## MOVEMENT ##############################
 ######################################################################
+
+func determineMovementState(delta):
+	match movementState:
+		0:
+			if state == 0:
+				onPlanetMovement(delta)
+			else:
+				onShipMovement(delta)
+		1:
+			chairMovement(delta)
+		2:
+			ladderMovement(delta)
 
 func noClipMovement(delta):
 	var dir = Vector2.ZERO
@@ -164,8 +187,10 @@ func onPlanetMovement(delta):
 	
 	var dir = 0
 	if Input.is_action_pressed("move_left"):
+		GlobalRef.playerSide = 0
 		dir -= 1
 	if Input.is_action_pressed("move_right"):
+		GlobalRef.playerSide = 1
 		dir += 1
 	var newVel = velocity.rotated(-rotated*(PI/2))
 	if beingKnockedback:
@@ -237,8 +262,10 @@ func onShipMovement(delta):
 	
 	var dir = 0
 	if Input.is_action_pressed("move_left"):
+		GlobalRef.playerSide = 0
 		dir -= 1
 	if Input.is_action_pressed("move_right"):
+		GlobalRef.playerSide = 1
 		dir += 1
 	
 	var newVel = velocity.rotated(-shipOn.rotation)
@@ -260,6 +287,26 @@ func onShipMovement(delta):
 	updateLight()
 	
 	ensureCamPosition()
+
+func chairMovement(delta):
+	
+	velocity = Vector2.ZERO
+	
+	
+	if shipOn != null:
+		sprite.rotation = shipOn.rotation
+		GlobalRef.camera.rotation = lerp_angle(GlobalRef.camera.rotation,shipOn.rotation,1.0-pow(2.0,(-delta/0.2)))
+	
+	if Input.is_action_pressed("jump"):
+		movementState = 0
+	
+	squishSprites(1.0,delta)
+	eyeBallAnim()
+	updateLight()
+	ensureCamPosition()
+
+func ladderMovement(delta):
+	pass
 
 func inSpaceMovement(delta):
 	
@@ -513,15 +560,90 @@ func runItemProcess():
 	else:
 		heldItemAnim.onNotUsing()
 
+func onRightClick():
+	
+	# Determine whether or not to target ship
+	var areas = $MouseOver.get_overlapping_areas()
+	var ship = null
+	var editBody = planetOn
+	if areas.size() > 0:
+		ship = areas[0].get_parent()
+		var mousePos = ship.get_local_mouse_position()
+		var tile = ship.posToTile(mousePos)
+		if tile != null:
+			if ship.DATAC.getBGData(tile.x,tile.y) > 1:
+				editBody = ship
+			elif ship.DATAC.getTileData(tile.x,tile.y) > 1:
+				editBody = ship
+			else:
+				for x in range(3):
+					for y in range(3):
+						if ship.DATAC.getTileData(tile.x+x-1,tile.y+y-1) > 1:
+							editBody = ship
+							break
+						if ship.DATAC.getBGData(tile.x+x-1,tile.y+y-1) > 1:
+							editBody = ship
+							break
+	
+	if editBody == null:
+		return
+	
+	var mousePos = editBody.get_local_mouse_position()
+	var tile = editBody.posToTile(mousePos)
+	var blockType = editBody.DATAC.getTileData(tile.x,tile.y)
+	
+	# right click functionality for each block
+	match blockType:
+		19: # chair
+			movementState = 1 # enter chair state
+			chairSit(tile,editBody)
+
+func chairSit(tile,editBody):
+	$AnimationPlayer.play("sit")
+	setAllPlayerFrames(7)
+	var info = editBody.DATAC.getInfoData(tile.x,tile.y)
+	
+	var pos = editBody.tileToPos(tile)
+	if editBody is Ship:
+		pos = editBody.tileToPosRotated(tile)
+	
+	var dif = -2
+	if info % 2 == 0:
+		dif = 6
+	var offset = Vector2(0,dif).rotated((PI/2)*getPlanetPosition())
+			
+	if state == 1:
+		offset = offset.rotated(editBody.rotation)
+			
+	position = pos + offset
+			
+	if editBody is Ship:
+		position += editBody.position
+	
+	if info % 4 <= 1:
+		flipPlayer(1)
+	else:
+		flipPlayer(-1)
+	
+	if state == 3:
+		await get_tree().process_frame
+		position = pos + offset
+		if editBody is Ship:
+			position += editBody.position
+
+
 ######################################################################
 ############################ ANIMATION ###############################
 ######################################################################
 
+func flipPlayer(dir):
+	sprite.scale.x = dir
+	$itemWorldRotation.scale.x = dir
+
 func playerAnimation(dir,newVel,delta):
 	#improve this later
 	if dir != 0:
-		sprite.scale.x = dir
-		$itemWorldRotation.scale.x = dir
+		flipPlayer(dir)
 	
 	var glob = global_position - get_global_mouse_position()
 	var gay = glob.rotated(-GlobalRef.camera.rotation)
@@ -529,24 +651,9 @@ func playerAnimation(dir,newVel,delta):
 	
 	# rotate player if using item
 	if Input.is_action_pressed("mouse_left"):
-		sprite.scale.x = newDir
-		$itemWorldRotation.scale.x = newDir
+		flipPlayer(newDir)
 	
-	$PlayerLayers/eye/Pupil.offset = gay.normalized() * Vector2(-sprite.scale.x,-1)
-	
-	# silly blink
-	blinkTick += 1
-	if blinkTick > 120:
-		if randi() % 60 == 0:
-			$PlayerLayers/eye.visible = false
-			blinkTick = -5
-			if randi() % 6 == 0:
-				blinkTick = -15
-			
-	if blinkTick == 0 or blinkTick == -10:
-		$PlayerLayers/eye.visible = true
-	elif blinkTick == -5:
-		$PlayerLayers/eye.visible = false
+	eyeBallAnim()
 	
 	var flor = isOnFloor(rotated*(PI/2))
 	if shipOn != null:
@@ -563,6 +670,25 @@ func playerAnimation(dir,newVel,delta):
 		animationPlayer.play("idle")
 	elif animationPlayer.current_animation != "walk":
 			animationPlayer.play("walk")
+
+func eyeBallAnim():
+	var glob = global_position - get_global_mouse_position()
+	var gay = glob.rotated(-GlobalRef.camera.rotation)
+	$PlayerLayers/eye/Pupil.offset = gay.normalized() * Vector2(-sprite.scale.x,-1)
+	
+	# silly blink
+	blinkTick += 1
+	if blinkTick > 120:
+		if randi() % 60 == 0:
+			$PlayerLayers/eye.visible = false
+			blinkTick = -5
+			if randi() % 6 == 0:
+				blinkTick = -15
+			
+	if blinkTick == 0 or blinkTick == -10:
+		$PlayerLayers/eye.visible = true
+	elif blinkTick == -5:
+		$PlayerLayers/eye.visible = false
 
 func setAllPlayerFrames(frame:int):
 	for obj in sprite.get_children():

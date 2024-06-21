@@ -14,10 +14,19 @@ var data = {
 	
 	18:load("res://items/blocks/ores/CopperOre.tres"),
 	
+	
 	# item ids
 	3000:load("res://items/tools/FlimsySword.tres"),
 	3001:load("res://items/tools/FlimsyPickaxe.tres"),
 	3002:load("res://items/tools/FlimsyHammer.tres"),
+	3003:load("res://items/material/Wax.tres"),
+	
+	
+	# chairs 6000 - 6199
+	6000:load("res://items/blocks/furniture/chairs/WoodenChair.tres"),
+	6001:load("res://items/blocks/furniture/chairs/Toilet.tres"),
+	
+	# doors 6200 - 6399
 }
 
 var heldItemAnims = {

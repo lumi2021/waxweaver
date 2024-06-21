@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_jyhdi")
 blockID = -13
-itemName = ""
+itemName = "Wood Wall"
 texture = ExtResource("2_d5gsa")
 maxStackSize = 99
 clickToUse = false
