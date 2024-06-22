@@ -112,6 +112,8 @@ Array CHUNKDRAW::generateTexturesFromData(PLANETDATA *planet,Vector2i pos,Node *
                     
                     if( cock->hasCollision(blockID) ) {
                         colliderImg->fill_rect(Rect2i(x*8,y*8,8,8),Color::hex(0xFFFFFFFF));
+                    }
+                    if( !cock->isTransparent(blockID) ) {
                         continue;
                     }
 

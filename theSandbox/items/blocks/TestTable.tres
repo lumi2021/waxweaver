@@ -6,11 +6,11 @@
 [resource]
 script = ExtResource("1_l5ooy")
 blockID = 16
-size = Vector2(3, 2)
+size = null
 grounded = true
-needsWalls = false
+needsWalls = null
 itemName = "True..."
 texture = ExtResource("2_lrljn")
-maxStackSize = 99
-clickToUse = false
-materialIn = Array[int]([])
+maxStackSize = null
+clickToUse = null
+materialIn = null

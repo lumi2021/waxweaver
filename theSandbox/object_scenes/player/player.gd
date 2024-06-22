@@ -56,6 +56,9 @@ func _ready():
 	PlayerData.addItem(3000,1)
 	PlayerData.addItem(3001,1)
 	PlayerData.addItem(6001,1)
+	PlayerData.addItem(20,99)
+	PlayerData.addItem(16,99)
+	PlayerData.addItem(6200,99)
 	
 	PlayerData.selectSlot(0)
 	
@@ -561,7 +564,6 @@ func runItemProcess():
 		heldItemAnim.onNotUsing()
 
 func onRightClick():
-	
 	# Determine whether or not to target ship
 	var areas = $MouseOver.get_overlapping_areas()
 	var ship = null
@@ -597,6 +599,45 @@ func onRightClick():
 		19: # chair
 			movementState = 1 # enter chair state
 			chairSit(tile,editBody)
+		22: # closed door
+			openDoor(tile,editBody,GlobalRef.playerSide)
+		23: # open door
+			closeDoor(tile,editBody)
+
+func openDoor(tile,body,playerDir):
+	var info = body.DATAC.getInfoData(tile.x,tile.y) % 2 # top or bottom of door
+	var doorType = body.DATAC.getInfoData(tile.x,tile.y) / 2
+	
+	var swing = playerDir * 4
+	var startInfo = info * 2
+	if playerDir == 0:
+		startInfo = 1 + (info * 2)
+		
+	if BlockData.checkIfPlaceable(tile.x,tile.y,body,Vector2i(2,2),false,startInfo,22):
+		var d = BlockData.placeTiles(tile.x,tile.y,body,Vector2i(2,2),23,startInfo,(doorType * 8) + swing)
+		body.editTiles(d)
+	else: # if open fails, try opening in other direction
+		playerDir = 1 - playerDir
+		swing = playerDir * 4
+		startInfo = info * 2
+		if playerDir == 0:
+			startInfo = 1 + (info * 2)
+		
+		if BlockData.checkIfPlaceable(tile.x,tile.y,body,Vector2i(2,2),false,startInfo,22):
+			var d = BlockData.placeTiles(tile.x,tile.y,body,Vector2i(2,2),23,startInfo,(doorType * 8) + swing)
+			body.editTiles(d)
+
+func closeDoor(tile,body):
+	var info = body.DATAC.getInfoData(tile.x,tile.y)
+	var doorSwing = 0
+	var dick = {}
+	
+	if info % 8 < 4:
+		doorSwing = 1
+	
+	var d = BlockData.placeDoor(tile.x,tile.y,body,info % 4,(info/8)*2,doorSwing)
+	body.editTiles(d)
+	
 
 func chairSit(tile,editBody):
 	$AnimationPlayer.play("sit")
@@ -631,6 +672,25 @@ func chairSit(tile,editBody):
 		if editBody is Ship:
 			position += editBody.position
 
+
+func scanForStations():
+	var scanBody = planetOn
+	if is_instance_valid(shipOn):
+		scanBody = shipOn
+	
+	if !is_instance_valid(scanBody):
+		return []
+		
+	var scan :Array[int]= []
+	for x in range(12):
+		for y in range(12):
+			var pos = Vector2(x,y) + scanBody.posToTile(position) - Vector2(6,6)
+			
+			var tile = scanBody.DATAC.getTileData(pos.x,pos.y)
+			if !scan.has(tile):
+				scan.append(tile)
+	
+	return scan
 
 ######################################################################
 ############################ ANIMATION ###############################
@@ -792,3 +852,4 @@ func updateLightStatic():
 
 func _on_health_component_health_changed():
 	PlayerData.sendHealthUpdate($HealthComponent.health,$HealthComponent.maxHealth)
+

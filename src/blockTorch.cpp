@@ -32,6 +32,8 @@ BLOCKTORCH::BLOCKTORCH() {
     animated = true;
     multitile = true;
 
+    isTransparent = true;
+
 }
 
 

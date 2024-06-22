@@ -52,6 +52,8 @@ public:
     bool multitile;
     bool animated;
 
+    bool isTransparent;
+
 
 	BLOCK();
 	~BLOCK();

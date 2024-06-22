@@ -10,6 +10,10 @@ extends Node2D
 
 var prevCraft = []
 
+var stationScan = []
+
+var scanTick = 0
+
 func _ready():
 	PlayerData.updateInventory.connect(createCraftingIcons)
 
@@ -18,6 +22,8 @@ func createCraftingIcons():
 		return
 	if !timer.is_stopped():
 		return
+	
+	stationScan = GlobalRef.player.scanForStations()
 	
 	var inv = PlayerData.getItemTotals() # gets all items and amounts
 	var craftsToDisplay = []
@@ -89,3 +95,11 @@ func displayCraftingInfo(craftid):
 	
 	
 	$itemInfo.visible = true
+
+func _process(delta):
+	if banner.invOpen:
+		scanTick += 1
+		
+		if scanTick % 60 == 0:
+			stationScan = GlobalRef.player.scanForStations()
+			scanTick = 0

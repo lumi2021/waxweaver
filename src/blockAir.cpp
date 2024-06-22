@@ -16,6 +16,8 @@ BLOCKAIR::BLOCKAIR() {
 
     lightMultiplier = 0.9;
     lightEmmission = 5.0;
+
+    isTransparent = true;
 }
 
 

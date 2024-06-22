@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ItemMultitile" load_steps=3 format=3 uid="uid://o67uubfddtrb"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemMultitile.gd" id="1_4hsme"]
+[ext_resource type="Texture2D" uid="uid://crtsh4fse6nob" path="res://items/blocks/furniture/stations/workbench.png" id="2_fa2n1"]
+
+[resource]
+script = ExtResource("1_4hsme")
+blockID = 20
+size = Vector2(2, 1)
+grounded = true
+needsWalls = false
+itemName = "Work Bench"
+texture = ExtResource("2_fa2n1")
+maxStackSize = 99
+clickToUse = false
+materialIn = Array[int]([])

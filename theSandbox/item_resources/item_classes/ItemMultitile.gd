@@ -3,7 +3,7 @@ class_name ItemMultitile
 
 @export var blockID := 0
 
-@export var size :Vector2=Vector2(3,2)
+@export var size :Vector2i=Vector2i(3,2)
 
 @export var grounded :bool = false
 @export var needsWalls :bool = false
@@ -15,86 +15,72 @@ func onUse(tileX:int,tileY:int,planetDir:int,planet,lastTile:Vector2):
 		#Cancel if not on planet
 		return "failure"
 	
-	var alter := Vector2(tileX,tileY) + Vector2(0,-size.y + 1).rotated((PI/2)*planetDir)
-	
-	if planet is Ship:
-		alter = Vector2(tileX,tileY) + Vector2(0,-size.y + 1)
-	
-	var o = planet.DATAC.getPositionLookup(alter.x,alter.y)
-	var d = size.rotated(o*(PI/2))
-	if checkAvailableArea(alter.x,alter.y,d,planet,o):
+	if checkIfPlaceable(tileX,tileY,planet):
 		PlayerData.consumeSelected()
-		planet.editTiles(makeCoolEditArray(alter.x,alter.y,d,planet,o%2==0))
-	
-# returns whether or not block can be placed
-func checkAvailableArea(startX,startY,dimensions:Vector2,planet,originalDir):
-	
-	if grounded:
-		var find = Vector2( startX , startY)
-		for i in range(size.x):
-			var rot = find + Vector2( i, size.y ).rotated(originalDir*(PI/2))
-			var worldPos = Vector2i( rot.x, rot.y)
-			var block = planet.DATAC.getTileData(worldPos.x,worldPos.y)
-			if !BlockData.theChunker.getBlockDictionary(block)["hasCollision"]:
-				return false
-	
-	
-	for x in range( round( abs(dimensions.x) ) ):
-		for y in range( round( abs(dimensions.y) ) ):
-			var worldPos = Vector2i( startX+x, startY+y)
-			#account for negative dimensions
-			if dimensions.x < 0:
-				worldPos.x = startX-x
-			if dimensions.y < 0:
-				worldPos.y = startY-y
-			
-			var block = planet.DATAC.getTileData(worldPos.x,worldPos.y)
-			var curDir = planet.DATAC.getPositionLookup(worldPos.x,worldPos.y)
-			#var bg = planet.DATAC.getBGData(tileX,tileY)
-			if curDir != originalDir:
-				# invalid if on corner of world
-				return false
-			if ![0,1].has(block):
-				# invalid if solid tile exists
-				return false
-			
-			if worldPos.x < 0 or worldPos.x >= planet.SIZEINCHUNKS * 8 or worldPos.y < 0 or worldPos.y >= planet.SIZEINCHUNKS * 8:
-				# invalid if any tile is outside boundaries
-				return false
-			
-	return true
+		planet.editTiles( placeTiles(tileX,tileY,planet) )
 
-func makeCoolEditArray(startX,startY,dimensions:Vector2,planet,epicRotate):
+
+func placeTiles(tileX:int,tileY:int,planet):
+	
 	
 	var DICK = {}
+	
+	var startInfo = (size.x * size.y) - size.x
+	
+	var mltY = startInfo / size.x
+	var mltX = (size.x * mltY * -1) + startInfo
+	var dir = planet.DATAC.getPositionLookup(tileX,tileY)
+	
 	var i = 0
 	
-	print("\n")
-	
-	print(dimensions)
-	print(round(abs(dimensions.x)))
-	
-	for x in range( round( abs(dimensions.x) ) ):
-		if epicRotate and i > 0:
-			i -= int(size.y) + int(size.x)
-		
-		for y in range( round( abs(dimensions.y) ) ):
-			var worldPos = Vector2i( startX+x, startY+y)
-			#account for negative dimensions
-			if dimensions.x < 0:
-				worldPos.x = startX-x
-			if dimensions.y < 0:
-				worldPos.y = startY-y
-				
-			DICK[worldPos] = blockID
-			print(i)
-			planet.DATAC.setInfoData(worldPos.x,worldPos.y,i)
-			if !epicRotate:
-				i += 1
-			else:
-				i += int(size.x)
+	for xi in range(size.x):
+		for yi in range(size.y):
+			var rot = Vector2( xi - mltX, yi - mltY ).rotated((PI/2)*dir);
+			var worldX :int = tileX + round(rot.x)
+			var worldY :int = tileY + round(rot.y)
 			
-	
-	print("\n")
-	
+			var replacePos := Vector2i( worldX,worldY )
+			DICK[replacePos] = blockID;
+			
+			var info = (yi * size.x) + i
+			
+			planet.DATAC.setInfoData(worldX,worldY,info)
+			
+		i += 1
+		
 	return DICK
+
+func checkIfPlaceable(tileX:int,tileY:int,planet):
+	
+	var startInfo = (size.x * size.y) - size.x
+	
+	var mltY = startInfo / size.x
+	var mltX = (size.x * mltY * -1) + startInfo
+	var dir = planet.DATAC.getPositionLookup(tileX,tileY)
+	
+	
+	for xi in range(size.x):
+		for yi in range(size.y + int(grounded)):
+			var rot = Vector2( xi - mltX, yi - mltY ).rotated((PI/2)*dir);
+			var worldX :int = tileX + round(rot.x)
+			var worldY :int = tileY + round(rot.y)
+			
+			var tile = planet.DATAC.getTileData(worldX,worldY)
+			
+			if grounded && yi == size.y: # return false if not grounded
+				if !BlockData.theChunker.getBlockDictionary(tile)["hasCollision"]:
+					return false
+			elif tile >= 2: # return false if block in the way
+				return false
+			
+			if worldX < 0 or worldX >= planet.SIZEINCHUNKS * 8:
+				return false # return false if outside world boundaries
+			if worldY < 0 or worldY >= planet.SIZEINCHUNKS * 8:
+				return false
+			
+			
+			var newDir = planet.DATAC.getPositionLookup(worldX,worldY)
+			if newDir != dir: # return false if on world corner
+				return false
+		
+	return true

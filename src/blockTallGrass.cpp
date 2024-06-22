@@ -30,6 +30,8 @@ BLOCKTALLGRASS::BLOCKTALLGRASS() {
 
     animated = true;
 
+    isTransparent = true;
+
 }
 
 

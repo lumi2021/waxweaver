@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemWall" load_steps=3 format=3 uid="uid://bn2qfq64tlcbb"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemWall.gd" id="1_wh62e"]
+[ext_resource type="Texture2D" uid="uid://trtfqrd20to0" path="res://items/walls/glassWall.png" id="2_fgp8w"]
+
+[resource]
+script = ExtResource("1_wh62e")
+blockID = -21
+itemName = "Glass Wall"
+texture = ExtResource("2_fgp8w")
+maxStackSize = 99
+clickToUse = false
+materialIn = Array[int]([])

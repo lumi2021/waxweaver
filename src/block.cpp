@@ -36,6 +36,8 @@ BLOCK::BLOCK() {
     multitile = false;
     animated = false;
 
+    isTransparent = false;
+
     setNewVariables();
 
 }

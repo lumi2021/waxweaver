@@ -27,6 +27,10 @@
 #include "blockTallGrass.h" // id 17
 #include "blockOreCopper.h" // id 18
 #include "blockChair.h" // id 19
+#include "blockWorkBench.h" // id 20
+#include "blockGlass.h" // id 21
+#include "blockDoorClosed.h" // id 22
+#include "blockDoorOpen.h" // id 23
 
 // adding a new block? make sure you increment the PENIS array !
 
@@ -44,7 +48,7 @@ public:
 	
 	Array allBlocks;
 
-	BLOCK *penis[20]; // must be largest id + 1
+	BLOCK *penis[24]; // must be largest id + 1
 
 	LOOKUPBLOCK();
 	~LOOKUPBLOCK();
@@ -62,6 +66,7 @@ public:
 	bool isAnimated(int id);
 	double getLightMultiplier(int id);
 	double getLightEmmission(int id);
+	bool isTransparent(int id);
 
 	Dictionary runOnTick(int x, int y, PLANETDATA *planet, int dir, int blockID);
 	Dictionary runOnBreak(int x, int y, PLANETDATA *planet, int dir, int blockID);

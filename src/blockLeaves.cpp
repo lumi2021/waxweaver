@@ -24,6 +24,7 @@ BLOCKLEAVES::BLOCKLEAVES() {
     connectedTexture = true;
 
     itemToDrop = 7;
+    isTransparent = true;
 
 }
 

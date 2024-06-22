@@ -8,6 +8,7 @@ var data = {
 		"amount":4,
 		"ingredients":[13],
 		"ingAmounts":[1],
+		"station":20,
 	},
 	
 	1:{ # torch
@@ -29,8 +30,24 @@ var data = {
 		"amount":1,
 		"ingredients":[13],
 		"ingAmounts":[5],
+		"station":20,
 	},
 	
+	4:{ # glass
+		"crafts":21,
+		"amount":1,
+		"ingredients":[14],
+		"ingAmounts":[1],
+		"station":0,
+	},
+	
+	5:{ # glass wall
+		"crafts":-21,
+		"amount":4,
+		"ingredients":[21],
+		"ingAmounts":[1],
+		"station":20,
+	},
 	
 }
 

@@ -38,9 +38,13 @@ LOOKUPBLOCK::LOOKUPBLOCK() {
     penis[17] = new BLOCKTALLGRASS();
     penis[18] = new BLOCKORECOPPER();
     penis[19] = new BLOCKCHAIR();
+    penis[20] = new BLOCKWORKBENCH();
+    penis[21] = new BLOCKGLASS();
+    penis[22] = new BLOCKDOORCLOSED();
+    penis[23] = new BLOCKDOOROPEN();
 
-    //int arraySize = sizeof(penis) / sizeof(int);
-    for(BLOCK *i : penis){ // make sure u increase me too !!
+    
+    for(BLOCK *i : penis){ // i increase automatically !
         i->setLookUp(this);
     }
 }
@@ -121,6 +125,12 @@ double LOOKUPBLOCK::getLightEmmission(int id){
     BLOCK* g = penis[id];
 
     return g->lightEmmission;
+}
+
+bool LOOKUPBLOCK::isTransparent(int id){
+    BLOCK* g = penis[id];
+
+    return g->isTransparent;
 }
 
 Dictionary LOOKUPBLOCK::runOnTick(int x, int y, PLANETDATA *planet, int dir, int blockID){

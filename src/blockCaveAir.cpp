@@ -17,6 +17,8 @@ BLOCKCAVEAIR::BLOCKCAVEAIR() {
     lightMultiplier = 0.94;
     lightEmmission = 0.0;
     
+    isTransparent = true;
+    
 }
 
 

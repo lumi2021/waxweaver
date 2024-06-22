@@ -1,5 +1,5 @@
 #ifndef BLOCKTABLEWOOD_H
-#define BLOCKSTONE_H
+#define BLOCKTABLEWOOD_H
 
 #include "block.h"
 

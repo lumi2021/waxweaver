@@ -17,6 +17,7 @@ BLOCKCHAIR::BLOCKCHAIR() {
     lightMultiplier = 0.99;
     itemToDrop = 19;
     breakParticleID = 2;
+    isTransparent = true;
 
 }
 
