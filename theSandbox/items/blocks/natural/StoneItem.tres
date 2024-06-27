@@ -10,4 +10,3 @@ itemName = "Stone"
 texture = ExtResource("2_fk7ju")
 maxStackSize = 99
 clickToUse = false
-materialIn = Array[int]([])

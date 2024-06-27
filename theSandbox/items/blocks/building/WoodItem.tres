@@ -10,4 +10,3 @@ itemName = "Wood"
 texture = ExtResource("2_e0n1w")
 maxStackSize = 99
 clickToUse = false
-materialIn = Array[int]([0, 1, 3])

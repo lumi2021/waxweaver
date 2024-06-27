@@ -24,6 +24,7 @@ size = Vector2(6, 6)
 
 [node name="Praffin" type="CharacterBody2D"]
 collision_layer = 128
+collision_mask = 17
 
 [node name="HealthComponent" parent="." instance=ExtResource("1_uxer5")]
 maxHealth = 15

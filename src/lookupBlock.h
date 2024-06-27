@@ -23,7 +23,7 @@
 #include "blockWood.h" // id 13
 #include "blockSand.h" // id 14
 #include "blockTorch.h" // id 15
-#include "blockTableWood.h" // id 16
+#include "blockFurnace.h" // id 16
 #include "blockTallGrass.h" // id 17
 #include "blockOreCopper.h" // id 18
 #include "blockChair.h" // id 19

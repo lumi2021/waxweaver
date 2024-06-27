@@ -10,4 +10,3 @@ itemName = "Glass"
 texture = ExtResource("2_ndfba")
 maxStackSize = 99
 clickToUse = false
-materialIn = Array[int]([5])

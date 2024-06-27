@@ -34,7 +34,7 @@ LOOKUPBLOCK::LOOKUPBLOCK() {
     penis[13] = new BLOCKWOOD();
     penis[14] = new BLOCKSAND();
     penis[15] = new BLOCKTORCH();
-    penis[16] = new BLOCKTABLEWOOD();
+    penis[16] = new BLOCKFURNACE();
     penis[17] = new BLOCKTALLGRASS();
     penis[18] = new BLOCKORECOPPER();
     penis[19] = new BLOCKCHAIR();

@@ -684,7 +684,7 @@ func scanForStations():
 	var scan :Array[int]= []
 	for x in range(12):
 		for y in range(12):
-			var pos = Vector2(x,y) + scanBody.posToTile(position) - Vector2(6,6)
+			var pos = Vector2(x,y) + scanBody.posToTile(scanBody.to_local(global_position)) - Vector2(6,6)
 			
 			var tile = scanBody.DATAC.getTileData(pos.x,pos.y)
 			if !scan.has(tile):

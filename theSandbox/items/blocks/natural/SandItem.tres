@@ -10,4 +10,3 @@ itemName = "Sand"
 texture = ExtResource("2_a5xbg")
 maxStackSize = 99
 clickToUse = false
-materialIn = Array[int]([4])

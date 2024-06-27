@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://wwtub3lnh5uk"]
+
+[ext_resource type="Script" path="res://item_resources/Item.gd" id="1_no2s4"]
+[ext_resource type="Texture2D" uid="uid://c3qks3xs1cf8t" path="res://items/material/bars/GoldBar.png" id="2_f4loq"]
+
+[resource]
+script = ExtResource("1_no2s4")
+itemName = "Gold"
+texture = ExtResource("2_f4loq")
+maxStackSize = 99
+clickToUse = false

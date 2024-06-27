@@ -1,5 +1,7 @@
 extends Node
 
+enum {FURNACE = 16, WORKBENCH = 20}
+
 var data = {
 	# might get messy BE CAREFUL
 	
@@ -8,7 +10,7 @@ var data = {
 		"amount":4,
 		"ingredients":[13],
 		"ingAmounts":[1],
-		"station":20,
+		"station":WORKBENCH,
 	},
 	
 	1:{ # torch
@@ -18,11 +20,12 @@ var data = {
 		"ingAmounts":[1,1],
 	},
 	
-	2:{ # test table true
+	2:{ # furnace
 		"crafts":16,
 		"amount":1,
-		"ingredients":[3003],
-		"ingAmounts":[20],
+		"ingredients":[2,15],
+		"ingAmounts":[10,6],
+		"station":WORKBENCH,
 	},
 	
 	3:{ # wooden chair
@@ -30,7 +33,7 @@ var data = {
 		"amount":1,
 		"ingredients":[13],
 		"ingAmounts":[5],
-		"station":20,
+		"station":WORKBENCH,
 	},
 	
 	4:{ # glass
@@ -38,7 +41,7 @@ var data = {
 		"amount":1,
 		"ingredients":[14],
 		"ingAmounts":[1],
-		"station":0,
+		"station":FURNACE,
 	},
 	
 	5:{ # glass wall
@@ -46,7 +49,15 @@ var data = {
 		"amount":4,
 		"ingredients":[21],
 		"ingAmounts":[1],
-		"station":20,
+		"station":WORKBENCH,
+	},
+	
+	6:{ # copper ingot
+		"crafts":3004,
+		"amount":1,
+		"ingredients":[18],
+		"ingAmounts":[3],
+		"station":FURNACE,
 	},
 	
 }
@@ -55,3 +66,12 @@ func getCraft(id):
 	if data.has(id):
 		return data[id]
 	return data[0]
+
+func _ready():
+	initializeMaterials()
+
+func initializeMaterials():
+	for recipe in data:
+		for materialID in data[recipe]["ingredients"]:
+			ItemData.data[materialID].materialIn.append(recipe)
+	

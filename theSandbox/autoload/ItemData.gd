@@ -10,7 +10,7 @@ var data = {
 	-13:load("res://items/walls/WoodWallItem.tres"),
 	14:load("res://items/blocks/natural/SandItem.tres"),
 	15:load("res://items/torches/TorchItem.tres"),
-	16:load("res://items/blocks/TestTable.tres"),
+	16:load("res://items/blocks/furniture/stations/Furnace.tres"),
 	18:load("res://items/blocks/ores/CopperOre.tres"),
 	20:load("res://items/blocks/furniture/stations/WorkBench.tres"),
 	21:load("res://items/blocks/building/GlassItem.tres"),
@@ -21,6 +21,7 @@ var data = {
 	3001:load("res://items/tools/FlimsyPickaxe.tres"),
 	3002:load("res://items/tools/FlimsyHammer.tres"),
 	3003:load("res://items/material/Wax.tres"),
+	3004:load("res://items/material/bars/CopperBar.tres"),
 	
 	
 	# chairs 6000 - 6199

@@ -9,4 +9,3 @@ itemName = "Wax"
 texture = ExtResource("2_iskey")
 maxStackSize = 99
 clickToUse = false
-materialIn = Array[int]([1, 2])
