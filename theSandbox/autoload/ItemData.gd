@@ -19,6 +19,7 @@ var data = {
 	24:load("res://items/blocks/ores/GoldOre.tres"),
 	25:load("res://items/blocks/furniture/other/Ladder.tres"),
 	26:load("res://items/blocks/foliage/flowers/LilyItem.tres"),
+	27:load("res://items/blocks/ores/IronOre.tres"),
 	
 	# item ids
 	3000:load("res://items/tools/flimsy/FlimsySword.tres"), # flimsy tools
@@ -35,6 +36,9 @@ var data = {
 	3008:load("res://items/tools/golden/GoldenSword.tres"), # golden tools
 	3009:load("res://items/tools/golden/GoldenPickaxe.tres"),
 	
+	3010:load("res://items/material/bars/IronBar.tres"),
+	3011:load("res://items/tools/iron/IronSword.tres"), # iron tools
+	3012:load("res://items/tools/iron/IronPickaxe.tres"),
 	
 	# chairs 6000 - 6199
 	6000:load("res://items/blocks/furniture/chairs/WoodenChair.tres"),

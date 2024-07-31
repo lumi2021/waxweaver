@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemMining" load_steps=3 format=3 uid="uid://bmhk15mruxf35"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemMining.gd" id="1_m16g6"]
+[ext_resource type="Texture2D" uid="uid://bre3cyiitvs6l" path="res://items/tools/iron/ironPickaxe.png" id="2_748q2"]
+
+[resource]
+script = ExtResource("1_m16g6")
+miningMultiplier = 1.6
+damage = 3
+animSpeed = 8.0
+weaponScale = 1.0
+itemName = "Iron Pickaxe"
+texture = ExtResource("2_748q2")
+maxStackSize = 1
+clickToUse = false

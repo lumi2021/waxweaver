@@ -12,7 +12,7 @@ BLOCKOREGOLD::BLOCKOREGOLD() {
 
     itemToDrop = 24;
     rotateTextureToGravity = true;
-    breakTime = 0.8;
+    breakTime = 1.0;
 
 }
 

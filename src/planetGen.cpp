@@ -123,19 +123,27 @@ void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
 
             // ores
             if(dis < baseSurface - 16){
-                if(std::rand() % 500 == 0){
+
+                
+                if( dis < 48 ) {
+
+                    if(std::rand() % 380 == 0){
+                        generateOre(planet,x,y,27,2,5); // generate iron
+                    }
+
+                }
+
+                if(std::rand() % 300 == 0){
                     generateOre(planet,x,y,18,2,5); // generate copper
                 }
 
                 if(std::rand() % 400 == 0){
-                    generateOre(planet,x,y,24,2,2); // generate gold
+                    generateOre(planet,x,y,24,2,3); // generate gold
                 }
 
+
+
             }
-
-
-
-
 
         }
     }

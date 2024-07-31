@@ -85,7 +85,7 @@ var data = [
 		"crafts":3004,
 		"amount":1,
 		"ingredients":[18],
-		"ingAmounts":[3],
+		"ingAmounts":[1],
 		"station":FURNACE,
 	},
 	
@@ -93,7 +93,15 @@ var data = [
 		"crafts":3005,
 		"amount":1,
 		"ingredients":[24],
-		"ingAmounts":[3],
+		"ingAmounts":[1],
+		"station":FURNACE,
+	},
+	
+	{ # iron ingot
+		"crafts":3010,
+		"amount":1,
+		"ingredients":[27],
+		"ingAmounts":[1],
 		"station":FURNACE,
 	},
 	
@@ -118,7 +126,7 @@ var data = [
 		"crafts":3008,
 		"amount":1,
 		"ingredients":[3005,13],
-		"ingAmounts":[5,5],
+		"ingAmounts":[8,5],
 		"station":WORKBENCH,
 	},
 	
@@ -126,7 +134,22 @@ var data = [
 		"crafts":3009,
 		"amount":1,
 		"ingredients":[3005,13],
-		"ingAmounts":[5,5],
+		"ingAmounts":[8,5],
+		"station":WORKBENCH,
+	},
+	{ # iron sword
+		"crafts":3011,
+		"amount":1,
+		"ingredients":[3010,13],
+		"ingAmounts":[15,5],
+		"station":WORKBENCH,
+	},
+	
+	{ # iron pickaxe
+		"crafts":3012,
+		"amount":1,
+		"ingredients":[3010,13],
+		"ingAmounts":[15,5],
 		"station":WORKBENCH,
 	},
 	
