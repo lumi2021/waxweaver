@@ -108,18 +108,27 @@ void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
                         planet->setTileData(x+up.x,y+up.y,17); // spawn grass
                     }
 
+                    if(r % 32 == 0){
+                        planet->setTileData(x+up.x,y+up.y,26); // spawn lily
+                    }
+
                     if(r % 10 == 0){
                         planet->setTileData(x+up.x,y+up.y,7);
-                        planet->setTimeData(x+up.x,y+up.y,-16000); // spawn foliage
+                        planet->setTimeData(x+up.x,y+up.y,-16000); // spawn tree sapling
                     }
 
                 }
 
             }
 
+            // ores
             if(dis < baseSurface - 16){
                 if(std::rand() % 500 == 0){
-                    generateOre(planet,x,y,18,2,3); // generate copper
+                    generateOre(planet,x,y,18,2,5); // generate copper
+                }
+
+                if(std::rand() % 400 == 0){
+                    generateOre(planet,x,y,24,2,2); // generate gold
                 }
 
             }

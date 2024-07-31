@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d2madsks052wm"
-path="res://.godot/imported/flimsyHammer.png-7595311add92f002a772d35a70860dcf.ctex"
+uid="uid://6dhvxgw525dg"
+path="res://.godot/imported/stars1.png-e07d0562504e88d2801f3204e161b5d5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://items/tools/flimsyHammer.png"
-dest_files=["res://.godot/imported/flimsyHammer.png-7595311add92f002a772d35a70860dcf.ctex"]
+source_file="res://ui_scenes/backgrounds/space/stars1.png"
+dest_files=["res://.godot/imported/stars1.png-e07d0562504e88d2801f3204e161b5d5.ctex"]
 
 [params]
 

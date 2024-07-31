@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_7i0pp")
-itemName = "Copper"
+itemName = "Copper Bar"
 texture = ExtResource("2_g5tao")
 maxStackSize = 99
 clickToUse = false

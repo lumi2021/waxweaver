@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cycvbqopkroj5"
-path="res://.godot/imported/flimsyPickaxe.png-ed2e5e003eaec389be6cf2e571030ac3.ctex"
+uid="uid://dssyoqgq06npa"
+path="res://.godot/imported/empty.png-d257f7aa7c5b6128d41923d84723af9e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://items/tools/flimsyPickaxe.png"
-dest_files=["res://.godot/imported/flimsyPickaxe.png-ed2e5e003eaec389be6cf2e571030ac3.ctex"]
+source_file="res://ui_scenes/backgrounds/space/empty.png"
+dest_files=["res://.godot/imported/empty.png-d257f7aa7c5b6128d41923d84723af9e.ctex"]
 
 [params]
 

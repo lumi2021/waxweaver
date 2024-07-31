@@ -217,7 +217,7 @@ Array CHUNKDRAW::drawLiquid(PLANETDATA *planet,Vector2i pos,bool shipChunk){
 
 }
 
-Array CHUNKDRAW::tickUpdate(PLANETDATA *planet,Vector2i pos,bool onScreen){
+Array CHUNKDRAW::tickUpdate(PLANETDATA *planet,Vector2i pos,bool onScreen,float daylight){
 
     Array collectedChanges;
     bool shouldRedrawLiquid = false;
@@ -335,12 +335,21 @@ Array CHUNKDRAW::tickUpdate(PLANETDATA *planet,Vector2i pos,bool onScreen){
 
             //average light values
             double mutliplier = cock->getLightMultiplier(blockID);
+
+            if (std::abs(water)> 0.2){
+                mutliplier = 0.75;
+            }
+
+
             double avgn = (lightL + lightR + lightB + lightT)/4.0;
             double newLight = ( std::max({ lightB , lightL , lightR , lightT }) + avgn  ) * mutliplier * 0.5;
             double lightEmmission = cock->getLightEmmission(blockID);
 
-            if(blockID == 0 && bgID > 1){
-                lightEmmission = 0.0;
+            if(blockID == 0){
+                lightEmmission = 5.0 * daylight;
+                if(bgID > 1){
+                    lightEmmission = 0.0;
+                }
             }
 
             if (std::abs(water)> 0.2){

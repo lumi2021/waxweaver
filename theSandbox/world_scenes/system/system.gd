@@ -10,6 +10,11 @@ extends Node2D
 func _ready():
 	generateSystem()
 	GlobalRef.system = self
+	
+	$lightRenderViewport.world_2d = get_tree().root.get_viewport().world_2d
+	GlobalRef.lightRenderVP = $lightRenderViewport
+	
+	
 
 func generateSystem():
 	for planet in cosmicBodyContainer.get_children():

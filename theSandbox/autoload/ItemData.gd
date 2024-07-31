@@ -3,6 +3,7 @@ extends Node
 var data = {
 	-1:null,
 	# block items
+	0:load("res://items/blocks/natural/StoneItem.tres"),
 	2:load("res://items/blocks/natural/StoneItem.tres"),
 	3:load("res://items/blocks/natural/DirtItem.tres"),
 	7:load("res://items/blocks/foliage/SaplingItem.tres"),
@@ -15,13 +16,24 @@ var data = {
 	20:load("res://items/blocks/furniture/stations/WorkBench.tres"),
 	21:load("res://items/blocks/building/GlassItem.tres"),
 	-21:load("res://items/walls/GlassWallItem.tres"),
+	24:load("res://items/blocks/ores/GoldOre.tres"),
+	25:load("res://items/blocks/furniture/other/Ladder.tres"),
+	26:load("res://items/blocks/foliage/flowers/LilyItem.tres"),
 	
 	# item ids
-	3000:load("res://items/tools/FlimsySword.tres"),
-	3001:load("res://items/tools/FlimsyPickaxe.tres"),
-	3002:load("res://items/tools/FlimsyHammer.tres"),
+	3000:load("res://items/tools/flimsy/FlimsySword.tres"), # flimsy tools
+	3001:load("res://items/tools/flimsy/FlimsyPickaxe.tres"),
+	3002:load("res://items/tools/flimsy/FlimsyHammer.tres"),
+	
 	3003:load("res://items/material/Wax.tres"),
 	3004:load("res://items/material/bars/CopperBar.tres"),
+	3005:load("res://items/material/bars/GoldBar.tres"),
+	
+	3006:load("res://items/tools/copper/CopperSword.tres"), # copper tools
+	3007:load("res://items/tools/copper/CopperPickaxe.tres"),
+	
+	3008:load("res://items/tools/golden/GoldenSword.tres"), # golden tools
+	3009:load("res://items/tools/golden/GoldenPickaxe.tres"),
 	
 	
 	# chairs 6000 - 6199
@@ -30,6 +42,7 @@ var data = {
 	
 	# doors 6200 - 6399
 	6200:load("res://items/blocks/furniture/doors/WoodDoor.tres"),
+	6201:load("res://items/tools/golden/GoldenPickaxe.tres"),
 }
 
 var heldItemAnims = {
@@ -47,3 +60,12 @@ func getItem(id):
 	if data.has(id):
 		return data[id]
 	return data[0]
+
+func itemExists(id):
+	return data.has(id)
+
+func getItemName(id):
+	var data = getItem(id)
+	return data.itemName
+		
+

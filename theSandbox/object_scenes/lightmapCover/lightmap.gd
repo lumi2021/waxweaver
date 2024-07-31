@@ -9,6 +9,8 @@ var newImg = null
 func _ready():
 	GlobalRef.lightmap = self
 	
+	sprite.material.set_shader_parameter("lightingMask",GlobalRef.lightRenderVP.get_texture())
+	
 
 func pushUpdate(planet,newPos):
 	var pSize = planet.SIZEINCHUNKS * 32 #Pixel diameter of planet
@@ -20,7 +22,10 @@ func pushUpdate(planet,newPos):
 
 	cppLightmap.generateLightTexture(newX,newY,planet.DATAC)
 	
-	position = newPos
+	position.x = int(newPos.x)
+	position.y = int(newPos.y)
+	GlobalRef.lightRenderVP.cam.global_position = global_position
 
 func _on_lightmap_image_updated(node, image):
 	sprite.texture = ImageTexture.create_from_image(image)
+	

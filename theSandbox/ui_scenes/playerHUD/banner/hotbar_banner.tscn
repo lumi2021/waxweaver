@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://daqevwntvcp3o"]
+[gd_scene load_steps=15 format=3 uid="uid://daqevwntvcp3o"]
 
 [ext_resource type="Script" path="res://ui_scenes/playerHUD/banner/hotbar_banner.gd" id="1_iyyfi"]
 [ext_resource type="PackedScene" uid="uid://cr7y1t1hoywt1" path="res://ui_scenes/playerHUD/inventory/inventory_slot.tscn" id="2_il2kt"]
@@ -6,6 +6,7 @@
 [ext_resource type="FontFile" uid="uid://n3r2v6m6uh2n" path="res://zeeg/font/GrapeSoda.ttf" id="5_3w5al"]
 [ext_resource type="Texture2D" uid="uid://i6l5rsnepvoc" path="res://ui_scenes/playerHUD/healthBar/white.png" id="5_ryv7v"]
 [ext_resource type="FontFile" uid="uid://c3vw44vws5n61" path="res://zeeg/font/I-pixel-u.ttf" id="6_bqidn"]
+[ext_resource type="FontFile" uid="uid://bn0yrqolh4ms8" path="res://zeeg/font/Arcadepix Plus.ttf" id="7_tlsqg"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_bk67w"]
 font = ExtResource("5_3w5al")
@@ -347,3 +348,19 @@ offset_bottom = 13.0
 text = "100 / 100"
 label_settings = SubResource("LabelSettings_utrlr")
 horizontal_alignment = 2
+
+[node name="Cheat" type="Node2D" parent="."]
+visible = false
+position = Vector2(0, 300)
+
+[node name="TextEdit" type="TextEdit" parent="Cheat"]
+offset_left = 5.0
+offset_top = -29.0
+offset_right = 397.0
+offset_bottom = -1.0
+theme_override_fonts/font = ExtResource("7_tlsqg")
+theme_override_font_sizes/font_size = 16
+placeholder_text = "enter command"
+
+[node name="Chat" type="Node2D" parent="."]
+position = Vector2(400, 300)

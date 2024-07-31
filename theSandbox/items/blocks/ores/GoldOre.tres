@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://bikm3131nhb1p"]
+
+[ext_resource type="Script" path="res://item_resources/Item.gd" id="1_7s8ec"]
+[ext_resource type="Texture2D" uid="uid://cqxnh6arvf1pa" path="res://items/blocks/ores/goldOreDrop.png" id="2_jux5f"]
+
+[resource]
+script = ExtResource("1_7s8ec")
+itemName = "Gold Ore"
+texture = ExtResource("2_jux5f")
+maxStackSize = 99
+clickToUse = false

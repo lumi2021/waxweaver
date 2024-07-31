@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://du3d46ncb8il5"]
+
+[ext_resource type="Script" path="res://ui_scenes/backgrounds/sky_gradient.gd" id="1_cc7cq"]
+
+[sub_resource type="Gradient" id="Gradient_s7j5y"]
+offsets = PackedFloat32Array(0, 0.5, 0.6, 0.970149, 1)
+colors = PackedColorArray(0.168627, 0.32549, 0.619608, 1, 0.168627, 0.32549, 0.619608, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.168627, 0.32549, 0.619608, 1)
+metadata/_snap_enabled = true
+
+[sub_resource type="Gradient" id="Gradient_uvlat"]
+colors = PackedColorArray(1, 1, 1, 0.392157, 1, 1, 1, 0.72549)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_l2nwg"]
+gradient = SubResource("Gradient_uvlat")
+
+[node name="skyGradient" type="Node2D"]
+script = ExtResource("1_cc7cq")
+gradient = SubResource("Gradient_s7j5y")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(199.918, 150.64)
+rotation = 1.5708
+scale = Vector2(1.24133, 415.551)
+texture = SubResource("GradientTexture1D_l2nwg")

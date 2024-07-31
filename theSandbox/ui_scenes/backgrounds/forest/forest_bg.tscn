@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=3 uid="uid://2khnx3vtgowi"]
+
+[ext_resource type="PackedScene" uid="uid://mh4q570jpivc" path="res://ui_scenes/backgrounds/background_layer.tscn" id="1_e6jns"]
+[ext_resource type="Script" path="res://ui_scenes/backgrounds/forest/forest_bg.gd" id="1_nlprf"]
+[ext_resource type="PackedScene" uid="uid://du3d46ncb8il5" path="res://ui_scenes/backgrounds/sky_gradient.tscn" id="1_y0a51"]
+[ext_resource type="Texture2D" uid="uid://d0gkklwukqupd" path="res://ui_scenes/backgrounds/forest/clouds.png" id="3_oigs6"]
+
+[node name="forestBG" type="Node2D"]
+script = ExtResource("1_nlprf")
+
+[node name="skyGradient" parent="." instance=ExtResource("1_y0a51")]
+position = Vector2(0, -1)
+
+[node name="backgroundLayer" parent="." instance=ExtResource("1_e6jns")]
+modulate = Color(0.368627, 0.811765, 1, 0.0823529)
+texture = ExtResource("3_oigs6")
+scrollAmount = Vector2(0.2, 0.1)

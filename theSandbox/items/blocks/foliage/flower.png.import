@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dbs4ktm2l71km"
-path="res://.godot/imported/flimsySword.png-eb99c1442abab14a25e82a48983642a5.ctex"
+uid="uid://dp4ncyn8177eq"
+path="res://.godot/imported/flower.png-deee2af0d7e437e24a2e25a7e318c284.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://items/tools/flimsySword.png"
-dest_files=["res://.godot/imported/flimsySword.png-eb99c1442abab14a25e82a48983642a5.ctex"]
+source_file="res://items/blocks/foliage/flower.png"
+dest_files=["res://.godot/imported/flower.png-deee2af0d7e437e24a2e25a7e318c284.ctex"]
 
 [params]
 

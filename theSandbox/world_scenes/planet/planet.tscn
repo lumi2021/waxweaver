@@ -10,3 +10,4 @@ script = ExtResource("1_8tc4r")
 [node name="ChunkContainer" type="Node2D" parent="."]
 
 [node name="EntityContainer" type="Node2D" parent="." groups=["planet"]]
+visibility_layer = 8

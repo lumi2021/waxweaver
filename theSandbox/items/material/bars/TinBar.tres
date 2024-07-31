@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://bbixfpcptufqr"]
 
 [ext_resource type="Script" path="res://item_resources/Item.gd" id="1_smwcd"]
-[ext_resource type="Texture2D" uid="uid://cc82rh42pqrje" path="res://items/material/bars/CopperBar.png" id="2_5vssr"]
+[ext_resource type="Texture2D" uid="uid://dk5bkaahlnsq7" path="res://items/material/bars/TinBar.png" id="2_jkc2m"]
 
 [resource]
 script = ExtResource("1_smwcd")
-itemName = "Copper Bar"
-texture = ExtResource("2_5vssr")
+itemName = "Tin Bar"
+texture = ExtResource("2_jkc2m")
 maxStackSize = 99
 clickToUse = false

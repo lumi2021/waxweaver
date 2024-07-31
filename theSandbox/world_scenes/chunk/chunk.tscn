@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://7ejg1f0f55t6"]
+[gd_scene load_steps=6 format=3 uid="uid://7ejg1f0f55t6"]
 
 [ext_resource type="Script" path="res://world_scenes/chunk/chunk.gd" id="1_2ne51"]
 [ext_resource type="Shader" path="res://world_scenes/chunk/chunk.gdshader" id="2_yo1vl"]
@@ -8,30 +8,31 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dtd3g"]
 shader = ExtResource("2_yo1vl")
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_q4lio"]
-blend_mode = 3
-
 [node name="Chunk" type="Node2D"]
 script = ExtResource("1_2ne51")
 
 [node name="backLayer" type="Sprite2D" parent="."]
+visibility_layer = 2
 z_index = -5
 material = SubResource("ShaderMaterial_dtd3g")
 centered = false
 
 [node name="mainLayer" type="Sprite2D" parent="."]
+visibility_layer = 4
 z_index = -1
 centered = false
 
 [node name="animLayer" type="Sprite2D" parent="."]
+visibility_layer = 4
 z_index = -1
 centered = false
 hframes = 3
 script = ExtResource("3_fbhgb")
 
 [node name="waterLayer" type="Sprite2D" parent="."]
-z_index = 64
-material = SubResource("CanvasItemMaterial_q4lio")
+visibility_layer = 16
+z_index = 1
+texture_repeat = 1
 centered = false
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
@@ -47,6 +48,7 @@ rect = Rect2(-48, -48, 160, 160)
 
 [node name="Border" type="Sprite2D" parent="."]
 visible = false
+modulate = Color(1, 1, 1, 0.129412)
 z_index = 455
 texture = ExtResource("3_k01ex")
 centered = false

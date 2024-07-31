@@ -33,7 +33,7 @@ func _ready():
 func tickUpdate():
 
 	# call c++ and return
-	return BlockData.theChunker.tickUpdate(ship.DATAC,pos,true)
+	return BlockData.theChunker.tickUpdate(ship.DATAC,pos,true,GlobalRef.daylightMult)
 
 func drawData():
 	

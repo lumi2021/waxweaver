@@ -293,9 +293,9 @@ func loadPlanet():
 	#createChunks()
 	set_physics_process(true)
 	reverseOrbitingParents()
-	
+	Background.setBG(planetType)
 
 func unloadPlanet():
 	clearChunks()
 	clearOrbitingParents()
-	
+	Background.clearBG()

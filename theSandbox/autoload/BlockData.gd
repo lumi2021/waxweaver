@@ -36,11 +36,17 @@ func breakWall(x,y,planet,blockID):
 
 
 func spawnGroundItem(tilex:int,tiley:int,id:int,planet):
-	if id == -1:
-		return
-		
-	if id == 19: # is chair
-		id = 6000 + ( planet.DATAC.getInfoData(tilex,tiley) / 4)
+	
+	## special cases ##
+	match id:
+		-1:
+			return
+		19: # is chair
+			id = 6000 + ( planet.DATAC.getInfoData(tilex,tiley) / 4)
+		22: # is closed door
+			id = 6200 + ( planet.DATAC.getInfoDadta(tilex,tiley) / 2)
+		23: # is open door
+			id = 6200 + ( planet.DATAC.getInfoData(tilex,tiley) / 8)
 	
 	
 	var ins = groundItemScene.instantiate()

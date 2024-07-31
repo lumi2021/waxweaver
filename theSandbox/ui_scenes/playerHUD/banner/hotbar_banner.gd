@@ -6,7 +6,19 @@ extends Node2D
 
 var invOpen = false
 
+
+
+# chat nodes
+@onready var cheatOrigin = $Cheat
+@onready var textBox = $Cheat/TextEdit
+@onready var chat = $Chat
+
+@onready var chatMessageScene = preload("res://ui_scenes/chat/chat_message.tscn")
+
 func _ready():
+	
+	GlobalRef.hotbar = self
+	
 	#assign self to slots
 	for slot in $Hotbar.get_children():
 		slot.parent = self
@@ -24,7 +36,7 @@ func _ready():
 	
 func _process(delta):
 	holdSlot.position = to_local(get_global_mouse_position()) - Vector2(6,6)
-	if Input.is_action_just_pressed("inventory"):
+	if Input.is_action_just_pressed("inventory") and !GlobalRef.chatIsOpen:
 		invOpen = !invOpen
 		$Menu.visible = invOpen
 		
@@ -47,6 +59,20 @@ func _process(delta):
 		PlayerData.selectSlot(curSlot)
 		for slot in $Hotbar.get_children():
 			slot.updateSelected()
+	
+	# cheat commands
+	if Input.is_action_just_pressed("openCommand"):
+		if cheatOrigin.visible:
+			interpretCommand(textBox.text)
+		
+		cheatOrigin.visible = !cheatOrigin.visible
+		textBox.text = ""
+		
+		GlobalRef.chatIsOpen = cheatOrigin.visible
+		
+		if cheatOrigin.visible:
+			textBox.grab_focus()
+	
 	
 func clickedSlot(slot):
 	if !invOpen:
@@ -115,3 +141,71 @@ func updateHealth():
 	$HealthBar/healthText.text = str(PlayerData.currentHealth) + " / " + str(PlayerData.maxHealth)
 	$HealthBar/bar.scale.x = PlayerData.currentHealth / 2.0
 	$HealthBar/barShadow.scale.x = PlayerData.maxHealth / 2.0
+
+
+func interpretCommand(text):
+	
+	#remove accidental slash
+	text = text.left(-1)
+	
+	var command = text.get_slice(" ",0)
+	match command:
+		"fullbright":
+			GlobalRef.lightmap.visible = !GlobalRef.lightmap.visible
+			if GlobalRef.lightmap.visible:
+				GlobalRef.sendChat("Fullbright: DISABLED")
+			else:
+				GlobalRef.sendChat("Fullbright: ENABLED")
+		"give":
+			var item = text.get_slice(" ",1)
+			var amount = text.get_slice(" ",2)
+			
+			if item == "":
+				GlobalRef.sendError("ERROR: missing item input")
+				return # return if item not inputted 
+			if !ItemData.itemExists(int(item)):
+				GlobalRef.sendError("ERROR: item of id " + item + " does not exist.")
+				return # return if item does not exist
+
+			if amount == "":
+				amount = "1" # make amount 1 if no amount in entered
+			
+			PlayerData.addItem(int(item),int(amount))
+			GlobalRef.sendChat("Gave player " + amount + " " + ItemData.getItemName(int(item)))
+		
+		"ship":
+			GlobalRef.player.spawnShip()
+		
+		"tick":
+			var amount = text.get_slice(" ",1)
+			if amount == "":
+				GlobalRef.sendError("ERROR: missing time input")
+				return # return if time not inputted 
+			GlobalRef.globalTick += int(amount)
+			GlobalRef.sendChat("Advanced time by " + str(int(amount)/15.0) + " seconds.")
+		
+		"time":
+			GlobalRef.sendChat("Time is " + str(GlobalRef.globalTick) + ".")
+		
+		"zoom":
+			var z = text.get_slice(" ",1)
+			if z == "":
+				GlobalRef.sendError("ERROR: missing zoom amount")
+				return
+			GlobalRef.camera.zoom = Vector2(float(z),float(z))
+			GlobalRef.camera.changeZoom()
+			GlobalRef.sendChat("Zoom set to " + z + ".")
+		
+		_:
+			GlobalRef.sendError("Error: command doesn't exist")
+			return
+
+func printIntoChat(text:String,color:Color = Color.WHITE):
+	var newMessage = chatMessageScene.instantiate()
+	newMessage.text = text
+	newMessage.color = color
+	
+	for oldMessage in chat.get_children():
+		oldMessage.position.y -= 24
+	
+	chat.add_child(newMessage)

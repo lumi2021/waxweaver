@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="ItemDamage" load_steps=3 format=3 uid="uid://ul5cu6wslhwi"]
 
 [ext_resource type="Script" path="res://item_resources/item_classes/ItemDamage.gd" id="1_xdeia"]
-[ext_resource type="Texture2D" uid="uid://dbs4ktm2l71km" path="res://items/tools/flimsySword.png" id="2_ve5la"]
+[ext_resource type="Texture2D" uid="uid://dbs4ktm2l71km" path="res://items/tools/flimsy/flimsySword.png" id="2_ve5la"]
 
 [resource]
 script = ExtResource("1_xdeia")

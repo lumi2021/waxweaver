@@ -55,13 +55,8 @@ func _ready():
 	
 	PlayerData.addItem(3000,1)
 	PlayerData.addItem(3001,1)
-	PlayerData.addItem(6001,1)
-	PlayerData.addItem(20,99)
-	PlayerData.addItem(16,99)
-	PlayerData.addItem(6200,99)
 	
 	PlayerData.selectSlot(0)
-	
 
 func _process(delta):
 	
@@ -102,15 +97,14 @@ func _process(delta):
 	if Input.is_action_just_pressed("mouse_right"):
 		onRightClick()
 	
+	
+	if GlobalRef.chatIsOpen:
+		return
+	
 	#map toggle
 	if Input.is_action_just_pressed("map"):
 		GlobalRef.camera.mapbg.visible = !GlobalRef.camera.mapbg.visible
 		GlobalRef.camera.map.visible = GlobalRef.camera.mapbg.visible
-	
-	if Input.is_action_just_pressed("spawnDebugShip"):
-		var ins = shipDEBUG.instantiate()
-		get_parent().add_child(ins)
-		ins.global_position = get_global_mouse_position()
 	
 	if Input.is_action_just_pressed("noclip"):
 		noClip = !noClip
@@ -141,6 +135,9 @@ func noClipMovement(delta):
 	var dir = Vector2.ZERO
 	dir.x = int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left"))
 	dir.y = int(Input.is_action_pressed("move_down")) - int(Input.is_action_pressed("move_up"))
+	
+	if GlobalRef.chatIsOpen:
+		dir = Vector2.ZERO
 	
 	if Input.is_action_just_pressed("scroll_up"):
 		noClipSpeed += 100
@@ -195,6 +192,10 @@ func onPlanetMovement(delta):
 	if Input.is_action_pressed("move_right"):
 		GlobalRef.playerSide = 1
 		dir += 1
+		
+	if GlobalRef.chatIsOpen:
+		dir = 0
+	
 	var newVel = velocity.rotated(-rotated*(PI/2))
 	if beingKnockedback:
 		newVel.x = lerp(newVel.x, dir * speed, 0.025)
@@ -209,7 +210,7 @@ func onPlanetMovement(delta):
 		if abs(planetOn.DATAC.getWaterData(tile.x,tile.y)) > 0.2:
 			wasInWater = true
 			newVel.y = min(newVel.y,50)
-			if Input.is_action_pressed("jump"):
+			if Input.is_action_pressed("jump") and !GlobalRef.chatIsOpen:
 				newVel.y = -100.0
 			if onFloor:
 				GlobalRef.camera.rotation = lerp_angle(GlobalRef.camera.rotation,rotated*(PI/2),1.0-pow(2.0,(-delta/0.06)))
@@ -219,7 +220,7 @@ func onPlanetMovement(delta):
 				wasInWater = false
 			
 			if onFloor:
-				if Input.is_action_just_pressed("jump"):
+				if Input.is_action_just_pressed("jump") and !GlobalRef.chatIsOpen:
 					newVel.y = -275
 				GlobalRef.camera.rotation = lerp_angle(GlobalRef.camera.rotation,rotated*(PI/2),1.0-pow(2.0,(-delta/0.06)))
 
@@ -271,13 +272,16 @@ func onShipMovement(delta):
 		GlobalRef.playerSide = 1
 		dir += 1
 	
+	if GlobalRef.chatIsOpen:
+		dir = 0
+	
 	var newVel = velocity.rotated(-shipOn.rotation)
 	newVel.x = lerp(newVel.x, dir * speed, 1.0-pow(2.0,(-delta/0.04)))
 	newVel.y += gravity * delta
 	newVel.y = min(newVel.y,300)
 	
 	if onFloor:
-		if Input.is_action_just_pressed("jump"):
+		if Input.is_action_just_pressed("jump") and !GlobalRef.chatIsOpen:
 			newVel.y = -275
 		if int(Input.is_action_pressed("rotateShipRight")) - int(Input.is_action_pressed("rotateShipLeft")) == 0:
 			GlobalRef.camera.rotation = lerp_angle(GlobalRef.camera.rotation,shipOn.rotation,1.0-pow(2.0,(-delta/0.2)))
@@ -309,8 +313,49 @@ func chairMovement(delta):
 	ensureCamPosition()
 
 func ladderMovement(delta):
-	pass
-
+	var vdir = int(Input.is_action_pressed("move_down")) - int(Input.is_action_pressed("move_up"))
+	
+	var hdir = int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left"))
+	if hdir != 0:
+		flipPlayer(hdir)
+	
+	var obj = planetOn
+	
+	var newVel = Vector2.ZERO
+	
+	if is_instance_valid(shipOn):
+		obj = shipOn
+		newVel = velocity.rotated(-shipOn.rotation)
+		newVel = Vector2(0,vdir * 150)
+	else:
+		newVel = velocity.rotated(-rotated*(PI/2))
+		newVel = Vector2(0,vdir * 150)
+	
+	
+	if Input.is_action_pressed("jump"):
+		movementState = 0
+		newVel.y = -250 
+		
+	
+	
+	var tile = obj.posToTile(obj.to_local(global_position))
+	var blockType = obj.DATAC.getTileData(tile.x,tile.y)
+	if blockType != 25:
+		movementState = 0
+		newVel.y = -250 * int(Input.is_action_pressed("move_up"))
+	
+	if is_instance_valid(shipOn):
+		velocity = newVel.rotated(shipOn.rotation)
+	else:
+		velocity = newVel.rotated(rotated*(PI/2))
+	
+	move_and_slide()
+	
+	squishSprites(1.0,delta)
+	eyeBallAnim()
+	updateLight()
+	ensureCamPosition()
+	
 func inSpaceMovement(delta):
 	
 	if noClip:
@@ -564,6 +609,11 @@ func runItemProcess():
 		heldItemAnim.onNotUsing()
 
 func onRightClick():
+	
+	#cancel if out of range
+	if get_local_mouse_position().length() > 48:
+		return
+	
 	# Determine whether or not to target ship
 	var areas = $MouseOver.get_overlapping_areas()
 	var ship = null
@@ -603,6 +653,11 @@ func onRightClick():
 			openDoor(tile,editBody,GlobalRef.playerSide)
 		23: # open door
 			closeDoor(tile,editBody)
+		25: # ladder
+			if movementState == 2:
+				return
+			movementState = 2 # enter ladder state
+			chairSit(tile,editBody)
 
 func openDoor(tile,body,playerDir):
 	var info = body.DATAC.getInfoData(tile.x,tile.y) % 2 # top or bottom of door
@@ -640,6 +695,8 @@ func closeDoor(tile,body):
 	
 
 func chairSit(tile,editBody):
+	
+	
 	$AnimationPlayer.play("sit")
 	setAllPlayerFrames(7)
 	var info = editBody.DATAC.getInfoData(tile.x,tile.y)
@@ -762,13 +819,13 @@ func squishSprites(target,delta):
 			obj.position.y = lerp(obj.position.y,3.0+(3.0*int(target!=1.0)), 1.0-pow( 2.0,( -delta/0.02 ) ) )
 
 func scrollBackgrounds(delta):
-	for layer in GlobalRef.camera.backgroundHolder.get_children():
-		layer.updatePosition(velocity.rotated(-GlobalRef.camera.rotation)*-delta)
-
+	Background.scroll(velocity.rotated(-GlobalRef.camera.rotation)*-delta)
+	
+	
 func scrollBackgroundsSpace(vel,delta):
-	for layer in GlobalRef.camera.backgroundHolder.get_children():
-		layer.updatePosition(vel.rotated(-GlobalRef.camera.rotation)*-delta)
-
+	Background.scroll(vel.rotated(-GlobalRef.camera.rotation)*-delta)
+	pass
+	
 ######################################################################
 ############################### MATHS ################################
 ######################################################################
@@ -853,3 +910,8 @@ func updateLightStatic():
 func _on_health_component_health_changed():
 	PlayerData.sendHealthUpdate($HealthComponent.health,$HealthComponent.maxHealth)
 
+
+func spawnShip():
+	var ins = shipDEBUG.instantiate()
+	get_parent().add_child(ins)
+	ins.global_position = get_global_mouse_position()

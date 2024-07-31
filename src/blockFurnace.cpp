@@ -16,6 +16,9 @@ BLOCKFURNACE::BLOCKFURNACE() {
     connectTexturesToMe = false;
     lightMultiplier = 0.99;
     itemToDrop = 16;
+    isTransparent = true;
+    animated = true;
+    lightEmmission = 0.4;
 
 }
 
@@ -31,7 +34,7 @@ Dictionary BLOCKFURNACE::onBreak(int x, int y, PLANETDATA *planet, int dir){
 
     // determine size of multiTile
     
-    Vector2i size = Vector2i(3,2);
+    Vector2i size = Vector2i(2,3);
    
 
     // find coords of info tile

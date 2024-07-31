@@ -60,7 +60,7 @@ Dictionary BLOCKGRASS::onTick(int x, int y, PLANETDATA *planet, int dir) {
                     
                     Vector2 pee = Vector2(0,1).rotated(acos(0.0) * i);
                    
-                    if(planet->getTileData(x+v.x+pee.x,y+v.y+pee.y)<2){
+                    if(!lookup->hasCollision(planet->getTileData(x+v.x+pee.x,y+v.y+pee.y))){
                    
                         changes[Vector2i(Vector2(x+v.x,y+v.y))] = 4;
                         break;

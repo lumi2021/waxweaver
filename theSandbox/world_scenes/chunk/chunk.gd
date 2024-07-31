@@ -37,7 +37,7 @@ func tickUpdate():
 	
 	MUSTUPDATELIGHT = true
 	# call c++ and return
-	return BlockData.theChunker.tickUpdate(planet.DATAC,pos,onScreen)
+	return BlockData.theChunker.tickUpdate(planet.DATAC,pos,onScreen,GlobalRef.daylightMult)
 
 func drawData():
 	

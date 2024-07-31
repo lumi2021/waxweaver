@@ -15,7 +15,7 @@ BLOCKDOORCLOSED::BLOCKDOORCLOSED() {
     hasCollision = true;
     connectTexturesToMe = false;
     lightMultiplier = 0.99;
-    itemToDrop = 19;
+    itemToDrop = 22;
     breakParticleID = 2;
     isTransparent = true;
 

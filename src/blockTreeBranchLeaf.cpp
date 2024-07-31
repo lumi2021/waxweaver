@@ -16,7 +16,7 @@ BLOCKTREEBRANCHLEAF::BLOCKTREEBRANCHLEAF() {
 
     hasCollision = false;
 
-   lightMultiplier = 1.0;
+    lightMultiplier = 0.99;
 
     rotateTextureToGravity = true;
 

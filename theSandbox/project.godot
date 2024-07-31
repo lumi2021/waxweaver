@@ -24,6 +24,7 @@ CreatureData="*res://autoload/CreatureData.gd"
 GlobalRef="*res://autoload/GlobalRef.gd"
 PlayerData="*res://autoload/PlayerData.gd"
 Indicators="*res://autoload/Indicators.gd"
+Background="*res://autoload/Background.gd"
 
 [debug]
 
@@ -214,11 +215,6 @@ map={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194306,"key_label":0,"unicode":0,"echo":false,"script":null)
 ]
 }
-spawnDebugShip={
-"deadzone": 0.5,
-"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194309,"key_label":0,"unicode":0,"echo":false,"script":null)
-]
-}
 rotateShipRight={
 "deadzone": 0.5,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":88,"key_label":0,"unicode":120,"echo":false,"script":null)
@@ -229,9 +225,20 @@ rotateShipLeft={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":90,"key_label":0,"unicode":122,"echo":false,"script":null)
 ]
 }
+openCommand={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194309,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
+}
 
 [layer_names]
 
+2d_render/layer_2="walls"
+2d_render/layer_3="tiles"
+2d_render/layer_4="entities"
+2d_render/layer_5="water"
+2d_render/layer_6="lighting"
+2d_render/layer_7="ui"
 2d_physics/layer_1="environment"
 2d_physics/layer_2="player"
 2d_physics/layer_3="groundItems"

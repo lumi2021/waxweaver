@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemMining" load_steps=3 format=3 uid="uid://d0g6ere0mmink"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemMining.gd" id="1_kcyqg"]
+[ext_resource type="Texture2D" uid="uid://ds7qelhyem6yi" path="res://items/tools/copper/copperPickaxe.png" id="2_e2gfn"]
+
+[resource]
+script = ExtResource("1_kcyqg")
+miningMultiplier = 1.2
+damage = 1
+animSpeed = 6.0
+weaponScale = 1.0
+itemName = "Copper Pickaxe"
+texture = ExtResource("2_e2gfn")
+maxStackSize = 1
+clickToUse = false

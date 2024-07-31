@@ -44,7 +44,8 @@ func _process(delta):
 	if get_parent().is_in_group("planet"):
 		velocity = lerp(velocity,dir.normalized() * 300,0.05)
 	else:
-		velocity += dir.normalized() * 2
+		#velocity += dir.normalized() * 2
+		velocity = lerp(velocity,dir.normalized() * 1000,0.01)
 	
 	var glo = global_position
 	
@@ -63,9 +64,12 @@ func _process(delta):
 		
 		targetRot = [0,1,3,2][dot1 + dot2]
 		rotation = lerp_angle(rotation,targetRot*(PI/2),0.04)
-	elif active:
-		var rotDir = int(Input.is_action_pressed("rotateShipRight")) - int(Input.is_action_pressed("rotateShipLeft"))
-		rotate(rotDir * 1.0 * delta)
+	#elif active:
+	#	var rotDir = int(Input.is_action_pressed("rotateShipRight")) - int(Input.is_action_pressed("rotateShipLeft"))
+	#	rotate(rotDir * 1.0 * delta)
+	
+	else:
+		rotation = lerp_angle(rotation,0.0,0.008)
 	
 	if GlobalRef.player.shipOn == self:
 		var rotDif = prevRot - rotation

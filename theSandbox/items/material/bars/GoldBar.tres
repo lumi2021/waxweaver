@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_no2s4")
-itemName = "Gold"
+itemName = "Gold Bar"
 texture = ExtResource("2_f4loq")
 maxStackSize = 99
 clickToUse = false
