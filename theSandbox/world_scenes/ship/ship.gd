@@ -81,7 +81,11 @@ func _process(delta):
 		GlobalRef.player.global_position = to_global(what)
 		GlobalRef.player.scrollBackgroundsSpace(velocity,delta)
 		GlobalRef.player.ensureCamPosition()
-		 
+	
+	# stabilize position
+	#chunkContainer.global_position.x = int(global_position.x)
+	#chunkContainer.global_position.y = int(global_position.y)
+	 
 func generateEmptyArray():
 	
 	var centerPoint = Vector2(SIZEINCHUNKS*4,SIZEINCHUNKS*4) - Vector2(0.5,0.5)

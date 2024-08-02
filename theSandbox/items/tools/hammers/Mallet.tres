@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ItemHammer" load_steps=3 format=3 uid="uid://bo4c00ruy0toy"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemHammer.gd" id="1_xwwjw"]
+[ext_resource type="Texture2D" uid="uid://dxgl85yvycnsg" path="res://items/tools/hammers/mallet.png" id="2_3m3pb"]
+
+[resource]
+script = ExtResource("1_xwwjw")
+damage = 1
+animSpeed = 4.0
+weaponScale = 1.0
+itemName = "Mallet"
+texture = ExtResource("2_3m3pb")
+maxStackSize = 1
+clickToUse = false

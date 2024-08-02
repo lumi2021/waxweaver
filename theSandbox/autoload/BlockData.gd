@@ -31,8 +31,14 @@ func breakBlock(x,y,planet,blockID):
 
 func breakWall(x,y,planet,blockID):
 	
+	
+	if blockID <= 1:
+		return
+	
 	var data = theChunker.getBlockDictionary(blockID)
 	spawnBreakParticle(x,y,blockID,data["breakParticleID"],planet)
+	if ItemData.itemExists(-blockID):
+		spawnGroundItem(x,y,-blockID,planet)
 
 
 func spawnGroundItem(tilex:int,tiley:int,id:int,planet):

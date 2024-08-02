@@ -8,7 +8,7 @@ void BLOCKLEAVES::_bind_methods() {
 
 BLOCKLEAVES::BLOCKLEAVES() {
 
-    setTexture("res://block_resources/block_textures/leaves.png");
+    setTexture("res://items/blocks/foliage/trees/forestTree/leaves.png");
 
     breakTime = 0.5;
 
@@ -16,7 +16,7 @@ BLOCKLEAVES::BLOCKLEAVES() {
 
     hasCollision = false;
 
-    lightMultiplier = 0.99;
+    lightMultiplier = 0.8;
 
     rotateTextureToGravity = true;
 

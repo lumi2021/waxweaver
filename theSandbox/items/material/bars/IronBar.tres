@@ -1,10 +1,11 @@
-[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://dpyj7k4plbjmy"]
+[gd_resource type="Resource" script_class="ItemBlock" load_steps=3 format=3 uid="uid://dpyj7k4plbjmy"]
 
-[ext_resource type="Script" path="res://item_resources/Item.gd" id="1_3bfb0"]
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemBlock.gd" id="1_3bfb0"]
 [ext_resource type="Texture2D" uid="uid://7lt2g8nnel68" path="res://items/material/bars/IronBar.png" id="2_uutrt"]
 
 [resource]
 script = ExtResource("1_3bfb0")
+blockID = 31
 itemName = "Iron Bar"
 texture = ExtResource("2_uutrt")
 maxStackSize = 99

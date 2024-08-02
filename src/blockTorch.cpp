@@ -12,7 +12,7 @@ void BLOCKTORCH::_bind_methods() {
 
 BLOCKTORCH::BLOCKTORCH() {
 
-    setTexture("res://block_resources/block_textures/torch.png");
+    setTexture("res://items/torches/torch.png");
 
     breakTime = 0.0;
 

@@ -24,3 +24,15 @@ script = ExtResource("2_lymq3")
 
 [node name="Camera2D" type="Camera2D" parent="lightRenderViewport"]
 anchor_mode = 0
+
+[node name="dropShadowViewport" type="SubViewport" parent="."]
+transparent_bg = true
+handle_input_locally = false
+canvas_item_default_texture_filter = 0
+gui_disable_input = true
+canvas_cull_mask = 4293918749
+size = Vector2i(576, 576)
+script = ExtResource("2_lymq3")
+
+[node name="Camera2D" type="Camera2D" parent="dropShadowViewport"]
+anchor_mode = 0

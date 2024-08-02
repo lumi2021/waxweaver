@@ -4,4 +4,4 @@
 
 [resource]
 shader = ExtResource("1_yvk04")
-shader_parameter/line_scale = 0.2
+shader_parameter/line_scale = 0.125

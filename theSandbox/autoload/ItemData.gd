@@ -20,15 +20,23 @@ var data = {
 	25:load("res://items/blocks/furniture/other/Ladder.tres"),
 	26:load("res://items/blocks/foliage/flowers/LilyItem.tres"),
 	27:load("res://items/blocks/ores/IronOre.tres"),
+	28:load("res://items/blocks/natural/GravelItem.tres"),
+	
+	29:load("res://items/material/bars/CopperBar.tres"),
+	30:load("res://items/material/bars/GoldBar.tres"),
+	31:load("res://items/material/bars/IronBar.tres"),
+	
+	32:load("res://items/blocks/building/StoneBrick.tres"),
+	-32:load("res://items/walls/StoneBrickWall.tres"),
 	
 	# item ids
 	3000:load("res://items/tools/flimsy/FlimsySword.tres"), # flimsy tools
 	3001:load("res://items/tools/flimsy/FlimsyPickaxe.tres"),
-	3002:load("res://items/tools/flimsy/FlimsyHammer.tres"),
+	3002:load("res://items/tools/hammers/Mallet.tres"),
 	
 	3003:load("res://items/material/Wax.tres"),
-	3004:load("res://items/material/bars/CopperBar.tres"),
-	3005:load("res://items/material/bars/GoldBar.tres"),
+	3004:null,
+	3005:null,
 	
 	3006:load("res://items/tools/copper/CopperSword.tres"), # copper tools
 	3007:load("res://items/tools/copper/CopperPickaxe.tres"),
@@ -36,7 +44,7 @@ var data = {
 	3008:load("res://items/tools/golden/GoldenSword.tres"), # golden tools
 	3009:load("res://items/tools/golden/GoldenPickaxe.tres"),
 	
-	3010:load("res://items/material/bars/IronBar.tres"),
+	3010:null,
 	3011:load("res://items/tools/iron/IronSword.tres"), # iron tools
 	3012:load("res://items/tools/iron/IronPickaxe.tres"),
 	

@@ -8,7 +8,7 @@ void BLOCKCORE::_bind_methods() {
 
 BLOCKCORE::BLOCKCORE() {
 
-    setTexture("res://block_resources/block_textures/core.png");
+    setTexture("res://items/blocks/natural/core.png");
 
     breakTime = 999999.0;
 

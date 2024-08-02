@@ -8,7 +8,7 @@ void BLOCKTREEBRANCHRIGHT::_bind_methods() {
 
 BLOCKTREEBRANCHRIGHT::BLOCKTREEBRANCHRIGHT() {
 
-    setTexture("res://block_resources/block_textures/leavesBranchRight.png");
+    setTexture("res://items/blocks/foliage/trees/forestTree/leavesBranchRight.png");
 
     breakTime = 0.5;
 
@@ -16,7 +16,7 @@ BLOCKTREEBRANCHRIGHT::BLOCKTREEBRANCHRIGHT() {
 
     hasCollision = false;
 
-    lightMultiplier = 0.99;
+    lightMultiplier = 0.8;
     
     rotateTextureToGravity = true;
 

@@ -6,6 +6,7 @@ var system  = null
 var lightmap = null
 var hotbar = null
 var lightRenderVP :SubViewport= null
+var dropShadowRenderVP:SubViewport = null
 
 var gravityConstant : float = 2000
 

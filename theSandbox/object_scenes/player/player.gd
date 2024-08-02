@@ -215,7 +215,7 @@ func onPlanetMovement(delta):
 			if onFloor:
 				GlobalRef.camera.rotation = lerp_angle(GlobalRef.camera.rotation,rotated*(PI/2),1.0-pow(2.0,(-delta/0.06)))
 		else:
-			if wasInWater:
+			if wasInWater and Input.is_action_pressed("jump"):
 				newVel.y += -150.0
 				wasInWater = false
 			

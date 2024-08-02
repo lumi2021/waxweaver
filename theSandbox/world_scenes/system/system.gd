@@ -12,7 +12,9 @@ func _ready():
 	GlobalRef.system = self
 	
 	$lightRenderViewport.world_2d = get_tree().root.get_viewport().world_2d
+	$dropShadowViewport.world_2d = get_tree().root.get_viewport().world_2d
 	GlobalRef.lightRenderVP = $lightRenderViewport
+	GlobalRef.dropShadowRenderVP = $dropShadowViewport
 	
 	
 

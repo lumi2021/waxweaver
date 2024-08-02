@@ -8,7 +8,7 @@ void BLOCKSTONE::_bind_methods() {
 
 BLOCKSTONE::BLOCKSTONE() {
 
-    setTexture("res://block_resources/block_textures/stone.png");
+    setTexture("res://items/blocks/natural/stone.png");
 
     itemToDrop = 2;
     rotateTextureToGravity = true;

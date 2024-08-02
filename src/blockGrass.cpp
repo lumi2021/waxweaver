@@ -9,7 +9,7 @@ void BLOCKGRASS::_bind_methods() {
 
 BLOCKGRASS::BLOCKGRASS() {
 
-    setTexture("res://block_resources/block_textures/grass.png");
+    setTexture("res://items/blocks/natural/grass.png");
 
     connectedTexture = true;
 

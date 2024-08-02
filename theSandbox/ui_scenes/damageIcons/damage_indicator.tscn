@@ -11,6 +11,7 @@ outline_color = Color(0, 0, 0, 1)
 
 [node name="damageIndicator" type="Node2D"]
 modulate = Color(0.960784, 0.105882, 0.176471, 1)
+visibility_layer = 64
 z_index = 2000
 script = ExtResource("1_m6lyy")
 

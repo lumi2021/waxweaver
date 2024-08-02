@@ -20,8 +20,8 @@ CHUNKDRAW::CHUNKDRAW() {
     cock = memnew(LOOKUPBLOCK);
     bitm = memnew(BitMap);
 
-    getBorderImage("res://block_resources/block_textures/border.png");
-    getWaterImage("res://block_resources/block_textures/water.png");
+    getBorderImage("res://items/border.png");
+    getWaterImage("res://items/water.png");
 
 
 }

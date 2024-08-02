@@ -47,7 +47,7 @@ void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
             }
             else if (dis <= surface + 5){
                 planet->setTileData(x,y,4);
-                planet->setBGData(x,y,3);
+                //planet->setBGData(x,y,0);
             }
 
             double r = (std::abs(dis - (baseSurface * 0.6 ) ) ) / (baseSurface * 0.75);
@@ -72,8 +72,10 @@ void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
                 if (dis >= lakeSurface + 8){
                     planet->setTileData(x,y, airOrCaveAir(x,y,planet) );
                     planet->setBGData(x,y,0);
-                    if ( dis <= baseSurface + 2) {
+                    if ( dis <= baseSurface + 1) {
                         planet->setWaterData(x,y,1.0);
+                    }else if(dis <= baseSurface + 2){
+                        planet->setWaterData(x,y,0.7);
                     }
 
                 }
@@ -141,6 +143,9 @@ void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
                     generateOre(planet,x,y,24,2,3); // generate gold
                 }
 
+                if(std::rand() % 500 == 0){
+                    generateOre(planet,x,y,28,2,10); // generate gravel
+                }
 
 
             }
@@ -206,7 +211,7 @@ double PLANETGEN::getBlockDistance(int x, int y, PLANETDATA *planet){
 
 int PLANETGEN::airOrCaveAir(int x,int y, PLANETDATA *planet){
     int planetSize = planet->planetSize;
-    int surface = (planetSize / 4);
+    int surface = std::max( planetSize / 4, (planetSize/2) - 128 );
     int b = getBlockDistance(x, y, planet) <= surface - 2;
     return b;
 }

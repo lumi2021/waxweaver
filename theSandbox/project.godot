@@ -36,8 +36,6 @@ gdscript/warnings/integer_division=0
 
 window/size/viewport_width=400
 window/size/viewport_height=300
-window/size/window_width_override=800
-window/size/window_height_override=600
 window/stretch/mode="viewport"
 
 [editor]
@@ -52,9 +50,10 @@ folder_colors={
 "res://autoload/": "red",
 "res://bin/": "orange",
 "res://block_resources/": "yellow",
-"res://item_resources/": "teal",
-"res://items/": "green",
-"res://object_scenes/": "blue",
+"res://item_resources/": "green",
+"res://items/": "yellow",
+"res://object_scenes/": "teal",
+"res://sound/": "blue",
 "res://ui_scenes/": "purple",
 "res://world_scenes/": "pink",
 "res://zeeg/": "gray"
@@ -239,6 +238,7 @@ openCommand={
 2d_render/layer_5="water"
 2d_render/layer_6="lighting"
 2d_render/layer_7="ui"
+2d_render/layer_8="outline"
 2d_physics/layer_1="environment"
 2d_physics/layer_2="player"
 2d_physics/layer_3="groundItems"

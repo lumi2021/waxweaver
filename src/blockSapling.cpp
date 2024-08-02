@@ -12,7 +12,7 @@ void BLOCKSAPLING::_bind_methods() {
 
 BLOCKSAPLING::BLOCKSAPLING() {
 
-    setTexture("res://block_resources/block_textures/treeSapling.png");
+    setTexture("res://items/blocks/foliage/trees/forestTree/treeSapling.png");
 
     breakTime = 0.0;
 
@@ -27,6 +27,8 @@ BLOCKSAPLING::BLOCKSAPLING() {
     connectTexturesToMe = false;
 
     itemToDrop = 7;
+
+    isTransparent = true;
 
 }
 

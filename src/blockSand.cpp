@@ -8,7 +8,7 @@ void BLOCKSAND::_bind_methods() {
 
 BLOCKSAND::BLOCKSAND() {
 
-    setTexture("res://block_resources/block_textures/sand.png");
+    setTexture("res://items/blocks/natural/sand.png");
 
     itemToDrop = 14;
     rotateTextureToGravity = true;

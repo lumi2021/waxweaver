@@ -35,6 +35,11 @@
 #include "blockLadder.h" // id 25
 #include "blockFlower.h" // id 26
 #include "blockOreIron.h" // id 27
+#include "blockGravel.h" // id 28
+#include "blockBarCopper.h" // id 29
+#include "blockBarGold.h" // id 30
+#include "blockBarIron.h" // id 31
+#include "blockStoneBrick.h" // id 32
 
 // adding a new block? make sure you increment the PENIS array !
 
@@ -52,7 +57,7 @@ public:
 	
 	Array allBlocks;
 
-	BLOCK *penis[28]; // must be largest id + 1
+	BLOCK *penis[33]; // must be largest id + 1
 
 	LOOKUPBLOCK();
 	~LOOKUPBLOCK();

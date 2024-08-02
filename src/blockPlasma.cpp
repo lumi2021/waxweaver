@@ -8,7 +8,7 @@ void BLOCKPLASMA::_bind_methods() {
 
 BLOCKPLASMA::BLOCKPLASMA() {
 
-    setTexture("res://block_resources/block_textures/plasma.png");
+    setTexture("res://items/blocks/natural/plasma.png");
 
     connectedTexture = true;
     breakTime = 999999.0;

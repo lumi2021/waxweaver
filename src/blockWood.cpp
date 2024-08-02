@@ -8,7 +8,7 @@ void BLOCKWOOD::_bind_methods() {
 
 BLOCKWOOD::BLOCKWOOD() {
 
-    setTexture("res://block_resources/block_textures/woodPlank.png");
+    setTexture("res://items/blocks/building/woodPlank.png");
 
     itemToDrop = 13;
     rotateTextureToGravity = true;

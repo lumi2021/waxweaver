@@ -13,7 +13,7 @@ BLOCK::BLOCK() {
     //Default Variables
     blockID = -1;
 
-    setTexture("res://block_resources/block_textures/error.png");
+    setTexture("res://items/error.png");
 
     rotateTextureToGravity = false;
     connectedTexture = false;

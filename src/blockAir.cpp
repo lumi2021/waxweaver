@@ -8,7 +8,7 @@ void BLOCKAIR::_bind_methods() {
 
 BLOCKAIR::BLOCKAIR() {
 
-    setTexture("res://block_resources/block_textures/air.png");
+    setTexture("res://items/blocks/natural/air.png");
 
     connectTexturesToMe = false;
 

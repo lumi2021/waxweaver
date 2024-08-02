@@ -27,7 +27,9 @@ var data = [
 		"ingAmounts":[10],
 	},
 	
+	###########
 	## WALLS ##
+	###########
 	
 	{ # wood wall
 		"crafts":-13,
@@ -45,7 +47,18 @@ var data = [
 		"station":WORKBENCH,
 	},
 	
+	{ # stone brick wall
+		"crafts":-32,
+		"amount":4,
+		"ingredients":[32],
+		"ingAmounts":[1],
+		"station":WORKBENCH,
+	},
+	
+	###############
 	## FURNITURE ##
+	###############
+	
 	{ # furnace
 		"crafts":16,
 		"amount":1,
@@ -80,9 +93,20 @@ var data = [
 		"station":FURNACE,
 	},
 	
+	{ # stone brick
+		"crafts":32,
+		"amount":1,
+		"ingredients":[2],
+		"ingAmounts":[1],
+		"station":FURNACE,
+	},
+	
+	############
 	## INGOTS ##
+	############
+	
 	{ # copper ingot
-		"crafts":3004,
+		"crafts":29,
 		"amount":1,
 		"ingredients":[18],
 		"ingAmounts":[1],
@@ -90,7 +114,7 @@ var data = [
 	},
 	
 	{ # gold ingot
-		"crafts":3005,
+		"crafts":30,
 		"amount":1,
 		"ingredients":[24],
 		"ingAmounts":[1],
@@ -98,19 +122,29 @@ var data = [
 	},
 	
 	{ # iron ingot
-		"crafts":3010,
+		"crafts":31,
 		"amount":1,
 		"ingredients":[27],
 		"ingAmounts":[1],
 		"station":FURNACE,
 	},
 	
-	
+	###########
 	## TOOLS ##
+	###########
+	
+	{ # mallet hammer
+		"crafts":3002,
+		"amount":1,
+		"ingredients":[3003,13],
+		"ingAmounts":[5,5],
+		"station":WORKBENCH,
+	},
+	
 	{ # copper sword
 		"crafts":3006,
 		"amount":1,
-		"ingredients":[3004,13],
+		"ingredients":[29,13],
 		"ingAmounts":[5,5],
 		"station":WORKBENCH,
 	},
@@ -118,14 +152,14 @@ var data = [
 	{ # copper pickaxe
 		"crafts":3007,
 		"amount":1,
-		"ingredients":[3004,13],
+		"ingredients":[29,13],
 		"ingAmounts":[5,5],
 		"station":WORKBENCH,
 	},
 	{ # gold sword
 		"crafts":3008,
 		"amount":1,
-		"ingredients":[3005,13],
+		"ingredients":[30,13],
 		"ingAmounts":[8,5],
 		"station":WORKBENCH,
 	},
@@ -133,14 +167,14 @@ var data = [
 	{ # gold pickaxe
 		"crafts":3009,
 		"amount":1,
-		"ingredients":[3005,13],
+		"ingredients":[30,13],
 		"ingAmounts":[8,5],
 		"station":WORKBENCH,
 	},
 	{ # iron sword
 		"crafts":3011,
 		"amount":1,
-		"ingredients":[3010,13],
+		"ingredients":[31,13],
 		"ingAmounts":[15,5],
 		"station":WORKBENCH,
 	},
@@ -148,7 +182,7 @@ var data = [
 	{ # iron pickaxe
 		"crafts":3012,
 		"amount":1,
-		"ingredients":[3010,13],
+		"ingredients":[31,13],
 		"ingAmounts":[15,5],
 		"station":WORKBENCH,
 	},

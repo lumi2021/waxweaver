@@ -143,9 +143,11 @@ func editTiles(changeCommit):
 				var save:int = DATAC.getTileData(change.x,change.y)
 				DATAC.setTileData(change.x,change.y,airOrCaveAir(change.x,change.y))
 				BlockData.breakBlock(change.x,change.y,self,save)
+				DATAC.setInfoData(change.x,change.y,0)
 			0:
 				DATAC.setTileData(change.x,change.y,airOrCaveAir(change.x,change.y))
 				DATAC.setTimeData(change.x,change.y,GlobalRef.globalTick)
+				DATAC.setInfoData(change.x,change.y,0)
 			-99999:
 				var save:int = DATAC.getBGData(change.x,change.y)
 				DATAC.setBGData(change.x,change.y,0)
@@ -239,6 +241,7 @@ func clearChunks():
 	var new = Node2D.new()
 	add_child(new)
 	chunkContainer = new
+	move_child(chunkContainer,1)
 	
 	chunkDictionary = {}
 	
@@ -266,7 +269,7 @@ func getBlockRoundedDistance(x,y):
 	return (Vector2(x,y) - centerPoint).length()
 
 func airOrCaveAir(x,y):
-	var surface = SIZEINCHUNKS*2
+	var surface = max(SIZEINCHUNKS*2, (SIZEINCHUNKS*4) - 128 )
 	#Returns 1 for cave air or 0 for surface air
 	return int(getBlockDistance(x,y) <= surface - 2)
 
