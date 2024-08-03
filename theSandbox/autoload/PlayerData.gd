@@ -11,17 +11,18 @@ var speed = 100.0
 
 ## INVENTORY ##
 # [ITEMID,COUNT]
-var inventory = {} #0-39 inventory, 40-42 armor, 43-48 acces, 49 held
+var inventory = {} #0-39 inventory, 40-42 armor, 43-48 acces, 49 held, 50 - 52 vanity
 signal updateInventory
 signal onlyUpdateCraft
 signal selectedSlotChanged
+signal armorUpdated
 var selectedSlot = 0
 
 func _ready():
 	initializeInventory()
 
 func initializeInventory():
-	for i in range(50):
+	for i in range(53):
 		inventory[i] = [-1,-1]
 
 func addItem(itemID,amount):
@@ -75,11 +76,45 @@ func inventoryHasItem(itemID):
 	return slots
 
 func swapItem(slot1,slot2):
+	
+	var points = 0
+	print(slot1)
+	match slot1:
+		40: #helmet
+			points += int(ItemData.getItem(inventory[slot1][0]) is ItemArmorHelmet)  * 3
+			points += int(ItemData.getItem(inventory[slot2][0]) is ItemArmorHelmet) * 3
+		41: #chest
+			points += int(ItemData.getItem(inventory[slot1][0]) is ItemArmorChest) * 3
+			points += int(ItemData.getItem(inventory[slot2][0]) is ItemArmorChest) * 3
+		42: #legs
+			points += int(ItemData.getItem(inventory[slot1][0]) is ItemArmorLegs) * 3
+			points += int(ItemData.getItem(inventory[slot2][0]) is ItemArmorLegs) * 3
+		50: #vanity helmet
+			points += int(ItemData.getItem(inventory[slot1][0]) is ItemArmorHelmet)  * 3
+			points += int(ItemData.getItem(inventory[slot2][0]) is ItemArmorHelmet) * 3
+		51: #vanity chest
+			points += int(ItemData.getItem(inventory[slot1][0]) is ItemArmorChest) * 3
+			points += int(ItemData.getItem(inventory[slot2][0]) is ItemArmorChest) * 3
+		52: #vanity legs
+			points += int(ItemData.getItem(inventory[slot1][0]) is ItemArmorLegs) * 3
+			points += int(ItemData.getItem(inventory[slot2][0]) is ItemArmorLegs) * 3
+		
+		
+		_: # every other slot
+			points += 2
+	
+	if points <= 0:
+		return
+	
+	
 	var carry = inventory[slot1].duplicate()
 	inventory[slot1] = inventory[slot2]
 	inventory[slot2] = carry
+	
 	emit_signal("updateInventory")
 	emit_signal("onlyUpdateCraft")
+	if points > 2:
+		emit_signal("armorUpdated")
 	
 
 func getSelectedItemData():
@@ -179,3 +214,6 @@ func checkForIngredient(itemID,amount):
 		if foundAmount >= amount:
 			return true
 	return false
+
+func getSlotItemData(slot:int):
+	return ItemData.data[inventory[slot][0]]

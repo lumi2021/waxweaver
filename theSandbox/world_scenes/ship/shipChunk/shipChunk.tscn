@@ -14,19 +14,23 @@ blend_mode = 3
 script = ExtResource("1_8j2mj")
 
 [node name="backLayer" type="Sprite2D" parent="."]
+visibility_layer = 2
 z_index = -1
 material = SubResource("ShaderMaterial_dtd3g")
 centered = false
 
 [node name="mainLayer" type="Sprite2D" parent="."]
+visibility_layer = 4
 centered = false
 
 [node name="animLayer" type="Sprite2D" parent="."]
+visibility_layer = 4
 centered = false
 hframes = 3
 script = ExtResource("3_qn0j0")
 
 [node name="waterLayer" type="Sprite2D" parent="."]
+visibility_layer = 16
 z_index = 64
 material = SubResource("CanvasItemMaterial_o7lcd")
 centered = false

@@ -7,9 +7,7 @@ var has = true
 
 func _ready():
 	$Label.text = itemName + " x " + str(amount)
-	print($Label.text)
 	$sprite.texture = spr
-	
 	
 	if !has:
 		$Label.modulate = Color.RED

@@ -1,0 +1,2 @@
+extends ItemArmor
+class_name ItemArmorChest

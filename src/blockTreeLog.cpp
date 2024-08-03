@@ -55,14 +55,14 @@ Dictionary BLOCKTREELOG::onBreak(int x, int y, PLANETDATA *planet, int dir){
     Vector2i newPos =  Vector2i(x,y) - Vector2i( Vector2(0,1).rotated(acos(0.0)*dir) );
     int tileAbove = planet->getTileData(newPos.x,newPos.y);
 
-    if (tileAbove == 12 || tileAbove == 9){
+    if (tileAbove != 8){
 
-        for (int xx = -2; xx < 3; xx++){
-            for (int yy = -2; yy < 3; yy++){
+        for (int xx = 0; xx < 5; xx++){
+            for (int yy = 0; yy < 5; yy++){
 
-                Vector2i scrapPos =  Vector2i( Vector2(xx,yy).rotated(acos(0.0)*dir) ) + Vector2i(x,y);
-                int tile = planet->getTileData(newPos.x,newPos.y);
-                if (tile == 12 || tile == 10 || tile == 9){
+                Vector2i scrapPos =  Vector2i( xx - 2,yy - 2 ) + Vector2i(x,y);
+                int tile = planet->getTileData(scrapPos.x,scrapPos.y);
+                if (tile == 12 || tile == 10 || tile == 11){
 
                     changes[scrapPos] = -1;
                 }

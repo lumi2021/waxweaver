@@ -21,6 +21,7 @@ rect = Rect2(-128, -128, 256, 256)
 [node name="ChunkContainer" type="Node2D" parent="."]
 
 [node name="EntityContainer" type="Node2D" parent="." groups=["ship"]]
+visibility_layer = 8
 
 [node name="IAMSHIP" type="Area2D" parent="."]
 collision_layer = 32

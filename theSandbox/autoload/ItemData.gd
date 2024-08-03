@@ -44,17 +44,22 @@ var data = {
 	3008:load("res://items/tools/golden/GoldenSword.tres"), # golden tools
 	3009:load("res://items/tools/golden/GoldenPickaxe.tres"),
 	
-	3010:null,
+	3010:load("res://items/vanity/redTie/RedTie.tres"),
 	3011:load("res://items/tools/iron/IronSword.tres"), # iron tools
 	3012:load("res://items/tools/iron/IronPickaxe.tres"),
 	
-	# chairs 6000 - 6199
+	3013:load("res://items/armors/copper/CopperHelmet.tres"),
+	3014:load("res://items/armors/copper/CopperChestplate.tres"),
+	3015:load("res://items/armors/copper/CopperLegs.tres"),
+	
+	
+	# chairs 6000 - 6049
 	6000:load("res://items/blocks/furniture/chairs/WoodenChair.tres"),
 	6001:load("res://items/blocks/furniture/chairs/Toilet.tres"),
 	
-	# doors 6200 - 6399
-	6200:load("res://items/blocks/furniture/doors/WoodDoor.tres"),
-	6201:load("res://items/tools/golden/GoldenPickaxe.tres"),
+	# doors 6050 - 6099
+	6050:load("res://items/blocks/furniture/doors/WoodDoor.tres"),
+	6051:load("res://items/tools/golden/GoldenPickaxe.tres"),
 }
 
 var heldItemAnims = {
@@ -78,6 +83,8 @@ func itemExists(id):
 
 func getItemName(id):
 	var data = getItem(id)
+	if !is_instance_valid(data):
+		return ""
 	return data.itemName
-		
+
 

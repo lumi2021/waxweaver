@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://c1b1vgh12jqww"]
+[gd_scene load_steps=21 format=3 uid="uid://c1b1vgh12jqww"]
 
 [ext_resource type="Script" path="res://object_scenes/player/player.gd" id="1_7l8c2"]
 [ext_resource type="Texture2D" uid="uid://dsqy1vjtqj0pm" path="res://object_scenes/player/sprites/fullbody.png" id="3_5ck88"]
@@ -175,9 +175,40 @@ tracks/1/keys = {
 "values": [Vector2(-0.5, -10.5), Vector2(-0.5, -9.5), Vector2(-0.5, -10.5), Vector2(-0.5, -9.5)]
 }
 
+[sub_resource type="Animation" id="Animation_n803e"]
+resource_name = "climbLadder"
+length = 0.0265
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [8],
+"method": &"setAllPlayerFrames"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerLayers/eye/Pupil:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-0.5, -10.5)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4n17m"]
 _data = {
 "RESET": SubResource("Animation_t2x0d"),
+"climbLadder": SubResource("Animation_n803e"),
 "fall": SubResource("Animation_vctuh"),
 "idle": SubResource("Animation_w13ke"),
 "jump": SubResource("Animation_hqg3u"),
@@ -216,25 +247,49 @@ modulate = Color(1, 0.784314, 0.333333, 1)
 position = Vector2(0, 3)
 texture = ExtResource("3_5ck88")
 offset = Vector2(0, -8)
-hframes = 8
+hframes = 10
 
 [node name="eye" type="Sprite2D" parent="PlayerLayers"]
 clip_children = 2
 position = Vector2(0, 3)
 texture = ExtResource("6_uk1hk")
 offset = Vector2(0, -8)
-hframes = 8
+hframes = 10
 
 [node name="Pupil" type="Sprite2D" parent="PlayerLayers/eye"]
 position = Vector2(-0.5, -9.5)
 texture = ExtResource("5_64d8m")
+
+[node name="helmet" type="Sprite2D" parent="PlayerLayers"]
+modulate = Color(1, 0.784314, 0.333333, 1)
+position = Vector2(0, 3)
+offset = Vector2(0, -8)
+hframes = 3
+vframes = 5
+frame = 3
+
+[node name="leggings" type="Sprite2D" parent="PlayerLayers"]
+modulate = Color(1, 0.784314, 0.333333, 1)
+position = Vector2(0, 3)
+offset = Vector2(0, -8)
+hframes = 3
+vframes = 5
+frame = 3
+
+[node name="chestplate" type="Sprite2D" parent="PlayerLayers"]
+modulate = Color(1, 0.784314, 0.333333, 1)
+position = Vector2(0, 3)
+offset = Vector2(0, -8)
+hframes = 3
+vframes = 5
+frame = 3
 
 [node name="handFront" type="Sprite2D" parent="PlayerLayers"]
 modulate = Color(1, 0.784314, 0.333333, 1)
 position = Vector2(0, 3)
 texture = ExtResource("8_0olu2")
 offset = Vector2(0, -8)
-hframes = 8
+hframes = 10
 
 [node name="itemWorldRotation" type="Node2D" parent="."]
 

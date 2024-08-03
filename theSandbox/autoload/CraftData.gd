@@ -76,7 +76,7 @@ var data = [
 	},
 	
 	{ # wooden door
-		"crafts":6200,
+		"crafts":6050,
 		"amount":1,
 		"ingredients":[13],
 		"ingAmounts":[3],

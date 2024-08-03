@@ -1,12 +1,23 @@
-[gd_scene load_steps=15 format=3 uid="uid://daqevwntvcp3o"]
+[gd_scene load_steps=19 format=3 uid="uid://daqevwntvcp3o"]
 
 [ext_resource type="Script" path="res://ui_scenes/playerHUD/banner/hotbar_banner.gd" id="1_iyyfi"]
 [ext_resource type="PackedScene" uid="uid://cr7y1t1hoywt1" path="res://ui_scenes/playerHUD/inventory/inventory_slot.tscn" id="2_il2kt"]
+[ext_resource type="Texture2D" uid="uid://bw4fq64a1ehwa" path="res://ui_scenes/playerHUD/armor/armoricons.png" id="3_8kb7t"]
 [ext_resource type="Script" path="res://ui_scenes/playerHUD/banner/Crafting.gd" id="3_i82mf"]
+[ext_resource type="Texture2D" uid="uid://bdqiwxyn3wg0y" path="res://ui_scenes/playerHUD/armor/vanityicons.png" id="4_50oir"]
 [ext_resource type="FontFile" uid="uid://n3r2v6m6uh2n" path="res://zeeg/font/GrapeSoda.ttf" id="5_3w5al"]
 [ext_resource type="Texture2D" uid="uid://i6l5rsnepvoc" path="res://ui_scenes/playerHUD/healthBar/white.png" id="5_ryv7v"]
 [ext_resource type="FontFile" uid="uid://c3vw44vws5n61" path="res://zeeg/font/I-pixel-u.ttf" id="6_bqidn"]
 [ext_resource type="FontFile" uid="uid://bn0yrqolh4ms8" path="res://zeeg/font/Arcadepix Plus.ttf" id="7_tlsqg"]
+[ext_resource type="Texture2D" uid="uid://b0ux0djrrr28d" path="res://ui_scenes/playerHUD/defense/coolShield.png" id="8_5tjvp"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_0g03e"]
+resource_local_to_scene = true
+font = ExtResource("6_bqidn")
+font_size = 8
+font_color = Color(0.854902, 0.878431, 0.901961, 1)
+outline_size = 5
+outline_color = Color(0.0823529, 0.113725, 0.156863, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_bk67w"]
 font = ExtResource("5_3w5al")
@@ -128,6 +139,14 @@ offset_top = 42.0
 offset_right = 92.0
 offset_bottom = 43.0
 color = Color(0.0823529, 0.113725, 0.156863, 1)
+
+[node name="Armoricons" type="Sprite2D" parent="Menu"]
+position = Vector2(111, 75)
+texture = ExtResource("3_8kb7t")
+
+[node name="Vanityicons" type="Sprite2D" parent="Menu"]
+position = Vector2(130, 75)
+texture = ExtResource("4_50oir")
 
 [node name="InventoryBody" type="Node2D" parent="Menu"]
 position = Vector2(8, 49)
@@ -251,8 +270,21 @@ slotToDisplay = 38
 position = Vector2(72, 85)
 slotToDisplay = 39
 
+[node name="defense" type="Sprite2D" parent="Menu"]
+position = Vector2(114, 105)
+texture = ExtResource("8_5tjvp")
+centered = false
+
+[node name="defenseAmount" type="Label" parent="Menu/defense"]
+offset_left = -7.0
+offset_right = 22.0
+offset_bottom = 10.0
+text = "0"
+label_settings = SubResource("LabelSettings_0g03e")
+horizontal_alignment = 1
+
 [node name="ArmorSlots" type="Node2D" parent="Menu"]
-position = Vector2(113, 49)
+position = Vector2(105, 50)
 
 [node name="slot40" parent="Menu/ArmorSlots" instance=ExtResource("2_il2kt")]
 slotToDisplay = 40
@@ -264,6 +296,20 @@ slotToDisplay = 41
 [node name="slot42" parent="Menu/ArmorSlots" instance=ExtResource("2_il2kt")]
 position = Vector2(0, 38)
 slotToDisplay = 42
+
+[node name="VanitySlots" type="Node2D" parent="Menu"]
+position = Vector2(124, 50)
+
+[node name="slot50" parent="Menu/VanitySlots" instance=ExtResource("2_il2kt")]
+slotToDisplay = 50
+
+[node name="slot51" parent="Menu/VanitySlots" instance=ExtResource("2_il2kt")]
+position = Vector2(0, 19)
+slotToDisplay = 51
+
+[node name="slot52" parent="Menu/VanitySlots" instance=ExtResource("2_il2kt")]
+position = Vector2(0, 38)
+slotToDisplay = 52
 
 [node name="AccessorySlots" type="Node2D" parent="Menu"]
 position = Vector2(150, 50)
@@ -364,3 +410,10 @@ placeholder_text = "enter command"
 
 [node name="Chat" type="Node2D" parent="."]
 position = Vector2(400, 300)
+
+[node name="itemSlotName" type="Label" parent="."]
+offset_left = 101.0
+offset_top = 5.0
+offset_right = 141.0
+offset_bottom = 28.0
+label_settings = SubResource("LabelSettings_bk67w")

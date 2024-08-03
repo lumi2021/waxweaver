@@ -7,6 +7,7 @@ class_name HealthComponent
 var health :int= 0
 # simple knockback multiplier
 @export var knockbackResist :float = 1.0
+@export var defense :int = 0
 
 ## list of items enemy will drop
 @export var dropItemArray :Array[int]= []
@@ -35,12 +36,17 @@ func heal(amount):
 	emit_signal("healthChanged")
 
 func damage(amount):
-	health -= amount
+	
+	var trueAmount = amount
+	trueAmount -= defense
+	trueAmount = max(trueAmount,1)
+	
+	health -= trueAmount
 	
 	if isPlayer:
-		Indicators.damnPopup(amount,parent.global_position,"player")
+		Indicators.damnPopup(trueAmount,parent.global_position,"player")
 	else:
-		Indicators.damnPopup(amount,parent.global_position)
+		Indicators.damnPopup(trueAmount,parent.global_position)
 	
 	emit_signal("healthChanged")
 	emit_signal("smacked")

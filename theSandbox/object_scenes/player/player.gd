@@ -27,6 +27,7 @@ var state = 0
 var movementState = 0
 
 var animTick = 0
+var ladderTick = 0
 var maxCameraDistance := 0
 
 var lastTileItemUsedOn := Vector2(-10,-10)
@@ -44,6 +45,11 @@ var wasInWater = false
 @onready var itemRoot = $itemWorldRotation/heldItemRoot
 var heldItemAnim :itemHeldClass = null
 
+## armors
+@onready var helmetSpr = $PlayerLayers/helmet
+@onready var chestSpr = $PlayerLayers/chestplate
+@onready var legsSpr = $PlayerLayers/leggings
+
 ######################################################################
 ########################### BASIC FUNTIONS ###########################
 ######################################################################
@@ -52,6 +58,7 @@ var heldItemAnim :itemHeldClass = null
 func _ready():
 	GlobalRef.player = self
 	PlayerData.connect("selectedSlotChanged",swapSlot)
+	PlayerData.connect("armorUpdated",changeArmor)
 	
 	PlayerData.addItem(3000,1)
 	PlayerData.addItem(3001,1)
@@ -319,17 +326,29 @@ func ladderMovement(delta):
 	if hdir != 0:
 		flipPlayer(hdir)
 	
+	## animtation
+	if vdir != 0:
+		ladderTick += 1
+		if ladderTick % 7 == 0:
+			if getPlayerFrame() == 8:
+				setAllPlayerFrames(9)
+			else:
+				setAllPlayerFrames(8)
+	else:
+		ladderTick = 6
+	
 	var obj = planetOn
 	
 	var newVel = Vector2.ZERO
+	var ladderSpeed = 80
 	
 	if is_instance_valid(shipOn):
 		obj = shipOn
 		newVel = velocity.rotated(-shipOn.rotation)
-		newVel = Vector2(0,vdir * 150)
+		newVel = Vector2(0,vdir * ladderSpeed)
 	else:
 		newVel = velocity.rotated(-rotated*(PI/2))
-		newVel = Vector2(0,vdir * 150)
+		newVel = Vector2(0,vdir * ladderSpeed)
 	
 	
 	if Input.is_action_pressed("jump"):
@@ -339,6 +358,14 @@ func ladderMovement(delta):
 	
 	
 	var tile = obj.posToTile(obj.to_local(global_position))
+	
+	if tile == null: # return early if player walks ladder to sky limit
+		movementState = 0
+		newVel.y = -250 * int(Input.is_action_pressed("move_up"))
+		velocity = newVel.rotated(rotated*(PI/2))
+		move_and_slide()
+		return
+	
 	var blockType = obj.DATAC.getTileData(tile.x,tile.y)
 	if blockType != 25:
 		movementState = 0
@@ -657,7 +684,7 @@ func onRightClick():
 			if movementState == 2:
 				return
 			movementState = 2 # enter ladder state
-			chairSit(tile,editBody)
+			attachToLadder(tile,editBody)
 
 func openDoor(tile,body,playerDir):
 	var info = body.DATAC.getInfoData(tile.x,tile.y) % 2 # top or bottom of door
@@ -695,10 +722,18 @@ func closeDoor(tile,body):
 	
 
 func chairSit(tile,editBody):
-	
-	
 	$AnimationPlayer.play("sit")
 	setAllPlayerFrames(7)
+	snapToPosition(tile,editBody)
+	wasInWater = false
+
+func attachToLadder(tile,editBody):
+	$AnimationPlayer.play("climbLadder")
+	setAllPlayerFrames(9)
+	snapToPosition(tile,editBody)
+	wasInWater = false
+
+func snapToPosition(tile,editBody):
 	var info = editBody.DATAC.getInfoData(tile.x,tile.y)
 	
 	var pos = editBody.tileToPos(tile)
@@ -810,6 +845,10 @@ func eyeBallAnim():
 func setAllPlayerFrames(frame:int):
 	for obj in sprite.get_children():
 		obj.frame = frame
+		
+func getPlayerFrame():
+	return sprite.get_children()[0].frame
+
 
 func squishSprites(target,delta):
 	for obj in sprite.get_children():
@@ -825,7 +864,52 @@ func scrollBackgrounds(delta):
 func scrollBackgroundsSpace(vel,delta):
 	Background.scroll(vel.rotated(-GlobalRef.camera.rotation)*-delta)
 	pass
+
+
+func changeArmor():
 	
+	var helmet = PlayerData.getSlotItemData(40)
+	var chest = PlayerData.getSlotItemData(41)
+	var legs = PlayerData.getSlotItemData(42)
+	
+	var vanityHelmet = PlayerData.getSlotItemData(50)
+	var vanityChest = PlayerData.getSlotItemData(51)
+	var vanityLegs = PlayerData.getSlotItemData(52)
+	
+	var newDefense = 0
+	
+	
+	# check for main armor
+	if helmet is ItemArmorHelmet:
+		helmetSpr.texture =  helmet.armorTexture
+		newDefense += helmet.defense
+	else:
+		helmetSpr.texture = null
+	if chest is ItemArmorChest:
+		chestSpr.texture =  chest.armorTexture
+		newDefense += chest.defense
+	else:
+		chestSpr.texture = null
+	if legs is ItemArmorLegs:
+		legsSpr.texture =  legs.armorTexture
+		newDefense += legs.defense
+	else:
+		legsSpr.texture = null
+	
+	# check for vanity
+	if vanityHelmet is ItemArmorHelmet:
+		helmetSpr.texture =  vanityHelmet.armorTexture
+
+	if vanityChest is ItemArmorChest:
+		chestSpr.texture =  vanityChest.armorTexture
+
+	if vanityLegs is ItemArmorLegs:
+		legsSpr.texture =  vanityLegs.armorTexture
+
+	
+	$HealthComponent.defense = newDefense
+	GlobalRef.hotbar.updateDefense(newDefense)
+
 ######################################################################
 ############################### MATHS ################################
 ######################################################################

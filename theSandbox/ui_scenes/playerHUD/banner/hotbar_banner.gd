@@ -28,6 +28,8 @@ func _ready():
 		slot.parent = self
 	for slot in $Menu/AccessorySlots.get_children():
 		slot.parent = self
+	for slot in $Menu/VanitySlots.get_children():
+		slot.parent = self
 	
 	$Menu.visible = false
 	
@@ -77,14 +79,17 @@ func _process(delta):
 func clickedSlot(slot):
 	if !invOpen:
 		return
-	if PlayerData.inventory[49][0] == -1:
-		PlayerData.swapItem(slot,49)
+	if PlayerData.inventory[49][0] == -1: # if hand is empty
+		PlayerData.swapItem(slot,49) 
+		displayItemName("")
 		return
-	elif PlayerData.inventory[slot][0] == -1:
+	elif PlayerData.inventory[slot][0] == -1: # if slot is empty
 		PlayerData.swapItem(slot,49)
+		displayItemName( ItemData.getItemName( PlayerData.inventory[slot][0] ) )
 		return
 	elif PlayerData.inventory[slot][0] != PlayerData.inventory[49][0]:
 		PlayerData.swapItem(slot,49)
+		displayItemName( ItemData.getItemName( PlayerData.inventory[slot][0] ) )
 		return
 	else:
 		var maxStack = ItemData.data[PlayerData.inventory[slot][0]].maxStackSize
@@ -209,3 +214,9 @@ func printIntoChat(text:String,color:Color = Color.WHITE):
 		oldMessage.position.y -= 24
 	
 	chat.add_child(newMessage)
+
+func displayItemName(text:String):
+	$itemSlotName.text = text
+
+func updateDefense(amount:int):
+	$Menu/defense/defenseAmount.text = str(amount)

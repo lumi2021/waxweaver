@@ -51,3 +51,13 @@ func _on_color_rect_gui_input(event):
 				parent.clickedSlot(slotToDisplay)
 			if event["button_index"] == 2:
 				parent.splitSlot(slotToDisplay)
+
+
+func _on_button_mouse_entered():
+	var s = PlayerData.inventory[slotToDisplay]
+	var n = ItemData.getItemName(s[0])
+	GlobalRef.hotbar.displayItemName(n)
+
+
+func _on_button_mouse_exited():
+	GlobalRef.hotbar.displayItemName("")
