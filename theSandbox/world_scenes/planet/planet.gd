@@ -34,6 +34,9 @@ var tickAlive = 0
 
 signal doneEditingTiles
 
+# Chest Data
+var chestDictionary :Dictionary= {}
+
 func _ready():
 	
 	if orbiting != null:
@@ -54,6 +57,9 @@ func _ready():
 
 func _process(delta):
 	##Orbit##
+	#if planetType == "forest":
+	#	print(chestDictionary)
+	
 	if orbiting != null and tickAlive > 240:
 		
 		var posHold = position
@@ -144,6 +150,12 @@ func editTiles(changeCommit):
 				DATAC.setTileData(change.x,change.y,airOrCaveAir(change.x,change.y))
 				BlockData.breakBlock(change.x,change.y,self,save)
 				DATAC.setInfoData(change.x,change.y,0)
+				
+				if chestDictionary.has(Vector2(change.x,change.y)):
+					var p = Vector2(change.x,change.y)
+					PlayerData.dropChestContainer(self,p,chestDictionary[p])
+					chestDictionary.erase(p)
+				
 			0:
 				DATAC.setTileData(change.x,change.y,airOrCaveAir(change.x,change.y))
 				DATAC.setTimeData(change.x,change.y,GlobalRef.globalTick)

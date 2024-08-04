@@ -164,3 +164,14 @@ func placeDoor(tileX:int,tileY:int,planet,startInfo:int,infoOffset:int,side:int)
 		i += 1
 		
 	return DICK
+
+func spawnLooseItem(position,body,id,amount):
+	
+	if id == -1:
+		return
+	
+	var ins = groundItemScene.instantiate()
+	ins.itemID = id
+	ins.amount = amount
+	ins.position = position
+	body.entityContainer.add_child(ins)

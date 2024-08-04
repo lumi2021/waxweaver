@@ -6,7 +6,7 @@ extends Node2D
 
 var invOpen = false
 
-
+var deathTimer :SceneTreeTimer = null
 
 # chat nodes
 @onready var cheatOrigin = $Cheat
@@ -30,11 +30,14 @@ func _ready():
 		slot.parent = self
 	for slot in $Menu/VanitySlots.get_children():
 		slot.parent = self
+	for slot in $ChestInventory/slots.get_children():
+		slot.parent = self
 	
 	$Menu.visible = false
 	
 	# connect health bar
 	PlayerData.connect("updateHealth",updateHealth)
+	PlayerData.connect("forceOpenInventory",forceOpenInventory)
 	
 func _process(delta):
 	holdSlot.position = to_local(get_global_mouse_position()) - Vector2(6,6)
@@ -44,6 +47,12 @@ func _process(delta):
 		
 		if invOpen:
 			crafting.createCraftingIcons()
+		else:
+			PlayerData.closeChest()
+		$ItemPreview.position.x = (197 * int(invOpen)) + (3 * (1-int(invOpen) ))
+	
+	$ChestInventory.visible = PlayerData.chestOBJ != null
+	$Menu/Crafting.visible = PlayerData.chestOBJ == null
 	
 	# hotbar scrolling
 	var curSlot = PlayerData.selectedSlot
@@ -75,21 +84,27 @@ func _process(delta):
 		if cheatOrigin.visible:
 			textBox.grab_focus()
 	
+	# death message
+	if is_instance_valid(deathTimer):
+		$"Death Screen/respawn".text = "respawn in " + str( int(deathTimer.time_left) )
+	
 	
 func clickedSlot(slot):
 	if !invOpen:
 		return
 	if PlayerData.inventory[49][0] == -1: # if hand is empty
 		PlayerData.swapItem(slot,49) 
-		displayItemName("")
+		displayItemName("",null)
 		return
 	elif PlayerData.inventory[slot][0] == -1: # if slot is empty
 		PlayerData.swapItem(slot,49)
-		displayItemName( ItemData.getItemName( PlayerData.inventory[slot][0] ) )
+		var data = ItemData.getItem(PlayerData.inventory[slot][0])
+		displayItemName( ItemData.getItemName( PlayerData.inventory[slot][0] ),data )
 		return
 	elif PlayerData.inventory[slot][0] != PlayerData.inventory[49][0]:
 		PlayerData.swapItem(slot,49)
-		displayItemName( ItemData.getItemName( PlayerData.inventory[slot][0] ) )
+		var data = ItemData.getItem(PlayerData.inventory[slot][0])
+		displayItemName( ItemData.getItemName( PlayerData.inventory[slot][0] ),data )
 		return
 	else:
 		var maxStack = ItemData.data[PlayerData.inventory[slot][0]].maxStackSize
@@ -115,6 +130,8 @@ func splitSlot(slot):
 		PlayerData.inventory[slot][1] = half
 		PlayerData.inventory[49] = [PlayerData.inventory[slot][0],amount-half]
 		PlayerData.emit_signal("updateInventory")
+		if slot >= 53:
+			PlayerData.saveChestString()
 		return
 	#If placement slot is empty
 	elif PlayerData.inventory[slot][0] == -1:
@@ -123,6 +140,8 @@ func splitSlot(slot):
 		if PlayerData.inventory[49][1] <= 0:
 			PlayerData.inventory[49] = [-1,-1]
 		PlayerData.emit_signal("updateInventory")
+		if slot >= 53:
+			PlayerData.saveChestString()
 		return
 	#If neither are empty but they aren't the same item type
 	elif PlayerData.inventory[slot][0] != PlayerData.inventory[49][0]:
@@ -140,6 +159,8 @@ func splitSlot(slot):
 		if PlayerData.inventory[49][1] <= 0:
 			PlayerData.inventory[49] = [-1,-1]
 		PlayerData.emit_signal("updateInventory")
+		if slot >= 53:
+			PlayerData.saveChestString()
 		return
 		
 func updateHealth():
@@ -215,8 +236,55 @@ func printIntoChat(text:String,color:Color = Color.WHITE):
 	
 	chat.add_child(newMessage)
 
-func displayItemName(text:String):
-	$itemSlotName.text = text
+func displayItemName(text:String,itemData:Item):
+	
+	$ItemPreview/itemSlotName.text = text
+	
+	if text == "":
+		$ItemPreview/subtext.text = ""
+		$ItemPreview/information.text = ""
+		$ItemPreview/infoBox.visible = false
+		$ItemPreview/namebox.visible = false
+		return
+	
+	$ItemPreview/namebox.visible = true
+	$ItemPreview/subtext.text = itemData.subtext
+	
+	## information data
+	var infoText = ""
+	var size = 0
+	if itemData is ItemDamage:
+		infoText += "DAMAGE: " + str(itemData.damage) + "\n"
+		size += 18
+		infoText += "SWING SPEED: " + str(itemData.animSpeed) + "\n"
+		size += 18
+		if itemData is ItemMining:
+			infoText += "MINE SPEED: " + str(itemData.miningMultiplier) + "\n"
+			size += 18
+	elif itemData is ItemArmor:
+		infoText += "DEFENSE: " + str(itemData.defense) + "\n"
+		size += 18
+	
+	if itemData.materialIn.size() > 0:
+		infoText += "material \n"
+		size += 18
+	
+	$ItemPreview/information.text = infoText
+	$ItemPreview/infoBox.size.y = size
+	$ItemPreview/infoBox.visible = (infoText != "")
 
 func updateDefense(amount:int):
 	$Menu/defense/defenseAmount.text = str(amount)
+
+func showDeathScreen():
+	$"Death Screen".visible = true
+	deathTimer = get_tree().create_timer(5.0)
+	await deathTimer.timeout
+	$"Death Screen".visible = false
+
+func forceOpenInventory():
+	invOpen = true
+	$Menu.visible = invOpen
+	
+	crafting.createCraftingIcons()
+	$ItemPreview.position.x = (197 * int(invOpen)) + (3 * (1-int(invOpen) ))

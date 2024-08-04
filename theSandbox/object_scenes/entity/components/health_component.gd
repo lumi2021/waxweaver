@@ -37,6 +37,10 @@ func heal(amount):
 
 func damage(amount):
 	
+	if isPlayer:
+		if parent.dead:
+			return
+	
 	var trueAmount = amount
 	trueAmount -= defense
 	trueAmount = max(trueAmount,1)
@@ -51,6 +55,7 @@ func damage(amount):
 	emit_signal("healthChanged")
 	emit_signal("smacked")
 	
+	health = max(health,0)
 	
 	if health <= 0:
 		die()
@@ -68,6 +73,10 @@ func dealKnockback(amount:float,dir:Vector2):
 		parent.beingKnockedback = true
 	
 func die():
+	if isPlayer:
+		parent.dieAndRespawn()
+		return
+	
 	rollDrops()
 	CreatureData.creatureDeleted(parent)
 	parent.queue_free()

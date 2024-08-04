@@ -349,8 +349,12 @@ int PLANETDATA::findSpawnPosition(){
     
     for(int y = 0; y < planetSize; y++){
         int id = getTileData(planetSize/2,y);
+        float water = getWaterData(planetSize/2,y);
 
         if(id > 1){
+            return ((y - 4) * 8) - (planetSize * 4) + 4;
+        }
+        if(std::abs(water) > 0.5){
             return ((y - 4) * 8) - (planetSize * 4) + 4;
         }
 
@@ -376,4 +380,9 @@ int PLANETDATA::getBlockPosition(int x,int y,Vector2 centerPoint){
     
     return nuts[dot1 + dot2];
 
+}
+
+void PLANETDATA::savePlanet(){
+
+    
 }

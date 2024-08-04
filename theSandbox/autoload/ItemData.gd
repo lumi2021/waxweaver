@@ -60,6 +60,9 @@ var data = {
 	# doors 6050 - 6099
 	6050:load("res://items/blocks/furniture/doors/WoodDoor.tres"),
 	6051:load("res://items/tools/golden/GoldenPickaxe.tres"),
+	
+	# chests 6100 - 6200
+	6100:load("res://items/blocks/furniture/chests/WoodenChest.tres"),
 }
 
 var heldItemAnims = {

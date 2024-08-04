@@ -14,6 +14,8 @@ var tick = 0
 
 var targetRot = 0
 
+var chestDictionary :Dictionary= {}
+
 func _ready():
 	generateEmptyArray()
 	print("Successfully made array")

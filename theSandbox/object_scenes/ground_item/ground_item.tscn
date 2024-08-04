@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://bhm2hwrbyr14h"]
 
-[ext_resource type="Texture2D" uid="uid://mwjxc6goor4m" path="res://block_resources/block_textures/dirt.png" id="1_38qci"]
+[ext_resource type="Texture2D" uid="uid://mwjxc6goor4m" path="res://items/blocks/natural/dirt.png" id="1_38qci"]
 [ext_resource type="Script" path="res://object_scenes/ground_item/ground_item.gd" id="1_vgw6l"]
 [ext_resource type="Shader" path="res://object_scenes/ground_item/dropShadow.gdshader" id="3_3fwy6"]
 

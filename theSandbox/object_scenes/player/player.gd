@@ -19,6 +19,7 @@ var previousChunk = Vector2.ZERO
 
 var planetOn :Node2D = null
 var shipOn :Node2D = null
+var lastPlanetOn :Node2D = null
 ##States: 0 = ON PLANET, 1 = ON SHIP IN SPACE, 
 ##      2 = ON SHIP ON PLANET, 3 = IN SPACE
 var state = 0 
@@ -40,10 +41,14 @@ var blinkTick = 0
 
 var beingKnockedback = false
 
+var dead = false
+
 var wasInWater = false
 
 @onready var itemRoot = $itemWorldRotation/heldItemRoot
 var heldItemAnim :itemHeldClass = null
+
+var usingItem = false
 
 ## armors
 @onready var helmetSpr = $PlayerLayers/helmet
@@ -96,14 +101,10 @@ func _process(delta):
 	## Ignore below for now ##
 	$MouseOver.global_position = get_global_mouse_position()
 	runItemProcess()
-	if Input.is_action_pressed("mouse_left"):
+	if usingItem:
 		useItem()
 	else:
 		lastTileItemUsedOn = Vector2(-10,-10)
-	
-	if Input.is_action_just_pressed("mouse_right"):
-		onRightClick()
-	
 	
 	if GlobalRef.chatIsOpen:
 		return
@@ -146,18 +147,19 @@ func noClipMovement(delta):
 	if GlobalRef.chatIsOpen:
 		dir = Vector2.ZERO
 	
-	if Input.is_action_just_pressed("scroll_up"):
-		noClipSpeed += 100
-	elif Input.is_action_just_pressed("scroll_down"):
-		noClipSpeed -= 100
-		noClipSpeed = max(0,noClipSpeed)
+	if !dead:
+		if Input.is_action_just_pressed("scroll_up"):
+			noClipSpeed += 100
+		elif Input.is_action_just_pressed("scroll_down"):
+			noClipSpeed -= 100
+			noClipSpeed = max(0,noClipSpeed)
 		
 	
 	velocity = dir.normalized() * noClipSpeed
 	move_and_slide()
 	
-	
-	GlobalRef.camera.rotation = 0
+	if !dead:
+		GlobalRef.camera.rotation = 0
 	ensureCamPosition()
 	updateLight()
 
@@ -498,10 +500,7 @@ func findPlanetToAttachInShip():
 		var distance = planet.global_position - global_position
 		var minimumDis = sqrt(pow(planet.SIZEINCHUNKS*32,2) * 2) + 570
 		if distance.length() <= minimumDis:
-			planet.loadPlanet()
-			planetOn = planet
-			#shipOn.
-			reparent(planet.entityContainer)
+			attachToPlanet(planet)
 			shipOn.reparent(planet.entityContainer)
 			state = 2
 			return
@@ -526,6 +525,7 @@ func shipDetachFromPlanet():
 func attachToPlanet(planet:Planet):
 	planet.loadPlanet()
 	planetOn = planet
+	lastPlanetOn = planet
 	reparent(planetOn.entityContainer)
 
 func detachFromPlanet():
@@ -560,8 +560,6 @@ func useItem():
 	if itemData == null:
 		$PlayerLayers/handFront.visible = true
 		return
-	
-
 	
 	# Determine whether or not to target ship
 	var areas = $MouseOver.get_overlapping_areas()
@@ -670,6 +668,7 @@ func onRightClick():
 	var mousePos = editBody.get_local_mouse_position()
 	var tile = editBody.posToTile(mousePos)
 	var blockType = editBody.DATAC.getTileData(tile.x,tile.y)
+	var rot = editBody.DATAC.getPositionLookup(tile.x,tile.y)
 	
 	# right click functionality for each block
 	match blockType:
@@ -685,6 +684,33 @@ func onRightClick():
 				return
 			movementState = 2 # enter ladder state
 			attachToLadder(tile,editBody)
+		33: # chest 
+			
+			if PlayerData.chestOBJ == editBody and PlayerData.currentSelectedChest == tile:
+				PlayerData.closeChest()
+				return
+			
+			if PlayerData.loadChest(editBody,tile):
+				# chest visual
+				var ins = load("res://object_scenes/chest/chest_open.tscn").instantiate()
+				ins.position = editBody.tileToPos(tile)
+				ins.body = editBody
+				ins.pos = tile
+				ins.rot = rot
+				editBody.entityContainer.add_child(ins)
+		34: # loot chest
+			
+			editBody.chestDictionary[tile] = LootData.getChestLoot(editBody.planetType)
+			editBody.DATAC.setTileData(tile.x,tile.y,33)
+			
+			if PlayerData.loadChest(editBody,tile):
+				# chest visual
+				var ins = load("res://object_scenes/chest/chest_open.tscn").instantiate()
+				ins.position = editBody.tileToPos(tile)
+				ins.body = editBody
+				ins.pos = tile
+				ins.rot = rot
+				editBody.entityContainer.add_child(ins)
 
 func openDoor(tile,body,playerDir):
 	var info = body.DATAC.getInfoData(tile.x,tile.y) % 2 # top or bottom of door
@@ -991,11 +1017,57 @@ func updateLightStatic():
 	GlobalRef.lightmap.pushUpdate(planetOn,newPos)
 
 
+######################################################
+####################### OTHER ########################
+######################################################
+
 func _on_health_component_health_changed():
 	PlayerData.sendHealthUpdate($HealthComponent.health,$HealthComponent.maxHealth)
-
 
 func spawnShip():
 	var ins = shipDEBUG.instantiate()
 	get_parent().add_child(ins)
 	ins.global_position = get_global_mouse_position()
+
+func dieAndRespawn():
+	# player is DEAD bruh
+	sprite.visible = false
+	dead = true
+	noClip = true
+	noClipSpeed = 0 # enable a little bit of movement
+	
+	await get_tree().create_timer(5.0).timeout
+	
+	# respawn
+	if is_instance_valid(lastPlanetOn):
+		var pee = lastPlanetOn.DATAC.findSpawnPosition()
+		if lastPlanetOn == planetOn:
+			# run if player dies on current planet
+			position = Vector2(4,pee)
+		elif !is_instance_valid(planetOn):
+			# run if player dies in space in the same system
+			global_position = Vector2(4,pee) + lastPlanetOn.position
+			attachToPlanet(lastPlanetOn)
+	else:
+		## Code that will run in the event you are off world and 
+		## haven't landed on a planet in your current system
+		## Do later when system generation is good
+		pass
+	
+	# reset variables
+	$HealthComponent.heal(100)
+	rotated = 0
+	sprite.visible = true
+	dead = false
+	noClip = false
+
+func _unhandled_input(event):
+	if event is InputEventMouseButton:
+		
+		if event["button_index"] == 1:
+			usingItem = event["pressed"]
+			useItem()
+		
+		if event["button_index"] == 2:
+			if event["pressed"]:
+				onRightClick()

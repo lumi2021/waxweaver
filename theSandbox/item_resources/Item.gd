@@ -2,6 +2,7 @@ extends Resource
 class_name Item
 
 @export var itemName : String = ""
+@export var subtext : String = ""
 
 @export var texture : Texture
 

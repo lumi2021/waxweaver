@@ -91,7 +91,7 @@ void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
 
 
     // second pass
-    // foliage and ores
+    // foliage and ores and chests
     for(int x = 0; x < planetSize; x++){
         for(int y = 0; y < planetSize; y++){
 
@@ -145,6 +145,18 @@ void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
 
                 if(std::rand() % 500 == 0){
                     generateOre(planet,x,y,28,2,10); // generate gravel
+                }
+
+                if (planet->getTileData(x,y) == 1){ // cave air
+                    Vector2i down = Vector2i( Vector2(0,1).rotated(acos(0.0)*quad) ) + Vector2i(x,y) ;
+                    if( planet->getTileData(down.x,down.y) == 2 ){
+                        // found suitable ground underground
+                        if(std::rand() % 300 == 0){
+                            planet->setTileData(x,y,34); // spawn loot chest
+                        }
+
+                    }
+
                 }
 
 

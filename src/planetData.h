@@ -64,6 +64,8 @@ public:
     int findSpawnPosition();
     int getBlockPosition(int x,int y,Vector2 centerPoint);
 
+    void savePlanet();
+
 };
 
 }

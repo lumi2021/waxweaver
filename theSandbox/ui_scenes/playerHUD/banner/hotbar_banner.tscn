@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://daqevwntvcp3o"]
+[gd_scene load_steps=22 format=3 uid="uid://daqevwntvcp3o"]
 
 [ext_resource type="Script" path="res://ui_scenes/playerHUD/banner/hotbar_banner.gd" id="1_iyyfi"]
 [ext_resource type="PackedScene" uid="uid://cr7y1t1hoywt1" path="res://ui_scenes/playerHUD/inventory/inventory_slot.tscn" id="2_il2kt"]
@@ -21,7 +21,7 @@ outline_color = Color(0.0823529, 0.113725, 0.156863, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_bk67w"]
 font = ExtResource("5_3w5al")
-font_color = Color(0.839216, 0.839216, 0.839216, 1)
+font_color = Color(0.988235, 0.988235, 0.988235, 1)
 outline_size = 4
 outline_color = Color(0, 0, 0, 1)
 shadow_size = 3
@@ -63,6 +63,35 @@ outline_size = 3
 outline_color = Color(0.0352941, 0.0352941, 0.0352941, 1)
 shadow_size = 5
 shadow_color = Color(0.0352941, 0.0352941, 0.0352941, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_8lb1b"]
+resource_local_to_scene = true
+line_spacing = 0.0
+font = ExtResource("6_bqidn")
+font_size = 8
+font_color = Color(0.501961, 0.501961, 0.501961, 1)
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 3
+shadow_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_wiqs2"]
+resource_local_to_scene = true
+line_spacing = 2.0
+font = ExtResource("5_3w5al")
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 3
+shadow_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ta8xq"]
+font = ExtResource("5_3w5al")
+font_size = 32
+font_color = Color(1, 0.784314, 0.333333, 1)
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 3
+shadow_color = Color(0, 0, 0, 1)
 
 [node name="HotbarBanner" type="Node2D"]
 z_index = 170
@@ -411,9 +440,169 @@ placeholder_text = "enter command"
 [node name="Chat" type="Node2D" parent="."]
 position = Vector2(400, 300)
 
-[node name="itemSlotName" type="Label" parent="."]
-offset_left = 101.0
-offset_top = 5.0
-offset_right = 141.0
-offset_bottom = 28.0
+[node name="ItemPreview" type="Node2D" parent="."]
+position = Vector2(197, 42)
+
+[node name="namebox" type="ColorRect" parent="ItemPreview"]
+visible = false
+offset_right = 201.0
+offset_bottom = 34.0
+color = Color(0, 0, 0, 0.407843)
+
+[node name="infoBox" type="ColorRect" parent="ItemPreview"]
+visible = false
+offset_top = 36.0
+offset_right = 201.0
+offset_bottom = 55.0
+color = Color(0, 0, 0, 0.407843)
+
+[node name="subtext" type="Label" parent="ItemPreview"]
+offset_left = 5.0
+offset_top = 19.0
+offset_right = 199.0
+offset_bottom = 34.0
+label_settings = SubResource("LabelSettings_8lb1b")
+
+[node name="itemSlotName" type="Label" parent="ItemPreview"]
+offset_left = 4.0
+offset_top = 1.0
+offset_right = 199.0
+offset_bottom = 24.0
 label_settings = SubResource("LabelSettings_bk67w")
+
+[node name="information" type="Label" parent="ItemPreview"]
+offset_left = 3.0
+offset_top = 37.0
+offset_right = 197.0
+offset_bottom = 108.0
+label_settings = SubResource("LabelSettings_wiqs2")
+
+[node name="ChestInventory" type="Node2D" parent="."]
+position = Vector2(7, 159)
+
+[node name="background" type="ColorRect" parent="ChestInventory"]
+offset_left = -31.0
+offset_top = -6.0
+offset_right = 93.0
+offset_bottom = 89.0
+color = Color(0, 0, 0, 0.835294)
+
+[node name="slots" type="Node2D" parent="ChestInventory"]
+
+[node name="slot53" parent="ChestInventory/slots" instance=ExtResource("2_il2kt")]
+slotToDisplay = 53
+
+[node name="slot54" parent="ChestInventory/slots" instance=ExtResource("2_il2kt")]
+position = Vector2(18, 0)
+slotToDisplay = 54
+
+[node name="slot55" parent="ChestInventory/slots" instance=ExtResource("2_il2kt")]
+position = Vector2(36, 0)
+slotToDisplay = 55
+
+[node name="slot56" parent="ChestInventory/slots" instance=ExtResource("2_il2kt")]
+position = Vector2(54, 0)
+slotToDisplay = 56
+
+[node name="slot57" parent="ChestInventory/slots" instance=ExtResource("2_il2kt")]
+position = Vector2(72, 0)
+slotToDisplay = 57
+
+[node name="slot58" parent="ChestInventory/slots" instance=ExtResource("2_il2kt")]
+position = Vector2(0, 17)
+slotToDisplay = 58
+
+[node name="slot59" parent="ChestInventory/slots" instance=ExtResource("2_il2kt")]
+position = Vector2(18, 17)
+slotToDisplay = 59
+
+[node name="slot60" parent="ChestInventory/slots" instance=ExtResource("2_il2kt")]
+position = Vector2(36, 17)
+slotToDisplay = 60
+
+[node name="slot61" parent="ChestInventory/slots" instance=ExtResource("2_il2kt")]
+position = Vector2(54, 17)
+slotToDisplay = 61
+
+[node name="slot62" parent="ChestInventory/slots" instance=ExtResource("2_il2kt")]
+position = Vector2(72, 17)
+slotToDisplay = 62
+
+[node name="slot63" parent="ChestInventory/slots" instance=ExtResource("2_il2kt")]
+position = Vector2(0, 34)
+slotToDisplay = 63
+
+[node name="slot64" parent="ChestInventory/slots" instance=ExtResource("2_il2kt")]
+position = Vector2(18, 34)
+slotToDisplay = 64
+
+[node name="slot65" parent="ChestInventory/slots" instance=ExtResource("2_il2kt")]
+position = Vector2(36, 34)
+slotToDisplay = 65
+
+[node name="slot66" parent="ChestInventory/slots" instance=ExtResource("2_il2kt")]
+position = Vector2(54, 34)
+slotToDisplay = 66
+
+[node name="slot67" parent="ChestInventory/slots" instance=ExtResource("2_il2kt")]
+position = Vector2(72, 34)
+slotToDisplay = 67
+
+[node name="slot68" parent="ChestInventory/slots" instance=ExtResource("2_il2kt")]
+position = Vector2(0, 51)
+slotToDisplay = 68
+
+[node name="slot69" parent="ChestInventory/slots" instance=ExtResource("2_il2kt")]
+position = Vector2(18, 51)
+slotToDisplay = 69
+
+[node name="slot70" parent="ChestInventory/slots" instance=ExtResource("2_il2kt")]
+position = Vector2(36, 51)
+slotToDisplay = 70
+
+[node name="slot71" parent="ChestInventory/slots" instance=ExtResource("2_il2kt")]
+position = Vector2(54, 51)
+slotToDisplay = 71
+
+[node name="slot72" parent="ChestInventory/slots" instance=ExtResource("2_il2kt")]
+position = Vector2(72, 51)
+slotToDisplay = 72
+
+[node name="slot73" parent="ChestInventory/slots" instance=ExtResource("2_il2kt")]
+position = Vector2(0, 68)
+slotToDisplay = 73
+
+[node name="slot74" parent="ChestInventory/slots" instance=ExtResource("2_il2kt")]
+position = Vector2(18, 68)
+slotToDisplay = 74
+
+[node name="slot75" parent="ChestInventory/slots" instance=ExtResource("2_il2kt")]
+position = Vector2(36, 68)
+slotToDisplay = 75
+
+[node name="slot76" parent="ChestInventory/slots" instance=ExtResource("2_il2kt")]
+position = Vector2(54, 68)
+slotToDisplay = 76
+
+[node name="slot77" parent="ChestInventory/slots" instance=ExtResource("2_il2kt")]
+position = Vector2(72, 68)
+slotToDisplay = 77
+
+[node name="Death Screen" type="Node2D" parent="."]
+visible = false
+
+[node name="youDied" type="Label" parent="Death Screen"]
+offset_top = 118.0
+offset_right = 400.0
+offset_bottom = 156.0
+text = "you are dead !"
+label_settings = SubResource("LabelSettings_ta8xq")
+horizontal_alignment = 1
+
+[node name="respawn" type="Label" parent="Death Screen"]
+offset_top = 152.0
+offset_right = 400.0
+offset_bottom = 187.0
+text = "respawn in 3"
+label_settings = SubResource("LabelSettings_bk67w")
+horizontal_alignment = 1

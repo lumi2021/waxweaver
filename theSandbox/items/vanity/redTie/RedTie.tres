@@ -9,6 +9,7 @@ script = ExtResource("1_kotd2")
 defense = 1
 armorTexture = ExtResource("1_68bxb")
 itemName = "Red Tie"
+subtext = "mm.. monkey"
 texture = ExtResource("3_oqf44")
 maxStackSize = 1
 clickToUse = false

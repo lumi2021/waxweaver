@@ -25,6 +25,10 @@ func updateSelected():
 		$Label.label_settings.outline_color = Color(0.082,0.114,0.157)
 	
 func updateDisplay():
+	
+	if PlayerData.inventory.size() <= slotToDisplay:
+		return
+	
 	var slotInfo = PlayerData.inventory[slotToDisplay]
 	
 	if slotInfo[0] == -1:
@@ -56,8 +60,8 @@ func _on_color_rect_gui_input(event):
 func _on_button_mouse_entered():
 	var s = PlayerData.inventory[slotToDisplay]
 	var n = ItemData.getItemName(s[0])
-	GlobalRef.hotbar.displayItemName(n)
+	GlobalRef.hotbar.displayItemName(n,ItemData.getItem( PlayerData.inventory[slotToDisplay][0]))
 
 
 func _on_button_mouse_exited():
-	GlobalRef.hotbar.displayItemName("")
+	GlobalRef.hotbar.displayItemName("",null)
