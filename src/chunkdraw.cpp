@@ -11,6 +11,7 @@ void CHUNKDRAW::_bind_methods() {
     ClassDB::bind_method(D_METHOD("runBreak","planetDatac","pos","x","y","id"), &CHUNKDRAW::runBreak);
     ClassDB::bind_method(D_METHOD("getBlockDictionary","id"), &CHUNKDRAW::getBlockDictionary);
     ClassDB::bind_method(D_METHOD("scanBlockOpen","planetDATAC","x","y","dir"), &CHUNKDRAW::scanBlockOpen);
+    ClassDB::bind_method(D_METHOD("returnLookup"), &CHUNKDRAW::returnLookup);
     ADD_SIGNAL(MethodInfo("chunkDrawn", PropertyInfo(Variant::OBJECT, "node"), PropertyInfo(Variant::OBJECT, "image"), PropertyInfo(Variant::OBJECT, "backImage")));
     ADD_SIGNAL(MethodInfo("attemptSpawnEnemy", PropertyInfo(Variant::OBJECT, "planetData") , PropertyInfo(Variant::VECTOR2, "tile") , PropertyInfo(Variant::INT, "id") , PropertyInfo(Variant::INT, "blockSide") ));
 }
@@ -236,12 +237,6 @@ Array CHUNKDRAW::tickUpdate(PLANETDATA *planet,Vector2i pos,bool onScreen,float 
 
 
             collectedChanges.append( cock->runOnTick(worldX,worldY,planet,blockSide,blockID) );
-
-            if(!onScreen && std::rand() % 5000 == 0 && blockID < 2){
-                emit_signal("attemptSpawnEnemy", planet, Vector2(worldX,worldY), blockID, blockSide); // this is where ill put the enemy spawn
-
-            }
-           
 
             // SIMULATE WATER //
 
@@ -547,4 +542,8 @@ Vector2i CHUNKDRAW::getWaterImgPos(PLANETDATA *planet,int x,int y, int blockSide
         }   
     }
     return posi;
+}
+
+LOOKUPBLOCK* CHUNKDRAW::returnLookup(){
+    return cock;
 }

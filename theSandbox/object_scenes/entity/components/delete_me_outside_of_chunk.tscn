@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://84sah16y8gwq"]
+
+[ext_resource type="Script" path="res://object_scenes/entity/components/AmIAllowedToExist.gd" id="1_y25tc"]
+
+[node name="DeleteMeOutsideOfChunk" type="Node"]
+script = ExtResource("1_y25tc")

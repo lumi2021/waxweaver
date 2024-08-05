@@ -107,7 +107,6 @@ func clearOrbitingParents():
 func _physics_process(delta):
 	tick += 1
 	DATAC.setGlobalTick(GlobalRef.globalTick)
-	DATAC.getGlobalTick()
 	var shouldUpdateLight = 0
 	for key in chunkDictionary:
 		var chunk = chunkDictionary[key]
@@ -300,6 +299,19 @@ func tileToPos(pos):
 	var planetRadius = SIZEINCHUNKS * 32
 	return (pos * 8) - Vector2(planetRadius,planetRadius) + Vector2(4,4)
 
+func pickRandomValidSpot():
+	for attempt in range(20):
+		var randKey = chunkDictionary.keys()[randi() % chunkDictionary.size()]
+		var chunk = chunkDictionary[randKey]
+		#if chunk.onScreen:
+		#	
+		continue
+		var pos = chunk.pos * 8
+		pos.x += randi() % 8
+		pos.y += randi() % 8
+		return pos
+	return Vector2(-100,-100)
+
 ########################################################################
 ############################ VISIBILITY ################################
 ########################################################################
@@ -309,8 +321,11 @@ func loadPlanet():
 	set_physics_process(true)
 	reverseOrbitingParents()
 	Background.setBG(planetType)
+	GlobalRef.currentPlanet = self
 
 func unloadPlanet():
 	clearChunks()
 	clearOrbitingParents()
 	Background.clearBG()
+	if GlobalRef.currentPlanet == self:
+		GlobalRef.currentPlanet = null

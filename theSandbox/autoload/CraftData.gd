@@ -83,7 +83,17 @@ var data = [
 		"station":WORKBENCH,
 	},
 	
+	{ # wood chest
+		"crafts":6100,
+		"amount":1,
+		"ingredients":[13],
+		"ingAmounts":[6],
+		"station":WORKBENCH,
+	},
+	
+	############
 	## BLOCKS ##
+	############
 	
 	{ # glass
 		"crafts":21,
@@ -184,6 +194,58 @@ var data = [
 		"amount":1,
 		"ingredients":[31,13],
 		"ingAmounts":[15,5],
+		"station":WORKBENCH,
+	},
+	
+	###########
+	## ARMOR ##
+	###########
+	
+	{ # copper helmet
+		"crafts":3013,
+		"amount":1,
+		"ingredients":[29],
+		"ingAmounts":[10],
+		"station":WORKBENCH,
+	},
+	
+	{ # copper chest
+		"crafts":3014,
+		"amount":1,
+		"ingredients":[29],
+		"ingAmounts":[10],
+		"station":WORKBENCH,
+	},
+	
+	{ # copper legs
+		"crafts":3015,
+		"amount":1,
+		"ingredients":[29],
+		"ingAmounts":[10],
+		"station":WORKBENCH,
+	},
+	
+	{ # iron helmet
+		"crafts":3019,
+		"amount":1,
+		"ingredients":[31],
+		"ingAmounts":[10],
+		"station":WORKBENCH,
+	},
+	
+	{ # iron chest
+		"crafts":3020,
+		"amount":1,
+		"ingredients":[31],
+		"ingAmounts":[10],
+		"station":WORKBENCH,
+	},
+	
+	{ # iron legs
+		"crafts":3021,
+		"amount":1,
+		"ingredients":[31],
+		"ingAmounts":[10],
 		"station":WORKBENCH,
 	},
 	

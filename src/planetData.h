@@ -9,6 +9,7 @@
 
 namespace godot {
 
+class LOOKUPBLOCK;
 class PLANETDATA : public Node {
 	GDCLASS(PLANETDATA, Node)
 
@@ -65,6 +66,7 @@ public:
     int getBlockPosition(int x,int y,Vector2 centerPoint);
 
     void savePlanet();
+    Vector2i findFloor(int x, int y, LOOKUPBLOCK *lookup);
 
 };
 

@@ -8,6 +8,8 @@ var hotbar = null
 var lightRenderVP :SubViewport= null
 var dropShadowRenderVP:SubViewport = null
 
+var currentPlanet = null
+
 var gravityConstant : float = 2000
 
 var fastTick : float = 0.0
@@ -28,7 +30,9 @@ func _process(delta):
 	var wave = sin( ( currentTime * PI ) / 0.5 ) + 0.5
 	daylightMult = clamp( wave,0.0,1.0 )
 	
-	
+func isNight():
+	return currentTime > 0.55
+
 func _physics_process(delta):
 	fastTick += 1
 	if fastTick >= 4:

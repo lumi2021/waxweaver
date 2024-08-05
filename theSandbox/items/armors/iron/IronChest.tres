@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemArmorChest" load_steps=4 format=3 uid="uid://d0n6vckd4bvqw"]
+
+[ext_resource type="Texture2D" uid="uid://buffp73kxu1rg" path="res://items/armors/iron/ironChest.png" id="1_dt3mm"]
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemArmorChest.gd" id="1_ig838"]
+[ext_resource type="Texture2D" uid="uid://b04r6x8lvc30n" path="res://items/armors/iron/ironBoobs.png" id="3_dbkq2"]
+
+[resource]
+script = ExtResource("1_ig838")
+defense = 4
+armorTexture = ExtResource("1_dt3mm")
+itemName = "Iron Chestplate"
+subtext = ""
+texture = ExtResource("3_dbkq2")
+maxStackSize = 1
+clickToUse = false

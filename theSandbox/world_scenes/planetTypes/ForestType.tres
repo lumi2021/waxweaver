@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="PlanetType" load_steps=2 format=3 uid="uid://drr030n6brnua"]
+
+[ext_resource type="Script" path="res://world_scenes/planetTypes/planetType.gd" id="1_j2ok1"]
+
+[resource]
+script = ExtResource("1_j2ok1")
+rareItems = Array[int]([])
+commonItems = Array[int]([])
+commonMinimum = Array[int]([])
+commonMaximum = Array[int]([])
+fish = Array[int]([])
+fishWeight = Array[int]([])
+surfaceDay = Array[String](["butterfly/butterfly.tscn", "praffin/praffin.tscn"])
+surfaceDayWeight = Array[int]([90, 10])
+surfaceNight = Array[String](["praffin/praffin.tscn"])
+surfaceNightWeight = Array[int]([100])
+underground = Array[String](["praffin/praffin.tscn", "butterfly/butterfly.tscn"])
+undergroundWeight = Array[int]([50, 50])
+water = Array[String](["butterfly/butterfly.tscn"])
+waterWeight = Array[int]([100])

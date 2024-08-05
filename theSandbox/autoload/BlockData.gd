@@ -15,10 +15,12 @@ func _ready():
 	theGenerator = g
 	add_child(g)
 	
-	theChunker.attemptSpawnEnemy.connect(attemptSpawnEnemy)
+	#theChunker.attemptSpawnEnemy.connect(attemptSpawnEnemy)
 
-func attemptSpawnEnemy(planet,tile:Vector2,blockID:int,dir:int):
-	CreatureData.attemptSpawnEnemy(planet,tile,blockID,dir)
+func checkForCollision(id):
+	var d = theChunker.getBlockDictionary(id)
+	return d["hasCollision"]
+
 
 func breakBlock(x,y,planet,blockID):
 	
@@ -30,8 +32,6 @@ func breakBlock(x,y,planet,blockID):
 	planet.editTiles( theChunker.runBreak(planet.DATAC,Vector2i.ZERO,x,y,blockID) )
 
 func breakWall(x,y,planet,blockID):
-	
-	
 	if blockID <= 1:
 		return
 	

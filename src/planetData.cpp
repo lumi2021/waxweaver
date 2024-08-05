@@ -1,7 +1,10 @@
 #include "planetData.h"
+
 #include <godot_cpp/core/class_db.hpp>
 #include <algorithm>
 #include <memory>
+
+#include "lookupBlock.h"
 
 #include <godot_cpp/classes/node2d.hpp>
 
@@ -37,6 +40,7 @@ void PLANETDATA::_bind_methods() {
     ClassDB::bind_method(D_METHOD("createAllChunks","chunkScene","chunkContainer","sizeInChunks"), &PLANETDATA::createAllChunks);
 
     ClassDB::bind_method(D_METHOD("findSpawnPosition"), &PLANETDATA::findSpawnPosition);
+    ClassDB::bind_method(D_METHOD("findFloor","x","y"), &PLANETDATA::findFloor);
 }
 
 void PLANETDATA::createEmptyArrays(int size, Vector2 centerPoint) {
@@ -385,4 +389,28 @@ int PLANETDATA::getBlockPosition(int x,int y,Vector2 centerPoint){
 void PLANETDATA::savePlanet(){
 
     
+}
+
+Vector2i PLANETDATA::findFloor(int x, int y, LOOKUPBLOCK *lookup){
+
+    int dir = getPositionLookup(x,y);
+
+    for(int i = 0; i < 50; i++){ // attempt search for fifty tiles
+
+        Vector2i pos = Vector2i( Vector2(0,i).rotated( acos(0.0) * dir ) ) + Vector2i(x,y) ;
+
+        int id = getTileData(pos.x,pos.y);
+        
+        if (lookup->hasCollision(id)){ // found floor!
+            Vector2i pastPos = Vector2i( Vector2(0,i-1).rotated( acos(0.0) * dir ) ) + Vector2i(x,y) ;
+            return pastPos;
+
+        }
+
+
+    }
+
+    return Vector2i(-10,-10);
+
+
 }

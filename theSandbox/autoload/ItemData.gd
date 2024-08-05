@@ -52,6 +52,10 @@ var data = {
 	3014:load("res://items/armors/copper/CopperChestplate.tres"),
 	3015:load("res://items/armors/copper/CopperLegs.tres"),
 	
+	3019:load("res://items/armors/iron/IronHelmet.tres"),
+	3020:load("res://items/armors/iron/IronChest.tres"),
+	3021:load("res://items/armors/iron/IronLeggings.tres"),
+	
 	
 	# chairs 6000 - 6049
 	6000:load("res://items/blocks/furniture/chairs/WoodenChair.tres"),

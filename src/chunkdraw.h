@@ -62,6 +62,7 @@ public:
 	void getWaterImage( const char* file );
 
 	Vector2i getWaterImgPos(PLANETDATA *planet,int x,int y,int blockSide);
+	LOOKUPBLOCK* returnLookup();
 
 };
 
