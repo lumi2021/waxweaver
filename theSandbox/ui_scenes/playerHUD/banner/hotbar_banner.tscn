@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://daqevwntvcp3o"]
+[gd_scene load_steps=23 format=3 uid="uid://daqevwntvcp3o"]
 
 [ext_resource type="Script" path="res://ui_scenes/playerHUD/banner/hotbar_banner.gd" id="1_iyyfi"]
 [ext_resource type="PackedScene" uid="uid://cr7y1t1hoywt1" path="res://ui_scenes/playerHUD/inventory/inventory_slot.tscn" id="2_il2kt"]
@@ -10,6 +10,7 @@
 [ext_resource type="FontFile" uid="uid://c3vw44vws5n61" path="res://zeeg/font/I-pixel-u.ttf" id="6_bqidn"]
 [ext_resource type="FontFile" uid="uid://bn0yrqolh4ms8" path="res://zeeg/font/Arcadepix Plus.ttf" id="7_tlsqg"]
 [ext_resource type="Texture2D" uid="uid://b0ux0djrrr28d" path="res://ui_scenes/playerHUD/defense/coolShield.png" id="8_5tjvp"]
+[ext_resource type="Texture2D" uid="uid://q1g4ghc2dp45" path="res://ui_scenes/playerHUD/crafting/visibleEyes.png" id="9_8uxfg"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_0g03e"]
 resource_local_to_scene = true
@@ -397,6 +398,19 @@ columns = 2
 wait_time = 0.5
 one_shot = true
 
+[node name="craftingViSToggle" type="Button" parent="Menu"]
+self_modulate = Color(1, 1, 1, 0)
+offset_left = 185.0
+offset_top = 143.0
+offset_right = 194.0
+offset_bottom = 151.0
+
+[node name="VisibleEyes" type="Sprite2D" parent="Menu/craftingViSToggle"]
+texture = ExtResource("9_8uxfg")
+centered = false
+hframes = 2
+frame = 1
+
 [node name="HealthBar" type="Node2D" parent="."]
 position = Vector2(392, 7)
 
@@ -606,3 +620,5 @@ offset_bottom = 187.0
 text = "respawn in 3"
 label_settings = SubResource("LabelSettings_bk67w")
 horizontal_alignment = 1
+
+[connection signal="pressed" from="Menu/craftingViSToggle" to="." method="_on_crafting_vi_s_toggle_pressed"]

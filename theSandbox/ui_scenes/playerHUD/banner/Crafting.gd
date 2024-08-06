@@ -14,6 +14,8 @@ var stationScan = []
 
 var scanTick = 0
 
+var showUncraftables = true
+
 func _ready():
 	PlayerData.updateInventory.connect(createCraftingIcons)
 
@@ -103,3 +105,7 @@ func _process(delta):
 		if scanTick % 60 == 0:
 			stationScan = GlobalRef.player.scanForStations()
 			scanTick = 0
+
+func updateUncraftableVis():
+	for c in container.get_children():
+		c.updateIfUncraftable()

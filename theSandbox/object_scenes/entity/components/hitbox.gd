@@ -10,6 +10,8 @@ class_name Hitbox
 
 var collectedIDs = []
 
+var invincible = false
+
 func _ready():
 	if healthComponent == null:
 		print("Error, entity has no health component")
@@ -26,6 +28,8 @@ func _on_area_entered(area):
 		return
 	if collectedIDs.has(area.id) and enemyBox:
 		return
+	if invincible:
+		return
 		
 	#is now valid hurtbox
 	
@@ -38,11 +42,13 @@ func _on_area_entered(area):
 	healthComponent.dealKnockback(120.0,dir)
 	
 	colliderShape.call_deferred("set_disabled",true)
+	invincible = true
 	await get_tree().process_frame
 	
 	if invincTime > 0.0:
 		await get_tree().create_timer(invincTime).timeout
 	colliderShape.call_deferred("set_disabled",false)
+	invincible = false
 	
 	if collectedIDs.size() > 3:
 		collectedIDs.remove_at(0)

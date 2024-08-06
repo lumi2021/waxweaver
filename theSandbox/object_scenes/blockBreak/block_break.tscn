@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://object_scenes/blockBreak/block_break.gd" id="1_o2xuf"]
 [ext_resource type="Texture2D" uid="uid://dlkkk863ax42x" path="res://object_scenes/blockBreak/holUp.png" id="3_3nge0"]
-[ext_resource type="Texture2D" uid="uid://mwjxc6goor4m" path="res://block_resources/block_textures/dirt.png" id="4_m60a3"]
+[ext_resource type="Texture2D" uid="uid://mwjxc6goor4m" path="res://items/blocks/natural/dirt.png" id="4_m60a3"]
 
 [sub_resource type="Curve" id="Curve_fgqng"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.44655, 0.0, 0, 0]

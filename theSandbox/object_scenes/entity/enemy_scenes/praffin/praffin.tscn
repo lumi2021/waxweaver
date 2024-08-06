@@ -1,5 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://by3n5rr1aqj03"]
+[gd_scene load_steps=13 format=3 uid="uid://by3n5rr1aqj03"]
 
+[ext_resource type="Script" path="res://object_scenes/entity/class/Enemy.gd" id="1_u87pf"]
 [ext_resource type="PackedScene" uid="uid://meikam2oyy13" path="res://object_scenes/entity/components/health_component.tscn" id="1_uxer5"]
 [ext_resource type="PackedScene" uid="uid://clix3ugcvjxn3" path="res://object_scenes/entity/components/ai_component.tscn" id="2_o2c5x"]
 [ext_resource type="Script" path="res://object_scenes/entity/enemy_resources/enemyAIs/FighterAI.gd" id="3_fao40"]
@@ -25,6 +26,7 @@ size = Vector2(6, 6)
 [node name="Praffin" type="CharacterBody2D"]
 collision_layer = 128
 collision_mask = 17
+script = ExtResource("1_u87pf")
 
 [node name="HealthComponent" parent="." instance=ExtResource("1_uxer5")]
 maxHealth = 15

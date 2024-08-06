@@ -12,6 +12,7 @@ var deathTimer :SceneTreeTimer = null
 @onready var cheatOrigin = $Cheat
 @onready var textBox = $Cheat/TextEdit
 @onready var chat = $Chat
+var previousMessage = ""
 
 @onready var chatMessageScene = preload("res://ui_scenes/chat/chat_message.tscn")
 
@@ -83,6 +84,10 @@ func _process(delta):
 		
 		if cheatOrigin.visible:
 			textBox.grab_focus()
+	
+	if cheatOrigin.visible:
+		if Input.is_action_just_pressed("ui_up"):
+			interpretCommand(previousMessage + " ")
 	
 	# death message
 	if is_instance_valid(deathTimer):
@@ -174,6 +179,8 @@ func interpretCommand(text):
 	#remove accidental slash
 	text = text.left(-1)
 	
+	previousMessage = text
+	
 	var command = text.get_slice(" ",0)
 	match command:
 		"fullbright":
@@ -221,6 +228,23 @@ func interpretCommand(text):
 			GlobalRef.camera.zoom = Vector2(float(z),float(z))
 			GlobalRef.camera.changeZoom()
 			GlobalRef.sendChat("Zoom set to " + z + ".")
+		
+		"summon":
+			var n = text.get_slice(" ",1)
+			if n == "" or n == "summon":
+				GlobalRef.sendError("ERROR: missing enemy name")
+				return
+			
+			var times = text.get_slice(" ",2)
+			if times == "":
+				times = "1"
+			
+			var b = 0
+			for i in range(int(times)):
+				CreatureData.summonCommand(GlobalRef.currentPlanet,GlobalRef.player.position,n)
+				b += 1
+			if b == 0:
+				GlobalRef.sendError("ERROR: amount invalid")
 		
 		_:
 			GlobalRef.sendError("Error: command doesn't exist")
@@ -288,3 +312,9 @@ func forceOpenInventory():
 	
 	crafting.createCraftingIcons()
 	$ItemPreview.position.x = (197 * int(invOpen)) + (3 * (1-int(invOpen) ))
+
+
+func _on_crafting_vi_s_toggle_pressed():
+	crafting.showUncraftables = !crafting.showUncraftables
+	crafting.updateUncraftableVis()
+	$Menu/craftingViSToggle/VisibleEyes.frame = int(crafting.showUncraftables)

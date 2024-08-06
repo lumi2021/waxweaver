@@ -355,4 +355,10 @@ colliderShape = NodePath("CollisionShape2D")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("RectangleShape2D_8bj8a")
 
+[node name="suffocatingCast" type="Node2D" parent="."]
+
+[node name="suffocate" type="RayCast2D" parent="suffocatingCast"]
+target_position = Vector2(0, 1)
+hit_from_inside = true
+
 [connection signal="healthChanged" from="HealthComponent" to="." method="_on_health_component_health_changed"]

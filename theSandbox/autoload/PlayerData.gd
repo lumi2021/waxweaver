@@ -177,7 +177,7 @@ func consumeItems(items:Array,amounts:Array):
 func checkForEnoughItems(itemID,amount):
 	var foundAmount = 0
 	var slots = []
-	for i in range(49):
+	for i in range(40):
 		if inventory[i][0] == itemID:
 			foundAmount += inventory[i][1]
 			slots.append(i)
@@ -187,7 +187,7 @@ func checkForEnoughItems(itemID,amount):
 
 func checkForItemAmount(itemID):
 	var foundAmount = 0
-	for i in range(49):
+	for i in range(40):
 		if inventory[i][0] == itemID:
 			foundAmount += inventory[i][1]
 	return foundAmount

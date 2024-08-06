@@ -1,12 +1,21 @@
 extends Node
 
 var creatureAmount = 0
-var creatureLimit = 50
+var creatureLimit = 50 # max evil mobs
 
-# this shit needs to be MADE BETTER !!!!!!!!!!!!!!!!!!!!!!!!
+var passiveAmount = 0
+var passiveLimit = 15 # max passive mobs
 
 var spawnDelayTick = 0
-var spawnDelayThreshold = 100
+var spawnDelayThreshold = 140 # spawn rate
+
+var creatures = {
+	"praffin": "res://object_scenes/entity/enemy_scenes/praffin/praffin.tscn",
+	"butterfly": "res://object_scenes/entity/enemy_scenes/butterfly/butterfly.tscn",
+	"fish":"res://object_scenes/entity/enemy_scenes/fish/fish.tscn",
+	"firefly":"res://object_scenes/entity/enemy_scenes/firefly/firefly.tscn",
+}
+
 
 func _physics_process(delta):
 	if GlobalRef.currentPlanet == null:
@@ -14,15 +23,12 @@ func _physics_process(delta):
 	
 	var planet = GlobalRef.currentPlanet
 	
-	if creatureAmount >= creatureLimit:
-		return
-	
 	spawnDelayTick += 1
 	if spawnDelayTick > spawnDelayThreshold:
 		for attempt in range(50):
 			var randomTile = pickRandomSpot(planet)
 			
-			if planet.DATAC.getTileData(randomTile.x,randomTile.y) > 1:
+			if BlockData.checkForCollision(planet.DATAC.getTileData(randomTile.x,randomTile.y)):
 				continue # if random spot is in wall, fail and try again
 			
 			var floorTile = scanValid(planet,randomTile)
@@ -33,6 +39,8 @@ func _physics_process(delta):
 			spawnDelayTick = 0
 			return
 		spawnDelayTick = 0
+		
+		
 
 func determineContext(tile,planet):
 	if abs(planet.DATAC.getWaterData(tile.x,tile.y)) > 0.5:
@@ -65,28 +73,44 @@ func spawnEnemy(planet,tile,context):
 	
 	var data = PlanetTypeInfo.getData(planet.planetType)
 	var string = data.getEnemySpawn(context)
-	var ins = load("res://object_scenes/entity/enemy_scenes/" +string).instantiate()
+	if !creatures.has(string):
+		string = "butterfly"
+	var ins = load(creatures[string]).instantiate()
+	
+	if ins.passive:
+		if passiveAmount >= passiveLimit:
+			ins.queue_free()
+			return
+		passiveAmount += ins.creatureSlots
+	else:
+		if creatureAmount >= creatureLimit:
+			ins.queue_free()
+			return
+		creatureAmount += ins.creatureSlots
+	
 	ins.position = planet.tileToPos(Vector2(tile))
-	creatureAmount += 5
-	ins.editor_description = str(5)
+	ins.planet = planet
+	#creatureAmount += ins.creatureSlots # add creatures slots
 	planet.entityContainer.add_child(ins)
 
 
-func spawnEnemyFromFile(file:String,tile:Vector2,planet):
-	pass
-
 func creatureDeleted(creature):
-	creatureAmount -= int(creature.editor_description)
-	creatureAmount = max(creatureAmount,0)
+	if creature.passive:
+		passiveAmount -= int(creature.creatureSlots)
+		passiveAmount = max(passiveAmount,0)
+	else:
+		creatureAmount -= int(creature.creatureSlots)
+		creatureAmount = max(creatureAmount,0)
+	creature.queue_free()
 
 func isTileOnScreen(tile,planet):
-	
-	var playerTile = planet.posToTile(GlobalRef.player.position)+ Vector2(0,-3).rotated( PI * GlobalRef.player.rotated )
+	var searchPos = GlobalRef.player.position +  Vector2(0,-40).rotated( (PI/2) * GlobalRef.player.rotated )
+	var playerTile = planet.posToTile(searchPos)
 	
 	var xRange = abs(tile.x - playerTile.x)
 	var yRange = abs(tile.y - playerTile.y)
 	
-	var rangeMin = Vector2(26,20).rotated( PI * GlobalRef.player.rotated )
+	var rangeMin = Vector2(26,20).rotated( (PI/2) * GlobalRef.player.rotated )
 	
 	if xRange <= abs(rangeMin.x) and yRange <= abs(rangeMin.y):
 		return true
@@ -95,12 +119,30 @@ func isTileOnScreen(tile,planet):
 	return false
 	
 func pickRandomSpot(planet):
-	var playerTile = planet.posToTile(GlobalRef.player.position) + Vector2(0,-24).rotated( PI * GlobalRef.player.rotated )
+	var searchPos = GlobalRef.player.position +  Vector2(0,-40).rotated( (PI/2) * GlobalRef.player.rotated )
+	var playerTile = planet.posToTile(searchPos)
 	
 	
-	var range = Vector2(36,24).rotated( PI * GlobalRef.player.rotated )
 	
-	var tileX = randi_range(-abs(range.x),abs(range.x))# * ((2 * (randi() % 2)) - 1)
-	var tileY = randi_range(-abs(range.y),abs(range.y))# * ((2 * (randi() % 2)) - 1)
+	var range = Vector2(36,22).rotated( (PI/2) * GlobalRef.player.rotated )
+	range.x = abs(range.x)
+	range.y = abs(range.y)
+	
+	
+	var tileX = randi_range(-range.x,range.x)
+	var tileY = randi_range(-range.y,range.y)
 
 	return Vector2(tileX + playerTile.x,tileY + playerTile.y)
+
+func summonCommand(planet,position,string):
+
+	if !creatures.has(string):
+		GlobalRef.sendError("Error: Enemy with that name doesn't exist")
+		return
+	var ins = load(creatures[string]).instantiate()
+	ins.position = position
+	ins.planet = planet
+	creatureAmount += ins.creatureSlots # add creatures slots
+	planet.entityContainer.add_child(ins)
+	
+	GlobalRef.sendChat("Spawned a " + string)

@@ -47,6 +47,8 @@ func damage(amount):
 	
 	health -= trueAmount
 	
+	health = max(health,0)
+	
 	if isPlayer:
 		Indicators.damnPopup(trueAmount,parent.global_position,"player")
 	else:
@@ -54,8 +56,6 @@ func damage(amount):
 	
 	emit_signal("healthChanged")
 	emit_signal("smacked")
-	
-	health = max(health,0)
 	
 	if health <= 0:
 		die()
@@ -79,7 +79,6 @@ func die():
 	
 	rollDrops()
 	CreatureData.creatureDeleted(parent)
-	parent.queue_free()
 
 func getWorldPosition():
 	var angle1 = Vector2(1,1)

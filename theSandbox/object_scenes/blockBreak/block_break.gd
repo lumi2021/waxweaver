@@ -71,6 +71,7 @@ func _process(delta):
 			if damage >= breakTime:
 				var edit = Vector2i(tileX,tileY)
 				planet.editTiles( { edit: -1 } )
+				GlobalRef.player.lastTileItemUsedOn = Vector2(-10,-10)
 				queue_free()
 		else:
 			queue_free()

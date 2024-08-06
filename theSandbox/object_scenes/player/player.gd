@@ -100,6 +100,9 @@ func _process(delta):
 	
 	## Ignore below for now ##
 	$MouseOver.global_position = get_global_mouse_position()
+	if dead:
+		return
+	
 	runItemProcess()
 	if usingItem:
 		useItem()
@@ -117,6 +120,10 @@ func _process(delta):
 	if Input.is_action_just_pressed("noclip"):
 		noClip = !noClip
 		$CollisionShape2D.disabled = noClip
+	
+	if !noClip:
+		if $suffocatingCast/suffocate.is_colliding():
+			$HealthComponent.damage(1)
 	
 	#var glob = global_position - get_global_mouse_position()
 	#var gay = glob.rotated(-GlobalRef.camera.rotation)
@@ -1036,6 +1043,7 @@ func dieAndRespawn():
 	noClip = true
 	noClipSpeed = 0 # enable a little bit of movement
 	
+	GlobalRef.hotbar.showDeathScreen()
 	await get_tree().create_timer(5.0).timeout
 	
 	# respawn

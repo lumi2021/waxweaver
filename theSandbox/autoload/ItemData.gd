@@ -56,6 +56,7 @@ var data = {
 	3020:load("res://items/armors/iron/IronChest.tres"),
 	3021:load("res://items/armors/iron/IronLeggings.tres"),
 	
+	3022:load("res://items/vanity/butterflyPin/PinkBFPin.tres"),
 	
 	# chairs 6000 - 6049
 	6000:load("res://items/blocks/furniture/chairs/WoodenChair.tres"),
