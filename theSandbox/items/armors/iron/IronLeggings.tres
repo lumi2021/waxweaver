@@ -11,5 +11,5 @@ armorTexture = ExtResource("1_ejnwt")
 itemName = "Iron Leggings"
 subtext = ""
 texture = ExtResource("3_k8i3g")
-maxStackSize = 99
+maxStackSize = 1
 clickToUse = false

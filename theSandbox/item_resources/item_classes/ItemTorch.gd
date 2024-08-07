@@ -56,4 +56,8 @@ func onUse(tileX:int,tileY:int,planetDir:int,planet,lastTile:Vector2):
 		return "success"
 
 func getBlockIsSolid(id):
-	return BlockData.theChunker.getBlockDictionary(id)["hasCollision"]
+	var collider = BlockData.theChunker.getBlockDictionary(id)["hasCollision"]
+	if id == 8:
+		collider = true
+	
+	return collider

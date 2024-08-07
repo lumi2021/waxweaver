@@ -52,6 +52,11 @@ func getDirectionTowardsPlayer():
 		targetdir *= -1
 	return targetdir
 
+func getPlayerDistance():
+	var x = abs( GlobalRef.player.position.x - position.x )
+	var y = abs( GlobalRef.player.position.y - position.y )
+	return Vector2(x,y).length()
+
 func getVelocity():
 	return velocity.rotated( -(PI/2) * getQuad(self)  )
 

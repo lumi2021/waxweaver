@@ -40,3 +40,64 @@ BLOCKTORCH::BLOCKTORCH() {
 BLOCKTORCH::~BLOCKTORCH() {
 }
 
+Dictionary BLOCKTORCH::onTick(int x, int y, PLANETDATA *planet, int dir){
+    
+	Dictionary changes = {};
+    
+	if (planet->getWaterData(x,y) > 0.2 ){
+
+        changes[ Vector2i(x,y) ] = -1;
+        return changes;
+
+    }
+
+    int type = planet->getInfoData(x,y);
+
+    if( type == 0 ){
+
+        if( planet->getBGData(x,y) < 2 ){
+            changes[ Vector2i(x,y) ] = -1;
+        }
+
+        return changes;
+    }
+
+    if( type == 1 ){
+
+        Vector2i D = Vector2i( Vector2(0,1).rotated(acos(0.0)*dir) ) + Vector2i(x,y);
+
+        if( planet->getTileData(D.x,D.y) < 2 ){
+            changes[ Vector2i(x,y) ] = -1;
+        }
+
+        return changes;
+    }
+
+    if( type == 2 ){
+
+        Vector2i D = Vector2i( Vector2(1,0).rotated(acos(0.0)*dir) ) + Vector2i(x,y);
+
+        if( planet->getTileData(D.x,D.y) < 2 ){
+            changes[ Vector2i(x,y) ] = -1;
+        }
+
+        return changes;
+    }
+
+    if( type == 3 ){
+
+        Vector2i D = Vector2i( Vector2(-1,0).rotated(acos(0.0)*dir) ) + Vector2i(x,y);
+
+        if( planet->getTileData(D.x,D.y) < 2 ){
+            changes[ Vector2i(x,y) ] = -1;
+        }
+
+        return changes;
+    }
+
+
+    
+    
+    return changes;
+
+}

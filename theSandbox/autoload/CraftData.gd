@@ -224,7 +224,29 @@ var data = [
 		"ingAmounts":[10],
 		"station":WORKBENCH,
 	},
+	{ # golden helmet
+		"crafts":3016,
+		"amount":1,
+		"ingredients":[30],
+		"ingAmounts":[10],
+		"station":WORKBENCH,
+	},
 	
+	{ # golden chest
+		"crafts":3017,
+		"amount":1,
+		"ingredients":[30],
+		"ingAmounts":[10],
+		"station":WORKBENCH,
+	},
+	
+	{ # golden legs
+		"crafts":3018,
+		"amount":1,
+		"ingredients":[30],
+		"ingAmounts":[10],
+		"station":WORKBENCH,
+	},
 	{ # iron helmet
 		"crafts":3019,
 		"amount":1,
