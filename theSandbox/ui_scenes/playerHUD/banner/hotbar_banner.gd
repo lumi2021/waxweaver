@@ -246,6 +246,10 @@ func interpretCommand(text):
 			if b == 0:
 				GlobalRef.sendError("ERROR: amount invalid")
 		
+		"noclip":
+			GlobalRef.player.toggleNoClip()
+			GlobalRef.sendChat("Toggled noclip")
+		
 		_:
 			GlobalRef.sendError("Error: command doesn't exist")
 			return

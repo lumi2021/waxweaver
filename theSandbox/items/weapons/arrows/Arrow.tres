@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemArrow" load_steps=3 format=3 uid="uid://bylnrcbcmn102"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemArrow.gd" id="1_6m5rf"]
+[ext_resource type="Texture2D" uid="uid://cqtkayy2cs3q3" path="res://items/weapons/arrows/arrow.png" id="2_cdtts"]
+
+[resource]
+script = ExtResource("1_6m5rf")
+damage = 3
+itemName = "Arrow"
+subtext = ""
+texture = ExtResource("2_cdtts")
+maxStackSize = 99
+clickToUse = false

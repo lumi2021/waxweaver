@@ -6,8 +6,13 @@ class_name Hurtbox
 
 var id = 0
 
+signal hitsomething
+
 func _ready():
 	shuffleId()
 
 func shuffleId():
 	id = randi()
+
+func hasHit():
+	emit_signal("hitsomething")

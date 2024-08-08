@@ -309,7 +309,7 @@ Array CHUNKDRAW::tickUpdate(PLANETDATA *planet,Vector2i pos,bool onScreen,float 
             water = planet->getWaterData(worldX,worldY);
             if( std::abs( std::abs(beginningWater) - std::abs(water) ) >= 0.01) {
                 shouldRedrawLiquid = true;
-            }
+            } else if( std::rand() % 50 == 0 ){  shouldRedrawLiquid = true; }
 
 
             // SIMULATE LIGHT //

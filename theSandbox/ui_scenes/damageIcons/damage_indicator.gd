@@ -29,9 +29,11 @@ func _ready():
 	queue_free()
 
 func _process(delta):
-	tick += 1
-	position += velocity
-	velocity = lerp(velocity,Vector2.ZERO,0.2)
+	tick += 60 * delta
+	position += velocity * 60 * delta
+	
+	var l = 1 - pow(2, ( -delta/0.03803 ) )
+	velocity = lerp(velocity,Vector2.ZERO,l)
 	
 	modulate.a = 0.5 + (sin(tick * flashSpeed) * 0.25)
 	

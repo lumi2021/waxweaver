@@ -2,11 +2,7 @@ extends Node
 
 
 func getChestLoot(planetType):
-	var lootResource = null
-	match planetType:
-		"forest":
-			lootResource = load("res://item_resources/chestLootTables/ForestLoot.tres")
-	
+	var lootResource = PlanetTypeInfo.getData(planetType)
 	if lootResource == null:
 		return "2x1x0"
 	

@@ -103,7 +103,7 @@ func _process(delta):
 	if dead:
 		return
 	
-	runItemProcess()
+	runItemProcess(delta)
 	if usingItem:
 		useItem()
 	else:
@@ -117,18 +117,9 @@ func _process(delta):
 		GlobalRef.camera.mapbg.visible = !GlobalRef.camera.mapbg.visible
 		GlobalRef.camera.map.visible = GlobalRef.camera.mapbg.visible
 	
-	if Input.is_action_just_pressed("noclip"):
-		noClip = !noClip
-		$CollisionShape2D.disabled = noClip
-	
 	if !noClip:
 		if $suffocatingCast/suffocate.is_colliding():
 			$HealthComponent.damage(1)
-	
-	#var glob = global_position - get_global_mouse_position()
-	#var gay = glob.rotated(-GlobalRef.camera.rotation)
-	#GlobalRef.playerSide = int(gay.x > 0)
-	
 	
 ######################################################################
 ############################## MOVEMENT ##############################
@@ -335,6 +326,11 @@ func ladderMovement(delta):
 	if hdir != 0:
 		flipPlayer(hdir)
 	
+	sprite.rotation = lerp_angle(sprite.rotation,rotated*(PI/2),0.4)
+	$itemWorldRotation.rotation = sprite.rotation
+	up_direction = Vector2(0,-1).rotated(rotated*(PI/2))
+	
+	
 	## animtation
 	if vdir != 0:
 		ladderTick += 1
@@ -391,6 +387,9 @@ func ladderMovement(delta):
 	eyeBallAnim()
 	updateLight()
 	ensureCamPosition()
+	
+	GlobalRef.camera.rotation = lerp_angle(GlobalRef.camera.rotation,rotated*(PI/2),0.3)
+	
 	
 func inSpaceMovement(delta):
 	
@@ -626,7 +625,7 @@ func swapSlot():
 	heldItemAnim = ins
 	itemRoot.add_child(ins)
 
-func runItemProcess():
+func runItemProcess(delta):
 	if !is_instance_valid(heldItemAnim):
 		return
 	
@@ -635,10 +634,10 @@ func runItemProcess():
 	if Input.is_action_just_pressed("mouse_left"):
 		heldItemAnim.onFirstUse()
 	
-	if Input.is_action_pressed("mouse_left"):
-		heldItemAnim.onUsing()
+	if usingItem:
+		heldItemAnim.onUsing(delta)
 	else:
-		heldItemAnim.onNotUsing()
+		heldItemAnim.onNotUsing(delta)
 
 func onRightClick():
 	
@@ -680,6 +679,8 @@ func onRightClick():
 	# right click functionality for each block
 	match blockType:
 		19: # chair
+			if rotated != editBody.DATAC.getPositionLookup(tile.x,tile.y) and editBody is Planet:
+				return
 			movementState = 1 # enter chair state
 			chairSit(tile,editBody)
 		22: # closed door
@@ -690,7 +691,11 @@ func onRightClick():
 			if movementState == 2:
 				return
 			movementState = 2 # enter ladder state
+			if editBody is Planet:
+				rotated = editBody.DATAC.getPositionLookup(tile.x,tile.y)
 			attachToLadder(tile,editBody)
+			
+			
 		33: # chest 
 			
 			if PlayerData.chestOBJ == editBody and PlayerData.currentSelectedChest == tile:
@@ -757,7 +762,7 @@ func closeDoor(tile,body):
 func chairSit(tile,editBody):
 	$AnimationPlayer.play("sit")
 	setAllPlayerFrames(7)
-	snapToPosition(tile,editBody)
+	snapToPositionChair(tile,editBody)
 	wasInWater = false
 
 func attachToLadder(tile,editBody):
@@ -766,7 +771,7 @@ func attachToLadder(tile,editBody):
 	snapToPosition(tile,editBody)
 	wasInWater = false
 
-func snapToPosition(tile,editBody):
+func snapToPositionChair(tile,editBody):
 	var info = editBody.DATAC.getInfoData(tile.x,tile.y)
 	
 	var pos = editBody.tileToPos(tile)
@@ -797,6 +802,22 @@ func snapToPosition(tile,editBody):
 		if editBody is Ship:
 			position += editBody.position
 
+func snapToPosition(tile,editBody):
+	var pos = editBody.tileToPos(tile)
+	if editBody is Ship:
+		pos = editBody.tileToPosRotated(tile)
+			
+	position = pos
+			
+	if editBody is Ship:
+		position += editBody.position
+	
+	
+	if state == 3:
+		await get_tree().process_frame
+		position = pos
+		if editBody is Ship:
+			position += editBody.position
 
 func scanForStations():
 	var scanBody = planetOn
@@ -1063,11 +1084,14 @@ func dieAndRespawn():
 		pass
 	
 	# reset variables
+	
 	$HealthComponent.heal(100)
 	rotated = 0
 	sprite.visible = true
 	dead = false
 	noClip = false
+	PlayerData.selectSlot(PlayerData.selectedSlot)
+	$CollisionShape2D.disabled = noClip
 
 func _unhandled_input(event):
 	if event is InputEventMouseButton:
@@ -1079,3 +1103,7 @@ func _unhandled_input(event):
 		if event["button_index"] == 2:
 			if event["pressed"]:
 				onRightClick()
+
+func toggleNoClip():
+	noClip = !noClip
+	$CollisionShape2D.disabled = noClip

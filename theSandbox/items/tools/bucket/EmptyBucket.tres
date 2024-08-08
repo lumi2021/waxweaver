@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemBucket" load_steps=3 format=3 uid="uid://bfqm101j6hsoc"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemBucket.gd" id="1_851un"]
+[ext_resource type="Texture2D" uid="uid://b8063wjsvd5n2" path="res://items/tools/bucket/emptyBucket.png" id="2_ofoka"]
+
+[resource]
+script = ExtResource("1_851un")
+type = 0
+itemName = "Empty Bucket"
+subtext = ""
+texture = ExtResource("2_ofoka")
+maxStackSize = 1
+clickToUse = false

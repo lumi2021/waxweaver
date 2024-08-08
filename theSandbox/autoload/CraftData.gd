@@ -27,6 +27,13 @@ var data = [
 		"ingAmounts":[10],
 	},
 	
+	{ # arrow
+		"crafts":3023,
+		"amount":3,
+		"ingredients":[2,13,3004],
+		"ingAmounts":[2,2,2],
+	},
+	
 	###########
 	## WALLS ##
 	###########
@@ -108,6 +115,14 @@ var data = [
 		"amount":1,
 		"ingredients":[2],
 		"ingAmounts":[1],
+		"station":FURNACE,
+	},
+	
+	{ # soil
+		"crafts":35,
+		"amount":2,
+		"ingredients":[3,28],
+		"ingAmounts":[1,1],
 		"station":FURNACE,
 	},
 	
@@ -197,6 +212,22 @@ var data = [
 		"station":WORKBENCH,
 	},
 	
+	{ # bow
+		"crafts":3024,
+		"amount":1,
+		"ingredients":[13,3004],
+		"ingAmounts":[10,10],
+		"station":WORKBENCH,
+	},
+	
+	{ # bucket
+		"crafts":3025,
+		"amount":1,
+		"ingredients":[31],
+		"ingAmounts":[3],
+		"station":WORKBENCH,
+	},
+	
 	###########
 	## ARMOR ##
 	###########
@@ -270,6 +301,8 @@ var data = [
 		"ingAmounts":[10],
 		"station":WORKBENCH,
 	},
+	
+	
 	
 ]
 

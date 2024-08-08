@@ -29,13 +29,15 @@ var data = {
 	32:load("res://items/blocks/building/StoneBrick.tres"),
 	-32:load("res://items/walls/StoneBrickWall.tres"),
 	
+	35:load("res://items/blocks/natural/SoilItem.tres"),
+	
 	# item ids
 	3000:load("res://items/tools/flimsy/FlimsySword.tres"), # flimsy tools
 	3001:load("res://items/tools/flimsy/FlimsyPickaxe.tres"),
 	3002:load("res://items/tools/hammers/Mallet.tres"),
 	
 	3003:load("res://items/material/Wax.tres"),
-	3004:null,
+	3004:load("res://items/material/String.tres"),
 	3005:null,
 	
 	3006:load("res://items/tools/copper/CopperSword.tres"), # copper tools
@@ -62,6 +64,13 @@ var data = {
 	
 	3022:load("res://items/vanity/butterflyPin/PinkBFPin.tres"),
 	
+	3023:load("res://items/weapons/arrows/Arrow.tres"),
+	3024:load("res://items/weapons/bows/WoodenBow.tres"),
+	
+	3025:load("res://items/tools/bucket/EmptyBucket.tres"),
+	3026:load("res://items/tools/bucket/FullBucket.tres"),
+	3027:load("res://items/tools/bucket/MagicBucket.tres"),
+	
 	# chairs 6000 - 6049
 	6000:load("res://items/blocks/furniture/chairs/WoodenChair.tres"),
 	6001:load("res://items/blocks/furniture/chairs/Toilet.tres"),
@@ -76,12 +85,15 @@ var data = {
 
 var heldItemAnims = {
 	"itemSwing" : load("res://item_resources/item_held_scenes/item_swing.tscn"),
+	"itemBow" : load("res://item_resources/item_held_scenes/item_bow.tscn"),
 }
 
 func matchItemAnimation(id):
 	var d = getItem(id)
 	if d is ItemDamage:
 		return "itemSwing"
+	if d is ItemBow:
+		return "itemBow"
 	
 	return null
 

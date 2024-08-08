@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemBow" load_steps=3 format=3 uid="uid://dyaiycqiiui81"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemBow.gd" id="1_6wsac"]
+[ext_resource type="Texture2D" uid="uid://synt8thxgpcr" path="res://items/weapons/bows/woodenBow.png" id="2_g56ca"]
+
+[resource]
+script = ExtResource("1_6wsac")
+damage = 2
+velocity = 400.0
+fireRate = 2000.0
+itemName = "Wooden Bow"
+subtext = ""
+texture = ExtResource("2_g56ca")
+maxStackSize = 1
+clickToUse = false

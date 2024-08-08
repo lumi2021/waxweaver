@@ -40,6 +40,7 @@ func _on_area_entered(area):
 	
 	healthComponent.damage(area.damage)
 	healthComponent.dealKnockback(120.0,dir)
+	area.hasHit()
 	
 	colliderShape.call_deferred("set_disabled",true)
 	invincible = true

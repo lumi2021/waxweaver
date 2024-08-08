@@ -11,22 +11,42 @@ func getPos():
 
 func getTile():
 	var pos = getPos()
+	
+	if pos == null:
+		return 0
+	
 	return planet.DATAC.getTileData(pos.x,pos.y)
 
 func getWater():
 	var pos = getPos()
-	return planet.DATAC.getWaterData(pos.x,pos.y)
+	
+	if pos == null:
+		return 0.0
+	
+	return abs(planet.DATAC.getWaterData(pos.x,pos.y))
 
 func getWall():
 	var pos = getPos()
+	
+	if pos == null:
+		return 0
+	
 	return planet.DATAC.getBGData(pos.x,pos.y)
 
 func getLight():
 	var pos = getPos()
+	
+	if pos == null:
+		return 1.0
+	
 	return planet.DATAC.getLightData(pos.x,pos.y)
 
 func setLight(amount):
 	var pos = getPos()
+	
+	if pos == null:
+		return
+	
 	if getLight() > amount:
 		return
 	planet.DATAC.setLightData(pos.x,pos.y,-amount)
@@ -62,3 +82,19 @@ func getVelocity():
 
 func setVelocity(vel):
 	velocity = vel.rotated( (PI/2) * getQuad(self)  )
+
+func getVERTICALDirectionTowardsPlayer():
+	var myQuad = getQuad( self )
+	var playerQuad = getQuad( GlobalRef.player )
+		
+	var pose = self.position.rotated((PI/2)*-myQuad)
+	var posa = GlobalRef.player.position.rotated((PI/2)*-playerQuad)
+	var targetdir :int= ((int(pose.y < posa.y) * 2.0) - 1.0)
+		
+	if playerQuad != myQuad:
+		targetdir *= -1
+	return targetdir
+
+func getSurface():
+	var pos = getPos()
+	return planet.getSurfaceDistance(pos.x,pos.y)

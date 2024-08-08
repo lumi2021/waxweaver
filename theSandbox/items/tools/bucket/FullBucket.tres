@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemBucket" load_steps=3 format=3 uid="uid://c3eriuo34y04f"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemBucket.gd" id="1_k2bq1"]
+[ext_resource type="Texture2D" uid="uid://2vmvqw8i7ltk" path="res://items/tools/bucket/filledBucket.png" id="2_qq6n3"]
+
+[resource]
+script = ExtResource("1_k2bq1")
+type = 1
+itemName = "Water Bucket"
+subtext = ""
+texture = ExtResource("2_qq6n3")
+maxStackSize = 1
+clickToUse = false

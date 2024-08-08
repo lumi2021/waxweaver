@@ -6,6 +6,7 @@
 [resource]
 script = ExtResource("1_mw10o")
 itemName = "Wax"
+subtext = ""
 texture = ExtResource("2_iskey")
 maxStackSize = 99
 clickToUse = false

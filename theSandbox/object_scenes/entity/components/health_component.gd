@@ -21,6 +21,11 @@ var health :int= 0
 signal healthChanged
 signal smacked
 
+
+# status stuff
+var speedMult :float= 1.0
+
+
 func _ready():
 	health = maxHealth
 

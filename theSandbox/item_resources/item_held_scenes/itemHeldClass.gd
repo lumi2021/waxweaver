@@ -27,8 +27,12 @@ func onEquip():
 func onFirstUse():
 	pass
 
-func onUsing():
+func onUsing(delta):
 	pass
 
-func onNotUsing():
+func onNotUsing(delta):
 	pass
+
+func _process(delta):
+	if GlobalRef.player.dead:
+		queue_free()

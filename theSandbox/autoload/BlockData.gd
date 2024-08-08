@@ -47,6 +47,9 @@ func spawnGroundItem(tilex:int,tiley:int,id:int,planet):
 	match id:
 		-1:
 			return
+		7: # is tree sapling
+			if randi() % 2 == 0:
+				return
 		19: # is chair
 			id = 6000 + ( planet.DATAC.getInfoData(tilex,tiley) / 4)
 		22: # is closed door

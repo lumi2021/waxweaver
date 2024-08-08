@@ -312,6 +312,13 @@ func pickRandomValidSpot():
 		return pos
 	return Vector2(-100,-100)
 
+func getSurfaceDistance(x,y):
+	var quadtrant = DATAC.getPositionLookup(x,y)
+	var newPos = Vector2(x,y) - centerPoint
+	newPos = newPos.rotated((PI/2)*-quadtrant)
+	var surface = max( (SIZEINCHUNKS*8) / 4, ((SIZEINCHUNKS*8)/2) - 128 )
+	return surface + newPos.y
+
 ########################################################################
 ############################ VISIBILITY ################################
 ########################################################################

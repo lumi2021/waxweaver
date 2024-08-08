@@ -6,11 +6,16 @@ extends Enemy
 
 var tick :float= 0
 
+var targetX :float= 0
+var targetY :float= -1
+
 func _process(delta):
 	var vel = getVelocity()
 	
-	var targetX :float= (randi() % 3) - 1
-	var targetY :float= (randi() % 3) - 1
+	if tick > 0.016:
+		targetX = (randi() % 3) - 1
+		targetY = (randi() % 3) - 1
+		tick -= 0.016
 	
 	if !groundCast.is_colliding():
 		targetY = 1
@@ -20,7 +25,8 @@ func _process(delta):
 		
 		targetY = -0.2
 	
-	vel = Vector2( lerp(vel.x,targetX * 100,0.01), lerp(vel.y,targetY * 100,0.02)  )
+	var l = 1 - pow(2, ( -delta/3.803 ) )
+	vel = Vector2( lerp(vel.x,targetX * 100,l), lerp(vel.y,targetY * 100,l*2.0)  )
 	
 	setVelocity(vel)
 	move_and_slide()

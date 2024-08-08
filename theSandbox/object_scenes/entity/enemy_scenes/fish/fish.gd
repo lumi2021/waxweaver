@@ -10,7 +10,7 @@ var tick = 0
 var targetX :float= 0
 var targetY :float= -1
 
-func _process(delta):
+func _physics_process(delta):
 	
 	state = int(abs(getWater())< 0.5)
 	

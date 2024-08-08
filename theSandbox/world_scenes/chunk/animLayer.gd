@@ -1,7 +1,7 @@
 extends Sprite2D
 
 var tick = 0
-func _process(delta):
+func _physics_process(delta):
 	tick += 1
 	if tick % 20 == 0:
 		if frame < 2:

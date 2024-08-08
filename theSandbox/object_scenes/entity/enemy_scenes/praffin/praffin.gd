@@ -10,11 +10,12 @@ var state = 0 # 0 = passive, 1 = hunting, 2 = stunned
 
 var wanderDir = 0
 var animTick = 0
+var floatamount = 25.0
 
 func _ready():
 	HC.connect("smacked",smack)
 
-func _process(delta):
+func _physics_process(delta):
 	match state:
 		0:
 			wander(delta)
@@ -28,12 +29,15 @@ func hunt(delta):
 	
 	var dir = getDirectionTowardsPlayer()
 	
+	if GlobalRef.player.dead:
+		dir *= -1
+	
 	rotationOrigin.rotation = getQuad(self) * (PI/2)
 	
 	if floorRay.is_colliding():
 		vel.x = lerp(vel.x, dir * 50.0, 0.05 )
 	else:
-		vel.x = vel.x + (dir * 0.5)
+		vel.x = vel.x + (dir * 0.5) * 60 * delta
 	
 	vel.y += 1000 * delta
 	
@@ -49,12 +53,15 @@ func hunt(delta):
 	if randi() % 100 == 0 and floorRay.is_colliding():
 		vel.y = -150
 		vel.x = dir * 60
+		
+	if getWater() > 0.5:
+		vel.y -= floatamount * 60 * delta
 	
 	setVelocity(vel)
 	
 	move_and_slide()
 	
-	animation(dir)
+	animation(dir,delta)
 
 func smack():
 	state = 2
@@ -66,11 +73,14 @@ func stunned(delta):
 	if floorRay.is_colliding():
 		vel.x = lerp(vel.x,0.0,0.08)
 	
+	if getWater() > 0.5:
+		vel.y -= floatamount * 60 * delta
+	
 	setVelocity(vel)
 	
 	move_and_slide()
 	
-	animation(0)
+	animation(0,delta)
 	
 	if abs(vel.x) < 10:
 		state = 1
@@ -86,7 +96,7 @@ func wander(delta):
 	if floorRay.is_colliding():
 		vel.x = lerp(vel.x, wanderDir * 15.0, 0.05 )
 	else:
-		vel.x = vel.x + (wanderDir * 1)
+		vel.x = vel.x + (wanderDir * 1) * 60 * delta
 	
 	vel.y += 1000 * delta
 	
@@ -98,18 +108,21 @@ func wander(delta):
 	if getPlayerDistance() < 36:
 		state = 1
 	
+	if getWater() > 0.5:
+		vel.y -= floatamount * 60 * delta
+	
 	setVelocity(vel)
 	
 	move_and_slide()
 	
-	animation(wanderDir)
+	animation(wanderDir,delta)
 
-func animation(dir):
+func animation(dir,delta):
 	
 	if dir != 0:
 		sprite.flip_h = dir == -1
 		
-		match animTick:
+		match int(animTick):
 			0:
 				sprite.frame = 1
 			8:

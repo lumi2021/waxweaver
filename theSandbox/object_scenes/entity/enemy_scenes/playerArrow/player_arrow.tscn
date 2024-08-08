@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=3 uid="uid://x0e1twxlt6d5"]
+
+[ext_resource type="Script" path="res://object_scenes/entity/enemy_scenes/playerArrow/player_arrow.gd" id="1_ww77b"]
+[ext_resource type="Texture2D" uid="uid://cqtkayy2cs3q3" path="res://items/weapons/arrows/arrow.png" id="2_qm4ss"]
+[ext_resource type="PackedScene" uid="uid://8jw6pruiu3cf" path="res://object_scenes/entity/components/hurtbox.tscn" id="3_3h174"]
+[ext_resource type="PackedScene" uid="uid://84sah16y8gwq" path="res://object_scenes/entity/components/delete_me_outside_of_chunk.tscn" id="4_dr1do"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kj11q"]
+radius = 1.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_janed"]
+size = Vector2(17, 16)
+
+[node name="PlayerArrow" type="CharacterBody2D"]
+collision_layer = 128
+script = ExtResource("1_ww77b")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_kj11q")
+
+[node name="axis" type="Node2D" parent="."]
+
+[node name="Arrow" type="Sprite2D" parent="axis"]
+rotation = 1.5708
+texture = ExtResource("2_qm4ss")
+
+[node name="Hurtbox" parent="axis" instance=ExtResource("3_3h174")]
+position = Vector2(-10, 0)
+enemyBox = false
+damage = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="axis/Hurtbox"]
+position = Vector2(8, 0)
+shape = SubResource("RectangleShape2D_janed")
+
+[node name="DeleteMeOutsideOfChunk" parent="." instance=ExtResource("4_dr1do")]
+
+[node name="poop" type="Node2D" parent="."]
+
+[node name="RayCast2D" type="RayCast2D" parent="poop"]
+position = Vector2(-1, 1)
+target_position = Vector2(0, 1)
+
+[node name="RayCast2D2" type="RayCast2D" parent="poop"]
+position = Vector2(1, 1)
+target_position = Vector2(0, 1)
+
+[connection signal="hitsomething" from="axis/Hurtbox" to="." method="_on_hurtbox_hitsomething"]

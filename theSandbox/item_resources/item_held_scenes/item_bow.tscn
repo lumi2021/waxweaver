@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://b86u1w2h12pxk"]
+
+[ext_resource type="Script" path="res://item_resources/item_held_scenes/item_bow.gd" id="1_a4fd2"]
+[ext_resource type="Texture2D" uid="uid://synt8thxgpcr" path="res://items/weapons/bows/woodenBow.png" id="2_01w81"]
+
+[node name="itemBow" type="Node2D"]
+script = ExtResource("1_a4fd2")
+
+[node name="origin" type="Node2D" parent="."]
+
+[node name="sprite" type="Sprite2D" parent="origin"]
+position = Vector2(6, 0)
+rotation = 0.785398
+texture = ExtResource("2_01w81")

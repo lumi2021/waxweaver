@@ -94,6 +94,7 @@ func swapItem(slot1,slot2):
 	
 	var points = 0
 	var updateArmor = false
+	var updateHeld = false
 	match slot1:
 		40: #helmet
 			points += int(ItemData.getItem(inventory[slot1][0]) is ItemArmorHelmet)
@@ -119,7 +120,9 @@ func swapItem(slot1,slot2):
 			points += int(ItemData.getItem(inventory[slot1][0]) is ItemArmorLegs)
 			points += int(ItemData.getItem(inventory[slot2][0]) is ItemArmorLegs)
 			updateArmor = true
-		
+		PlayerData.selectedSlot:
+			updateHeld = true
+			points += 3
 		
 		_: # every other slot
 			points += 3
@@ -143,6 +146,8 @@ func swapItem(slot1,slot2):
 	emit_signal("onlyUpdateCraft")
 	if updateArmor:
 		emit_signal("armorUpdated")
+	if updateHeld:
+		PlayerData.selectSlot(PlayerData.selectedSlot)
 	
 
 func getSelectedItemData():
@@ -353,4 +358,14 @@ func dropChestContainer(body,pos,string):
 		var amount :int = int(itemString.get_slice("x",1))
 		BlockData.spawnLooseItem(body.tileToPos(pos),body,id,amount)
 	
-	
+func scanForArrow():
+	for i in range(40):
+		var id = inventory[i][0]
+		var data = ItemData.getItem(id)
+		if data is ItemArrow:
+			return [data,i] # sends item data and slots
+	return null
+
+func replaceSelectedSlot(id:int,amount:int):
+	inventory[selectedSlot] = [id,amount]
+	emit_signal("updateInventory")

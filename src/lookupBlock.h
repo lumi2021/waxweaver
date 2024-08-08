@@ -42,6 +42,7 @@
 #include "blockStoneBrick.h" // id 32
 #include "blockChest.h" // id 33
 #include "blockChestLoot.h" // id 34
+#include "blockSoil.h" // id 35
 
 // adding a new block? make sure you increment the PENIS array !
 
@@ -59,7 +60,7 @@ public:
 	
 	Array allBlocks;
 
-	BLOCK *penis[35]; // must be largest id + 1
+	BLOCK *penis[36]; // must be largest id + 1
 
 	LOOKUPBLOCK();
 	~LOOKUPBLOCK();

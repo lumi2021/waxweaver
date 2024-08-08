@@ -7,13 +7,15 @@ var passiveAmount = 0
 var passiveLimit = 15 # max passive mobs
 
 var spawnDelayTick = 0
-var spawnDelayThreshold = 140 # spawn rate
+var spawnDelayThreshold = 240 # spawn rate
 
 var creatures = {
 	"praffin": "res://object_scenes/entity/enemy_scenes/praffin/praffin.tscn",
 	"butterfly": "res://object_scenes/entity/enemy_scenes/butterfly/butterfly.tscn",
 	"fish":"res://object_scenes/entity/enemy_scenes/fish/fish.tscn",
 	"firefly":"res://object_scenes/entity/enemy_scenes/firefly/firefly.tscn",
+	"evilBird":"res://object_scenes/entity/enemy_scenes/evilBird/evil_bird.tscn",
+	"spider":"res://object_scenes/entity/enemy_scenes/spider/spider.tscn",
 }
 
 
@@ -46,7 +48,7 @@ func determineContext(tile,planet):
 	if abs(planet.DATAC.getWaterData(tile.x,tile.y)) > 0.5:
 		return 3 # is water
 	
-	if planet.DATAC.getTileData(tile.x,tile.y) == 1:
+	if planet.getSurfaceDistance(tile.x,tile.y) > 20.0:
 		return 2 # is cave
 	
 	if GlobalRef.isNight():
@@ -122,6 +124,8 @@ func pickRandomSpot(planet):
 	var searchPos = GlobalRef.player.position +  Vector2(0,-40).rotated( (PI/2) * GlobalRef.player.rotated )
 	var playerTile = planet.posToTile(searchPos)
 	
+	if playerTile == null:
+		return Vector2.ZERO
 	
 	
 	var range = Vector2(36,22).rotated( (PI/2) * GlobalRef.player.rotated )

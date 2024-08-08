@@ -53,6 +53,7 @@ LOOKUPBLOCK::LOOKUPBLOCK() {
     penis[32] = new BLOCKSTONEBRICK();
     penis[33] = new BLOCKCHEST();
     penis[34] = new BLOCKCHESTLOOT();
+    penis[35] = new BLOCKSOIL();
 
     
     for(BLOCK *i : penis){ // i increase automatically !

@@ -30,7 +30,8 @@ transparent_bg = true
 handle_input_locally = false
 canvas_item_default_texture_filter = 0
 gui_disable_input = true
-canvas_cull_mask = 4293918749
+sdf_oversize = 0
+canvas_cull_mask = 4293918733
 size = Vector2i(576, 576)
 script = ExtResource("2_lymq3")
 
