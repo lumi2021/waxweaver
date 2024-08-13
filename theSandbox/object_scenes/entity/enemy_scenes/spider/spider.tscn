@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://xt3vfsegvgjj"]
+[gd_scene load_steps=10 format=3 uid="uid://xt3vfsegvgjj"]
 
 [ext_resource type="Script" path="res://object_scenes/entity/enemy_scenes/spider/spider.gd" id="1_rpbfy"]
 [ext_resource type="Texture2D" uid="uid://b6xs2nif25drt" path="res://object_scenes/entity/enemy_scenes/spider/sprite.png" id="2_cn8la"]
+[ext_resource type="PackedScene" uid="uid://84sah16y8gwq" path="res://object_scenes/entity/components/delete_me_outside_of_chunk.tscn" id="3_f6yp8"]
 [ext_resource type="Script" path="res://object_scenes/entity/components/health_component.gd" id="3_gfi00"]
 [ext_resource type="PackedScene" uid="uid://c05kukkqfrg40" path="res://object_scenes/entity/components/hitbox.tscn" id="4_ei6ps"]
 [ext_resource type="PackedScene" uid="uid://8jw6pruiu3cf" path="res://object_scenes/entity/components/hurtbox.tscn" id="5_tyfpu"]
@@ -26,6 +27,8 @@ shape = SubResource("CircleShape2D_arcvd")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_cn8la")
+
+[node name="DeleteMeOutsideOfChunk" parent="." instance=ExtResource("3_f6yp8")]
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("3_gfi00")

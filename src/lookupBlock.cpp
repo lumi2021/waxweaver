@@ -54,6 +54,8 @@ LOOKUPBLOCK::LOOKUPBLOCK() {
     penis[33] = new BLOCKCHEST();
     penis[34] = new BLOCKCHESTLOOT();
     penis[35] = new BLOCKSOIL();
+    penis[36] = new BLOCKSOILDRY();
+    penis[37] = new BLOCKCROPPOTATO();
 
     
     for(BLOCK *i : penis){ // i increase automatically !

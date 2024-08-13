@@ -53,15 +53,32 @@ func spawnGroundItem(tilex:int,tiley:int,id:int,planet):
 		19: # is chair
 			id = 6000 + ( planet.DATAC.getInfoData(tilex,tiley) / 4)
 		22: # is closed door
-			id = 6050 + ( planet.DATAC.getInfoDadta(tilex,tiley) / 2)
+			id = 6050 + ( planet.DATAC.getInfoData(tilex,tiley) / 2)
 		23: # is open door
 			id = 6050 + ( planet.DATAC.getInfoData(tilex,tiley) / 8)
-	
+		37: # is potato
+			if planet.DATAC.getInfoData(tilex,tiley) >= 4:
+				spawnItemRaw(tilex,tiley,37,planet)
+				spawnItemRaw(tilex,tiley,37,planet)
+				spawnItemRaw(tilex,tiley,37,planet)
+			
 	
 	var ins = groundItemScene.instantiate()
 	ins.itemID = id
 	ins.position = planet.tileToPos(Vector2(tilex,tiley))
 	planet.entityContainer.add_child(ins)
+
+func spawnItemRaw(tilex:int,tiley:int,id:int,planet,amount:int=1,droppedByPlayer:bool=false,dropDir:int=1):
+	# spawns an item without considering special cases
+	var ins = groundItemScene.instantiate()
+	ins.itemID = id
+	if droppedByPlayer:
+		ins.droppedByPlayer = 4
+		ins.dropvel = Vector2(200*dropDir,-100)
+	ins.amount = amount
+	ins.position = planet.tileToPos(Vector2(tilex,tiley))
+	planet.entityContainer.add_child(ins)
+
 
 func spawnBreakParticle(tilex:int,tiley:int,id:int,otherId:int,planet):
 	

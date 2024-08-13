@@ -11,6 +11,8 @@ var itemData = null
 var currentlyUsing
 var clickUsage :bool = false
 
+var usedUp = false
+
 func _ready():
 	itemData = ItemData.getItem(itemID)
 	if sprite != null:
@@ -34,5 +36,9 @@ func onNotUsing(delta):
 	pass
 
 func _process(delta):
+	invUpdate()
 	if GlobalRef.player.dead:
 		queue_free()
+
+func invUpdate():
+	usedUp = PlayerData.getSelectedItemID() != itemID

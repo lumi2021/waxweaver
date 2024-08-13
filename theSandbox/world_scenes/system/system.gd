@@ -108,3 +108,7 @@ func generateSystem():
 		#planet.position -= rootPosition
 	#for object in objectContainer.get_children():
 		#object.position -= rootPosition
+
+func posToTile(pos):
+	# just ensures anything emitted into the main system doesnt crash
+	return null

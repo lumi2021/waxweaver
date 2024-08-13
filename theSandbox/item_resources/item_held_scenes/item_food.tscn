@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=3 uid="uid://dlew7jxmmutj7"]
+
+[ext_resource type="Texture2D" uid="uid://33qpomexvcha" path="res://items/food/potatoBaked.png" id="1_6jra8"]
+[ext_resource type="Script" path="res://item_resources/item_held_scenes/item_food.gd" id="1_eso0p"]
+[ext_resource type="Texture2D" uid="uid://bbhygnshkya87" path="res://object_scenes/player/hand.png" id="2_1wkdc"]
+
+[sub_resource type="Curve" id="Curve_7ldc0"]
+max_value = 2.0
+_data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="item_food" type="Node2D" node_paths=PackedStringArray("sprite", "handSprite")]
+script = ExtResource("1_eso0p")
+sprite = NodePath("origin/foodSprite")
+handSprite = NodePath("origin/handSprite")
+
+[node name="origin" type="Node2D" parent="."]
+position = Vector2(2, 1)
+
+[node name="foodSprite" type="Sprite2D" parent="origin"]
+position = Vector2(3, -7)
+texture = ExtResource("1_6jra8")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 8, 8)
+
+[node name="handSprite" type="Sprite2D" parent="origin"]
+modulate = Color(1, 0.784314, 0.333333, 1)
+position = Vector2(3, -1)
+texture = ExtResource("2_1wkdc")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="origin"]
+position = Vector2(4, -2)
+amount = 2
+lifetime = 0.4
+emission_shape = 3
+emission_rect_extents = Vector2(0.165, 1.99)
+direction = Vector2(0.54, -1.45)
+spread = 28.22
+gravity = Vector2(0, 400)
+initial_velocity_min = 9.55
+initial_velocity_max = 59.07
+scale_amount_curve = SubResource("Curve_7ldc0")

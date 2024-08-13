@@ -35,6 +35,20 @@ var data = [
 	},
 	
 	###########
+	## FOOD ###
+	###########
+	
+	{ # baked potato
+		"crafts":3028,
+		"amount":1,
+		"ingredients":[37],
+		"ingAmounts":[1],
+		"station": FURNACE,
+	},
+	
+	
+	
+	###########
 	## WALLS ##
 	###########
 	

@@ -490,6 +490,7 @@ offset_top = 37.0
 offset_right = 197.0
 offset_bottom = 108.0
 label_settings = SubResource("LabelSettings_wiqs2")
+autowrap_mode = 2
 
 [node name="ChestInventory" type="Node2D" parent="."]
 position = Vector2(7, 159)

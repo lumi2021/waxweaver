@@ -1,13 +1,13 @@
 [gd_scene load_steps=21 format=3 uid="uid://c1b1vgh12jqww"]
 
 [ext_resource type="Script" path="res://object_scenes/player/player.gd" id="1_7l8c2"]
+[ext_resource type="PackedScene" uid="uid://meikam2oyy13" path="res://object_scenes/entity/components/health_component.tscn" id="2_vteuo"]
 [ext_resource type="Texture2D" uid="uid://dsqy1vjtqj0pm" path="res://object_scenes/player/sprites/fullbody.png" id="3_5ck88"]
 [ext_resource type="PackedScene" uid="uid://cq6k7eeybndp6" path="res://object_scenes/lightmapCover/lightmap.tscn" id="3_37tb5"]
 [ext_resource type="Texture2D" uid="uid://8or0mhmcnuym" path="res://object_scenes/player/sprites/pupil.png" id="5_64d8m"]
 [ext_resource type="Texture2D" uid="uid://c47fuirjhvx43" path="res://object_scenes/player/sprites/layerEye.png" id="6_uk1hk"]
 [ext_resource type="Texture2D" uid="uid://dei6me4j1chus" path="res://object_scenes/player/sprites/layerHandFront.png" id="8_0olu2"]
 [ext_resource type="PackedScene" uid="uid://c05kukkqfrg40" path="res://object_scenes/entity/components/hitbox.tscn" id="12_wduni"]
-[ext_resource type="Script" path="res://object_scenes/entity/components/health_component.gd" id="14_6s78u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8s1yf"]
 size = Vector2(6, 6)
@@ -236,8 +236,7 @@ script = ExtResource("1_7l8c2")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_8s1yf")
 
-[node name="HealthComponent" type="Node" parent="."]
-script = ExtResource("14_6s78u")
+[node name="HealthComponent" parent="." instance=ExtResource("2_vteuo")]
 isPlayer = true
 
 [node name="PlayerLayers" type="Node2D" parent="."]

@@ -125,6 +125,8 @@ func clickedSlot(slot):
 func splitSlot(slot):
 	if !invOpen:
 		return
+
+	
 	#If Hand slot is empty
 	if PlayerData.inventory[49][0] == -1:
 		var amount = PlayerData.inventory[slot][1]
@@ -135,6 +137,7 @@ func splitSlot(slot):
 		PlayerData.inventory[slot][1] = half
 		PlayerData.inventory[49] = [PlayerData.inventory[slot][0],amount-half]
 		PlayerData.emit_signal("updateInventory")
+		PlayerData.emit_signal("selectedSlotChanged")
 		if slot >= 53:
 			PlayerData.saveChestString()
 		return
@@ -145,6 +148,7 @@ func splitSlot(slot):
 		if PlayerData.inventory[49][1] <= 0:
 			PlayerData.inventory[49] = [-1,-1]
 		PlayerData.emit_signal("updateInventory")
+		PlayerData.emit_signal("selectedSlotChanged")
 		if slot >= 53:
 			PlayerData.saveChestString()
 		return
@@ -164,6 +168,7 @@ func splitSlot(slot):
 		if PlayerData.inventory[49][1] <= 0:
 			PlayerData.inventory[49] = [-1,-1]
 		PlayerData.emit_signal("updateInventory")
+		PlayerData.emit_signal("selectedSlotChanged")
 		if slot >= 53:
 			PlayerData.saveChestString()
 		return
@@ -291,6 +296,15 @@ func displayItemName(text:String,itemData:Item):
 			size += 18
 	elif itemData is ItemArmor:
 		infoText += "DEFENSE: " + str(itemData.defense) + "\n"
+		size += 18
+	elif itemData is ItemFood:
+		infoText += "HEALS: " + str(itemData.healingAmount) + "\n"
+		size += 18
+		infoText += "EAT TIME: " + str(itemData.eatTime) + "\n"
+		size += 18
+	elif itemData is ItemPlant:
+		infoText += "Can be planted on \n"+ str(itemData.descCanPlaceOn) + "\n"
+		size += 18
 		size += 18
 	
 	if itemData.materialIn.size() > 0:

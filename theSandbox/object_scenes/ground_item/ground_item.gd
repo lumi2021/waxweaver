@@ -18,7 +18,12 @@ var ticks = 0
 
 var tweening = false
 
-var body
+var parent
+
+var droppedByPlayer :int= 0
+var dropvel :Vector2 = Vector2.ZERO
+
+var frozen = false
 
 func _ready():
 	var itemData = ItemData.getItem(itemID)
@@ -33,15 +38,21 @@ func _ready():
 	if !itemData is ItemBlock:
 		texture.material = null
 	
-	var randVelocity = Vector2(randi_range(-70,70),-60)
-	rotSide = getPlanetPosition()
-	velocity = randVelocity.rotated(rotSide*(PI/2))
+	if !droppedByPlayer:
+		var randVelocity = Vector2(randi_range(-70,70),-60)
+		rotSide = getPlanetPosition()
+		velocity = randVelocity.rotated(rotSide*(PI/2))
+	else:
+		rotSide = getPlanetPosition()
+		velocity = dropvel.rotated(rotSide*(PI/2))
 	
-	body = get_parent().get_parent()
+	parent = get_parent().get_parent()
 	
 	determineAmount()
 	
 func _process(delta):
+	
+	droppedByPlayer -= 1
 	
 	if tweening:
 		return
@@ -50,22 +61,46 @@ func _process(delta):
 	rotSide = getPlanetPosition()
 	
 	var newVelocity = velocity.rotated(-rotSide*(PI/2))
-	newVelocity.x = lerp(newVelocity.x,0.0,10.0*delta)
-	newVelocity.y += gravity * delta
-	newVelocity.y = min(newVelocity.y,150)
+	if !frozen:
+		newVelocity.x = lerp(newVelocity.x,0.0,8.0*delta)
+		newVelocity.y += gravity * delta
+		newVelocity.y = min(newVelocity.y,150)
+	else:
+		newVelocity = lerp(newVelocity,Vector2.ZERO,0.2)
+	
 	velocity = newVelocity.rotated(rotSide*(PI/2))
 	
 	move_and_slide()
 	
-	$textureRoot.rotation = rotSide*(PI/2)
+	if parent is Ship:
+		$textureRoot.rotation = 0
+	else:
+		$textureRoot.rotation = rotSide*(PI/2)
 	
 	texture.offset.y = (sin(ticks*0.12) * 2.0) - 2
 	back.offset.y = texture.offset.y
 	
+	if parent is Ship:
+		var t = parent.posToTile(position)
+		if t == null:
+			return # gay
+		if parent.DATAC.getBGData(t.x,t.y) <= 1:
+			if parent.get_parent().is_in_group("planet"):
+				# on planet
+				reparent(parent.get_parent().get_parent().entityContainer)
+			else:
+				frozen = true
+	
 func getPlanetPosition():
-	if !is_instance_valid(body):
+	if !is_instance_valid(parent):
 		return 0
-	var p = body.posToTile(position)
+	if parent is Ship:
+		if parent.get_parent().is_in_group("planet"):
+				# on planet
+				return parent.targetRot
+		return 0
+		
+	var p = parent.posToTile(position)
 	if p == null:
 		var angle1 = Vector2(1,1)
 		var angle2 = Vector2(-1,1)
@@ -74,13 +109,13 @@ func getPlanetPosition():
 		var dot2 = int(position.dot(angle2) > 0) * 2
 		
 		return [0,1,3,2][dot1 + dot2]
-	return body.DATAC.getPositionLookup(p.x,p.y)
+	return parent.DATAC.getPositionLookup(p.x,p.y)
 
 func _on_area_2d_body_entered(body):
 	
 	if tweening:
 		return
-	tweenAndDestroy(body.position,true)
+	tweenAndDestroy(body.global_position,true)
 
 
 func _on_stack_body_entered(body):
@@ -97,7 +132,7 @@ func _on_stack_body_entered(body):
 			if amount + body.amount > maxAmount: return
 			amount += body.amount
 			determineAmount()
-			body.tweenAndDestroy(position,false)
+			body.tweenAndDestroy(global_position,false)
 			return
 
 func determineAmount():
@@ -107,14 +142,20 @@ func determineAmount():
 func tweenAndDestroy(pos,shouldAddItem):
 	if tweening:
 		return
+	
+	if droppedByPlayer > 0:
+		return
+		
 	tweening = true
 	var tween = get_tree().create_tween()
-	tween.tween_property(self,"position",pos,0.1)
+	tween.tween_property(self,"global_position",pos,0.1)
 	await tween.finished
 	
 	if shouldAddItem:
 		if PlayerData.addItem(itemID,amount) == 0:
 			queue_free()
+		else:
+			tweening = false
 	else:
 		queue_free()
 

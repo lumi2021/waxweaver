@@ -21,7 +21,7 @@ func emptyBucket(tileX:int,tileY:int,planetDir:int,planet,lastTile:Vector2):
 	
 	var waterLevel = abs( planet.DATAC.getWaterData(tileX,tileY) )
 	
-	if waterLevel > 0.8:
+	if waterLevel > 0.6:
 		planet.DATAC.setWaterData(tileX,tileY,0.0)
 		PlayerData.replaceSelectedSlot(3026,1)
 
@@ -31,7 +31,7 @@ func fullBucket(tileX:int,tileY:int,planetDir:int,planet,lastTile:Vector2):
 	var waterLevel = abs( planet.DATAC.getWaterData(tileX,tileY) )
 	
 	if waterLevel < 0.8:
-		planet.DATAC.setWaterData(tileX,tileY,1.0)
+		planet.DATAC.setWaterData(tileX,tileY,0.8)
 		PlayerData.replaceSelectedSlot(3025,1)
 
 func magicBucket(tileX:int,tileY:int,planetDir:int,planet,lastTile:Vector2):

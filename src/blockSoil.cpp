@@ -39,7 +39,7 @@ Dictionary BLOCKSOIL::onTick(int x, int y, PLANETDATA *planet, int dir){
                 }
 
             }
-            changes[ Vector2i(x,y) ] = 3;// replace with dirt if no water around
+            changes[ Vector2i(x,y) ] = 36;// replace with dry soil if no water around
         }
         
 		return changes;

@@ -30,6 +30,7 @@ var data = {
 	-32:load("res://items/walls/StoneBrickWall.tres"),
 	
 	35:load("res://items/blocks/natural/SoilItem.tres"),
+	37:load("res://items/blocks/foliage/crops/Potato.tres"),
 	
 	# item ids
 	3000:load("res://items/tools/flimsy/FlimsySword.tres"), # flimsy tools
@@ -71,6 +72,8 @@ var data = {
 	3026:load("res://items/tools/bucket/FullBucket.tres"),
 	3027:load("res://items/tools/bucket/MagicBucket.tres"),
 	
+	3028:load("res://items/food/PotatoBaked.tres"),
+	
 	# chairs 6000 - 6049
 	6000:load("res://items/blocks/furniture/chairs/WoodenChair.tres"),
 	6001:load("res://items/blocks/furniture/chairs/Toilet.tres"),
@@ -86,14 +89,23 @@ var data = {
 var heldItemAnims = {
 	"itemSwing" : load("res://item_resources/item_held_scenes/item_swing.tscn"),
 	"itemBow" : load("res://item_resources/item_held_scenes/item_bow.tscn"),
+	"itemSwingNoHitbox" : load("res://item_resources/item_held_scenes/itemSwingNoHitbox.tscn"),
+	"itemFood" : load("res://item_resources/item_held_scenes/item_food.tscn"),
+	"itemTorch" : load("res://item_resources/item_held_scenes/item_torch.tscn"),
 }
 
 func matchItemAnimation(id):
 	var d = getItem(id)
+	if d is ItemBlock or d is ItemPlant or d is ItemBucket or d is ItemMultitile or d is ItemDoor or d is ItemChair:
+		return "itemSwingNoHitbox"
 	if d is ItemDamage:
 		return "itemSwing"
 	if d is ItemBow:
 		return "itemBow"
+	if d is ItemFood:
+		return "itemFood"
+	if d is ItemTorch:
+		return "itemTorch"
 	
 	return null
 

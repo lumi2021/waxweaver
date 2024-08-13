@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_5xu3m")
-blockID = 35
+blockID = 36
 itemName = "Soil"
 subtext = "Used for farming, must be by water"
 texture = ExtResource("2_jl1ha")

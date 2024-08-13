@@ -10,6 +10,8 @@ class_name Player
 
 @onready var shipDEBUG = preload("res://world_scenes/ship/ship.tscn")
 
+@onready var healthComponent = $HealthComponent
+
 var rotated = 0
 var rotationDelayTicks = 0
 
@@ -54,6 +56,7 @@ var usingItem = false
 @onready var helmetSpr = $PlayerLayers/helmet
 @onready var chestSpr = $PlayerLayers/chestplate
 @onready var legsSpr = $PlayerLayers/leggings
+
 
 ######################################################################
 ########################### BASIC FUNTIONS ###########################
@@ -631,10 +634,10 @@ func runItemProcess(delta):
 	
 	$PlayerLayers/handFront.visible = !heldItemAnim.visible
 	
-	if Input.is_action_just_pressed("mouse_left"):
+	if Input.is_action_just_pressed("mouse_left") and !heldItemAnim.usedUp:
 		heldItemAnim.onFirstUse()
 	
-	if usingItem:
+	if usingItem and !heldItemAnim.usedUp:
 		heldItemAnim.onUsing(delta)
 	else:
 		heldItemAnim.onNotUsing(delta)

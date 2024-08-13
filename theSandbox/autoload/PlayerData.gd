@@ -20,6 +20,7 @@ signal selectedSlotChanged
 signal armorUpdated
 signal forceOpenInventory
 var selectedSlot = 0
+var selectedSlotRemember = 0
 
 var currentSelectedChest = null
 var chestOBJ = null
@@ -32,6 +33,16 @@ func _process(delta):
 	if chestOBJ != null:
 		if chestDisCheck(chestOBJ,currentSelectedChest):
 			closeChest()
+	
+	if inventory[49][0] != -1:
+		if selectedSlot != 49:
+			selectedSlotRemember = selectedSlot
+			selectedSlot = 49
+			emit_signal("selectedSlotChanged")
+	else:
+		if selectedSlot == 49:
+			selectedSlot = selectedSlotRemember
+			emit_signal("selectedSlotChanged")
 	
 func initializeInventory():
 	for i in range(78):
@@ -369,3 +380,41 @@ func scanForArrow():
 func replaceSelectedSlot(id:int,amount:int):
 	inventory[selectedSlot] = [id,amount]
 	emit_signal("updateInventory")
+
+func getHandSlot():
+	return inventory[49]
+
+func clearHandSlot():
+	inventory[49] = [-1,-1]
+
+func _unhandled_input(event):
+	if event.is_action_pressed("mouse_right"):
+		
+		var slot = getHandSlot()
+		if slot[0] == -1:
+			return
+		
+		var playerState = GlobalRef.player.state
+		
+		match playerState:
+			3:
+				return
+			0:
+				var planet = GlobalRef.player.planetOn
+				var tile = planet.posToTile(GlobalRef.player.position)
+				var mouseX = int(GlobalRef.player.get_local_mouse_position().x > 0) * 2
+				BlockData.spawnItemRaw(tile.x,tile.y,slot[0],planet,slot[1],true, mouseX - 1 )
+			2:
+				var planet = GlobalRef.player.shipOn
+				var tile = planet.posToTile(GlobalRef.player.shipOn.to_local(GlobalRef.player.global_position))
+				var mouseX = int(GlobalRef.player.get_local_mouse_position().x > 0) * 2
+				BlockData.spawnItemRaw(tile.x,tile.y,slot[0],planet,slot[1],true, mouseX - 1 )
+			1:
+				var planet = GlobalRef.player.shipOn
+				var tile = planet.posToTile(GlobalRef.player.shipOn.to_local(GlobalRef.player.global_position))
+				var mouseX = int(GlobalRef.player.get_local_mouse_position().x > 0) * 2
+				BlockData.spawnItemRaw(tile.x,tile.y,slot[0],planet,slot[1],true, mouseX - 1 )
+			
+				
+		clearHandSlot()
+		emit_signal("updateInventory")
