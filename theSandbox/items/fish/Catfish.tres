@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemFood" load_steps=3 format=3 uid="uid://tk65qrjhlvhq"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemFood.gd" id="1_83ktu"]
+[ext_resource type="Texture2D" uid="uid://coo10g635ybj2" path="res://items/fish/catfish.png" id="2_8gui8"]
+
+[resource]
+script = ExtResource("1_83ktu")
+healingAmount = 2
+eatTime = 10.0
+particleColor = Color(0.658824, 0.0666667, 0.0823529, 1)
+itemName = "Catfish"
+subtext = ""
+texture = ExtResource("2_8gui8")
+maxStackSize = 99
+clickToUse = false

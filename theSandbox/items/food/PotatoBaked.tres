@@ -5,11 +5,11 @@
 
 [resource]
 script = ExtResource("1_c7cxb")
-healingAmount = 15
-eatTime = 1.0
+healingAmount = 5
+eatTime = 0.8
 particleColor = Color(0.643137, 0.337255, 0.172549, 1)
 itemName = "Baked Potato"
 subtext = ""
 texture = ExtResource("2_dw3lg")
-maxStackSize = 8
+maxStackSize = 5
 clickToUse = false

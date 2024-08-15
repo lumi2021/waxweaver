@@ -53,6 +53,10 @@ func rollWeights(objects,weights:Array[int]):
 	var cursor = 0
 	for i in range(weights.size()):
 		cursor += weights[i]
-		if cursor >= rand:
+		if cursor > rand:
 			return objects[i]
+	print("roll didnt work")
 	return objects[0]
+
+func getFish():
+	return rollWeights(fish,fishWeight)

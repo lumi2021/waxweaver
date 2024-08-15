@@ -1,6 +1,6 @@
 extends Node
 
-enum {FURNACE = 16, WORKBENCH = 20}
+enum {FURNACE = 16, WORKBENCH = 20, GRILL = 46}
 
 var data = [
 	# might get messy BE CAREFUL
@@ -43,7 +43,23 @@ var data = [
 		"amount":1,
 		"ingredients":[37],
 		"ingAmounts":[1],
-		"station": FURNACE,
+		"station": GRILL,
+	},
+	
+	{ # grilled catfish
+		"crafts":3031,
+		"amount":1,
+		"ingredients":[3030],
+		"ingAmounts":[1],
+		"station": GRILL,
+	},
+	
+	{ # fish and chips
+		"crafts":3032,
+		"amount":1,
+		"ingredients":[3030,37],
+		"ingAmounts":[2,10],
+		"station": GRILL,
 	},
 	
 	
@@ -239,6 +255,14 @@ var data = [
 		"amount":1,
 		"ingredients":[31],
 		"ingAmounts":[3],
+		"station":WORKBENCH,
+	},
+	
+	{ # fishing rod
+		"crafts":3029,
+		"amount":1,
+		"ingredients":[13,3004],
+		"ingAmounts":[10,10],
 		"station":WORKBENCH,
 	},
 	

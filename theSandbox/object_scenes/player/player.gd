@@ -632,7 +632,10 @@ func runItemProcess(delta):
 	if !is_instance_valid(heldItemAnim):
 		return
 	
-	$PlayerLayers/handFront.visible = !heldItemAnim.visible
+	if heldItemAnim.override:
+		$PlayerLayers/handFront.visible = !heldItemAnim.isVisible
+	else:
+		$PlayerLayers/handFront.visible = !heldItemAnim.visible
 	
 	if Input.is_action_just_pressed("mouse_left") and !heldItemAnim.usedUp:
 		heldItemAnim.onFirstUse()
@@ -814,7 +817,8 @@ func snapToPosition(tile,editBody):
 			
 	if editBody is Ship:
 		position += editBody.position
-	
+		if state % 2 == 1:
+			rotated = 0
 	
 	if state == 3:
 		await get_tree().process_frame
@@ -859,8 +863,8 @@ func playerAnimation(dir,newVel,delta):
 	var newDir = (int(gay.x < 0) * 2) - 1
 	
 	# rotate player if using item
-	if Input.is_action_pressed("mouse_left"):
-		flipPlayer(newDir)
+	#if Input.is_action_pressed("mouse_left"):
+	#	flipPlayer(newDir)
 	
 	eyeBallAnim()
 	

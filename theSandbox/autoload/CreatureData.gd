@@ -7,7 +7,7 @@ var passiveAmount = 0
 var passiveLimit = 15 # max passive mobs
 
 var spawnDelayTick = 0
-var spawnDelayThreshold = 300 # spawn rate
+var spawnDelayThreshold = 450 # spawn rate
 
 var creatures = {
 	"praffin": "res://object_scenes/entity/enemy_scenes/praffin/praffin.tscn",

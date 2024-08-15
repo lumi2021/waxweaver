@@ -79,6 +79,15 @@ func spawnItemRaw(tilex:int,tiley:int,id:int,planet,amount:int=1,droppedByPlayer
 	ins.position = planet.tileToPos(Vector2(tilex,tiley))
 	planet.entityContainer.add_child(ins)
 
+func spawnItemVelocity(pos:Vector2,id:int,planet,velocity:Vector2,amount:int=1):
+	# spawns an item without considering special cases and with velocity
+	var ins = groundItemScene.instantiate()
+	ins.itemID = id
+	ins.dropvel = velocity
+	ins.amount = amount
+	ins.position = pos
+	ins.coolVelcoity = true
+	planet.entityContainer.add_child(ins)
 
 func spawnBreakParticle(tilex:int,tiley:int,id:int,otherId:int,planet):
 	

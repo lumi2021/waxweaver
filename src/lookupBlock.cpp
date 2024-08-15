@@ -56,6 +56,17 @@ LOOKUPBLOCK::LOOKUPBLOCK() {
     penis[35] = new BLOCKSOIL();
     penis[36] = new BLOCKSOILDRY();
     penis[37] = new BLOCKCROPPOTATO();
+    penis[38] = new BLOCKCROPPOTATONATURAL();
+    
+    penis[39] = new BLOCKPAINTSTAGPLUMP(); // paintings batch 1
+    penis[40] = new BLOCKPAINTSTAGMARSH();
+    penis[41] = new BLOCKPAINTSTAGCUP();
+    penis[42] = new BLOCKPAINTSTAGDAWN();
+    penis[43] = new BLOCKPAINTGAHAXA();
+    penis[44] = new BLOCKPAINTGAHFINE();
+    penis[45] = new BLOCKPAINTGAHLUL();
+
+    penis[46] = new BLOCKGRILL();
 
     
     for(BLOCK *i : penis){ // i increase automatically !

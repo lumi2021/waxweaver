@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ItemFishingRod" load_steps=4 format=3 uid="uid://d1v7uud1hi1s4"]
+
+[ext_resource type="Texture2D" uid="uid://dfpk6g4nr5ade" path="res://items/tools/fishingRods/woodRodNoLine.png" id="1_0tnpe"]
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemFishingRod.gd" id="1_458bg"]
+[ext_resource type="Texture2D" uid="uid://cteh4dy4ceex1" path="res://items/tools/fishingRods/woodRod.png" id="3_7rve6"]
+
+[resource]
+script = ExtResource("1_458bg")
+noLineTexture = ExtResource("1_0tnpe")
+itemName = "Fishing Rod"
+subtext = ""
+texture = ExtResource("3_7rve6")
+maxStackSize = 1
+clickToUse = false

@@ -25,6 +25,8 @@ var dropvel :Vector2 = Vector2.ZERO
 
 var frozen = false
 
+var coolVelcoity :bool = false
+
 func _ready():
 	var itemData = ItemData.getItem(itemID)
 	
@@ -38,15 +40,17 @@ func _ready():
 	if !itemData is ItemBlock:
 		texture.material = null
 	
-	if !droppedByPlayer:
+	parent = get_parent().get_parent()
+	
+	if droppedByPlayer <= 0 and !coolVelcoity:
 		var randVelocity = Vector2(randi_range(-70,70),-60)
 		rotSide = getPlanetPosition()
 		velocity = randVelocity.rotated(rotSide*(PI/2))
 	else:
 		rotSide = getPlanetPosition()
-		velocity = dropvel.rotated(rotSide*(PI/2))
+		velocity = dropvel.rotated(GlobalRef.player.rotated*(PI/2))
 	
-	parent = get_parent().get_parent()
+
 	
 	determineAmount()
 	
@@ -61,12 +65,19 @@ func _process(delta):
 	rotSide = getPlanetPosition()
 	
 	var newVelocity = velocity.rotated(-rotSide*(PI/2))
-	if !frozen:
-		newVelocity.x = lerp(newVelocity.x,0.0,8.0*delta)
+	
+	if !coolVelcoity:
+		if !frozen:
+			newVelocity.x = lerp(newVelocity.x,0.0,8.0*delta)
+			newVelocity.y += gravity * delta
+			newVelocity.y = min(newVelocity.y,150)
+		else:
+			newVelocity = lerp(newVelocity,Vector2.ZERO,0.2)
+	else:
+		#newVelocity.x = lerp(newVelocity.x,0.0,8.0*delta)
 		newVelocity.y += gravity * delta
 		newVelocity.y = min(newVelocity.y,150)
-	else:
-		newVelocity = lerp(newVelocity,Vector2.ZERO,0.2)
+	
 	
 	velocity = newVelocity.rotated(rotSide*(PI/2))
 	

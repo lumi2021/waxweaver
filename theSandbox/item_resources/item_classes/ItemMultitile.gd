@@ -73,6 +73,11 @@ func checkIfPlaceable(tileX:int,tileY:int,planet):
 			elif tile >= 2: # return false if block in the way
 				return false
 			
+			if needsWalls:
+				var BG = planet.DATAC.getBGData(worldX,worldY)
+				if BG < 2:
+					return false
+			
 			if worldX < 0 or worldX >= planet.SIZEINCHUNKS * 8:
 				return false # return false if outside world boundaries
 			if worldY < 0 or worldY >= planet.SIZEINCHUNKS * 8:

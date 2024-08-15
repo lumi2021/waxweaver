@@ -97,4 +97,8 @@ func getVERTICALDirectionTowardsPlayer():
 
 func getSurface():
 	var pos = getPos()
+	
+	if pos == null:
+		return 0
+	
 	return planet.getSurfaceDistance(pos.x,pos.y)

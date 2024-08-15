@@ -45,6 +45,18 @@
 #include "blockSoil.h" // id 35
 #include "blockSoilDry.h" // id 36
 #include "blockCropPotato.h" // id 37
+#include "blockCropPotatoNatural.h" // id 38
+
+// paintings batch 1
+#include "blockPaintStagPlump.h" // id 39
+#include "blockPaintStagMarsh.h" // id 40
+#include "blockPaintStagCup.h" // id 41
+#include "blockPaintStagDawn.h" // id 42
+#include "blockPaintGahAxa.h" // id 43
+#include "blockPaintGahFine.h" // id 44
+#include "blockPaintGahLuL.h" // id 45
+
+#include "blockGrill.h" // id 46
 
 // adding a new block? make sure you increment the PENIS array !
 
@@ -62,7 +74,7 @@ public:
 	
 	Array allBlocks;
 
-	BLOCK *penis[38]; // must be largest id + 1
+	BLOCK *penis[47]; // must be largest id + 1
 
 	LOOKUPBLOCK();
 	~LOOKUPBLOCK();

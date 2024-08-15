@@ -32,6 +32,17 @@ var data = {
 	35:load("res://items/blocks/natural/SoilItem.tres"),
 	37:load("res://items/blocks/foliage/crops/Potato.tres"),
 	
+	# paintings batch 1
+	39:load("res://items/paintings/StagPlump.tres"),
+	40:load("res://items/paintings/StagMarsh.tres"),
+	41:load("res://items/paintings/StagCup.tres"),
+	42:load("res://items/paintings/StagDawn.tres"),
+	43:load("res://items/paintings/GahAxa.tres"),
+	44:load("res://items/paintings/GahFine.tres"),
+	45:load("res://items/paintings/GahLuL.tres"),
+	
+	46:load("res://items/blocks/furniture/stations/Grill.tres"),
+	
 	# item ids
 	3000:load("res://items/tools/flimsy/FlimsySword.tres"), # flimsy tools
 	3001:load("res://items/tools/flimsy/FlimsyPickaxe.tres"),
@@ -73,6 +84,10 @@ var data = {
 	3027:load("res://items/tools/bucket/MagicBucket.tres"),
 	
 	3028:load("res://items/food/PotatoBaked.tres"),
+	3029:load("res://items/tools/fishingRods/WoodRod.tres"),
+	3030:load("res://items/fish/Catfish.tres"),
+	3031:load("res://items/food/FishCatGrilled.tres"),
+	3032:load("res://items/food/FishAndChips.tres"),
 	
 	# chairs 6000 - 6049
 	6000:load("res://items/blocks/furniture/chairs/WoodenChair.tres"),
@@ -92,11 +107,13 @@ var heldItemAnims = {
 	"itemSwingNoHitbox" : load("res://item_resources/item_held_scenes/itemSwingNoHitbox.tscn"),
 	"itemFood" : load("res://item_resources/item_held_scenes/item_food.tscn"),
 	"itemTorch" : load("res://item_resources/item_held_scenes/item_torch.tscn"),
+	"itemMultitile" : load("res://item_resources/item_held_scenes/itemMultitile.tscn"),
+	"itemFishingRod" : load("res://item_resources/item_held_scenes/item_fish_rod.tscn"),
 }
 
 func matchItemAnimation(id):
 	var d = getItem(id)
-	if d is ItemBlock or d is ItemPlant or d is ItemBucket or d is ItemMultitile or d is ItemDoor or d is ItemChair:
+	if d is ItemBlock or d is ItemPlant or d is ItemBucket:
 		return "itemSwingNoHitbox"
 	if d is ItemDamage:
 		return "itemSwing"
@@ -106,6 +123,10 @@ func matchItemAnimation(id):
 		return "itemFood"
 	if d is ItemTorch:
 		return "itemTorch"
+	if d is ItemMultitile or d is ItemDoor or d is ItemChair:
+		return "itemMultitile"
+	if d is ItemFishingRod:
+		return "itemFishingRod"
 	
 	return null
 

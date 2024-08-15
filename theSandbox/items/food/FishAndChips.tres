@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemFood" load_steps=3 format=3 uid="uid://cfptsoiqwvrqx"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemFood.gd" id="1_7eoh4"]
+[ext_resource type="Texture2D" uid="uid://cbj7om1k8f4ty" path="res://items/food/fishAndChips.png" id="2_ufmxc"]
+
+[resource]
+script = ExtResource("1_7eoh4")
+healingAmount = 50
+eatTime = 3.0
+particleColor = Color(0.866667, 0.639216, 0.435294, 1)
+itemName = "Fish and Chips"
+subtext = ""
+texture = ExtResource("2_ufmxc")
+maxStackSize = 2
+clickToUse = false

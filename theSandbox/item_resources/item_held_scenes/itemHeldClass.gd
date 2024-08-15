@@ -12,6 +12,8 @@ var currentlyUsing
 var clickUsage :bool = false
 
 var usedUp = false
+var isVisible = false
+var override = false # if true, instead of player hand using visibily it will use the variable
 
 func _ready():
 	itemData = ItemData.getItem(itemID)
@@ -23,6 +25,7 @@ func _ready():
 	
 	onEquip()
 
+# copy deez
 func onEquip():
 	pass
 

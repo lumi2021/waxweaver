@@ -114,9 +114,15 @@ void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
                         planet->setTileData(x+up.x,y+up.y,26); // spawn lily
                     }
 
+
                     if(r % 10 == 0){
                         planet->setTileData(x+up.x,y+up.y,7);
                         planet->setTimeData(x+up.x,y+up.y,-16000); // spawn tree sapling
+                    }
+
+                    if(std::rand() % 64 == 0){
+                        planet->setTileData(x+up.x,y+up.y,38); // spawn natural potato
+                        planet->setInfoData(x+up.x,y+up.y,4);
                     }
 
                 }

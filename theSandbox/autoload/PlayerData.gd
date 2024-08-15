@@ -395,24 +395,21 @@ func _unhandled_input(event):
 			return
 		
 		var playerState = GlobalRef.player.state
-		
+		var mouseX = int(GlobalRef.player.get_local_mouse_position().rotated(GlobalRef.player.rotated*-(PI/2)).x > 0) * 2
 		match playerState:
 			3:
 				return
 			0:
 				var planet = GlobalRef.player.planetOn
 				var tile = planet.posToTile(GlobalRef.player.position)
-				var mouseX = int(GlobalRef.player.get_local_mouse_position().x > 0) * 2
 				BlockData.spawnItemRaw(tile.x,tile.y,slot[0],planet,slot[1],true, mouseX - 1 )
 			2:
 				var planet = GlobalRef.player.shipOn
 				var tile = planet.posToTile(GlobalRef.player.shipOn.to_local(GlobalRef.player.global_position))
-				var mouseX = int(GlobalRef.player.get_local_mouse_position().x > 0) * 2
 				BlockData.spawnItemRaw(tile.x,tile.y,slot[0],planet,slot[1],true, mouseX - 1 )
 			1:
 				var planet = GlobalRef.player.shipOn
 				var tile = planet.posToTile(GlobalRef.player.shipOn.to_local(GlobalRef.player.global_position))
-				var mouseX = int(GlobalRef.player.get_local_mouse_position().x > 0) * 2
 				BlockData.spawnItemRaw(tile.x,tile.y,slot[0],planet,slot[1],true, mouseX - 1 )
 			
 				
