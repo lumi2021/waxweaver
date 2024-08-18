@@ -5,6 +5,8 @@ class_name Hurtbox
 @export var damage :int = 1
 @export var knockback : float = 1.0
 
+@export var statusInflictors :Array= []
+
 var id = 0
 
 signal hitsomething

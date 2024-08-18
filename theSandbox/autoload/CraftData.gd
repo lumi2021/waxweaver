@@ -360,14 +360,37 @@ var data = [
 	
 ]
 
+var recipies = []
+
 func getCraft(id):
 	if id < data.size():
 		return data[id]
 	return data[0]
 
 func _ready():
+	initializeRecipies()
 	initializeMaterials()
 
+func initializeRecipies():
+	var i = 0
+	var folder = "res://item_resources/crafting/recipies/"
+	var dir = DirAccess.open(folder)
+	if dir:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "": # search through each file in crafting recipies
+			var r :CraftingRecipe = load( folder + file_name )
+			r.internalID = i
+			for item in r.ingredients:
+				ItemData.data[item.ingredient].materialIn.append( i )
+			recipies.append( r )
+			i += 1
+			file_name = dir.get_next()
+	else:
+		print("An error occurred when trying to access the path.")
+	
+	print(recipies)
+	
 func initializeMaterials():
 	var id = 0
 	for recipe in data:

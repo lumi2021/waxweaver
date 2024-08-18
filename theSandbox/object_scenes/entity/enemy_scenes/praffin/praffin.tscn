@@ -49,7 +49,6 @@ shape = SubResource("RectangleShape2D_1hxg4")
 
 [node name="Hurtbox" parent="." instance=ExtResource("5_53tc8")]
 damage = 12
-knockback = 3.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 shape = SubResource("RectangleShape2D_yntbc")

@@ -7,8 +7,9 @@ var rotSpeed = 1.0
 var swingOut = false
 
 func onEquip():
-	$holder/Hurtbox.damage =  itemData.damage
-	rotSpeed = itemData.animSpeed
+	
+	Stats.updatedStats.connect( getData )
+	getData()
 	visible = false
 
 func onFirstUse():
@@ -45,3 +46,10 @@ func turnOff():
 
 func mm():
 	$holder/Hurtbox.shuffleId()
+
+func getData():
+	$holder/Hurtbox.damage =  Stats.getMeleeDamage(itemData.damage)
+	$holder/Hurtbox.knockback = itemData.knockbackMult + Stats.getBonusKnockback()
+	rotSpeed = itemData.animSpeed * Stats.getAttackSpeedMult()
+	$holder/Hurtbox.statusInflictors = []
+	$holder/Hurtbox.statusInflictors += itemData.statusInflictors

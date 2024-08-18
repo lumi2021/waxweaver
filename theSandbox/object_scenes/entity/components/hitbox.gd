@@ -40,6 +40,12 @@ func _on_area_entered(area):
 	
 	healthComponent.damage(area.damage)
 	healthComponent.dealKnockback(120.0,dir,area.knockback)
+	
+	for effect in area.statusInflictors:
+		var chance :int= (randi() % 100) + 1
+		if chance <= effect.chance:
+			healthComponent.inflictStatus( effect.effectName, effect.seconds )
+	
 	area.hasHit()
 	
 	colliderShape.call_deferred("set_disabled",true)

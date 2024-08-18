@@ -7,7 +7,7 @@ extends itemHeldClass
 var tick :float= -1.0
 
 func onEquip():
-	$origin/sprite.texture = itemData.texture
+	pass
 
 func onFirstUse():
 	pass
@@ -22,7 +22,7 @@ func onUsing(delta):
 		fire(delta)
 		tick += itemData.fireRate * delta
 	else:
-		tick -= 60.0*delta
+		tick -= 60.0*delta * Stats.getAttackSpeedMult()
 
 func onNotUsing(delta):
 	visible = false
@@ -40,7 +40,7 @@ func fire(delta):
 	PlayerData.emit_signal("updateInventory")
 	
 	var ins = arrowScene.instantiate()
-	ins.damage = itemData.damage + i[0].damage
+	ins.damage = Stats.getRangedDamage(itemData.damage + i[0].damage)
 	ins.speed = itemData.velocity * i[0].velocityMultiplier
 	ins.tex = i[0].texture
 	ins.dir = Vector2(1,0).rotated(origin.global_rotation - get_parent().get_parent().rotation)

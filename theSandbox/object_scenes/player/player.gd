@@ -278,6 +278,7 @@ func WATERJUMPCAMERALETSGO(body,vel,rot,onFloor,delta):
 	var inWater = abs(body.DATAC.getWaterData(tile.x,tile.y)) > 0.3
 	if inWater:
 		wasInWater = true
+		healthComponent.inflictStatus("wet",8)
 		vel.y = min(vel.y,30 + (Stats.swimMult * 2.5))
 		if Input.is_action_pressed("jump") and !GlobalRef.chatIsOpen:
 			vel.y = -25 - Stats.getSwim()
@@ -993,6 +994,13 @@ func getEditingBody():
 							break
 	
 	return editBody
+
+func getBodyOn():
+	if shipOn != null:
+		return shipOn
+	if planetOn != null:
+		return planetOn
+	return null
 
 func wallCheck(pos):
 	

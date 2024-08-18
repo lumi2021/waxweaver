@@ -18,12 +18,15 @@ var meleeDamageMult :float = 1.0
 var rangedDamageMult :float = 1.0
 var bonusHealing :float = 1.0
 var knockbackBonus :float = 0.0
+var attackSpeedMult :float = 1.0
 
 ## OTHER ##
 var respawnWait :float = 8.0 # how long until player respawns
 
 var trinkets :Array[int]= [] # array of trinket ids
 var specialProperties :Array[String] = [] # array of special tags to give player
+
+signal updatedStats
 
 ###################################
 ###################################
@@ -66,6 +69,9 @@ func getBonusHealing(healing):
 func getBonusKnockback() -> float:
 	return knockbackBonus
 
+func getAttackSpeedMult() -> float:
+	return attackSpeedMult
+
 ###### TECHNICAL #########
 
 func hasProperty(property:String):
@@ -81,6 +87,7 @@ func resetStats():
 	rangedDamageMult = 1.0
 	bonusHealing = 1.0
 	knockbackBonus = 0.0
+	attackSpeedMult = 1.0
 	
 	trinkets = []
 	specialProperties = []
@@ -103,6 +110,10 @@ func updateStats():
 		additiveDefense += data.addDefense
 		meleeDamageMult += data.addMeleeDamage
 		rangedDamageMult += data.addRangedDamage
+		bonusHealing += data.addHealingMultiplier
+		knockbackBonus += data.addKnockback
+		attackSpeedMult += data.addAttackSpeed
 		
 		specialProperties += data.specialProperties
-
+	
+	emit_signal("updatedStats")

@@ -38,8 +38,8 @@ func createCraftingIcons():
 				
 	if prevCraft != craftsToDisplay:
 		clearIcons()
-		timer.start()
-		await timer.timeout
+		#timer.start()
+		#await timer.timeout
 		
 		for craft in craftsToDisplay:
 			createIcon(craft,inv)

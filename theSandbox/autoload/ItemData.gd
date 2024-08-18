@@ -39,7 +39,7 @@ var data = {
 	42:load("res://items/paintings/StagDawn.tres"),
 	43:load("res://items/paintings/GahAxa.tres"),
 	44:load("res://items/paintings/GahFine.tres"),
-	45:load("res://items/paintings/GahLuL.tres"),
+	45:load("res://items/paintings/GahLUL.tres"),
 	
 	46:load("res://items/blocks/furniture/stations/Grill.tres"),
 	

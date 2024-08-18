@@ -4,8 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://synt8thxgpcr" path="res://items/weapons/bows/woodenBow.png" id="2_01w81"]
 [ext_resource type="Texture2D" uid="uid://bbhygnshkya87" path="res://object_scenes/player/hand.png" id="3_ctaeo"]
 
-[node name="itemBow" type="Node2D" node_paths=PackedStringArray("handSprite")]
+[node name="itemBow" type="Node2D" node_paths=PackedStringArray("sprite", "handSprite")]
 script = ExtResource("1_a4fd2")
+sprite = NodePath("origin/sprite")
 handSprite = NodePath("origin/handSprite")
 
 [node name="origin" type="Node2D" parent="."]

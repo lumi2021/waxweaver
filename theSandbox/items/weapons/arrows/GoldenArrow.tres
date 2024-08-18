@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_o6adh")
-damage = 8
+damage = 7
 velocityMultiplier = 1.2
 itemName = "Gold Tipped Arrow"
 subtext = ""

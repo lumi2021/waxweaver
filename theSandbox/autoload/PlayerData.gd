@@ -89,7 +89,7 @@ func findEmptySlot():
 
 func inventoryHasItem(itemID):
 	var slots = []
-	for i in range(50):
+	for i in range(40):
 		if inventory[i][0] == itemID:
 			slots.append(i)
 	return slots
@@ -253,7 +253,7 @@ func selectSlot(newSlot):
 func checkForIngredient(itemID,amount):
 	var foundAmount = 0
 	var slots = []
-	for i in range(49):
+	for i in range(40):
 		if inventory[i][0] == itemID:
 			foundAmount += inventory[i][1]
 			slots.append(i)

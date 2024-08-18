@@ -14,22 +14,28 @@ var health :int= 0
 ## list of chances above items have to drop, make sure this is same size
 @export var dropChanceArray :Array[int]= []
 
+@export var statusImmunities :Array[String] = []
 
 @onready var parent = get_parent()
 @export var isPlayer :bool = false
 
 signal healthChanged
 signal smacked
-
+signal statusUpdated
 
 # status stuff
-var speedMult :float= 1.0
+var statusEffects :Array[StatusEffect] = []
 
 
 func _ready():
 	health = maxHealth
+	statusEffects = []
 
 func heal(amount):
+	
+	if isPlayer:
+		amount = Stats.getBonusHealing(amount)
+	
 	health += amount
 	health = min(health,maxHealth)
 	
@@ -45,8 +51,10 @@ func damage(amount):
 	if isPlayer:
 		if parent.dead:
 			return
-	
 	var trueAmount = amount
+	var def = defense
+	if checkIfHasEffect("fragile"):
+		defense /= 2
 	trueAmount -= defense
 	trueAmount = max(trueAmount,1)
 	
@@ -61,6 +69,28 @@ func damage(amount):
 	
 	emit_signal("healthChanged")
 	emit_signal("smacked")
+	
+	if health <= 0:
+		die()
+
+func damagePassive(amount): # does damage while ignoring defense
+	
+	if isPlayer:
+		if parent.dead:
+			return
+	
+	var trueAmount = amount
+	trueAmount = max(trueAmount,1)
+	
+	health -= trueAmount
+	health = max(health,0)
+	
+	if isPlayer:
+		Indicators.damnPopup(trueAmount,parent.global_position,"player")
+	else:
+		Indicators.damnPopup(trueAmount,parent.global_position)
+	
+	emit_signal("healthChanged")
 	
 	if health <= 0:
 		die()
@@ -108,7 +138,6 @@ func rollDrops():
 		
 		i += 1
 
-
 func dropItem(itemID):
 	if itemID == -1:
 		return
@@ -116,3 +145,57 @@ func dropItem(itemID):
 	ins.itemID = itemID
 	ins.position = parent.position
 	parent.get_parent().call_deferred("add_child",ins)
+
+func inflictStatus(effect:String,seconds:int):
+	if statusImmunities.has(effect): # return if immune to status
+		return
+	
+	for i in statusEffects: # check if already has effect, set time if does
+		if is_instance_valid(i):
+			if i.name == effect:
+				i.time = seconds
+				return
+	
+	# add new affect
+	var f := "res://object_scenes/specialResource/statusEffects/resources/"
+	var s = load(f + effect + ".tres").duplicate()
+	s.time = seconds
+	s.name = effect
+	s.healthComponent = self
+	
+	if s.particle != null: # particle effect stuff
+		s.p = s.particle.instantiate()
+		s.p.hc = self
+		add_child(s.p)
+	
+	statusEffects.append( s )
+	s.onInfliction()
+	emit_signal("statusUpdated")
+	
+func _process(delta):
+
+	var names = []
+	for effect in statusEffects:
+		if effect.time <= 0.0 and is_instance_valid(effect):
+			effect.onGone()
+			statusEffects.erase(effect)
+			emit_signal("statusUpdated")
+		if is_instance_valid(effect):
+			names.append(effect.name)
+			effect.proc(delta)
+			for i in effect.incompatibleEffects:
+				if checkIfHasEffect(i):
+					effect.time = -10.0
+					continue
+	
+func checkIfHasEffect(effect:String):
+	for i in statusEffects:
+		if is_instance_valid(i):
+			if i.name == effect:
+				return true
+	return false
+
+func getWorld():
+	if isPlayer:
+		return parent.getBodyOn()
+	return parent.get_parent().get_parent()

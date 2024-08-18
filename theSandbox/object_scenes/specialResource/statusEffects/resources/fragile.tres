@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="StatusEffect" load_steps=2 format=3 uid="uid://by05fxyntxfc5"]
+
+[ext_resource type="Script" path="res://object_scenes/specialResource/statusEffects/StatusEffect.gd" id="1_f7st7"]
+
+[resource]
+script = ExtResource("1_f7st7")
+displayName = "Fragile"
+dyeColor = Color(1, 1, 0.87451, 1)
+incompatibleEffects = Array[String]([])

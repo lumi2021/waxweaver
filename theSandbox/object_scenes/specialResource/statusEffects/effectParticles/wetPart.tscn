@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://c3u73ljmpakkl"]
+
+[ext_resource type="Script" path="res://object_scenes/specialResource/statusEffects/effectParticles/statusParticle.gd" id="2_t0ygd"]
+
+[node name="wetPart" type="CPUParticles2D"]
+amount = 2
+lifetime = 0.3
+emission_shape = 4
+emission_points = PackedVector2Array(-4, -4, 0, -4, 4, -4, 0, -2, 2, -2, -2, -2)
+emission_colors = PackedColorArray()
+direction = Vector2(0, 1)
+spread = 0.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 15.0
+initial_velocity_max = 15.0
+color = Color(0.372549, 0.67451, 0.913725, 0.466667)
+script = ExtResource("2_t0ygd")

@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://oohi6ibnbj5m"]
+
+[ext_resource type="Texture2D" uid="uid://cyd0fw1ighwln" path="res://object_scenes/specialResource/statusEffects/effectParticles/poisonBubble.png" id="1_uq0hx"]
+[ext_resource type="Script" path="res://object_scenes/specialResource/statusEffects/effectParticles/statusParticle.gd" id="2_lb0fc"]
+
+[sub_resource type="Curve" id="Curve_5ubax"]
+_data = [Vector2(0, 0), 0.0, 6.85577, 0, 0, Vector2(0.133641, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.73244, 0.0, 0, 0]
+point_count = 3
+
+[node name="poison" type="CPUParticles2D"]
+amount = 2
+texture = ExtResource("1_uq0hx")
+emission_shape = 1
+emission_sphere_radius = 5.0
+gravity = Vector2(0, -10)
+angular_velocity_min = -0.85
+angular_velocity_max = 5.2
+orbit_velocity_min = -0.1
+orbit_velocity_max = 0.1
+angle_min = -6.0
+angle_max = 16.0
+scale_amount_curve = SubResource("Curve_5ubax")
+script = ExtResource("2_lb0fc")

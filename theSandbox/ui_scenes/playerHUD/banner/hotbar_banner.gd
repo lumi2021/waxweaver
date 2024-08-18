@@ -242,6 +242,19 @@ func interpretCommand(text):
 		"noclip":
 			GlobalRef.player.toggleNoClip()
 			GlobalRef.sendChat("Toggled noclip")
+		"inflict":
+			var effect = text.get_slice(" ",1)
+			if effect == "" or effect == "inflict":
+				GlobalRef.sendError("ERROR: missing effect name")
+				return
+			var time = text.get_slice(" ",2)
+			if time == "" or time == effect:
+				time = "10"
+			GlobalRef.player.healthComponent.inflictStatus(effect,float(time))
+			GlobalRef.sendChat("Inflicted player with " + effect + " for " + time + " seconds.")
+		"heal":
+			GlobalRef.player.healthComponent.heal(1000)
+			GlobalRef.sendChat("Healed player.")
 		
 		_:
 			GlobalRef.sendError("Error: command doesn't exist")

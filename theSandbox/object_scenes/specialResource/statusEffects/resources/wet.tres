@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="StatusEffect" load_steps=3 format=3 uid="uid://c1hk48y517b8m"]
+
+[ext_resource type="PackedScene" uid="uid://c3u73ljmpakkl" path="res://object_scenes/specialResource/statusEffects/effectParticles/wetPart.tscn" id="1_36fxg"]
+[ext_resource type="Script" path="res://object_scenes/specialResource/statusEffects/StatusEffect.gd" id="1_r7sbl"]
+
+[resource]
+script = ExtResource("1_r7sbl")
+displayName = "Wet"
+dyeColor = Color(0.811765, 0.811765, 0.811765, 1)
+particle = ExtResource("1_36fxg")
+incompatibleEffects = Array[String]([])
