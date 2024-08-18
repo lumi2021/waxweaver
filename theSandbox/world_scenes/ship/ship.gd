@@ -81,7 +81,7 @@ func _process(delta):
 		
 		var what = to_local(GlobalRef.player.global_position).rotated(-rotDif)
 		GlobalRef.player.global_position = to_global(what)
-		GlobalRef.player.scrollBackgroundsSpace(velocity,delta)
+		GlobalRef.player.scrollBackgrounds(velocity,delta)
 		GlobalRef.player.ensureCamPosition()
 	
 	# stabilize position

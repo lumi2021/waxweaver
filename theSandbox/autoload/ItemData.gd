@@ -88,6 +88,12 @@ var data = {
 	3030:load("res://items/fish/Catfish.tres"),
 	3031:load("res://items/food/FishCatGrilled.tres"),
 	3032:load("res://items/food/FishAndChips.tres"),
+	3033:load("res://items/trinket/SpringShoes.tres"),
+	3034:load("res://items/trinket/ComftySocks.tres"),
+	3035:load("res://items/weapons/arrows/GoldenArrow.tres"),
+	3036:load("res://items/trinket/GoldenRing.tres"),
+	3037:load("res://items/food/Apple.tres"),
+	3038:load("res://items/trinket/Flashlight.tres"),
 	
 	# chairs 6000 - 6049
 	6000:load("res://items/blocks/furniture/chairs/WoodenChair.tres"),

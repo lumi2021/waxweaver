@@ -11,5 +11,5 @@ particleColor = Color(0.882353, 0.701961, 0.498039, 1)
 itemName = "Grilled Catfish"
 subtext = ""
 texture = ExtResource("2_l2un1")
-maxStackSize = 5
+maxStackSize = 1
 clickToUse = false

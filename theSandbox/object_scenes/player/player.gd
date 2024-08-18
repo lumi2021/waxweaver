@@ -1,7 +1,6 @@
 extends CharacterBody2D
 class_name Player
 
-
 @export var system : Node2D
 
 @onready var sprite = $PlayerLayers
@@ -11,6 +10,7 @@ class_name Player
 @onready var shipDEBUG = preload("res://world_scenes/ship/ship.tscn")
 
 @onready var healthComponent = $HealthComponent
+@onready var shipFinder = $ShipFinder
 
 var rotated = 0
 var rotationDelayTicks = 0
@@ -47,6 +47,8 @@ var dead = false
 
 var wasInWater = false
 
+var airTime :float = 0.0
+
 @onready var itemRoot = $itemWorldRotation/heldItemRoot
 var heldItemAnim :itemHeldClass = null
 
@@ -72,6 +74,8 @@ func _ready():
 	PlayerData.addItem(3001,1)
 	
 	PlayerData.selectSlot(0)
+	
+	healthComponent.heal(50)
 
 func _process(delta):
 	
@@ -99,10 +103,10 @@ func _process(delta):
 			inSpaceMovement(delta)
 			findPlanetToAttachInSpace()
 
-	scrollBackgrounds(delta)
+	scrollBackgrounds(velocity,delta)
 	
 	## Ignore below for now ##
-	$MouseOver.global_position = get_global_mouse_position()
+	shipFinder.global_position = get_global_mouse_position()
 	if dead:
 		return
 	
@@ -120,21 +124,22 @@ func _process(delta):
 		GlobalRef.camera.mapbg.visible = !GlobalRef.camera.mapbg.visible
 		GlobalRef.camera.map.visible = GlobalRef.camera.mapbg.visible
 	
-	if !noClip:
-		if $suffocatingCast/suffocate.is_colliding():
-			$HealthComponent.damage(1)
+	if $suffocatingCast/suffocate.is_colliding() and !noClip:
+		healthComponent.damage(1)
 	
 ######################################################################
 ############################## MOVEMENT ##############################
 ######################################################################
 
 func determineMovementState(delta):
+	
+	if noClip:
+		noClipMovement(delta)
+		return
+	
 	match movementState:
 		0:
-			if state == 0:
-				onPlanetMovement(delta)
-			else:
-				onShipMovement(delta)
+			normalMovement(delta)
 		1:
 			chairMovement(delta)
 		2:
@@ -155,7 +160,6 @@ func noClipMovement(delta):
 			noClipSpeed -= 100
 			noClipSpeed = max(0,noClipSpeed)
 		
-	
 	velocity = dir.normalized() * noClipSpeed
 	move_and_slide()
 	
@@ -164,78 +168,58 @@ func noClipMovement(delta):
 	ensureCamPosition()
 	updateLight()
 
-
-func onPlanetMovement(delta):
-	
-	if noClip:
-		noClipMovement(delta)
-		return
-	
+func setPlanetRotation():
 	var newRotation = getPlanetPosition()
-	
 	if newRotation != rotated:
 		rotationDelayTicks -= 1
 		if rotationDelayTicks <= 0:
 			rotated = newRotation
 			rotationDelayTicks = 8
 	else:
-		rotationDelayTicks = 8 #frame delay
+		rotationDelayTicks = 8
+
+func getProperRotationSource():
+	if state == 0:
+		return rotated*(PI/2)
+	return shipOn.rotation
+
+func normalMovement(delta):
 	
-	sprite.rotation = lerp_angle(sprite.rotation,rotated*(PI/2),0.4)
+	setPlanetRotation()
+	var rotSource = getProperRotationSource() # should rotate to planet or ship
+	
+	sprite.rotation = lerp_angle(sprite.rotation,rotSource,0.4)
 	$itemWorldRotation.rotation = sprite.rotation
-	up_direction = Vector2(0,-1).rotated(rotated*(PI/2))
+	up_direction = Vector2(0,-1).rotated(rotSource)
 	
-	var underCeiling = isUnderCeiling(rotated*(PI/2))
-	var onFloor = isOnFloor(rotated*(PI/2))
-	var speed = PlayerData.speed
+	var onFloor = isOnFloor(rotSource)
+	var speed = Stats.getSpeed()
 	
-	if underCeiling:
-		speed = 25.0
-		squishSprites(0.68,delta)
-	else:
-		squishSprites(1.0,delta)
+	if squishHeadUnderCeiling():
+		speed *= 0.25
 	
 	var dir = 0
-	if Input.is_action_pressed("move_left"):
-		GlobalRef.playerSide = 0
-		dir -= 1
-	if Input.is_action_pressed("move_right"):
-		GlobalRef.playerSide = 1
-		dir += 1
+	dir = int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left"))
+	if dir != 0:
+		GlobalRef.playerSide = int(dir == 1)
 		
 	if GlobalRef.chatIsOpen:
 		dir = 0
 	
-	var newVel = velocity.rotated(-rotated*(PI/2))
+	var newVel = velocity.rotated(-rotSource)
 	if beingKnockedback:
-		newVel.x = lerp(newVel.x, dir * speed, 0.025)
+		newVel.x = lerp(newVel.x, dir * speed, 0.025) # make framerate independent
 	else:
 		newVel.x = lerp(newVel.x, dir * speed, 1.0-pow(2.0,(-delta/0.04)))
-	newVel.y += gravity * delta
-	newVel.y = min(newVel.y,300)
-	var tile = planetOn.posToTile(position)
+	newVel.y += Stats.getGravity() * delta
+	newVel.y = min(newVel.y,Stats.getTerminalVelocity())
 	
-	if tile != null:
-		# if in water
-		if abs(planetOn.DATAC.getWaterData(tile.x,tile.y)) > 0.2:
-			wasInWater = true
-			newVel.y = min(newVel.y,50)
-			if Input.is_action_pressed("jump") and !GlobalRef.chatIsOpen:
-				newVel.y = -100.0
-			if onFloor:
-				GlobalRef.camera.rotation = lerp_angle(GlobalRef.camera.rotation,rotated*(PI/2),1.0-pow(2.0,(-delta/0.06)))
-		else:
-			if wasInWater and Input.is_action_pressed("jump"):
-				newVel.y += -150.0
-				wasInWater = false
-			
-			if onFloor:
-				if Input.is_action_just_pressed("jump") and !GlobalRef.chatIsOpen:
-					newVel.y = -275
-				GlobalRef.camera.rotation = lerp_angle(GlobalRef.camera.rotation,rotated*(PI/2),1.0-pow(2.0,(-delta/0.06)))
-
+	var body = planetOn
+	if shipOn != null:
+		body = shipOn
+	newVel = WATERJUMPCAMERALETSGO(body,newVel,rotSource,onFloor,delta)
 	
-	velocity = newVel.rotated(rotated*(PI/2))
+	velocity = newVel.rotated(rotSource)
 	
 	move_and_slide()
 	
@@ -244,66 +228,74 @@ func onPlanetMovement(delta):
 	
 	ensureCamPosition()
 	
-	
-	if is_on_floor() and beingKnockedback:
+	if onFloor and beingKnockedback and newVel.y > 0:
 		beingKnockedback = false
-
-func onShipMovement(delta):
 	
-	if noClip:
-		noClipMovement(delta)
-		return
-	
-	var newRotation = shipOn.rotation
-	
-	sprite.rotation = lerp_angle(sprite.rotation,shipOn.rotation,0.4)
-	$itemWorldRotation.rotation = sprite.rotation
-	up_direction = Vector2(0,-1).rotated(shipOn.rotation)
-	
-	var underCeiling = isUnderCeiling(shipOn.rotation)
-	var onFloor = isOnFloor(shipOn.rotation)
-	var speed = PlayerData.speed
-	
-	if planetOn != null:
-		rotationDelayTicks = -10
-		rotated = getPlanetPosition()
-	
-	if underCeiling:
-		speed = 25.0
-		squishSprites(0.68,delta)
+	if !onFloor:
+		airTime += delta
+		if newVel.y < 0:
+			airTime = 0.0
 	else:
-		squishSprites(1.0,delta)
+		# fall damage stuff
+		var fallDamage = int(airTime * 40.0 ) - 20
+		
+		if Stats.hasProperty("fallImmune"):
+			fallDamage = 0
+		
+		if fallDamage > 10:
+			healthComponent.damage(fallDamage)
+		airTime = 0.0
+
+func WATERJUMPCAMERALETSGO(body,vel,rot,onFloor,delta):
+	# uses world to alter velocity
+	if !is_instance_valid(body):
+		return vel
+	var tile = body.posToTile(body.to_local(global_position))
+
+	if tile == null:
+		return vel
 	
-	var dir = 0
-	if Input.is_action_pressed("move_left"):
-		GlobalRef.playerSide = 0
-		dir -= 1
-	if Input.is_action_pressed("move_right"):
-		GlobalRef.playerSide = 1
-		dir += 1
+	# attach to ladder if holding up
+	if body.DATAC.getTileData(tile.x,tile.y) == 25:
+		if Input.is_action_pressed("move_up") or Input.is_action_pressed("move_down"):
+			velocity = Vector2.ZERO
+			vel = Vector2.ZERO
+			if movementState == 2:
+					return
+			movementState = 2 # enter ladder state
+			if body is Planet:
+				rotated = body.DATAC.getPositionLookup(tile.x,tile.y)
+			attachToLadder(tile,body)
 	
-	if GlobalRef.chatIsOpen:
-		dir = 0
+	# emit light if have trinket
+	if Stats.hasProperty("emitLight"):
+		var amount :float = 0.6
+		var l = body.DATAC.getLightData(tile.x,tile.y)
+		if l <= amount:
+			body.DATAC.setLightData(tile.x,tile.y,-amount)
 	
-	var newVel = velocity.rotated(-shipOn.rotation)
-	newVel.x = lerp(newVel.x, dir * speed, 1.0-pow(2.0,(-delta/0.04)))
-	newVel.y += gravity * delta
-	newVel.y = min(newVel.y,300)
+	# there must be a better way
+	var inWater = abs(body.DATAC.getWaterData(tile.x,tile.y)) > 0.3
+	if inWater:
+		wasInWater = true
+		vel.y = min(vel.y,30 + (Stats.swimMult * 2.5))
+		if Input.is_action_pressed("jump") and !GlobalRef.chatIsOpen:
+			vel.y = -25 - Stats.getSwim()
+		GlobalRef.camera.rotation = lerp_angle(GlobalRef.camera.rotation,rot,1.0-pow(2.0,(-delta/0.06)))
+		vel.x = clamp(vel.x, -Stats.getSwim(),Stats.getSwim() )
+		airTime = 0.0 # cancel fall damage
+		return vel
 	
+	if wasInWater and Input.is_action_pressed("jump"):
+		vel.y += -150.0
+		wasInWater = false
+			
 	if onFloor:
 		if Input.is_action_just_pressed("jump") and !GlobalRef.chatIsOpen:
-			newVel.y = -275
-		if int(Input.is_action_pressed("rotateShipRight")) - int(Input.is_action_pressed("rotateShipLeft")) == 0:
-			GlobalRef.camera.rotation = lerp_angle(GlobalRef.camera.rotation,shipOn.rotation,1.0-pow(2.0,(-delta/0.2)))
-
-	velocity = newVel.rotated(shipOn.rotation)
+			vel.y = Stats.getJump()
+		GlobalRef.camera.rotation = lerp_angle(GlobalRef.camera.rotation,rot,1.0-pow(2.0,(-delta/0.06)))
 	
-	move_and_slide()
-	
-	playerAnimation(dir,newVel,delta)
-	updateLight()
-	
-	ensureCamPosition()
+	return vel
 
 func chairMovement(delta):
 	
@@ -317,7 +309,7 @@ func chairMovement(delta):
 	if Input.is_action_pressed("jump"):
 		movementState = 0
 	
-	squishSprites(1.0,delta)
+	squishSprites(1.0)
 	eyeBallAnim()
 	updateLight()
 	ensureCamPosition()
@@ -333,6 +325,7 @@ func ladderMovement(delta):
 	$itemWorldRotation.rotation = sprite.rotation
 	up_direction = Vector2(0,-1).rotated(rotated*(PI/2))
 	
+	airTime = 0.0
 	
 	## animtation
 	if vdir != 0:
@@ -386,7 +379,7 @@ func ladderMovement(delta):
 	
 	move_and_slide()
 	
-	squishSprites(1.0,delta)
+	squishSprites(1.0)
 	eyeBallAnim()
 	updateLight()
 	ensureCamPosition()
@@ -413,24 +406,7 @@ func inSpaceMovement(delta):
 	move_and_slide()
 	ensureCamPosition()
 
-
-func searchForBorders():
-	
-	var systemWidth = 99900
-	
-	if position.x < -(systemWidth/2):
-		position.x += systemWidth
-		GlobalRef.system.generateSystem()
-	if position.y < -(systemWidth/2):
-		position.y += systemWidth
-		GlobalRef.system.generateSystem()
-	if position.x > (systemWidth/2):
-		position.x -= systemWidth
-		GlobalRef.system.generateSystem()
-	if position.y > (systemWidth/2):
-		position.y -= systemWidth
-		GlobalRef.system.generateSystem()
-	
+#region planet attaching/detaching stuff. scary
 func detachFromShip():
 	if state == 1 or state == 2:
 		#Code for dismounting ship
@@ -542,14 +518,12 @@ func detachFromPlanet():
 	planetOn = null
 	s.unloadPlanet()
 	reparent(system.objectContainer)
-
+#endregion
 
 
 func ensureCamPosition():
-	#camera.global_position = cameraOrigin.global_position
+
 	cameraOrigin.position = Vector2(0,-40).rotated(GlobalRef.camera.rotation)
-	#if shipOn != null:
-	#	cameraOrigin.position += shipOn.velocity
 	cameraOrigin.position.x = int(cameraOrigin.position.x)
 	cameraOrigin.position.y = int(cameraOrigin.position.y)
 	GlobalRef.camera.global_position = to_global(cameraOrigin.position)
@@ -570,36 +544,20 @@ func useItem():
 		$PlayerLayers/handFront.visible = true
 		return
 	
-	# Determine whether or not to target ship
-	var areas = $MouseOver.get_overlapping_areas()
-	var ship = null
-	var editBody = planetOn
-	if areas.size() > 0:
-		ship = areas[0].get_parent()
-		var mousePos = ship.get_local_mouse_position()
-		var tile = ship.posToTile(mousePos)
-		if tile != null:
-			if ship.DATAC.getBGData(tile.x,tile.y) > 1:
-				editBody = ship
-			elif ship.DATAC.getTileData(tile.x,tile.y) > 1:
-				editBody = ship
-			else:
-				for x in range(3):
-					for y in range(3):
-						if ship.DATAC.getTileData(tile.x+x-1,tile.y+y-1) > 1:
-							editBody = ship
-							break
-						if ship.DATAC.getBGData(tile.x+x-1,tile.y+y-1) > 1:
-							editBody = ship
-							break
-	
-	if editBody == null:
+	var editBody = getEditingBody()
+	if !is_instance_valid(editBody):
 		return
 	
 	var mousePos = editBody.get_local_mouse_position()
 	var tile = editBody.posToTile(mousePos)
 	
 	if itemData != null and tile != null:
+		
+		if get_local_mouse_position().length() > 64:
+			return
+		
+		if dead:
+			return
 		
 		if itemData.clickToUse:
 			if Input.is_action_just_pressed("mouse_left"):
@@ -651,30 +609,8 @@ func onRightClick():
 	if get_local_mouse_position().length() > 48:
 		return
 	
-	# Determine whether or not to target ship
-	var areas = $MouseOver.get_overlapping_areas()
-	var ship = null
-	var editBody = planetOn
-	if areas.size() > 0:
-		ship = areas[0].get_parent()
-		var mousePos = ship.get_local_mouse_position()
-		var tile = ship.posToTile(mousePos)
-		if tile != null:
-			if ship.DATAC.getBGData(tile.x,tile.y) > 1:
-				editBody = ship
-			elif ship.DATAC.getTileData(tile.x,tile.y) > 1:
-				editBody = ship
-			else:
-				for x in range(3):
-					for y in range(3):
-						if ship.DATAC.getTileData(tile.x+x-1,tile.y+y-1) > 1:
-							editBody = ship
-							break
-						if ship.DATAC.getBGData(tile.x+x-1,tile.y+y-1) > 1:
-							editBody = ship
-							break
-	
-	if editBody == null:
+	var editBody = getEditingBody()
+	if !is_instance_valid(editBody):
 		return
 	
 	var mousePos = editBody.get_local_mouse_position()
@@ -685,6 +621,11 @@ func onRightClick():
 	# right click functionality for each block
 	match blockType:
 		19: # chair
+			
+			# return if wall is in the way
+			if !wallCheck(get_local_mouse_position()):
+				return
+			
 			if rotated != editBody.DATAC.getPositionLookup(tile.x,tile.y) and editBody is Planet:
 				return
 			movementState = 1 # enter chair state
@@ -694,16 +635,19 @@ func onRightClick():
 		23: # open door
 			closeDoor(tile,editBody)
 		25: # ladder
+			
+			# return if wall is in the way
+			if !wallCheck(get_local_mouse_position()):
+				return
+			
 			if movementState == 2:
 				return
 			movementState = 2 # enter ladder state
 			if editBody is Planet:
 				rotated = editBody.DATAC.getPositionLookup(tile.x,tile.y)
 			attachToLadder(tile,editBody)
-			
-			
+
 		33: # chest 
-			
 			if PlayerData.chestOBJ == editBody and PlayerData.currentSelectedChest == tile:
 				PlayerData.closeChest()
 				return
@@ -766,13 +710,13 @@ func closeDoor(tile,body):
 	
 
 func chairSit(tile,editBody):
-	$AnimationPlayer.play("sit")
+	animationPlayer.play("sit")
 	setAllPlayerFrames(7)
 	snapToPositionChair(tile,editBody)
 	wasInWater = false
 
 func attachToLadder(tile,editBody):
-	$AnimationPlayer.play("climbLadder")
+	animationPlayer.play("climbLadder")
 	setAllPlayerFrames(9)
 	snapToPosition(tile,editBody)
 	wasInWater = false
@@ -849,6 +793,14 @@ func scanForStations():
 ############################ ANIMATION ###############################
 ######################################################################
 
+func squishHeadUnderCeiling():
+	var underCeiling = isUnderCeiling(rotated*(PI/2))
+	if underCeiling:
+		squishSprites(0.68)
+		return true
+	squishSprites(1.0)
+	return false
+
 func flipPlayer(dir):
 	sprite.scale.x = dir
 	$itemWorldRotation.scale.x = dir
@@ -911,20 +863,16 @@ func getPlayerFrame():
 	return sprite.get_children()[0].frame
 
 
-func squishSprites(target,delta):
+func squishSprites(target):
 	for obj in sprite.get_children():
-		obj.scale.y = lerp(obj.scale.y,target,1.0-pow(2.0,(-delta/0.02)))
+		obj.scale.y = lerp(obj.scale.y,target,0.2)
 		if obj == $PlayerLayers/eye:
 			obj.scale.y = 1.0
-			obj.position.y = lerp(obj.position.y,3.0+(3.0*int(target!=1.0)), 1.0-pow( 2.0,( -delta/0.02 ) ) )
+			obj.position.y = lerp(obj.position.y,3.0+(3.0*int(target!=1.0)),0.2 )
 
-func scrollBackgrounds(delta):
-	Background.scroll(velocity.rotated(-GlobalRef.camera.rotation)*-delta)
-	
-	
-func scrollBackgroundsSpace(vel,delta):
+
+func scrollBackgrounds(vel,delta):
 	Background.scroll(vel.rotated(-GlobalRef.camera.rotation)*-delta)
-	pass
 
 
 func changeArmor():
@@ -966,9 +914,11 @@ func changeArmor():
 
 	if vanityLegs is ItemArmorLegs:
 		legsSpr.texture =  vanityLegs.armorTexture
-
 	
-	$HealthComponent.defense = newDefense
+	Stats.updateStats()
+	newDefense += Stats.getAdditiveDefense()
+	
+	healthComponent.defense = newDefense
 	GlobalRef.hotbar.updateDefense(newDefense)
 
 ######################################################################
@@ -1006,9 +956,6 @@ func isUnderCeiling(rot):
 	#improve this
 	$CeilingAngles.rotation = rot
 	
-	$CeilingAngles/cCast1.force_raycast_update()
-	$CeilingAngles/cCast2.force_raycast_update()
-	
 	if $CeilingAngles/cCast1.is_colliding():
 		return true
 	if $CeilingAngles/cCast2.is_colliding():
@@ -1020,6 +967,45 @@ func enteredNewChunk(newChunk):
 	var newPos = (newChunk * 64) - Vector2(planetRadius,planetRadius) - Vector2(288,288)
 	GlobalRef.lightmap.pushUpdate(planetOn,newPos)
 	planetOn.loadChunkArea(newChunk)
+
+func getEditingBody():
+	# Determine whether or not to target ship
+	var areas = shipFinder.get_overlapping_areas()
+	var ship = null
+	var editBody = planetOn
+	if areas.size() > 0:
+		ship = areas[0].get_parent()
+		var mousePos = ship.get_local_mouse_position()
+		var tile = ship.posToTile(mousePos)
+		if tile != null:
+			if ship.DATAC.getBGData(tile.x,tile.y) > 1:
+				editBody = ship
+			elif ship.DATAC.getTileData(tile.x,tile.y) > 1:
+				editBody = ship
+			else:
+				for x in range(3):
+					for y in range(3):
+						if ship.DATAC.getTileData(tile.x+x-1,tile.y+y-1) > 1:
+							editBody = ship
+							break
+						if ship.DATAC.getBGData(tile.x+x-1,tile.y+y-1) > 1:
+							editBody = ship
+							break
+	
+	return editBody
+
+func wallCheck(pos):
+	
+	$wallCheck/RayCast2D.target_position = pos - $wallCheck/RayCast2D.position
+	$wallCheck/RayCast2D2.target_position = pos - $wallCheck/RayCast2D2.position
+	
+	$wallCheck/RayCast2D.force_raycast_update()
+	$wallCheck/RayCast2D2.force_raycast_update()
+	
+	if $wallCheck/RayCast2D.is_colliding() and $wallCheck/RayCast2D2.is_colliding():
+		return false
+
+	return true
 
 ######################################################################
 ############################# LIGHTS #################################
@@ -1043,10 +1029,7 @@ func updateLightStatic():
 		return
 	
 	var pos = position
-	#if state == 2:
-	#	pos += shipOn.position
-	
-	
+
 	var currentChunk = Vector2(int(pos.x+1024)/64,int(pos.y+1024)/64)
 	var newPos = (currentChunk * 64) - Vector2(1024,1024) - Vector2(288,288)
 	GlobalRef.lightmap.pushUpdate(planetOn,newPos)
@@ -1057,7 +1040,7 @@ func updateLightStatic():
 ######################################################
 
 func _on_health_component_health_changed():
-	PlayerData.sendHealthUpdate($HealthComponent.health,$HealthComponent.maxHealth)
+	PlayerData.sendHealthUpdate(healthComponent.health,healthComponent.maxHealth)
 
 func spawnShip():
 	var ins = shipDEBUG.instantiate()
@@ -1071,8 +1054,8 @@ func dieAndRespawn():
 	noClip = true
 	noClipSpeed = 0 # enable a little bit of movement
 	
-	GlobalRef.hotbar.showDeathScreen()
-	await get_tree().create_timer(5.0).timeout
+	GlobalRef.hotbar.showDeathScreen(Stats.respawnWait)
+	await get_tree().create_timer(Stats.respawnWait).timeout
 	
 	# respawn
 	if is_instance_valid(lastPlanetOn):
@@ -1091,8 +1074,8 @@ func dieAndRespawn():
 		pass
 	
 	# reset variables
-	
-	$HealthComponent.heal(100)
+	airTime = 0.0 # cancel fall damage
+	healthComponent.heal(25)
 	rotated = 0
 	sprite.visible = true
 	dead = false

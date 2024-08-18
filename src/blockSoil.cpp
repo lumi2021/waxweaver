@@ -39,6 +39,15 @@ Dictionary BLOCKSOIL::onTick(int x, int y, PLANETDATA *planet, int dir){
                 }
 
             }
+
+            Vector2i below = Vector2i( Vector2( 0,1 ).rotated(acos(0.0)*dir)  ) + Vector2i(x,y);
+            if(abs(planet->getWaterData(below.x,below.y)) > 0.1 ){
+
+                return changes;
+
+            }
+
+
             changes[ Vector2i(x,y) ] = 36;// replace with dry soil if no water around
         }
         

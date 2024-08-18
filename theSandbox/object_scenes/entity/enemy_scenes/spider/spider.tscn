@@ -32,20 +32,22 @@ texture = ExtResource("2_cn8la")
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("3_gfi00")
-maxHealth = 10
-defense = 2
+maxHealth = 15
+defense = 6
 dropItemArray = Array[int]([3004, 3004, 3004, 3004])
 dropChanceArray = Array[int]([1, 2, 2, 2])
 
 [node name="Hitbox" parent="." node_paths=PackedStringArray("healthComponent", "colliderShape") instance=ExtResource("4_ei6ps")]
 healthComponent = NodePath("../HealthComponent")
+enemyBox = null
+invincTime = null
 colliderShape = NodePath("CollisionShape2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("CircleShape2D_k1ben")
 
 [node name="Hurtbox" parent="." instance=ExtResource("5_tyfpu")]
-damage = 10
+damage = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 shape = SubResource("CircleShape2D_bm3sh")

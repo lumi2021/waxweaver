@@ -412,7 +412,7 @@ hframes = 2
 frame = 1
 
 [node name="HealthBar" type="Node2D" parent="."]
-position = Vector2(392, 7)
+position = Vector2(395, 7)
 
 [node name="barShadow" type="Sprite2D" parent="HealthBar"]
 modulate = Color(0.972549, 0.631373, 0.266667, 1)
@@ -434,7 +434,7 @@ offset_left = -207.0
 offset_top = 1.0
 offset_right = 4.0
 offset_bottom = 13.0
-text = "100 / 100"
+text = "50 / 50"
 label_settings = SubResource("LabelSettings_utrlr")
 horizontal_alignment = 2
 

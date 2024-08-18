@@ -6,7 +6,7 @@
 
 [resource]
 script = ExtResource("1_xjhpb")
-defense = 3
+defense = 4
 armorTexture = ExtResource("1_ejnwt")
 itemName = "Iron Leggings"
 subtext = ""

@@ -48,8 +48,14 @@ func spawnGroundItem(tilex:int,tiley:int,id:int,planet):
 		-1:
 			return
 		7: # is tree sapling
+			
+			if randi() % 30 == 0:
+				spawnItemRaw(tilex,tiley,3037,planet)
+			
 			if randi() % 2 == 0:
 				return
+				
+			
 		19: # is chair
 			id = 6000 + ( planet.DATAC.getInfoData(tilex,tiley) / 4)
 		22: # is closed door
@@ -58,7 +64,6 @@ func spawnGroundItem(tilex:int,tiley:int,id:int,planet):
 			id = 6050 + ( planet.DATAC.getInfoData(tilex,tiley) / 8)
 		37: # is potato
 			if planet.DATAC.getInfoData(tilex,tiley) >= 4:
-				spawnItemRaw(tilex,tiley,37,planet)
 				spawnItemRaw(tilex,tiley,37,planet)
 				spawnItemRaw(tilex,tiley,37,planet)
 			

@@ -13,6 +13,7 @@ config_version=5
 config/name="theSandbox"
 run/main_scene="res://world_scenes/system/system.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
+run/max_fps=60
 config/icon="res://icon.png"
 
 [autoload]
@@ -24,6 +25,7 @@ PlanetTypeInfo="*res://autoload/PlanetTypeInfo.gd"
 CreatureData="*res://autoload/CreatureData.gd"
 LootData="*res://autoload/LootData.gd"
 GlobalRef="*res://autoload/GlobalRef.gd"
+Stats="*res://autoload/PlayerStats.gd"
 PlayerData="*res://autoload/PlayerData.gd"
 Indicators="*res://autoload/Indicators.gd"
 Background="*res://autoload/Background.gd"

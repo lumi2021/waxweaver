@@ -31,7 +31,15 @@ var data = [
 		"crafts":3023,
 		"amount":3,
 		"ingredients":[2,13,3004],
-		"ingAmounts":[2,2,2],
+		"ingAmounts":[2,1,1],
+	},
+	
+	{ # gold tipped arrow
+		"crafts":3035,
+		"amount":3,
+		"ingredients":[30,3023],
+		"ingAmounts":[1,3],
+		"station": WORKBENCH,
 	},
 	
 	###########
@@ -128,6 +136,14 @@ var data = [
 		"station":WORKBENCH,
 	},
 	
+	{ # grill
+		"crafts":46,
+		"amount":1,
+		"ingredients":[29,15],
+		"ingAmounts":[10,6],
+		"station":WORKBENCH,
+	},
+	
 	############
 	## BLOCKS ##
 	############
@@ -200,7 +216,7 @@ var data = [
 		"crafts":3006,
 		"amount":1,
 		"ingredients":[29,13],
-		"ingAmounts":[5,5],
+		"ingAmounts":[10,5],
 		"station":WORKBENCH,
 	},
 	
@@ -208,14 +224,14 @@ var data = [
 		"crafts":3007,
 		"amount":1,
 		"ingredients":[29,13],
-		"ingAmounts":[5,5],
+		"ingAmounts":[10,5],
 		"station":WORKBENCH,
 	},
 	{ # gold sword
 		"crafts":3008,
 		"amount":1,
 		"ingredients":[30,13],
-		"ingAmounts":[8,5],
+		"ingAmounts":[12,5],
 		"station":WORKBENCH,
 	},
 	
@@ -223,7 +239,7 @@ var data = [
 		"crafts":3009,
 		"amount":1,
 		"ingredients":[30,13],
-		"ingAmounts":[8,5],
+		"ingAmounts":[12,5],
 		"station":WORKBENCH,
 	},
 	{ # iron sword
@@ -274,7 +290,7 @@ var data = [
 		"crafts":3013,
 		"amount":1,
 		"ingredients":[29],
-		"ingAmounts":[10],
+		"ingAmounts":[8],
 		"station":WORKBENCH,
 	},
 	
@@ -290,7 +306,7 @@ var data = [
 		"crafts":3015,
 		"amount":1,
 		"ingredients":[29],
-		"ingAmounts":[10],
+		"ingAmounts":[8],
 		"station":WORKBENCH,
 	},
 	{ # golden helmet
@@ -305,7 +321,7 @@ var data = [
 		"crafts":3017,
 		"amount":1,
 		"ingredients":[30],
-		"ingAmounts":[10],
+		"ingAmounts":[12],
 		"station":WORKBENCH,
 	},
 	
@@ -320,7 +336,7 @@ var data = [
 		"crafts":3019,
 		"amount":1,
 		"ingredients":[31],
-		"ingAmounts":[10],
+		"ingAmounts":[15],
 		"station":WORKBENCH,
 	},
 	
@@ -328,7 +344,7 @@ var data = [
 		"crafts":3020,
 		"amount":1,
 		"ingredients":[31],
-		"ingAmounts":[10],
+		"ingAmounts":[20],
 		"station":WORKBENCH,
 	},
 	
@@ -336,7 +352,7 @@ var data = [
 		"crafts":3021,
 		"amount":1,
 		"ingredients":[31],
-		"ingAmounts":[10],
+		"ingAmounts":[15],
 		"station":WORKBENCH,
 	},
 	

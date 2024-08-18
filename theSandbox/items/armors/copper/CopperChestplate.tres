@@ -6,9 +6,10 @@
 
 [resource]
 script = ExtResource("1_gxlr6")
-defense = 1
+defense = 2
 armorTexture = ExtResource("1_lmn1p")
 itemName = "Copper Chestplate"
+subtext = ""
 texture = ExtResource("3_ko80q")
 maxStackSize = 1
 clickToUse = false

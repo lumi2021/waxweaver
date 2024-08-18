@@ -237,6 +237,7 @@ script = ExtResource("1_7l8c2")
 shape = SubResource("RectangleShape2D_8s1yf")
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_vteuo")]
+maxHealth = 50
 isPlayer = true
 
 [node name="PlayerLayers" type="Node2D" parent="."]
@@ -330,11 +331,11 @@ libraries = {
 "": SubResource("AnimationLibrary_4n17m")
 }
 
-[node name="MouseOver" type="Area2D" parent="."]
+[node name="ShipFinder" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 32
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="MouseOver"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShipFinder"]
 shape = SubResource("CircleShape2D_dk4gh")
 
 [node name="ShipCollider" type="Area2D" parent="."]
@@ -358,6 +359,18 @@ shape = SubResource("RectangleShape2D_8bj8a")
 
 [node name="suffocate" type="RayCast2D" parent="suffocatingCast"]
 target_position = Vector2(0, 1)
+hit_from_inside = true
+
+[node name="wallCheck" type="Node2D" parent="."]
+
+[node name="RayCast2D" type="RayCast2D" parent="wallCheck"]
+position = Vector2(0, 3)
+target_position = Vector2(1, 0)
+hit_from_inside = true
+
+[node name="RayCast2D2" type="RayCast2D" parent="wallCheck"]
+position = Vector2(0, -7)
+target_position = Vector2(1, 0)
 hit_from_inside = true
 
 [connection signal="healthChanged" from="HealthComponent" to="." method="_on_health_component_health_changed"]

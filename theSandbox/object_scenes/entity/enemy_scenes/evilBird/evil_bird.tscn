@@ -56,11 +56,14 @@ radius = 5.0
 collision_layer = 128
 collision_mask = 17
 script = ExtResource("1_6ektk")
-creatureSlots = 15
+creatureSlots = 10
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_myc62")]
 maxHealth = 20
 knockbackResist = 0.8
+defense = 4
+dropItemArray = Array[int]([3033, 3034, 3036])
+dropChanceArray = Array[int]([500, 500, 500])
 
 [node name="DeleteMeOutsideOfChunk" parent="." instance=ExtResource("3_nn12s")]
 
@@ -82,6 +85,8 @@ target_position = Vector2(5, 0)
 
 [node name="Hitbox" parent="." node_paths=PackedStringArray("healthComponent", "colliderShape") instance=ExtResource("5_ly7sk")]
 healthComponent = NodePath("../HealthComponent")
+enemyBox = null
+invincTime = null
 colliderShape = NodePath("CollisionShape2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]

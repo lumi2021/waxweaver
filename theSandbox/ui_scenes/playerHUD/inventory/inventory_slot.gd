@@ -53,6 +53,10 @@ func _on_color_rect_gui_input(event):
 		if event["pressed"]:
 			if event["button_index"] == 1:
 				parent.clickedSlot(slotToDisplay)
+				
+				if slotToDisplay < 10 and !parent.invOpen:
+					parent.selectSlot(slotToDisplay)
+				
 			if event["button_index"] == 2:
 				parent.splitSlot(slotToDisplay)
 

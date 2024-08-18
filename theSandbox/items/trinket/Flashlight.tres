@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ItemTrinket" load_steps=3 format=3 uid="uid://c6rqn72swxmom"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemTrinket.gd" id="1_jc0t4"]
+[ext_resource type="Texture2D" uid="uid://dgd7ifh61wixb" path="res://items/trinket/flashlight.png" id="2_yyi6e"]
+
+[resource]
+script = ExtResource("1_jc0t4")
+description = "Emits light around you"
+specialProperties = Array[String](["emitLight"])
+sceneToLoad = ""
+addSpeed = 0.0
+addJump = 0.0
+addSwim = 0.0
+addDefense = 0
+addMeleeDamage = 0.0
+addRangedDamage = 0.0
+itemName = "Flashlight"
+subtext = ""
+texture = ExtResource("2_yyi6e")
+maxStackSize = 1
+clickToUse = false

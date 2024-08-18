@@ -438,10 +438,12 @@ Vector2i CHUNKDRAW::scanForBorder(PLANETDATA *planet,int x,int y){
 	int openBL = 4;
 	int openBR = 8;
 
-
+    int blockID = 0;
+    int connectTexturesToMe = 1;
+    
     // Straight Directionals
-    int blockID = planet->getBGData(x-1,y);
-    int connectTexturesToMe = blockID < 2;
+    blockID = planet->getBGData(x-1,y);
+    connectTexturesToMe = blockID < 2;
     openL = 1 * connectTexturesToMe;
 
     blockID = planet->getBGData(x+1,y);
@@ -472,6 +474,52 @@ Vector2i CHUNKDRAW::scanForBorder(PLANETDATA *planet,int x,int y){
     blockID = planet->getBGData(x+1,y+1);
     connectTexturesToMe = blockID < 2;
     openBR = 8 * connectTexturesToMe;
+
+    // scan for solid blocks
+    bool tileLEFT = cock->isTransparent(planet->getTileData(x-1,y));
+    bool tileRIGHT = cock->isTransparent(planet->getTileData(x+1,y));
+    bool tileUP = cock->isTransparent(planet->getTileData(x,y-1));
+    bool tileDOWN = cock->isTransparent(planet->getTileData(x,y+1));
+
+    int TLpoint = 0;
+    int TRpoint = 0;
+    int BLpoint = 0;
+    int BRpoint = 0;
+
+    if(!tileLEFT){
+        openL = 0;
+        TLpoint++;
+        BLpoint++;
+    }
+    if(!tileRIGHT){
+        openR = 0;
+        TRpoint++;
+        BRpoint++;
+    }
+    if(!tileUP){
+        openT = 0;
+        TLpoint++;
+        TRpoint++;
+    }
+    if(!tileDOWN){
+        openB = 0;
+        BRpoint++;
+        BLpoint++;
+    }
+
+    bool tileTL = cock->isTransparent(planet->getTileData(x-1,y-1));
+    bool tileTR = cock->isTransparent(planet->getTileData(x+1,y-1));
+    bool tileBL = cock->isTransparent(planet->getTileData(x-1,y+1));
+    bool tileBR = cock->isTransparent(planet->getTileData(x+1,y+1));
+
+    if(TLpoint == 2 || !tileTL){ openTL = 0; }
+    if(TRpoint == 2 || !tileTR){ openTR = 0; }
+    if(BLpoint == 2 || !tileBL){ openBL = 0; }
+    if(BRpoint == 2 || !tileBR){ openBR = 0; }
+
+
+
+
 
 	return Vector2i((openL + openR + openT + openB) * 8 , (openTL + openTR + openBL + openBR) * 8 ) ;
 }

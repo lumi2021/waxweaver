@@ -6,10 +6,10 @@
 [resource]
 script = ExtResource("1_7eoh4")
 healingAmount = 50
-eatTime = 3.0
+eatTime = 2.0
 particleColor = Color(0.866667, 0.639216, 0.435294, 1)
 itemName = "Fish and Chips"
 subtext = ""
 texture = ExtResource("2_ufmxc")
-maxStackSize = 2
+maxStackSize = 1
 clickToUse = false

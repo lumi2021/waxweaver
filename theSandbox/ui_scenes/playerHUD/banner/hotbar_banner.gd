@@ -56,21 +56,9 @@ func _process(delta):
 	$Menu/Crafting.visible = PlayerData.chestOBJ == null
 	
 	# hotbar scrolling
-	var curSlot = PlayerData.selectedSlot
-	if Input.is_action_just_pressed("scroll_up"):
-		curSlot -= 1
-		if curSlot < 0:
-			curSlot = 9
-		PlayerData.selectSlot(curSlot)
-		for slot in $Hotbar.get_children():
-			slot.updateSelected()
-	elif Input.is_action_just_pressed("scroll_down"):
-		curSlot += 1
-		if curSlot > 9:
-			curSlot = 0
-		PlayerData.selectSlot(curSlot)
-		for slot in $Hotbar.get_children():
-			slot.updateSelected()
+	
+	
+	
 	
 	# cheat commands
 	if Input.is_action_just_pressed("openCommand"):
@@ -175,8 +163,8 @@ func splitSlot(slot):
 		
 func updateHealth():
 	$HealthBar/healthText.text = str(PlayerData.currentHealth) + " / " + str(PlayerData.maxHealth)
-	$HealthBar/bar.scale.x = PlayerData.currentHealth / 2.0
-	$HealthBar/barShadow.scale.x = PlayerData.maxHealth / 2.0
+	$HealthBar/bar.scale.x = PlayerData.currentHealth
+	$HealthBar/barShadow.scale.x = PlayerData.maxHealth
 
 
 func interpretCommand(text):
@@ -306,6 +294,11 @@ func displayItemName(text:String,itemData:Item):
 		infoText += "Can be planted on \n"+ str(itemData.descCanPlaceOn) + "\n"
 		size += 18
 		size += 18
+	elif itemData is ItemTrinket:
+		infoText += "Trinket \n"
+		size += 18
+		infoText += itemData.description
+		size += (itemData.description.count("\n") + 1) * 18
 	
 	if itemData.materialIn.size() > 0:
 		infoText += "material \n"
@@ -318,9 +311,9 @@ func displayItemName(text:String,itemData:Item):
 func updateDefense(amount:int):
 	$Menu/defense/defenseAmount.text = str(amount)
 
-func showDeathScreen():
+func showDeathScreen(time):
 	$"Death Screen".visible = true
-	deathTimer = get_tree().create_timer(5.0)
+	deathTimer = get_tree().create_timer(time)
 	await deathTimer.timeout
 	$"Death Screen".visible = false
 
@@ -336,3 +329,38 @@ func _on_crafting_vi_s_toggle_pressed():
 	crafting.showUncraftables = !crafting.showUncraftables
 	crafting.updateUncraftableVis()
 	$Menu/craftingViSToggle/VisibleEyes.frame = int(crafting.showUncraftables)
+
+func _unhandled_input(event):
+	
+	# mouse scroll
+	if event is InputEventMouseButton:
+		if event["pressed"] == false:
+			return
+		var curSlot = PlayerData.selectedSlot
+		if event["button_index"] == 4:
+			curSlot -= 1
+			if curSlot < 0:
+				curSlot = 9
+			selectSlot(curSlot)
+		elif event["button_index"] == 5:
+			curSlot += 1
+			if curSlot > 9:
+				curSlot = 0
+			selectSlot(curSlot)
+		
+		return
+	
+	# inventory keys
+	if not event is InputEventKey:
+		return
+	
+	if event["keycode"] < 49 or event["keycode"] > 57:
+		if event["keycode"] == 48: # special case for 0 key
+			selectSlot(9)
+		return
+	selectSlot(event["keycode"]-49)
+
+func selectSlot(slot):
+	PlayerData.selectSlot(slot)
+	for i in $Hotbar.get_children():
+		i.updateSelected()

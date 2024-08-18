@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="ItemTrinket" load_steps=3 format=3 uid="uid://ds78nyhav6uiy"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemTrinket.gd" id="1_40754"]
+[ext_resource type="Texture2D" uid="uid://b8anjxe42kp37" path="res://items/trinket/springShoes.png" id="2_u4ftn"]
+
+[resource]
+script = ExtResource("1_40754")
+description = "13% Jump Increase
+Immune to fall damage"
+specialProperties = Array[String](["fallImmune"])
+sceneToLoad = ""
+addSpeed = 0.0
+addJump = 0.13
+addSwim = 0.0
+addDefense = 0
+addMeleeDamage = 0.0
+addRangedDamage = 0.0
+itemName = "Spring Shoes"
+subtext = ""
+texture = ExtResource("2_u4ftn")
+maxStackSize = 1
+clickToUse = false

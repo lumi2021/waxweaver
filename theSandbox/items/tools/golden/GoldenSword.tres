@@ -5,10 +5,11 @@
 
 [resource]
 script = ExtResource("1_ustmt")
-damage = 8
+damage = 10
 animSpeed = 6.0
 weaponScale = 1.0
 itemName = "Golden Sword"
+subtext = ""
 texture = ExtResource("2_f5ad6")
 maxStackSize = 1
 clickToUse = false

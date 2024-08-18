@@ -65,11 +65,11 @@ func damage(amount):
 	if health <= 0:
 		die()
 
-func dealKnockback(amount:float,dir:Vector2):
+func dealKnockback(amount:float,dir:Vector2,mult:float):
 	var q = getWorldPosition()
 	dir = dir.rotated(-q*(PI/2)).normalized()
 	var b = (int(dir.x > 0.0) * 2) - 1
-	var newDir = Vector2(amount * b,amount * -2)
+	var newDir = Vector2(amount * b * mult,amount * -2 * sqrt(mult))
 	newDir = newDir.rotated(q*(PI/2))
 	
 	if knockbackResist > 0.0:

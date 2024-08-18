@@ -5,10 +5,11 @@
 
 [resource]
 script = ExtResource("1_ht1ny")
-damage = 10
+damage = 14
 animSpeed = 8.0
 weaponScale = 1.0
 itemName = "Iron Sword"
+subtext = ""
 texture = ExtResource("2_tc1mf")
 maxStackSize = 1
 clickToUse = false

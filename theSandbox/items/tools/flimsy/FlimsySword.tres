@@ -5,11 +5,11 @@
 
 [resource]
 script = ExtResource("1_xdeia")
-damage = 3
+damage = 6
 animSpeed = 5.0
 weaponScale = 1.0
 itemName = "Flimsy Sword"
+subtext = ""
 texture = ExtResource("2_ve5la")
 maxStackSize = 1
 clickToUse = false
-materialIn = Array[int]([])

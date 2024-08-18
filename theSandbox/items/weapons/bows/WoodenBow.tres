@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_6wsac")
-damage = 2
+damage = 8
 velocity = 400.0
 fireRate = 2000.0
 itemName = "Wooden Bow"

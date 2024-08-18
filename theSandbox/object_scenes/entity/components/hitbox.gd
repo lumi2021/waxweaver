@@ -39,7 +39,7 @@ func _on_area_entered(area):
 	collectedIDs.append(area.id)
 	
 	healthComponent.damage(area.damage)
-	healthComponent.dealKnockback(120.0,dir)
+	healthComponent.dealKnockback(120.0,dir,area.knockback)
 	area.hasHit()
 	
 	colliderShape.call_deferred("set_disabled",true)

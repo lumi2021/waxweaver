@@ -43,6 +43,8 @@ BLOCKTORCH::~BLOCKTORCH() {
 Dictionary BLOCKTORCH::onTick(int x, int y, PLANETDATA *planet, int dir){
     
 	Dictionary changes = {};
+
+    int selfId = 15;
     
 	if (planet->getWaterData(x,y) > 0.2 ){
 
@@ -67,7 +69,8 @@ Dictionary BLOCKTORCH::onTick(int x, int y, PLANETDATA *planet, int dir){
         Vector2i D = Vector2i( Vector2(0,1).rotated(acos(0.0)*dir) ) + Vector2i(x,y);
 
         if( planet->getTileData(D.x,D.y) < 2 ){
-            changes[ Vector2i(x,y) ] = -1;
+            planet->setInfoData(x,y,0);
+            changes[ Vector2i(x,y) ] = selfId;
         }
 
         return changes;
@@ -78,7 +81,8 @@ Dictionary BLOCKTORCH::onTick(int x, int y, PLANETDATA *planet, int dir){
         Vector2i D = Vector2i( Vector2(1,0).rotated(acos(0.0)*dir) ) + Vector2i(x,y);
 
         if( planet->getTileData(D.x,D.y) < 2 ){
-            changes[ Vector2i(x,y) ] = -1;
+            planet->setInfoData(x,y,0);
+            changes[ Vector2i(x,y) ] = selfId;
         }
 
         return changes;
@@ -89,7 +93,8 @@ Dictionary BLOCKTORCH::onTick(int x, int y, PLANETDATA *planet, int dir){
         Vector2i D = Vector2i( Vector2(-1,0).rotated(acos(0.0)*dir) ) + Vector2i(x,y);
 
         if( planet->getTileData(D.x,D.y) < 2 ){
-            changes[ Vector2i(x,y) ] = -1;
+            planet->setInfoData(x,y,0);
+            changes[ Vector2i(x,y) ] = selfId;
         }
 
         return changes;

@@ -1,18 +1,14 @@
 extends Node
 
 ## HEALTH ##
-var maxHealth :int= 100
+var maxHealth :int= 100  ## just for health bar shit u feel
 var currentHealth :int= 100
 signal updateHealth
-
-## MOVEMENT ##
-var speed = 98.0
-
 
 ## INVENTORY ##
 # [ITEMID,COUNT]
 var inventory = [] # 0-39 inventory, 40-42 armor, 
-				   # 43-48 acces, 49 held, 50 - 52 vanity
+				   # 43-48 trinket, 49 held, 50 - 52 vanity
 				   # 53 - 77 chest inventory (25 slots)
 signal updateInventory
 signal onlyUpdateCraft
@@ -131,6 +127,12 @@ func swapItem(slot1,slot2):
 			points += int(ItemData.getItem(inventory[slot1][0]) is ItemArmorLegs)
 			points += int(ItemData.getItem(inventory[slot2][0]) is ItemArmorLegs)
 			updateArmor = true
+		43,44,45,46,47,48:
+			points += int(ItemData.getItem(inventory[slot1][0]) is ItemTrinket)
+			points += int(ItemData.getItem(inventory[slot2][0]) is ItemTrinket)
+			updateArmor = true
+		
+		
 		PlayerData.selectedSlot:
 			updateHeld = true
 			points += 3

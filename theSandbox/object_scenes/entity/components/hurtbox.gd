@@ -3,6 +3,7 @@ class_name Hurtbox
 
 @export var enemyBox :bool = true
 @export var damage :int = 1
+@export var knockback : float = 1.0
 
 var id = 0
 

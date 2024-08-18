@@ -6,7 +6,7 @@
 
 [resource]
 script = ExtResource("1_f4oep")
-defense = 3
+defense = 5
 armorTexture = ExtResource("1_sgwq0")
 itemName = "Iron Helmet"
 subtext = ""

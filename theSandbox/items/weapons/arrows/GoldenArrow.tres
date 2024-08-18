@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ItemArrow" load_steps=3 format=3 uid="uid://qbeb544r45sc"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemArrow.gd" id="1_o6adh"]
+[ext_resource type="Texture2D" uid="uid://dsgerjim6ah1w" path="res://items/weapons/arrows/goldArrow.png" id="2_jxxi5"]
+
+[resource]
+script = ExtResource("1_o6adh")
+damage = 8
+velocityMultiplier = 1.2
+itemName = "Gold Tipped Arrow"
+subtext = ""
+texture = ExtResource("2_jxxi5")
+maxStackSize = 99
+clickToUse = false

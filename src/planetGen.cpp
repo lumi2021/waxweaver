@@ -141,8 +141,10 @@ void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
 
                 }
 
-                if(std::rand() % 300 == 0){
-                    generateOre(planet,x,y,18,2,5); // generate copper
+                if( dis > 64 ) {
+                    if(std::rand() % 300 == 0){
+                        generateOre(planet,x,y,18,2,5); // generate copper
+                    }
                 }
 
                 if(std::rand() % 400 == 0){
@@ -157,7 +159,7 @@ void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
                     Vector2i down = Vector2i( Vector2(0,1).rotated(acos(0.0)*quad) ) + Vector2i(x,y) ;
                     if( planet->getTileData(down.x,down.y) == 2 ){
                         // found suitable ground underground
-                        if(std::rand() % 300 == 0){
+                        if(std::rand() % 280 == 0){
                             planet->setTileData(x,y,34); // spawn loot chest
                         }
 

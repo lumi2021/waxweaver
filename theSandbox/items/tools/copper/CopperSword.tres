@@ -5,10 +5,11 @@
 
 [resource]
 script = ExtResource("1_1uiqy")
-damage = 5
+damage = 8
 animSpeed = 6.0
 weaponScale = 1.0
 itemName = "Copper Sword"
+subtext = ""
 texture = ExtResource("2_knptb")
 maxStackSize = 1
 clickToUse = false
