@@ -9,9 +9,13 @@ var deletable = true
 
 var tex :Texture2D
 
+var statusInflictors :Array[StatusInflictor] = []
+
+
 func _ready():
 	setVelocity(dir.normalized() * speed)
 	$axis/Hurtbox.damage = damage
+	$axis/Hurtbox.statusInflictors = statusInflictors
 	$axis.rotation = velocity.angle()
 	
 	$axis/Arrow.texture = tex

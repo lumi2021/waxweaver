@@ -6,9 +6,8 @@ class_name CraftingRecipe
 
 @export var ingredients :Array[CraftingIngredient] = []
 
-@export_subgroup("Station")
 @export var requiresStation :bool = true
-enum stationEnum {FURNACE = 16, WORKBENCH = 20, GRILL = 46}
+enum stationEnum {NONE = 0, FURNACE = 16, WORKBENCH = 20, GRILL = 46}
 @export var station :stationEnum
 
 var internalID = 0

@@ -46,9 +46,7 @@ func _process(delta):
 		invOpen = !invOpen
 		$Menu.visible = invOpen
 		
-		if invOpen:
-			crafting.createCraftingIcons()
-		else:
+		if !invOpen:
 			PlayerData.closeChest()
 		$ItemPreview.position.x = (197 * int(invOpen)) + (3 * (1-int(invOpen) ))
 	
@@ -334,13 +332,13 @@ func forceOpenInventory():
 	invOpen = true
 	$Menu.visible = invOpen
 	
-	crafting.createCraftingIcons()
+	#crafting.createCraftingIcons()
 	$ItemPreview.position.x = (197 * int(invOpen)) + (3 * (1-int(invOpen) ))
 
 
 func _on_crafting_vi_s_toggle_pressed():
-	crafting.showUncraftables = !crafting.showUncraftables
-	crafting.updateUncraftableVis()
+	#crafting.showUncraftables = !crafting.showUncraftables
+	#crafting.updateUncraftableVis()
 	$Menu/craftingViSToggle/VisibleEyes.frame = int(crafting.showUncraftables)
 
 func _unhandled_input(event):

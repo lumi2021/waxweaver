@@ -394,10 +394,6 @@ horizontal_scroll_mode = 0
 layout_mode = 2
 columns = 2
 
-[node name="Timer" type="Timer" parent="Menu/Crafting"]
-wait_time = 0.5
-one_shot = true
-
 [node name="craftingViSToggle" type="Button" parent="Menu"]
 self_modulate = Color(1, 1, 1, 0)
 offset_left = 185.0
@@ -493,6 +489,7 @@ label_settings = SubResource("LabelSettings_wiqs2")
 autowrap_mode = 2
 
 [node name="ChestInventory" type="Node2D" parent="."]
+visible = false
 position = Vector2(7, 159)
 
 [node name="background" type="ColorRect" parent="ChestInventory"]

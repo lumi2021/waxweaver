@@ -94,6 +94,7 @@ var data = {
 	3036:load("res://items/trinket/GoldenRing.tres"),
 	3037:load("res://items/food/Apple.tres"),
 	3038:load("res://items/trinket/Flashlight.tres"),
+	3039:load("res://items/weapons/arrows/PoisonArrow.tres"),
 	
 	# chairs 6000 - 6049
 	6000:load("res://items/blocks/furniture/chairs/WoodenChair.tres"),
@@ -150,4 +151,8 @@ func getItemName(id):
 		return ""
 	return data.itemName
 
-
+func getItemTexture(id):
+	var data = getItem(id)
+	if !is_instance_valid(data):
+		return ""
+	return data.texture

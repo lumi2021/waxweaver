@@ -42,6 +42,7 @@ func fire(delta):
 	var ins = arrowScene.instantiate()
 	ins.damage = Stats.getRangedDamage(itemData.damage + i[0].damage)
 	ins.speed = itemData.velocity * i[0].velocityMultiplier
+	ins.statusInflictors = itemData.statusInflictors + i[0].statusInflictors
 	ins.tex = i[0].texture
 	ins.dir = Vector2(1,0).rotated(origin.global_rotation - get_parent().get_parent().rotation)
 	#print(Vector2(1,0).rotated(origin.global_rotation))

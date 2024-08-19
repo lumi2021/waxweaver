@@ -219,24 +219,30 @@ func consumeFromSlots(slots:Array,amount:int):
 		amountLeft -= inventory[i][1]
 		inventory[i] = [-1,-1]
 
-func craftItem(craftData):
-	if inventory[49][0] != -1 and inventory[49][0] != craftData["crafts"]:
+func craftItem(recipe:CraftingRecipe):
+	if inventory[49][0] != -1 and inventory[49][0] != recipe.itemToCraft:
 		return
 	
-	var maxStack = ItemData.getItem(craftData["crafts"]).maxStackSize
-	if inventory[49][1] + craftData["amount"] > maxStack:
+	var maxStack = ItemData.getItem(recipe.itemToCraft).maxStackSize
+	if inventory[49][1] + recipe.amountToCraft > maxStack:
 		return
-		
-	consumeItems(craftData["ingredients"],craftData["ingAmounts"])
+	
+	var ingredients = []
+	var ingAmounts = []
+	for ing in recipe.ingredients:
+		ingredients.append( ing.ingredient )
+		ingAmounts.append( ing.amount )
+	
+	consumeItems(ingredients,ingAmounts)
 	if inventory[49][0] == -1:
-		inventory[49] = [ craftData["crafts"],craftData["amount"] ]
+		inventory[49] = [ recipe.itemToCraft,recipe.amountToCraft ]
 	else:
-		if inventory[49][1] + craftData["amount"] <= maxStack:
-			inventory[49][1] += craftData["amount"]
+		if inventory[49][1] + recipe.amountToCraft <= maxStack:
+			inventory[49][1] += recipe.amountToCraft
 	emit_signal("updateInventory")
 	
-	for i in craftData["ingredients"].size():
-		if checkForItemAmount(craftData["ingredients"][i]) < craftData["ingAmounts"][i]:
+	for i in ingredients.size():
+		if checkForItemAmount(ingredients[i]) < ingAmounts[i]:
 			return false # can not craft again
 	
 	return true # can craft again
@@ -417,3 +423,34 @@ func _unhandled_input(event):
 				
 		clearHandSlot()
 		emit_signal("updateInventory")
+
+####################################################################
+####################################################################
+######################### CRAFTING REDONE ##########################
+####################################################################
+####################################################################
+
+func parseRecipies() -> Array:
+	
+	var recipies :Array[int]= []
+	
+	for slot in range(40): # scans all items in inventory
+		
+		if inventory[slot][0] == -1:
+			continue # ignore if slot empty
+		
+		var item = ItemData.getItem(inventory[slot][0])
+		for recipe in item.materialIn: # scans each recipe on item
+			if !recipies.has( recipe ):
+				recipies.append( recipe ) # appends every unique recipe
+	
+	# return all discovered recipies
+	
+	return recipies
+
+func checkIfCraftable(recipe:CraftingRecipe):
+	for ing in recipe.ingredients:
+		if !checkForIngredient(ing.ingredient,ing.amount):
+			return false
+	return true
+	

@@ -1,14 +1,7 @@
-[gd_resource type="Resource" script_class="ItemDamage" load_steps=5 format=3 uid="uid://ul5cu6wslhwi"]
+[gd_resource type="Resource" script_class="ItemDamage" load_steps=3 format=3 uid="uid://ul5cu6wslhwi"]
 
 [ext_resource type="Script" path="res://item_resources/item_classes/ItemDamage.gd" id="1_xdeia"]
-[ext_resource type="Script" path="res://object_scenes/specialResource/statusEffects/StatusInflictor.gd" id="2_lpq66"]
 [ext_resource type="Texture2D" uid="uid://dbs4ktm2l71km" path="res://items/tools/flimsy/flimsySword.png" id="2_ve5la"]
-
-[sub_resource type="Resource" id="Resource_7to0m"]
-script = ExtResource("2_lpq66")
-effectName = "wet"
-seconds = 2.0
-chance = 100
 
 [resource]
 script = ExtResource("1_xdeia")
@@ -16,7 +9,7 @@ damage = 6
 animSpeed = 5.0
 knockbackMult = 0.8
 weaponScale = 1.0
-statusInflictors = Array[ExtResource("2_lpq66")]([SubResource("Resource_7to0m")])
+statusInflictors = Array[Resource("res://object_scenes/specialResource/statusEffects/StatusInflictor.gd")]([])
 itemName = "Flimsy Sword"
 subtext = ""
 texture = ExtResource("2_ve5la")
