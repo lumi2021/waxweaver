@@ -10,14 +10,13 @@ func _ready():
 		# need to run game twice to properly instantiate new recipies
 
 func initializeRecipies():
-	var i = 0
 	var folder = "res://item_resources/crafting/recipies/"
 	var dir = DirAccess.open(folder)
 	if dir:
 		dir.list_dir_begin()
 		var file_name = dir.get_next()
 		while file_name != "": # search through each file in crafting recipies
-			var r :CraftingRecipe = load( folder + file_name )
+			#var r :CraftingRecipe = load( folder + file_name )
 			longAssString += "load(\"" + folder + file_name + "\"),"
 			file_name = dir.get_next()
 	else:

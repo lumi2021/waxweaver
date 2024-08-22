@@ -7,3 +7,5 @@ class_name ItemFood
 @export var eatTime :float = 1.0
 
 @export var particleColor :Color = Color.WHITE
+
+@export var statusInflictors :Array[StatusInflictor] = []

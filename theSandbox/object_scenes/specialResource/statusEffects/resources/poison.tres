@@ -1,12 +1,15 @@
-[gd_resource type="Resource" script_class="StatusEffectPassiveDamage" load_steps=3 format=3 uid="uid://byk4npfkfi7ks"]
+[gd_resource type="Resource" script_class="StatusEffectPassiveDamage" load_steps=4 format=3 uid="uid://byk4npfkfi7ks"]
 
 [ext_resource type="PackedScene" uid="uid://oohi6ibnbj5m" path="res://object_scenes/specialResource/statusEffects/effectParticles/poisonPart.tscn" id="1_2q6v8"]
 [ext_resource type="Script" path="res://object_scenes/specialResource/statusEffects/StatusEffectPassiveDamage.gd" id="1_e5brj"]
+[ext_resource type="Texture2D" uid="uid://bt417epchjrs4" path="res://object_scenes/specialResource/statusEffects/playerDisplayIcon/poisoned.png" id="1_lwdml"]
 
 [resource]
 script = ExtResource("1_e5brj")
 rateInSeconds = 1.0
 amount = 1
 displayName = "Poisoned"
+icon = ExtResource("1_lwdml")
 dyeColor = Color(0.54902, 0.215686, 1, 1)
 particle = ExtResource("1_2q6v8")
+incompatibleEffects = Array[String]([])

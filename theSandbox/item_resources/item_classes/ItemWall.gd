@@ -10,8 +10,6 @@ func onUse(tileX:int,tileY:int,planetDir:int,planet,lastTile:Vector2):
 		#Cancel if not on planet
 		return "failure"
 	
-	var arrayPosition = (tileX * planet.SIZEINCHUNKS * 8) + tileY
-	
 	var block = planet.DATAC.getTileData(tileX,tileY)
 	var bg = planet.DATAC.getBGData(tileX,tileY)
 	

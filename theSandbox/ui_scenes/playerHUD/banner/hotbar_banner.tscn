@@ -1,9 +1,10 @@
-[gd_scene load_steps=23 format=3 uid="uid://daqevwntvcp3o"]
+[gd_scene load_steps=24 format=3 uid="uid://daqevwntvcp3o"]
 
 [ext_resource type="Script" path="res://ui_scenes/playerHUD/banner/hotbar_banner.gd" id="1_iyyfi"]
 [ext_resource type="PackedScene" uid="uid://cr7y1t1hoywt1" path="res://ui_scenes/playerHUD/inventory/inventory_slot.tscn" id="2_il2kt"]
 [ext_resource type="Texture2D" uid="uid://bw4fq64a1ehwa" path="res://ui_scenes/playerHUD/armor/armoricons.png" id="3_8kb7t"]
 [ext_resource type="Script" path="res://ui_scenes/playerHUD/banner/Crafting.gd" id="3_i82mf"]
+[ext_resource type="Texture2D" uid="uid://dx82ru7gr64h2" path="res://ui_scenes/playerHUD/inventory/nineRect.png" id="3_k7pwo"]
 [ext_resource type="Texture2D" uid="uid://bdqiwxyn3wg0y" path="res://ui_scenes/playerHUD/armor/vanityicons.png" id="4_50oir"]
 [ext_resource type="FontFile" uid="uid://n3r2v6m6uh2n" path="res://zeeg/font/GrapeSoda.ttf" id="5_3w5al"]
 [ext_resource type="Texture2D" uid="uid://i6l5rsnepvoc" path="res://ui_scenes/playerHUD/healthBar/white.png" id="5_ryv7v"]
@@ -28,31 +29,55 @@ outline_color = Color(0, 0, 0, 1)
 shadow_size = 3
 shadow_color = Color(0, 0, 0, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lombr"]
-bg_color = Color(0.239216, 0.329412, 0.458824, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6riis"]
+bg_color = Color(0.709804, 0.709804, 0.709804, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yhha6"]
-bg_color = Color(0.239216, 0.329412, 0.458824, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cm1y8"]
+bg_color = Color(0.658824, 0.658824, 0.658824, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o3p5s"]
-bg_color = Color(0.239216, 0.329412, 0.458824, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_omsf4"]
+bg_color = Color(0.509804, 0.509804, 0.509804, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sesr6"]
 content_margin_left = 1.0
 content_margin_top = 0.0
 content_margin_right = 4.0
 content_margin_bottom = 0.0
-bg_color = Color(0.231373, 0.25098, 0.329412, 1)
+bg_color = Color(1, 1, 1, 0.176471)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
 corner_radius_top_left = 3
 corner_radius_top_right = 3
 corner_radius_bottom_right = 3
-corner_radius_bottom_left = 2
+corner_radius_bottom_left = 3
+corner_detail = 2
 anti_aliasing = false
 
 [sub_resource type="Theme" id="Theme_yy38c"]
-VScrollBar/styles/grabber = SubResource("StyleBoxFlat_lombr")
-VScrollBar/styles/grabber_highlight = SubResource("StyleBoxFlat_yhha6")
-VScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_o3p5s")
+VScrollBar/styles/grabber = SubResource("StyleBoxFlat_6riis")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxFlat_cm1y8")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_omsf4")
 VScrollBar/styles/scroll = SubResource("StyleBoxFlat_sesr6")
 VScrollBar/styles/scroll_focus = null
 VSlider/constants/center_grabber = 0
@@ -98,12 +123,16 @@ shadow_color = Color(0, 0, 0, 1)
 z_index = 170
 script = ExtResource("1_iyyfi")
 
-[node name="blackBanner" type="ColorRect" parent="."]
-offset_left = -24.0
-offset_top = -26.0
-offset_right = 426.0
-offset_bottom = 40.0
-color = Color(0, 0, 0, 0.87451)
+[node name="NinePatchRect2" type="NinePatchRect" parent="."]
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 400.0
+offset_bottom = 41.0
+texture = ExtResource("3_k7pwo")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
 
 [node name="Hotbar" type="Node2D" parent="."]
 position = Vector2(7, 6)
@@ -156,19 +185,16 @@ isHoldSlot = true
 [node name="Menu" type="Node2D" parent="."]
 position = Vector2(-1, -1)
 
-[node name="background" type="ColorRect" parent="Menu"]
-offset_left = -23.0
-offset_top = 41.0
-offset_right = 196.0
+[node name="NinePatchRect" type="NinePatchRect" parent="Menu"]
+offset_left = 3.0
+offset_top = 43.0
+offset_right = 190.0
 offset_bottom = 154.0
-color = Color(0, 0, 0, 0.835294)
-
-[node name="line" type="ColorRect" parent="Menu"]
-offset_left = 8.0
-offset_top = 42.0
-offset_right = 92.0
-offset_bottom = 43.0
-color = Color(0.0823529, 0.113725, 0.156863, 1)
+texture = ExtResource("3_k7pwo")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
 
 [node name="Armoricons" type="Sprite2D" parent="Menu"]
 position = Vector2(111, 75)
@@ -308,7 +334,9 @@ centered = false
 [node name="defenseAmount" type="Label" parent="Menu/defense"]
 offset_left = -7.0
 offset_right = 22.0
-offset_bottom = 10.0
+offset_bottom = 13.0
+tooltip_text = "defense"
+mouse_filter = 1
 text = "0"
 label_settings = SubResource("LabelSettings_0g03e")
 horizontal_alignment = 1
@@ -318,54 +346,66 @@ position = Vector2(105, 50)
 
 [node name="slot40" parent="Menu/ArmorSlots" instance=ExtResource("2_il2kt")]
 slotToDisplay = 40
+customToolTip = "helmet slot"
 
 [node name="slot41" parent="Menu/ArmorSlots" instance=ExtResource("2_il2kt")]
 position = Vector2(0, 19)
 slotToDisplay = 41
+customToolTip = "chestplate slot"
 
 [node name="slot42" parent="Menu/ArmorSlots" instance=ExtResource("2_il2kt")]
 position = Vector2(0, 38)
 slotToDisplay = 42
+customToolTip = "leggings slot"
 
 [node name="VanitySlots" type="Node2D" parent="Menu"]
 position = Vector2(124, 50)
 
 [node name="slot50" parent="Menu/VanitySlots" instance=ExtResource("2_il2kt")]
 slotToDisplay = 50
+customToolTip = "vanity hat slot"
 
 [node name="slot51" parent="Menu/VanitySlots" instance=ExtResource("2_il2kt")]
 position = Vector2(0, 19)
 slotToDisplay = 51
+customToolTip = "vanity shirt slot"
 
 [node name="slot52" parent="Menu/VanitySlots" instance=ExtResource("2_il2kt")]
 position = Vector2(0, 38)
 slotToDisplay = 52
+customToolTip = "vanity pants slot"
 
 [node name="AccessorySlots" type="Node2D" parent="Menu"]
 position = Vector2(150, 50)
 
 [node name="slot43" parent="Menu/AccessorySlots" instance=ExtResource("2_il2kt")]
 slotToDisplay = 43
+customToolTip = "trinket slot"
 
 [node name="slot44" parent="Menu/AccessorySlots" instance=ExtResource("2_il2kt")]
 position = Vector2(0, 19)
 slotToDisplay = 44
+customToolTip = "trinket slot"
 
 [node name="slot45" parent="Menu/AccessorySlots" instance=ExtResource("2_il2kt")]
 position = Vector2(0, 38)
 slotToDisplay = 45
+customToolTip = "trinket slot"
 
 [node name="slot46" parent="Menu/AccessorySlots" instance=ExtResource("2_il2kt")]
 position = Vector2(17, 0)
 slotToDisplay = 46
+customToolTip = "trinket slot"
 
 [node name="slot47" parent="Menu/AccessorySlots" instance=ExtResource("2_il2kt")]
 position = Vector2(17, 19)
 slotToDisplay = 47
+customToolTip = "trinket slot"
 
 [node name="slot48" parent="Menu/AccessorySlots" instance=ExtResource("2_il2kt")]
 position = Vector2(17, 38)
 slotToDisplay = 48
+customToolTip = "trinket slot"
 
 [node name="Crafting" type="Node2D" parent="Menu"]
 position = Vector2(6, 157)
@@ -396,16 +436,16 @@ columns = 2
 
 [node name="craftingViSToggle" type="Button" parent="Menu"]
 self_modulate = Color(1, 1, 1, 0)
-offset_left = 185.0
-offset_top = 143.0
-offset_right = 194.0
-offset_bottom = 151.0
+offset_left = 178.0
+offset_top = 142.0
+offset_right = 187.0
+offset_bottom = 150.0
+tooltip_text = "show uncraftable items"
 
 [node name="VisibleEyes" type="Sprite2D" parent="Menu/craftingViSToggle"]
 texture = ExtResource("9_8uxfg")
 centered = false
 hframes = 2
-frame = 1
 
 [node name="HealthBar" type="Node2D" parent="."]
 position = Vector2(395, 7)
@@ -426,9 +466,9 @@ centered = false
 offset = Vector2(-1, 0)
 
 [node name="healthText" type="Label" parent="HealthBar"]
-offset_left = -207.0
+offset_left = -209.0
 offset_top = 1.0
-offset_right = 4.0
+offset_right = 2.0
 offset_bottom = 13.0
 text = "50 / 50"
 label_settings = SubResource("LabelSettings_utrlr")
@@ -492,12 +532,16 @@ autowrap_mode = 2
 visible = false
 position = Vector2(7, 159)
 
-[node name="background" type="ColorRect" parent="ChestInventory"]
-offset_left = -31.0
-offset_top = -6.0
-offset_right = 93.0
-offset_bottom = 89.0
-color = Color(0, 0, 0, 0.835294)
+[node name="NinePatchRect" type="NinePatchRect" parent="ChestInventory"]
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 90.0
+offset_bottom = 87.0
+texture = ExtResource("3_k7pwo")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
 
 [node name="slots" type="Node2D" parent="ChestInventory"]
 
@@ -618,5 +662,8 @@ offset_bottom = 187.0
 text = "respawn in 3"
 label_settings = SubResource("LabelSettings_bk67w")
 horizontal_alignment = 1
+
+[node name="StatusDisplay" type="Node2D" parent="."]
+position = Vector2(395, 47)
 
 [connection signal="pressed" from="Menu/craftingViSToggle" to="." method="_on_crafting_vi_s_toggle_pressed"]

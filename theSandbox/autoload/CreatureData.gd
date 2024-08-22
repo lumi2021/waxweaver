@@ -109,6 +109,9 @@ func isTileOnScreen(tile,planet):
 	var searchPos = GlobalRef.player.position +  Vector2(0,-40).rotated( (PI/2) * GlobalRef.player.rotated )
 	var playerTile = planet.posToTile(searchPos)
 	
+	if playerTile == null:
+		return true
+	
 	var xRange = abs(tile.x - playerTile.x)
 	var yRange = abs(tile.y - playerTile.y)
 	
@@ -128,13 +131,13 @@ func pickRandomSpot(planet):
 		return Vector2.ZERO
 	
 	
-	var range = Vector2(36,22).rotated( (PI/2) * GlobalRef.player.rotated )
-	range.x = abs(range.x)
-	range.y = abs(range.y)
+	var spawnRange = Vector2(36,22).rotated( (PI/2) * GlobalRef.player.rotated )
+	spawnRange.x = abs(spawnRange.x)
+	spawnRange.y = abs(spawnRange.y)
 	
 	
-	var tileX = randi_range(-range.x,range.x)
-	var tileY = randi_range(-range.y,range.y)
+	var tileX = randi_range(-spawnRange.x,spawnRange.x)
+	var tileY = randi_range(-spawnRange.y,spawnRange.y)
 
 	return Vector2(tileX + playerTile.x,tileY + playerTile.y)
 

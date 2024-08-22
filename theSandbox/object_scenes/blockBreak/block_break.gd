@@ -12,13 +12,15 @@ var mineMultiplier := 1.0
 
 var baseRotation = 0
 
+@onready var texture = $blockTexture
+
 func _ready():
 	
 	if !is_instance_valid(planet):
 		return
 	
 	var blockData = BlockData.theChunker.getBlockDictionary(blockID)
-	$blockTexture.texture = blockData["texture"]
+	texture.texture = blockData["texture"]
 	
 	if blockData["breakParticleID"] == -1:
 		$particles.texture = blockData["texture"]
@@ -27,24 +29,24 @@ func _ready():
 		$particles.texture = particleData["texture"]
 	
 	if blockData["connectedTexture"]:
-		$blockTexture.hframes = 16
-		$blockTexture.frame = BlockData.theChunker.scanBlockOpen(planet.DATAC,tileX,tileY,planetDir * int(blockData["rotateTextureToGravity"])) / 8
+		texture.hframes = 16
+		texture.frame = BlockData.theChunker.scanBlockOpen(planet.DATAC,tileX,tileY,planetDir * int(blockData["rotateTextureToGravity"])) / 8
 		$Sprite.hframes = 16
-		$Sprite.frame = $blockTexture.frame
+		$Sprite.frame = texture.frame
 	elif blockData["multitile"]:
-		$blockTexture.hframes = $blockTexture.texture.get_size().x / 8
-		$blockTexture.frame = planet.DATAC.getInfoData(tileX,tileY)
-		$Sprite.hframes = $blockTexture.hframes
-		$Sprite.frame = $blockTexture.frame
+		texture.hframes = texture.texture.get_size().x / 8
+		texture.frame = planet.DATAC.getInfoData(tileX,tileY)
+		$Sprite.hframes = texture.hframes
+		$Sprite.frame = texture.frame
 	
 	if blockData["animated"]:
-		$blockTexture.vframes = 3
+		texture.vframes = 3
 		$Sprite.vframes = 3
 	
 	if blockData["rotateTextureToGravity"]:
-		$blockTexture.rotation = (PI/2) * planet.getBlockPosition(tileX,tileY)
-		baseRotation = $blockTexture.rotation
-		$Sprite.rotation = $blockTexture.rotation
+		texture.rotation = (PI/2) * planet.getBlockPosition(tileX,tileY)
+		baseRotation = texture.rotation
+		$Sprite.rotation = texture.rotation
 		
 	$Sprite.texture = blockData["texture"]
 	
@@ -62,11 +64,9 @@ func _process(delta):
 		if itemData is ItemMining:
 			damage += delta * itemData.miningMultiplier
 			var breakTime = BlockData.theChunker.getBlockDictionary(blockID)["breakTime"]
-			$blockTexture.position.x = ((randi() % 3)-1) * (damage / breakTime)
-			$blockTexture.position.y = ((randi() % 3)-1) * (damage / breakTime)
-			$blockTexture.rotation = baseRotation + ((randi() % 3)-1) * (damage / breakTime) * 0.1
-			
-			var arrayPosition = (tileX * planet.SIZEINCHUNKS * 8) + tileY
+			texture.position.x = ((randi() % 3)-1) * (damage / breakTime)
+			texture.position.y = ((randi() % 3)-1) * (damage / breakTime)
+			texture.rotation = baseRotation + ((randi() % 3)-1) * (damage / breakTime) * 0.1
 			
 			if damage >= breakTime:
 				var edit = Vector2i(tileX,tileY)

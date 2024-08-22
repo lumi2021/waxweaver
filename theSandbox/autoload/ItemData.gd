@@ -42,6 +42,7 @@ var data = {
 	45:load("res://items/paintings/GahLUL.tres"),
 	
 	46:load("res://items/blocks/furniture/stations/Grill.tres"),
+	47:load("res://items/blocks/furniture/trapdoors/ItemTrapdoor.tres"),
 	
 	# item ids
 	3000:load("res://items/tools/flimsy/FlimsySword.tres"), # flimsy tools
@@ -146,13 +147,13 @@ func itemExists(id):
 	return data.has(id)
 
 func getItemName(id):
-	var data = getItem(id)
-	if !is_instance_valid(data):
+	var d = getItem(id)
+	if !is_instance_valid(d):
 		return ""
-	return data.itemName
+	return d.itemName
 
 func getItemTexture(id):
-	var data = getItem(id)
-	if !is_instance_valid(data):
+	var d = getItem(id)
+	if !is_instance_valid(d):
 		return ""
-	return data.texture
+	return d.texture

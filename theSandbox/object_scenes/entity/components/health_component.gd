@@ -54,8 +54,8 @@ func damage(amount):
 	var trueAmount = amount
 	var def = defense
 	if checkIfHasEffect("fragile"):
-		defense /= 2
-	trueAmount -= defense
+		def /= 2
+	trueAmount -= def
 	trueAmount = max(trueAmount,1)
 	
 	health -= trueAmount
@@ -146,7 +146,7 @@ func dropItem(itemID):
 	ins.position = parent.position
 	parent.get_parent().call_deferred("add_child",ins)
 
-func inflictStatus(effect:String,seconds:int):
+func inflictStatus(effect:String,seconds:float):
 	if statusImmunities.has(effect): # return if immune to status
 		return
 	
@@ -171,6 +171,8 @@ func inflictStatus(effect:String,seconds:int):
 	statusEffects.append( s )
 	s.onInfliction()
 	emit_signal("statusUpdated")
+	if isPlayer:
+		GlobalRef.hotbar.updateStatus()
 	
 func _process(delta):
 

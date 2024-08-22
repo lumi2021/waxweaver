@@ -276,7 +276,7 @@ func openChestInventory(chestarray:Array):
 
 func clearChestInventory():
 	inventory.resize(53)
-	var newAppendArray = []
+	#var newAppendArray = []
 	for i in range(25):
 		inventory.append([-1,-1])
 

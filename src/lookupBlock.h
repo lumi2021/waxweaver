@@ -57,6 +57,8 @@
 #include "blockPaintGahLuL.h" // id 45
 
 #include "blockGrill.h" // id 46
+#include "blockTrapdoorClosed.h" // id 47
+#include "blockTrapdoorOpen.h" // id 48
 
 // adding a new block? make sure you increment the PENIS array !
 
@@ -74,7 +76,7 @@ public:
 	
 	Array allBlocks;
 
-	BLOCK *penis[47]; // must be largest id + 1
+	BLOCK *penis[49]; // must be largest id + 1
 
 	LOOKUPBLOCK();
 	~LOOKUPBLOCK();

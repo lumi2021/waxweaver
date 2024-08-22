@@ -7,7 +7,7 @@
 [sub_resource type="Resource" id="Resource_ry8h0"]
 script = ExtResource("2_6038e")
 effectName = "poison"
-seconds = 5.0
+seconds = 10.0
 chance = 100
 
 [resource]

@@ -36,6 +36,7 @@ Background="*res://autoload/Background.gd"
 settings/stdout/print_fps=true
 gdscript/warnings/unused_parameter=0
 gdscript/warnings/integer_division=0
+gdscript/warnings/narrowing_conversion=0
 
 [display]
 
@@ -69,7 +70,9 @@ folder_colors={
 [gui]
 
 fonts/dynamic_fonts/use_oversampling=false
+theme/custom_font="res://zeeg/font/GrapeSoda.ttf"
 theme/default_font_antialiasing=0
+timers/tooltip_delay_sec=0.2
 
 [input]
 

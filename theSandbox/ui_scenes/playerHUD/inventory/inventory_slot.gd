@@ -5,7 +5,12 @@ extends Node2D
 
 @export var isHoldSlot := false
 
+@export var customToolTip :String = ""
+
 var parent = null
+
+@export var selectedColor :Color = Color.WHITE
+@export var notSelectedColor :Color = Color.WHITE
 
 func _ready():
 	PlayerData.updateInventory.connect(updateDisplay)
@@ -15,14 +20,18 @@ func _ready():
 	
 	if isHoldSlot:
 		$button.queue_free()
+		$itemTexture.material = null
+	
+	if customToolTip != "":
+		$button.tooltip_text = customToolTip
 
 func updateSelected():
 	if slotToDisplay == PlayerData.selectedSlot:
-		$Slot.modulate = Color(0.192,0.565,0.255)
-		$Label.label_settings.outline_color = Color(0.192,0.565,0.255)
+		$Slot.modulate = selectedColor
+		$Label.label_settings.outline_color = selectedColor
 	else:
-		$Slot.modulate = Color(0.082,0.114,0.157)
-		$Label.label_settings.outline_color = Color(0.082,0.114,0.157)
+		$Slot.modulate = notSelectedColor
+		$Label.label_settings.outline_color = notSelectedColor
 	
 func updateDisplay():
 	

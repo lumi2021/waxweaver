@@ -10,6 +10,8 @@ var stationScan = []
 var scanTick = 0
 signal scannedStations
 
+var showUncraftables : bool = false
+
 var oldRecipies :Array[int]= []
 
 func _ready():
@@ -20,6 +22,12 @@ func reloadCraftingRecipies():
 	if oldRecipies == newRecipies:
 		return # do nothing if available recipies havent changed
 	
+	refresh(newRecipies) # refresh recipies if recipies unchanged
+
+func forceReload():
+	refresh(PlayerData.parseRecipies())
+
+func refresh(newRecipies):
 	clearOldIcons()
 	
 	for id in newRecipies:
@@ -63,8 +71,6 @@ func displayCraftingInfo(recipe:CraftingRecipe):
 		$itemInfo/ingHolder.add_child(ins)
 		
 		i += 1
-	
-	
 	
 	$itemInfo.visible = true
 

@@ -40,6 +40,8 @@ void PLANETDATA::_bind_methods() {
     ClassDB::bind_method(D_METHOD("createAllChunks","chunkScene","chunkContainer","sizeInChunks"), &PLANETDATA::createAllChunks);
 
     ClassDB::bind_method(D_METHOD("findSpawnPosition"), &PLANETDATA::findSpawnPosition);
+    ClassDB::bind_method(D_METHOD("getSaveString"), &PLANETDATA::getSaveString);
+    ClassDB::bind_method(D_METHOD("loadFromString","tileString","bgString","infoString","timeString","waterString"), &PLANETDATA::loadFromString);
     ClassDB::bind_method(D_METHOD("findFloor","x","y"), &PLANETDATA::findFloor);
 }
 
@@ -413,4 +415,202 @@ Vector2i PLANETDATA::findFloor(int x, int y, LOOKUPBLOCK *lookup){
     return Vector2i(-10,-10);
 
 
+}
+
+PackedStringArray PLANETDATA::getSaveString(){
+    int size = planetSize * planetSize;
+
+    // tiles
+    String tiles = "";
+    int lastTile = getTileRow(0);
+    int tileInRow = 0;
+
+    // bg walls
+    String bgs = "";
+    int lastBG = getBGRow(0);
+    int BGInRow = 0;
+
+    // info multitile stuff
+    String infostring = "";
+    int lastInfo = getInfoRow(0);
+    int InfoInRow = 0;
+
+    // time tick stuff
+    String timestring = "";
+    int lastTime = getTimeRow(0);
+    int TimeInRow = 0;
+
+    // water stuff
+    String waterstring = "";
+    float lastWater = getWaterRow(0);
+    int WaterInRow = 0;
+
+
+    for(int i = 0; i < size; i++){ // loop through every tile
+
+        // tiles
+        int tile = getTileRow(i); // gets tile
+        if(lastTile == tile){
+            tileInRow++;
+        }else{
+            tiles += String::num_int64(lastTile) + "x";
+            tiles += String::num_int64(tileInRow) + ",";
+            tileInRow = 1;
+            lastTile = tile;
+        }
+
+        // bg
+        int bg = getBGRow(i); // gets bg wall tile
+        if(lastBG == bg){
+            BGInRow++;
+        }else{
+            bgs += String::num_int64(lastBG) + "x";
+            bgs += String::num_int64(BGInRow) + ",";
+            BGInRow = 1;
+            lastBG = bg;
+        }
+
+        // info
+        int info = getInfoRow(i); // gets info
+        if(lastInfo == info){
+            InfoInRow++;
+        }else{
+            infostring += String::num_int64(lastInfo) + "x";
+            infostring += String::num_int64(InfoInRow) + ",";
+            InfoInRow = 1;
+            lastInfo = info;
+        }
+
+        // time
+        int time = getTimeRow(i); // gets time
+        if(lastTime == time){
+            TimeInRow++;
+        }else{
+            timestring += String::num_int64(lastTime) + "x";
+            timestring += String::num_int64(TimeInRow) + ",";
+            TimeInRow = 1;
+            lastTime = time;
+        }
+
+        // water
+        float water = getWaterRow(i); // gets water
+        if(lastWater == water){
+            WaterInRow++;
+        }else{
+            waterstring += String::num(lastWater,4) + "x";
+            waterstring += String::num_int64(WaterInRow) + ",";
+            WaterInRow = 1;
+            lastWater = water;
+        }
+    
+    
+    }
+    
+    PackedStringArray collection;
+    collection.append(tiles);
+    collection.append(bgs);
+    collection.append(infostring);
+    collection.append(timestring);
+    collection.append(waterstring);
+    
+    return collection;
+}
+
+void PLANETDATA::loadFromString(String tileString,String bgString,String infoString,String timeString,String waterString){
+   
+    // tile loading
+    int prev = 0;
+    PackedStringArray tiles = tileString.split(",");
+    for(int slice = 0; slice < tiles.size(); slice++){
+        String s = tiles[slice];
+        int tile = s.get_slice("x",0).to_int();
+        int amount = s.get_slice("x",1).to_int();  
+        int wow = 0;
+        for(int i = 0; i < amount; i++){
+            tileData[i + prev] = tile;
+            wow++;
+        }
+        prev += wow;
+    }
+
+    // bg loading
+    prev = 0;
+    PackedStringArray bg = bgString.split(",");
+    for(int slice = 0; slice < bg.size(); slice++){
+        String s = bg[slice];
+        int tile = s.get_slice("x",0).to_int();
+        int amount = s.get_slice("x",1).to_int();  
+        int wow = 0;
+        for(int i = 0; i < amount; i++){
+            bgData[i + prev] = tile;
+            wow++;
+        }
+        prev += wow;
+    }
+
+    // info loading
+    prev = 0;
+    PackedStringArray info = infoString.split(",");
+    for(int slice = 0; slice < info.size(); slice++){
+        String s = info[slice];
+        int tile = s.get_slice("x",0).to_int();
+        int amount = s.get_slice("x",1).to_int();  
+        int wow = 0;
+        for(int i = 0; i < amount; i++){
+            infoData[i + prev] = tile;
+            wow++;
+        }
+        prev += wow;
+    }
+
+    // time loading
+    prev = 0;
+    PackedStringArray time = timeString.split(",");
+    for(int slice = 0; slice < time.size(); slice++){
+        String s = time[slice];
+        int tile = s.get_slice("x",0).to_int();
+        int amount = s.get_slice("x",1).to_int();  
+        int wow = 0;
+        for(int i = 0; i < amount; i++){
+            timeData[i + prev] = tile;
+            wow++;
+        }
+        prev += wow;
+    }
+
+    // water loading
+    prev = 0;
+    PackedStringArray water = waterString.split(",");
+    for(int slice = 0; slice < water.size(); slice++){
+        String s = water[slice];
+        float tile = s.get_slice("x",0).to_float();
+        int amount = s.get_slice("x",1).to_int();  
+        int wow = 0;
+        for(int i = 0; i < amount; i++){
+            waterData[i + prev] = tile;
+            wow++;
+        }
+        prev += wow;
+    }
+
+}
+
+int PLANETDATA::getTileRow(int i){
+    return tileData[i];
+}
+
+int PLANETDATA::getBGRow(int i){
+    return bgData[i];
+}
+
+int PLANETDATA::getInfoRow(int i){
+    return infoData[i];
+}
+
+int PLANETDATA::getTimeRow(int i){
+    return timeData[i];
+}
+
+float PLANETDATA::getWaterRow(int i){
+    return waterData[i];
 }

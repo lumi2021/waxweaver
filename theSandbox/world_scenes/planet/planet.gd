@@ -107,7 +107,7 @@ func clearOrbitingParents():
 func _physics_process(delta):
 	tick += 1
 	DATAC.setGlobalTick(GlobalRef.globalTick)
-	var shouldUpdateLight = 0
+	#var shouldUpdateLight = 0
 	for key in chunkDictionary:
 		var chunk = chunkDictionary[key]
 		if tick % 4 != chunk.id4:
@@ -130,7 +130,7 @@ func _physics_process(delta):
 					committedChanges[i] = d[i]
 		
 		#Updates light
-		shouldUpdateLight += int(chunk.MUSTUPDATELIGHT)
+		#shouldUpdateLight += int(chunk.MUSTUPDATELIGHT)
 		chunk.MUSTUPDATELIGHT = false
 		
 		if committedChanges.size() > 0:
@@ -336,3 +336,7 @@ func unloadPlanet():
 	Background.clearBG()
 	if GlobalRef.currentPlanet == self:
 		GlobalRef.currentPlanet = null
+
+func forceChunkDrawUpdate():
+	for chunk in chunkContainer.get_children():
+		chunk.drawData()

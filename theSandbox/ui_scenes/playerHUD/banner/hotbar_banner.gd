@@ -16,6 +16,8 @@ var previousMessage = ""
 
 @onready var chatMessageScene = preload("res://ui_scenes/chat/chat_message.tscn")
 
+var longassstring :PackedStringArray
+
 func _ready():
 	
 	GlobalRef.hotbar = self
@@ -41,7 +43,8 @@ func _ready():
 	PlayerData.connect("forceOpenInventory",forceOpenInventory)
 	
 func _process(delta):
-	holdSlot.position = to_local(get_global_mouse_position()) - Vector2(6,6)
+	var pos = to_local(get_global_mouse_position()) - Vector2(6,6)
+	holdSlot.position = Vector2i( pos )
 	if Input.is_action_just_pressed("inventory") and !GlobalRef.chatIsOpen:
 		invOpen = !invOpen
 		$Menu.visible = invOpen
@@ -254,6 +257,13 @@ func interpretCommand(text):
 			GlobalRef.player.healthComponent.heal(1000)
 			GlobalRef.sendChat("Healed player.")
 		
+		"save":
+			longassstring = GlobalRef.currentPlanet.DATAC.getSaveString()
+		
+		"load":
+			GlobalRef.currentPlanet.DATAC.loadFromString(longassstring[0],longassstring[1],longassstring[2],longassstring[3],longassstring[4])
+			GlobalRef.currentPlanet.forceChunkDrawUpdate()
+		
 		_:
 			GlobalRef.sendError("Error: command doesn't exist")
 			return
@@ -337,8 +347,8 @@ func forceOpenInventory():
 
 
 func _on_crafting_vi_s_toggle_pressed():
-	#crafting.showUncraftables = !crafting.showUncraftables
-	#crafting.updateUncraftableVis()
+	crafting.showUncraftables = !crafting.showUncraftables
+	crafting.forceReload()
 	$Menu/craftingViSToggle/VisibleEyes.frame = int(crafting.showUncraftables)
 
 func _unhandled_input(event):
@@ -375,3 +385,14 @@ func selectSlot(slot):
 	PlayerData.selectSlot(slot)
 	for i in $Hotbar.get_children():
 		i.updateSelected()
+
+func updateStatus():
+	for c in $StatusDisplay.get_children():
+		c.queue_free()
+	var i = 0
+	for effect in GlobalRef.player.healthComponent.statusEffects:
+		var ins = load("res://object_scenes/specialResource/statusEffects/status_display.tscn").instantiate()
+		ins.status = effect
+		ins.position.y = i * 10
+		$StatusDisplay.add_child(ins)
+		i += 1

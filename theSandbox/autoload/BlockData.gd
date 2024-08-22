@@ -177,7 +177,7 @@ func placeDoor(tileX:int,tileY:int,planet,startInfo:int,infoOffset:int,side:int)
 	var mltX = (size.x * mltY * -1) + startInfo
 	var dir = planet.DATAC.getPositionLookup(tileX,tileY)
 	
-	var i = 0
+	#var i = 0
 	
 	for xi in range(size.x):
 		for yi in range(size.y):
@@ -189,13 +189,13 @@ func placeDoor(tileX:int,tileY:int,planet,startInfo:int,infoOffset:int,side:int)
 			if side == xi:
 				DICK[replacePos] = 22;
 				
-				var info = (yi * size.x) + i
+				#var info = (yi * size.x) + i
 				
 				planet.DATAC.setInfoData(worldX,worldY,yi + infoOffset)
 			else:
 				DICK[replacePos] = 0;
 			
-		i += 1
+		#i += 1
 		
 	return DICK
 

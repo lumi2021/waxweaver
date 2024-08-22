@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="StatusEffectPassiveDamage" load_steps=3 format=3 uid="uid://but7vsetgpvi3"]
+
+[ext_resource type="Script" path="res://object_scenes/specialResource/statusEffects/StatusEffectPassiveDamage.gd" id="1_4hau3"]
+[ext_resource type="Texture2D" uid="uid://psuy2as228rw" path="res://object_scenes/specialResource/statusEffects/playerDisplayIcon/suffocating.png" id="1_8aixs"]
+
+[resource]
+script = ExtResource("1_4hau3")
+rateInSeconds = 0.25
+amount = 1
+displayName = "Suffocating"
+icon = ExtResource("1_8aixs")
+dyeColor = Color(0.54902, 0.54902, 0.54902, 1)
+incompatibleEffects = Array[String]([])

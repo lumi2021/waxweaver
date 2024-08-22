@@ -40,7 +40,14 @@ func onUsing(delta):
 	if timeTick >= timeToEat:
 		timeTick = 0.0
 		onFirstUse()
-		GlobalRef.player.healthComponent.heal(amountToHeal) 
+		GlobalRef.player.healthComponent.heal(amountToHeal)
+		
+		for effect in itemData.statusInflictors:
+			var chance :int= (randi() % 100) + 1
+			if chance <= effect.chance:
+				GlobalRef.player.healthComponent.inflictStatus( effect.effectName, effect.seconds )
+		
+		
 		PlayerData.consumeSelected()
 	
 

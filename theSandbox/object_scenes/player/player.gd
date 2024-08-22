@@ -9,7 +9,7 @@ class_name Player
 
 @onready var shipDEBUG = preload("res://world_scenes/ship/ship.tscn")
 
-@onready var healthComponent = $HealthComponent
+@onready var healthComponent :HealthComponent= $HealthComponent
 @onready var shipFinder = $ShipFinder
 
 var rotated = 0
@@ -125,7 +125,7 @@ func _process(delta):
 		GlobalRef.camera.map.visible = GlobalRef.camera.mapbg.visible
 	
 	if $suffocatingCast/suffocate.is_colliding() and !noClip:
-		healthComponent.damage(1)
+		healthComponent.inflictStatus("suffocating",0.1)
 	
 ######################################################################
 ############################## MOVEMENT ##############################
@@ -219,6 +219,11 @@ func normalMovement(delta):
 		body = shipOn
 	newVel = WATERJUMPCAMERALETSGO(body,newVel,rotSource,onFloor,delta)
 	
+	if movementState == 2:
+		updateLight()
+		ensureCamPosition()
+		return
+	
 	velocity = newVel.rotated(rotSource)
 	
 	move_and_slide()
@@ -258,10 +263,16 @@ func WATERJUMPCAMERALETSGO(body,vel,rot,onFloor,delta):
 	# attach to ladder if holding up
 	if body.DATAC.getTileData(tile.x,tile.y) == 25:
 		if Input.is_action_pressed("move_up") or Input.is_action_pressed("move_down"):
+			
+			
+			if !onFloor and vel.y < 260:
+				return vel
+			
 			velocity = Vector2.ZERO
 			vel = Vector2.ZERO
 			if movementState == 2:
-					return
+				return vel
+			animationPlayer.stop()
 			movementState = 2 # enter ladder state
 			if body is Planet:
 				rotated = body.DATAC.getPositionLookup(tile.x,tile.y)
@@ -674,6 +685,32 @@ func onRightClick():
 				ins.pos = tile
 				ins.rot = rot
 				editBody.entityContainer.add_child(ins)
+		47:
+			var dick = setAllTrapdoors(tile,48,editBody)
+			editBody.editTiles( dick )
+		48:
+			var dick = setAllTrapdoors(tile,47,editBody)
+			editBody.editTiles( dick )
+
+func setAllTrapdoors(tile:Vector2,replaceID:int,body):
+	var dick = {}
+	var quad = body.DATAC.getPositionLookup(tile.x,tile.y)
+	# scans right
+	for i in range(32):
+		var newPos = Vector2i( Vector2(i,0).rotated( quad * (PI/2) ) ) + Vector2i(tile.x,tile.y)
+		var existingTile = body.DATAC.getTileData(newPos.x,newPos.y)
+		if existingTile != 47 and existingTile != 48:
+			break
+		dick[newPos] = replaceID
+	
+	for i in range(31):
+		var newPos = Vector2i( Vector2(-i-1,0).rotated( quad * (PI/2) ) ) + Vector2i(tile.x,tile.y)
+		var existingTile = body.DATAC.getTileData(newPos.x,newPos.y)
+		if existingTile != 47 and existingTile != 48:
+			break
+		dick[newPos] = replaceID
+	
+	return dick
 
 func openDoor(tile,body,playerDir):
 	var info = body.DATAC.getInfoData(tile.x,tile.y) % 2 # top or bottom of door
@@ -701,7 +738,6 @@ func openDoor(tile,body,playerDir):
 func closeDoor(tile,body):
 	var info = body.DATAC.getInfoData(tile.x,tile.y)
 	var doorSwing = 0
-	var dick = {}
 	
 	if info % 8 < 4:
 		doorSwing = 1
@@ -811,9 +847,9 @@ func playerAnimation(dir,newVel,delta):
 	if dir != 0:
 		flipPlayer(dir)
 	
-	var glob = global_position - get_global_mouse_position()
-	var gay = glob.rotated(-GlobalRef.camera.rotation)
-	var newDir = (int(gay.x < 0) * 2) - 1
+	#var glob = global_position - get_global_mouse_position()
+	#var gay = glob.rotated(-GlobalRef.camera.rotation)
+	#var newDir = (int(gay.x < 0) * 2) - 1
 	
 	# rotate player if using item
 	#if Input.is_action_pressed("mouse_left"):
