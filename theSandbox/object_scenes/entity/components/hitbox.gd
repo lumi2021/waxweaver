@@ -38,8 +38,16 @@ func _on_area_entered(area):
 	
 	collectedIDs.append(area.id)
 	
-	healthComponent.damage(area.damage)
-	healthComponent.dealKnockback(120.0,dir,area.knockback)
+	var hitCrit :bool= false
+	var knock = area.knockback
+	
+	if enemyBox:
+		if Stats.getCriticalStrikeChance() >= (randi() % 100) + 1: # rolls from 1 - 100
+			hitCrit = true
+			knock *= 1.4
+		
+	healthComponent.damage(area.damage,hitCrit)
+	healthComponent.dealKnockback(120.0,dir,knock)
 	
 	for effect in area.statusInflictors:
 		var chance :int= (randi() % 100) + 1

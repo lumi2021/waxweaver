@@ -19,6 +19,7 @@ var rangedDamageMult :float = 1.0
 var bonusHealing :float = 1.0
 var knockbackBonus :float = 0.0
 var attackSpeedMult :float = 1.0
+var criticalStrikeChance :int = 4 # chance out of 100
 
 ## OTHER ##
 var respawnWait :float = 8.0 # how long until player respawns
@@ -72,6 +73,9 @@ func getBonusKnockback() -> float:
 func getAttackSpeedMult() -> float:
 	return attackSpeedMult
 
+func getCriticalStrikeChance() -> int:
+	return criticalStrikeChance
+
 ###### TECHNICAL #########
 
 func hasProperty(property:String):
@@ -88,6 +92,7 @@ func resetStats():
 	bonusHealing = 1.0
 	knockbackBonus = 0.0
 	attackSpeedMult = 1.0
+	criticalStrikeChance = 4
 	
 	trinkets = []
 	specialProperties = []
@@ -113,6 +118,7 @@ func updateStats():
 		bonusHealing += data.addHealingMultiplier
 		knockbackBonus += data.addKnockback
 		attackSpeedMult += data.addAttackSpeed
+		criticalStrikeChance += data.addcriticalStrikeChance
 		
 		specialProperties += data.specialProperties
 	

@@ -24,6 +24,9 @@ func _ready():
 			z_index += 2
 		"healPlayer" :
 			modulate = Color.SPRING_GREEN
+		"critEnemy" :
+			flashSpeed = 1.0
+			z_index += 1
 	
 	await get_tree().create_timer(0.5).timeout
 	queue_free()

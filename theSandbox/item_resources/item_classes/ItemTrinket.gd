@@ -21,4 +21,5 @@ class_name ItemTrinket
 @export var addHealingMultiplier :float = 0.0
 @export var addKnockback :float = 0.0
 @export var addAttackSpeed :float = 0.0
+@export var addcriticalStrikeChance: int = 0
 

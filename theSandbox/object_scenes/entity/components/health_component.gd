@@ -46,7 +46,7 @@ func heal(amount):
 	
 	emit_signal("healthChanged")
 
-func damage(amount):
+func damage(amount,hitCrit:bool=false):
 	
 	if isPlayer:
 		if parent.dead:
@@ -55,8 +55,15 @@ func damage(amount):
 	var def = defense
 	if checkIfHasEffect("fragile"):
 		def /= 2
+	
 	trueAmount -= def
 	trueAmount = max(trueAmount,1)
+	
+	var peebus :String = ""
+	
+	if hitCrit:
+		trueAmount *= 2
+		peebus = "critEnemy"
 	
 	health -= trueAmount
 	
@@ -65,7 +72,7 @@ func damage(amount):
 	if isPlayer:
 		Indicators.damnPopup(trueAmount,parent.global_position,"player")
 	else:
-		Indicators.damnPopup(trueAmount,parent.global_position)
+		Indicators.damnPopup(trueAmount,parent.global_position,peebus)
 	
 	emit_signal("healthChanged")
 	emit_signal("smacked")
