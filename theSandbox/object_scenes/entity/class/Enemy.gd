@@ -52,13 +52,19 @@ func setLight(amount):
 	planet.DATAC.setLightData(pos.x,pos.y,-amount)
 
 func getQuad(obj):
-	var angle1 = Vector2(1,1)
-	var angle2 = Vector2(-1,1)
-		
-	var dot1 = int(obj.position.dot(angle1) >= 0)
-	var dot2 = int(obj.position.dot(angle2) > 0) * 2
 	
-	return [0,1,3,2][dot1 + dot2]
+	var pos = getPos()
+	if pos == null:
+		var angle1 = Vector2(1,1)
+		var angle2 = Vector2(-1,1)
+			
+		var dot1 = int(obj.position.dot(angle1) >= 0)
+		var dot2 = int(obj.position.dot(angle2) > 0) * 2
+		
+		return [0,1,3,2][dot1 + dot2]
+	
+	return planet.DATAC.getPositionLookup(pos.x,pos.y)
+		
 
 func getDirectionTowardsPlayer():
 	var myQuad = getQuad( self )

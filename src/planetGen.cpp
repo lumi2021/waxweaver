@@ -25,6 +25,8 @@ void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
     int planetSize = planet->planetSize;
 
     int lastSpawnedTree = 16;
+    int baseSurface = std::max( planetSize / 4, (planetSize/2) - 128 );
+    int skySize = (planetSize - (baseSurface * 2)) / 2;
 
     // first pass
     // basic terrain, lakes and oceans
@@ -33,7 +35,6 @@ void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
 
             int quad = planet->getPositionLookup(x,y);
             int side = Vector2(x,y).rotated(acos(0.0) * quad).x;
-            int baseSurface = std::max( planetSize / 4, (planetSize/2) - 128 );
             double dis = getBlockDistance(x,y,planet);
             double surface = (noise->get_noise_1d(side*2.0) * 8.0)  +  baseSurface;
 
@@ -170,6 +171,18 @@ void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
 
             }
 
+
+        }
+    }
+
+    // end big loops, spawn structure?
+
+    int randX = (std::rand() % (baseSurface * 2)) + skySize; // finds random position underground
+    int randY = (std::rand() % (baseSurface * 2)) + skySize;
+    
+    for (int x = 0; x < 6; x++){
+        for (int y = 0; y < 6; y++){
+            planet->setTileData(x + randX,y + randY,30); // remove this
         }
     }
 
