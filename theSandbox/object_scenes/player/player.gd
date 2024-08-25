@@ -327,6 +327,11 @@ func chairMovement(delta):
 	ensureCamPosition()
 
 func ladderMovement(delta):
+	
+	if beingKnockedback: # cancel ladder state if hit
+		movementState = 0
+		return
+	
 	var vdir = int(Input.is_action_pressed("move_down")) - int(Input.is_action_pressed("move_up"))
 	
 	var hdir = int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left"))

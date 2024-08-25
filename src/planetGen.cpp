@@ -66,7 +66,13 @@ void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
                 planet->setTileData(x,y, 4 );
                 planet->setBGData(x,y,3);
 
-                if ( dis <= baseSurface + 3 && dis >= lakeSurface + 6) {
+                int poop = dis - (baseSurface - 15);
+                poop = poop / 2;
+                if (poop < 3){
+                    poop = 3; // for some reason std::min won't work despite std::max working just fine 
+                }
+
+                if ( dis <= baseSurface + 3 && dis >= lakeSurface + poop) {
                     planet->setTileData(x,y, 14 );
                 }
                 
@@ -177,14 +183,10 @@ void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
 
     // end big loops, spawn structure?
 
-    int randX = (std::rand() % (baseSurface * 2)) + skySize; // finds random position underground
-    int randY = (std::rand() % (baseSurface * 2)) + skySize;
+    //int randX = (std::rand() % (baseSurface * 2)) + skySize; // finds random position underground
+    //int randY = (std::rand() % (baseSurface * 2)) + skySize;
     
-    for (int x = 0; x < 6; x++){
-        for (int y = 0; y < 6; y++){
-            planet->setTileData(x + randX,y + randY,30); // remove this
-        }
-    }
+    //generateBox(planet,randX,randY,5,5,13,13);
 
 }
 
@@ -279,6 +281,30 @@ void PLANETGEN::generateOre(PLANETDATA *planet,int x,int y,int oreID,int replace
 
         
     
+    }
+
+}
+
+void PLANETGEN::generateBox(PLANETDATA *planet,int x, int y, int wallID, int bgID){
+
+
+    
+
+    for (int xx = 0; xx < 5; xx++){
+        for (int yy = 0; yy < 5; yy++){
+
+            Vector2i p = Vector2i( x + xx, y + yy );
+
+            planet->setBGData(p.x,p.y,bgID);
+
+            if (xx == 0 || yy == 0 || xx == 4 || yy == 4){
+                planet->setTileData(p.x,p.y,wallID);
+            } else {
+                planet->setTileData(p.x,p.y,airOrCaveAir(p.x,p.y,planet));
+            }
+
+        }
+
     }
 
 }
