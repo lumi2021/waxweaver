@@ -163,6 +163,16 @@ void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
                 }
 
                 if (planet->getTileData(x,y) == 1){ // cave air
+
+                    Vector2i up = Vector2i( Vector2(0,-1).rotated(acos(0.0)*quad) ) + Vector2i(x,y) ;
+                    if( planet->getTileData(up.x,up.y) == 2 ){ // found ceiling
+                        if(std::rand() % 3 == 0){
+                            planet->setTileData(x,y,52); // spawn stalactite
+                            planet->setInfoData(x,y, std::rand() % 2 );
+                        }
+                    }
+
+
                     Vector2i down = Vector2i( Vector2(0,1).rotated(acos(0.0)*quad) ) + Vector2i(x,y) ;
                     if( planet->getTileData(down.x,down.y) == 2 ){
                         // found suitable ground underground
@@ -171,6 +181,7 @@ void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
                         }
 
                     }
+                    
 
                 }
 

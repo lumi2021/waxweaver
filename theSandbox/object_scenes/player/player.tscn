@@ -237,7 +237,7 @@ script = ExtResource("1_7l8c2")
 shape = SubResource("RectangleShape2D_8s1yf")
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_vteuo")]
-maxHealth = 300
+maxHealth = 50
 isPlayer = true
 
 [node name="PlayerLayers" type="Node2D" parent="."]

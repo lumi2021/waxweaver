@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_j2ok1")
-rareItems = Array[int]([3010, 6001, 39, 40, 41, 42, 43, 44, 45])
+rareItems = Array[int]([3010, 6001, 39, 40, 41, 42, 43, 44, 45, 49, 50, 51])
 commonItems = Array[int]([3003, 15, 13, 18, 26, 27, 37, 3023])
 commonMinimum = Array[int]([3, 5, 10, 4, 2, 1, 4, 5])
 commonMaximum = Array[int]([7, 15, 24, 8, 6, 4, 6, 10])

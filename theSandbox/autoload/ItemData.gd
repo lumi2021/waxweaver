@@ -44,7 +44,12 @@ var data = {
 	46:load("res://items/blocks/furniture/stations/Grill.tres"),
 	47:load("res://items/blocks/furniture/trapdoors/ItemTrapdoor.tres"),
 	
-	# item ids
+	# painting batch 2
+	49:load("res://items/paintings/LynSmile.tres"),
+	50:load("res://items/paintings/LynWorn.tres"),
+	51:load("res://items/paintings/LynFish.tres"),
+	
+	########## item ids ##################
 	3000:load("res://items/tools/flimsy/FlimsySword.tres"), # flimsy tools
 	3001:load("res://items/tools/flimsy/FlimsyPickaxe.tres"),
 	3002:load("res://items/tools/hammers/Mallet.tres"),
