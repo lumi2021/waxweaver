@@ -139,7 +139,7 @@ func _on_stack_body_entered(body):
 	if body is GroundItem:
 		if body.itemID != itemID or body.tweening:
 			return
-		if body.ticks > ticks:
+		if body.ticks >= ticks:
 			if amount + body.amount > maxAmount: return
 			amount += body.amount
 			determineAmount()

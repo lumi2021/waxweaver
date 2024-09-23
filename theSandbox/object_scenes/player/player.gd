@@ -116,6 +116,9 @@ func _process(delta):
 	else:
 		lastTileItemUsedOn = Vector2(-10,-10)
 	
+	if !GlobalRef.playerCanUseItem:
+		GlobalRef.playerCanUseItem = true
+	
 	if GlobalRef.chatIsOpen:
 		return
 	
@@ -556,6 +559,9 @@ func ensureCamPosition():
 
 func useItem():
 	
+	if !GlobalRef.playerCanUseItem:
+		return
+	
 	var itemData = PlayerData.getSelectedItemData()
 	if itemData == null:
 		$PlayerLayers/handFront.visible = true
@@ -604,6 +610,10 @@ func swapSlot():
 	itemRoot.add_child(ins)
 
 func runItemProcess(delta):
+	
+	if !GlobalRef.playerCanUseItem:
+		return
+	
 	if !is_instance_valid(heldItemAnim):
 		return
 	
@@ -1124,7 +1134,7 @@ func dieAndRespawn():
 	
 	# reset variables
 	airTime = 0.0 # cancel fall damage
-	healthComponent.heal(25)
+	healthComponent.heal(40)
 	rotated = 0
 	sprite.visible = true
 	dead = false
@@ -1133,6 +1143,7 @@ func dieAndRespawn():
 	$CollisionShape2D.disabled = noClip
 
 func _unhandled_input(event):
+	
 	if event is InputEventMouseButton:
 		
 		if event["button_index"] == 1:

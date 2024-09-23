@@ -152,6 +152,8 @@ func swapItem(slot1,slot2):
 	inventory[slot1] = inventory[slot2]
 	inventory[slot2] = carry
 	
+	GlobalRef.playerCanUseItem = false
+	
 	if slot1 >= 53 and currentSelectedChest != null:
 		saveChestString()
 	

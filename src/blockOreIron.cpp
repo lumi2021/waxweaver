@@ -13,6 +13,7 @@ BLOCKOREIRON::BLOCKOREIRON() {
     itemToDrop = 27;
     rotateTextureToGravity = true;
     breakTime = 1.2;
+    miningLevel = 2;
 
 }
 

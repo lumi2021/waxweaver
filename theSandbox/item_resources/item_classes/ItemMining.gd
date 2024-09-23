@@ -1,7 +1,8 @@
 extends ItemDamage
 class_name ItemMining
 
-@export var miningMultiplier = 1.0
+@export var miningMultiplier :float= 1.0
+@export var miningLevel :int= 0
 
 func onUse(tileX:int,tileY:int,planetDir:int,planet,lastTile:Vector2):
 	

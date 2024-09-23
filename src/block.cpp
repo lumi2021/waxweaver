@@ -38,6 +38,8 @@ BLOCK::BLOCK() {
 
     isTransparent = false;
 
+    miningLevel = 0; // 0 is always mineable, 1 is copper tools, 2 is gold tools, 3 is iron tools...
+
     setNewVariables();
 
 }

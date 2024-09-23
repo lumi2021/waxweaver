@@ -53,6 +53,7 @@ public:
     bool animated;
 
     bool isTransparent;
+    int miningLevel;
 
 
 	BLOCK();

@@ -14,6 +14,9 @@ var baseRotation = 0
 
 @onready var texture = $blockTexture
 
+var blockMiningLevel :int= 0
+var cantMineSparkTick :float= 0.51
+
 func _ready():
 	
 	if !is_instance_valid(planet):
@@ -49,6 +52,7 @@ func _ready():
 		$Sprite.rotation = texture.rotation
 		
 	$Sprite.texture = blockData["texture"]
+	blockMiningLevel = blockData["miningLevel"]
 	
 
 func _process(delta):
@@ -63,16 +67,27 @@ func _process(delta):
 		var itemData = ItemData.data[PlayerData.inventory[PlayerData.selectedSlot][0]]
 		if itemData is ItemMining:
 			damage += delta * itemData.miningMultiplier
-			var breakTime = BlockData.theChunker.getBlockDictionary(blockID)["breakTime"]
-			texture.position.x = ((randi() % 3)-1) * (damage / breakTime)
-			texture.position.y = ((randi() % 3)-1) * (damage / breakTime)
-			texture.rotation = baseRotation + ((randi() % 3)-1) * (damage / breakTime) * 0.1
+			cantMineSparkTick += delta
 			
-			if damage >= breakTime:
-				var edit = Vector2i(tileX,tileY)
-				planet.editTiles( { edit: -1 } )
-				GlobalRef.player.lastTileItemUsedOn = Vector2(-10,-10)
-				queue_free()
+			var canMine :bool= blockMiningLevel <= itemData.miningLevel
+			
+			if canMine:
+				var breakTime = BlockData.theChunker.getBlockDictionary(blockID)["breakTime"]
+				texture.position.x = ((randi() % 3)-1) * (damage / breakTime)
+				texture.position.y = ((randi() % 3)-1) * (damage / breakTime)
+				texture.rotation = baseRotation + ((randi() % 3)-1) * (damage / breakTime) * 0.1
+			
+				if damage >= breakTime :
+					var edit = Vector2i(tileX,tileY)
+					planet.editTiles( { edit: -1 } )
+					GlobalRef.player.lastTileItemUsedOn = Vector2(-10,-10)
+					queue_free()
+			else:
+				if cantMineSparkTick >= 0.5: # do failure spark
+					cantMineSparkTick -= 0.5
+					$spark.emitting = true
+					# add sound here
+			
 		else:
 			queue_free()
 	else:

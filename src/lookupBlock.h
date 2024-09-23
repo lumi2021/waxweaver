@@ -102,6 +102,7 @@ public:
 	double getLightMultiplier(int id);
 	double getLightEmmission(int id);
 	bool isTransparent(int id);
+	int getMiningLevel(int id);
 
 	Dictionary runOnTick(int x, int y, PLANETDATA *planet, int dir, int blockID);
 	Dictionary runOnBreak(int x, int y, PLANETDATA *planet, int dir, int blockID);

@@ -10,7 +10,8 @@ BLOCKCORE::BLOCKCORE() {
 
     setTexture("res://items/blocks/natural/core.png");
 
-    breakTime = 999999.0;
+    breakTime = 5.0;
+    miningLevel = 1000;
 
 }
 

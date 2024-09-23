@@ -13,6 +13,7 @@ void LOOKUPBLOCK::_bind_methods() {
     ClassDB::bind_method(D_METHOD("hasCollision","id"), &LOOKUPBLOCK::hasCollision);
     ClassDB::bind_method(D_METHOD("isGravityRotate","id"), &LOOKUPBLOCK::isGravityRotate);
     ClassDB::bind_method(D_METHOD("getTextureImage","id"), &LOOKUPBLOCK::getTextureImage);
+    ClassDB::bind_method(D_METHOD("getMiningLevel","id"), &LOOKUPBLOCK::getMiningLevel);
 }
 
 // ADD BLOCKS TO ARRAY IN HERE
@@ -101,6 +102,7 @@ Dictionary LOOKUPBLOCK::getBlockData(int id){
     data["lightEmmission"] = g->lightEmmission;
     data["multitile"] = g->multitile;
     data["animated"] = g->animated;
+    data["miningLevel"] = g->miningLevel;
 
     return data;
 }
@@ -164,6 +166,12 @@ bool LOOKUPBLOCK::isTransparent(int id){
     BLOCK* g = penis[id];
 
     return g->isTransparent;
+}
+
+int LOOKUPBLOCK::getMiningLevel(int id){
+    BLOCK* g = penis[id];
+
+    return g->miningLevel;
 }
 
 Dictionary LOOKUPBLOCK::runOnTick(int x, int y, PLANETDATA *planet, int dir, int blockID){

@@ -13,6 +13,7 @@ BLOCKOREGOLD::BLOCKOREGOLD() {
     itemToDrop = 24;
     rotateTextureToGravity = true;
     breakTime = 1.0;
+    miningLevel = 1;
 
 }
 

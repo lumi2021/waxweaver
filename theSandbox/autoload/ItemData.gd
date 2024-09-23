@@ -101,6 +101,7 @@ var data = {
 	3037:load("res://items/food/Apple.tres"),
 	3038:load("res://items/trinket/Flashlight.tres"),
 	3039:load("res://items/weapons/arrows/PoisonArrow.tres"),
+	3040:load("res://items/tools/explosives/bomb.tres"),
 	
 	# chairs 6000 - 6049
 	6000:load("res://items/blocks/furniture/chairs/WoodenChair.tres"),
@@ -122,6 +123,7 @@ var heldItemAnims = {
 	"itemTorch" : load("res://item_resources/item_held_scenes/item_torch.tscn"),
 	"itemMultitile" : load("res://item_resources/item_held_scenes/itemMultitile.tscn"),
 	"itemFishingRod" : load("res://item_resources/item_held_scenes/item_fish_rod.tscn"),
+	"itemTossable" : load("res://item_resources/item_held_scenes/itemTossable.tscn")
 }
 
 func matchItemAnimation(id):
@@ -140,6 +142,8 @@ func matchItemAnimation(id):
 		return "itemMultitile"
 	if d is ItemFishingRod:
 		return "itemFishingRod"
+	if d is ItemTossable:
+		return "itemTossable"
 	
 	return null
 

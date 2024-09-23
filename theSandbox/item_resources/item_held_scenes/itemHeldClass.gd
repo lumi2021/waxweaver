@@ -45,3 +45,11 @@ func _process(delta):
 
 func invUpdate():
 	usedUp = PlayerData.getSelectedItemID() != itemID
+
+func getWorld():
+	return GlobalRef.player.get_parent()
+
+func getLocalMouse():
+	var m = get_local_mouse_position()
+	m.x *= get_parent().get_parent().scale.x
+	return m

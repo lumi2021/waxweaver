@@ -18,6 +18,7 @@ var globalTick : int = 0
 var playerSide = 0 # 0 : facing left, 1 : facing right
 
 var chatIsOpen = false
+var playerCanUseItem = true
 
 # day cycle
 var dayLength :int= 9000
