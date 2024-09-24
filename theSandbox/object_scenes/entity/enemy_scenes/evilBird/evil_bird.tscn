@@ -63,7 +63,7 @@ maxHealth = 20
 knockbackResist = 0.8
 defense = 4
 dropItemArray = Array[int]([3033, 3034, 3036])
-dropChanceArray = Array[int]([500, 500, 500])
+dropChanceArray = Array[int]([200, 200, 200])
 
 [node name="DeleteMeOutsideOfChunk" parent="." instance=ExtResource("3_nn12s")]
 

@@ -1,0 +1,68 @@
+[gd_scene load_steps=10 format=3 uid="uid://cim01bkwfl3hq"]
+
+[ext_resource type="Script" path="res://object_scenes/entity/enemy_scenes/cobble/cobble.gd" id="1_uxt3j"]
+[ext_resource type="PackedScene" uid="uid://84sah16y8gwq" path="res://object_scenes/entity/components/delete_me_outside_of_chunk.tscn" id="2_liknb"]
+[ext_resource type="PackedScene" uid="uid://meikam2oyy13" path="res://object_scenes/entity/components/health_component.tscn" id="3_yldhv"]
+[ext_resource type="PackedScene" uid="uid://c05kukkqfrg40" path="res://object_scenes/entity/components/hitbox.tscn" id="4_igbye"]
+[ext_resource type="PackedScene" uid="uid://8jw6pruiu3cf" path="res://object_scenes/entity/components/hurtbox.tscn" id="5_pyxpf"]
+[ext_resource type="Texture2D" uid="uid://dinhg03flo8ln" path="res://object_scenes/entity/enemy_scenes/cobble/cobble.png" id="6_dx63a"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bsfip"]
+size = Vector2(6, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1hxg4"]
+size = Vector2(6, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yntbc"]
+size = Vector2(8, 8)
+
+[node name="Cobble" type="CharacterBody2D" node_paths=PackedStringArray("HC", "rotationOrigin", "sprite", "wallWay", "floorRay")]
+collision_layer = 128
+collision_mask = 17
+script = ExtResource("1_uxt3j")
+HC = NodePath("HealthComponent")
+rotationOrigin = NodePath("axis")
+sprite = NodePath("axis/spr")
+wallWay = NodePath("axis/wall")
+floorRay = NodePath("axis/floor")
+walkSpeed = 25.0
+
+[node name="DeleteMeOutsideOfChunk" parent="." instance=ExtResource("2_liknb")]
+
+[node name="HealthComponent" parent="." instance=ExtResource("3_yldhv")]
+maxHealth = 20
+knockbackResist = 0.65
+defense = 3
+dropItemArray = Array[int]([3040, 18, 24, 27, 2, 2, 2])
+dropChanceArray = Array[int]([2, 10, 25, 50, 1, 1, 2])
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_bsfip")
+
+[node name="Hitbox" parent="." node_paths=PackedStringArray("healthComponent", "colliderShape") instance=ExtResource("4_igbye")]
+healthComponent = NodePath("../HealthComponent")
+enemyBox = null
+invincTime = null
+colliderShape = NodePath("CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_1hxg4")
+
+[node name="Hurtbox" parent="." instance=ExtResource("5_pyxpf")]
+damage = 12
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("RectangleShape2D_yntbc")
+
+[node name="axis" type="Node2D" parent="."]
+
+[node name="spr" type="Sprite2D" parent="axis"]
+texture = ExtResource("6_dx63a")
+offset = Vector2(0, -3)
+hframes = 4
+
+[node name="wall" type="RayCast2D" parent="axis"]
+target_position = Vector2(8, 0)
+
+[node name="floor" type="RayCast2D" parent="axis"]
+target_position = Vector2(0, 5)

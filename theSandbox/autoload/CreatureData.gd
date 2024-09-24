@@ -16,6 +16,7 @@ var creatures = {
 	"firefly":"res://object_scenes/entity/enemy_scenes/firefly/firefly.tscn",
 	"evilBird":"res://object_scenes/entity/enemy_scenes/evilBird/evil_bird.tscn",
 	"spider":"res://object_scenes/entity/enemy_scenes/spider/spider.tscn",
+	"cobble":"res://object_scenes/entity/enemy_scenes/cobble/cobble.tscn",
 }
 
 

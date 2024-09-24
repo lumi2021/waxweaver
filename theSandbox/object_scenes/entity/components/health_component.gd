@@ -116,6 +116,7 @@ func dealKnockback(amount:float,dir:Vector2,mult:float):
 	
 func die():
 	if isPlayer:
+		clearAllStatus()
 		parent.dieAndRespawn()
 		return
 	
@@ -163,7 +164,7 @@ func inflictStatus(effect:String,seconds:float):
 				i.time = seconds
 				return
 	
-	# add new affect
+	# add new effect
 	var f := "res://object_scenes/specialResource/statusEffects/resources/"
 	var s = load(f + effect + ".tres").duplicate()
 	s.time = seconds
@@ -180,7 +181,11 @@ func inflictStatus(effect:String,seconds:float):
 	emit_signal("statusUpdated")
 	if isPlayer:
 		GlobalRef.hotbar.updateStatus()
-	
+
+func clearAllStatus():
+	for effect in statusEffects:
+		effect.time = -10.0
+
 func _process(delta):
 
 	var names = []
