@@ -6,7 +6,7 @@
 
 [resource]
 script = ExtResource("1_e5brj")
-rateInSeconds = 1.0
+rateInSeconds = 0.8
 amount = 1
 displayName = "Poisoned"
 icon = ExtResource("1_lwdml")

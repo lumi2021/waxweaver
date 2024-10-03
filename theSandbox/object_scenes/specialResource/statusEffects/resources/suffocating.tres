@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_4hau3")
-rateInSeconds = 0.25
+rateInSeconds = 0.15
 amount = 1
 displayName = "Suffocating"
 icon = ExtResource("1_8aixs")

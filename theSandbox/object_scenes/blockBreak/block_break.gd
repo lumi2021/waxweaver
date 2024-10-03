@@ -13,14 +13,20 @@ var mineMultiplier := 1.0
 var baseRotation = 0
 
 @onready var texture = $blockTexture
+@onready var sound = $digSound
+var soundTick :float= 0.1
 
 var blockMiningLevel :int= 0
 var cantMineSparkTick :float= 0.51
+
+var stream :AudioStreamOggVorbis= null
 
 func _ready():
 	
 	if !is_instance_valid(planet):
 		return
+	
+	stream = SoundManager.getMineSound(blockID)
 	
 	var blockData = BlockData.theChunker.getBlockDictionary(blockID)
 	texture.texture = blockData["texture"]
@@ -37,10 +43,14 @@ func _ready():
 		$Sprite.hframes = 16
 		$Sprite.frame = texture.frame
 	elif blockData["multitile"]:
-		texture.hframes = texture.texture.get_size().x / 8
-		texture.frame = planet.DATAC.getInfoData(tileX,tileY)
-		$Sprite.hframes = texture.hframes
-		$Sprite.frame = texture.frame
+		
+		var img = texture.texture.get_image()
+		var i = planet.DATAC.getInfoData(tileX,tileY)
+		var croppedImg :Image= img.get_region( Rect2i( Vector2i(i*8,0), Vector2i(8,8) ) )
+		var tex = ImageTexture.create_from_image(croppedImg)
+		
+		texture.texture = tex
+		$particles.texture = tex
 	
 	if blockData["animated"]:
 		texture.vframes = 3
@@ -51,7 +61,7 @@ func _ready():
 		baseRotation = texture.rotation
 		$Sprite.rotation = texture.rotation
 		
-	$Sprite.texture = blockData["texture"]
+	$Sprite.texture = texture.texture
 	blockMiningLevel = blockData["miningLevel"]
 	
 
@@ -64,6 +74,10 @@ func _process(delta):
 		return
 	
 	if Input.is_action_pressed("mouse_left"):
+		
+		if blockID > 1:
+			playDigSound(delta)
+		
 		var itemData = ItemData.data[PlayerData.inventory[PlayerData.selectedSlot][0]]
 		if itemData is ItemMining:
 			damage += delta * itemData.miningMultiplier
@@ -98,3 +112,12 @@ func _process(delta):
 		queue_free()
 	if abs(mousePos.x) > 4:
 		queue_free()
+
+func playDigSound(delta):
+	soundTick += delta
+	
+	mineMultiplier
+	
+	if soundTick > 0.2:
+		soundTick -= 0.2
+		SoundManager.playSoundStream(stream,global_position,SoundManager.blockMineVol,0.1,"BLOCKS")

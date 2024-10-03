@@ -50,6 +50,7 @@ shape = SubResource("RectangleShape2D_1hxg4")
 
 [node name="Hurtbox" parent="." instance=ExtResource("5_pyxpf")]
 damage = 12
+enemyName = "cobble"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 shape = SubResource("RectangleShape2D_yntbc")

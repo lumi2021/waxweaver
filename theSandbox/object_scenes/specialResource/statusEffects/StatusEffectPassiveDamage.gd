@@ -11,5 +11,5 @@ func onFrame(delta):
 	t += delta
 	if t > rateInSeconds:
 		if is_instance_valid(healthComponent):
-			healthComponent.damagePassive(amount)
+			healthComponent.damagePassive(amount,displayName.to_lower())
 		t -= rateInSeconds

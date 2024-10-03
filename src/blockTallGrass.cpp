@@ -31,6 +31,7 @@ BLOCKTALLGRASS::BLOCKTALLGRASS() {
     animated = true;
 
     isTransparent = true;
+    soundMaterial = 5;
 
 }
 

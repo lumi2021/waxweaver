@@ -12,7 +12,7 @@ BLOCKDIRT::BLOCKDIRT() {
 
     itemToDrop = 3;
     rotateTextureToGravity = true;
-
+    soundMaterial = 1;
 }
 
 

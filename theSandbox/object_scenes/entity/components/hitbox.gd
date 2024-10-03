@@ -46,7 +46,7 @@ func _on_area_entered(area):
 			hitCrit = true
 			knock *= 1.4
 		
-	healthComponent.damage(area.damage,hitCrit)
+	healthComponent.damage(area.damage,hitCrit,area.enemyName)
 	healthComponent.dealKnockback(120.0,dir,knock)
 	
 	for effect in area.statusInflictors:

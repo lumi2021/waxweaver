@@ -34,6 +34,8 @@ BLOCKTORCH::BLOCKTORCH() {
 
     isTransparent = true;
 
+    soundMaterial = 2;
+
 }
 
 

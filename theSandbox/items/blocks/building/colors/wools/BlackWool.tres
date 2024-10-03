@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ItemTypeBlock" load_steps=3 format=3 uid="uid://buhq807tw01i3"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemTypeBlock.gd" id="1_43crg"]
+[ext_resource type="Texture2D" uid="uid://dhh65a3rma2i3" path="res://items/blocks/building/colors/wools/woolColor10.png" id="2_sc2fy"]
+
+[resource]
+script = ExtResource("1_43crg")
+blockID = 53
+multiTileId = 9
+itemName = "Black Wool"
+subtext = ""
+texture = ExtResource("2_sc2fy")
+maxStackSize = 99
+clickToUse = false

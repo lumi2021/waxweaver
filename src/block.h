@@ -55,6 +55,8 @@ public:
     bool isTransparent;
     int miningLevel;
 
+    int soundMaterial;
+
 
 	BLOCK();
 	~BLOCK();

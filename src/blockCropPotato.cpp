@@ -31,6 +31,7 @@ BLOCKCROPPOTATO::BLOCKCROPPOTATO() {
     isTransparent = true;
 
     multitile = true;
+    soundMaterial = 5;
 
 }
 

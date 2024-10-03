@@ -18,6 +18,7 @@ BLOCKDOORCLOSED::BLOCKDOORCLOSED() {
     itemToDrop = 22;
     breakParticleID = 2;
     isTransparent = true;
+    soundMaterial = 2;
 
 }
 

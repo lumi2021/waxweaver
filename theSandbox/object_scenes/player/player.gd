@@ -31,6 +31,7 @@ var movementState = 0
 
 var animTick = 0
 var ladderTick = 0
+var lastOnLadder :int= 0 # for determining if the player can attach to ladder again
 var maxCameraDistance := 0
 
 var lastTileItemUsedOn := Vector2(-10,-10)
@@ -59,6 +60,7 @@ var usingItem = false
 @onready var chestSpr = $PlayerLayers/chestplate
 @onready var legsSpr = $PlayerLayers/leggings
 
+var myTile := Vector2.ZERO # players tile in the world
 
 ######################################################################
 ########################### BASIC FUNTIONS ###########################
@@ -127,6 +129,7 @@ func _process(delta):
 		GlobalRef.camera.mapbg.visible = !GlobalRef.camera.mapbg.visible
 		GlobalRef.camera.map.visible = GlobalRef.camera.mapbg.visible
 	
+	# suffocates player if they are in a block
 	if $suffocatingCast/suffocate.is_colliding() and !noClip:
 		healthComponent.inflictStatus("suffocating",0.1)
 	
@@ -178,6 +181,7 @@ func setPlanetRotation():
 		if rotationDelayTicks <= 0:
 			rotated = newRotation
 			rotationDelayTicks = 8
+		airTime = 0.0 # cancel fall damage if screen rotates
 	else:
 		rotationDelayTicks = 8
 
@@ -245,13 +249,13 @@ func normalMovement(delta):
 			airTime = 0.0
 	else:
 		# fall damage stuff
-		var fallDamage = int(airTime * 40.0 ) - 20
+		var fallDamage = int(airTime * 60.0 ) - 35
 		
 		if Stats.hasProperty("fallImmune"):
 			fallDamage = 0
 		
 		if fallDamage > 10:
-			healthComponent.damage(fallDamage)
+			healthComponent.damage(fallDamage,false,"fall damage")
 		airTime = 0.0
 
 func WATERJUMPCAMERALETSGO(body,vel,rot,onFloor,delta):
@@ -259,16 +263,18 @@ func WATERJUMPCAMERALETSGO(body,vel,rot,onFloor,delta):
 	if !is_instance_valid(body):
 		return vel
 	var tile = body.posToTile(body.to_local(global_position))
-
+	
 	if tile == null:
 		return vel
+	myTile = tile
 	
 	# attach to ladder if holding up
+	if lastOnLadder > 0:
+		lastOnLadder -= 1 # subtract ladder ticks
 	if body.DATAC.getTileData(tile.x,tile.y) == 25:
 		if Input.is_action_pressed("move_up") or Input.is_action_pressed("move_down"):
 			
-			
-			if !onFloor and vel.y < 260:
+			if lastOnLadder > 0:
 				return vel
 			
 			velocity = Vector2.ZERO
@@ -280,6 +286,7 @@ func WATERJUMPCAMERALETSGO(body,vel,rot,onFloor,delta):
 			if body is Planet:
 				rotated = body.DATAC.getPositionLookup(tile.x,tile.y)
 			attachToLadder(tile,body)
+	
 	
 	# emit light if have trinket
 	if Stats.hasProperty("emitLight"):
@@ -330,6 +337,8 @@ func chairMovement(delta):
 	ensureCamPosition()
 
 func ladderMovement(delta):
+	
+	lastOnLadder = 25
 	
 	if beingKnockedback: # cancel ladder state if hit
 		movementState = 0
@@ -665,6 +674,9 @@ func onRightClick():
 			
 			# return if wall is in the way
 			if !wallCheck(get_local_mouse_position()):
+				return
+			
+			if lastOnLadder > 0: # return if player was on a ladder recently
 				return
 			
 			if movementState == 2:
@@ -1134,7 +1146,7 @@ func dieAndRespawn():
 	
 	# reset variables
 	airTime = 0.0 # cancel fall damage
-	healthComponent.heal(40)
+	healthComponent.heal(60)
 	rotated = 0
 	sprite.visible = true
 	dead = false

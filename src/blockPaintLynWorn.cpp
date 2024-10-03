@@ -18,7 +18,7 @@ BLOCKPAINTLYNWORN::BLOCKPAINTLYNWORN() {
     itemToDrop = 50;
     isTransparent = true;
     breakParticleID = 14;
-
+    soundMaterial = 2;
 }
 
 

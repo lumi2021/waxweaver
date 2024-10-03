@@ -6,7 +6,7 @@
 
 [resource]
 script = ExtResource("1_rrsv2")
-rateInSeconds = 0.7
+rateInSeconds = 0.5
 amount = 1
 displayName = "Burning"
 icon = ExtResource("1_8vup0")

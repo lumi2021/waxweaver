@@ -24,6 +24,7 @@ func onUse(tileX:int,tileY:int,planetDir:int,planet,lastTile:Vector2):
 		planet.DATAC.setInfoData(tileX,tileY,1)
 		planet.editTiles({edit:blockID})
 		PlayerData.consumeSelected()
+		playSound(tileX,tileY,planet)
 		return "success"
 	
 	# check sides
@@ -34,6 +35,7 @@ func onUse(tileX:int,tileY:int,planetDir:int,planet,lastTile:Vector2):
 		planet.DATAC.setInfoData(tileX,tileY,2)
 		planet.editTiles({edit:blockID})
 		PlayerData.consumeSelected()
+		playSound(tileX,tileY,planet)
 		return "success"
 	
 	var l = Vector2(-1,0).rotated((PI/2)*planetDir)
@@ -43,6 +45,7 @@ func onUse(tileX:int,tileY:int,planetDir:int,planet,lastTile:Vector2):
 		planet.DATAC.setInfoData(tileX,tileY,3)
 		planet.editTiles({edit:blockID})
 		PlayerData.consumeSelected()
+		playSound(tileX,tileY,planet)
 		return "success"
 	
 	
@@ -53,6 +56,7 @@ func onUse(tileX:int,tileY:int,planetDir:int,planet,lastTile:Vector2):
 		planet.editTiles({edit:blockID})
 		planet.DATAC.setInfoData(tileX,tileY,0)
 		PlayerData.consumeSelected()
+		playSound(tileX,tileY,planet)
 		return "success"
 
 func getBlockIsSolid(id):
@@ -61,3 +65,8 @@ func getBlockIsSolid(id):
 		collider = true
 	
 	return collider
+
+func playSound(tileX:int,tileY:int,planet):
+	var s = SoundManager.getMineSound(blockID)
+	var p = GlobalRef.player.global_position
+	SoundManager.playSoundStream( s,p,SoundManager.blockPlaceVol, 0.1,"BLOCKS" )

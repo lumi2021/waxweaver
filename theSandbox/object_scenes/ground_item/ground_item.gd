@@ -163,10 +163,15 @@ func tweenAndDestroy(pos,shouldAddItem):
 	await tween.finished
 	
 	if shouldAddItem:
-		if PlayerData.addItem(itemID,amount) == 0:
+		var amountLeft = PlayerData.addItem(itemID,amount)
+		if amountLeft == 0:
+			var itemData = ItemData.getItem(itemID)
+			Indicators.itemPopup(itemData.itemName,amount,global_position)
+			SoundManager.playSound("inventory/pickupItem",global_position,1.0,0.12,"INVENTORY")
 			queue_free()
 		else:
 			tweening = false
+			amount = amountLeft
 	else:
 		queue_free()
 

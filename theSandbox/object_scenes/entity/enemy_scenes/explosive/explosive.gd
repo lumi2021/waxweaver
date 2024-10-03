@@ -5,6 +5,8 @@ extends Enemy
 @export var radius :int = 3
 @export var delay :float = 4.0
 
+@export var bounce :float = 0.5
+
 var vol :Vector2 = Vector2.ZERO
 
 var tick :float= 0.0
@@ -17,8 +19,6 @@ var red :bool= false
 
 func _ready():
 	setVelocity(vol)
-	
-	print(radius)
 	
 	var tween :Tween= get_tree().create_tween()
 	tween.tween_property(self,"flipLimit",0.0,delay)
@@ -43,9 +43,9 @@ func _process(delta):
 	if collision:
 		velocity = velocity.bounce(collision.get_normal())
 		var weed = getVelocity()
-		weed.y *= 0.5
+		weed.y *= bounce
 		if !isOnFloor():
-			weed.x *= 0.5
+			weed.x *= bounce
 		setVelocity(weed)
 	
 	
@@ -57,6 +57,7 @@ func _process(delta):
 	
 func isOnFloor():
 	$RayCast2D.rotation = getQuad(self) * (PI/2)
+	$RayCast2D.force_raycast_update()
 	return $RayCast2D.is_colliding()
 
 func explode():
@@ -73,9 +74,13 @@ func explode():
 	
 	var changes :Dictionary= {}
 	
-	for x in range(size):
+	for x in range(size): # break tiles
 		for y in range(size):
-			var p :Vector2 = Vector2(4,4) + planet.tileToPos( Vector2(pos.x + x - radius,pos.y + y - radius))
+			var tile = Vector2(pos.x + x - radius,pos.y + y - radius)
+			var p :Vector2 = Vector2(4,4) + planet.tileToPos(tile)
+			var id = planet.DATAC.getTileData(tile.x,tile.y)
+			if id == 5:
+				continue
 			if p.distance_to(position) < radius * 8:
 				changes[Vector2i(pos.x + x - radius,pos.y + y - radius)] = -1
 	

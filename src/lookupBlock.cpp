@@ -76,6 +76,7 @@ LOOKUPBLOCK::LOOKUPBLOCK() {
     penis[51] = new BLOCKPAINTLYNFISH();
 
     penis[52] = new BLOCKSTALACTITE();
+    penis[53] = new BLOCKWOOL();
 
     
     for(BLOCK *i : penis){ // i increase automatically !
@@ -103,6 +104,7 @@ Dictionary LOOKUPBLOCK::getBlockData(int id){
     data["multitile"] = g->multitile;
     data["animated"] = g->animated;
     data["miningLevel"] = g->miningLevel;
+    data["soundMaterial"] = g->soundMaterial;
 
     return data;
 }

@@ -18,7 +18,7 @@ BLOCKPAINTGAHAXA::BLOCKPAINTGAHAXA() {
     itemToDrop = 43;
     isTransparent = true;
     breakParticleID = 14;
-
+    soundMaterial = 2;
 }
 
 

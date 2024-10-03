@@ -22,6 +22,12 @@ BLOCKTREEBRANCHRIGHT::BLOCKTREEBRANCHRIGHT() {
 
     connectTexturesToMe = false;
 
+    isTransparent = true;
+
+    itemToDrop = 13;
+
+    soundMaterial = 2;
+
 }
 
 

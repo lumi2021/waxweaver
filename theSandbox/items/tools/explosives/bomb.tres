@@ -8,6 +8,7 @@ script = ExtResource("1_fvjn7")
 radius = 3
 delay = 4.0
 speed = 300
+bounce = 0.5
 itemName = "Bomb"
 subtext = ""
 texture = ExtResource("2_wx6te")

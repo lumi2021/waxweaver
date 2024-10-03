@@ -13,6 +13,7 @@ BLOCKGLASS::BLOCKGLASS() {
     itemToDrop = 21;
     rotateTextureToGravity = true;
     connectedTexture = true;
+    soundMaterial = 6;
 
 }
 

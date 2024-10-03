@@ -27,6 +27,7 @@ func onUse(tileX:int,tileY:int,planetDir:int,planet,lastTile:Vector2):
 	var o = planet.DATAC.getPositionLookup(alter.x,alter.y)
 	var d = size.rotated(o*(PI/2))
 	if checkAvailableArea(alter.x,alter.y,d,planet,o):
+		playSound(tileX,tileY,planet)
 		planet.editTiles(makeCoolEditArray(alter.x,alter.y,d,planet,o%2==0,side))
 		PlayerData.consumeSelected()
 		
@@ -97,3 +98,8 @@ func makeCoolEditArray(startX,startY,dimensions:Vector2,planet,epicRotate,side):
 	
 	
 	return DICK
+
+func playSound(tileX:int,tileY:int,planet):
+	var s = SoundManager.getMineSound(abs(blockID))
+	var p = GlobalRef.player.global_position
+	SoundManager.playSoundStream( s,p, SoundManager.blockPlaceVol, 0.1,"BLOCKS" )

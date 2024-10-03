@@ -18,6 +18,7 @@ BLOCKDOOROPEN::BLOCKDOOROPEN() {
     itemToDrop = 23;
     breakParticleID = 2;
     isTransparent = true;
+    soundMaterial = 2;
 
 }
 

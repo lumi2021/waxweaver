@@ -147,7 +147,7 @@ func editTiles(changeCommit):
 			-1:
 				var save:int = DATAC.getTileData(change.x,change.y)
 				DATAC.setTileData(change.x,change.y,airOrCaveAir(change.x,change.y))
-				BlockData.breakBlock(change.x,change.y,self,save)
+				BlockData.breakBlock(change.x,change.y,self,save,DATAC.getInfoData(change.x,change.y))
 				DATAC.setInfoData(change.x,change.y,0)
 				
 				if chestDictionary.has(Vector2(change.x,change.y)):

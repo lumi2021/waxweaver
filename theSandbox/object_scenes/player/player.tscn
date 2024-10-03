@@ -237,7 +237,6 @@ script = ExtResource("1_7l8c2")
 shape = SubResource("RectangleShape2D_8s1yf")
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_vteuo")]
-maxHealth = 60
 isPlayer = true
 
 [node name="PlayerLayers" type="Node2D" parent="."]
@@ -349,7 +348,7 @@ shape = SubResource("RectangleShape2D_jcs3x")
 modulate = Color(0.298039, 0.811765, 0, 1)
 healthComponent = NodePath("../HealthComponent")
 enemyBox = false
-invincTime = 0.5
+invincTime = 0.7
 colliderShape = NodePath("CollisionShape2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]

@@ -35,7 +35,7 @@ func hunt(delta):
 	rotationOrigin.rotation = getQuad(self) * (PI/2)
 	
 	if floorRay.is_colliding():
-		vel.x = lerp(vel.x, dir * 50.0, 0.05 )
+		vel.x = lerp(vel.x, dir * 40.0, 0.05 )
 	else:
 		vel.x = vel.x + (dir * 0.5) * 60 * delta
 	

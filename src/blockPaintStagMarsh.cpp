@@ -18,7 +18,7 @@ BLOCKPAINTSTAGMARSH::BLOCKPAINTSTAGMARSH() {
     itemToDrop = 40;
     isTransparent = true;
     breakParticleID = 14;
-
+    soundMaterial = 2;
 }
 
 

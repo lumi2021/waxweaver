@@ -18,7 +18,7 @@ BLOCKPAINTSTAGCUP::BLOCKPAINTSTAGCUP() {
     itemToDrop = 41;
     isTransparent = true;
     breakParticleID = 14;
-
+    soundMaterial = 2;
 }
 
 

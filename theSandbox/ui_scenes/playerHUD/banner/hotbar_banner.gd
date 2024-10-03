@@ -254,9 +254,10 @@ func interpretCommand(text):
 			GlobalRef.player.healthComponent.inflictStatus(effect,float(time))
 			GlobalRef.sendChat("Inflicted player with " + effect + " for " + time + " seconds.")
 		"heal":
-			GlobalRef.player.healthComponent.heal(1000)
+			GlobalRef.player.healthComponent.heal(99999)
 			GlobalRef.sendChat("Healed player.")
-		
+		"kill":
+			GlobalRef.player.healthComponent.damagePassive(99999,"cheats")
 		"save":
 			longassstring = GlobalRef.currentPlanet.DATAC.getSaveString()
 		

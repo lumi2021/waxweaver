@@ -26,6 +26,7 @@ texture = ExtResource("2_yqhsd")
 [node name="Hurtbox" parent="holder" instance=ExtResource("3_epa84")]
 rotation = -0.785398
 enemyBox = false
+enemyName = "player"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="holder/Hurtbox"]
 position = Vector2(13, 0)

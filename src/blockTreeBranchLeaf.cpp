@@ -22,6 +22,10 @@ BLOCKTREEBRANCHLEAF::BLOCKTREEBRANCHLEAF() {
 
     connectTexturesToMe = true;
 
+    itemToDrop = 13;
+
+    soundMaterial = 2;
+
 }
 
 

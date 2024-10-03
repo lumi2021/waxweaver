@@ -5,9 +5,9 @@
 
 [resource]
 script = ExtResource("1_hcain")
-rateInSeconds = 6.0
+rateInSeconds = 3.0
 amount = 1
-displayName = "Regen"
+displayName = "Poor Regen"
 icon = ExtResource("1_lyolw")
 dyeColor = Color(1, 1, 1, 1)
 incompatibleEffects = Array[String]([])

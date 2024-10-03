@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ItemTypeBlock" load_steps=3 format=3 uid="uid://u1bh266d8iv2"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemTypeBlock.gd" id="1_d4bgu"]
+[ext_resource type="Texture2D" uid="uid://djdfovrnippk5" path="res://items/blocks/building/colors/wools/woolColor8.png" id="2_cq0ac"]
+
+[resource]
+script = ExtResource("1_d4bgu")
+blockID = 53
+multiTileId = 7
+itemName = "Wool"
+subtext = ""
+texture = ExtResource("2_cq0ac")
+maxStackSize = 99
+clickToUse = false

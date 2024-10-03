@@ -49,6 +49,7 @@ func launchTossable():
 		ins.planet = getWorld().get_parent()
 		ins.position = GlobalRef.player.position
 		ins.radius = itemData.radius
+		ins.bounce = itemData.bounce
 		ins.delay = itemData.delay
 		ins.vol = getLocalMouse().normalized() * itemData.speed
 		getWorld().add_child(ins)

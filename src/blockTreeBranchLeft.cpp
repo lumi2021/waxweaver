@@ -20,8 +20,12 @@ BLOCKTREEBRANCHLEFT::BLOCKTREEBRANCHLEFT() {
 
     rotateTextureToGravity = true;
 
-    connectTexturesToMe = false;
+    itemToDrop = 13;
 
+    isTransparent = true;
+
+    connectTexturesToMe = false;
+    soundMaterial = 2;
 }
 
 

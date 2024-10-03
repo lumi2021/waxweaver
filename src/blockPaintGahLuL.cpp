@@ -18,7 +18,7 @@ BLOCKPAINTGAHLUL::BLOCKPAINTGAHLUL() {
     itemToDrop = 45;
     isTransparent = true;
     breakParticleID = 14;
-
+    soundMaterial = 2;
 }
 
 

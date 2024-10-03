@@ -19,6 +19,7 @@ BLOCKCHEST::BLOCKCHEST() {
     breakTime = 3.0;
     connectTexturesToMe = false;
     breakParticleID = 13;
+    soundMaterial = 2;
 
 }
 

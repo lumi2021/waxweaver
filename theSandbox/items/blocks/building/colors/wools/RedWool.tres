@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ItemTypeBlock" load_steps=3 format=3 uid="uid://jns613ebyaxl"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemTypeBlock.gd" id="1_ibyur"]
+[ext_resource type="Texture2D" uid="uid://c4qp7dui4j4od" path="res://items/blocks/building/colors/wools/woolColor1.png" id="2_b6103"]
+
+[resource]
+script = ExtResource("1_ibyur")
+blockID = 53
+multiTileId = 0
+itemName = "Red Wool"
+subtext = ""
+texture = ExtResource("2_b6103")
+maxStackSize = 99
+clickToUse = false

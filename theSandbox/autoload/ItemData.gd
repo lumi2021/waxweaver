@@ -6,6 +6,7 @@ var data = {
 	0:load("res://items/blocks/natural/StoneItem.tres"),
 	2:load("res://items/blocks/natural/StoneItem.tres"),
 	3:load("res://items/blocks/natural/DirtItem.tres"),
+	5:load("res://items/blocks/natural/CoreItem.tres"),
 	7:load("res://items/blocks/foliage/SaplingItem.tres"),
 	13:load("res://items/blocks/building/WoodItem.tres"),
 	-13:load("res://items/walls/WoodWallItem.tres"),
@@ -48,6 +49,8 @@ var data = {
 	49:load("res://items/paintings/LynSmile.tres"),
 	50:load("res://items/paintings/LynWorn.tres"),
 	51:load("res://items/paintings/LynFish.tres"),
+	
+	#53:load("res://items/blocks/building/colors/wools/WhiteWool.tres"),
 	
 	########## item ids ##################
 	3000:load("res://items/tools/flimsy/FlimsySword.tres"), # flimsy tools
@@ -102,6 +105,19 @@ var data = {
 	3038:load("res://items/trinket/Flashlight.tres"),
 	3039:load("res://items/weapons/arrows/PoisonArrow.tres"),
 	3040:load("res://items/tools/explosives/bomb.tres"),
+	
+	3041:load("res://items/blocks/building/colors/wools/RedWool.tres"),
+	3042:load("res://items/blocks/building/colors/wools/OrangeWool.tres"),
+	3043:load("res://items/blocks/building/colors/wools/YellowWool.tres"),
+	3044:load("res://items/blocks/building/colors/wools/GreenWool.tres"),
+	3045:load("res://items/blocks/building/colors/wools/CyanWool.tres"),
+	3046:load("res://items/blocks/building/colors/wools/BlueWool.tres"),
+	3047:load("res://items/blocks/building/colors/wools/PurpleWool.tres"),
+	3048:load("res://items/blocks/building/colors/wools/WhiteWool.tres"),
+	3049:load("res://items/blocks/building/colors/wools/GreyWool.tres"),
+	3050:load("res://items/blocks/building/colors/wools/BlackWool.tres"),
+	3051:load("res://items/blocks/building/colors/wools/BrownWool.tres"),
+	3052:load("res://items/blocks/building/colors/wools/PinkWool.tres"),
 	
 	# chairs 6000 - 6049
 	6000:load("res://items/blocks/furniture/chairs/WoodenChair.tres"),

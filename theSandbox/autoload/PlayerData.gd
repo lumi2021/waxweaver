@@ -72,6 +72,7 @@ func addItem(itemID,amount):
 			itemCountLeft -= itemMax
 			emptySlot = findEmptySlot()
 			if emptySlot == null:
+				emit_signal("updateInventory")
 				return itemCountLeft
 	
 	inventory[emptySlot] = [itemID,itemCountLeft]
@@ -159,6 +160,8 @@ func swapItem(slot1,slot2):
 	
 	emit_signal("updateInventory")
 	emit_signal("onlyUpdateCraft")
+	var g = GlobalRef.player.get_global_mouse_position()
+	SoundManager.playSound("inventory/pickupItem",g,1.0,0.12,"INVENTORY")
 	if updateArmor:
 		emit_signal("armorUpdated")
 	if updateHeld:

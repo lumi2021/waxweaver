@@ -18,7 +18,7 @@ BLOCKPAINTGAHFINE::BLOCKPAINTGAHFINE() {
     itemToDrop = 44;
     isTransparent = true;
     breakParticleID = 14;
-
+    soundMaterial = 2;
 }
 
 

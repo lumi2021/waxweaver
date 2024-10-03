@@ -18,7 +18,7 @@ BLOCKPAINTLYNSMILE::BLOCKPAINTLYNSMILE() {
     itemToDrop = 49;
     isTransparent = true;
     breakParticleID = 14;
-
+    soundMaterial = 2;
 }
 
 

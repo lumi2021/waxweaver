@@ -1,10 +1,33 @@
 extends CPUParticles2D
 
+@onready var sound = $AudioStreamPlayer2D
+
 var textureID = 0
 var ticks = 0
 
+var infoID = 0
+var blockID = 0
+
 func _ready():
-	texture = BlockData.theChunker.getBlockDictionary(textureID)["texture"]
+	
+	if textureID < 2:
+		queue_free()
+	
+	var blockData = BlockData.theChunker.getBlockDictionary(textureID)
+	
+	texture = blockData["texture"]
+	sound.stream = SoundManager.getBreakSound(blockID)
+	sound.volume_db = SoundManager.blockBreakVol
+	sound.pitch_scale = randf_range(0.9,1.1)
+	sound.play()
+	
+	if blockData["multitile"]:
+		var img = texture.get_image()
+		var croppedImg :Image= img.get_region( Rect2i( Vector2i(infoID*8,0), Vector2i(8,8) ) )
+		var tex = ImageTexture.create_from_image(croppedImg)
+			
+		texture = tex
+	
 	one_shot = true
 	emitting = true
 

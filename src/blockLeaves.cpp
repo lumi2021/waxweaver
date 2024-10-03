@@ -26,6 +26,8 @@ BLOCKLEAVES::BLOCKLEAVES() {
     itemToDrop = 7;
     isTransparent = true;
 
+    soundMaterial = 5;
+
 }
 
 

@@ -27,6 +27,7 @@ BLOCKCROPPOTATONATURAL::BLOCKCROPPOTATONATURAL() {
     itemToDrop = 37;
 
     isTransparent = true;
+    soundMaterial = 5;
 
 }
 

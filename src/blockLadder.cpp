@@ -17,6 +17,7 @@ BLOCKLADDER::BLOCKLADDER() {
     connectTexturesToMe = false;
     lightMultiplier = 1.0;
     breakTime = 0.2;
+    soundMaterial = 2;
 }
 
 

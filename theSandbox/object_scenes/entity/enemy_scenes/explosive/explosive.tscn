@@ -14,7 +14,7 @@ script = ExtResource("1_hajb3")
 [node name="DeleteMeOutsideOfChunk" parent="." instance=ExtResource("2_yaxwx")]
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
-target_position = Vector2(0, 7)
+target_position = Vector2(0, 4)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_ggudy")

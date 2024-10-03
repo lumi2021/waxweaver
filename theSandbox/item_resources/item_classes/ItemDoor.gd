@@ -18,6 +18,7 @@ func onUse(tileX:int,tileY:int,planetDir:int,planet,lastTile:Vector2):
 	
 	if checkIfPlaceable(tileX,tileY,planet):
 		PlayerData.consumeSelected()
+		playSound(tileX,tileY,planet)
 		planet.editTiles( placeTiles(tileX,tileY,planet) )
 
 
@@ -85,3 +86,8 @@ func checkIfPlaceable(tileX:int,tileY:int,planet):
 				return false
 		
 	return true
+
+func playSound(tileX:int,tileY:int,planet):
+	var s = SoundManager.getMineSound(abs(blockID))
+	var p = GlobalRef.player.global_position
+	SoundManager.playSoundStream( s,p, SoundManager.blockPlaceVol, 0.1,"BLOCKS" )

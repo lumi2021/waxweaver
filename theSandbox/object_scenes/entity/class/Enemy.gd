@@ -101,6 +101,9 @@ func getVERTICALDirectionTowardsPlayer():
 		targetdir *= -1
 	return targetdir
 
+func getExactDirToPlayer():
+	return (GlobalRef.player.position - position).normalized()
+
 func getSurface():
 	var pos = getPos()
 	

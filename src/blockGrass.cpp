@@ -15,6 +15,7 @@ BLOCKGRASS::BLOCKGRASS() {
 
     itemToDrop = 3;
     breakParticleID = 3;
+    soundMaterial = 1;
 
 }
 

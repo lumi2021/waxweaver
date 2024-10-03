@@ -25,6 +25,8 @@ BLOCKTREELOG::BLOCKTREELOG() {
 
     itemToDrop = 13;
 
+    soundMaterial = 2;
+
 }
 
 

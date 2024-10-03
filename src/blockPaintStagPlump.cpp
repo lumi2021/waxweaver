@@ -18,7 +18,7 @@ BLOCKPAINTSTAGPLUMP::BLOCKPAINTSTAGPLUMP() {
     itemToDrop = 39;
     isTransparent = true;
     breakParticleID = 14;
-
+    soundMaterial = 2;
 }
 
 

@@ -46,7 +46,9 @@ func heal(amount):
 	
 	emit_signal("healthChanged")
 
-func damage(amount,hitCrit:bool=false):
+func damage(amount,hitCrit:bool=false,source:String="idk"):
+	
+	SoundManager.playSound("enemy/attackEnemy",parent.global_position,1.4,0.2)
 	
 	if isPlayer:
 		if parent.dead:
@@ -78,9 +80,9 @@ func damage(amount,hitCrit:bool=false):
 	emit_signal("smacked")
 	
 	if health <= 0:
-		die()
+		die(source)
 
-func damagePassive(amount): # does damage while ignoring defense
+func damagePassive(amount,source:String="idk"): # does damage while ignoring defense
 	
 	if isPlayer:
 		if parent.dead:
@@ -100,7 +102,7 @@ func damagePassive(amount): # does damage while ignoring defense
 	emit_signal("healthChanged")
 	
 	if health <= 0:
-		die()
+		die(source)
 
 func dealKnockback(amount:float,dir:Vector2,mult:float):
 	var q = getWorldPosition()
@@ -114,11 +116,19 @@ func dealKnockback(amount:float,dir:Vector2,mult:float):
 	if isPlayer:
 		parent.beingKnockedback = true
 	
-func die():
+func die(source:String="idk"):
+	
+	SoundManager.playSound("enemy/killSquish",parent.global_position,1.0, 0.1 )
+	
 	if isPlayer:
 		clearAllStatus()
 		parent.dieAndRespawn()
+		if source != "idk":
+			GlobalRef.sendError("Player died from: " + source)
+		else:
+			GlobalRef.sendError("Player died")
 		return
+	
 	
 	rollDrops()
 	CreatureData.creatureDeleted(parent)

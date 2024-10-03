@@ -18,6 +18,7 @@ BLOCKWORKBENCH::BLOCKWORKBENCH() {
     itemToDrop = 20;
     animated = true;
     isTransparent = true;
+    soundMaterial = 2;
 
 }
 

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ItemTypeBlock" load_steps=3 format=3 uid="uid://bmfbq8r5kll5v"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemTypeBlock.gd" id="1_1hmco"]
+[ext_resource type="Texture2D" uid="uid://c2vvw5q22fm7b" path="res://items/blocks/building/colors/wools/woolColor12.png" id="2_kij22"]
+
+[resource]
+script = ExtResource("1_1hmco")
+blockID = 53
+multiTileId = 11
+itemName = "Pink Wool"
+subtext = ""
+texture = ExtResource("2_kij22")
+maxStackSize = 99
+clickToUse = false

@@ -93,7 +93,8 @@ colliderShape = NodePath("CollisionShape2D")
 shape = SubResource("CircleShape2D_sm5pu")
 
 [node name="Hurtbox" parent="." instance=ExtResource("6_rqsjp")]
-damage = 20
+damage = 18
+enemyName = "bird"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 shape = SubResource("CircleShape2D_anxn3")

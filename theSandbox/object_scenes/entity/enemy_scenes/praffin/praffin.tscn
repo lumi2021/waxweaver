@@ -29,7 +29,7 @@ floorRay = NodePath("axis/floor")
 [node name="DeleteMeOutsideOfChunk" parent="." instance=ExtResource("2_mu7bf")]
 
 [node name="HealthComponent" parent="." instance=ExtResource("1_uxer5")]
-maxHealth = 25
+maxHealth = 22
 knockbackResist = 0.8
 defense = 2
 dropItemArray = Array[int]([3003, 3003, 3003, 3003, 15])
@@ -48,7 +48,8 @@ colliderShape = NodePath("CollisionShape2D")
 shape = SubResource("RectangleShape2D_1hxg4")
 
 [node name="Hurtbox" parent="." instance=ExtResource("5_53tc8")]
-damage = 12
+damage = 8
+enemyName = "praffin"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 shape = SubResource("RectangleShape2D_yntbc")

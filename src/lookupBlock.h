@@ -66,6 +66,7 @@
 #include "blockPaintLynFish.h" // id 51
 
 #include "blockStalactite.h" // id 52
+#include "blockWool.h" // id 53
 
 // adding a new block? make sure you increment the PENIS array !
 
@@ -83,7 +84,7 @@ public:
 	
 	Array allBlocks;
 
-	BLOCK *penis[53]; // must be largest id + 1
+	BLOCK *penis[54]; // must be largest id + 1
 
 	LOOKUPBLOCK();
 	~LOOKUPBLOCK();

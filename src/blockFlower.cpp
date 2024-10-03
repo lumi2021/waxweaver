@@ -26,6 +26,7 @@ BLOCKFLOWER::BLOCKFLOWER() {
 
     isTransparent = true;
     itemToDrop = 26;
+    soundMaterial = 5;
 
 }
 

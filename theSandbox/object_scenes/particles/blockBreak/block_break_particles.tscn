@@ -21,3 +21,7 @@ initial_velocity_min = 5.2
 initial_velocity_max = 5.2
 scale_amount_curve = SubResource("Curve_o888i")
 script = ExtResource("2_aa3k4")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+volume_db = -2.0
+bus = &"BLOCKS"

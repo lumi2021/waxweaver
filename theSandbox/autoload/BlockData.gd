@@ -22,11 +22,11 @@ func checkForCollision(id):
 	return d["hasCollision"]
 
 
-func breakBlock(x,y,planet,blockID):
+func breakBlock(x,y,planet,blockID,infoID):
 	
 	var data = theChunker.getBlockDictionary(blockID)
 	
-	spawnBreakParticle(x,y,blockID,data["breakParticleID"],planet)
+	spawnBreakParticle(x,y,blockID,data["breakParticleID"],planet,infoID)
 	spawnGroundItem(x,y,data["itemToDrop"],planet)
 	
 	planet.editTiles( theChunker.runBreak(planet.DATAC,Vector2i.ZERO,x,y,blockID) )
@@ -36,7 +36,7 @@ func breakWall(x,y,planet,blockID):
 		return
 	
 	var data = theChunker.getBlockDictionary(blockID)
-	spawnBreakParticle(x,y,blockID,data["breakParticleID"],planet)
+	spawnBreakParticle(x,y,blockID,data["breakParticleID"],planet,0)
 	if ItemData.itemExists(-blockID):
 		spawnGroundItem(x,y,-blockID,planet)
 
@@ -66,7 +66,8 @@ func spawnGroundItem(tilex:int,tiley:int,id:int,planet):
 			if planet.DATAC.getInfoData(tilex,tiley) >= 4:
 				spawnItemRaw(tilex,tiley,37,planet)
 				spawnItemRaw(tilex,tiley,37,planet)
-			
+		53: # is wool
+			id = 3041 + planet.DATAC.getInfoData(tilex,tiley)
 	
 	var ins = groundItemScene.instantiate()
 	ins.itemID = id
@@ -94,7 +95,7 @@ func spawnItemVelocity(pos:Vector2,id:int,planet,velocity:Vector2,amount:int=1):
 	ins.coolVelcoity = true
 	planet.entityContainer.add_child(ins)
 
-func spawnBreakParticle(tilex:int,tiley:int,id:int,otherId:int,planet):
+func spawnBreakParticle(tilex:int,tiley:int,id:int,otherId:int,planet,infoID:int):
 	
 	var newId = id
 	if otherId != -1:
@@ -102,6 +103,8 @@ func spawnBreakParticle(tilex:int,tiley:int,id:int,otherId:int,planet):
 	
 	var ins = blockBreakParticle.instantiate()
 	ins.textureID = newId
+	ins.infoID = infoID
+	ins.blockID = id
 	ins.position = planet.tileToPos(Vector2(tilex,tiley))
 	planet.entityContainer.add_child(ins)
 
@@ -209,3 +212,7 @@ func spawnLooseItem(position,body,id,amount):
 	ins.amount = amount
 	ins.position = position
 	body.entityContainer.add_child(ins)
+
+func getSoundMaterialID(blockID) -> int:
+	var d = theChunker.getBlockDictionary(blockID)
+	return d["soundMaterial"]

@@ -12,6 +12,7 @@ BLOCKWOOD::BLOCKWOOD() {
 
     itemToDrop = 13;
     rotateTextureToGravity = true;
+    soundMaterial = 2;
 
 }
 

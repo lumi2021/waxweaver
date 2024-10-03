@@ -16,6 +16,8 @@ BLOCKTRAPDOOROPEN::BLOCKTRAPDOOROPEN() {
     multitile = true;
     isTransparent = true;
     connectTexturesToMe = false;
+    soundMaterial = 2;
+    
 
 }
 
