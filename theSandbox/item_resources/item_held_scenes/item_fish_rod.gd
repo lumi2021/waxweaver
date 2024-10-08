@@ -23,6 +23,8 @@ var fishTime :float = 2.0
 var FOUNDFISH = false
 var fishToGive :int= 8
 
+var fishSound :float= 0.0
+
 func onEquip():
 	pass
 
@@ -43,6 +45,7 @@ func onUsing(delta):
 			var h = (int(bobber.position.x * s < 0) * 2) - 1
 			var v = Vector2(abs(bobber.position.x) * 2.0 * h,-180 - bobber.position.y )
 			BlockData.spawnItemVelocity(GlobalRef.currentPlanet.to_local(bobberWaterTarget),fishToGive,GlobalRef.currentPlanet,v)
+			SoundManager.playSound("enemy/swim0",bobber.global_position,1.0,0.1)
 			reset()
 			
 		reelIn()
@@ -81,7 +84,7 @@ func onNotUsing(delta):
 				inWaterTick = 60
 				bobberInWater = true
 				scanningForFish = true
-				
+				SoundManager.playSound("enemy/swim1",bobber.global_position,1.0,0.1)
 				rollFishTime()
 				
 				return
@@ -118,7 +121,6 @@ func onNotUsing(delta):
 				
 				fishTick += delta
 				if fishTick > fishTime:
-					print(fishTime)
 					FOUNDFISH = true
 					scanningForFish = false
 					var data = PlanetTypeInfo.getData(GlobalRef.currentPlanet.planetType)
@@ -127,6 +129,7 @@ func onNotUsing(delta):
 					fishTick = 2.0
 			
 			if FOUNDFISH:
+				fishNoise(delta)
 				fishTick -= delta
 				if fishTick < 0.0:
 					reset()
@@ -137,10 +140,15 @@ func onNotUsing(delta):
 		line.add_point( bobber.position - line.position )
 
 func reelIn():
+	
+	SoundManager.playSound("items/fishingRodReelIn",bobber.global_position,1.0,0.1)
+	
 	line.clear_points()
 	bobber.visible = false
 	delayTick = 30
 	reelOut = false
+	if scanningForFish:
+		SoundManager.playSound("enemy/swim0",bobber.global_position,1.0,0.1)
 	bobberInWater = false
 	bobber.position = Vector2(17,-5)
 	bobberWaterPos = bobber.global_position
@@ -164,3 +172,9 @@ func reset():
 func rollFishTime():
 	fishTick = 0.0
 	fishTime = randf_range(4.0,12.0)
+
+func fishNoise(delta):
+	fishSound += delta
+	if fishSound >= 0.2:
+		SoundManager.playSound("enemy/swim2",bobber.global_position,1.0,0.1)
+		fishSound -= 0.2

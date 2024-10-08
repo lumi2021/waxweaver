@@ -15,6 +15,8 @@ BLOCKGRAVEL::BLOCKGRAVEL() {
     rotateTextureToGravity = true;
     breakTime = 0.4;
 
+    soundMaterial = 3;
+
 }
 
 

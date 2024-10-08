@@ -143,6 +143,9 @@ func editTiles(changeCommit):
 	var chunksToUpdate = []
 	for change in changeCommit.keys():
 		var c = changeCommit[change]
+		if c is String:
+			BlockData.doBlockAction(c,change.x,change.y,self)
+			continue
 		match c:
 			-1:
 				var save:int = DATAC.getTileData(change.x,change.y)

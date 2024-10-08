@@ -15,6 +15,7 @@ BLOCKSOIL::BLOCKSOIL() {
     connectedTexture = true;
     connectTexturesToMe = true;
     breakParticleID = 3;
+    soundMaterial = 1;
 
 }
 

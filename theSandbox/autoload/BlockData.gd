@@ -21,6 +21,9 @@ func checkForCollision(id):
 	var d = theChunker.getBlockDictionary(id)
 	return d["hasCollision"]
 
+func checkIfNatural(id):
+	var d = theChunker.getBlockDictionary(id)
+	return d["natural"]
 
 func breakBlock(x,y,planet,blockID,infoID):
 	
@@ -216,3 +219,16 @@ func spawnLooseItem(position,body,id,amount):
 func getSoundMaterialID(blockID) -> int:
 	var d = theChunker.getBlockDictionary(blockID)
 	return d["soundMaterial"]
+
+func doBlockAction(action:String,tileX:int,tileY:int,planet):
+	match action:
+		"drip":
+			var ins = load("res://object_scenes/entity/enemy_scenes/ambientEntities/caveDrip/caveDrip.tscn").instantiate()
+			ins.position = planet.tileToPos(Vector2(tileX,tileY))
+			ins.planet = planet
+			planet.entityContainer.add_child(ins)
+		"leaf":
+			var ins = load("res://object_scenes/entity/enemy_scenes/ambientEntities/leafFall/leafFall.tscn").instantiate()
+			ins.position = planet.tileToPos(Vector2(tileX,tileY))
+			ins.planet = planet
+			planet.entityContainer.add_child(ins)

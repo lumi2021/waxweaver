@@ -44,6 +44,7 @@ func fire(delta):
 	ins.speed = itemData.velocity * i[0].velocityMultiplier
 	ins.statusInflictors = itemData.statusInflictors + i[0].statusInflictors
 	ins.tex = i[0].texture
+	ins.itemID = PlayerData.inventory[i[1]][0]
 	ins.planet = GlobalRef.currentPlanet
 	ins.dir = Vector2(1,0).rotated(origin.global_rotation - get_parent().get_parent().rotation)
 	#print(Vector2(1,0).rotated(origin.global_rotation))

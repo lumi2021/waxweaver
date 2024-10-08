@@ -7,7 +7,7 @@ var passiveAmount = 0
 var passiveLimit = 15 # max passive mobs
 
 var spawnDelayTick = 0
-var spawnDelayThreshold = 420 # spawn rate
+var spawnDelayThreshold = 500 # spawn rate
 
 var creatures = {
 	"praffin": "res://object_scenes/entity/enemy_scenes/praffin/praffin.tscn",
@@ -19,7 +19,6 @@ var creatures = {
 	"cobble":"res://object_scenes/entity/enemy_scenes/cobble/cobble.tscn",
 	"apparition":"res://object_scenes/entity/enemy_scenes/apparition/apparition.tscn",
 }
-
 
 func _physics_process(delta):
 	if GlobalRef.currentPlanet == null:
@@ -70,6 +69,9 @@ func scanValid(planet,tile):
 	if isTileOnScreen(floorScan,planet):
 		return Vector2i(-10,-10) # fail because tile on screen
 	
+	var wall = planet.DATAC.getBGData(floorScan.x,floorScan.y)
+	if !BlockData.checkIfNatural(wall):
+		return Vector2i(-10,-10) # fail to spawn on non natural wall
 	return floorScan
 	
 

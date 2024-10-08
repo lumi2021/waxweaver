@@ -18,6 +18,8 @@ BLOCKAIR::BLOCKAIR() {
     lightEmmission = 5.0;
 
     isTransparent = true;
+
+    natural = true;
 }
 
 

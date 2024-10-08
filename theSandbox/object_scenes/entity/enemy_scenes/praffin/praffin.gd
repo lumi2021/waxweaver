@@ -65,6 +65,7 @@ func hunt(delta):
 
 func smack():
 	state = 2
+	$Hurtbox/CollisionShape2D.call_deferred("set_disabled",false)
 
 func stunned(delta):
 	var vel = getVelocity()
@@ -105,8 +106,8 @@ func wander(delta):
 	if wallWay.is_colliding() and floorRay.is_colliding():
 		vel.y = -220
 	
-	if getPlayerDistance() < 36:
-		state = 1
+	#if getPlayerDistance() < 36:
+	#	state = 1
 	
 	if getWater() > 0.5:
 		vel.y -= floatamount * 60 * delta

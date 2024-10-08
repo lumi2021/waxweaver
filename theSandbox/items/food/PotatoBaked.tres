@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_c7cxb")
 healingAmount = 5
-eatTime = 0.6
+eatTime = 0.5
 particleColor = Color(0.643137, 0.337255, 0.172549, 1)
 statusInflictors = Array[Resource("res://object_scenes/specialResource/statusEffects/StatusInflictor.gd")]([])
 itemName = "Baked Potato"

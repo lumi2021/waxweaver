@@ -8,25 +8,26 @@
 [ext_resource type="PackedScene" uid="uid://8jw6pruiu3cf" path="res://object_scenes/entity/components/hurtbox.tscn" id="5_tyfpu"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_arcvd"]
-radius = 3.16228
+radius = 3.8
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_k1ben"]
-radius = 5.09902
+radius = 7.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bm3sh"]
-radius = 5.0
+radius = 6.0
 
 [node name="spider" type="CharacterBody2D" node_paths=PackedStringArray("sprite")]
 collision_layer = 128
 script = ExtResource("1_rpbfy")
 sprite = NodePath("Sprite")
-creatureSlots = 6
+creatureSlots = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_arcvd")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_cn8la")
+hframes = 4
 
 [node name="DeleteMeOutsideOfChunk" parent="." instance=ExtResource("3_f6yp8")]
 
@@ -47,7 +48,7 @@ colliderShape = NodePath("CollisionShape2D")
 shape = SubResource("CircleShape2D_k1ben")
 
 [node name="Hurtbox" parent="." instance=ExtResource("5_tyfpu")]
-damage = 8
+damage = 16
 knockback = 0.2
 enemyName = "spider"
 

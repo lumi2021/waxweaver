@@ -13,6 +13,8 @@ BLOCKSAND::BLOCKSAND() {
     itemToDrop = 14;
     rotateTextureToGravity = true;
 
+    soundMaterial = 3;
+
 }
 
 

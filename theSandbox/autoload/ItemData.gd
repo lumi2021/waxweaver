@@ -144,7 +144,7 @@ var heldItemAnims = {
 
 func matchItemAnimation(id):
 	var d = getItem(id)
-	if d is ItemBlock or d is ItemPlant or d is ItemBucket:
+	if d is ItemBlock or d is ItemPlant or d is ItemBucket or d is ItemTypeBlock:
 		return "itemSwingNoHitbox"
 	if d is ItemDamage:
 		return "itemSwing"

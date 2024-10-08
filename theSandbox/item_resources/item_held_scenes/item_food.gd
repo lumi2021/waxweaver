@@ -8,6 +8,8 @@ var timeToEat :float= 1.0
 
 var amountToHeal :int = 1
 
+var soundTick :float= 0.0
+
 func onEquip():
 	visible = false
 	sprite.region_rect.size.x = sprite.texture.get_width()
@@ -49,6 +51,15 @@ func onUsing(delta):
 		
 		
 		PlayerData.consumeSelected()
+		SoundManager.playSound("items/eatFood2",global_position,1.5,0.1)
+		SoundManager.playSound("items/heal",global_position,1.5,0.0)
+	
+	# play sound
+	soundTick += delta
+	if soundTick > 0.3:
+		soundTick -= 0.3
+		#var r = str((randi() % 2 ) + 1)
+		SoundManager.playSound("items/eatFood1",global_position,1.7,0.2)
 	
 
 func onNotUsing(delta):

@@ -100,7 +100,7 @@ func _process(delta):
 				if cantMineSparkTick >= 0.5: # do failure spark
 					cantMineSparkTick -= 0.5
 					$spark.emitting = true
-					# add sound here
+					SoundManager.playSound("mining/mineFail",global_position,0.7,0.05)
 			
 		else:
 			queue_free()
@@ -115,8 +115,6 @@ func _process(delta):
 
 func playDigSound(delta):
 	soundTick += delta
-	
-	mineMultiplier
 	
 	if soundTick > 0.2:
 		soundTick -= 0.2

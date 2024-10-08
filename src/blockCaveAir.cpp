@@ -18,6 +18,8 @@ BLOCKCAVEAIR::BLOCKCAVEAIR() {
     lightEmmission = 0.0;
     
     isTransparent = true;
+
+    natural = true;
     
 }
 

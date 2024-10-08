@@ -41,6 +41,8 @@ BLOCK::BLOCK() {
     miningLevel = 0; // 0 is always mineable, 1 is copper tools, 2 is gold tools, 3 is iron tools...
     soundMaterial = 0; // stone, dirt, wood, sand, cloth, leaves, glass
 
+    natural = false; // used to block spawns when used as wall, natural true means spawns are allowed
+
     setNewVariables();
 
 }

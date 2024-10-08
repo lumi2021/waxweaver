@@ -29,6 +29,7 @@ BLOCKSAPLING::BLOCKSAPLING() {
     itemToDrop = 7;
 
     isTransparent = true;
+    soundMaterial = 5;
 
 }
 

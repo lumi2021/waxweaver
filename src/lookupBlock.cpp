@@ -105,6 +105,7 @@ Dictionary LOOKUPBLOCK::getBlockData(int id){
     data["animated"] = g->animated;
     data["miningLevel"] = g->miningLevel;
     data["soundMaterial"] = g->soundMaterial;
+    data["natural"] = g->natural;
 
     return data;
 }

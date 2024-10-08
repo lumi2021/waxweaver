@@ -47,6 +47,7 @@ var beingKnockedback = false
 var dead = false
 
 var wasInWater = false
+var wasJustOnFloorEarlierActually = false
 
 var airTime :float = 0.0
 
@@ -61,6 +62,10 @@ var usingItem = false
 @onready var legsSpr = $PlayerLayers/leggings
 
 var myTile := Vector2.ZERO # players tile in the world
+var lastFloorTile := 0
+
+# footstep
+var stream :AudioStreamOggVorbis = null #SoundManager.getMineSound(blockID)
 
 ######################################################################
 ########################### BASIC FUNTIONS ###########################
@@ -202,7 +207,11 @@ func normalMovement(delta):
 	var onFloor = isOnFloor(rotSource)
 	var speed = Stats.getSpeed()
 	
-	if squishHeadUnderCeiling():
+	if onFloor and !wasJustOnFloorEarlierActually:
+		playFootstepSound() # landing on floor sound effect
+	wasJustOnFloorEarlierActually = onFloor
+	
+	if squishHeadUnderCeiling(): # reduce speed if squashed
 		speed *= 0.25
 	
 	var dir = 0
@@ -224,6 +233,7 @@ func normalMovement(delta):
 	var body = planetOn
 	if shipOn != null:
 		body = shipOn
+	$swimmingDetector.body = body
 	newVel = WATERJUMPCAMERALETSGO(body,newVel,rotSource,onFloor,delta)
 	
 	if movementState == 2:
@@ -266,6 +276,15 @@ func WATERJUMPCAMERALETSGO(body,vel,rot,onFloor,delta):
 	
 	if tile == null:
 		return vel
+	
+	#load audio stream for footstep
+	if tile != myTile: # if tile changes
+		var floor = tile + Vector2(0,1).rotated((PI/2)*rotated) # gets floor tile
+		var blockID :int = body.DATAC.getTileData(floor.x,floor.y)
+		if blockID != null and lastFloorTile != blockID:
+			stream = SoundManager.getMineSound(blockID)
+			lastFloorTile = blockID
+		
 	myTile = tile
 	
 	# attach to ladder if holding up
@@ -297,7 +316,7 @@ func WATERJUMPCAMERALETSGO(body,vel,rot,onFloor,delta):
 	
 	# there must be a better way
 	var inWater = abs(body.DATAC.getWaterData(tile.x,tile.y)) > 0.3
-	if inWater:
+	if inWater: # code if currently in water
 		wasInWater = true
 		healthComponent.inflictStatus("wet",8)
 		vel.y = min(vel.y,30 + (Stats.swimMult * 2.5))
@@ -311,6 +330,7 @@ func WATERJUMPCAMERALETSGO(body,vel,rot,onFloor,delta):
 	if wasInWater and Input.is_action_pressed("jump"):
 		vel.y += -150.0
 		wasInWater = false
+		# code for leaving water
 			
 	if onFloor:
 		if Input.is_action_just_pressed("jump") and !GlobalRef.chatIsOpen:
@@ -364,6 +384,7 @@ func ladderMovement(delta):
 				setAllPlayerFrames(9)
 			else:
 				setAllPlayerFrames(8)
+			SoundManager.playSound("items/ladderClimb",global_position,1.2,0.1)
 	else:
 		ladderTick = 6
 	
@@ -654,6 +675,7 @@ func onRightClick():
 	var blockType = editBody.DATAC.getTileData(tile.x,tile.y)
 	var rot = editBody.DATAC.getPositionLookup(tile.x,tile.y)
 	
+	
 	# right click functionality for each block
 	match blockType:
 		19: # chair
@@ -668,8 +690,10 @@ func onRightClick():
 			chairSit(tile,editBody)
 		22: # closed door
 			openDoor(tile,editBody,GlobalRef.playerSide)
+			SoundManager.playSound("interacts/door",get_global_mouse_position(),1.2,0.1)
 		23: # open door
 			closeDoor(tile,editBody)
+			SoundManager.playSound("interacts/door",get_global_mouse_position(),1.2,0.1)
 		25: # ladder
 			
 			# return if wall is in the way
@@ -685,6 +709,7 @@ func onRightClick():
 			if editBody is Planet:
 				rotated = editBody.DATAC.getPositionLookup(tile.x,tile.y)
 			attachToLadder(tile,editBody)
+			SoundManager.playSound("items/ladderClimb",global_position,1.5,0.1)
 
 		33: # chest 
 			if PlayerData.chestOBJ == editBody and PlayerData.currentSelectedChest == tile:
@@ -699,6 +724,7 @@ func onRightClick():
 				ins.pos = tile
 				ins.rot = rot
 				editBody.entityContainer.add_child(ins)
+				SoundManager.playSound("interacts/chest",get_global_mouse_position(),1.0,0.1)
 		34: # loot chest
 			
 			editBody.chestDictionary[tile] = LootData.getChestLoot(editBody.planetType)
@@ -712,12 +738,15 @@ func onRightClick():
 				ins.pos = tile
 				ins.rot = rot
 				editBody.entityContainer.add_child(ins)
-		47:
+				SoundManager.playSound("interacts/chest",get_global_mouse_position(),1.0,0.1)
+		47: # trap door
 			var dick = setAllTrapdoors(tile,48,editBody)
 			editBody.editTiles( dick )
-		48:
+			SoundManager.playSound("interacts/door",get_global_mouse_position(),1.2,0.1)
+		48: # trap door
 			var dick = setAllTrapdoors(tile,47,editBody)
 			editBody.editTiles( dick )
+			SoundManager.playSound("interacts/door",get_global_mouse_position(),1.2,0.1)
 
 func setAllTrapdoors(tile:Vector2,replaceID:int,body):
 	var dick = {}
@@ -1165,7 +1194,13 @@ func _unhandled_input(event):
 		if event["button_index"] == 2:
 			if event["pressed"]:
 				onRightClick()
+				
 
 func toggleNoClip():
 	noClip = !noClip
 	$CollisionShape2D.disabled = noClip
+
+func playFootstepSound():
+	SoundManager.playSound("enemy/step",global_position,0.5,0.1)
+	if stream != null:
+		SoundManager.playSoundStream(stream,global_position,0.5,0.1)

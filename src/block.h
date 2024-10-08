@@ -56,6 +56,7 @@ public:
     int miningLevel;
 
     int soundMaterial;
+    bool natural;
 
 
 	BLOCK();

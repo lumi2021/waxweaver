@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://by3n5rr1aqj03"]
+[gd_scene load_steps=11 format=3 uid="uid://by3n5rr1aqj03"]
 
 [ext_resource type="Script" path="res://object_scenes/entity/enemy_scenes/praffin/praffin.gd" id="1_i086i"]
 [ext_resource type="PackedScene" uid="uid://meikam2oyy13" path="res://object_scenes/entity/components/health_component.tscn" id="1_uxer5"]
 [ext_resource type="PackedScene" uid="uid://84sah16y8gwq" path="res://object_scenes/entity/components/delete_me_outside_of_chunk.tscn" id="2_mu7bf"]
+[ext_resource type="PackedScene" uid="uid://ch461nupa3hsv" path="res://object_scenes/entity/components/swimming_detector.tscn" id="4_4a7ge"]
 [ext_resource type="PackedScene" uid="uid://c05kukkqfrg40" path="res://object_scenes/entity/components/hitbox.tscn" id="4_6kicg"]
 [ext_resource type="PackedScene" uid="uid://8jw6pruiu3cf" path="res://object_scenes/entity/components/hurtbox.tscn" id="5_53tc8"]
 [ext_resource type="Texture2D" uid="uid://b422dce41j8mm" path="res://object_scenes/entity/enemy_scenes/praffin/praffin.png" id="7_8mbo5"]
@@ -25,6 +26,7 @@ rotationOrigin = NodePath("axis")
 sprite = NodePath("axis/spr")
 wallWay = NodePath("axis/wall")
 floorRay = NodePath("axis/floor")
+creatureSlots = 10
 
 [node name="DeleteMeOutsideOfChunk" parent="." instance=ExtResource("2_mu7bf")]
 
@@ -34,6 +36,8 @@ knockbackResist = 0.8
 defense = 2
 dropItemArray = Array[int]([3003, 3003, 3003, 3003, 15])
 dropChanceArray = Array[int]([1, 2, 5, 5, 10])
+
+[node name="swimmingDetector" parent="." instance=ExtResource("4_4a7ge")]
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_bsfip")
@@ -48,11 +52,12 @@ colliderShape = NodePath("CollisionShape2D")
 shape = SubResource("RectangleShape2D_1hxg4")
 
 [node name="Hurtbox" parent="." instance=ExtResource("5_53tc8")]
-damage = 8
+damage = 10
 enemyName = "praffin"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 shape = SubResource("RectangleShape2D_yntbc")
+disabled = true
 
 [node name="axis" type="Node2D" parent="."]
 

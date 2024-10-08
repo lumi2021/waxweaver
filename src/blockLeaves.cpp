@@ -46,6 +46,11 @@ Dictionary BLOCKLEAVES::onTick(int x, int y, PLANETDATA *planet, int dir){
             Vector2i newPos =  Vector2i(x,y) - Vector2i( Vector2(scanX,scanY).rotated(acos(0.0)*dir) );
             int tile = planet->getTileData(newPos.x,newPos.y);
             if( tile == 8 || tile == 12 ){
+
+                if(std::rand()%100==0){
+                    changes[Vector2i(x,y)] = "leaf";
+                }
+
                  return changes;
             }
 

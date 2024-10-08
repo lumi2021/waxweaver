@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://c75skil8yqf3u"]
+[gd_scene load_steps=5 format=3 uid="uid://kvtx627vkc6j"]
 
 [ext_resource type="Script" path="res://object_scenes/entity/enemy_scenes/explosive/explosive.gd" id="1_hajb3"]
 [ext_resource type="Texture2D" uid="uid://b1m7ytwt10ye7" path="res://items/tools/explosives/bomb.png" id="2_a8hi3"]

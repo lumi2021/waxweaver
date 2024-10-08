@@ -57,6 +57,8 @@ func getMineSound(id:int=0) -> AudioStreamOggVorbis:
 			return load("res://sound/mining/dirtMine.ogg")
 		2: # wood
 			return load("res://sound/mining/woodMine.ogg")
+		3: # sand / gravel
+			return load("res://sound/mining/sandMine.ogg")
 		5: # foliage
 			return load("res://sound/mining/foliageMine.ogg")
 		6: # glass
@@ -74,6 +76,8 @@ func getBreakSound(id:int=0) -> AudioStreamOggVorbis:
 			return load("res://sound/mining/dirtBreak.ogg")
 		2: # wood
 			return load("res://sound/mining/woodBreak.ogg")
+		3: # sand / gravel
+			return load("res://sound/mining/sandBreak.ogg")
 		5: # foliage
 			return load("res://sound/mining/foliageBreak.ogg")
 		6: # glass

@@ -49,6 +49,11 @@ func addItem(itemID,amount):
 	var itemCountLeft = amount
 	
 	var itemData = ItemData.data[itemID]
+	
+	if itemData == null:
+		printerr("ERROR: Failed to grab item data.")
+		return # avoid crashes
+	
 	var itemMax = itemData.maxStackSize
 	for slot in inventoryHasItem(itemID):
 		var add = inventory[slot][1] + itemCountLeft

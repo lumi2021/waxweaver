@@ -53,5 +53,11 @@ Dictionary BLOCKSTALACTITE::onTick(int x, int y, PLANETDATA *planet, int dir){
     }
 
 
+    int rand = std::rand();
+    if(rand%800 == 0){
+        changes[Vector2i(x,y)] = "drip";
+    }
+
+
     return changes;
 }

@@ -24,6 +24,7 @@ func emptyBucket(tileX:int,tileY:int,planetDir:int,planet,lastTile:Vector2):
 	if waterLevel > 0.6:
 		planet.DATAC.setWaterData(tileX,tileY,0.0)
 		PlayerData.replaceSelectedSlot(3026,1)
+		sound(tileX,tileY,planet)
 
 func fullBucket(tileX:int,tileY:int,planetDir:int,planet,lastTile:Vector2):
 	
@@ -33,7 +34,16 @@ func fullBucket(tileX:int,tileY:int,planetDir:int,planet,lastTile:Vector2):
 	if waterLevel < 0.8:
 		planet.DATAC.setWaterData(tileX,tileY,0.8)
 		PlayerData.replaceSelectedSlot(3025,1)
+		sound(tileX,tileY,planet)
 
 func magicBucket(tileX:int,tileY:int,planetDir:int,planet,lastTile:Vector2):
 	
 	planet.DATAC.setWaterData(tileX,tileY,1.0)
+	sound(tileX,tileY,planet,true)
+
+func sound(tileX:int,tileY:int,planet,quiet:bool=false):
+	var pos = planet.to_global(planet.tileToPos(Vector2(tileX,tileY)))
+	var vol = 1.0
+	if quiet:
+		vol = 0.2
+	SoundManager.playSound("enemy/swim0",pos,vol,0.1)

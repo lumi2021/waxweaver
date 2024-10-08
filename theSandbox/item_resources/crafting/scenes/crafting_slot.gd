@@ -58,9 +58,30 @@ func checkForStation():
 
 
 func _on_craft_button_pressed():
+	
+	var itemID :int= recipe.itemToCraft
+	var amount :int= recipe.amountToCraft
+	
+	var hand = PlayerData.getHandSlot()
+	
+	if hand[0] != -1 and hand[0] != itemID:
+		return  # cancel if holding wrong item
+	
+	if hand[1] + amount > ItemData.getItem(itemID).maxStackSize:
+		return # cancel if holding too much of correct item 
+	
 	if isCraftable:
-		var canCraftAgain = PlayerData.craftItem(recipe)
-		displayCanCraft(canCraftAgain)
+		if Input.is_action_pressed("shift"):
+			var poo = true
+			while (poo): # crafts as many as possible
+				var canCraftAgain = PlayerData.craftItem(recipe)
+				displayCanCraft(canCraftAgain)
+				if !canCraftAgain:
+					poo = false
+		else:
+			var canCraftAgain = PlayerData.craftItem(recipe)
+			displayCanCraft(canCraftAgain)
+		SoundManager.playSound("inventory/pickupItem",get_global_mouse_position(),1.2,0.1)
 
 func _on_craft_button_mouse_entered():
 	parent.displayCraftingInfo(recipe)

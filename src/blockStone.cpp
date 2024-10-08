@@ -12,7 +12,7 @@ BLOCKSTONE::BLOCKSTONE() {
 
     itemToDrop = 2;
     rotateTextureToGravity = true;
-
+    natural = true;
 }
 
 

@@ -5,8 +5,9 @@
 
 [resource]
 script = ExtResource("1_6m5rf")
-damage = 4
+damage = 3
 velocityMultiplier = 1.0
+statusInflictors = Array[Resource("res://object_scenes/specialResource/statusEffects/StatusInflictor.gd")]([])
 itemName = "Arrow"
 subtext = ""
 texture = ExtResource("2_cdtts")

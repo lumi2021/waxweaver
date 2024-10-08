@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://c1b1vgh12jqww"]
+[gd_scene load_steps=22 format=3 uid="uid://c1b1vgh12jqww"]
 
 [ext_resource type="Script" path="res://object_scenes/player/player.gd" id="1_7l8c2"]
 [ext_resource type="PackedScene" uid="uid://meikam2oyy13" path="res://object_scenes/entity/components/health_component.tscn" id="2_vteuo"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://8or0mhmcnuym" path="res://object_scenes/player/sprites/pupil.png" id="5_64d8m"]
 [ext_resource type="Texture2D" uid="uid://c47fuirjhvx43" path="res://object_scenes/player/sprites/layerEye.png" id="6_uk1hk"]
 [ext_resource type="Texture2D" uid="uid://dei6me4j1chus" path="res://object_scenes/player/sprites/layerHandFront.png" id="8_0olu2"]
+[ext_resource type="PackedScene" uid="uid://ch461nupa3hsv" path="res://object_scenes/entity/components/swimming_detector.tscn" id="9_2illf"]
 [ext_resource type="PackedScene" uid="uid://c05kukkqfrg40" path="res://object_scenes/entity/components/hitbox.tscn" id="12_wduni"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8s1yf"]
@@ -204,6 +205,23 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(-0.5, -10.5), Vector2(-0.5, -9.5), Vector2(-0.5, -10.5), Vector2(-0.5, -9.5)]
 }
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"playFootstepSound"
+}, {
+"args": [],
+"method": &"playFootstepSound"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4n17m"]
 _data = {
@@ -371,5 +389,8 @@ hit_from_inside = true
 position = Vector2(0, -7)
 target_position = Vector2(1, 0)
 hit_from_inside = true
+
+[node name="swimmingDetector" parent="." instance=ExtResource("9_2illf")]
+isEnemy = false
 
 [connection signal="healthChanged" from="HealthComponent" to="." method="_on_health_component_health_changed"]

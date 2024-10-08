@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://b1on05vi7iope"]
+
+[ext_resource type="Script" path="res://object_scenes/entity/enemy_scenes/ambientEntities/leafFall/leafFall.gd" id="1_1wece"]
+[ext_resource type="PackedScene" uid="uid://84sah16y8gwq" path="res://object_scenes/entity/components/delete_me_outside_of_chunk.tscn" id="2_mfsbm"]
+[ext_resource type="Texture2D" uid="uid://v1cscs6qwnik" path="res://object_scenes/entity/enemy_scenes/ambientEntities/leafFall/leaf.png" id="3_d71ig"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ggudy"]
+radius = 0.5
+
+[node name="leafFall" type="CharacterBody2D"]
+collision_layer = 128
+script = ExtResource("1_1wece")
+
+[node name="DeleteMeOutsideOfChunk" parent="." instance=ExtResource("2_mfsbm")]
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(0, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ggudy")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("3_d71ig")
