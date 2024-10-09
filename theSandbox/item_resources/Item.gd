@@ -10,6 +10,8 @@ class_name Item
 
 ## FALSE means item can be used continually while mouse is held down,TRUE means its only used once.
 @export var clickToUse := false
+## settings to TRUE means item can be used even when mouse is far away
+@export var infiniteReach := false
 
 var materialIn : Array[int] = []
 

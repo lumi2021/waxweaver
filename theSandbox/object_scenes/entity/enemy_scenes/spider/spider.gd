@@ -30,7 +30,7 @@ func hunt(delta):
 	setVelocity(vel)
 	move_and_slide() 
 	
-	sprite.rotation = vel.angle()
+	sprite.rotation = velocity.angle()
 	
 	if getWall() < 2:
 		state = 1

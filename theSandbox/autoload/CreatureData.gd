@@ -18,6 +18,7 @@ var creatures = {
 	"spider":"res://object_scenes/entity/enemy_scenes/spider/spider.tscn",
 	"cobble":"res://object_scenes/entity/enemy_scenes/cobble/cobble.tscn",
 	"apparition":"res://object_scenes/entity/enemy_scenes/apparition/apparition.tscn",
+	"flower":"res://object_scenes/entity/enemy_scenes/flower/flower.tscn",
 }
 
 func _physics_process(delta):

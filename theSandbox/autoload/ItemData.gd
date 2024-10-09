@@ -106,7 +106,7 @@ var data = {
 	3039:load("res://items/weapons/arrows/PoisonArrow.tres"),
 	3040:load("res://items/tools/explosives/bomb.tres"),
 	
-	3041:load("res://items/blocks/building/colors/wools/RedWool.tres"),
+	3041:load("res://items/blocks/building/colors/wools/RedWool.tres"), # wools
 	3042:load("res://items/blocks/building/colors/wools/OrangeWool.tres"),
 	3043:load("res://items/blocks/building/colors/wools/YellowWool.tres"),
 	3044:load("res://items/blocks/building/colors/wools/GreenWool.tres"),
@@ -118,6 +118,21 @@ var data = {
 	3050:load("res://items/blocks/building/colors/wools/BlackWool.tres"),
 	3051:load("res://items/blocks/building/colors/wools/BrownWool.tres"),
 	3052:load("res://items/blocks/building/colors/wools/PinkWool.tres"),
+	
+	3053:load("res://items/gifts/DyeBag.tres"),
+	
+	3054:load("res://items/dye/DyeRed.tres"), # dyes
+	3055:load("res://items/dye/DyeOrange.tres"),
+	3056:load("res://items/dye/DyeYellow.tres"),
+	3057:load("res://items/dye/DyeGreen.tres"),
+	3058:load("res://items/dye/DyeCyan.tres"),
+	3059:load("res://items/dye/DyeBlue.tres"),
+	3060:load("res://items/dye/DyePurple.tres"),
+	3061:load("res://items/dye/DyeWhite.tres"),
+	3062:load("res://items/dye/DyeGrey.tres"),
+	3063:load("res://items/dye/DyeBlack.tres"),
+	3064:load("res://items/dye/DyeBrown.tres"),
+	3065:load("res://items/dye/DyePink.tres"),
 	
 	# chairs 6000 - 6049
 	6000:load("res://items/blocks/furniture/chairs/WoodenChair.tres"),

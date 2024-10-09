@@ -48,11 +48,11 @@ func heal(amount):
 
 func damage(amount,hitCrit:bool=false,source:String="idk"):
 	
-	SoundManager.playSound("enemy/attackEnemy",parent.global_position,1.4,0.2)
-	
 	if isPlayer:
 		if parent.dead:
 			return
+	
+	SoundManager.playSound("enemy/attackEnemy",parent.global_position,1.4,0.2)
 	var trueAmount = amount
 	var def = defense
 	if checkIfHasEffect("fragile"):

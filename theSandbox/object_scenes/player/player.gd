@@ -606,14 +606,16 @@ func useItem():
 	
 	if itemData != null and tile != null:
 		
-		if get_local_mouse_position().length() > 64:
-			return
+		if !itemData.infiniteReach:
+			if get_local_mouse_position().length() > 64:
+				return
 		
 		if dead:
 			return
 		
 		if itemData.clickToUse:
 			if Input.is_action_just_pressed("mouse_left"):
+				print("woah")
 				itemData.onUse(tile.x,tile.y,getPlanetPosition(),editBody,lastTileItemUsedOn)
 		else:
 			itemData.onUse(tile.x,tile.y,getPlanetPosition(),editBody,lastTileItemUsedOn)
@@ -1189,7 +1191,7 @@ func _unhandled_input(event):
 		
 		if event["button_index"] == 1:
 			usingItem = event["pressed"]
-			useItem()
+			#useItem()
 		
 		if event["button_index"] == 2:
 			if event["pressed"]:

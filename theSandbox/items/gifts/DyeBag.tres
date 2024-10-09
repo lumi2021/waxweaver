@@ -1,0 +1,99 @@
+[gd_resource type="Resource" script_class="ItemGift" load_steps=17 format=3 uid="uid://f2e5kwi0e6um"]
+
+[ext_resource type="Script" path="res://object_scenes/specialResource/lootTables/LootTable.gd" id="1_4860d"]
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemGift.gd" id="1_ygwx8"]
+[ext_resource type="Script" path="res://object_scenes/specialResource/lootTables/RollableItem.gd" id="2_s44oj"]
+[ext_resource type="Texture2D" uid="uid://yui46oyrm5a6" path="res://items/gifts/dyeBag.png" id="4_75aro"]
+
+[sub_resource type="Resource" id="Resource_r7hht"]
+script = ExtResource("2_s44oj")
+id = 3054
+amountMin = 2
+amountMax = 3
+weight = 1
+
+[sub_resource type="Resource" id="Resource_mkayv"]
+script = ExtResource("2_s44oj")
+id = 3055
+amountMin = 2
+amountMax = 3
+weight = 1
+
+[sub_resource type="Resource" id="Resource_oxhqo"]
+script = ExtResource("2_s44oj")
+id = 3056
+amountMin = 2
+amountMax = 3
+weight = 1
+
+[sub_resource type="Resource" id="Resource_blh82"]
+script = ExtResource("2_s44oj")
+id = 3057
+amountMin = 2
+amountMax = 3
+weight = 1
+
+[sub_resource type="Resource" id="Resource_1hh71"]
+script = ExtResource("2_s44oj")
+id = 3058
+amountMin = 2
+amountMax = 3
+weight = 1
+
+[sub_resource type="Resource" id="Resource_fkdg8"]
+script = ExtResource("2_s44oj")
+id = 3059
+amountMin = 2
+amountMax = 3
+weight = 1
+
+[sub_resource type="Resource" id="Resource_kclpr"]
+script = ExtResource("2_s44oj")
+id = 3060
+amountMin = 2
+amountMax = 3
+weight = 1
+
+[sub_resource type="Resource" id="Resource_p84a3"]
+script = ExtResource("2_s44oj")
+id = 3062
+amountMin = 2
+amountMax = 3
+weight = 1
+
+[sub_resource type="Resource" id="Resource_66ylg"]
+script = ExtResource("2_s44oj")
+id = 3063
+amountMin = 2
+amountMax = 3
+weight = 1
+
+[sub_resource type="Resource" id="Resource_wqr8x"]
+script = ExtResource("2_s44oj")
+id = 3064
+amountMin = 2
+amountMax = 3
+weight = 1
+
+[sub_resource type="Resource" id="Resource_auki2"]
+script = ExtResource("2_s44oj")
+id = 3065
+amountMin = 2
+amountMax = 3
+weight = 1
+
+[sub_resource type="Resource" id="Resource_hbh0t"]
+script = ExtResource("1_4860d")
+rollType = 0
+rollCount = 5
+table = Array[ExtResource("2_s44oj")]([SubResource("Resource_r7hht"), SubResource("Resource_mkayv"), SubResource("Resource_oxhqo"), SubResource("Resource_blh82"), SubResource("Resource_1hh71"), SubResource("Resource_fkdg8"), SubResource("Resource_kclpr"), SubResource("Resource_p84a3"), SubResource("Resource_66ylg"), SubResource("Resource_wqr8x"), SubResource("Resource_auki2")])
+
+[resource]
+script = ExtResource("1_ygwx8")
+loottable = SubResource("Resource_hbh0t")
+itemName = "Dye bag"
+subtext = ""
+texture = ExtResource("4_75aro")
+maxStackSize = 99
+clickToUse = true
+infiniteReach = true

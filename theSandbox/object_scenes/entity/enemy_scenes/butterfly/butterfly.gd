@@ -46,7 +46,8 @@ func _process(delta):
 		spr.frame_coords.x = int( spr.frame_coords.x == 0 )
 		animTick -= 0.5
 	
-	groundCast.target_position = Vector2(0,64).rotated( getQuad(self) )
+	groundCast.target_position = Vector2(0,64).rotated( (PI/2) * getQuad(self) )
+	airCast.target_position = Vector2(0,20).rotated( (PI/2) * getQuad(self) )
 	spr.rotation = getQuad(self) * (PI/2)
 	
 	if getWater() > 0.5:

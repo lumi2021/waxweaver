@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://b5jaranv4e7l"]
+
+[ext_resource type="Script" path="res://item_resources/Item.gd" id="1_jlm7s"]
+[ext_resource type="Texture2D" uid="uid://cyxuwvcf50gap" path="res://items/dye/dyeGrey.png" id="2_fbnao"]
+
+[resource]
+script = ExtResource("1_jlm7s")
+itemName = "Grey Dye"
+subtext = ""
+texture = ExtResource("2_fbnao")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

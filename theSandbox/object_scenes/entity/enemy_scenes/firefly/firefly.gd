@@ -33,7 +33,8 @@ func _process(delta):
 	
 	tick += delta
 	
-	groundCast.target_position = Vector2(0,64).rotated( getQuad(self) )
+	groundCast.target_position = Vector2(0,64).rotated( (PI/2) * getQuad(self) )
+	airCast.target_position = Vector2(0,20).rotated( (PI/2) * getQuad(self) )
 	
 	if getWater() > 0.5:
 		HC.damage(1)

@@ -29,8 +29,8 @@ floorRay = NodePath("axis/floor")
 maxHealth = 32
 knockbackResist = 0.8
 defense = 2
-dropItemArray = Array[int]([3037, 3028])
-dropChanceArray = Array[int]([10, 50])
+dropItemArray = Array[int]([26, 3038])
+dropChanceArray = Array[int]([1, 20])
 
 [node name="Hitbox" parent="." node_paths=PackedStringArray("healthComponent", "colliderShape") instance=ExtResource("4_6kicg")]
 healthComponent = NodePath("../HealthComponent")
