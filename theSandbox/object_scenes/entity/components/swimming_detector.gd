@@ -16,7 +16,7 @@ func _process(delta):
 	if !is_instance_valid(body):
 		return # cancel if body invalid
 	
-	var tile :Vector2= body.posToTile( body.to_local(global_position) )
+	var tile = body.posToTile( body.to_local(global_position) )
 	if tile == null:
 		return # cancel if outside world boundary
 	

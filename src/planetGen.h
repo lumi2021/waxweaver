@@ -29,12 +29,14 @@ public:
     void generateForestPlanet(PLANETDATA *planet, FastNoiseLite *noise);
     void generateLunarPlanet(PLANETDATA *planet, FastNoiseLite *noise);
     void generateSunPlanet(PLANETDATA *planet, FastNoiseLite *noise);
+    void generateAridPlanet(PLANETDATA *planet, FastNoiseLite *noise);
     
     
     double getBlockDistance(int x, int y, PLANETDATA *planet);
     int airOrCaveAir(int x,int y, PLANETDATA *planet);
     void generateOre(PLANETDATA *planet,int x,int y,int oreID,int replaceID,int cycles);
     void generateBox(PLANETDATA *planet,int x, int y, int wallID, int bgID);
+    void generateLadderPath(PLANETDATA *planet,int x, int y, int dir);
 	
 };
 

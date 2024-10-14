@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemTrinket" load_steps=3 format=3 uid="uid://c8t6w5iwsmvkc"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemTrinket.gd" id="1_kwdw2"]
+[ext_resource type="Texture2D" uid="uid://dnx7g8evxdx8x" path="res://items/trinket/flipper.png" id="2_1cr0d"]
+
+[resource]
+script = ExtResource("1_kwdw2")
+description = "+100% swim movement"
+specialProperties = Array[String]([])
+sceneToLoad = ""
+addSpeed = 0.0
+addJump = 0.0
+addSwim = 1.0
+addDefense = 0
+addMeleeDamage = 0.0
+addRangedDamage = 0.0
+addHealingMultiplier = 0.0
+addKnockback = 0.0
+addAttackSpeed = 0.0
+addcriticalStrikeChance = 0
+itemName = "Flipper"
+subtext = ""
+texture = ExtResource("2_1cr0d")
+maxStackSize = 1
+clickToUse = false
+infiniteReach = false

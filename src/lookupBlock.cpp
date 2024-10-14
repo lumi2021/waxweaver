@@ -77,6 +77,8 @@ LOOKUPBLOCK::LOOKUPBLOCK() {
 
     penis[52] = new BLOCKSTALACTITE();
     penis[53] = new BLOCKWOOL();
+    penis[54] = new BLOCKSTRUCTURE();
+    penis[55] = new BLOCKBED();
 
     
     for(BLOCK *i : penis){ // i increase automatically !

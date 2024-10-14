@@ -71,6 +71,8 @@ func spawnGroundItem(tilex:int,tiley:int,id:int,planet):
 				spawnItemRaw(tilex,tiley,37,planet)
 		53: # is wool
 			id = 3041 + planet.DATAC.getInfoData(tilex,tiley)
+		55: # is bed
+			id = 6150 # for now
 	
 	var ins = groundItemScene.instantiate()
 	ins.itemID = id

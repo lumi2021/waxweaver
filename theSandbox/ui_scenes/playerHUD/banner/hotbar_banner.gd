@@ -264,7 +264,9 @@ func interpretCommand(text):
 		"load":
 			GlobalRef.currentPlanet.DATAC.loadFromString(longassstring[0],longassstring[1],longassstring[2],longassstring[3],longassstring[4])
 			GlobalRef.currentPlanet.forceChunkDrawUpdate()
-		
+		"spawnpoint":
+			GlobalRef.playerSpawn = GlobalRef.player.position
+			GlobalRef.sendChat("set spawn")
 		_:
 			GlobalRef.sendError("Error: command doesn't exist")
 			return

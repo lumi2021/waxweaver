@@ -51,6 +51,7 @@ var data = {
 	51:load("res://items/paintings/LynFish.tres"),
 	
 	#53:load("res://items/blocks/building/colors/wools/WhiteWool.tres"),
+	54:load("res://items/blocks/technical/StructureBlock.tres"),
 	
 	########## item ids ##################
 	3000:load("res://items/tools/flimsy/FlimsySword.tres"), # flimsy tools
@@ -134,6 +135,14 @@ var data = {
 	3064:load("res://items/dye/DyeBrown.tres"),
 	3065:load("res://items/dye/DyePink.tres"),
 	
+	3066:load("res://items/trinket/Dice.tres"),
+	3067:load("res://items/trinket/BoxingGlove.tres"),
+	3068:load("res://items/trinket/BandAid.tres"),
+	3069:load("res://items/trinket/Flipper.tres"),
+	3070:load("res://items/trinket/curses/CurseStone.tres"),
+	3071:load("res://items/trinket/curses/CurseFragile.tres"),
+	3072:load("res://items/trinket/curses/CurseMoonwalk.tres"),
+	
 	# chairs 6000 - 6049
 	6000:load("res://items/blocks/furniture/chairs/WoodenChair.tres"),
 	6001:load("res://items/blocks/furniture/chairs/Toilet.tres"),
@@ -142,8 +151,11 @@ var data = {
 	6050:load("res://items/blocks/furniture/doors/WoodDoor.tres"),
 	6051:load("res://items/tools/golden/GoldenPickaxe.tres"),
 	
-	# chests 6100 - 6200
+	# chests 6100 - 6149
 	6100:load("res://items/blocks/furniture/chests/WoodenChest.tres"),
+	
+	# beds 6150 - 6200
+	6150:load("res://items/blocks/furniture/beds/WhiteBed.tres"),
 }
 
 var heldItemAnims = {

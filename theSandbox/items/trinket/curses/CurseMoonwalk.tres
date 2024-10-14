@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemTrinket" load_steps=3 format=3 uid="uid://2a5iwrli20dw"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemTrinket.gd" id="1_v6yrh"]
+[ext_resource type="Texture2D" uid="uid://bk0dqjhnrxair" path="res://items/trinket/curses/curseMoonwalk.png" id="2_c7mpq"]
+
+[resource]
+script = ExtResource("1_v6yrh")
+description = "-250% movement speed"
+specialProperties = Array[String]([])
+sceneToLoad = ""
+addSpeed = -2.5
+addJump = 0.0
+addSwim = 0.0
+addDefense = 0
+addMeleeDamage = 0.0
+addRangedDamage = 0.0
+addHealingMultiplier = 0.0
+addKnockback = 0.0
+addAttackSpeed = 0.0
+addcriticalStrikeChance = 0
+itemName = "Curse of Moonwalk"
+subtext = ""
+texture = ExtResource("2_c7mpq")
+maxStackSize = 1
+clickToUse = false
+infiniteReach = false

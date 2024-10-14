@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="ItemTrinket" load_steps=3 format=3 uid="uid://1q7xxpxaa0jd"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemTrinket.gd" id="1_0kqcw"]
+[ext_resource type="Texture2D" uid="uid://b8bncx6j3b8on" path="res://items/trinket/curses/curseFragile.png" id="2_i4d0h"]
+
+[resource]
+script = ExtResource("1_0kqcw")
+description = "-10 Defense
++20% Movement speed
++20% jump"
+specialProperties = Array[String]([])
+sceneToLoad = ""
+addSpeed = 0.2
+addJump = 0.2
+addSwim = 0.0
+addDefense = -4
+addMeleeDamage = 0.0
+addRangedDamage = 0.0
+addHealingMultiplier = 0.0
+addKnockback = 0.0
+addAttackSpeed = 0.0
+addcriticalStrikeChance = 0
+itemName = "Curse of Fragility"
+subtext = ""
+texture = ExtResource("2_i4d0h")
+maxStackSize = 1
+clickToUse = false
+infiniteReach = false

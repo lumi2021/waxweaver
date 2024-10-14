@@ -11,3 +11,4 @@ subtext = ""
 texture = ExtResource("2_qqyle")
 maxStackSize = 99
 clickToUse = false
+infiniteReach = false

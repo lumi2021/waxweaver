@@ -8,7 +8,7 @@ extends Node2D
 @export var rootPlanet := Node2D
 
 func _ready():
-	generateSystem()
+	generateNewSystem()
 	GlobalRef.system = self
 	
 	$lightRenderViewport.world_2d = get_tree().root.get_viewport().world_2d
@@ -18,7 +18,7 @@ func _ready():
 	
 	
 
-func generateSystem():
+func generateNewSystem():
 	for planet in cosmicBodyContainer.get_children():
 		planet.queue_free()
 	
@@ -30,42 +30,44 @@ func generateSystem():
 	cosmicBodyContainer.add_child(sun)
 	rootPlanet = sun
 	
-	var planetAmount = 1  #(randi() % 5) + 1
-	var lastPlanet = sun
-	var distanceOverlap = 0
-	for i in range(planetAmount):
-		
-		var newPlanet = planetScene.instantiate()
-		newPlanet.planetType = "forest"
-		newPlanet.orbiting = sun
-		newPlanet.system = self
-		
-		var s = 1#(randi() % 5)
-		match s:
-			0: newPlanet.SIZEINCHUNKS = 64
-			1: newPlanet.SIZEINCHUNKS = 96
-			2: newPlanet.SIZEINCHUNKS = 128
-			3: newPlanet.SIZEINCHUNKS = 256
-			4: newPlanet.SIZEINCHUNKS = 256
-			5: newPlanet.SIZEINCHUNKS = 256
-		
-		var c = sqrt((newPlanet.SIZEINCHUNKS * 64) * (newPlanet.SIZEINCHUNKS * 64) * 2)
-		var cPrevious = sqrt((lastPlanet.SIZEINCHUNKS * 64) * (lastPlanet.SIZEINCHUNKS * 64) * 2)
-		var distance = ((c + cPrevious)/2) + 2000 + (randi() % 2800)
-		
-
-		newPlanet.orbitDistance = distanceOverlap + distance
-		newPlanet.orbitSpeed = 30000.0 / (distanceOverlap + distance)
-		newPlanet.orbitPeriod = randf_range(0.0,PI * 2)
-		
-		distanceOverlap += distance
-		
-		
-		cosmicBodyContainer.add_child(newPlanet)
-
-		lastPlanet = newPlanet
+	#  create Forest
+	var forestPlanet = planetScene.instantiate()
+	forestPlanet.planetType = "forest"
+	forestPlanet.orbiting = sun
+	forestPlanet.system = self
+	forestPlanet.SIZEINCHUNKS = 96
+	forestPlanet.orbitDistance = 36000.0
+	forestPlanet.orbitSpeed = 3.0
+	forestPlanet.orbitPeriod = randf_range(0.0,PI * 2) # where along the rotation is it
 	
-	await get_tree().create_timer(0.25).timeout
+	cosmicBodyContainer.add_child(forestPlanet)
+	
+	#  create moon
+	var forestMoon = planetScene.instantiate()
+	forestMoon.planetType = "lunar"
+	forestMoon.orbiting = forestPlanet
+	forestMoon.system = self
+	forestMoon.SIZEINCHUNKS = 32
+	forestMoon.orbitDistance = 8000.0
+	forestMoon.orbitSpeed = 50.0
+	forestMoon.orbitPeriod = randf_range(0.0,PI * 2) # where along the rotation is it
+	
+	cosmicBodyContainer.add_child(forestMoon)
+	
+	#  create arid planet
+	#var aridPlanet = planetScene.instantiate()
+	#aridPlanet.planetType = "arid"
+	#aridPlanet.orbiting = sun
+	#aridPlanet.system = self
+	#aridPlanet.SIZEINCHUNKS = 64
+	#aridPlanet.orbitDistance = 15000.0
+	#aridPlanet.orbitSpeed = 4.0
+	#aridPlanet.orbitPeriod = randf_range(0.0,PI * 2) # where along the rotation is it
+	
+	#cosmicBodyContainer.add_child(aridPlanet)
+	
+	# halt
+	await get_tree().create_timer(0.1).timeout
 	
 	#Spawns player position
 	if is_instance_valid(GlobalRef.player):
@@ -76,14 +78,13 @@ func generateSystem():
 		player.system = self
 		objectContainer.add_child(player)
 		
-		var pee = lastPlanet.DATAC.findSpawnPosition()
-		print(pee)
-		player.position = Vector2(4,pee) + lastPlanet.position
+		var pee = forestPlanet.DATAC.findSpawnPosition()
+		player.position = Vector2(4,pee) + forestPlanet.position
 		
 
 		GlobalRef.camera.map.map(self,cosmicBodyContainer.get_children())
 		
-		player.attachToPlanet(lastPlanet)
+		player.attachToPlanet(forestPlanet)
 
 #func reparentToPlanet(object,planet):
 	#print(object)

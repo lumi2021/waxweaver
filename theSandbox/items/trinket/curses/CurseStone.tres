@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="ItemTrinket" load_steps=3 format=3 uid="uid://de3hhnb6i8bld"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemTrinket.gd" id="1_3d2vv"]
+[ext_resource type="Texture2D" uid="uid://bpwiprtabdsil" path="res://items/trinket/curses/curseStone.png" id="2_l2qnh"]
+
+[resource]
+script = ExtResource("1_3d2vv")
+description = "-15% Movement Speed
+-13% Jump
++5 Defense"
+specialProperties = Array[String]([])
+sceneToLoad = ""
+addSpeed = -0.15
+addJump = -0.13
+addSwim = 0.0
+addDefense = 5
+addMeleeDamage = 0.0
+addRangedDamage = 0.0
+addHealingMultiplier = 0.0
+addKnockback = 0.0
+addAttackSpeed = 0.0
+addcriticalStrikeChance = 0
+itemName = "Curse of Stone"
+subtext = ""
+texture = ExtResource("2_l2qnh")
+maxStackSize = 1
+clickToUse = false
+infiniteReach = false

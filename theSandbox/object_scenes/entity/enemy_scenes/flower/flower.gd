@@ -32,6 +32,8 @@ func idle(delta):
 	setVelocity(vel)
 	move_and_slide()
 	
+	rotationOrigin.rotation = getQuad(self) * (PI/2)
+	
 	if getPlayerDistance() < 16:
 		state = 1
 
@@ -53,6 +55,8 @@ func stunned(delta):
 	move_and_slide()
 	
 	animation(0,delta)
+	
+	rotationOrigin.rotation = getQuad(self) * (PI/2)
 	
 	if abs(vel.x) < 10:
 		state = 1

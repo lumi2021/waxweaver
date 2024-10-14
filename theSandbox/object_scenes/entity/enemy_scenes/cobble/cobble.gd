@@ -82,6 +82,8 @@ func stunned(delta):
 	
 	animation(0,delta)
 	
+	rotationOrigin.rotation = getQuad(self) * (PI/2)
+	
 	if abs(vel.x) < 10:
 		state = 1
 

@@ -217,7 +217,7 @@ func generateTerrain():
 		"forest":BlockData.theGenerator.generateForestPlanet(DATAC,noise)
 		"lunar":BlockData.theGenerator.generateLunarPlanet(DATAC,noise)
 		"sun":BlockData.theGenerator.generateSunPlanet(DATAC,noise)
-	
+		"arid":BlockData.theGenerator.generateAridPlanet(DATAC,noise)
 	
 	return
 

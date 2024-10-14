@@ -26,7 +26,7 @@ var lastPlanetOn :Node2D = null
 ##      2 = ON SHIP ON PLANET, 3 = IN SPACE
 var state = 0 
 
-## States: 0 = REGULAR, 1 = SITTING, 2 = LADDER
+## States: 0 = REGULAR, 1 = SITTING, 2 = LADDER, 3 = BED
 var movementState = 0
 
 var animTick = 0
@@ -155,6 +155,8 @@ func determineMovementState(delta):
 			chairMovement(delta)
 		2:
 			ladderMovement(delta)
+		3:
+			bedMovement(delta)
 
 func noClipMovement(delta):
 	var dir = Vector2.ZERO
@@ -435,7 +437,23 @@ func ladderMovement(delta):
 	ensureCamPosition()
 	
 	GlobalRef.camera.rotation = lerp_angle(GlobalRef.camera.rotation,rotated*(PI/2),0.3)
+
+func bedMovement(delta):
 	
+	velocity = Vector2.ZERO
+	
+	
+	if shipOn != null:
+		#sprite.rotation = shipOn.rotation
+		GlobalRef.camera.rotation = lerp_angle(GlobalRef.camera.rotation,shipOn.rotation,1.0-pow(2.0,(-delta/0.2)))
+	
+	if Input.is_action_pressed("jump"):
+		movementState = 0
+	
+	squishSprites(1.0)
+	$PlayerLayers/eye.hide()
+	updateLight()
+	ensureCamPosition()
 	
 func inSpaceMovement(delta):
 	
@@ -615,7 +633,6 @@ func useItem():
 		
 		if itemData.clickToUse:
 			if Input.is_action_just_pressed("mouse_left"):
-				print("woah")
 				itemData.onUse(tile.x,tile.y,getPlanetPosition(),editBody,lastTileItemUsedOn)
 		else:
 			itemData.onUse(tile.x,tile.y,getPlanetPosition(),editBody,lastTileItemUsedOn)
@@ -749,7 +766,34 @@ func onRightClick():
 			var dick = setAllTrapdoors(tile,47,editBody)
 			editBody.editTiles( dick )
 			SoundManager.playSound("interacts/door",get_global_mouse_position(),1.2,0.1)
-
+		55: # bed
+			
+			if editBody is Ship:
+				GlobalRef.sendChat("You can't spawn on a ship!")
+				return # fix laying on bed in ship
+			else:
+				GlobalRef.playerSpawn = editBody.tileToPos(tile)
+				GlobalRef.playerSpawnPlanet = editBody
+				GlobalRef.sendChat("Set spawnpoint.")
+			
+			movementState = 3
+			position = editBody.tileToPos(tile)
+			var info = editBody.DATAC.getInfoData(tile.x,tile.y) % 4
+			var d = editBody.DATAC.getPositionLookup(tile.x,tile.y)
+			
+			var side = (int( info < 2 )*2) - 1 # is 1 or -1 
+			
+			flipPlayer( side )
+			sprite.rotation = (side * -(PI/2)) + ( d * (PI/2) )
+			
+			if info == 0:
+				position += Vector2(8,0).rotated(d * (PI/2))
+			elif info == 3:
+				position += Vector2(-8,0).rotated(d * (PI/2))
+			
+			position += Vector2(-side,-3).rotated(d * (PI/2))
+			
+			
 func setAllTrapdoors(tile:Vector2,replaceID:int,body):
 	var dick = {}
 	var quad = body.DATAC.getPositionLookup(tile.x,tile.y)
@@ -1160,20 +1204,24 @@ func dieAndRespawn():
 	await get_tree().create_timer(Stats.respawnWait).timeout
 	
 	# respawn
-	if is_instance_valid(lastPlanetOn):
-		var pee = lastPlanetOn.DATAC.findSpawnPosition()
-		if lastPlanetOn == planetOn:
-			# run if player dies on current planet
-			position = Vector2(4,pee)
-		elif !is_instance_valid(planetOn):
-			# run if player dies in space in the same system
-			global_position = Vector2(4,pee) + lastPlanetOn.position
-			attachToPlanet(lastPlanetOn)
+	
+	if is_instance_valid(GlobalRef.playerSpawnPlanet):
+		var spawn = GlobalRef.playerSpawn
+		if spawn == null:
+			spawn =  Vector2(4,GlobalRef.playerSpawnPlanet.DATAC.findSpawnPosition())
+		if GlobalRef.playerSpawnPlanet != planetOn:
+			global_position = spawn + GlobalRef.playerSpawnPlanet.position
+			state = 0 
+			if is_instance_valid(planetOn):
+				print(planetOn)
+				detachFromPlanet()
+			attachToPlanet(GlobalRef.playerSpawnPlanet)
+		else:
+			position = spawn
 	else:
-		## Code that will run in the event you are off world and 
-		## haven't landed on a planet in your current system
-		## Do later when system generation is good
-		pass
+		var spawn = Vector2(4,lastPlanetOn.DATAC.findSpawnPosition())
+		position = spawn
+		#attachToPlanet(GlobalRef.playerSpawnPlanet)
 	
 	# reset variables
 	airTime = 0.0 # cancel fall damage

@@ -8,6 +8,7 @@ void PLANETGEN::_bind_methods() {
     ClassDB::bind_method(D_METHOD("generateForestPlanet","DATAC"), &PLANETGEN::generateForestPlanet);
     ClassDB::bind_method(D_METHOD("generateLunarPlanet","DATAC"), &PLANETGEN::generateLunarPlanet);
     ClassDB::bind_method(D_METHOD("generateSunPlanet","DATAC"), &PLANETGEN::generateSunPlanet);
+    ClassDB::bind_method(D_METHOD("generateAridPlanet","DATAC"), &PLANETGEN::generateAridPlanet);
 }
 
 PLANETGEN::PLANETGEN() {
@@ -132,6 +133,13 @@ void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
                         planet->setInfoData(x+up.x,y+up.y,4);
                     }
 
+                    if (quad % 2 != 0){ // spawns only on left and right side of planet
+                        if(std::rand() % 70 == 0){
+                            planet->setTileData(x+up.x,y+up.y,54); // spawn house structure
+                            planet->setInfoData(x+up.x,y+up.y,0);
+                        }
+                    }
+
                 }
 
             }
@@ -169,7 +177,15 @@ void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
                         if(std::rand() % 3 == 0){
                             planet->setTileData(x,y,52); // spawn stalactite
                             planet->setInfoData(x,y, std::rand() % 2 );
+
+                        }else if(std::rand() % 300 == 0){
+                            planet->setTileData(x,y,54);
+                            planet->setInfoData(x,y, 1 ); // generate cavern house
+
                         }
+
+                        
+
                     }
 
 
@@ -194,10 +210,11 @@ void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
 
     // end big loops, spawn structure?
 
-    //int randX = (std::rand() % (baseSurface * 2)) + skySize; // finds random position underground
-    //int randY = (std::rand() % (baseSurface * 2)) + skySize;
+    int randX = (std::rand() % (baseSurface * 2)) + skySize; // finds random position underground
+    int randY = (std::rand() % (baseSurface * 2)) + skySize;
     
     //generateBox(planet,randX,randY,5,5,13,13);
+    generateLadderPath(planet,randX,randY, planet->getPositionLookup(randX,randY) );
 
 }
 
@@ -214,8 +231,8 @@ void PLANETGEN::generateLunarPlanet(PLANETDATA *planet,FastNoiseLite *noise){
             double surface = (noise->get_noise_1d(side*4.0) * 12.0)  + (planetSize / 4);
 
             if (dis <= surface){
-                planet->setTileData(x,y,2);
-                planet->setBGData(x,y,2);
+                planet->setTileData(x,y,28);
+                planet->setBGData(x,y,28);
             }
             if (dis <= 3){
                 planet->setTileData(x,y,5);
@@ -238,6 +255,36 @@ void PLANETGEN::generateSunPlanet(PLANETDATA *planet,FastNoiseLite *noise){
             if (dis <= surface){
                 planet->setTileData(x,y,6);
                 planet->setBGData(x,y,0);
+            }
+        }
+    }
+}
+
+/////////////////// ARID GENERATION /////////////////
+
+void PLANETGEN::generateAridPlanet(PLANETDATA *planet,FastNoiseLite *noise){
+    int planetSize = planet->planetSize;
+
+    int baseSurface = std::max( planetSize / 4, (planetSize/2) - 128 );
+
+    for(int x = 0; x < planetSize; x++){
+        for(int y = 0; y < planetSize; y++){
+
+            int quad = planet->getPositionLookup(x,y);
+            int side = Vector2(x,y).rotated(acos(0.0) * quad).x;
+            double dis = getBlockDistance(x,y,planet);
+            double surface = (noise->get_noise_1d(side*2.0) * 8.0)  +  baseSurface;
+
+            if (dis <= surface){
+                planet->setTileData(x,y,2); // remember to add sandstone in here eventually
+                planet->setBGData(x,y,2);
+            }else if (dis <= surface + 4){ 
+                planet->setTileData(x,y,14);
+                planet->setBGData(x,y,14);
+            }
+            if (dis <= 3){ // core
+                planet->setTileData(x,y,5);
+                planet->setBGData(x,y,5);
             }
         }
     }
@@ -315,6 +362,33 @@ void PLANETGEN::generateBox(PLANETDATA *planet,int x, int y, int wallID, int bgI
             }
 
         }
+
+    }
+
+}
+
+void PLANETGEN::generateLadderPath(PLANETDATA *planet,int x, int y, int dir){
+    int length = (std::rand() % 128) + 64;
+
+    for (int i = 0; i < length; i++){
+        Vector2i pos = Vector2i( Vector2(0,i).rotated( acos(0.0) * dir ) );
+        Vector2i L = Vector2i( Vector2(-1,0).rotated( acos(0.0) * dir ) );
+        Vector2i R = Vector2i( Vector2(1,0).rotated( acos(0.0) * dir ) );
+
+        if (planet->getTileData( x + pos.x, y + pos.y ) == 5 ){
+            continue; // continue if trying to delete core
+        }
+
+        planet->setTileData( x + pos.x + L.x, y + pos.y + L.y, 1 );
+        planet->setTileData( x + pos.x + R.x, y + pos.y + R.y, 1 );
+
+        if ( dir % 2 == planet->getPositionLookup( x + pos.x, y + pos.y ) % 2 ){
+
+            planet->setTileData( x + pos.x, y + pos.y, 25 );
+        }else{
+            planet->setTileData( x + pos.x, y + pos.y, 1 );
+        }
+
 
     }
 

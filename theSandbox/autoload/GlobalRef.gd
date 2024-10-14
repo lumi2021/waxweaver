@@ -20,6 +20,9 @@ var playerSide = 0 # 0 : facing left, 1 : facing right
 var chatIsOpen = false
 var playerCanUseItem = true
 
+var playerSpawn = null
+var playerSpawnPlanet = null
+
 # day cycle
 var dayLength :int= 9000
 var currentTime :float= 0 # 0.0 - 1.0

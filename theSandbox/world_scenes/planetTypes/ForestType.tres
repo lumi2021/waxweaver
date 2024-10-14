@@ -1,20 +1,288 @@
-[gd_resource type="Resource" script_class="PlanetType" load_steps=2 format=3 uid="uid://drr030n6brnua"]
+[gd_resource type="Resource" script_class="PlanetType" load_steps=46 format=3 uid="uid://drr030n6brnua"]
 
+[ext_resource type="Script" path="res://object_scenes/specialResource/lootTables/RollableItem.gd" id="1_5rukt"]
 [ext_resource type="Script" path="res://world_scenes/planetTypes/planetType.gd" id="1_j2ok1"]
+[ext_resource type="Script" path="res://object_scenes/specialResource/lootTables/EnemyRoll.gd" id="2_jpcmu"]
+
+[sub_resource type="Resource" id="Resource_wj633"]
+script = ExtResource("1_5rukt")
+id = 3040
+amountMin = 2
+amountMax = 4
+weight = 100
+
+[sub_resource type="Resource" id="Resource_xth5j"]
+script = ExtResource("1_5rukt")
+id = 15
+amountMin = 4
+amountMax = 10
+weight = 200
+
+[sub_resource type="Resource" id="Resource_fa6ll"]
+script = ExtResource("1_5rukt")
+id = 3028
+amountMin = 1
+amountMax = 3
+weight = 90
+
+[sub_resource type="Resource" id="Resource_o6u4c"]
+script = ExtResource("1_5rukt")
+id = 3023
+amountMin = 5
+amountMax = 12
+weight = 120
+
+[sub_resource type="Resource" id="Resource_4bc7s"]
+script = ExtResource("1_5rukt")
+id = 3004
+amountMin = 3
+amountMax = 8
+weight = 80
+
+[sub_resource type="Resource" id="Resource_wnpcp"]
+script = ExtResource("1_5rukt")
+id = 3048
+amountMin = 6
+amountMax = 18
+weight = 70
+
+[sub_resource type="Resource" id="Resource_a63aw"]
+script = ExtResource("1_5rukt")
+id = 3053
+amountMin = 1
+amountMax = 1
+weight = 20
+
+[sub_resource type="Resource" id="Resource_ip3fi"]
+script = ExtResource("1_5rukt")
+id = 18
+amountMin = 3
+amountMax = 9
+weight = 50
+
+[sub_resource type="Resource" id="Resource_b110y"]
+script = ExtResource("1_5rukt")
+id = 39
+amountMin = 1
+amountMax = 1
+weight = 100
+
+[sub_resource type="Resource" id="Resource_wncux"]
+script = ExtResource("1_5rukt")
+id = 40
+amountMin = 1
+amountMax = 1
+weight = 70
+
+[sub_resource type="Resource" id="Resource_ipvf4"]
+script = ExtResource("1_5rukt")
+id = 41
+amountMin = 1
+amountMax = 1
+weight = 90
+
+[sub_resource type="Resource" id="Resource_ak76h"]
+script = ExtResource("1_5rukt")
+id = 42
+amountMin = 1
+amountMax = 1
+weight = 90
+
+[sub_resource type="Resource" id="Resource_fskh7"]
+script = ExtResource("1_5rukt")
+id = 43
+amountMin = 1
+amountMax = 1
+weight = 100
+
+[sub_resource type="Resource" id="Resource_1pk33"]
+script = ExtResource("1_5rukt")
+id = 44
+amountMin = 1
+amountMax = 1
+weight = 100
+
+[sub_resource type="Resource" id="Resource_wcsak"]
+script = ExtResource("1_5rukt")
+id = 45
+amountMin = 1
+amountMax = 1
+weight = 100
+
+[sub_resource type="Resource" id="Resource_kmls0"]
+script = ExtResource("1_5rukt")
+id = 49
+amountMin = 1
+amountMax = 1
+weight = 110
+
+[sub_resource type="Resource" id="Resource_nwwit"]
+script = ExtResource("1_5rukt")
+id = 50
+amountMin = 1
+amountMax = 1
+weight = 100
+
+[sub_resource type="Resource" id="Resource_c23a0"]
+script = ExtResource("1_5rukt")
+id = 51
+amountMin = 1
+amountMax = 1
+weight = 90
+
+[sub_resource type="Resource" id="Resource_teygi"]
+script = ExtResource("1_5rukt")
+id = 3010
+amountMin = 1
+amountMax = 1
+weight = 5
+
+[sub_resource type="Resource" id="Resource_udfw4"]
+script = ExtResource("1_5rukt")
+id = 6001
+amountMin = 1
+amountMax = 1
+weight = 5
+
+[sub_resource type="Resource" id="Resource_i0iyx"]
+script = ExtResource("1_5rukt")
+id = 3033
+amountMin = 1
+amountMax = 1
+weight = 100
+
+[sub_resource type="Resource" id="Resource_rn0xa"]
+script = ExtResource("1_5rukt")
+id = 3034
+amountMin = 1
+amountMax = 1
+weight = 100
+
+[sub_resource type="Resource" id="Resource_jt0yo"]
+script = ExtResource("1_5rukt")
+id = 3036
+amountMin = 1
+amountMax = 1
+weight = 50
+
+[sub_resource type="Resource" id="Resource_0iqcu"]
+script = ExtResource("1_5rukt")
+id = 3027
+amountMin = 1
+amountMax = 1
+weight = 5
+
+[sub_resource type="Resource" id="Resource_c71ju"]
+script = ExtResource("1_5rukt")
+id = 3066
+amountMin = 1
+amountMax = 1
+weight = 140
+
+[sub_resource type="Resource" id="Resource_1aa78"]
+script = ExtResource("1_5rukt")
+id = 3067
+amountMin = 1
+amountMax = 1
+weight = 100
+
+[sub_resource type="Resource" id="Resource_ritix"]
+script = ExtResource("1_5rukt")
+id = 3068
+amountMin = 1
+amountMax = 1
+weight = 100
+
+[sub_resource type="Resource" id="Resource_yjrof"]
+script = ExtResource("1_5rukt")
+id = 3069
+amountMin = 1
+amountMax = 1
+weight = 90
+
+[sub_resource type="Resource" id="Resource_85rl2"]
+script = ExtResource("1_5rukt")
+id = 3070
+amountMin = 1
+amountMax = 1
+weight = 20
+
+[sub_resource type="Resource" id="Resource_0oyo6"]
+script = ExtResource("1_5rukt")
+id = 3071
+amountMin = 1
+amountMax = 1
+weight = 20
+
+[sub_resource type="Resource" id="Resource_bnrpw"]
+script = ExtResource("1_5rukt")
+id = 3072
+amountMin = 1
+amountMax = 1
+weight = 20
+
+[sub_resource type="Resource" id="Resource_2krwu"]
+script = ExtResource("2_jpcmu")
+id = "butterfly"
+weight = 50
+
+[sub_resource type="Resource" id="Resource_c7q03"]
+script = ExtResource("2_jpcmu")
+id = "praffin"
+weight = 40
+
+[sub_resource type="Resource" id="Resource_7kvi4"]
+script = ExtResource("2_jpcmu")
+id = "flower"
+weight = 5
+
+[sub_resource type="Resource" id="Resource_fcrlm"]
+script = ExtResource("2_jpcmu")
+id = "praffin"
+weight = 40
+
+[sub_resource type="Resource" id="Resource_r6phs"]
+script = ExtResource("2_jpcmu")
+id = "firefly"
+weight = 60
+
+[sub_resource type="Resource" id="Resource_l3ot6"]
+script = ExtResource("2_jpcmu")
+id = "evilBird"
+weight = 60
+
+[sub_resource type="Resource" id="Resource_b27hs"]
+script = ExtResource("2_jpcmu")
+id = "apparition"
+weight = 10
+
+[sub_resource type="Resource" id="Resource_sxmvn"]
+script = ExtResource("2_jpcmu")
+id = "cobble"
+weight = 100
+
+[sub_resource type="Resource" id="Resource_juyfm"]
+script = ExtResource("2_jpcmu")
+id = "evilBird"
+weight = 60
+
+[sub_resource type="Resource" id="Resource_qb7kf"]
+script = ExtResource("2_jpcmu")
+id = "spider"
+weight = 50
+
+[sub_resource type="Resource" id="Resource_mp2va"]
+script = ExtResource("2_jpcmu")
+id = "fish"
+weight = 100
 
 [resource]
 script = ExtResource("1_j2ok1")
-rareItems = Array[int]([3010, 6001, 39, 40, 41, 42, 43, 44, 45, 49, 50, 51])
-commonItems = Array[int]([3003, 15, 13, 18, 26, 27, 37, 3023])
-commonMinimum = Array[int]([3, 5, 10, 4, 2, 1, 4, 5])
-commonMaximum = Array[int]([7, 15, 24, 8, 6, 4, 6, 10])
-fish = Array[int]([3030, 3027, 37])
-fishWeight = Array[int]([1000, 1, 50])
-surfaceDay = Array[String](["butterfly", "praffin", "flower"])
-surfaceDayWeight = Array[int]([50, 40, 10])
-surfaceNight = Array[String](["praffin", "firefly", "evilBird", "apparition"])
-surfaceNightWeight = Array[int]([40, 60, 60, 10])
-underground = Array[String](["cobble", "evilBird", "spider"])
-undergroundWeight = Array[int]([100, 60, 50])
-water = Array[String](["fish"])
-waterWeight = Array[int]([100])
+rareItems = Array[ExtResource("1_5rukt")]([SubResource("Resource_i0iyx"), SubResource("Resource_rn0xa"), SubResource("Resource_jt0yo"), SubResource("Resource_0iqcu"), SubResource("Resource_c71ju"), SubResource("Resource_1aa78"), SubResource("Resource_ritix"), SubResource("Resource_yjrof"), SubResource("Resource_85rl2"), SubResource("Resource_0oyo6"), SubResource("Resource_bnrpw")])
+commonItems = Array[ExtResource("1_5rukt")]([SubResource("Resource_wj633"), SubResource("Resource_xth5j"), SubResource("Resource_fa6ll"), SubResource("Resource_o6u4c"), SubResource("Resource_4bc7s"), SubResource("Resource_wnpcp"), SubResource("Resource_a63aw"), SubResource("Resource_ip3fi")])
+funItems = Array[ExtResource("1_5rukt")]([SubResource("Resource_b110y"), SubResource("Resource_wncux"), SubResource("Resource_ipvf4"), SubResource("Resource_ak76h"), SubResource("Resource_fskh7"), SubResource("Resource_1pk33"), SubResource("Resource_wcsak"), SubResource("Resource_kmls0"), SubResource("Resource_nwwit"), SubResource("Resource_c23a0"), SubResource("Resource_teygi"), SubResource("Resource_udfw4")])
+fish = Array[ExtResource("1_5rukt")]([])
+surfaceDay = Array[ExtResource("2_jpcmu")]([SubResource("Resource_2krwu"), SubResource("Resource_c7q03"), SubResource("Resource_7kvi4")])
+surfaceNight = Array[ExtResource("2_jpcmu")]([SubResource("Resource_fcrlm"), SubResource("Resource_r6phs"), SubResource("Resource_l3ot6"), SubResource("Resource_b27hs")])
+underground = Array[ExtResource("2_jpcmu")]([SubResource("Resource_sxmvn"), SubResource("Resource_juyfm"), SubResource("Resource_qb7kf")])
+water = Array[ExtResource("2_jpcmu")]([SubResource("Resource_mp2va")])

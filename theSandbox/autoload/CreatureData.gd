@@ -79,7 +79,7 @@ func scanValid(planet,tile):
 func spawnEnemy(planet,tile,context):
 	
 	var data = PlanetTypeInfo.getData(planet.planetType)
-	var string = data.getEnemySpawn(context)
+	var string = data.getEnemySpawn(context).id
 	if !creatures.has(string):
 		string = "butterfly"
 	var ins = load(creatures[string]).instantiate()

@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemTrinket" load_steps=3 format=3 uid="uid://c3fol4mdkre70"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemTrinket.gd" id="1_fcin6"]
+[ext_resource type="Texture2D" uid="uid://b8md7ej72dem5" path="res://items/trinket/boxingGlove.png" id="2_41i4j"]
+
+[resource]
+script = ExtResource("1_fcin6")
+description = "+10% knockback"
+specialProperties = Array[String]([])
+sceneToLoad = ""
+addSpeed = 0.0
+addJump = 0.0
+addSwim = 0.0
+addDefense = 0
+addMeleeDamage = 0.0
+addRangedDamage = 0.0
+addHealingMultiplier = 0.0
+addKnockback = 0.1
+addAttackSpeed = 0.0
+addcriticalStrikeChance = 0
+itemName = "Boxing Glove"
+subtext = ""
+texture = ExtResource("2_41i4j")
+maxStackSize = 1
+clickToUse = false
+infiniteReach = false

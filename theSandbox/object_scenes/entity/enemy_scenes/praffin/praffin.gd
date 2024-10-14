@@ -81,6 +81,8 @@ func stunned(delta):
 	
 	move_and_slide()
 	
+	rotationOrigin.rotation = getQuad(self) * (PI/2)
+	
 	animation(0,delta)
 	
 	if abs(vel.x) < 10:

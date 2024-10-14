@@ -3,60 +3,47 @@ class_name PlanetType
 
 @export_category("Loot")
 @export_group("Loot Chest")
-@export var rareItems :Array[int] = []
-@export var commonItems :Array[int] = []
-@export var commonMinimum :Array[int] = []
-@export var commonMaximum :Array[int] = []
+@export var rareItems :Array[RollableItem] = []
+@export var commonItems :Array[RollableItem] = []
+@export var funItems :Array[RollableItem] = []
 @export_group("Fishing")
-@export var fish :Array[int] = []
-@export var fishWeight :Array[int] = []
+@export var fish :Array[RollableItem] = []
 
 @export_category("Enemy Spawning")
 
-@export_group("Surface Day")
-@export var surfaceDay :Array[String] = []
-@export var surfaceDayWeight :Array[int] = []
-@export_group("Surface Night")
-@export var surfaceNight :Array[String] = []
-@export var surfaceNightWeight :Array[int] = []
-@export_group("Underground")
-@export var underground :Array[String] = []
-@export var undergroundWeight :Array[int] = []
-@export_group("Water")
-@export var water :Array[String] = []
-@export var waterWeight :Array[int] = []
+@export var surfaceDay:Array[EnemyRoll]
+@export var surfaceNight:Array[EnemyRoll]
+@export var underground:Array[EnemyRoll]
+@export var water:Array[EnemyRoll]
 
 
 func getEnemySpawn(context:int):
 	match context:
 		0:
-			return rollWeights(surfaceDay,surfaceDayWeight)
+			return rollWeights(surfaceDay)
 		1:
-			return rollWeights(surfaceNight,surfaceNightWeight)
+			return rollWeights(surfaceNight)
 		2:
-			return rollWeights(underground,undergroundWeight)
+			return rollWeights(underground)
 		3:
-			return rollWeights(water,waterWeight)
+			return rollWeights(water)
 
-func rollWeights(objects,weights:Array[int]):
+func rollWeights(objects:Array):
 	
-	if objects.size() != weights.size():
-		printerr("EPIC FAIL: OBJECTS AND WEIGHTS ARE UNALIGNED! FAILED ROLL")
-		return objects[0]
 	
 	var total = 0
-	for weight in weights: # total all weights
-		total += weight
+	for i in range(objects.size()): # total all weights
+		total += objects[i].weight
 	
 	var rand = randi() % total # randomly selects from 0 - weight total
 	
 	var cursor = 0
-	for i in range(weights.size()):
-		cursor += weights[i]
+	for i in range(objects.size()):
+		cursor += objects[i].weight
 		if cursor > rand:
 			return objects[i]
 	print("roll didnt work")
 	return objects[0]
 
 func getFish():
-	return rollWeights(fish,fishWeight)
+	return rollWeights(fish)

@@ -67,6 +67,8 @@
 
 #include "blockStalactite.h" // id 52
 #include "blockWool.h" // id 53
+#include "blockStructure.h" // 54
+#include "blockBed.h" // 55
 
 // adding a new block? make sure you increment the PENIS array !
 
