@@ -181,7 +181,7 @@ func matchItemAnimation(id):
 		return "itemFood"
 	if d is ItemTorch:
 		return "itemTorch"
-	if d is ItemMultitile or d is ItemDoor or d is ItemChair:
+	if d is ItemMultitile or d is ItemDoor or d is ItemChair or d is ItemBed:
 		return "itemMultitile"
 	if d is ItemFishingRod:
 		return "itemFishingRod"

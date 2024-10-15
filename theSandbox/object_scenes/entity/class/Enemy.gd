@@ -64,7 +64,9 @@ func getQuad(obj):
 		return [0,1,3,2][dot1 + dot2]
 	
 	return planet.DATAC.getPositionLookup(pos.x,pos.y)
-		
+
+func getWorldRot(obj):
+	return getQuad(obj) * (PI/2)
 
 func getDirectionTowardsPlayer():
 	var myQuad = getQuad( self )

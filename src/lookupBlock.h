@@ -86,7 +86,7 @@ public:
 	
 	Array allBlocks;
 
-	BLOCK *penis[54]; // must be largest id + 1
+	BLOCK *penis[56]; // must be largest id + 1
 
 	LOOKUPBLOCK();
 	~LOOKUPBLOCK();
