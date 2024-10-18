@@ -43,6 +43,7 @@ void PLANETDATA::_bind_methods() {
     ClassDB::bind_method(D_METHOD("getSaveString"), &PLANETDATA::getSaveString);
     ClassDB::bind_method(D_METHOD("loadFromString","tileString","bgString","infoString","timeString","waterString"), &PLANETDATA::loadFromString);
     ClassDB::bind_method(D_METHOD("findFloor","x","y"), &PLANETDATA::findFloor);
+    ClassDB::bind_method(D_METHOD("copyLightFromShip","planet","planetX","planetY","dir","lookup"), &PLANETDATA::copyLightFromShip);
 }
 
 void PLANETDATA::createEmptyArrays(int size, Vector2 centerPoint) {
@@ -613,4 +614,29 @@ int PLANETDATA::getTimeRow(int i){
 
 float PLANETDATA::getWaterRow(int i){
     return waterData[i];
+}
+
+void PLANETDATA::copyLightFromShip(PLANETDATA *planet,int planetX, int planetY, int dir, LOOKUPBLOCK *lookup){
+
+    // be sure to change this if ship size ever changes from 32
+    for (int x = 0; x < 32; x++){
+        for (int y = 0; y < 32; y++){
+            int tileID = getTileData( x,y );
+            
+            if (tileID < 2){ continue; } // ignore air blocks
+            
+            double emissive = lookup->getLightEmmission(tileID);
+            if ( emissive > 0.1 ){ // found emmissive tile
+                // get correct position
+
+                int relX = x - 16;
+                int relY = y - 16;
+
+                Vector2i relative = Vector2i( Vector2(relX,relY).rotated( acos(0.0) * dir ).round() );
+
+                planet->setLightData( planetX + relative.x,planetY + relative.y, -emissive );
+            }
+        }
+    }
+
 }

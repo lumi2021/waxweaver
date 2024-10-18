@@ -299,30 +299,37 @@ func displayItemName(text:String,itemData:Item):
 	var infoText = ""
 	var size = 0
 	if itemData is ItemDamage:
-		infoText += "DAMAGE: " + str(itemData.damage) + "\n"
+		infoText += "damage: " + str(itemData.damage) + "\n"
 		size += 18
-		infoText += "SWING SPEED: " + str(itemData.animSpeed) + "\n"
+		infoText += "swing speed: " + str(itemData.animSpeed) + "\n"
 		size += 18
 		if itemData is ItemMining:
-			infoText += "MINE SPEED: " + str(itemData.miningMultiplier) + "\n"
+			infoText += "mine speed: " + str(itemData.miningMultiplier) + "\n"
+			size += 18
+			infoText += "mining power: " + str(itemData.miningLevel) + "\n"
 			size += 18
 	elif itemData is ItemArmor:
-		infoText += "DEFENSE: " + str(itemData.defense) + "\n"
+		infoText += "defense: " + str(itemData.defense) + "\n"
 		size += 18
 	elif itemData is ItemFood:
-		infoText += "HEALS: " + str(itemData.healingAmount) + "\n"
+		infoText += "heals: " + str(itemData.healingAmount) + "\n"
 		size += 18
-		infoText += "EAT TIME: " + str(itemData.eatTime) + "\n"
+		infoText += "eat time: " + str(itemData.eatTime) + "\n"
 		size += 18
 	elif itemData is ItemPlant:
-		infoText += "Can be planted on \n"+ str(itemData.descCanPlaceOn) + "\n"
+		infoText += "can be planted on: \n[ "+ str(itemData.descCanPlaceOn) + " ]\n"
 		size += 18
 		size += 18
 	elif itemData is ItemTrinket:
-		infoText += "Trinket \n"
+		infoText += "trinket \n"
 		size += 18
 		infoText += itemData.description
 		size += (itemData.description.count("\n") + 1) * 18
+	
+	if itemData.desc != "":
+		infoText += itemData.desc
+		size += (itemData.desc.count("\n")+1) * 18
+	
 	
 	if itemData.materialIn.size() > 0:
 		infoText += "material \n"

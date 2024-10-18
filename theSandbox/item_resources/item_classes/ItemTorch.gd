@@ -63,6 +63,8 @@ func getBlockIsSolid(id):
 	var collider = BlockData.theChunker.getBlockDictionary(id)["hasCollision"]
 	if id == 8:
 		collider = true
+	if id == 56:
+		collider = true
 	
 	return collider
 

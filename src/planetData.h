@@ -78,6 +78,8 @@ public:
     int getTimeRow(int i);
     float getWaterRow(int i);
 
+    void copyLightFromShip(PLANETDATA *planet,int planetX, int planetY, int dir, LOOKUPBLOCK *lookup);
+
 };
 
 }

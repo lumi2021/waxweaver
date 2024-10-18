@@ -69,6 +69,11 @@
 #include "blockWool.h" // id 53
 #include "blockStructure.h" // 54
 #include "blockBed.h" // 55
+#include "blockSunflowerStem.h" // id 56
+#include "blockSunflowerTop.h" // id 57
+#include "blockSunflowerLeaf.h" // id 58
+#include "blockSunflowerSmall.h" // id 59
+#include "blockSunflowerSapling.h" // id 60
 
 // adding a new block? make sure you increment the PENIS array !
 
@@ -86,7 +91,7 @@ public:
 	
 	Array allBlocks;
 
-	BLOCK *penis[56]; // must be largest id + 1
+	BLOCK *penis[61]; // must be largest id + 1
 
 	LOOKUPBLOCK();
 	~LOOKUPBLOCK();

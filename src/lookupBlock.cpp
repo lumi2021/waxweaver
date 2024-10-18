@@ -79,7 +79,11 @@ LOOKUPBLOCK::LOOKUPBLOCK() {
     penis[53] = new BLOCKWOOL();
     penis[54] = new BLOCKSTRUCTURE();
     penis[55] = new BLOCKBED();
-
+    penis[56] = new BLOCKSUNFLOWERSTEM();
+    penis[57] = new BLOCKSUNFLOWERTOP();
+    penis[58] = new BLOCKSUNFLOWERLEAF();
+    penis[59] = new BLOCKSUNFLOWERSMALL();
+    penis[60] = new BLOCKSUNFLOWERSAPLING();
     
     for(BLOCK *i : penis){ // i increase automatically !
         i->setLookUp(this);

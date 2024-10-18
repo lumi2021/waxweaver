@@ -122,35 +122,29 @@ Array CHUNKDRAW::generateTexturesFromData(PLANETDATA *planet,Vector2i pos,Node *
 
 
                 // draw background
-                // imrpove this so it doesn't have to do that ugly rotate thing
 
                 if (backBlockID>1){
                     
                     Ref<Image> blockImg = cock->getTextureImage(backBlockID);
+                    Ref<Image> individualBlock = Image::create(8, 8, false, Image::FORMAT_RGBA8);
+
+                    int frame = 0;
+                    Rect2i blockRect = Rect2i(0,0,8,8); // ignore connected texture crap, u wont see em anyways cause of the border
+                    individualBlock = blockImg->get_region(blockRect);
 
                     bool rotate = cock->isGravityRotate(backBlockID);
                     if (rotate){ 
                         for(int g = 0; g < blockSide; g++){
-                            blockImg->rotate_90(ClockDirection::CLOCKWISE);
+                            individualBlock->rotate_90(ClockDirection::CLOCKWISE);
                         }
                     }
 
-                    int frame = 0;
-                    if( cock->isConnectedTexture(backBlockID) ) { frame = scanBackOpen(planet,worldX,worldY); }
-                    Rect2i blockRect = Rect2i(frame,0,8,8);
-
-                    backImg->blend_rect(blockImg, blockRect, imgPos);
+                    backImg->blend_rect(individualBlock, Rect2i(0,0,8,8), imgPos);
 
                     Vector2i scan = scanForBorder(planet,worldX,worldY);
 
                     backImg->blend_rect(texImage, Rect2i(scan.x,scan.y,8,8), imgPos);
 
-                    // unrotate it
-                    if (rotate){ 
-                        for(int g = 0; g < blockSide; g++){
-                            blockImg->rotate_90(ClockDirection::COUNTERCLOCKWISE);
-                        }
-                    }
 
                 
                 }

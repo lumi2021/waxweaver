@@ -6,11 +6,15 @@
 [resource]
 script = ExtResource("1_ak4lg")
 miningMultiplier = 0.8
-damage = 1
+miningLevel = 0
+damage = 2
 animSpeed = 4.0
+knockbackMult = 1.0
 weaponScale = 1.0
+statusInflictors = Array[Resource("res://object_scenes/specialResource/statusEffects/StatusInflictor.gd")]([])
 itemName = "Flimsy Pickaxe"
+subtext = ""
 texture = ExtResource("2_n1mxw")
 maxStackSize = 1
 clickToUse = false
-materialIn = Array[int]([])
+infiniteReach = false

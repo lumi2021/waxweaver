@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_rjlly")
-blockID = 54
+blockID = 58
 multiTileId = 1
 itemName = "Structure Block"
 subtext = ""

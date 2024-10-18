@@ -27,6 +27,8 @@ BLOCKTREELOG::BLOCKTREELOG() {
 
     soundMaterial = 2;
 
+    isTransparent = true;
+
 }
 
 

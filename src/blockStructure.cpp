@@ -61,8 +61,8 @@ Dictionary BLOCKSTRUCTURE::generateHouse(int worldx, int worldy, PLANETDATA *pla
                 }
             }
 
-            if (tiles[i] == 34){ // only make chest 20% spawn rate
-                if (std::rand() % 5 != 0){
+            if (tiles[i] == 34){ // only make chest 10% spawn rate
+                if (std::rand() % 10 != 0){
                     changes[pos] = 0;
                 }
             }

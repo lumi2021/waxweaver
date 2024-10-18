@@ -1,5 +1,7 @@
 extends Enemy
 
+@onready var sprite = $axis/AnimatedSprite2D
+
 var state :int= 0
 ## states:
 # 0: position for swoop attack
@@ -9,7 +11,7 @@ var swoopSide = 0
 var swoopWait :int= 0
 
 func _ready():
-	$axis/AnimatedSprite2D.play("default")
+	sprite.play("default")
 
 func _physics_process(delta):
 	match state:
@@ -19,7 +21,8 @@ func _physics_process(delta):
 			swoopAttack(delta)
 	
 	# sprite rotation
-	$axis/AnimatedSprite2D.rotation = getVelocity().x * 0.001
+	sprite.rotation = getVelocity().x * 0.001
+	sprite.flip_h = getVelocity().x < 0.0
 
 func position4swoopAttack(delta):
 	if swoopSide == 0:

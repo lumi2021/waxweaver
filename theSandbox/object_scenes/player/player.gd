@@ -769,7 +769,7 @@ func onRightClick():
 		55: # bed
 			
 			if editBody is Ship:
-				GlobalRef.sendChat("You can't spawn on a ship!")
+				GlobalRef.sendChat("You can't sleep on a ship!")
 				return # fix laying on bed in ship
 			else:
 				GlobalRef.playerSpawn = editBody.tileToPos(tile)

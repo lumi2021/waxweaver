@@ -16,6 +16,8 @@ var targetRot = 0
 
 var chestDictionary :Dictionary= {}
 
+var spaceFlightMaxSpeed :float= 2000.0
+
 func _ready():
 	generateEmptyArray()
 	print("Successfully made array")
@@ -39,15 +41,35 @@ func _process(delta):
 	if !active:
 		dir = Vector2.ZERO
 	
-	chunkContainer.rotation = lerp(chunkContainer.rotation,0.05*dir.x,0.2)
-	dir = dir.rotated(rotation)
+	var vel :Vector2= velocity.rotated( -rotation )
+	var onplanet = get_parent().is_in_group("planet")
 	
-	
-	if get_parent().is_in_group("planet"):
-		velocity = lerp(velocity,dir.normalized() * 300,0.05)
+	if onplanet:
+		if dir.y == 0:
+			vel.y += 500.0 * delta
+		else:
+			vel.y = lerp( vel.y, dir.y * 200.0, 0.1 )
+		
+		if !is_on_floor():
+			vel.x = lerp( vel.x, dir.x * 200.0, 0.1 )
+			chunkContainer.rotation = lerp(chunkContainer.rotation,0.05*dir.x,0.2)
+		else:
+			vel.x = lerp( vel.x, 0.0, 0.4 )
+			chunkContainer.rotation = 0.0
 	else:
-		#velocity += dir.normalized() * 2
-		velocity = lerp(velocity,dir.normalized() * 1000,0.01)
+		vel += dir * 10.0
+		print(vel.length())
+		if vel.length() > spaceFlightMaxSpeed:
+			vel = vel.normalized() * spaceFlightMaxSpeed
+		if !active:
+			spaceFlightMaxSpeed = lerp( spaceFlightMaxSpeed, 60.0,0.05 )
+		else:
+			spaceFlightMaxSpeed = lerp( spaceFlightMaxSpeed, 2000.0,0.5 )
+	
+	#if dir == Vector2.ZERO:
+	#	velocity = Vector2.ZERO
+	
+	velocity = vel.rotated(rotation)
 	
 	var glo = global_position
 	
@@ -159,7 +181,14 @@ func _physics_process(delta):
 					committedChanges[i] = d[i]
 		
 		editTiles(committedChanges)
-
+	
+	if get_parent().is_in_group("planet"):
+		# simulate light attempt
+		var p = get_parent().get_parent()
+		var pos = p.posToTile(position)
+		if pos == null: 
+			return
+		DATAC.copyLightFromShip( p.DATAC, int(pos.x),int(pos.y),targetRot, BlockData.theChunker.returnLookup())
 
 func editTiles(changeCommit):
 	var chunksToUpdate = []
@@ -170,10 +199,18 @@ func editTiles(changeCommit):
 			-1:
 				var save:int = DATAC.getTileData(change.x,change.y)
 				DATAC.setTileData(change.x,change.y,0)
-				BlockData.breakBlock(change.x,change.y,self,save,DATAC.setInfoData(change.x,change.y,0))
+				BlockData.breakBlock(change.x,change.y,self,save,DATAC.getInfoData(change.x,change.y))
+				DATAC.setInfoData(change.x,change.y,0)
+				
+				if chestDictionary.has(Vector2(change.x,change.y)): # clear chest
+					var p = Vector2(change.x,change.y)
+					PlayerData.dropChestContainer(self,p,chestDictionary[p])
+					chestDictionary.erase(p)
+				
 			0:
 				DATAC.setTileData(change.x,change.y,0)
 				DATAC.setTimeData(change.x,change.y,GlobalRef.globalTick)
+				DATAC.setInfoData(change.x,change.y,0)
 			-99999:
 				var save:int = DATAC.getBGData(change.x,change.y)
 				DATAC.setBGData(change.x,change.y,0)

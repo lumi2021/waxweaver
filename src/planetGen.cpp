@@ -65,7 +65,7 @@ void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
             if (dis >= lakeSurface && dis <= surface + 6){
                 
                 planet->setTileData(x,y, 4 );
-                planet->setBGData(x,y,3);
+                //planet->setBGData(x,y,3);
 
                 int poop = dis - (baseSurface - 15);
                 poop = poop / 2;
@@ -75,6 +75,7 @@ void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
 
                 if ( dis <= baseSurface + 3 && dis >= lakeSurface + poop) {
                     planet->setTileData(x,y, 14 );
+                    planet->setBGData(x,y,3);
                 }
                 
                 if (dis >= lakeSurface + 8){
@@ -137,6 +138,21 @@ void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
                         if(std::rand() % 70 == 0){
                             planet->setTileData(x+up.x,y+up.y,54); // spawn house structure
                             planet->setInfoData(x+up.x,y+up.y,0);
+                        }
+                    }
+
+                    if ( quad == 2 ){
+                        if(std::rand() % 4 == 0){
+
+                            int roll = (std::rand() % 2) * 2;
+                            int upper = up.y * 2;
+
+                            if(std::rand() % 16 == 0){ roll = roll + 4; }
+
+                            planet->setTileData(x+up.x,y+up.y,59); // spawn sunflower
+                            planet->setInfoData(x+up.x,y+up.y,1 + roll);
+                            planet->setTileData(x+up.x,y+upper,59);
+                            planet->setInfoData(x+up.x,y+upper,roll);
                         }
                     }
 

@@ -53,6 +53,9 @@ var data = {
 	#53:load("res://items/blocks/building/colors/wools/WhiteWool.tres"),
 	54:load("res://items/blocks/technical/StructureBlock.tres"),
 	
+	59:load("res://items/blocks/foliage/trees/sunflowerTree/sunflower.tres"),
+	60:load("res://items/blocks/foliage/trees/sunflowerTree/sunflowerSapling.tres"),
+	
 	########## item ids ##################
 	3000:load("res://items/tools/flimsy/FlimsySword.tres"), # flimsy tools
 	3001:load("res://items/tools/flimsy/FlimsyPickaxe.tres"),
@@ -142,6 +145,9 @@ var data = {
 	3070:load("res://items/trinket/curses/CurseStone.tres"),
 	3071:load("res://items/trinket/curses/CurseFragile.tres"),
 	3072:load("res://items/trinket/curses/CurseMoonwalk.tres"),
+	
+	3073:load("res://items/tools/sunflower/SunflowerSword.tres"),
+	3074:load("res://items/tools/sunflower/SunflowerPickaxe.tres"),
 	
 	# chairs 6000 - 6049
 	6000:load("res://items/blocks/furniture/chairs/WoodenChair.tres"),
