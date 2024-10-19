@@ -42,6 +42,8 @@ BLOCK::BLOCK() {
     soundMaterial = 0; // stone, dirt, wood, sand, cloth, leaves, glass
 
     natural = false; // used to block spawns when used as wall, natural true means spawns are allowed
+    
+    backgroundColorImmune = false; // setting to true means the wall won't be dyed by wall shader
 
     setNewVariables();
 

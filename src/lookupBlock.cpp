@@ -84,6 +84,8 @@ LOOKUPBLOCK::LOOKUPBLOCK() {
     penis[58] = new BLOCKSUNFLOWERLEAF();
     penis[59] = new BLOCKSUNFLOWERSMALL();
     penis[60] = new BLOCKSUNFLOWERSAPLING();
+    penis[61] = new BLOCKPAPER();
+    penis[62] = new BLOCKLETTER();
     
     for(BLOCK *i : penis){ // i increase automatically !
         i->setLookUp(this);
@@ -112,6 +114,7 @@ Dictionary LOOKUPBLOCK::getBlockData(int id){
     data["miningLevel"] = g->miningLevel;
     data["soundMaterial"] = g->soundMaterial;
     data["natural"] = g->natural;
+    data["bgimmune"] = g->backgroundColorImmune;
 
     return data;
 }
@@ -181,6 +184,12 @@ int LOOKUPBLOCK::getMiningLevel(int id){
     BLOCK* g = penis[id];
 
     return g->miningLevel;
+}
+
+bool LOOKUPBLOCK::isBGImmune(int id){
+    BLOCK* g = penis[id];
+
+    return g->backgroundColorImmune;
 }
 
 Dictionary LOOKUPBLOCK::runOnTick(int x, int y, PLANETDATA *planet, int dir, int blockID){

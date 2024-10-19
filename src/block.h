@@ -57,6 +57,7 @@ public:
 
     int soundMaterial;
     bool natural;
+    bool backgroundColorImmune;
 
 
 	BLOCK();

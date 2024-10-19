@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemWall" load_steps=3 format=3 uid="uid://brmb0mgaypo3b"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemWall.gd" id="1_87ygl"]
+[ext_resource type="Texture2D" uid="uid://ctfmx2ysga8nx" path="res://items/walls/paperwall.png" id="2_x4ns7"]
+
+[resource]
+script = ExtResource("1_87ygl")
+blockID = -61
+itemName = "Paper Wall"
+subtext = ""
+desc = ""
+texture = ExtResource("2_x4ns7")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

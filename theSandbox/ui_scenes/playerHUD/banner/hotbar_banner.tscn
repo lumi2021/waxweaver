@@ -491,19 +491,20 @@ placeholder_text = "enter command"
 position = Vector2(400, 300)
 
 [node name="ItemPreview" type="Node2D" parent="."]
-position = Vector2(197, 42)
+position = Vector2(3, 42)
 
 [node name="namebox" type="ColorRect" parent="ItemPreview"]
 visible = false
+offset_top = 1.0
 offset_right = 201.0
-offset_bottom = 34.0
+offset_bottom = 21.0
 color = Color(0, 0, 0, 0.407843)
 
 [node name="infoBox" type="ColorRect" parent="ItemPreview"]
 visible = false
-offset_top = 36.0
+offset_top = 24.0
 offset_right = 201.0
-offset_bottom = 55.0
+offset_bottom = 43.0
 color = Color(0, 0, 0, 0.407843)
 
 [node name="subtext" type="Label" parent="ItemPreview"]
@@ -515,16 +516,16 @@ label_settings = SubResource("LabelSettings_8lb1b")
 
 [node name="itemSlotName" type="Label" parent="ItemPreview"]
 offset_left = 4.0
-offset_top = 1.0
+offset_top = 2.0
 offset_right = 199.0
-offset_bottom = 24.0
+offset_bottom = 25.0
 label_settings = SubResource("LabelSettings_bk67w")
 
 [node name="information" type="Label" parent="ItemPreview"]
 offset_left = 3.0
-offset_top = 37.0
+offset_top = 24.0
 offset_right = 197.0
-offset_bottom = 108.0
+offset_bottom = 95.0
 label_settings = SubResource("LabelSettings_wiqs2")
 autowrap_mode = 2
 

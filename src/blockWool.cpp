@@ -15,6 +15,7 @@ BLOCKWOOL::BLOCKWOOL() {
     lightMultiplier = 0.9;
     rotateTextureToGravity = true;
     soundMaterial = 4;
+    backgroundColorImmune = true;
 
 }
 

@@ -4,6 +4,7 @@ extends Node2D
 @onready var backLayerSprite = $backLayer
 @onready var waterLayerSprite = $waterLayer
 @onready var animLayerSprite = $animLayer
+@onready var backImmuneSprite = $backImmuneLayer
 
 const CHUNKSIZE :int= 8
 
@@ -47,10 +48,12 @@ func drawData():
 	# Call c++
 	var images :Array= BlockData.theChunker.generateTexturesFromData(ship.DATAC,pos,ship,shape,true)
 	
-	mainLayerSprite.texture = ImageTexture.create_from_image(images[images.size()-3])
-	backLayerSprite.texture = ImageTexture.create_from_image(images[images.size()-2])
-	animLayerSprite.texture = ImageTexture.create_from_image(images[images.size()-1])
+	mainLayerSprite.texture = ImageTexture.create_from_image(images[images.size()-4])
+	backLayerSprite.texture = ImageTexture.create_from_image(images[images.size()-3])
+	animLayerSprite.texture = ImageTexture.create_from_image(images[images.size()-2])
+	backImmuneSprite.texture = ImageTexture.create_from_image(images[images.size()-1])
 	
+	images.remove_at(images.size()-1)
 	images.remove_at(images.size()-1)
 	images.remove_at(images.size()-1)
 	images.remove_at(images.size()-1)

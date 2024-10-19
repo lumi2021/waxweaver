@@ -79,7 +79,8 @@ func generateNewSystem():
 		objectContainer.add_child(player)
 		
 		var pee = forestPlanet.DATAC.findSpawnPosition()
-		player.position = Vector2(4,pee) + forestPlanet.position
+		print( pee )
+		player.position = Vector2(pee) + forestPlanet.position
 		
 
 		GlobalRef.camera.map.map(self,cosmicBodyContainer.get_children())

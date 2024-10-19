@@ -74,6 +74,8 @@
 #include "blockSunflowerLeaf.h" // id 58
 #include "blockSunflowerSmall.h" // id 59
 #include "blockSunflowerSapling.h" // id 60
+#include "blockPaper.h" // id 61
+#include "blockLetter.h" // id 62
 
 // adding a new block? make sure you increment the PENIS array !
 
@@ -91,7 +93,7 @@ public:
 	
 	Array allBlocks;
 
-	BLOCK *penis[61]; // must be largest id + 1
+	BLOCK *penis[63]; // must be largest id + 1
 
 	LOOKUPBLOCK();
 	~LOOKUPBLOCK();
@@ -111,6 +113,8 @@ public:
 	double getLightEmmission(int id);
 	bool isTransparent(int id);
 	int getMiningLevel(int id);
+
+	bool isBGImmune(int id);
 
 	Dictionary runOnTick(int x, int y, PLANETDATA *planet, int dir, int blockID);
 	Dictionary runOnBreak(int x, int y, PLANETDATA *planet, int dir, int blockID);

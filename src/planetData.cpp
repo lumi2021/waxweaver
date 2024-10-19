@@ -352,22 +352,32 @@ Array PLANETDATA::createAllChunks(PackedScene *chunkScene, Node *chunkContainer,
     return FAGGOT;
 }
 
-int PLANETDATA::findSpawnPosition(){
+Vector2i PLANETDATA::findSpawnPosition(){
     
     for(int y = 0; y < planetSize; y++){
         int id = getTileData(planetSize/2,y);
         float water = getWaterData(planetSize/2,y);
+        int vert = ((y - 4) * 8) - (planetSize * 4) + 4;
+
 
         if(id > 1){
-            return ((y - 4) * 8) - (planetSize * 4) + 4;
+            return Vector2i(4,vert);
         }
         if(std::abs(water) > 0.5){
-            return ((y - 4) * 8) - (planetSize * 4) + 4;
+            // search horizontally
+            for( int x = 0; x < 512; x++ ){
+                int findwall = getTileData((planetSize/2)+x,y);
+                if (findwall > 1){
+                    return Vector2i((x*8)-20,vert);
+                }
+
+            }
+
         }
 
     }
 
-    return 0;
+    return Vector2i(0,0);
 }
 
 int PLANETDATA::getBlockPosition(int x,int y,Vector2 centerPoint){

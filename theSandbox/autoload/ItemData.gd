@@ -50,11 +50,13 @@ var data = {
 	50:load("res://items/paintings/LynWorn.tres"),
 	51:load("res://items/paintings/LynFish.tres"),
 	
-	#53:load("res://items/blocks/building/colors/wools/WhiteWool.tres"),
 	54:load("res://items/blocks/technical/StructureBlock.tres"),
 	
 	59:load("res://items/blocks/foliage/trees/sunflowerTree/sunflower.tres"),
 	60:load("res://items/blocks/foliage/trees/sunflowerTree/sunflowerSapling.tres"),
+	61:load("res://items/blocks/building/Paper.tres"),
+	-61:load("res://items/walls/PaperWall.tres"),
+	62:load("res://items/blocks/building/LetterBlock.tres"),
 	
 	########## item ids ##################
 	3000:load("res://items/tools/flimsy/FlimsySword.tres"), # flimsy tools

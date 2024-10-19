@@ -792,7 +792,11 @@ func onRightClick():
 				position += Vector2(-8,0).rotated(d * (PI/2))
 			
 			position += Vector2(-side,-3).rotated(d * (PI/2))
-			
+		62: # letter block
+			var currentLetter = editBody.DATAC.getInfoData(tile.x,tile.y)
+			currentLetter = (currentLetter + 1) % 38
+			editBody.DATAC.setInfoData(tile.x,tile.y,currentLetter)
+			editBody.editTiles( { Vector2i(tile.x,tile.y):62, } )
 			
 func setAllTrapdoors(tile:Vector2,replaceID:int,body):
 	var dick = {}
@@ -1219,9 +1223,8 @@ func dieAndRespawn():
 		else:
 			position = spawn
 	else:
-		var spawn = Vector2(4,lastPlanetOn.DATAC.findSpawnPosition())
-		position = spawn
-		#attachToPlanet(GlobalRef.playerSpawnPlanet)
+		var pee = lastPlanetOn.DATAC.findSpawnPosition()
+		position = Vector2(pee)
 	
 	# reset variables
 	airTime = 0.0 # cancel fall damage

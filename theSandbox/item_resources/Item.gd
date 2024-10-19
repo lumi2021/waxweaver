@@ -3,7 +3,7 @@ class_name Item
 
 @export var itemName : String = ""
 @export var subtext : String = ""
-@export var desc : String = ""
+@export_multiline var desc : String = ""
 
 @export var texture : Texture
 

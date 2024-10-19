@@ -1,11 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://u8tr2xmowgle"]
 
 [ext_resource type="Script" path="res://world_scenes/ship/shipChunk/shipChunk.gd" id="1_8j2mj"]
-[ext_resource type="Shader" path="res://world_scenes/chunk/chunk.gdshader" id="2_yo1vl"]
+[ext_resource type="Material" uid="uid://1ljopdtj4368" path="res://zeeg/shaders/backgroundMaterial.tres" id="2_6yp66"]
+[ext_resource type="Material" uid="uid://ch8tdtundkqiy" path="res://zeeg/shaders/backgroundImmuneMaterial.tres" id="3_hk30f"]
 [ext_resource type="Script" path="res://world_scenes/chunk/animLayer.gd" id="3_qn0j0"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_dtd3g"]
-shader = ExtResource("2_yo1vl")
 
 [node name="ShipChunk" type="Node2D"]
 script = ExtResource("1_8j2mj")
@@ -13,7 +11,13 @@ script = ExtResource("1_8j2mj")
 [node name="backLayer" type="Sprite2D" parent="."]
 visibility_layer = 2
 z_index = -1
-material = SubResource("ShaderMaterial_dtd3g")
+material = ExtResource("2_6yp66")
+centered = false
+
+[node name="backImmuneLayer" type="Sprite2D" parent="."]
+visibility_layer = 2
+z_index = -1
+material = ExtResource("3_hk30f")
 centered = false
 
 [node name="mainLayer" type="Sprite2D" parent="."]

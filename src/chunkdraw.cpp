@@ -39,6 +39,7 @@ Dictionary CHUNKDRAW::getBlockDictionary(int id){
 Array CHUNKDRAW::generateTexturesFromData(PLANETDATA *planet,Vector2i pos,Node *body,Ref<Shape2D> shape,bool shipChunk){
     Ref<Image> img = Image::create(64, 64, false, Image::FORMAT_RGBA8);
     Ref<Image> backImg = Image::create(64, 64, false, Image::FORMAT_RGBA8);
+    Ref<Image> backImmuneImg = Image::create(64, 64, false, Image::FORMAT_RGBA8);
     Ref<Image> animImg = Image::create(192, 64, false, Image::FORMAT_RGBA8);
     
     Array images;
@@ -139,12 +140,16 @@ Array CHUNKDRAW::generateTexturesFromData(PLANETDATA *planet,Vector2i pos,Node *
                         }
                     }
 
-                    backImg->blend_rect(individualBlock, Rect2i(0,0,8,8), imgPos);
+                    if ( cock->isBGImmune(backBlockID) ){
+                        backImmuneImg->blend_rect(individualBlock, Rect2i(0,0,8,8), imgPos);
+                        Vector2i scan = scanForBorder(planet,worldX,worldY);
+                        backImmuneImg->blend_rect(texImage, Rect2i(scan.x,scan.y,8,8), imgPos);
 
-                    Vector2i scan = scanForBorder(planet,worldX,worldY);
-
-                    backImg->blend_rect(texImage, Rect2i(scan.x,scan.y,8,8), imgPos);
-
+                    }else{
+                        backImg->blend_rect(individualBlock, Rect2i(0,0,8,8), imgPos);
+                        Vector2i scan = scanForBorder(planet,worldX,worldY);
+                        backImg->blend_rect(texImage, Rect2i(scan.x,scan.y,8,8), imgPos);
+                    }
 
                 
                 }
@@ -181,6 +186,7 @@ Array CHUNKDRAW::generateTexturesFromData(PLANETDATA *planet,Vector2i pos,Node *
     images.append(img);
     images.append(backImg);
     images.append(animImg);
+    images.append(backImmuneImg);
 
 
    return images;

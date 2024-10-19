@@ -51,7 +51,7 @@ func _process(delta):
 		
 		if !invOpen:
 			PlayerData.closeChest()
-		$ItemPreview.position.x = (197 * int(invOpen)) + (3 * (1-int(invOpen) ))
+		$ItemPreview.position.x = (194 * int(invOpen)) + (3 * (1-int(invOpen) ))
 	
 	$ChestInventory.visible = PlayerData.chestOBJ != null
 	$Menu/Crafting.visible = PlayerData.chestOBJ == null

@@ -17,6 +17,7 @@ var targetRot = 0
 var chestDictionary :Dictionary= {}
 
 var spaceFlightMaxSpeed :float= 2000.0
+var wasOnPlanet = false
 
 func _ready():
 	generateEmptyArray()
@@ -45,10 +46,17 @@ func _process(delta):
 	var onplanet = get_parent().is_in_group("planet")
 	
 	if onplanet:
+		wasOnPlanet = true
 		if dir.y == 0:
 			vel.y += 500.0 * delta
 		else:
 			vel.y = lerp( vel.y, dir.y * 200.0, 0.1 )
+		
+		var p = get_parent().get_parent()
+		var pos = p.posToTile(position)
+		if pos != null: 
+			if abs( p.DATAC.getWaterData(pos.x,pos.y) ) > 0.5:
+				vel.y = lerp( vel.y, -100.0, 0.1 )
 		
 		if !is_on_floor():
 			vel.x = lerp( vel.x, dir.x * 200.0, 0.1 )
@@ -57,6 +65,12 @@ func _process(delta):
 			vel.x = lerp( vel.x, 0.0, 0.4 )
 			chunkContainer.rotation = 0.0
 	else:
+		
+		if wasOnPlanet:
+			spaceFlightMaxSpeed = 300.0
+			wasOnPlanet = false
+			vel *= 1.2
+		
 		vel += dir * 10.0
 		print(vel.length())
 		if vel.length() > spaceFlightMaxSpeed:
