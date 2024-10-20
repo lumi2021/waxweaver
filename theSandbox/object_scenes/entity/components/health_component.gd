@@ -26,6 +26,8 @@ signal statusUpdated
 # status stuff
 var statusEffects :Array[StatusEffect] = []
 
+## Used for being immune to certain types of damage hitbox
+@export var damageTypeImmunities :Array = []
 
 func _ready():
 	health = maxHealth
@@ -46,11 +48,12 @@ func heal(amount):
 	
 	emit_signal("healthChanged")
 
-func damage(amount,hitCrit:bool=false,source:String="idk"):
+func damage(amount,hitCrit:bool=false,source:String="idk",type:int=0):
 	
 	if isPlayer:
 		if parent.dead:
 			return
+	
 	
 	SoundManager.playSound("enemy/attackEnemy",parent.global_position,1.4,0.2)
 	var trueAmount = amount
@@ -66,6 +69,10 @@ func damage(amount,hitCrit:bool=false,source:String="idk"):
 	if hitCrit:
 		trueAmount *= 2
 		peebus = "critEnemy"
+	
+	if damageTypeImmunities.has(type):
+		SoundManager.playSound("mining/mineFail",parent.global_position,0.7,0.05)
+		trueAmount = 0 # CANCEL all damage if immune
 	
 	health -= trueAmount
 	
@@ -223,3 +230,6 @@ func getWorld():
 	if isPlayer:
 		return parent.getBodyOn()
 	return parent.get_parent().get_parent()
+
+func getHealthPercent():
+	return float(health)/float(maxHealth)

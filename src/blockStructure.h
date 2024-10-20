@@ -23,6 +23,7 @@ public:
 	// structures
 	Dictionary generateHouse(int worldx, int worldy, PLANETDATA *planet, int dir);
 	Dictionary generateCavernHouse(int worldx, int worldy, PLANETDATA *planet, int dir);
+	Dictionary generateBossShipPlatform(int worldx, int worldy, PLANETDATA *planet, int dir);
 };
 
 }

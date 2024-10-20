@@ -28,7 +28,8 @@ Dictionary BLOCKSTRUCTURE::onTick(int x, int y, PLANETDATA *planet, int dir){
             return generateHouse(x,y,planet,dir);
         case 1:
             return generateCavernHouse(x,y,planet,dir);
-
+        case 2:
+            return generateBossShipPlatform(x,y,planet,dir);
 
 
     }
@@ -123,4 +124,49 @@ Dictionary BLOCKSTRUCTURE::generateCavernHouse(int worldx, int worldy, PLANETDAT
 
     return changes;
 
+}
+
+Dictionary BLOCKSTRUCTURE::generateBossShipPlatform(int worldx, int worldy, PLANETDATA *planet, int dir){
+    Dictionary changes = {};
+
+    // remember: vertical strips
+    int tiles[112] = {
+        -1,-1,-1,-1,26,32,32,32,32,32,32,32,32,-1,
+        -1,-1,-1,-1,-1,32,32,32,32,32,32,32,32,32,
+        -1,-1,-1,26,32,32,32,32,32,32,32,32,32,32,
+        -1,63,63,63,32,32,32,32,32,32,32,32,32,32,
+        -1,63,63,63,32,32,32,32,32,32,32,32,32,32,
+        -1,-1,-1,26,32,32,32,32,32,32,32,32,32,32,
+        -1,-1,-1,-1,-1,32,32,32,32,32,32,32,32,32,
+        -1,-1,-1,-1,26,32,32,32,32,32,32,32,32,-1,
+    };
+
+    int i = 0;
+    int pillar = 0;
+    for( int x = 0; x < 8; x++ ){
+        for( int y = 0; y < 14; y++ ){
+            
+            if (tiles[i] == -1){ 
+                i++;
+                continue; } // skips generation if id is -1
+
+            Vector2 p = Vector2(x-3,y-4).rotated(acos(0.0)*dir);
+            Vector2i pos = Vector2i(p.x + worldx,p.y + worldy);
+
+            changes[pos] = tiles[i];
+
+            if (tiles[i] == 63){
+                planet->setInfoData(pos.x,pos.y,pillar);
+                pillar = pillar + 2;
+                if (pillar >= 6){
+                    pillar = 1;
+                }
+            }
+
+            i++;
+        }
+    
+    }
+
+    return changes;
 }

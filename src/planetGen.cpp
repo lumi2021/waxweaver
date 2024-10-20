@@ -232,6 +232,20 @@ void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
     //generateBox(planet,randX,randY,5,5,13,13);
     generateLadderPath(planet,randX,randY, planet->getPositionLookup(randX,randY) );
 
+    // generate boss platform
+    int h = (((std::rand() % 200) + 64) * ((( std::rand() % 2 ) * 2) - 1)) + 384;
+    int v = (noise->get_noise_1d(h*2.0) * 8.0) + (baseSurface/2) - 4;
+
+    // create rectangle
+    for( int x = 0; x < 8; x++ ){
+        for( int y = 0; y < 8; y++ ){
+            planet->setTileData(x+h-3,y+v-4,0);
+        }
+    }
+
+    planet->setTileData(h,v,54);
+    planet->setInfoData(h,v,2);
+
 }
 
 /////////////////// MOON LUNAR GENERATION /////////////////

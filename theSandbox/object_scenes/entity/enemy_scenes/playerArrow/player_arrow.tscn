@@ -35,6 +35,7 @@ offset = Vector2(-0.0505136, 3.34601)
 position = Vector2(-10, 0)
 enemyBox = false
 damage = 3
+damageType = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="axis/Hurtbox"]
 position = Vector2(8, 0)

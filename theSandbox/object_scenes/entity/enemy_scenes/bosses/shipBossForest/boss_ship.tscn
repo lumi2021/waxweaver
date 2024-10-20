@@ -43,8 +43,8 @@ radius = 20.0
 height = 48.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_po3h3"]
-radius = 20.0
-height = 48.0
+radius = 19.0
+height = 42.0
 
 [node name="BossShip" type="CharacterBody2D"]
 collision_layer = 128
@@ -52,8 +52,9 @@ collision_mask = 0
 script = ExtResource("1_favl4")
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_7ituk")]
+maxHealth = 1000
 knockbackResist = 0.0
-defense = 5
+defense = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_lndia")
@@ -72,9 +73,11 @@ colliderShape = NodePath("CollisionShape2D")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="axis/Hitbox"]
 shape = SubResource("CapsuleShape2D_w3ebs")
 
+[node name="ground" type="RayCast2D" parent="axis"]
+target_position = Vector2(0, 512)
+
 [node name="Hurtbox" parent="." instance=ExtResource("5_rcdpc")]
-damage = 20
-knockback = 0.8
+knockback = 0.0
 enemyName = "big praffin"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]

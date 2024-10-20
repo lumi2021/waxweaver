@@ -267,6 +267,15 @@ func interpretCommand(text):
 		"spawnpoint":
 			GlobalRef.playerSpawn = GlobalRef.player.position
 			GlobalRef.sendChat("set spawn")
+		"kit":
+			PlayerData.addItem(3011,1)
+			PlayerData.addItem(3012,1)
+			PlayerData.addItem(3024,1)
+			PlayerData.addItem(3028,10)
+			PlayerData.addItem(3035,198)
+			PlayerData.addItem(3019,1)
+			PlayerData.addItem(3020,1)
+			PlayerData.addItem(3021,1)
 		_:
 			GlobalRef.sendError("Error: command doesn't exist")
 			return
