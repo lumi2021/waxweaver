@@ -151,6 +151,9 @@ var data = {
 	3073:load("res://items/tools/sunflower/SunflowerSword.tres"),
 	3074:load("res://items/tools/sunflower/SunflowerPickaxe.tres"),
 	
+	3075:load("res://items/vanity/propellerCap/PropellerCap.tres"),
+	3076:load("res://items/tools/bossSummoner/WaxLollipop.tres"),
+	
 	# chairs 6000 - 6049
 	6000:load("res://items/blocks/furniture/chairs/WoodenChair.tres"),
 	6001:load("res://items/blocks/furniture/chairs/Toilet.tres"),

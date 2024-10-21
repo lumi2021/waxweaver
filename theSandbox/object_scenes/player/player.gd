@@ -797,6 +797,14 @@ func onRightClick():
 			currentLetter = (currentLetter + 1) % 38
 			editBody.DATAC.setInfoData(tile.x,tile.y,currentLetter)
 			editBody.editTiles( { Vector2i(tile.x,tile.y):62, } )
+		63: # ship boss pedastal
+			if PlayerData.checkForIngredient(3076,1):
+				if CreatureData.spawnBoss(planetOn,position + Vector2(0,-250).rotated(rotated*(PI/2)) ,"bossShip"):
+					GlobalRef.sendChat("Summoned big praffin!!")
+					PlayerData.consumeItems([3076],[1])
+					PlayerData.emit_signal("updateInventory")
+			else:
+				GlobalRef.sendChat("i need sucker NOW")
 			
 func setAllTrapdoors(tile:Vector2,replaceID:int,body):
 	var dick = {}

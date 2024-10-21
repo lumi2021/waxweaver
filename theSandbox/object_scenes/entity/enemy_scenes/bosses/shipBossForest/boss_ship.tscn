@@ -55,6 +55,8 @@ script = ExtResource("1_favl4")
 maxHealth = 1000
 knockbackResist = 0.0
 defense = 7
+dropItemArray = Array[int]([3075])
+dropChanceArray = Array[int]([1])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_lndia")
@@ -77,7 +79,8 @@ shape = SubResource("CapsuleShape2D_w3ebs")
 target_position = Vector2(0, 512)
 
 [node name="Hurtbox" parent="." instance=ExtResource("5_rcdpc")]
-knockback = 0.0
+damage = 28
+knockback = 0.8
 enemyName = "big praffin"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]

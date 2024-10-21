@@ -14,7 +14,7 @@ var state :int= 0
 # 2: chase
 
 var swoopSide = 0
-var swoopWait :int= 0
+var swoopWait :int= -100
 
 var swoopTimes :int= 0
 var chaseTicks :int= 0

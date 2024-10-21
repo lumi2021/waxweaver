@@ -11,6 +11,7 @@ needsWalls = false
 bedType = 0
 itemName = "Bed"
 subtext = ""
+desc = "sets spawnpoint"
 texture = ExtResource("2_am4hp")
 maxStackSize = 99
 clickToUse = false

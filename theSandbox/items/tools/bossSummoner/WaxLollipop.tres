@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://yd1ntmw83bce"]
+
+[ext_resource type="Script" path="res://item_resources/Item.gd" id="1_0bogw"]
+[ext_resource type="Texture2D" uid="uid://cn8aftel651od" path="res://items/tools/bossSummoner/waxLollipop.png" id="2_e12ix"]
+
+[resource]
+script = ExtResource("1_0bogw")
+itemName = "Wax Lollipop"
+subtext = ""
+desc = "\"Tastes disgusting...\""
+texture = ExtResource("2_e12ix")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

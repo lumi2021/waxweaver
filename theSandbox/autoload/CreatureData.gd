@@ -9,6 +9,9 @@ var passiveLimit = 15 # max passive mobs
 var spawnDelayTick = 0
 var spawnDelayThreshold = 500 # spawn rate
 
+var boss = null
+signal spawnedBoss
+
 var creatures = {
 	"praffin": "res://object_scenes/entity/enemy_scenes/praffin/praffin.tscn",
 	"butterfly": "res://object_scenes/entity/enemy_scenes/butterfly/butterfly.tscn",
@@ -161,3 +164,22 @@ func summonCommand(planet,position,string):
 	planet.entityContainer.add_child(ins)
 	
 	GlobalRef.sendChat("Spawned a " + string)
+
+func spawnBoss(planet,position,string):
+	
+	if is_instance_valid(boss):
+		return false
+	
+	if !creatures.has(string):
+		return false
+	var ins = load(creatures[string]).instantiate()
+	ins.position = position
+	ins.planet = planet
+	creatureAmount += ins.creatureSlots # add creatures slots
+	planet.entityContainer.add_child(ins)
+	boss = ins
+	emit_signal("spawnedBoss")
+	return true
+
+func isBossActive():
+	return is_instance_valid(boss)
