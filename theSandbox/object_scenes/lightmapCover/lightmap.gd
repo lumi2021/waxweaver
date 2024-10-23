@@ -13,8 +13,13 @@ func _ready():
 	$dropShadow.texture = GlobalRef.dropShadowRenderVP.get_texture()
 
 func _process(delta):
-	dropShadow.position = Vector2(1,1).rotated(GlobalRef.camera.rotation)
-
+	var g = GlobalRef.camera.global_position
+	var r = GlobalRef.camera.rotation
+	dropShadow.global_position = g + Vector2(1,1).rotated(r)
+	GlobalRef.dropShadowRenderVP.cam.global_position = g
+	dropShadow.rotation = r
+	GlobalRef.dropShadowRenderVP.cam.rotation = r
+	
 func pushUpdate(planet,newPos):
 	var pSize = planet.SIZEINCHUNKS * 32 #Pixel diameter of planet
 	newPos += planet.position
@@ -28,8 +33,13 @@ func pushUpdate(planet,newPos):
 	position.x = int(newPos.x)
 	position.y = int(newPos.y)
 	GlobalRef.lightRenderVP.cam.global_position = global_position
-	GlobalRef.dropShadowRenderVP.cam.global_position = global_position
+	#GlobalRef.dropShadowRenderVP.cam.global_position = global_position + Vector2(7,7)
+	
+	#GlobalRef.lightRenderVP.cam.global_position = GlobalRef.camera.global_position
+	#GlobalRef.lightRenderVP.cam.rotation = GlobalRef.camera.rotation
 
 func _on_lightmap_image_updated(node, image):
 	sprite.texture = ImageTexture.create_from_image(image)
 	
+func toggleShadow():
+	$dropShadow.visible = !$dropShadow.visible

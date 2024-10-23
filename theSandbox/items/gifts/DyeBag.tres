@@ -93,6 +93,7 @@ script = ExtResource("1_ygwx8")
 loottable = SubResource("Resource_hbh0t")
 itemName = "Dye bag"
 subtext = ""
+desc = ""
 texture = ExtResource("4_75aro")
 maxStackSize = 99
 clickToUse = true

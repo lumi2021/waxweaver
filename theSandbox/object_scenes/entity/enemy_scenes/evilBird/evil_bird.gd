@@ -35,7 +35,9 @@ func _physics_process(delta):
 		targetY = -4.0
 	if getSurface() < 0.0 and !GlobalRef.isNight():
 		targetY = -4.0
-	
+	if getWater() > 0.5:
+		targetY = -2.0 # bird will not be able to enter water
+		targetX *= -1.0
 	
 	var vel = getVelocity()
 	

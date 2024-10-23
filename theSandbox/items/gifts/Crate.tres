@@ -1,0 +1,114 @@
+[gd_resource type="Resource" script_class="ItemGift" load_steps=19 format=3 uid="uid://bi2twuht27huo"]
+
+[ext_resource type="Script" path="res://object_scenes/specialResource/lootTables/LootTable.gd" id="1_1rtil"]
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemGift.gd" id="1_xngf1"]
+[ext_resource type="Script" path="res://object_scenes/specialResource/lootTables/RollableItem.gd" id="2_vawkx"]
+[ext_resource type="Texture2D" uid="uid://b7xlu3twdewuf" path="res://items/gifts/crate.png" id="4_8dk5y"]
+
+[sub_resource type="Resource" id="Resource_duaum"]
+script = ExtResource("2_vawkx")
+id = 18
+amountMin = 4
+amountMax = 10
+weight = 400
+
+[sub_resource type="Resource" id="Resource_46tpd"]
+script = ExtResource("2_vawkx")
+id = 24
+amountMin = 3
+amountMax = 7
+weight = 150
+
+[sub_resource type="Resource" id="Resource_c3m72"]
+script = ExtResource("2_vawkx")
+id = 27
+amountMin = 2
+amountMax = 6
+weight = 50
+
+[sub_resource type="Resource" id="Resource_djtx3"]
+script = ExtResource("2_vawkx")
+id = 3001
+amountMin = 1
+amountMax = 1
+weight = 1
+
+[sub_resource type="Resource" id="Resource_412es"]
+script = ExtResource("2_vawkx")
+id = 3000
+amountMin = 1
+amountMax = 1
+weight = 1
+
+[sub_resource type="Resource" id="Resource_hwil7"]
+script = ExtResource("2_vawkx")
+id = 3028
+amountMin = 5
+amountMax = 5
+weight = 100
+
+[sub_resource type="Resource" id="Resource_c6kf2"]
+script = ExtResource("2_vawkx")
+id = 3033
+amountMin = 1
+amountMax = 1
+weight = 10
+
+[sub_resource type="Resource" id="Resource_18leo"]
+script = ExtResource("2_vawkx")
+id = 3036
+amountMin = 1
+amountMax = 1
+weight = 10
+
+[sub_resource type="Resource" id="Resource_bqrhn"]
+script = ExtResource("2_vawkx")
+id = 3034
+amountMin = 1
+amountMax = 1
+weight = 10
+
+[sub_resource type="Resource" id="Resource_xaw8v"]
+script = ExtResource("2_vawkx")
+id = 3028
+amountMin = 1
+amountMax = 1
+weight = 10
+
+[sub_resource type="Resource" id="Resource_mpj0c"]
+script = ExtResource("2_vawkx")
+id = 3035
+amountMin = 9
+amountMax = 17
+weight = 25
+
+[sub_resource type="Resource" id="Resource_vdobr"]
+script = ExtResource("2_vawkx")
+id = 3040
+amountMin = 2
+amountMax = 4
+weight = 25
+
+[sub_resource type="Resource" id="Resource_bwgnr"]
+script = ExtResource("2_vawkx")
+id = 6001
+amountMin = 1
+amountMax = 1
+weight = 2
+
+[sub_resource type="Resource" id="Resource_js6nd"]
+script = ExtResource("1_1rtil")
+rollType = 1
+rollCount = 3
+table = Array[ExtResource("2_vawkx")]([SubResource("Resource_duaum"), SubResource("Resource_46tpd"), SubResource("Resource_c3m72"), SubResource("Resource_djtx3"), SubResource("Resource_412es"), SubResource("Resource_hwil7"), SubResource("Resource_c6kf2"), SubResource("Resource_18leo"), SubResource("Resource_bqrhn"), SubResource("Resource_xaw8v"), SubResource("Resource_mpj0c"), SubResource("Resource_vdobr"), SubResource("Resource_bwgnr")])
+
+[resource]
+script = ExtResource("1_xngf1")
+loottable = SubResource("Resource_js6nd")
+itemName = "Crate"
+subtext = ""
+desc = ""
+texture = ExtResource("4_8dk5y")
+maxStackSize = 99
+clickToUse = true
+infiniteReach = true

@@ -124,7 +124,7 @@ func onNotUsing(delta):
 					FOUNDFISH = true
 					scanningForFish = false
 					var data = PlanetTypeInfo.getData(GlobalRef.currentPlanet.planetType)
-					fishToGive = data.getFish()
+					fishToGive = data.getFish().id
 					$Bobber/CPUParticles2D.emitting = true
 					fishTick = 2.0
 			

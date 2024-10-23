@@ -38,6 +38,9 @@ private:
 	Ref<Texture2D> texture;
     Ref<Image> texImage;
 
+	Ref<Texture2D> maskHold;
+    Ref<Image> maskBorder;
+
 	Ref<Texture2D> watertexture;
     Ref<Image> watertexImage;
 
@@ -59,6 +62,7 @@ public:
 	Dictionary getBlockDictionary(int id);
 
 	void getBorderImage( const char* file );
+	void getBorderMask( const char* file );
 	void getWaterImage( const char* file );
 
 	Vector2i getWaterImgPos(PLANETDATA *planet,int x,int y,int blockSide);

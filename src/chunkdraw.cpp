@@ -23,7 +23,7 @@ CHUNKDRAW::CHUNKDRAW() {
 
     getBorderImage("res://items/border.png");
     getWaterImage("res://items/water.png");
-
+    getBorderMask("res://items/wallMask.png");
 
 }
 
@@ -39,7 +39,6 @@ Dictionary CHUNKDRAW::getBlockDictionary(int id){
 Array CHUNKDRAW::generateTexturesFromData(PLANETDATA *planet,Vector2i pos,Node *body,Ref<Shape2D> shape,bool shipChunk){
     Ref<Image> img = Image::create(64, 64, false, Image::FORMAT_RGBA8);
     Ref<Image> backImg = Image::create(64, 64, false, Image::FORMAT_RGBA8);
-    Ref<Image> backImmuneImg = Image::create(64, 64, false, Image::FORMAT_RGBA8);
     Ref<Image> animImg = Image::create(192, 64, false, Image::FORMAT_RGBA8);
     
     Array images;
@@ -140,16 +139,25 @@ Array CHUNKDRAW::generateTexturesFromData(PLANETDATA *planet,Vector2i pos,Node *
                         }
                     }
 
-                    if ( cock->isBGImmune(backBlockID) ){
-                        backImmuneImg->blend_rect(individualBlock, Rect2i(0,0,8,8), imgPos);
-                        Vector2i scan = scanForBorder(planet,worldX,worldY);
-                        backImmuneImg->blend_rect(texImage, Rect2i(scan.x,scan.y,8,8), imgPos);
+                    if(!cock->isBGImmune(backBlockID)){
+                        // cycle through pixels god help us all
+                        for(int xx = 0; xx < 8; xx++){
+                            for(int yy = 0; yy < 8; yy++){
+                               Color c = individualBlock->get_pixel(xx,yy);
+                               c.r = c.r * 0.569;
+                               c.g = c.g * 0.569;
+                               c.b = c.b * 0.729;
+                               individualBlock->set_pixel(xx,yy,c);
+                            }
 
-                    }else{
-                        backImg->blend_rect(individualBlock, Rect2i(0,0,8,8), imgPos);
-                        Vector2i scan = scanForBorder(planet,worldX,worldY);
-                        backImg->blend_rect(texImage, Rect2i(scan.x,scan.y,8,8), imgPos);
+                        }
                     }
+
+                    backImg->blend_rect(individualBlock, Rect2i(0,0,8,8), imgPos);
+                    Vector2i scan = scanForBorder(planet,worldX,worldY);
+                    backImg->blend_rect(texImage, Rect2i(scan.x,scan.y,8,8), imgPos);
+                    backImg->blit_rect_mask(texImage,maskBorder, Rect2i(scan.x,scan.y,8,8), imgPos);
+            
 
                 
                 }
@@ -186,7 +194,6 @@ Array CHUNKDRAW::generateTexturesFromData(PLANETDATA *planet,Vector2i pos,Node *
     images.append(img);
     images.append(backImg);
     images.append(animImg);
-    images.append(backImmuneImg);
 
 
    return images;
@@ -538,6 +545,15 @@ void CHUNKDRAW::getBorderImage( const char* file ) {
 
     texImage = texture->get_image();
     texImage->convert(Image::FORMAT_RGBA8);
+
+}
+
+void CHUNKDRAW::getBorderMask( const char* file ) {
+    ResourceLoader rl;
+    maskHold = rl.load(file);
+
+    maskBorder = maskHold->get_image();
+    maskBorder->convert(Image::FORMAT_RGBA8);
 
 }
 

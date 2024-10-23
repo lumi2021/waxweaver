@@ -82,6 +82,8 @@ func _process(delta):
 	if is_instance_valid(deathTimer):
 		$"Death Screen/respawn".text = "respawn in " + str( int(deathTimer.time_left) )
 	
+	# fps counter
+	$fps.text = "fps: " + str(1.0/delta ).left(4)
 	
 func clickedSlot(slot):
 	if !invOpen:
@@ -276,6 +278,12 @@ func interpretCommand(text):
 			PlayerData.addItem(3019,1)
 			PlayerData.addItem(3020,1)
 			PlayerData.addItem(3021,1)
+		"shadow":
+			GlobalRef.lightmap.toggleShadow()
+			GlobalRef.sendChat("Toggled drop shadow")
+		"fps":
+			$fps.visible = !$fps.visible
+			GlobalRef.sendChat("Toggled FPS display")
 		_:
 			GlobalRef.sendError("Error: command doesn't exist")
 			return
@@ -334,6 +342,9 @@ func displayItemName(text:String,itemData:Item):
 		size += 18
 		infoText += itemData.description
 		size += (itemData.description.count("\n") + 1) * 18
+	elif itemData is ItemGift:
+		infoText += "left click to open! \n"
+		size += 18
 	
 	if itemData.desc != "":
 		infoText += itemData.desc

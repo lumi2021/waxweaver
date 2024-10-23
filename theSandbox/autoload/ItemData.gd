@@ -153,6 +153,7 @@ var data = {
 	
 	3075:load("res://items/vanity/propellerCap/PropellerCap.tres"),
 	3076:load("res://items/tools/bossSummoner/WaxLollipop.tres"),
+	3077:load("res://items/gifts/Crate.tres"),
 	
 	# chairs 6000 - 6049
 	6000:load("res://items/blocks/furniture/chairs/WoodenChair.tres"),

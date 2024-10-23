@@ -67,7 +67,8 @@ func _on_color_rect_gui_input(event):
 					parent.selectSlot(slotToDisplay)
 				
 			if event["button_index"] == 2:
-				parent.splitSlot(slotToDisplay)
+				if slotToDisplay < 40 or slotToDisplay > 52: # used to disable right click on armor slots
+					parent.splitSlot(slotToDisplay)
 
 
 func _on_button_mouse_entered():
