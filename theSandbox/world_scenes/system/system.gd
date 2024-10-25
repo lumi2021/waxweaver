@@ -86,7 +86,7 @@ func generateNewSystem():
 		GlobalRef.camera.map.map(self,cosmicBodyContainer.get_children())
 		
 		player.attachToPlanet(forestPlanet)
-
+	
 #func reparentToPlanet(object,planet):
 	#print(object)
 	#print(planet)

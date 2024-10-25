@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemArmorChest" load_steps=2 format=3 uid="uid://csftio02pkx4h"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemArmorChest.gd" id="1_qp6gq"]
+
+[resource]
+script = ExtResource("1_qp6gq")
+defense = 1
+itemName = ""
+subtext = ""
+desc = ""
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

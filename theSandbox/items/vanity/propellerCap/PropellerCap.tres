@@ -28,7 +28,7 @@ frame_2/duration = 0.1
 
 [resource]
 script = ExtResource("1_idpdy")
-defense = 3
+defense = 5
 armorTexture = SubResource("AnimatedTexture_snwvq")
 itemName = "Propeller Cap"
 subtext = ""

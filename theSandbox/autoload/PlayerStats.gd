@@ -123,3 +123,6 @@ func updateStats():
 		specialProperties += data.specialProperties
 	
 	emit_signal("updatedStats")
+
+func emit():
+	emit_signal("updatedStats")

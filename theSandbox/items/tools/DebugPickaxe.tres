@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="ItemMining" load_steps=3 format=3 uid="uid://d00guv1ahu204"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemMining.gd" id="1_syqps"]
+[ext_resource type="Texture2D" uid="uid://q73vrg1ixkye" path="res://items/tools/debugPickaxe.png" id="2_4seis"]
+
+[resource]
+script = ExtResource("1_syqps")
+miningMultiplier = 9999.0
+miningLevel = 99999999
+damage = 9999
+animSpeed = 8.0
+knockbackMult = 1.0
+weaponScale = 1.0
+statusInflictors = Array[Resource("res://object_scenes/specialResource/statusEffects/StatusInflictor.gd")]([])
+itemName = "Debug Pickaxe"
+subtext = ""
+desc = "
+Congrats on beating the boss!
+This is the end of the current demo.
+The boss will eventually drop parts necessary to build the ship.
+For now, have an op pickaxe."
+texture = ExtResource("2_4seis")
+maxStackSize = 1
+clickToUse = false
+infiniteReach = true

@@ -1,0 +1,100 @@
+[gd_resource type="Resource" script_class="ItemGift" load_steps=17 format=3 uid="uid://bq43p67gn1t4o"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemGift.gd" id="1_8dgjr"]
+[ext_resource type="Script" path="res://object_scenes/specialResource/lootTables/LootTable.gd" id="1_buwi6"]
+[ext_resource type="Script" path="res://object_scenes/specialResource/lootTables/RollableItem.gd" id="2_lw6vd"]
+[ext_resource type="Texture2D" uid="uid://bep8dhcsna3cs" path="res://items/gifts/present.png" id="4_vioaf"]
+
+[sub_resource type="Resource" id="Resource_iopna"]
+script = ExtResource("2_lw6vd")
+id = 3079
+amountMin = 1
+amountMax = 1
+weight = 1
+
+[sub_resource type="Resource" id="Resource_v6rhu"]
+script = ExtResource("2_lw6vd")
+id = 3080
+amountMin = 1
+amountMax = 1
+weight = 1
+
+[sub_resource type="Resource" id="Resource_tb13f"]
+script = ExtResource("2_lw6vd")
+id = null
+amountMin = 1
+amountMax = 1
+weight = 1
+
+[sub_resource type="Resource" id="Resource_aw7sl"]
+script = ExtResource("2_lw6vd")
+id = 3082
+amountMin = 1
+amountMax = 1
+weight = 1
+
+[sub_resource type="Resource" id="Resource_5uymu"]
+script = ExtResource("2_lw6vd")
+id = 3083
+amountMin = 1
+amountMax = 1
+weight = 1
+
+[sub_resource type="Resource" id="Resource_rb758"]
+script = ExtResource("2_lw6vd")
+id = 3084
+amountMin = 1
+amountMax = 1
+weight = 1
+
+[sub_resource type="Resource" id="Resource_lpb4g"]
+script = ExtResource("2_lw6vd")
+id = 3088
+amountMin = 1
+amountMax = 1
+weight = 1
+
+[sub_resource type="Resource" id="Resource_7g0xm"]
+script = ExtResource("2_lw6vd")
+id = 3089
+amountMin = 1
+amountMax = 1
+weight = 1
+
+[sub_resource type="Resource" id="Resource_uavdh"]
+script = ExtResource("2_lw6vd")
+id = 3090
+amountMin = 1
+amountMax = 1
+weight = 1
+
+[sub_resource type="Resource" id="Resource_rhrqx"]
+script = ExtResource("2_lw6vd")
+id = 3010
+amountMin = 1
+amountMax = 1
+weight = 1
+
+[sub_resource type="Resource" id="Resource_l2kqx"]
+script = ExtResource("2_lw6vd")
+id = 3022
+amountMin = 1
+amountMax = 1
+weight = 1
+
+[sub_resource type="Resource" id="Resource_sq6vm"]
+script = ExtResource("1_buwi6")
+rollType = 0
+rollCount = 1
+table = Array[ExtResource("2_lw6vd")]([SubResource("Resource_iopna"), SubResource("Resource_v6rhu"), SubResource("Resource_tb13f"), SubResource("Resource_aw7sl"), SubResource("Resource_5uymu"), SubResource("Resource_rb758"), SubResource("Resource_lpb4g"), SubResource("Resource_7g0xm"), SubResource("Resource_uavdh"), SubResource("Resource_rhrqx"), SubResource("Resource_l2kqx")])
+
+[resource]
+script = ExtResource("1_8dgjr")
+loottable = SubResource("Resource_sq6vm")
+itemName = "Present"
+subtext = ""
+desc = "Contains vanity items"
+texture = ExtResource("4_vioaf")
+maxStackSize = 99
+clickToUse = true
+infiniteReach = true

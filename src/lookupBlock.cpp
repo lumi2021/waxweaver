@@ -87,6 +87,7 @@ LOOKUPBLOCK::LOOKUPBLOCK() {
     penis[61] = new BLOCKPAPER();
     penis[62] = new BLOCKLETTER();
     penis[63] = new BLOCKBOSSSHIPPILLAR();
+    penis[64] = new BLOCKVANITYPRESENT();
     
     for(BLOCK *i : penis){ // i increase automatically !
         i->setLookUp(this);

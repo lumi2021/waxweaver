@@ -60,6 +60,8 @@ func damage(amount,hitCrit:bool=false,source:String="idk",type:int=0):
 	var def = defense
 	if checkIfHasEffect("fragile"):
 		def /= 2
+	if checkIfHasEffect("tough"):
+		def += 5
 	
 	trueAmount -= def
 	trueAmount = max(trueAmount,1)
@@ -196,6 +198,7 @@ func inflictStatus(effect:String,seconds:float):
 	statusEffects.append( s )
 	s.onInfliction()
 	emit_signal("statusUpdated")
+	Stats.emit()
 	if isPlayer:
 		GlobalRef.hotbar.updateStatus()
 

@@ -17,6 +17,8 @@ var red :bool= false
 
 @onready var partScene = preload("res://object_scenes/particles/explosion/explosion_particle.tscn")
 
+var immortalTiles :Array[int]= [5,63,34]
+
 func _ready():
 	setVelocity(vol)
 	
@@ -79,7 +81,7 @@ func explode():
 			var tile = Vector2(pos.x + x - radius,pos.y + y - radius)
 			var p :Vector2 = Vector2(4,4) + planet.tileToPos(tile)
 			var id = planet.DATAC.getTileData(tile.x,tile.y)
-			if id == 5:
+			if immortalTiles.has(id):
 				continue
 			if p.distance_to(position) < radius * 8:
 				changes[Vector2i(pos.x + x - radius,pos.y + y - radius)] = -1

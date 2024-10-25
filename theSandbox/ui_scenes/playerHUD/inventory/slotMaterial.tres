@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bn2sbolo78687"]
+
+[ext_resource type="Shader" path="res://ui_scenes/playerHUD/inventory/inventory_slot.gdshader" id="1_dkle3"]
+
+[resource]
+shader = ExtResource("1_dkle3")
+shader_parameter/line_color = Color(0, 0, 0, 1)
+shader_parameter/line_thickness = 1.0
+shader_parameter/add_margins = true

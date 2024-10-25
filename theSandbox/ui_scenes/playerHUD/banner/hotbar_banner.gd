@@ -18,6 +18,8 @@ var previousMessage = ""
 
 var longassstring :PackedStringArray
 
+@onready var hb = $BossHealthbar/hb
+
 func _ready():
 	
 	GlobalRef.hotbar = self
@@ -41,6 +43,7 @@ func _ready():
 	# connect health bar
 	PlayerData.connect("updateHealth",updateHealth)
 	PlayerData.connect("forceOpenInventory",forceOpenInventory)
+	CreatureData.connect("spawnedBoss",connectBossHealthbar)
 	
 func _process(delta):
 	var pos = to_local(get_global_mouse_position()) - Vector2(6,6)
@@ -345,6 +348,11 @@ func displayItemName(text:String,itemData:Item):
 	elif itemData is ItemGift:
 		infoText += "left click to open! \n"
 		size += 18
+	elif itemData is ItemArrow:
+		infoText += "damage: " + str(itemData.damage) + "\n"
+		size += 18
+		infoText += "speed: " + str(itemData.velocityMultiplier) + "\n"
+		size += 18
 	
 	if itemData.desc != "":
 		infoText += itemData.desc
@@ -426,3 +434,15 @@ func updateStatus():
 		ins.position.y = i * 10
 		$StatusDisplay.add_child(ins)
 		i += 1
+
+func connectBossHealthbar():
+	if !is_instance_valid(CreatureData.boss):
+		hb.hide()
+		return
+	
+	var hc :HealthComponent = CreatureData.boss.healthcomponent
+	hb.max_value = hc.maxHealth
+	hb.value = hc.health
+	hb.textSet(hc.health,hc.maxHealth)
+	hb.show()
+	hb.set_process(true)

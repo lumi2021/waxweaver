@@ -12,6 +12,9 @@ var state :int= 0
 # 0: position for swoop attack
 # 1: swoop attack
 # 2: chase
+# 3: moving downward to settle for spawning
+# 4: spawning praffins
+# 5: leave because player died
 
 var swoopSide = 0
 var swoopWait :int= -100
@@ -25,9 +28,15 @@ var spawningTicks = 39
 var dashWhileChaseTicks = 0
 
 func _ready():
+	$DeleteMeOutsideOfChunk.set_process(false)
 	sprite.play("default")
 
 func _physics_process(delta):
+	
+	if GlobalRef.player.dead and state != 5:
+		state = 5
+		$DeleteMeOutsideOfChunk.set_process(true)
+	
 	match state:
 		0:
 			position4swoopAttack(delta)
@@ -39,6 +48,8 @@ func _physics_process(delta):
 			moveToSettle(delta)
 		4:
 			spawnPraffins(delta)
+		5:
+			run(delta)
 	
 	# sprite rotation
 	sprite.rotation = getVelocity().x * 0.001
@@ -142,3 +153,10 @@ func spawnPraffins(delta):
 		spawningTicks = 39
 		state = 2
 		healthcomponent.damageTypeImmunities = []
+
+func run(delta):
+	
+	var vel = getVelocity()
+	vel.y -= 200.0 * delta
+	setVelocity(vel)
+	move_and_slide()

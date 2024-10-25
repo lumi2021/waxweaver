@@ -7,7 +7,7 @@
 [sub_resource type="Resource" id="Resource_ry8h0"]
 script = ExtResource("2_6038e")
 effectName = "poison"
-seconds = 40.0
+seconds = 20.0
 chance = 100
 
 [resource]
@@ -17,6 +17,8 @@ velocityMultiplier = 1.0
 statusInflictors = Array[ExtResource("2_6038e")]([SubResource("Resource_ry8h0")])
 itemName = "Poison Tipped Arrow"
 subtext = ""
+desc = ""
 texture = ExtResource("2_a8dc6")
 maxStackSize = 99
 clickToUse = false
+infiniteReach = false

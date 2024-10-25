@@ -65,7 +65,7 @@ var data = {
 	
 	3003:load("res://items/material/Wax.tres"),
 	3004:load("res://items/material/String.tres"),
-	3005:null,
+	3005:load("res://items/tools/DebugPickaxe.tres"),
 	
 	3006:load("res://items/tools/copper/CopperSword.tres"), # copper tools
 	3007:load("res://items/tools/copper/CopperPickaxe.tres"),
@@ -154,6 +154,23 @@ var data = {
 	3075:load("res://items/vanity/propellerCap/PropellerCap.tres"),
 	3076:load("res://items/tools/bossSummoner/WaxLollipop.tres"),
 	3077:load("res://items/gifts/Crate.tres"),
+	
+	3078:load("res://items/gifts/VanityGift.tres"),
+	3079:load("res://items/vanity/strawhat/Strawhat.tres"),
+	3080:load("res://items/vanity/strawhat/RedShirt.tres"),
+	3081:load("res://items/vanity/strawhat/JeanShorts.tres"),
+	3082:load("res://items/vanity/winter/GreenScarf.tres"),
+	3083:load("res://items/vanity/winter/RedScarf.tres"),
+	3084:load("res://items/vanity/winter/Fleece.tres"),
+	3085:load("res://items/vanity/empty/nakedHead.tres"),
+	3086:load("res://items/vanity/empty/nakedChest.tres"),
+	3087:load("res://items/vanity/empty/nakedLegs.tres"),
+	3088:load("res://items/vanity/calvinjojo/CalvinHat.tres"),
+	3089:load("res://items/vanity/calvinjojo/CalvinShirt.tres"),
+	3090:load("res://items/vanity/calvinjojo/CalvinPants.tres"),
+	
+	3091:load("res://items/fish/BoneFish.tres"),
+	3092:load("res://items/fish/HeartyFish.tres"),
 	
 	# chairs 6000 - 6049
 	6000:load("res://items/blocks/furniture/chairs/WoodenChair.tres"),

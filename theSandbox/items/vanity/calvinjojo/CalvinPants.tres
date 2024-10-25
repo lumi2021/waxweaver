@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemArmorLegs" load_steps=4 format=3 uid="uid://kuex0ysa1fh4"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemArmorLegs.gd" id="1_4qlox"]
+[ext_resource type="Texture2D" uid="uid://df65lv5a7gda1" path="res://items/vanity/calvinjojo/calvinOutfitLegs.png" id="1_os6h8"]
+[ext_resource type="Texture2D" uid="uid://dkh4awvlyfawl" path="res://items/vanity/calvinjojo/pants.png" id="3_7g02l"]
+
+[resource]
+script = ExtResource("1_4qlox")
+defense = 1
+armorTexture = ExtResource("1_os6h8")
+itemName = "Calvin's Pants"
+subtext = ""
+desc = ""
+texture = ExtResource("3_7g02l")
+maxStackSize = 1
+clickToUse = false
+infiniteReach = false
