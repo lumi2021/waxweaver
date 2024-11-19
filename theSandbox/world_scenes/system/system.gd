@@ -7,7 +7,16 @@ extends Node2D
 
 @export var rootPlanet := Node2D
 
+var planets = []
+
+var planetsShouldGenerate = true
+
+var autosaveTicks :int= 0
+var lastSave :float= Time.get_unix_time_from_system()
+
 func _ready():
+	planetsShouldGenerate = !Saving.has_save(Saving.loadedFile)
+	
 	generateNewSystem()
 	GlobalRef.system = self
 	
@@ -66,7 +75,15 @@ func generateNewSystem():
 	
 	#cosmicBodyContainer.add_child(aridPlanet)
 	
+	# used for saving order
+	planets.append(sun)
+	planets.append(forestPlanet)
+	planets.append(forestMoon)
+	
 	# halt
+	if !planetsShouldGenerate:
+		loadSaveFromFile()
+	
 	await get_tree().create_timer(0.1).timeout
 	
 	#Spawns player position
@@ -79,38 +96,95 @@ func generateNewSystem():
 		objectContainer.add_child(player)
 		
 		var pee = forestPlanet.DATAC.findSpawnPosition()
-		print( pee )
 		player.position = Vector2(pee) + forestPlanet.position
-		
+		player.attachToPlanet(forestPlanet)
+		player.respawn()
 
 		GlobalRef.camera.map.map(self,cosmicBodyContainer.get_children())
 		
-		player.attachToPlanet(forestPlanet)
-	
-#func reparentToPlanet(object,planet):
-	#print(object)
-	#print(planet)
-	#if !objectContainer.get_children().has(object):
-		#return
-	#
-	#if object == GlobalRef.player:
-		#object.planet = planet
-	#object.reparent(planet.entityContainer)
-#
-#
-#func dumpObjectToSpace(object):
-	#object.reparent(objectContainer)
-	#if object == GlobalRef.player:
-		#object.planet = null
-		#resetObjectPositions()
-#
-#func resetObjectPositions():
-	#var rootPosition = rootPlanet.position
-	#for planet in cosmicBodyContainer.get_children():
-		#planet.position -= rootPosition
-	#for object in objectContainer.get_children():
-		#object.position -= rootPosition
+		await get_tree().create_timer(0.1).timeout
+		player.respawn()
+		saveGameToFile()
 
+func saveGameToFile():
+	var gameData :Dictionary= {} # will hold all data
+	var planetDictionary :Array = [] # will hold the data for planets
+	var chestDictionary :Array = [] # will hold planet chest data
+	
+	for planet in planets: # parse over all planets
+		var saveString :PackedStringArray= planet.DATAC.getSaveString()
+		var hex :String= var_to_bytes(saveString).hex_encode() # compact string
+		planetDictionary.append( hex )
+		
+		var chest = planet.chestDictionary
+		var chestHex :String= var_to_bytes(chest).hex_encode() # compact string
+		chestDictionary.append( chestHex )
+	
+	gameData["version"] = 19 ## be sure to change this, very important
+	gameData["versionEra"] = 0 # 0:alpha, 1:release
+	gameData["planets"] = planetDictionary
+	gameData["chests"] = chestDictionary
+	gameData["playerInventory"] = var_to_bytes(PlayerData.inventory).hex_encode()
+	if GlobalRef.playerSpawnPlanet != null:
+		gameData["spawnPlanet"] = planets.find(GlobalRef.playerSpawnPlanet) # gets planet id
+		gameData["spawnpoint"] = var_to_str(GlobalRef.playerSpawn)
+	
+	Saving.write_save(Saving.loadedFile,gameData)
+	
+	lastSave = Time.get_unix_time_from_system() # keep track of time elapsed
+
+func loadSaveFromFile():
+	var gameData = Saving.read_save( Saving.loadedFile )
+	if gameData == null:
+		printerr( "Failed to load save, save file doesn't exist." )
+		return
+	
+	var planetDic :Array = gameData["planets"]
+	var chestDic :Array = gameData["chests"]
+	var id :int= 0
+	for planet in planets: # parse over all planets
+		
+		# planet data
+		var decoded :PackedByteArray = planetDic[id].hex_decode()
+		var pldt :PackedStringArray = bytes_to_var(decoded)
+		planet.DATAC.loadFromString(pldt[0],pldt[1],pldt[2],pldt[3],pldt[4])
+		if planet == GlobalRef.currentPlanet:
+			planet.forceChunkDrawUpdate()
+			
+		# chest data
+		var chestDecoded :PackedByteArray = chestDic[id].hex_decode()
+		var chstdt :Dictionary = bytes_to_var(chestDecoded)
+		planet.chestDictionary = chstdt.duplicate()
+		
+		id += 1
+	
+	# inventory
+	PlayerData.inventory = bytes_to_var(gameData["playerInventory"].hex_decode())
+	PlayerData.emit_signal("updateInventory")
+	PlayerData.emit_signal("armorUpdated")
+	
+	# spawnpoint
+	if gameData.has("spawnpoint"):
+		GlobalRef.playerSpawnPlanet = planets[ gameData["spawnPlanet"] ] # gets planet id
+		GlobalRef.playerSpawn = str_to_var(gameData["spawnpoint"])
+
+		
 func posToTile(pos):
 	# just ensures anything emitted into the main system doesnt crash
 	return null
+
+func _exit_tree():
+	saveGameToFile()
+
+func _process(delta):
+	autosaveTicks += 1
+	if autosaveTicks > 10800: # every 3 minutes
+		if GlobalRef.player.velocity.length() < 2.0: # make sure player is standing still
+			Saving.autosave()
+			autosaveTicks = 0
+			print("Game autosaved!")
+	
+	if Input.is_action_just_pressed("pause"):
+		get_tree().paused = !get_tree().paused
+		
+		$PauseMenu.visible = get_tree().paused

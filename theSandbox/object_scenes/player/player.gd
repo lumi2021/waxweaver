@@ -77,16 +77,23 @@ func _ready():
 	PlayerData.connect("selectedSlotChanged",swapSlot)
 	PlayerData.connect("armorUpdated",changeArmor)
 	
-	PlayerData.addItem(3000,1)
-	PlayerData.addItem(3001,1)
+	if system.planetsShouldGenerate: # new game
+		PlayerData.addItem(3000,1)
+		PlayerData.addItem(3001,1)
 	
 	PlayerData.selectSlot(0)
 	
 	healthComponent.heal(50)
+	
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	
+	PlayerData.emit_signal("armorUpdated")
 
 func _process(delta):
 	
 	tick+=1
+	
+	$rightClicker.global_position = get_global_mouse_position()
 	
 	match state:
 		0: #On planet
@@ -111,6 +118,8 @@ func _process(delta):
 			findPlanetToAttachInSpace()
 
 	scrollBackgrounds(velocity,delta)
+	
+	## do mouse stuff ##
 	
 	## Ignore below for now ##
 	shipFinder.global_position = get_global_mouse_position()
@@ -679,133 +688,7 @@ func runItemProcess(delta):
 	else:
 		heldItemAnim.onNotUsing(delta)
 
-func onRightClick():
-	
-	#cancel if out of range
-	if get_local_mouse_position().length() > 48:
-		return
-	
-	var editBody = getEditingBody()
-	if !is_instance_valid(editBody):
-		return
-	
-	var mousePos = editBody.get_local_mouse_position()
-	var tile = editBody.posToTile(mousePos)
-	var blockType = editBody.DATAC.getTileData(tile.x,tile.y)
-	var rot = editBody.DATAC.getPositionLookup(tile.x,tile.y)
-	
-	
-	# right click functionality for each block
-	match blockType:
-		19: # chair
-			
-			# return if wall is in the way
-			if !wallCheck(get_local_mouse_position()):
-				return
-			
-			if rotated != editBody.DATAC.getPositionLookup(tile.x,tile.y) and editBody is Planet:
-				return
-			movementState = 1 # enter chair state
-			chairSit(tile,editBody)
-		22: # closed door
-			openDoor(tile,editBody,GlobalRef.playerSide)
-			SoundManager.playSound("interacts/door",get_global_mouse_position(),1.2,0.1)
-		23: # open door
-			closeDoor(tile,editBody)
-			SoundManager.playSound("interacts/door",get_global_mouse_position(),1.2,0.1)
-		25: # ladder
-			
-			# return if wall is in the way
-			if !wallCheck(get_local_mouse_position()):
-				return
-			
-			if lastOnLadder > 0: # return if player was on a ladder recently
-				return
-			
-			if movementState == 2:
-				return
-			movementState = 2 # enter ladder state
-			if editBody is Planet:
-				rotated = editBody.DATAC.getPositionLookup(tile.x,tile.y)
-			attachToLadder(tile,editBody)
-			SoundManager.playSound("items/ladderClimb",global_position,1.5,0.1)
 
-		33: # chest 
-			if PlayerData.chestOBJ == editBody and PlayerData.currentSelectedChest == tile:
-				PlayerData.closeChest()
-				return
-			
-			if PlayerData.loadChest(editBody,tile):
-				# chest visual
-				var ins = load("res://object_scenes/chest/chest_open.tscn").instantiate()
-				ins.position = editBody.tileToPos(tile)
-				ins.body = editBody
-				ins.pos = tile
-				ins.rot = rot
-				editBody.entityContainer.add_child(ins)
-				SoundManager.playSound("interacts/chest",get_global_mouse_position(),1.0,0.1)
-		34: # loot chest
-			
-			editBody.chestDictionary[tile] = LootData.getChestLoot(editBody.planetType)
-			editBody.DATAC.setTileData(tile.x,tile.y,33)
-			
-			if PlayerData.loadChest(editBody,tile):
-				# chest visual
-				var ins = load("res://object_scenes/chest/chest_open.tscn").instantiate()
-				ins.position = editBody.tileToPos(tile)
-				ins.body = editBody
-				ins.pos = tile
-				ins.rot = rot
-				editBody.entityContainer.add_child(ins)
-				SoundManager.playSound("interacts/chest",get_global_mouse_position(),1.0,0.1)
-		47: # trap door
-			var dick = setAllTrapdoors(tile,48,editBody)
-			editBody.editTiles( dick )
-			SoundManager.playSound("interacts/door",get_global_mouse_position(),1.2,0.1)
-		48: # trap door
-			var dick = setAllTrapdoors(tile,47,editBody)
-			editBody.editTiles( dick )
-			SoundManager.playSound("interacts/door",get_global_mouse_position(),1.2,0.1)
-		55: # bed
-			
-			if editBody is Ship:
-				GlobalRef.sendChat("You can't sleep on a ship!")
-				return # fix laying on bed in ship
-			else:
-				GlobalRef.playerSpawn = editBody.tileToPos(tile)
-				GlobalRef.playerSpawnPlanet = editBody
-				GlobalRef.sendChat("Set spawnpoint.")
-			
-			movementState = 3
-			position = editBody.tileToPos(tile)
-			var info = editBody.DATAC.getInfoData(tile.x,tile.y) % 4
-			var d = editBody.DATAC.getPositionLookup(tile.x,tile.y)
-			
-			var side = (int( info < 2 )*2) - 1 # is 1 or -1 
-			
-			flipPlayer( side )
-			sprite.rotation = (side * -(PI/2)) + ( d * (PI/2) )
-			
-			if info == 0:
-				position += Vector2(8,0).rotated(d * (PI/2))
-			elif info == 3:
-				position += Vector2(-8,0).rotated(d * (PI/2))
-			
-			position += Vector2(-side,-3).rotated(d * (PI/2))
-		62: # letter block
-			var currentLetter = editBody.DATAC.getInfoData(tile.x,tile.y)
-			currentLetter = (currentLetter + 1) % 38
-			editBody.DATAC.setInfoData(tile.x,tile.y,currentLetter)
-			editBody.editTiles( { Vector2i(tile.x,tile.y):62, } )
-		63: # ship boss pedastal
-			if PlayerData.checkForIngredient(3076,1):
-				if CreatureData.spawnBoss(planetOn,position + Vector2(0,-250).rotated(rotated*(PI/2)) ,"bossShip"):
-					GlobalRef.sendChat("Summoned big praffin!!")
-					PlayerData.consumeItems([3076],[1])
-					PlayerData.emit_signal("updateInventory")
-			else:
-				GlobalRef.sendChat("i need sucker NOW")
-			
 func setAllTrapdoors(tile:Vector2,replaceID:int,body):
 	var dick = {}
 	var quad = body.DATAC.getPositionLookup(tile.x,tile.y)
@@ -1212,10 +1095,23 @@ func dieAndRespawn():
 	noClip = true
 	noClipSpeed = 0 # enable a little bit of movement
 	
+	Saving.autosave()
 	GlobalRef.hotbar.showDeathScreen(Stats.respawnWait)
 	await get_tree().create_timer(Stats.respawnWait).timeout
 	
 	# respawn
+	respawn()
+	
+	# reset variables
+	healthComponent.heal(60)
+	rotated = 0
+	sprite.visible = true
+	dead = false
+	noClip = false
+	PlayerData.selectSlot(PlayerData.selectedSlot)
+	$CollisionShape2D.disabled = noClip
+
+func respawn():
 	
 	if is_instance_valid(GlobalRef.playerSpawnPlanet):
 		var spawn = GlobalRef.playerSpawn
@@ -1234,16 +1130,9 @@ func dieAndRespawn():
 		var pee = lastPlanetOn.DATAC.findSpawnPosition()
 		position = Vector2(pee)
 	
-	# reset variables
 	airTime = 0.0 # cancel fall damage
-	healthComponent.heal(60)
-	rotated = 0
-	sprite.visible = true
-	dead = false
-	noClip = false
-	PlayerData.selectSlot(PlayerData.selectedSlot)
-	$CollisionShape2D.disabled = noClip
-
+	velocity = Vector2.ZERO # cancel vel
+	
 func _unhandled_input(event):
 	
 	if event is InputEventMouseButton:
@@ -1254,7 +1143,7 @@ func _unhandled_input(event):
 		
 		if event["button_index"] == 2:
 			if event["pressed"]:
-				onRightClick()
+				$rightClicker.onRightClick()
 				
 
 func toggleNoClip():

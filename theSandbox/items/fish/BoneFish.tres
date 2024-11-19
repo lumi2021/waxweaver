@@ -18,7 +18,8 @@ particleColor = Color(1, 1, 1, 1)
 statusInflictors = Array[ExtResource("2_4sc8c")]([SubResource("Resource_wt4xg")])
 itemName = "Bone Fish"
 subtext = ""
-desc = "Gives 5 defense for 5 minutes"
+desc = "Gives 5 defense for 3 minutes.
+"
 texture = ExtResource("3_pbcia")
 maxStackSize = 1
 clickToUse = false

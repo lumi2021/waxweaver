@@ -171,6 +171,8 @@ var data = {
 	
 	3091:load("res://items/fish/BoneFish.tres"),
 	3092:load("res://items/fish/HeartyFish.tres"),
+	3093:load("res://items/weapons/guns/Flintlock.tres"),
+	3094:load("res://items/weapons/bullets/CopperBullet.tres"),
 	
 	# chairs 6000 - 6049
 	6000:load("res://items/blocks/furniture/chairs/WoodenChair.tres"),
@@ -195,7 +197,8 @@ var heldItemAnims = {
 	"itemTorch" : load("res://item_resources/item_held_scenes/item_torch.tscn"),
 	"itemMultitile" : load("res://item_resources/item_held_scenes/itemMultitile.tscn"),
 	"itemFishingRod" : load("res://item_resources/item_held_scenes/item_fish_rod.tscn"),
-	"itemTossable" : load("res://item_resources/item_held_scenes/itemTossable.tscn")
+	"itemTossable" : load("res://item_resources/item_held_scenes/itemTossable.tscn"),
+	"itemGun" : load("res://item_resources/item_held_scenes/item_gun.tscn"),
 }
 
 func matchItemAnimation(id):
@@ -216,6 +219,8 @@ func matchItemAnimation(id):
 		return "itemFishingRod"
 	if d is ItemTossable:
 		return "itemTossable"
+	if d is ItemGun:
+		return "itemGun"
 	
 	return null
 

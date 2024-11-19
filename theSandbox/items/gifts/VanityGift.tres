@@ -21,7 +21,7 @@ weight = 1
 
 [sub_resource type="Resource" id="Resource_tb13f"]
 script = ExtResource("2_lw6vd")
-id = null
+id = 3081
 amountMin = 1
 amountMax = 1
 weight = 1

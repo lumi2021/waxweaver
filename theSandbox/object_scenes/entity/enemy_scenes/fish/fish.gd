@@ -50,4 +50,5 @@ func _physics_process(delta):
 		spr.rotation = lerp_angle(spr.rotation,base + (-0.05 * vel.y),0.1)
 	else:
 		spr.rotation = lerp_angle(spr.rotation,base + (0.05 * vel.y),0.1)
-
+	
+	floorRay.rotation = getWorldRot(self)

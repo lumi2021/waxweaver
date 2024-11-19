@@ -48,7 +48,8 @@ func _ready():
 	set_physics_process(false)
 	generateEmptyArray()
 	noise.seed = randi()
-	generateTerrain()
+	if system.planetsShouldGenerate:
+		generateTerrain()
 	
 	
 ########################################################################

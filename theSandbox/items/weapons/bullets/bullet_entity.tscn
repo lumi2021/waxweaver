@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://cy04516amijn1"]
+
+[ext_resource type="Script" path="res://items/weapons/bullets/bullet_entity.gd" id="1_pt35s"]
+[ext_resource type="PackedScene" uid="uid://8jw6pruiu3cf" path="res://object_scenes/entity/components/hurtbox.tscn" id="2_ocj00"]
+
+[sub_resource type="Gradient" id="Gradient_1vsyk"]
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_t1iei"]
+gradient = SubResource("Gradient_1vsyk")
+
+[node name="bulletEntity" type="Node2D"]
+script = ExtResource("1_pt35s")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(50, 0)
+collision_mask = 273
+collide_with_areas = true
+
+[node name="Hurtbox" parent="." instance=ExtResource("2_ocj00")]
+enemyBox = false
+enemyName = "bullet"
+damageType = 1
+
+[node name="Line2D" type="Line2D" parent="."]
+width = 2.0
+texture = SubResource("GradientTexture1D_t1iei")
+texture_mode = 2
+end_cap_mode = 2

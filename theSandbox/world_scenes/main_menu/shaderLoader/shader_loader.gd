@@ -32,4 +32,4 @@ func _ready():
 		await get_tree().create_timer(0.15).timeout
 		
 	
-	get_tree().change_scene_to_file("res://world_scenes/system/system.tscn")
+	get_tree().change_scene_to_file("res://ui_scenes/mainMenu/main_menu.tscn")

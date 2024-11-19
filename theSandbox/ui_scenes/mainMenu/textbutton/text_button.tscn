@@ -1,0 +1,41 @@
+[gd_scene load_steps=4 format=3 uid="uid://d0j06gpiq8jxo"]
+
+[ext_resource type="Script" path="res://ui_scenes/mainMenu/textbutton/text_button.gd" id="1_mi3f6"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_f2sph"]
+font_color = Color(0, 0, 0, 1)
+shadow_size = 8
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(-1, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_nqjjx"]
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 8
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(-1, 1)
+
+[node name="textButton" type="Button"]
+self_modulate = Color(1, 1, 1, 0)
+offset_right = 26.0
+offset_bottom = 17.0
+script = ExtResource("1_mi3f6")
+buttonText = "bBOOOBS BITCH"
+
+[node name="shadow" type="Label" parent="."]
+layout_mode = 0
+offset_right = 6.0
+offset_bottom = 17.0
+text = "text"
+label_settings = SubResource("LabelSettings_f2sph")
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="text" type="Label" parent="Node2D"]
+offset_right = 27.0
+offset_bottom = 17.0
+text = "text"
+label_settings = SubResource("LabelSettings_nqjjx")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

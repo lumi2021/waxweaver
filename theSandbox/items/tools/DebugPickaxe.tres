@@ -16,9 +16,11 @@ itemName = "Debug Pickaxe"
 subtext = ""
 desc = "
 Congrats on beating the boss!
-This is the end of the current demo.
-The boss will eventually drop parts necessary to build the ship.
-For now, have an op pickaxe."
+This is the end of the current demo. The boss will eventually drop parts necessary to build the ship.
+For now, have an op pickaxe.
+
+
+"
 texture = ExtResource("2_4seis")
 maxStackSize = 1
 clickToUse = false

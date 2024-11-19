@@ -264,14 +264,12 @@ func interpretCommand(text):
 		"kill":
 			GlobalRef.player.healthComponent.damagePassive(99999,"cheats")
 		"save":
-			longassstring = GlobalRef.currentPlanet.DATAC.getSaveString()
-		
+			GlobalRef.system.saveGameToFile()
 		"load":
-			GlobalRef.currentPlanet.DATAC.loadFromString(longassstring[0],longassstring[1],longassstring[2],longassstring[3],longassstring[4])
-			GlobalRef.currentPlanet.forceChunkDrawUpdate()
-		"spawnpoint":
-			GlobalRef.playerSpawn = GlobalRef.player.position
-			GlobalRef.sendChat("set spawn")
+			GlobalRef.system.loadSaveFromFile()
+			GlobalRef.player.respawn()
+		"respawn":
+			GlobalRef.player.respawn()
 		"kit":
 			PlayerData.addItem(3011,1)
 			PlayerData.addItem(3012,1)

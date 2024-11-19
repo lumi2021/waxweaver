@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://c1b1vgh12jqww"]
+[gd_scene load_steps=25 format=3 uid="uid://c1b1vgh12jqww"]
 
 [ext_resource type="Script" path="res://object_scenes/player/player.gd" id="1_7l8c2"]
 [ext_resource type="PackedScene" uid="uid://meikam2oyy13" path="res://object_scenes/entity/components/health_component.tscn" id="2_vteuo"]
@@ -8,6 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://c47fuirjhvx43" path="res://object_scenes/player/sprites/layerEye.png" id="6_uk1hk"]
 [ext_resource type="Texture2D" uid="uid://dei6me4j1chus" path="res://object_scenes/player/sprites/layerHandFront.png" id="8_0olu2"]
 [ext_resource type="PackedScene" uid="uid://ch461nupa3hsv" path="res://object_scenes/entity/components/swimming_detector.tscn" id="9_2illf"]
+[ext_resource type="Texture2D" uid="uid://d33cvd2imiq15" path="res://ui_scenes/mouseCursor/rightClick.png" id="10_bh305"]
+[ext_resource type="Script" path="res://object_scenes/player/rightClicker.gd" id="10_v34o7"]
+[ext_resource type="Texture2D" uid="uid://celgr5v0qm8m3" path="res://ui_scenes/mouseCursor/mouseIcon.png" id="11_k042u"]
 [ext_resource type="PackedScene" uid="uid://c05kukkqfrg40" path="res://object_scenes/entity/components/hitbox.tscn" id="12_wduni"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8s1yf"]
@@ -392,5 +395,20 @@ hit_from_inside = true
 
 [node name="swimmingDetector" parent="." instance=ExtResource("9_2illf")]
 isEnemy = false
+
+[node name="rightClicker" type="Node2D" parent="."]
+process_mode = 3
+z_index = 4096
+position = Vector2(11, -5)
+script = ExtResource("10_v34o7")
+
+[node name="RightClick" type="Sprite2D" parent="rightClicker"]
+visible = false
+position = Vector2(8, -1)
+texture = ExtResource("10_bh305")
+
+[node name="MouseIcon" type="Sprite2D" parent="rightClicker"]
+position = Vector2(4, 4)
+texture = ExtResource("11_k042u")
 
 [connection signal="healthChanged" from="HealthComponent" to="." method="_on_health_component_health_changed"]

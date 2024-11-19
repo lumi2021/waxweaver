@@ -18,7 +18,7 @@ chance = 100
 
 [resource]
 script = ExtResource("1_bivkd")
-damage = 8
+damage = 10
 animSpeed = 7.0
 knockbackMult = 1.0
 weaponScale = 1.0
