@@ -10,6 +10,7 @@ radius = 3.0
 [node name="caveDrip" type="CharacterBody2D"]
 collision_layer = 128
 script = ExtResource("1_1ln5m")
+creatureSlots = 0
 
 [node name="DeleteMeOutsideOfChunk" parent="." instance=ExtResource("2_4rjd8")]
 

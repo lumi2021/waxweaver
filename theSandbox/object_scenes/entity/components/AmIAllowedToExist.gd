@@ -15,9 +15,11 @@ func _process(delta):
 		var tile = planet.posToTile(parent.position)
 		if tile == null: # delete if enemy goes outside planet boundaries
 			CreatureData.creatureDeleted(parent)
+			set_process(false)
 			return 
 		
 		var chunk = Vector2(int(tile.x)/8,int(tile.y)/8)
 		if !planet.chunkDictionary.has(chunk):
 			CreatureData.creatureDeleted(parent)
+			set_process(false)
 	checkTick += 1
