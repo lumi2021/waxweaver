@@ -113,8 +113,6 @@ func creatureDeleted(creature):
 	else:
 		creatureAmount -= int(creature.creatureSlots)
 		#creatureAmount = max(creatureAmount,0)
-	print("deleted creature: " + str(creature))
-	print(creatureAmount)
 	creature.queue_free()
 
 func isTileOnScreen(tile,planet):
