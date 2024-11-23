@@ -1,10 +1,11 @@
 extends Node
 
 var loadedFile = "save1"
+var worldName = "save1"
 
 
 # handles save files
-# static save files, save1, save2, save3
+# static save files, save1, save2, save3....
 
 func _ready():
 	pass
@@ -21,6 +22,11 @@ func read_save(key): # returns dictionary or null
 		if not file:
 			return null
 		var newData = JSON.parse_string(file.get_as_text())
+		if newData == null: # assume parse failed, attept converting from bytes
+			print("JSON save file parse failed, attempting to convert from bytes instead.")
+			var bytes = FileAccess.get_file_as_bytes("user://" + key + ".sdata")
+			newData = JSON.parse_string(bytes_to_var(bytes))
+			
 		file.close()
 		return newData
 
@@ -29,7 +35,7 @@ func write_save(key,data):
 		JavaScriptBridge.eval("window.localStorage.setItem('" + key + "', '" + JSON.stringify(data) + "');")
 	else:
 		var file = FileAccess.open("user://" + key + ".sdata", FileAccess.WRITE)
-		file.store_line(JSON.stringify(data))
+		file.store_line(JSON.stringify(data,"\t"))
 		file.close()
 
 func clearSave(key):
@@ -75,3 +81,8 @@ func has_save(key):
 
 func autosave():
 	GlobalRef.system.saveGameToFile()
+
+func downloadsave(key):
+	if OS.has_feature('web'):
+		var data = read_save(key)
+		JavaScriptBridge.download_buffer( var_to_bytes(JSON.stringify(data)), key + ".sdata" )

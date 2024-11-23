@@ -327,7 +327,7 @@ Array CHUNKDRAW::tickUpdate(PLANETDATA *planet,Vector2i pos,bool onScreen,float 
                 continue;
             }
 
-            double lightL = std::abs(planet->getLightData(worldX - 1,worldY));
+            double lightL = std::abs(planet->getLightData(worldX - 1,worldY)); // get surrounding light
 
             double lightR = std::abs(planet->getLightData(worldX + 1,worldY));
                 
@@ -335,17 +335,19 @@ Array CHUNKDRAW::tickUpdate(PLANETDATA *planet,Vector2i pos,bool onScreen,float 
 
             double lightT = std::abs(planet->getLightData(worldX,worldY - 1));
 
-            //average light values
+            double lightEmmission = cock->getLightEmmission(blockID); // get current block emmision
+
+            bool passthru = cock->isTransparent(blockID);
+            if( passthru && lightEmmission < 0.01 ){ blockID = airOrCaveAir(worldX,worldY,planet); } // make something have the same properties as air if transparent UNLESS it emits light
+            
             double mutliplier = cock->getLightMultiplier(blockID);
 
             if (std::abs(water)> 0.2){
                 mutliplier = 0.75;
             }
 
-
             double avgn = (lightL + lightR + lightB + lightT)/4.0;
             double newLight = ( std::max({ lightB , lightL , lightR , lightT }) + avgn  ) * mutliplier * 0.5;
-            double lightEmmission = cock->getLightEmmission(blockID);
 
             if(blockID == 0){
                 lightEmmission = 5.0 * daylight;
@@ -610,4 +612,21 @@ Vector2i CHUNKDRAW::getWaterImgPos(PLANETDATA *planet,int x,int y, int blockSide
 
 LOOKUPBLOCK* CHUNKDRAW::returnLookup(){
     return cock;
+}
+
+int CHUNKDRAW::airOrCaveAir(int x,int y, PLANETDATA *planet){
+    int planetSize = planet->planetSize;
+    int surface = std::max( planetSize / 4, (planetSize/2) - 128 );
+    int b = getBlockDistance(x, y, planet) <= surface - 2;
+    return b;
+}
+
+double CHUNKDRAW::getBlockDistance(int x, int y, PLANETDATA *planet){
+    int planetSize = planet->planetSize;
+    int quad = planet->getPositionLookup(x,y);
+    Vector2 newPos = Vector2(x - (planetSize / 2) + 0.5, y - (planetSize / 2) + 0.5 ) ;
+    newPos = newPos.rotated(acos(0.0) * -quad);
+
+
+    return -newPos.y;
 }

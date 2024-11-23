@@ -10,7 +10,7 @@ class_name Hurtbox
 @export var statusInflictors :Array= []
 
 enum types {MELEE = 0, RANGED = 1, MAGIC = 2}
-@export var damageType :types = 0
+@export var damageType :types = types.MELEE
 
 var id = 0
 

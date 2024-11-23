@@ -3,6 +3,8 @@ extends Node2D
 @onready var container = $container
 @onready var label = $Label
 
+signal clicked
+
 var materialsToLoad = [
 	"res://object_scenes/ground_item/groundItemOutlineShader.tres",
 	"res://object_scenes/ground_item/tintItemShader.tres",
@@ -30,6 +32,13 @@ func _ready():
 		label.text = "compiling shaders ( " + str(count+1) + " / " + str(materialsToLoad.size()) + " )"
 		count += 1
 		await get_tree().create_timer(0.15).timeout
-		
+	
+	if OS.has_feature("web"):
+		label.text = "click to focus window"
+		await clicked
 	
 	get_tree().change_scene_to_file("res://ui_scenes/mainMenu/main_menu.tscn")
+
+
+func _on_button_pressed():
+	emit_signal("clicked")

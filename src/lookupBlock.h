@@ -78,6 +78,16 @@
 #include "blockLetter.h" // id 62
 #include "blockBossShipPillar.h" // id 63
 #include "blockVanityPresent.h" // id 64
+#include "blockBrownBrick.h" // id 65
+
+// painting batch 3
+#include "blockPaintTiltroKiwi.h" // id 66
+#include "blockPaintCalvinNightmare.h" // id 67
+#include "blockPaintCalvinSunrise.h" // id 68
+#include "blockPaintOctoSpiral.h" // id 69
+#include "blockPaintKaiaGhosts.h" // id 70
+#include "blockPaintKaiaCreature.h" // id 71
+#include "blockPaintKaiaWashed.h" // id 72
 
 // adding a new block? make sure you increment the PENIS array !
 
@@ -95,7 +105,7 @@ public:
 	
 	Array allBlocks;
 
-	BLOCK *penis[65]; // must be largest id + 1
+	BLOCK *penis[73]; // must be largest id + 1
 
 	LOOKUPBLOCK();
 	~LOOKUPBLOCK();

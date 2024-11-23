@@ -10,3 +10,16 @@ func _process(delta):
 
 func _on_savegame_pressed():
 	parent.saveGameToFile()
+
+
+func _on_unpause_pressed():
+	get_tree().paused = false
+	hide()
+
+
+func _on_saveandquit_pressed():
+	parent.saveGameToFile()
+	get_tree().paused = false
+	SoundManager.deleteAllSounds()
+	get_tree().change_scene_to_file("res://ui_scenes/mainMenu/main_menu.tscn")
+

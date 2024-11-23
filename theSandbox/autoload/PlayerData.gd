@@ -41,6 +41,7 @@ func _process(delta):
 			emit_signal("selectedSlotChanged")
 	
 func initializeInventory():
+	inventory = []
 	for i in range(78):
 		inventory.append([-1,-1])
 

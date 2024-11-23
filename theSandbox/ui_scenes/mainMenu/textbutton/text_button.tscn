@@ -17,10 +17,9 @@ shadow_offset = Vector2(-1, 1)
 
 [node name="textButton" type="Button"]
 self_modulate = Color(1, 1, 1, 0)
-offset_right = 26.0
+offset_right = 27.0
 offset_bottom = 17.0
 script = ExtResource("1_mi3f6")
-buttonText = "bBOOOBS BITCH"
 
 [node name="shadow" type="Label" parent="."]
 layout_mode = 0
@@ -37,5 +36,6 @@ offset_bottom = 17.0
 text = "text"
 label_settings = SubResource("LabelSettings_nqjjx")
 
+[connection signal="button_down" from="." to="." method="_on_button_down"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

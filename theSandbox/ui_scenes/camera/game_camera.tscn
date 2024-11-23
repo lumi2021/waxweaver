@@ -50,6 +50,7 @@ visible = false
 z_index = 803
 
 [node name="HotbarBanner" parent="." instance=ExtResource("7_mxwda")]
+visible = true
 position = Vector2(-201, -151)
 
 [node name="Backgrounds" type="Node2D" parent="."]

@@ -17,7 +17,7 @@ func _process(delta):
 	#blockMineVol  = 1.0
 	#blockBreakVol = 1.2
 	
-	if GlobalRef.currentPlanet != null:
+	if is_instance_valid(GlobalRef.currentPlanet) and is_instance_valid(GlobalRef.player):
 		var pos = GlobalRef.currentPlanet.posToTile(GlobalRef.player.position)
 		if pos == null:
 			return
@@ -29,6 +29,7 @@ func _process(delta):
 
 
 func playSound(file:String,globalPos:Vector2,volumeLinear:float,pitchVariation:float=0.0,bus:String="SFX") -> void:
+	
 	var ins = soundScene.instantiate()
 	ins.global_position = globalPos
 	ins.stream = load("res://sound/" + file + ".ogg")
@@ -38,6 +39,7 @@ func playSound(file:String,globalPos:Vector2,volumeLinear:float,pitchVariation:f
 	add_child(ins)
 
 func playSoundStream(stream:AudioStreamOggVorbis,globalPos:Vector2,volumeLinear:float,pitchVariation:float=0.0,bus:String="SFX") -> void:
+	
 	var ins = soundScene.instantiate()
 	ins.global_position = globalPos
 	ins.stream = stream
@@ -49,7 +51,6 @@ func playSoundStream(stream:AudioStreamOggVorbis,globalPos:Vector2,volumeLinear:
 func getMineSound(id:int=0) -> AudioStreamOggVorbis:
 	
 	var material = BlockData.getSoundMaterialID(id)
-	
 	match material:
 		0: # stone
 			return load("res://sound/mining/stoneMine.ogg")
@@ -68,7 +69,6 @@ func getMineSound(id:int=0) -> AudioStreamOggVorbis:
 func getBreakSound(id:int=0) -> AudioStreamOggVorbis:
 	
 	var material = BlockData.getSoundMaterialID(id)
-	
 	match material:
 		0: # stone
 			return load("res://sound/mining/stoneBreak.ogg")
@@ -84,3 +84,7 @@ func getBreakSound(id:int=0) -> AudioStreamOggVorbis:
 			return load("res://sound/mining/glassBreak"+ str((randi()%3)+1) +".ogg")
 		
 	return load("res://sound/mining/stoneBreak.ogg")
+
+func deleteAllSounds():
+	for child in get_children():
+		child.queue_free()

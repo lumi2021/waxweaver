@@ -20,9 +20,18 @@ color = Color(0, 0, 0, 1)
 offset_top = 100.0
 offset_right = 399.0
 offset_bottom = 242.0
-text = "compiling shaders ( 0 / 2 )"
+text = "click to focus window"
 label_settings = SubResource("LabelSettings_stqqx")
 horizontal_alignment = 1
 
 [node name="container" type="Node2D" parent="."]
 position = Vector2(197, 167)
+
+[node name="Button" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
+offset_left = -25.0
+offset_top = -24.0
+offset_right = 437.0
+offset_bottom = 322.0
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

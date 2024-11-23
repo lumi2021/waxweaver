@@ -46,8 +46,8 @@ func displayCanCraft(canCraft):
 
 func changeVisibility():
 	var hasStation = checkForStation()
-	var show = isCraftable or parent.showUncraftables
-	visible = show and hasStation
+	var showw = isCraftable or parent.showUncraftables
+	visible = showw and hasStation
 
 func checkForStation():
 	if recipe.requiresStation:

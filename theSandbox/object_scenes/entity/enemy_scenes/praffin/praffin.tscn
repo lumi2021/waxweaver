@@ -35,7 +35,7 @@ maxHealth = 22
 knockbackResist = 0.8
 defense = 2
 dropItemArray = Array[int]([3003, 3003, 3003, 3003, 15])
-dropChanceArray = Array[int]([1, 2, 5, 5, 10])
+dropChanceArray = Array[int]([1, 1, 2, 2, 10])
 
 [node name="swimmingDetector" parent="." instance=ExtResource("4_4a7ge")]
 

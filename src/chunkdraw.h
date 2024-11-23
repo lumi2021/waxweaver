@@ -67,6 +67,8 @@ public:
 
 	Vector2i getWaterImgPos(PLANETDATA *planet,int x,int y,int blockSide);
 	LOOKUPBLOCK* returnLookup();
+	int airOrCaveAir(int x,int y, PLANETDATA *planet);
+	double getBlockDistance(int x, int y, PLANETDATA *planet);
 
 };
 

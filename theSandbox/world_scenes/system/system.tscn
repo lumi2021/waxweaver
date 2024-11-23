@@ -65,6 +65,7 @@ ignore_rotation = false
 
 [node name="PauseMenu" type="CanvasLayer" parent="."]
 process_mode = 2
+visible = false
 script = ExtResource("4_odccu")
 
 [node name="ColorRect" type="ColorRect" parent="PauseMenu"]
@@ -92,10 +93,24 @@ label_settings = SubResource("LabelSettings_o15mw")
 
 [node name="savegame" parent="PauseMenu" instance=ExtResource("5_0l5e1")]
 offset_left = 11.0
-offset_top = 79.0
-offset_right = 37.0
-offset_bottom = 96.0
+offset_top = 101.0
+offset_right = 78.0
+offset_bottom = 118.0
 buttonText = "save game"
+
+[node name="saveandquit" parent="PauseMenu" instance=ExtResource("5_0l5e1")]
+offset_left = 11.0
+offset_top = 127.0
+offset_right = 100.0
+offset_bottom = 144.0
+buttonText = "save and quit"
+
+[node name="unpause" parent="PauseMenu" instance=ExtResource("5_0l5e1")]
+offset_left = 11.0
+offset_top = 75.0
+offset_right = 95.0
+offset_bottom = 92.0
+buttonText = "back to game"
 
 [node name="MouseIcon" type="Sprite2D" parent="PauseMenu"]
 position = Vector2(251, 192)
@@ -103,3 +118,5 @@ texture = ExtResource("5_8xxx0")
 offset = Vector2(4, 4)
 
 [connection signal="pressed" from="PauseMenu/savegame" to="PauseMenu" method="_on_savegame_pressed"]
+[connection signal="pressed" from="PauseMenu/saveandquit" to="PauseMenu" method="_on_saveandquit_pressed"]
+[connection signal="pressed" from="PauseMenu/unpause" to="PauseMenu" method="_on_unpause_pressed"]

@@ -57,6 +57,17 @@ var data = {
 	61:load("res://items/blocks/building/Paper.tres"),
 	-61:load("res://items/walls/PaperWall.tres"),
 	62:load("res://items/blocks/building/LetterBlock.tres"),
+	65:load("res://items/blocks/building/BrownBrick.tres"),
+	-65:load("res://items/walls/BrownBrickWall.tres"),
+	
+	# paintings batch 3
+	66:load("res://items/paintings/TiltroKiwi.tres"),
+	67:load("res://items/paintings/CalvinNightmare.tres"),
+	68:load("res://items/paintings/CalvinSunrise.tres"),
+	69:load("res://items/paintings/OctoSpiral.tres"),
+	70:load("res://items/paintings/KaiaGhosts.tres"),
+	71:load("res://items/paintings/KaiaCreature.tres"),
+	72:load("res://items/paintings/KaiaWashed.tres"),
 	
 	########## item ids ##################
 	3000:load("res://items/tools/flimsy/FlimsySword.tres"), # flimsy tools

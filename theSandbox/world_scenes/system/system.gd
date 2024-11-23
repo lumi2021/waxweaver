@@ -99,8 +99,10 @@ func generateNewSystem():
 		player.position = Vector2(pee) + forestPlanet.position
 		player.attachToPlanet(forestPlanet)
 		player.respawn()
-
-		GlobalRef.camera.map.map(self,cosmicBodyContainer.get_children())
+	
+		var children = cosmicBodyContainer.get_children()
+		children.append(player)
+		GlobalRef.camera.map.map(self,children)
 		
 		await get_tree().create_timer(0.1).timeout
 		player.respawn()
@@ -120,11 +122,13 @@ func saveGameToFile():
 		var chestHex :String= var_to_bytes(chest).hex_encode() # compact string
 		chestDictionary.append( chestHex )
 	
-	gameData["version"] = 19 ## be sure to change this, very important
+	gameData["version"] = GlobalRef.version
 	gameData["versionEra"] = 0 # 0:alpha, 1:release
 	gameData["planets"] = planetDictionary
 	gameData["chests"] = chestDictionary
 	gameData["playerInventory"] = var_to_bytes(PlayerData.inventory).hex_encode()
+	gameData["playtime"] = GlobalRef.globalTick
+	gameData["worldname"] = Saving.worldName
 	if GlobalRef.playerSpawnPlanet != null:
 		gameData["spawnPlanet"] = planets.find(GlobalRef.playerSpawnPlanet) # gets planet id
 		gameData["spawnpoint"] = var_to_str(GlobalRef.playerSpawn)
@@ -167,13 +171,21 @@ func loadSaveFromFile():
 	if gameData.has("spawnpoint"):
 		GlobalRef.playerSpawnPlanet = planets[ gameData["spawnPlanet"] ] # gets planet id
 		GlobalRef.playerSpawn = str_to_var(gameData["spawnpoint"])
-
+	
+	#time
+	GlobalRef.globalTick = gameData["playtime"]
+	if gameData.has("worldname"):
+		Saving.worldName = gameData["worldname"]
 		
 func posToTile(pos):
 	# just ensures anything emitted into the main system doesnt crash
 	return null
 
 func _exit_tree():
+	
+	$lightRenderViewport.world_2d = null
+	$dropShadowViewport.world_2d = null
+	
 	saveGameToFile()
 
 func _process(delta):

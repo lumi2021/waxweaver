@@ -290,12 +290,12 @@ func WATERJUMPCAMERALETSGO(body,vel,rot,onFloor,delta):
 	
 	#load audio stream for footstep
 	if tile != myTile: # if tile changes
-		var floor = tile + Vector2(0,1).rotated((PI/2)*rotated) # gets floor tile
-		var blockID :int = body.DATAC.getTileData(floor.x,floor.y)
+		var floorr = tile + Vector2(0,1).rotated((PI/2)*rotated) # gets floor tile
+		var blockID :int = body.DATAC.getTileData(floorr.x,floorr.y)
 		if blockID != null and lastFloorTile != blockID and blockID > 1:
 			stream = SoundManager.getMineSound(blockID)
 			lastFloorTile = blockID
-		
+	
 	myTile = tile
 	
 	# attach to ladder if holding up
