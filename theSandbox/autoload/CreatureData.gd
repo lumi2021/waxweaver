@@ -50,7 +50,6 @@ func _physics_process(delta):
 			return
 		spawnDelayTick = 0
 		
-		
 
 func determineContext(tile,planet):
 	if abs(planet.DATAC.getWaterData(tile.x,tile.y)) > 0.5:
@@ -110,10 +109,10 @@ func spawnEnemy(planet,tile,context):
 func creatureDeleted(creature):
 	if creature.passive:
 		passiveAmount -= int(creature.creatureSlots)
-		passiveAmount = max(passiveAmount,0)
+		#passiveAmount = max(passiveAmount,0)
 	else:
 		creatureAmount -= int(creature.creatureSlots)
-		creatureAmount = max(creatureAmount,0)
+		#creatureAmount = max(creatureAmount,0)
 	creature.queue_free()
 
 func isTileOnScreen(tile,planet):

@@ -184,6 +184,7 @@ var data = {
 	3092:load("res://items/fish/HeartyFish.tres"),
 	3093:load("res://items/weapons/guns/Flintlock.tres"),
 	3094:load("res://items/weapons/bullets/CopperBullet.tres"),
+	3095:load("res://items/food/BirdMeat.tres"),
 	
 	# chairs 6000 - 6049
 	6000:load("res://items/blocks/furniture/chairs/WoodenChair.tres"),

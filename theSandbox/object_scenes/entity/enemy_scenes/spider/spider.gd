@@ -22,10 +22,14 @@ func hunt(delta):
 	var targetX = getDirectionTowardsPlayer()
 	var targetY = getVERTICALDirectionTowardsPlayer()
 	
-	var t = Vector2( targetX,targetY ).normalized() * 60.0
+	var t = Vector2( targetX,targetY ).normalized() * 120.0
 	
-	var l = 1-pow(2, (-delta/0.38) )
+	var l = 1-pow(2, (-delta/1.0) )
 	vel = lerp( vel, t, l )
+	
+	if $Sprite/wallcast.is_colliding():
+		vel = vel.rotated( (PI/2) + randf_range(-1.0,1.0) )
+		vel = vel.normalized() * 100
 	
 	setVelocity(vel)
 	move_and_slide() 

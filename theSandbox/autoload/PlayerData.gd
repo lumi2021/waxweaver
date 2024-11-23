@@ -21,6 +21,9 @@ var selectedSlotRemember = 0
 var currentSelectedChest = null
 var chestOBJ = null
 
+## MONEY ##
+var money :int = 0
+
 func _ready():
 	initializeInventory()
 

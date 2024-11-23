@@ -20,7 +20,6 @@ radius = 6.0
 collision_layer = 128
 script = ExtResource("1_rpbfy")
 sprite = NodePath("Sprite")
-creatureSlots = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_arcvd")
@@ -28,6 +27,9 @@ shape = SubResource("CircleShape2D_arcvd")
 [node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_cn8la")
 hframes = 4
+
+[node name="wallcast" type="RayCast2D" parent="Sprite"]
+target_position = Vector2(7, 0)
 
 [node name="DeleteMeOutsideOfChunk" parent="." instance=ExtResource("3_f6yp8")]
 

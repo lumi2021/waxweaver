@@ -3,10 +3,20 @@ extends Enemy
 var delayTickX = 0
 var poop = 0
 
+var searchTicks :int= 0
+var playerSpotted :bool= false
+
 func _ready():
-	$axis/AnimatedSprite2D.play("default")
+	#$axis/AnimatedSprite2D.play("default")
+	pass
 
 func _physics_process(delta):
+	if playerSpotted:
+		chase(delta)
+	else:
+		waitForPlayer(delta)
+
+func chase(delta):
 	
 	$axis.rotation = getQuad(self) * (PI/2)
 	
@@ -52,3 +62,26 @@ func _physics_process(delta):
 	
 	$axis/AnimatedSprite2D.flip_h = vel.x > 0.0
 	$axis/AnimatedSprite2D.rotation = vel.y * 0.01 * ((int( vel.x > 0.0 )*2)-1)
+
+func waitForPlayer(delta):
+	var vel = getVelocity()
+	vel.y += 1000 * delta
+	var dir = ((randi()%2)*2)-1 # either -1 or 1
+	if randi() % 100 == 0:
+		vel = Vector2(dir*100,-100)
+		$axis/AnimatedSprite2D.flip_h = dir > 0
+	
+	$axis.rotation = getWorldRot(self)
+	
+	if $axis/floorScanner.is_colliding():
+		vel.x = lerp(vel.x,0.0,0.2)
+	
+	setVelocity(vel)
+	move_and_slide()
+	
+	$pointAtPlayer.target_position = to_local(GlobalRef.player.global_position)
+	if !$pointAtPlayer.is_colliding():
+		searchTicks += 1
+		if searchTicks > 10:
+			playerSpotted = true
+			$axis/AnimatedSprite2D.play("default")

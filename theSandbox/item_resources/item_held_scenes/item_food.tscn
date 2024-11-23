@@ -33,6 +33,7 @@ texture = ExtResource("2_1wkdc")
 position = Vector2(4, -2)
 amount = 2
 lifetime = 0.4
+local_coords = true
 emission_shape = 3
 emission_rect_extents = Vector2(0.165, 1.99)
 direction = Vector2(0.54, -1.45)

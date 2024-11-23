@@ -141,7 +141,7 @@ hframes = 10
 [node name="play" parent="info" instance=ExtResource("3_neipt")]
 offset_left = 259.0
 offset_top = 17.0
-offset_right = 294.0
+offset_right = 286.0
 offset_bottom = 34.0
 buttonText = "play"
 
