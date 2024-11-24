@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemArmorChest" load_steps=4 format=3 uid="uid://csetlso7onmb4"]
+
+[ext_resource type="Texture2D" uid="uid://diefuktl5qec4" path="res://items/vanity/miscacc/shouldercloak.png" id="1_7acox"]
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemArmorChest.gd" id="1_fxnjc"]
+[ext_resource type="Texture2D" uid="uid://bbxpkpx8jys4l" path="res://items/vanity/miscacc/shouldercloakicon.png" id="3_ryat1"]
+
+[resource]
+script = ExtResource("1_fxnjc")
+defense = 1
+armorTexture = ExtResource("1_7acox")
+itemName = "Shoulder Cloak"
+subtext = ""
+desc = "a cloak for the stars"
+texture = ExtResource("3_ryat1")
+maxStackSize = 1
+clickToUse = false
+infiniteReach = false

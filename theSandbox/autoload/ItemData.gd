@@ -204,6 +204,19 @@ var data = {
 	3111:load("res://items/vanity/bathfits/waisttowel.tres"),
 	3112:load("res://items/vanity/misctops/leatherjacket.tres"),
 	3113:load("res://items/vanity/mischats/greybeanie.tres"),
+	
+	3114:load("res://items/vanity/headtypes/maghead.tres"),
+	3115:load("res://items/vanity/miscacc/antenna.tres"),
+	3116:load("res://items/vanity/miscacc/shouldercloak.tres"),
+	3117:load("res://items/vanity/mischats/browncap.tres"),
+	3118:load("res://items/vanity/mischats/doctorscap.tres"),
+	3119:load("res://items/vanity/mischats/rockerhair.tres"),
+	3120:load("res://items/vanity/misctops/bandeautop.tres"),
+	3121:load("res://items/vanity/misctops/greensweater.tres"),
+	3122:load("res://items/vanity/misctops/puffysweater.tres"),
+	
+	
+	
 
 	# chairs 6000 - 6049
 	6000:load("res://items/blocks/furniture/chairs/WoodenChair.tres"),
