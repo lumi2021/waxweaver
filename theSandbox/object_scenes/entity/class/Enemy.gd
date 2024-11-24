@@ -68,7 +68,7 @@ func getQuad(obj):
 func getWorldRot(obj):
 	return getQuad(obj) * (PI/2)
 
-func getDirectionTowardsPlayer():
+func getDirectionTowardsPlayer() -> int:
 	var myQuad = getQuad( self )
 	var playerQuad = getQuad( GlobalRef.player )
 		
