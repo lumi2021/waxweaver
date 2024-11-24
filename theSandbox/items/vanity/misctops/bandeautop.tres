@@ -8,7 +8,7 @@
 script = ExtResource("1_ekj70")
 defense = 1
 armorTexture = ExtResource("1_kfes1")
-itemName = ""
+itemName = "Bandeau Top"
 subtext = ""
 desc = "a simple black tube top"
 texture = ExtResource("3_yjaut")

@@ -215,6 +215,8 @@ var data = {
 	3121:load("res://items/vanity/misctops/greensweater.tres"),
 	3122:load("res://items/vanity/misctops/puffysweater.tres"),
 	
+	3123:load("res://items/vanity/miscdresses/flowerskirt.tres"),
+	
 	
 	
 
