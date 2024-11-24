@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ItemArmorLegs" load_steps=4 format=3 uid="uid://xt6wqux48k1s"]
+
+[ext_resource type="Texture2D" uid="uid://uqwn2f6tgr02" path="res://items/vanity/miscshoes/lightuphightops.png" id="1_firak"]
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemArmorLegs.gd" id="1_l3rru"]
+[ext_resource type="Texture2D" uid="uid://clir7s8pawbjp" path="res://items/vanity/miscshoes/lightuphightopsicon.png" id="3_0wvoj"]
+
+[resource]
+script = ExtResource("1_l3rru")
+defense = 0
+armorTexture = ExtResource("1_firak")
+itemName = "Lightup Hightops"
+subtext = ""
+desc = "you'll be the coolest
+kid at school"
+texture = ExtResource("3_0wvoj")
+maxStackSize = 1
+clickToUse = false
+infiniteReach = false

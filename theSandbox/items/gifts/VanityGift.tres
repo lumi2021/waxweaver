@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ItemGift" load_steps=17 format=3 uid="uid://bq43p67gn1t4o"]
+[gd_resource type="Resource" script_class="ItemGift" load_steps=35 format=3 uid="uid://bq43p67gn1t4o"]
 
 [ext_resource type="Script" path="res://item_resources/item_classes/ItemGift.gd" id="1_8dgjr"]
 [ext_resource type="Script" path="res://object_scenes/specialResource/lootTables/LootTable.gd" id="1_buwi6"]
@@ -82,11 +82,137 @@ amountMin = 1
 amountMax = 1
 weight = 1
 
+[sub_resource type="Resource" id="Resource_38ldp"]
+script = ExtResource("2_lw6vd")
+id = 3096
+amountMin = 1
+amountMax = 1
+weight = 1
+
+[sub_resource type="Resource" id="Resource_yqmh1"]
+script = ExtResource("2_lw6vd")
+id = 3097
+amountMin = 1
+amountMax = 1
+weight = 1
+
+[sub_resource type="Resource" id="Resource_t4x35"]
+script = ExtResource("2_lw6vd")
+id = 3098
+amountMin = 1
+amountMax = 1
+weight = 1
+
+[sub_resource type="Resource" id="Resource_1esq7"]
+script = ExtResource("2_lw6vd")
+id = 3099
+amountMin = 1
+amountMax = 1
+weight = 1
+
+[sub_resource type="Resource" id="Resource_q3x4g"]
+script = ExtResource("2_lw6vd")
+id = 3100
+amountMin = 1
+amountMax = 1
+weight = 1
+
+[sub_resource type="Resource" id="Resource_yjjrg"]
+script = ExtResource("2_lw6vd")
+id = 3101
+amountMin = 1
+amountMax = 1
+weight = 1
+
+[sub_resource type="Resource" id="Resource_6rt7t"]
+script = ExtResource("2_lw6vd")
+id = 3102
+amountMin = 1
+amountMax = 1
+weight = 1
+
+[sub_resource type="Resource" id="Resource_drq1a"]
+script = ExtResource("2_lw6vd")
+id = 3103
+amountMin = 1
+amountMax = 1
+weight = 1
+
+[sub_resource type="Resource" id="Resource_7ns2q"]
+script = ExtResource("2_lw6vd")
+id = 3104
+amountMin = 1
+amountMax = 1
+weight = 1
+
+[sub_resource type="Resource" id="Resource_sfhmp"]
+script = ExtResource("2_lw6vd")
+id = 3105
+amountMin = 1
+amountMax = 1
+weight = 1
+
+[sub_resource type="Resource" id="Resource_uy562"]
+script = ExtResource("2_lw6vd")
+id = 3106
+amountMin = 1
+amountMax = 1
+weight = 1
+
+[sub_resource type="Resource" id="Resource_1id2v"]
+script = ExtResource("2_lw6vd")
+id = 3107
+amountMin = 1
+amountMax = 1
+weight = 1
+
+[sub_resource type="Resource" id="Resource_sgom0"]
+script = ExtResource("2_lw6vd")
+id = 3108
+amountMin = 1
+amountMax = 1
+weight = 1
+
+[sub_resource type="Resource" id="Resource_c5jtk"]
+script = ExtResource("2_lw6vd")
+id = 3109
+amountMin = 1
+amountMax = 1
+weight = 1
+
+[sub_resource type="Resource" id="Resource_vlkdt"]
+script = ExtResource("2_lw6vd")
+id = 3110
+amountMin = 1
+amountMax = 1
+weight = 1
+
+[sub_resource type="Resource" id="Resource_cp8l2"]
+script = ExtResource("2_lw6vd")
+id = 3111
+amountMin = 1
+amountMax = 1
+weight = 1
+
+[sub_resource type="Resource" id="Resource_2qegk"]
+script = ExtResource("2_lw6vd")
+id = 3112
+amountMin = 1
+amountMax = 1
+weight = 1
+
+[sub_resource type="Resource" id="Resource_jbarp"]
+script = ExtResource("2_lw6vd")
+id = 3113
+amountMin = 1
+amountMax = 1
+weight = 1
+
 [sub_resource type="Resource" id="Resource_sq6vm"]
 script = ExtResource("1_buwi6")
 rollType = 0
 rollCount = 1
-table = Array[ExtResource("2_lw6vd")]([SubResource("Resource_iopna"), SubResource("Resource_v6rhu"), SubResource("Resource_tb13f"), SubResource("Resource_aw7sl"), SubResource("Resource_5uymu"), SubResource("Resource_rb758"), SubResource("Resource_lpb4g"), SubResource("Resource_7g0xm"), SubResource("Resource_uavdh"), SubResource("Resource_rhrqx"), SubResource("Resource_l2kqx")])
+table = Array[ExtResource("2_lw6vd")]([SubResource("Resource_iopna"), SubResource("Resource_v6rhu"), SubResource("Resource_tb13f"), SubResource("Resource_aw7sl"), SubResource("Resource_5uymu"), SubResource("Resource_rb758"), SubResource("Resource_lpb4g"), SubResource("Resource_7g0xm"), SubResource("Resource_uavdh"), SubResource("Resource_rhrqx"), SubResource("Resource_l2kqx"), SubResource("Resource_38ldp"), SubResource("Resource_yqmh1"), SubResource("Resource_t4x35"), SubResource("Resource_1esq7"), SubResource("Resource_q3x4g"), SubResource("Resource_yjjrg"), SubResource("Resource_6rt7t"), SubResource("Resource_drq1a"), SubResource("Resource_7ns2q"), SubResource("Resource_sfhmp"), SubResource("Resource_uy562"), SubResource("Resource_1id2v"), SubResource("Resource_sgom0"), SubResource("Resource_c5jtk"), SubResource("Resource_vlkdt"), SubResource("Resource_cp8l2"), SubResource("Resource_2qegk"), SubResource("Resource_jbarp")])
 
 [resource]
 script = ExtResource("1_8dgjr")

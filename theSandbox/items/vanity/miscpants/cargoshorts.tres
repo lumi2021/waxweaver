@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemArmorLegs" load_steps=4 format=3 uid="uid://d1ilbnc7oas8b"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemArmorLegs.gd" id="1_am223"]
+[ext_resource type="Texture2D" uid="uid://t8nsonowdba4" path="res://items/vanity/miscpants/cargoshorts.png" id="1_b2bag"]
+[ext_resource type="Texture2D" uid="uid://imof7x2okf38" path="res://items/vanity/miscpants/cargoshortsicon.png" id="3_bn83c"]
+
+[resource]
+script = ExtResource("1_am223")
+defense = 1
+armorTexture = ExtResource("1_b2bag")
+itemName = "Cargo Shorts"
+subtext = ""
+desc = "huge pockets!!!"
+texture = ExtResource("3_bn83c")
+maxStackSize = 1
+clickToUse = false
+infiniteReach = false

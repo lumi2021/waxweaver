@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemArmorHelmet" load_steps=4 format=3 uid="uid://cp48722y6bhhl"]
+
+[ext_resource type="Texture2D" uid="uid://bnc2jhdogb38f" path="res://items/vanity/bathfits/towelwrap.png" id="1_puena"]
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemArmorHelmet.gd" id="1_rg7w7"]
+[ext_resource type="Texture2D" uid="uid://h8o3512oblvs" path="res://items/vanity/bathfits/towelwrapicon.png" id="3_tx85p"]
+
+[resource]
+script = ExtResource("1_rg7w7")
+defense = 0
+armorTexture = ExtResource("1_puena")
+itemName = "Towel Wrap"
+subtext = ""
+desc = "freshly bathed"
+texture = ExtResource("3_tx85p")
+maxStackSize = 1
+clickToUse = false
+infiniteReach = false
