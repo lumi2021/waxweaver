@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="PlanetType" load_steps=61 format=3 uid="uid://drr030n6brnua"]
+[gd_resource type="Resource" script_class="PlanetType" load_steps=62 format=3 uid="uid://drr030n6brnua"]
 
 [ext_resource type="Script" path="res://object_scenes/specialResource/lootTables/RollableItem.gd" id="1_5rukt"]
 [ext_resource type="Script" path="res://world_scenes/planetTypes/planetType.gd" id="1_j2ok1"]
@@ -364,17 +364,22 @@ weight = 10
 [sub_resource type="Resource" id="Resource_sxmvn"]
 script = ExtResource("2_jpcmu")
 id = "cobble"
-weight = 100
+weight = 80
 
 [sub_resource type="Resource" id="Resource_juyfm"]
 script = ExtResource("2_jpcmu")
 id = "evilBird"
-weight = 60
+weight = 70
 
 [sub_resource type="Resource" id="Resource_qb7kf"]
 script = ExtResource("2_jpcmu")
 id = "spider"
-weight = 50
+weight = 60
+
+[sub_resource type="Resource" id="Resource_qmk12"]
+script = ExtResource("2_jpcmu")
+id = "mimic"
+weight = 5
 
 [sub_resource type="Resource" id="Resource_mp2va"]
 script = ExtResource("2_jpcmu")
@@ -389,5 +394,5 @@ funItems = Array[ExtResource("1_5rukt")]([SubResource("Resource_b110y"), SubReso
 fish = Array[ExtResource("1_5rukt")]([SubResource("Resource_5e5dr"), SubResource("Resource_y2h6p"), SubResource("Resource_o5prv"), SubResource("Resource_u24lq"), SubResource("Resource_3xk2w"), SubResource("Resource_hfe3i"), SubResource("Resource_s565u"), SubResource("Resource_2yyvm")])
 surfaceDay = Array[ExtResource("2_jpcmu")]([SubResource("Resource_2krwu"), SubResource("Resource_c7q03"), SubResource("Resource_7kvi4")])
 surfaceNight = Array[ExtResource("2_jpcmu")]([SubResource("Resource_fcrlm"), SubResource("Resource_r6phs"), SubResource("Resource_l3ot6"), SubResource("Resource_b27hs")])
-underground = Array[ExtResource("2_jpcmu")]([SubResource("Resource_sxmvn"), SubResource("Resource_juyfm"), SubResource("Resource_qb7kf")])
+underground = Array[ExtResource("2_jpcmu")]([SubResource("Resource_sxmvn"), SubResource("Resource_juyfm"), SubResource("Resource_qb7kf"), SubResource("Resource_qmk12")])
 water = Array[ExtResource("2_jpcmu")]([SubResource("Resource_mp2va")])

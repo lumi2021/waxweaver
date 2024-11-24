@@ -22,6 +22,7 @@ var creatures = {
 	"cobble":"res://object_scenes/entity/enemy_scenes/cobble/cobble.tscn",
 	"apparition":"res://object_scenes/entity/enemy_scenes/apparition/apparition.tscn",
 	"flower":"res://object_scenes/entity/enemy_scenes/flower/flower.tscn",
+	"mimic":"res://object_scenes/entity/enemy_scenes/mimic/mimic.tscn",
 	
 	# bosses
 	"bossShip":"res://object_scenes/entity/enemy_scenes/bosses/shipBossForest/boss_ship.tscn",

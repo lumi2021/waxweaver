@@ -1,11 +1,33 @@
-[gd_scene load_steps=9 format=3 uid="uid://bukefng4x1pde"]
+[gd_scene load_steps=14 format=3 uid="uid://bukefng4x1pde"]
 
 [ext_resource type="Script" path="res://object_scenes/entity/enemy_scenes/flower/flower.gd" id="1_l0n1p"]
 [ext_resource type="PackedScene" uid="uid://84sah16y8gwq" path="res://object_scenes/entity/components/delete_me_outside_of_chunk.tscn" id="2_38m6v"]
 [ext_resource type="PackedScene" uid="uid://meikam2oyy13" path="res://object_scenes/entity/components/health_component.tscn" id="3_8c7oj"]
 [ext_resource type="PackedScene" uid="uid://ch461nupa3hsv" path="res://object_scenes/entity/components/swimming_detector.tscn" id="4_6s8f7"]
+[ext_resource type="Script" path="res://object_scenes/specialResource/lootTables/LootTable.gd" id="4_v56wg"]
 [ext_resource type="PackedScene" uid="uid://c05kukkqfrg40" path="res://object_scenes/entity/components/hitbox.tscn" id="5_3dxor"]
+[ext_resource type="Script" path="res://object_scenes/specialResource/lootTables/RollableItem.gd" id="5_f0ct4"]
 [ext_resource type="Texture2D" uid="uid://b6whex0bowh6l" path="res://object_scenes/entity/enemy_scenes/flower/sprite.png" id="7_a12gp"]
+
+[sub_resource type="Resource" id="Resource_1k7et"]
+script = ExtResource("5_f0ct4")
+id = 3053
+amountMin = 1
+amountMax = 1
+weight = 500
+
+[sub_resource type="Resource" id="Resource_c8oph"]
+script = ExtResource("5_f0ct4")
+id = 60
+amountMin = 2
+amountMax = 3
+weight = 250
+
+[sub_resource type="Resource" id="Resource_kh8ft"]
+script = ExtResource("4_v56wg")
+rollType = 2
+rollCount = 1
+table = Array[ExtResource("5_f0ct4")]([SubResource("Resource_1k7et"), SubResource("Resource_c8oph")])
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bsfip"]
 size = Vector2(6, 6)
@@ -28,8 +50,7 @@ floorRay = NodePath("axis/floor")
 [node name="HealthComponent" parent="." instance=ExtResource("3_8c7oj")]
 maxHealth = 32
 knockbackResist = 0.8
-dropItemArray = Array[int]([3053])
-dropChanceArray = Array[int]([1])
+loottable = SubResource("Resource_kh8ft")
 
 [node name="swimmingDetector" parent="." instance=ExtResource("4_6s8f7")]
 

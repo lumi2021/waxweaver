@@ -1,14 +1,29 @@
-[gd_scene load_steps=10 format=3 uid="uid://xt3vfsegvgjj"]
+[gd_scene load_steps=14 format=3 uid="uid://xt3vfsegvgjj"]
 
 [ext_resource type="Script" path="res://object_scenes/entity/enemy_scenes/spider/spider.gd" id="1_rpbfy"]
 [ext_resource type="Texture2D" uid="uid://b6xs2nif25drt" path="res://object_scenes/entity/enemy_scenes/spider/sprite.png" id="2_cn8la"]
 [ext_resource type="PackedScene" uid="uid://84sah16y8gwq" path="res://object_scenes/entity/components/delete_me_outside_of_chunk.tscn" id="3_f6yp8"]
 [ext_resource type="Script" path="res://object_scenes/entity/components/health_component.gd" id="3_gfi00"]
 [ext_resource type="PackedScene" uid="uid://c05kukkqfrg40" path="res://object_scenes/entity/components/hitbox.tscn" id="4_ei6ps"]
+[ext_resource type="Script" path="res://object_scenes/specialResource/lootTables/LootTable.gd" id="5_ba1cl"]
 [ext_resource type="PackedScene" uid="uid://8jw6pruiu3cf" path="res://object_scenes/entity/components/hurtbox.tscn" id="5_tyfpu"]
+[ext_resource type="Script" path="res://object_scenes/specialResource/lootTables/RollableItem.gd" id="6_nwrfc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_arcvd"]
 radius = 3.8
+
+[sub_resource type="Resource" id="Resource_cleda"]
+script = ExtResource("6_nwrfc")
+id = 3004
+amountMin = 2
+amountMax = 3
+weight = 1000
+
+[sub_resource type="Resource" id="Resource_igsjl"]
+script = ExtResource("5_ba1cl")
+rollType = 2
+rollCount = 1
+table = Array[ExtResource("6_nwrfc")]([SubResource("Resource_cleda")])
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_k1ben"]
 radius = 7.0
@@ -37,8 +52,7 @@ target_position = Vector2(7, 0)
 script = ExtResource("3_gfi00")
 maxHealth = 15
 defense = 4
-dropItemArray = Array[int]([3004, 3004, 3004, 3004])
-dropChanceArray = Array[int]([1, 2, 2, 2])
+loottable = SubResource("Resource_igsjl")
 
 [node name="Hitbox" parent="." node_paths=PackedStringArray("healthComponent", "colliderShape") instance=ExtResource("4_ei6ps")]
 healthComponent = NodePath("../HealthComponent")

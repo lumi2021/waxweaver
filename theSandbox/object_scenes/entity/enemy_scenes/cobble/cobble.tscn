@@ -1,11 +1,54 @@
-[gd_scene load_steps=10 format=3 uid="uid://cim01bkwfl3hq"]
+[gd_scene load_steps=18 format=3 uid="uid://cim01bkwfl3hq"]
 
 [ext_resource type="Script" path="res://object_scenes/entity/enemy_scenes/cobble/cobble.gd" id="1_uxt3j"]
 [ext_resource type="PackedScene" uid="uid://84sah16y8gwq" path="res://object_scenes/entity/components/delete_me_outside_of_chunk.tscn" id="2_liknb"]
 [ext_resource type="PackedScene" uid="uid://meikam2oyy13" path="res://object_scenes/entity/components/health_component.tscn" id="3_yldhv"]
+[ext_resource type="Script" path="res://object_scenes/specialResource/lootTables/LootTable.gd" id="4_1586y"]
 [ext_resource type="PackedScene" uid="uid://c05kukkqfrg40" path="res://object_scenes/entity/components/hitbox.tscn" id="4_igbye"]
+[ext_resource type="Script" path="res://object_scenes/specialResource/lootTables/RollableItem.gd" id="5_n8q1b"]
 [ext_resource type="PackedScene" uid="uid://8jw6pruiu3cf" path="res://object_scenes/entity/components/hurtbox.tscn" id="5_pyxpf"]
 [ext_resource type="Texture2D" uid="uid://dinhg03flo8ln" path="res://object_scenes/entity/enemy_scenes/cobble/cobble.png" id="6_dx63a"]
+
+[sub_resource type="Resource" id="Resource_vhvt4"]
+script = ExtResource("5_n8q1b")
+id = 3040
+amountMin = 1
+amountMax = 1
+weight = 400
+
+[sub_resource type="Resource" id="Resource_gyc0f"]
+script = ExtResource("5_n8q1b")
+id = 2
+amountMin = 2
+amountMax = 4
+weight = 1000
+
+[sub_resource type="Resource" id="Resource_w4dhh"]
+script = ExtResource("5_n8q1b")
+id = 27
+amountMin = 1
+amountMax = 1
+weight = 20
+
+[sub_resource type="Resource" id="Resource_mb7jw"]
+script = ExtResource("5_n8q1b")
+id = 24
+amountMin = 1
+amountMax = 2
+weight = 50
+
+[sub_resource type="Resource" id="Resource_4id5b"]
+script = ExtResource("5_n8q1b")
+id = 18
+amountMin = 2
+amountMax = 3
+weight = 100
+
+[sub_resource type="Resource" id="Resource_6wfwh"]
+script = ExtResource("4_1586y")
+rollType = 2
+rollCount = 1
+table = Array[ExtResource("5_n8q1b")]([SubResource("Resource_vhvt4"), SubResource("Resource_gyc0f"), SubResource("Resource_w4dhh"), SubResource("Resource_mb7jw"), SubResource("Resource_4id5b")])
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bsfip"]
 size = Vector2(6, 6)
@@ -33,8 +76,7 @@ walkSpeed = 25.0
 maxHealth = 20
 knockbackResist = 0.65
 defense = 3
-dropItemArray = Array[int]([3040, 18, 24, 27, 2, 2, 2])
-dropChanceArray = Array[int]([2, 10, 25, 50, 1, 1, 2])
+loottable = SubResource("Resource_6wfwh")
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_bsfip")

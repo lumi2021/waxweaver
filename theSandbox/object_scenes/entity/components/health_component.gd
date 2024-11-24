@@ -10,9 +10,7 @@ var health :int= 0
 @export var defense :int = 0
 
 ## list of items enemy will drop
-@export var dropItemArray :Array[int]= []
-## list of chances above items have to drop, make sure this is same size
-@export var dropChanceArray :Array[int]= []
+@export var loottable :Loot
 
 @export var statusImmunities :Array[String] = []
 
@@ -153,23 +151,19 @@ func getWorldPosition():
 	return [0,1,3,2][dot1 + dot2]
 
 func rollDrops():
-	if dropItemArray.size() != dropChanceArray.size():
-		print_debug("Drop array and chance array do not match: " + str(parent))
+	if loottable == null:
 		return
 	
-	var i = 0
-	for drop in dropItemArray:
-		
-		if randi() % dropChanceArray[i] == 0:
-			dropItem(drop)
-		
-		i += 1
+	var drops :Array[LootItem] = loottable.getLoot()
+	for loot in drops:
+		dropItem(loot.id,loot.amount)
 
-func dropItem(itemID):
+func dropItem(itemID,amount):
 	if itemID == -1:
 		return
 	var ins = BlockData.groundItemScene.instantiate()
 	ins.itemID = itemID
+	ins.amount = amount
 	ins.position = parent.position
 	parent.get_parent().call_deferred("add_child",ins)
 
