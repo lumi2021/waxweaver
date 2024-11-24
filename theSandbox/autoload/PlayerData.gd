@@ -390,6 +390,8 @@ func dropChestContainer(body,pos,string):
 		var id :int = int(itemString.get_slice("x",0))
 		var amount :int = int(itemString.get_slice("x",1))
 		BlockData.spawnLooseItem(body.tileToPos(pos),body,id,amount)
+	closeChest()
+	
 	
 func scanForArrow():
 	for i in range(40):
