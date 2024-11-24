@@ -285,6 +285,11 @@ func interpretCommand(text):
 		"fps":
 			$fps.visible = !$fps.visible
 			GlobalRef.sendChat("Toggled FPS display")
+		"clear":
+			PlayerData.initializeInventory() # erases inventory
+			PlayerData.addItem(3000,1) # readds starting tools
+			PlayerData.addItem(3001,1)
+			PlayerData.emit_signal("armorUpdated")
 		_:
 			GlobalRef.sendError("Error: command doesn't exist")
 			return
