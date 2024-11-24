@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemArmorHelmet" load_steps=4 format=3 uid="uid://br3tya2jleefk"]
+
+[ext_resource type="Texture2D" uid="uid://gdqxcx64xxce" path="res://items/vanity/mischats/greybeanie.png" id="1_bb0fm"]
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemArmorHelmet.gd" id="1_ynjmf"]
+[ext_resource type="Texture2D" uid="uid://ddakra7huftvr" path="res://items/vanity/mischats/greybeanieicon.png" id="3_1qhuj"]
+
+[resource]
+script = ExtResource("1_ynjmf")
+defense = 1
+armorTexture = ExtResource("1_bb0fm")
+itemName = "Grey Beanie"
+subtext = ""
+desc = ""
+texture = ExtResource("3_1qhuj")
+maxStackSize = 1
+clickToUse = false
+infiniteReach = false

@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemArmorHelmet" load_steps=4 format=3 uid="uid://dmki4ego4ie6j"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemArmorHelmet.gd" id="1_e2auo"]
+[ext_resource type="Texture2D" uid="uid://ck3mrmmqdvvx" path="res://items/vanity/miscacc/ponytail.png" id="1_qrskp"]
+[ext_resource type="Texture2D" uid="uid://bopgixibsikip" path="res://items/vanity/miscacc/ponytailicon.png" id="3_84kgw"]
+
+[resource]
+script = ExtResource("1_e2auo")
+defense = 0
+armorTexture = ExtResource("1_qrskp")
+itemName = "Ponytail"
+subtext = ""
+desc = "comes with a small red bow"
+texture = ExtResource("3_84kgw")
+maxStackSize = 1
+clickToUse = false
+infiniteReach = false
