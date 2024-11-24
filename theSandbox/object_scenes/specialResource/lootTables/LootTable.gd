@@ -16,6 +16,8 @@ func getLoot() -> Array[LootItem]:
 				itemArray.append(rollRand())
 			1:
 				itemArray.append(rollWeight())
+			2:
+				itemArray += rollAll()
 	
 	return itemArray
 
@@ -48,3 +50,15 @@ func rollRand() ->LootItem:
 
 func rollItemAmount(item:RollableItem) -> int:
 	return randi_range(item.amountMin ,item.amountMax  )
+
+func rollAll() -> Array[LootItem]:
+	var a :Array[LootItem]= []
+	for rollableItem in table:
+		var chance :int= rollableItem.weight
+		if randi() % 1000 < chance:
+			var newItem :LootItem = LootItem.new()
+			newItem.id = rollableItem.id
+			newItem.amount = rollItemAmount(rollableItem)
+			a.append(newItem)
+			
+	return a

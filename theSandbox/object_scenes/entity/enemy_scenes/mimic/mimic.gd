@@ -31,7 +31,7 @@ func chill(delta):
 	var p = to_local( GlobalRef.player.global_position )
 	$playerFinder.target_position = p
 	if !$playerFinder.is_colliding():
-		if p.length() < 60:
+		if p.length() < 32:
 			state = 1
 			$axis/sprite.play("popout")
 
@@ -40,15 +40,13 @@ func hunt(delta):
 	
 	var dir = getDirectionTowardsPlayer()
 	var p = to_local( GlobalRef.player.global_position )
-	if $axis/wall.is_colliding():
-		if p.length() < 128:
-			vel.y = -60
-		else:
-			vel.y += 1000 * delta
-	else:
-		vel.y += 1000 * delta
 	
-		if $axis/floorCast.is_colliding():
+	vel.y += 1000 * delta
+	
+	if $axis/floorCast.is_colliding():
+		if randi() % 120 == 0:
+			vel.y = -300
+		if $axis/wall.is_colliding():
 			vel.y = -300
 	
 	vel.x = lerp(vel.x,200.0*dir,0.01)
@@ -62,19 +60,24 @@ func hunt(delta):
 		if p.length() < 60:
 			if chargeDelay > 120:
 				state = 3
+				chargeDir = p.normalized()
 				chargeDelay = 0
 				chargingTicks = 0
+				$axis/sprite.play("stab")
+				$axis/Hurtbox.damage = 40
 	
 	setVelocity(vel)
 	move_and_slide()
 
 func charge(delta):
 	chargingTicks += 1
-	velocity = chargeDir * 200
+	velocity = chargeDir * 300
 	move_and_slide()
 	
-	if chargingTicks > 120:
+	if chargingTicks > 10:
 		state = 2
+		$axis/sprite.play("run")
+		$axis/Hurtbox.damage = 20
 
 func rotAxis():
 	$axis.rotation = getWorldRot(self)

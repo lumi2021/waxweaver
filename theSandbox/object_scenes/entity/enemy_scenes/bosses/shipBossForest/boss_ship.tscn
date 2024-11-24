@@ -1,11 +1,33 @@
-[gd_scene load_steps=14 format=3 uid="uid://cx52pej1x1k6c"]
+[gd_scene load_steps=19 format=3 uid="uid://cx52pej1x1k6c"]
 
 [ext_resource type="Script" path="res://object_scenes/entity/enemy_scenes/bosses/shipBossForest/boss_ship.gd" id="1_favl4"]
 [ext_resource type="PackedScene" uid="uid://meikam2oyy13" path="res://object_scenes/entity/components/health_component.tscn" id="2_7ituk"]
+[ext_resource type="Script" path="res://object_scenes/specialResource/lootTables/LootTable.gd" id="3_l1vov"]
 [ext_resource type="PackedScene" uid="uid://84sah16y8gwq" path="res://object_scenes/entity/components/delete_me_outside_of_chunk.tscn" id="3_vg6w2"]
 [ext_resource type="Texture2D" uid="uid://boydqy3mcdk2v" path="res://object_scenes/entity/enemy_scenes/bosses/shipBossForest/idle.png" id="3_vvna7"]
+[ext_resource type="Script" path="res://object_scenes/specialResource/lootTables/RollableItem.gd" id="4_7dmrj"]
 [ext_resource type="PackedScene" uid="uid://c05kukkqfrg40" path="res://object_scenes/entity/components/hitbox.tscn" id="4_rjc2y"]
 [ext_resource type="PackedScene" uid="uid://8jw6pruiu3cf" path="res://object_scenes/entity/components/hurtbox.tscn" id="5_rcdpc"]
+
+[sub_resource type="Resource" id="Resource_2u0ia"]
+script = ExtResource("4_7dmrj")
+id = 3075
+amountMin = 1
+amountMax = 1
+weight = 1000
+
+[sub_resource type="Resource" id="Resource_64aa2"]
+script = ExtResource("4_7dmrj")
+id = 3003
+amountMin = 15
+amountMax = 40
+weight = 1000
+
+[sub_resource type="Resource" id="Resource_6idsn"]
+script = ExtResource("3_l1vov")
+rollType = 2
+rollCount = 1
+table = Array[ExtResource("4_7dmrj")]([SubResource("Resource_2u0ia"), SubResource("Resource_64aa2")])
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lndia"]
 size = Vector2(54, 34)
@@ -56,8 +78,7 @@ script = ExtResource("1_favl4")
 maxHealth = 1000
 knockbackResist = 0.0
 defense = 6
-dropItemArray = Array[int]([3075, 3005])
-dropChanceArray = Array[int]([1, 1])
+loottable = SubResource("Resource_6idsn")
 
 [node name="DeleteMeOutsideOfChunk" parent="." instance=ExtResource("3_vg6w2")]
 
