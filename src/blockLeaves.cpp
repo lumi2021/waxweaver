@@ -51,6 +51,10 @@ Dictionary BLOCKLEAVES::onTick(int x, int y, PLANETDATA *planet, int dir){
                     changes[Vector2i(x,y)] = "leaf";
                 }
 
+                if(std::rand()%1000==0){
+                    changes[Vector2i(x,y)] = "leafrustle";
+                }
+
                  return changes;
             }
 

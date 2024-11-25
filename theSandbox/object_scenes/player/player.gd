@@ -276,7 +276,7 @@ func normalMovement(delta):
 			fallDamage = 0
 		
 		if fallDamage > 10:
-			healthComponent.damage(fallDamage,false,"fall damage")
+			healthComponent.damage(fallDamage,null,false,"fall damage")
 		airTime = 0.0
 
 func WATERJUMPCAMERALETSGO(body,vel,rot,onFloor,delta):

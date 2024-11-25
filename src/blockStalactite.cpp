@@ -51,6 +51,11 @@ Dictionary BLOCKSTALACTITE::onTick(int x, int y, PLANETDATA *planet, int dir){
         return changes;
 
     }
+    if( whatsBelowMe == 74 ){ // is moss
+        changes[Vector2i(x,y)] = 0; // replace with cave air
+        return changes;
+
+    }
 
 
     int rand = std::rand();

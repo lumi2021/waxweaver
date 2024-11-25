@@ -18,7 +18,7 @@ func onUse(tileX:int,tileY:int,planetDir:int,planet,lastTile:Vector2):
 	if checkIfPlaceable(tileX,tileY,planet):
 		playSound(tileX,tileY,planet)
 		PlayerData.consumeSelected()
-		planet.editTiles( placeTiles(tileX,tileY,planet) )
+		planet.editTiles( placeTiles(tileX,tileY,planet),true )
 
 
 func placeTiles(tileX:int,tileY:int,planet):

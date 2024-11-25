@@ -46,7 +46,7 @@ func heal(amount):
 	
 	emit_signal("healthChanged")
 
-func damage(amount,hitCrit:bool=false,source:String="idk",type:int=0):
+func damage(amount,area:Hurtbox=null,hitCrit:bool=false,source:String="idk",type:int=0):
 	
 	if isPlayer:
 		if parent.dead:
@@ -60,6 +60,10 @@ func damage(amount,hitCrit:bool=false,source:String="idk",type:int=0):
 		def /= 2
 	if checkIfHasEffect("tough"):
 		def += 5
+	
+	if area != null:
+		if area.ignoreDefense:
+			def = 0
 	
 	trueAmount -= def
 	trueAmount = max(trueAmount,1)

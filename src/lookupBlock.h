@@ -89,6 +89,10 @@
 #include "blockPaintKaiaCreature.h" // id 71
 #include "blockPaintKaiaWashed.h" // id 72
 
+#include "blockJarFirefly.h" // id 73
+#include "blockMoss.h" // id 74
+#include "blockMossVine.h" // id 75
+
 // adding a new block? make sure you increment the PENIS array !
 
 namespace godot {
@@ -105,7 +109,7 @@ public:
 	
 	Array allBlocks;
 
-	BLOCK *penis[73]; // must be largest id + 1
+	BLOCK *penis[76]; // must be largest id + 1
 
 	LOOKUPBLOCK();
 	~LOOKUPBLOCK();

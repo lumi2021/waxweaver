@@ -1,0 +1,58 @@
+[gd_scene load_steps=8 format=3 uid="uid://d37ar0daakn8t"]
+
+[ext_resource type="Script" path="res://object_scenes/entity/enemy_scenes/slingshotBullet/slingBullet.gd" id="1_4rb5f"]
+[ext_resource type="PackedScene" uid="uid://84sah16y8gwq" path="res://object_scenes/entity/components/delete_me_outside_of_chunk.tscn" id="2_6d71t"]
+[ext_resource type="Texture2D" uid="uid://u4x1dw6tbkog" path="res://items/blocks/natural/stone.png" id="4_byyip"]
+[ext_resource type="PackedScene" uid="uid://8jw6pruiu3cf" path="res://object_scenes/entity/components/hurtbox.tscn" id="4_eac1f"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kj11q"]
+radius = 1.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a7ctw"]
+radius = 8.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_janed"]
+size = Vector2(16, 16)
+
+[node name="slingBullet" type="CharacterBody2D"]
+collision_layer = 128
+script = ExtResource("1_4rb5f")
+creatureSlots = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_kj11q")
+
+[node name="DeleteMeOutsideOfChunk" parent="." instance=ExtResource("2_6d71t")]
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_a7ctw")
+
+[node name="axis" type="Node2D" parent="."]
+
+[node name="Hurtbox" parent="axis" instance=ExtResource("4_eac1f")]
+position = Vector2(-10, 0)
+enemyBox = false
+damage = 10
+enemyName = "flying block"
+damageType = 1
+ignoreDefense = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="axis/Hurtbox"]
+position = Vector2(10, 0)
+shape = SubResource("RectangleShape2D_janed")
+
+[node name="sprite" type="Sprite2D" parent="axis"]
+rotation = 1.5708
+texture = ExtResource("4_byyip")
+
+[node name="RayCast2D" type="RayCast2D" parent="axis"]
+target_position = Vector2(9, 0)
+hit_from_inside = true
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="hitsomething" from="axis/Hurtbox" to="." method="_on_hurtbox_hitsomething"]

@@ -69,6 +69,9 @@ var data = {
 	71:load("res://items/paintings/KaiaCreature.tres"),
 	72:load("res://items/paintings/KaiaWashed.tres"),
 	
+	73:load("res://items/blocks/furniture/lights/JarFirefly.tres"),
+	74:load("res://items/blocks/natural/MossItem.tres"),
+	
 	########## item ids ##################
 	3000:load("res://items/tools/flimsy/FlimsySword.tres"), # flimsy tools
 	3001:load("res://items/tools/flimsy/FlimsyPickaxe.tres"),
@@ -214,10 +217,10 @@ var data = {
 	3120:load("res://items/vanity/misctops/bandeautop.tres"),
 	3121:load("res://items/vanity/misctops/greensweater.tres"),
 	3122:load("res://items/vanity/misctops/puffysweater.tres"),
-	
 	3123:load("res://items/vanity/miscdresses/flowerskirt.tres"),
 	
-	
+	3124:load("res://items/weapons/slingshot/Slingshot.tres"),
+	3125:load("res://items/material/Glowworm.tres"),
 	
 
 	# chairs 6000 - 6049
@@ -245,6 +248,7 @@ var heldItemAnims = {
 	"itemFishingRod" : load("res://item_resources/item_held_scenes/item_fish_rod.tscn"),
 	"itemTossable" : load("res://item_resources/item_held_scenes/itemTossable.tscn"),
 	"itemGun" : load("res://item_resources/item_held_scenes/item_gun.tscn"),
+	"itemSling": load("res://item_resources/item_held_scenes/item_slingshot.tscn"),
 }
 
 func matchItemAnimation(id):
@@ -267,6 +271,8 @@ func matchItemAnimation(id):
 		return "itemTossable"
 	if d is ItemGun:
 		return "itemGun"
+	if d is ItemSlingshot:
+		return "itemSling"
 	
 	return null
 

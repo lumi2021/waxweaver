@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://btuok63qm5xgd" path="res://object_scenes/entity/enemy_scenes/evilBird/spr.png" id="2_sj408"]
 [ext_resource type="Script" path="res://object_scenes/specialResource/lootTables/LootTable.gd" id="3_int5s"]
 [ext_resource type="PackedScene" uid="uid://84sah16y8gwq" path="res://object_scenes/entity/components/delete_me_outside_of_chunk.tscn" id="3_nn12s"]
-[ext_resource type="Texture2D" path="res://object_scenes/entity/enemy_scenes/evilBird/stand.png" id="4_85gly"]
+[ext_resource type="Texture2D" uid="uid://bh3nbcrutgy0o" path="res://object_scenes/entity/enemy_scenes/evilBird/stand.png" id="4_85gly"]
 [ext_resource type="Script" path="res://object_scenes/specialResource/lootTables/RollableItem.gd" id="4_rlqay"]
 [ext_resource type="PackedScene" uid="uid://c05kukkqfrg40" path="res://object_scenes/entity/components/hitbox.tscn" id="5_ly7sk"]
 [ext_resource type="PackedScene" uid="uid://8jw6pruiu3cf" path="res://object_scenes/entity/components/hurtbox.tscn" id="6_rqsjp"]

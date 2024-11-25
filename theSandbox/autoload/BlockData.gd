@@ -235,3 +235,11 @@ func doBlockAction(action:String,tileX:int,tileY:int,planet):
 			ins.position = planet.tileToPos(Vector2(tileX,tileY))
 			ins.planet = planet
 			planet.entityContainer.add_child(ins)
+		"leafrustle":
+			var p = planet.tileToPos(Vector2(tileX,tileY))
+			var g = planet.to_global(p)
+			SoundManager.playSound("ambient/treerustle",g,1.0,0.02)
+
+func checkForEmmission(id):
+	var d = theChunker.getBlockDictionary(id)
+	return d["lightEmmission"]

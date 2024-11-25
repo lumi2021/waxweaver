@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://bthq5vg68i2lm"]
+[gd_scene load_steps=36 format=3 uid="uid://bthq5vg68i2lm"]
 
 [ext_resource type="Script" path="res://object_scenes/entity/enemy_scenes/mimic/mimic.gd" id="1_dcghv"]
 [ext_resource type="Texture2D" uid="uid://bfqu4i3lpr4xn" path="res://object_scenes/entity/enemy_scenes/mimic/sprite.png" id="1_tg52t"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://object_scenes/specialResource/lootTables/LootTable.gd" id="3_xqe57"]
 [ext_resource type="Script" path="res://object_scenes/specialResource/lootTables/RollableItem.gd" id="4_mhdw4"]
 [ext_resource type="PackedScene" uid="uid://c05kukkqfrg40" path="res://object_scenes/entity/components/hitbox.tscn" id="5_6kqn5"]
+[ext_resource type="PackedScene" uid="uid://84sah16y8gwq" path="res://object_scenes/entity/components/delete_me_outside_of_chunk.tscn" id="5_sycl1"]
 [ext_resource type="PackedScene" uid="uid://8jw6pruiu3cf" path="res://object_scenes/entity/components/hurtbox.tscn" id="6_vgw5h"]
 
 [sub_resource type="Resource" id="Resource_qqf2t"]
@@ -215,6 +216,8 @@ creatureSlots = 10
 maxHealth = 25
 defense = 10
 loottable = SubResource("Resource_8luun")
+
+[node name="DeleteMeOutsideOfChunk" parent="." instance=ExtResource("5_sycl1")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_xb1h5")

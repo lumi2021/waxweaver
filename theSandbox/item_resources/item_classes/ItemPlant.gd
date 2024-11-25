@@ -28,7 +28,7 @@ func onUse(tileX:int,tileY:int,planetDir:int,planet,lastTile:Vector2):
 		return # fail if acceptable block doesn't exist
 	
 	var edit = Vector2i(tileX,tileY)
-	planet.editTiles({edit:blockToPlace})
+	planet.editTiles({edit:blockToPlace},true)
 	playSound(tileX,tileY,planet)
 	PlayerData.consumeSelected()
 

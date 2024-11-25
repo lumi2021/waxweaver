@@ -81,7 +81,7 @@ func getBreakSound(id:int=0) -> AudioStreamOggVorbis:
 		5: # foliage
 			return load("res://sound/mining/foliageBreak.ogg")
 		6: # glass
-			return load("res://sound/mining/glassBreak"+ str((randi()%3)+1) +".ogg")
+			return load("res://sound/mining/glassBreak1.ogg")
 		
 	return load("res://sound/mining/stoneBreak.ogg")
 

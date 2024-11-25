@@ -42,6 +42,12 @@ func _ready():
 		texture.frame = BlockData.theChunker.scanBlockOpen(planet.DATAC,tileX,tileY,planetDir * int(blockData["rotateTextureToGravity"])) / 8
 		$Sprite.hframes = 16
 		$Sprite.frame = texture.frame
+		
+		var img = texture.texture.get_image()
+		var croppedImg :Image= img.get_region( Rect2i( Vector2i(0,0), Vector2i(8,8) ) )
+		var tex = ImageTexture.create_from_image(croppedImg)
+		
+		$particles.texture = tex
 	elif blockData["multitile"]:
 		
 		var img = texture.texture.get_image()
@@ -93,7 +99,7 @@ func _process(delta):
 			
 				if damage >= breakTime :
 					var edit = Vector2i(tileX,tileY)
-					planet.editTiles( { edit: -1 } )
+					planet.editTiles( { edit: -1 },true )
 					GlobalRef.player.lastTileItemUsedOn = Vector2(-10,-10)
 					queue_free()
 			else:

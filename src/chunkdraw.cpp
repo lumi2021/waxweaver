@@ -354,11 +354,12 @@ Array CHUNKDRAW::tickUpdate(PLANETDATA *planet,Vector2i pos,bool onScreen,float 
                 if(bgID > 1){
                     lightEmmission = 0.0;
                 }
+                if (std::abs(water)> 0.2){
+                    lightEmmission = 0.0;
+                }
             }
 
-            if (std::abs(water)> 0.2){
-                lightEmmission = 0.0;
-            }
+
 
             newLight = std::max(newLight,lightEmmission);
 

@@ -1,10 +1,25 @@
-[gd_scene load_steps=8 format=3 uid="uid://id5vhltbu4de"]
+[gd_scene load_steps=12 format=3 uid="uid://id5vhltbu4de"]
 
 [ext_resource type="Script" path="res://object_scenes/entity/enemy_scenes/firefly/firefly.gd" id="1_enuet"]
 [ext_resource type="PackedScene" uid="uid://meikam2oyy13" path="res://object_scenes/entity/components/health_component.tscn" id="2_5j4s5"]
+[ext_resource type="Script" path="res://object_scenes/specialResource/lootTables/LootTable.gd" id="3_wpxss"]
 [ext_resource type="PackedScene" uid="uid://84sah16y8gwq" path="res://object_scenes/entity/components/delete_me_outside_of_chunk.tscn" id="3_ypvk5"]
 [ext_resource type="PackedScene" uid="uid://c05kukkqfrg40" path="res://object_scenes/entity/components/hitbox.tscn" id="4_kdmkk"]
+[ext_resource type="Script" path="res://object_scenes/specialResource/lootTables/RollableItem.gd" id="4_lpus1"]
 [ext_resource type="Texture2D" uid="uid://c6s1ca7qi2sf7" path="res://object_scenes/entity/enemy_scenes/firefly/spr.png" id="5_i88w3"]
+
+[sub_resource type="Resource" id="Resource_sqiys"]
+script = ExtResource("4_lpus1")
+id = 3125
+amountMin = 1
+amountMax = 1
+weight = 250
+
+[sub_resource type="Resource" id="Resource_jmug5"]
+script = ExtResource("3_wpxss")
+rollType = 2
+rollCount = 1
+table = Array[ExtResource("4_lpus1")]([SubResource("Resource_sqiys")])
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_41jnv"]
 radius = 5.0
@@ -24,6 +39,7 @@ passive = true
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_5j4s5")]
 maxHealth = 1
+loottable = SubResource("Resource_jmug5")
 
 [node name="DeleteMeOutsideOfChunk" parent="." instance=ExtResource("3_ypvk5")]
 

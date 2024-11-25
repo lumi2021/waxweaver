@@ -22,7 +22,7 @@ func onUse(tileX:int,tileY:int,planetDir:int,planet,lastTile:Vector2):
 	if getBlockIsSolid(planet.DATAC.getTileData(downTile.x,downTile.y)):
 		var edit = Vector2i(tileX,tileY)
 		planet.DATAC.setInfoData(tileX,tileY,1)
-		planet.editTiles({edit:blockID})
+		planet.editTiles({edit:blockID},true)
 		PlayerData.consumeSelected()
 		playSound(tileX,tileY,planet)
 		return "success"
@@ -33,7 +33,7 @@ func onUse(tileX:int,tileY:int,planetDir:int,planet,lastTile:Vector2):
 	if getBlockIsSolid(planet.DATAC.getTileData(rightTile.x,rightTile.y)):
 		var edit = Vector2i(tileX,tileY)
 		planet.DATAC.setInfoData(tileX,tileY,2)
-		planet.editTiles({edit:blockID})
+		planet.editTiles({edit:blockID},true)
 		PlayerData.consumeSelected()
 		playSound(tileX,tileY,planet)
 		return "success"
@@ -43,7 +43,7 @@ func onUse(tileX:int,tileY:int,planetDir:int,planet,lastTile:Vector2):
 	if getBlockIsSolid(planet.DATAC.getTileData(leftTile.x,leftTile.y)):
 		var edit = Vector2i(tileX,tileY)
 		planet.DATAC.setInfoData(tileX,tileY,3)
-		planet.editTiles({edit:blockID})
+		planet.editTiles({edit:blockID},true)
 		PlayerData.consumeSelected()
 		playSound(tileX,tileY,planet)
 		return "success"
@@ -53,7 +53,7 @@ func onUse(tileX:int,tileY:int,planetDir:int,planet,lastTile:Vector2):
 	var bg = planet.DATAC.getBGData(tileX,tileY)
 	if ![0,1].has(bg):
 		var edit = Vector2i(tileX,tileY)
-		planet.editTiles({edit:blockID})
+		planet.editTiles({edit:blockID},true)
 		planet.DATAC.setInfoData(tileX,tileY,0)
 		PlayerData.consumeSelected()
 		playSound(tileX,tileY,planet)

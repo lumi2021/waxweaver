@@ -11,6 +11,7 @@ class_name Hurtbox
 
 enum types {MELEE = 0, RANGED = 1, MAGIC = 2}
 @export var damageType :types = types.MELEE
+@export var ignoreDefense :bool = false
 
 var id = 0
 

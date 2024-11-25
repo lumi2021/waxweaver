@@ -220,11 +220,33 @@ void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
 
             }
 
+            // moss biome
+            double r = (std::abs(dis - (baseSurface * 0.6 ) ) ) / (baseSurface * 0.75);
+
+            float caveSize = 0.25;
+            double n = noise->get_noise_2d((x+12000) * caveSize, (y+12000) * caveSize) + r;
+
+            int basecaveSize = 2;
+            double basen = noise->get_noise_2d(x * basecaveSize, y * basecaveSize) + r;
+            if ( basen < 0.35 && basen > -0.35 ){
+
+                if ( n > 0.6 ){
+                    if( planet->getTileData(x,y) == 2 ){
+                        planet->setTileData(x,y,74);
+                        planet->setTimeData(x,y, (std::rand() % 8000) * -1 );
+                    }
+
+                    if( planet->getBGData(x,y) == 2 ){
+                    planet->setBGData(x,y,74);
+                    }
+                }
+            }
+
 
         }
     }
 
-    // end big loops, spawn structure?
+    // end of big loops, spawn structure?
 
     int randX = (std::rand() % (baseSurface * 2)) + skySize; // finds random position underground
     int randY = (std::rand() % (baseSurface * 2)) + skySize;

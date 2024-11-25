@@ -409,6 +409,14 @@ func scanForBullet():
 			return [data,i] # sends item data and slots
 	return null
 
+func scanForBlock():
+	for i in range(40):
+		var id = inventory[i][0]
+		var data = ItemData.getItem(id)
+		if data is ItemBlock:
+			return [data,i] # sends item data and slots
+	return null
+
 func replaceSelectedSlot(id:int,amount:int):
 	inventory[selectedSlot] = [id,amount]
 	emit_signal("updateInventory")

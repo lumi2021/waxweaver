@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ItemGift" load_steps=19 format=3 uid="uid://bi2twuht27huo"]
+[gd_resource type="Resource" script_class="ItemGift" load_steps=20 format=3 uid="uid://bi2twuht27huo"]
 
 [ext_resource type="Script" path="res://object_scenes/specialResource/lootTables/LootTable.gd" id="1_1rtil"]
 [ext_resource type="Script" path="res://item_resources/item_classes/ItemGift.gd" id="1_xngf1"]
@@ -96,11 +96,18 @@ amountMin = 1
 amountMax = 1
 weight = 2
 
+[sub_resource type="Resource" id="Resource_x5lmx"]
+script = ExtResource("2_vawkx")
+id = 3124
+amountMin = 1
+amountMax = 1
+weight = 10
+
 [sub_resource type="Resource" id="Resource_js6nd"]
 script = ExtResource("1_1rtil")
 rollType = 1
 rollCount = 3
-table = Array[ExtResource("2_vawkx")]([SubResource("Resource_duaum"), SubResource("Resource_46tpd"), SubResource("Resource_c3m72"), SubResource("Resource_djtx3"), SubResource("Resource_412es"), SubResource("Resource_hwil7"), SubResource("Resource_c6kf2"), SubResource("Resource_18leo"), SubResource("Resource_bqrhn"), SubResource("Resource_xaw8v"), SubResource("Resource_mpj0c"), SubResource("Resource_vdobr"), SubResource("Resource_bwgnr")])
+table = Array[ExtResource("2_vawkx")]([SubResource("Resource_duaum"), SubResource("Resource_46tpd"), SubResource("Resource_c3m72"), SubResource("Resource_djtx3"), SubResource("Resource_412es"), SubResource("Resource_hwil7"), SubResource("Resource_c6kf2"), SubResource("Resource_18leo"), SubResource("Resource_bqrhn"), SubResource("Resource_xaw8v"), SubResource("Resource_mpj0c"), SubResource("Resource_vdobr"), SubResource("Resource_bwgnr"), SubResource("Resource_x5lmx")])
 
 [resource]
 script = ExtResource("1_xngf1")

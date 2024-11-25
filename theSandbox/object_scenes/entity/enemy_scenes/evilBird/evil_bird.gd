@@ -70,6 +70,7 @@ func waitForPlayer(delta):
 	if randi() % 100 == 0:
 		vel = Vector2(dir*100,-100)
 		$axis/AnimatedSprite2D.flip_h = dir > 0
+		SoundManager.playSound("enemy/step",global_position,0.8,0.1)
 	
 	$axis.rotation = getWorldRot(self)
 	

@@ -140,7 +140,7 @@ func _physics_process(delta):
 	#if shouldUpdateLight > 0 and is_instance_valid(GlobalRef.player):
 	GlobalRef.player.updateLightStatic()
 
-func editTiles(changeCommit):
+func editTiles(changeCommit,doneByPlayer:bool=false):
 	var chunksToUpdate = []
 	for change in changeCommit.keys():
 		var c = changeCommit[change]
@@ -153,7 +153,7 @@ func editTiles(changeCommit):
 				DATAC.setTileData(change.x,change.y,airOrCaveAir(change.x,change.y))
 				BlockData.breakBlock(change.x,change.y,self,save,DATAC.getInfoData(change.x,change.y))
 				DATAC.setInfoData(change.x,change.y,0)
-				
+				DATAC.setTimeData(change.x,change.y,GlobalRef.globalTick)
 				if chestDictionary.has(Vector2(change.x,change.y)):
 					var p = Vector2(change.x,change.y)
 					PlayerData.dropChestContainer(self,p,chestDictionary[p])
@@ -172,7 +172,8 @@ func editTiles(changeCommit):
 					DATAC.setBGData(change.x,change.y,abs(c))
 				else:
 					DATAC.setTileData(change.x,change.y,c)
-				DATAC.setTimeData(change.x,change.y,GlobalRef.globalTick)
+					if doneByPlayer:
+						DATAC.setTimeData(change.x,change.y,GlobalRef.globalTick)
 		
 		var chunkVector = Vector2( change.x/8 , change.y/8 )
 		if !chunksToUpdate.has(chunkVector):

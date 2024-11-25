@@ -7,7 +7,7 @@
 script = ExtResource("1_0bogw")
 itemName = "Wax Lollipop"
 subtext = ""
-desc = "\"Tastes disgusting...\""
+desc = "An acceptable offering..."
 texture = ExtResource("2_e12ix")
 maxStackSize = 99
 clickToUse = false

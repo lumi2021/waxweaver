@@ -28,7 +28,7 @@ func onUse(tileX:int,tileY:int,planetDir:int,planet,lastTile:Vector2):
 	var d = size.rotated(o*(PI/2))
 	if checkAvailableArea(alter.x,alter.y,d,planet,o):
 		playSound(tileX,tileY,planet)
-		planet.editTiles(makeCoolEditArray(alter.x,alter.y,d,planet,o%2==0,side))
+		planet.editTiles(makeCoolEditArray(alter.x,alter.y,d,planet,o%2==0,side),true)
 		PlayerData.consumeSelected()
 		
 # returns whether or not block can be placed

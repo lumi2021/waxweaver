@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://cmw1aeigrulo6"]
+
+[ext_resource type="Script" path="res://item_resources/Item.gd" id="1_evsi2"]
+[ext_resource type="Texture2D" uid="uid://ckpr2qt1l1s8m" path="res://items/material/glowworm.png" id="2_tepg0"]
+
+[resource]
+script = ExtResource("1_evsi2")
+itemName = "Glowworm"
+subtext = ""
+desc = ""
+texture = ExtResource("2_tepg0")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false
