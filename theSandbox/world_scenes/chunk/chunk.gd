@@ -26,7 +26,7 @@ func _ready():
 	pos = position
 	position = (pos * 64) - Vector2(planet.SIZEINCHUNKS*32,32*planet.SIZEINCHUNKS)
 	
-
+	#BlockData.theChunker.resetLight(planet.DATAC,Vector2i(pos))
 	id4 = (int(pos.x) % 2)+((int(pos.y) % 2)*2)
 	
 	set_process(false)
@@ -80,3 +80,6 @@ func _on_visible_on_screen_notifier_2d_screen_exited():
 #debug
 func flicker(visshow):
 	$Icon.visible = visshow
+
+func _exit_tree():
+	BlockData.theChunker.resetLight(planet.DATAC,Vector2i(pos))
