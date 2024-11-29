@@ -74,6 +74,9 @@ func spawnGroundItem(tilex:int,tiley:int,id:int,planet):
 			print( planet.DATAC.getInfoData(tilex,tiley) )
 		55: # is bed
 			id = 6150 # for now
+		76: # is glowing orb
+			if planet.DATAC.getInfoData(tilex,tiley) == 0:
+				return # returns if not fully grown
 	
 	var ins = groundItemScene.instantiate()
 	ins.itemID = id

@@ -55,16 +55,7 @@ func clearSave(key):
 		dir.remove(key + ".sdata")
 	
 func open_site(url):
-	if OS.has_feature('web'):
-		JavaScriptBridge.eval("window.open(\"" + url + "\");")
-	else:
-		print("Could not open site " + url + " without an HTML5 build")
-
-func switchToSite(url):
-	if OS.has_feature('web'):
-		JavaScriptBridge.eval("window.open(\"" + url + "\", \"_parent\");")
-	else:
-		print("Could not switch to site " + url + " without an HTML5 build")
+	OS.shell_open(url)
 
 func has_save(key):
 	if OS.has_feature('web'):

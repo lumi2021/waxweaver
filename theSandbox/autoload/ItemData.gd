@@ -71,6 +71,7 @@ var data = {
 	
 	73:load("res://items/blocks/furniture/lights/JarFirefly.tres"),
 	74:load("res://items/blocks/natural/MossItem.tres"),
+	76:load("res://items/blocks/foliage/moss/OrbItem.tres"),
 	
 	########## item ids ##################
 	3000:load("res://items/tools/flimsy/FlimsySword.tres"), # flimsy tools

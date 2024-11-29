@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_evsi2")
-itemName = "Glowworm"
+itemName = "Luminous Sack"
 subtext = ""
 desc = ""
 texture = ExtResource("2_tepg0")

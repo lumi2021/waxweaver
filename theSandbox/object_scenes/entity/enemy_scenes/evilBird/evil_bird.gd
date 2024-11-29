@@ -42,9 +42,9 @@ func chase(delta):
 		targetY = (((randi() % 2) * 2) - 1) * 6.0
 	
 	if GlobalRef.player.dead:
-		targetY = -4.0
+		targetY = -2.0
 	if getSurface() < 0.0 and !GlobalRef.isNight():
-		targetY = -4.0
+		targetY = -2.0
 	if getWater() > 0.5:
 		targetY = -2.0 # bird will not be able to enter water
 		targetX *= -1.0

@@ -208,9 +208,19 @@ void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
                     Vector2i down = Vector2i( Vector2(0,1).rotated(acos(0.0)*quad) ) + Vector2i(x,y) ;
                     if( planet->getTileData(down.x,down.y) == 2 ){
                         // found suitable ground underground
+
+                        if(std::rand() % 260 == 0){
+                            planet->setTileData(x,y,54); // spawn pond
+                            planet->setInfoData(x,y, 3 );
+                        }
+
+
                         if(std::rand() % 260 == 0){
                             planet->setTileData(x,y,34); // spawn loot chest
                         }
+
+                        
+
 
                     }
                     
@@ -230,10 +240,11 @@ void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
             double basen = noise->get_noise_2d(x * basecaveSize, y * basecaveSize) + r;
             if ( basen < 0.35 && basen > -0.35 ){
 
-                if ( n > 0.6 ){
+                if ( n > 0.3 ){
                     if( planet->getTileData(x,y) == 2 ){
                         planet->setTileData(x,y,74);
-                        planet->setTimeData(x,y, (std::rand() % 8000) * -1 );
+                        planet->setTimeData(x,y, (std::rand() % 18000) * -1 ); // makes moss blocks a random amount of old so they can grow things when first loaded
+
                     }
 
                     if( planet->getBGData(x,y) == 2 ){

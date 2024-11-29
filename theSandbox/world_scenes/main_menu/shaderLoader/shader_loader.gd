@@ -11,7 +11,36 @@ var materialsToLoad = [
 	"res://object_scenes/lightmapCover/lightmap.tres",
 	"res://ui_scenes/playerHUD/inventory/slotMaterial.tres",
 ]
+
+var motd :Array[String]= [ # messages to display when opening the window
+	"hi chat",
+	"bring it back!",
+	"what if goku was betrayed and imprisoned in the hyberbolic time chamber?",
+	"weaverwax",
+	"this is the last update sorry",
+	"please play my hideo game",
+	"buy bug ball 3D NOW!",
+	"gordon feetman",
+	"your's truly, the pee man",
+	"shoutout tom fulp",
+	"goodnight, back to the future on VHS",
+	"proud daily second award winner",
+	"green square!",
+	"oldest trick in the book...",
+	"okay, seventh gear!",
+	"so unorganized...",
+	"the thanksgiving dinner and its consequences have been a disaster for the my tummy",
+	"dude, like... spiral out dude... learn to swim man...",
+	"billions must smile",
+	"stay prog my friends",
+	
+]
+
+
 func _ready():
+	
+	var r = randi() % motd.size()
+	DisplayServer.window_set_title("waxweaver - " + motd[r])
 	
 	RenderingServer.set_default_clear_color(Color.BLACK)
 	

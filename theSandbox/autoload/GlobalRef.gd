@@ -28,6 +28,7 @@ var playerCanUseItem = true
 
 var playerSpawn = null
 var playerSpawnPlanet = null
+var savedHealth = 100
 
 # day cycle
 var dayLength :int= 9000

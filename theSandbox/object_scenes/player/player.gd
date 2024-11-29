@@ -83,7 +83,8 @@ func _ready():
 	
 	PlayerData.selectSlot(0)
 	
-	healthComponent.heal(50)
+	healthComponent.health = GlobalRef.savedHealth
+	PlayerData.emit_signal("updateHealth")
 	
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	

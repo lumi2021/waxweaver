@@ -5,10 +5,11 @@
 
 [resource]
 script = ExtResource("1_rjlly")
-blockID = 58
-multiTileId = 1
+blockID = 54
+multiTileId = 3
 itemName = "Structure Block"
 subtext = ""
+desc = ""
 texture = ExtResource("2_52tvw")
 maxStackSize = 99
 clickToUse = true

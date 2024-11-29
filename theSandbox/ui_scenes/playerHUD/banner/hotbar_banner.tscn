@@ -489,6 +489,7 @@ offset_bottom = -1.0
 theme_override_fonts/font = ExtResource("7_tlsqg")
 theme_override_font_sizes/font_size = 16
 placeholder_text = "enter command"
+caret_blink = true
 
 [node name="BossHealthbar" type="Node2D" parent="."]
 position = Vector2(72, 279)

@@ -127,6 +127,7 @@ func saveGameToFile():
 	gameData["planets"] = planetDictionary
 	gameData["chests"] = chestDictionary
 	gameData["playerInventory"] = var_to_bytes(PlayerData.inventory).hex_encode()
+	gameData["playerHealth"] = GlobalRef.player.healthComponent.health
 	gameData["playtime"] = GlobalRef.globalTick
 	gameData["worldname"] = Saving.worldName
 	if GlobalRef.playerSpawnPlanet != null:
@@ -176,6 +177,12 @@ func loadSaveFromFile():
 	GlobalRef.globalTick = gameData["playtime"]
 	if gameData.has("worldname"):
 		Saving.worldName = gameData["worldname"]
+	
+	# player health
+	if gameData.has("playerHealth"):
+		GlobalRef.savedHealth = gameData["playerHealth"]
+	else:
+		GlobalRef.savedHealth = 100
 		
 func posToTile(pos):
 	# just ensures anything emitted into the main system doesnt crash

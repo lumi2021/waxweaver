@@ -79,7 +79,9 @@ func _process(delta):
 	
 	if cheatOrigin.visible:
 		if Input.is_action_just_pressed("ui_up"):
-			interpretCommand(previousMessage + " ")
+			textBox.text = previousMessage
+			textBox.set_caret_column(previousMessage.length())
+			#interpretCommand(previousMessage + " ")
 	
 	# death message
 	if is_instance_valid(deathTimer):
@@ -168,9 +170,10 @@ func splitSlot(slot):
 		return
 		
 func updateHealth():
-	$HealthBar/healthText.text = str(PlayerData.currentHealth) + " / " + str(PlayerData.maxHealth)
-	$HealthBar/bar.scale.x = PlayerData.currentHealth
-	$HealthBar/barShadow.scale.x = PlayerData.maxHealth
+	var h :HealthComponent = GlobalRef.player.healthComponent
+	$HealthBar/healthText.text = str(h.health) + " / " + str(h.maxHealth)
+	$HealthBar/bar.scale.x = h.health
+	$HealthBar/barShadow.scale.x = h.maxHealth
 
 
 func interpretCommand(text):
@@ -178,7 +181,8 @@ func interpretCommand(text):
 	#remove accidental slash
 	text = text.left(-1)
 	
-	previousMessage = text
+	if text != "":
+		previousMessage = text
 	
 	var command = text.get_slice(" ",0)
 	match command:
@@ -221,7 +225,7 @@ func interpretCommand(text):
 		
 		"zoom":
 			var z = text.get_slice(" ",1)
-			if z == "":
+			if z == "" or z == "zoom":
 				GlobalRef.sendError("ERROR: missing zoom amount")
 				return
 			GlobalRef.camera.zoom = Vector2(float(z),float(z))
@@ -290,6 +294,9 @@ func interpretCommand(text):
 			PlayerData.addItem(3000,1) # readds starting tools
 			PlayerData.addItem(3001,1)
 			PlayerData.emit_signal("armorUpdated")
+		"god":
+			GlobalRef.player.healthComponent.god = !GlobalRef.player.healthComponent.god
+			GlobalRef.sendChat("Toggled god mode")
 		_:
 			GlobalRef.sendError("Error: command doesn't exist")
 			return

@@ -30,6 +30,8 @@ Dictionary BLOCKSTRUCTURE::onTick(int x, int y, PLANETDATA *planet, int dir){
             return generateCavernHouse(x,y,planet,dir);
         case 2:
             return generateBossShipPlatform(x,y,planet,dir);
+        case 3:
+            return genetatePond(x,y,planet,dir);
 
 
     }
@@ -169,4 +171,58 @@ Dictionary BLOCKSTRUCTURE::generateBossShipPlatform(int worldx, int worldy, PLAN
     }
 
     return changes;
+}
+
+Dictionary BLOCKSTRUCTURE::genetatePond(int worldx, int worldy, PLANETDATA *planet, int dir){
+    Dictionary changes = {};
+
+    int tiles[35] = {
+    -1,-1,2,-1,-1,
+    0,0,-8,2,-1,
+    0,0,-8,-8,2,
+    0,0,-8,-8,2,
+    0,0,-8,-8,2,
+    0,0,-8,2,-1,
+    -1,-1,2,-1,-1
+    };
+
+
+    int i = 0;
+    for( int x = 0; x < 7; x++ ){
+        for( int y = 0; y < 5; y++ ){
+            
+            if (tiles[i] == -1){ 
+                i++;
+                continue; } // skips generation if id is -1
+            
+            Vector2 p = Vector2(x-3,y-1).rotated(acos(0.0)*dir);
+            Vector2i pos = Vector2i(p.x + worldx,p.y + worldy);
+
+            if (tiles[i] == 2){ // skip if block is already present, otherwise place stone
+                if (planet->getTileData(pos.x,pos.y) > 2){ // block already exists
+                    i++;
+                    continue; 
+                }
+            }
+
+            if (tiles[i] == -8){ // place air and water
+                
+                changes[pos] = 0;
+                planet->setWaterData(pos.x,pos.y,1.0);
+
+
+                i++;
+                continue; 
+                
+            }
+
+
+            changes[pos] = tiles[i];
+            i++;
+        }
+    
+    }
+
+    return changes;
+
 }

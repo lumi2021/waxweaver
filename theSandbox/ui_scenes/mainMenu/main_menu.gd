@@ -8,14 +8,20 @@ var state :int=0
 
 @onready var selectedslot = $savefiles/ScrollContainer/VBoxContainer/saveslot
 
+var waitUntilMusic :int= 0
+
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	$mainButtons/versionLabel.text = "v0." + str( GlobalRef.version )
+	SoundManager.deleteMusicNode()
 
 func _process(delta):
 	$bg/backgroundLayer.scroll(Vector2(0.1,0))
 	$MouseIcon.position = get_local_mouse_position()
-
+	if waitUntilMusic == 300:
+		$Music.play()
+	waitUntilMusic += 1
+	
 func enterState(newstate):
 	match newstate:
 		1:
@@ -71,3 +77,7 @@ func areyousuredelete(slot):
 func _on_yes_pressed():
 	enterState(1)
 	selectedslot.deleteSave()
+
+
+func _on_discord_pressed():
+	Saving.open_site("https://discord.com/invite/d6N8tbgW98")

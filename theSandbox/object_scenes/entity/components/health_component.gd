@@ -27,6 +27,8 @@ var statusEffects :Array[StatusEffect] = []
 ## Used for being immune to certain types of damage hitbox
 @export var damageTypeImmunities :Array = []
 
+var god :bool= false # prevents damage and knockback if true
+
 func _ready():
 	health = maxHealth
 	statusEffects = []
@@ -52,8 +54,10 @@ func damage(amount,area:Hurtbox=null,hitCrit:bool=false,source:String="idk",type
 		if parent.dead:
 			return
 	
+	if god:
+		return
 	
-	SoundManager.playSound("enemy/attackEnemy",parent.global_position,1.4,0.2)
+	SoundManager.playSound("enemy/attackEnemy",parent.global_position,0.8,0.2)
 	var trueAmount = amount
 	var def = defense
 	if checkIfHasEffect("fragile"):
@@ -116,6 +120,10 @@ func damagePassive(amount,source:String="idk"): # does damage while ignoring def
 		die(source)
 
 func dealKnockback(amount:float,dir:Vector2,mult:float):
+	
+	if god:
+		return
+	
 	var q = getWorldPosition()
 	dir = dir.rotated(-q*(PI/2)).normalized()
 	var b = (int(dir.x > 0.0) * 2) - 1
@@ -129,7 +137,7 @@ func dealKnockback(amount:float,dir:Vector2,mult:float):
 	
 func die(source:String="idk"):
 	
-	SoundManager.playSound("enemy/killSquish",parent.global_position,1.0, 0.1 )
+	SoundManager.playSound("enemy/killSquish",parent.global_position,0.5, 0.1 )
 	
 	if isPlayer:
 		clearAllStatus()

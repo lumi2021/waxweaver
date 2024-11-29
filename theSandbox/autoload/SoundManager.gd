@@ -10,6 +10,11 @@ var blockPlaceVol :float= 1.0
 var blockMineVol :float = 1.2
 var blockBreakVol :float = 1.4
 
+var randomMusicTick :float = 0
+var randomAmbientTick :float = 0
+
+var musicNode = null
+var ambientNode = null
 
 func _process(delta):
 	
@@ -26,7 +31,25 @@ func _process(delta):
 		wet = clamp(wet,0.0,0.5)
 		var effect = AudioServer.get_bus_effect(1,1) # gets reverb
 		effect.wet = wet
-
+		
+		if musicNode == null:
+			randomMusicTick += delta
+			if randomMusicTick >= 280:
+				if randi() % 1000 != 0:
+					return
+				if randi() % 2 == 0:
+					playMusic("music/planet ambience",1.0)
+				else:
+					playMusic("music/harnessforplanet",0.4)
+		if ambientNode == null:
+			randomAmbientTick += delta
+			if randomAmbientTick >= 2:
+				if randi() % 1000 != 0:
+					return
+				if randi() % 2 == 0:
+					playAmbient("ambient/softwindnoloop",0.1)
+				else:
+					playAmbient("ambient/spookywind",0.1)
 
 func playSound(file:String,globalPos:Vector2,volumeLinear:float,pitchVariation:float=0.0,bus:String="SFX") -> void:
 	
@@ -88,3 +111,45 @@ func getBreakSound(id:int=0) -> AudioStreamOggVorbis:
 func deleteAllSounds():
 	for child in get_children():
 		child.queue_free()
+
+func playMusic(file:String,volumeLinear:float,bus:String="MUSIC") -> void:
+	
+	var ins = AudioStreamPlayer.new()
+	ins.stream = load("res://sound/" + file + ".ogg")
+	ins.autoplay = true
+	ins.volume_db = linear_to_db(volumeLinear)
+	ins.bus = StringName(bus)
+	musicNode = ins
+	ins.connect("finished",deleteMusicNode)
+	add_child(ins)
+
+func deleteMusicNode():
+	if !is_instance_valid(musicNode):
+		musicNode = null
+		randomMusicTick = -10.0
+		return
+	musicNode.queue_free()
+	musicNode = null
+	
+	randomMusicTick = -10.0
+
+func playAmbient(file:String,volumeLinear:float,bus:String="AMBIENT") -> void:
+	
+	var ins = AudioStreamPlayer.new()
+	ins.stream = load("res://sound/" + file + ".ogg")
+	ins.autoplay = true
+	ins.volume_db = linear_to_db(volumeLinear)
+	ins.bus = StringName(bus)
+	ambientNode = ins
+	ins.connect("finished",deleteAmbientNode)
+	add_child(ins)
+
+func deleteAmbientNode():
+	if !is_instance_valid(ambientNode):
+		ambientNode = null
+		randomAmbientTick = -10.0
+		return
+	ambientNode.queue_free()
+	ambientNode = null
+	
+	randomAmbientTick = -10.0
