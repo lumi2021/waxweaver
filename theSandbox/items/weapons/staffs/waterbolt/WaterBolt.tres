@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ItemStaff" load_steps=5 format=3 uid="uid://wtwyjcviy326"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemStaff.gd" id="1_kckbs"]
+[ext_resource type="Texture2D" uid="uid://06qd5fn4nrfu" path="res://items/weapons/staffs/waterbolt/em.png" id="1_tsi38"]
+[ext_resource type="PackedScene" uid="uid://bjh0j4glwow0i" path="res://items/weapons/staffs/waterbolt/Waterbolt.tscn" id="2_sxvap"]
+[ext_resource type="Texture2D" uid="uid://b0s717cuhick0" path="res://items/weapons/staffs/waterbolt/waterboltStaff.png" id="3_18ixa"]
+
+[resource]
+script = ExtResource("1_kckbs")
+summoningObject = ExtResource("2_sxvap")
+delay = 0.5
+ejectPower = 300
+emissiveTex = ExtResource("1_tsi38")
+itemName = "Waterbolt Staff"
+subtext = ""
+desc = "Shoots a ball of water"
+texture = ExtResource("3_18ixa")
+maxStackSize = 1
+clickToUse = false
+infiniteReach = false

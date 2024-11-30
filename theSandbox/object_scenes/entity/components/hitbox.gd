@@ -12,6 +12,7 @@ var collectedIDs = []
 
 var invincible = false
 
+
 func _ready():
 	if healthComponent == null:
 		print("Error, entity has no health component")

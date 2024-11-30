@@ -53,3 +53,6 @@ func getLocalMouse():
 	var m = get_local_mouse_position()
 	m.x *= get_parent().get_parent().scale.x
 	return m
+
+func getDirectionTowardsMouse():
+	return getLocalMouse().normalized().rotated(GlobalRef.camera.rotation)

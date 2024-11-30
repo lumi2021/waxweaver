@@ -367,6 +367,7 @@ shape = SubResource("RectangleShape2D_jcs3x")
 
 [node name="Hitbox" parent="." node_paths=PackedStringArray("healthComponent", "colliderShape") instance=ExtResource("12_wduni")]
 modulate = Color(0.298039, 0.811765, 0, 1)
+collision_layer = 256
 healthComponent = NodePath("../HealthComponent")
 enemyBox = false
 invincTime = 0.7

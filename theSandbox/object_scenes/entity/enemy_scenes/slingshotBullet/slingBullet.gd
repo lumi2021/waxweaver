@@ -16,6 +16,8 @@ var state :int = 0 # 0 is flying, 1 is stuck
 
 var itemID :int= 2
 
+var placeInfo :int = -1
+
 func _ready():
 	SoundManager.playSound("items/bowFire",global_position,5.0,0.1)
 	setVelocity(dir.normalized() * speed)
@@ -37,7 +39,10 @@ func _process(delta):
 		stuck(delta)
 
 func fly(delta):
-	var blockID = ItemData.getItem(itemID).blockID
+	var itemd = ItemData.getItem(itemID)
+	var blockID = itemd.blockID
+	if itemd is ItemTypeBlock:
+		placeInfo = itemd.multiTileId
 	var vel = getVelocity()
 	
 	vel.y += 400 * delta
@@ -60,6 +65,10 @@ func fly(delta):
 		if pos != null:
 			if planet.DATAC.getTileData(pos.x,pos.y) < 2:
 				planet.editTiles({pos: blockID })
+				
+				if placeInfo != -1:
+					planet.DATAC.setInfoData(pos.x,pos.y, placeInfo )
+				
 			else:
 				BlockData.spawnItemRaw(pos.x,pos.y,blockID,planet)
 		queue_free()

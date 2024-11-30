@@ -8,6 +8,9 @@ var planet = null
 
 func getPos():
 	return planet.posToTile(position)
+	
+func getPosFrom(pos):
+	return planet.posToTile(pos)
 
 func getTile():
 	var pos = getPos()
@@ -50,6 +53,15 @@ func setLight(amount):
 	if getLight() > amount:
 		return
 	planet.DATAC.setLightData(pos.x,pos.y,-amount)
+
+func setWater(amount):
+	var pos = getPos()
+	
+	if pos == null:
+		return
+	
+	var a = getWater() + amount
+	planet.DATAC.setWaterData(pos.x,pos.y,-a)
 
 func getQuad(obj):
 	
@@ -113,3 +125,13 @@ func getSurface():
 		return 0
 	
 	return planet.getSurfaceDistance(pos.x,pos.y)
+
+func setLightPos(amount,posi):
+	var pos = getPosFrom(posi)
+	
+	if pos == null:
+		return
+	
+	if getLight() > amount:
+		return
+	planet.DATAC.setLightData(pos.x,pos.y,-amount)

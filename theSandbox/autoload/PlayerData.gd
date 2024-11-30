@@ -415,6 +415,8 @@ func scanForBlock():
 		var data = ItemData.getItem(id)
 		if data is ItemBlock:
 			return [data,i] # sends item data and slots
+		if data is ItemTypeBlock:
+			return [data,i] # sends item data and slots
 	return null
 
 func replaceSelectedSlot(id:int,amount:int):

@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://bjh0j4glwow0i"]
+
+[ext_resource type="Script" path="res://items/weapons/staffs/waterbolt/Waterbolt.gd" id="1_1homh"]
+[ext_resource type="Texture2D" uid="uid://mf6pwpiprm5c" path="res://items/material/string.png" id="2_5pu21"]
+
+[sub_resource type="Curve" id="Curve_exwyj"]
+max_value = 0.5
+_data = [Vector2(0, 0.0139728), 0.0, 1.52611, 0, 0, Vector2(0.0661765, 0.337991), 1.00151, 1.00151, 0, 0, Vector2(1, 0), -0.995804, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_y4rit"]
+offsets = PackedFloat32Array(0, 0.221311, 0.586066, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.756863, 0.807843, 1, 1, 0, 0.509804, 1, 1, 0, 0.509804, 1, 0)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rf7e1"]
+radius = 3.0
+
+[node name="Waterbolt" type="CharacterBody2D"]
+collision_layer = 0
+script = ExtResource("1_1homh")
+creatureSlots = 0
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 16
+lifetime = 0.2
+texture = ExtResource("2_5pu21")
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_max = 2.55
+angular_velocity_min = -720.0
+angular_velocity_max = 720.0
+orbit_velocity_min = -0.2
+orbit_velocity_max = 0.2
+scale_amount_curve = SubResource("Curve_exwyj")
+color_ramp = SubResource("Gradient_y4rit")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_rf7e1")

@@ -7,8 +7,7 @@
 script = ExtResource("1_18ftx")
 itemName = "Glowing Orb"
 subtext = ""
-desc = "it radiates 
-magical energy"
+desc = "it radiates magical energy"
 texture = ExtResource("2_tdtv1")
 maxStackSize = 99
 clickToUse = false

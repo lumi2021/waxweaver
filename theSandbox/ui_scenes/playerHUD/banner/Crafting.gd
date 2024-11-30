@@ -10,7 +10,7 @@ var stationScan = []
 var scanTick = 0
 signal scannedStations
 
-var showUncraftables : bool = false
+var showUncraftables : bool = true
 
 var oldRecipies :Array[int]= []
 

@@ -289,6 +289,9 @@ Array CHUNKDRAW::tickUpdate(PLANETDATA *planet,Vector2i pos,bool onScreen,float 
                     int rightHasCollider = cock->hasCollision( planet->getTileData(blockRight.x,blockRight.y) );
                     int leftHasCollider = cock->hasCollision( planet->getTileData(blockLeft.x,blockLeft.y) );
 
+                    if ( planet->getPositionLookup(blockRight.x,blockRight.y) != blockSide ){ rightHasCollider = true; }
+                    if ( planet->getPositionLookup(blockLeft.x,blockLeft.y) != blockSide ){ leftHasCollider = true; }
+
                     int coolValue = rightHasCollider + ( leftHasCollider * 2 );
                     if(coolValue == 2){
                         double waterLevelRight = std::abs(planet->getWaterData(blockRight.x,blockRight.y));
@@ -590,6 +593,7 @@ Vector2i CHUNKDRAW::getWaterImgPos(PLANETDATA *planet,int x,int y, int blockSide
 
    
     posi.x = std::ceil(std::abs(water * 8.0));
+    if (posi.x > 9){ posi.x = 9; }
     
     Vector2i tileABOVE = Vector2i(x,y) + Vector2i( Vector2(0,-1).rotated( acos(0.0) * blockSide ) );
     double waterlevelabove = planet->getWaterData(tileABOVE.x,tileABOVE.y);

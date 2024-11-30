@@ -1,0 +1,65 @@
+[gd_scene load_steps=10 format=3 uid="uid://bqrhlj054mkga"]
+
+[ext_resource type="Script" path="res://items/weapons/staffs/firebolt/firebolt.gd" id="1_8rxlo"]
+[ext_resource type="Texture2D" uid="uid://mf6pwpiprm5c" path="res://items/material/string.png" id="2_btghn"]
+[ext_resource type="PackedScene" uid="uid://8jw6pruiu3cf" path="res://object_scenes/entity/components/hurtbox.tscn" id="3_sorgb"]
+[ext_resource type="Script" path="res://object_scenes/specialResource/statusEffects/StatusInflictor.gd" id="4_jq1tr"]
+
+[sub_resource type="Curve" id="Curve_sbrhw"]
+max_value = 0.5
+_data = [Vector2(0, 0.0139728), 0.0, 1.52611, 0, 0, Vector2(0.0661765, 0.337991), 1.00151, 1.00151, 0, 0, Vector2(1, 0), -0.995804, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_godf8"]
+offsets = PackedFloat32Array(0, 0.409836, 0.721311, 1)
+colors = PackedColorArray(0.991164, 0.991164, 0.991164, 1, 0.99, 0.8745, 0, 1, 0.996078, 0.290196, 0.219608, 1, 0.6, 0.00599999, 0.00599999, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wrhcr"]
+radius = 2.0
+
+[sub_resource type="Resource" id="Resource_4pjkj"]
+script = ExtResource("4_jq1tr")
+effectName = "burning"
+seconds = 10.0
+chance = 10
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vb75v"]
+radius = 5.0
+
+[node name="Firebolt" type="CharacterBody2D"]
+collision_layer = 0
+script = ExtResource("1_8rxlo")
+creatureSlots = 0
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 16
+lifetime = 0.2
+texture = ExtResource("2_btghn")
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_max = 2.55
+angular_velocity_min = -720.0
+angular_velocity_max = 720.0
+orbit_velocity_min = -0.2
+orbit_velocity_max = 0.2
+scale_amount_curve = SubResource("Curve_sbrhw")
+color_ramp = SubResource("Gradient_godf8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_wrhcr")
+
+[node name="Hurtbox" parent="." instance=ExtResource("3_sorgb")]
+enemyBox = false
+damage = 7
+enemyName = "firebolt"
+statusInflictors = [SubResource("Resource_4pjkj")]
+damageType = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("CircleShape2D_vb75v")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(0, 1)
+hit_from_inside = true
+
+[connection signal="hitsomething" from="Hurtbox" to="." method="_on_hurtbox_hitsomething"]

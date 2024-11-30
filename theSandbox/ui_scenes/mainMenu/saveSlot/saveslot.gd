@@ -10,12 +10,19 @@ extends Container
 
 
 func _ready():
+	setData()
+
+func setData():
 	var gameData = Saving.read_save(saveFile)
 	if gameData == null:
 		$emptyslot.show()
 		$info.hide()
 		$createNew.show()
 		return
+	else:
+		$emptyslot.hide()
+		$info.show()
+		$createNew.hide()
 	
 	var ticks :int= gameData["playtime"]
 	var seconds = ticks/15 # sets to seconds

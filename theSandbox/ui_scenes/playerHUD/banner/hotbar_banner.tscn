@@ -449,6 +449,7 @@ tooltip_text = "show uncraftable items"
 texture = ExtResource("9_8uxfg")
 centered = false
 hframes = 2
+frame = 1
 
 [node name="HealthBar" type="Node2D" parent="."]
 position = Vector2(395, 7)

@@ -270,7 +270,7 @@ pause={
 2d_physics/layer_6="isShip"
 2d_physics/layer_8="enemy"
 2d_physics/layer_9="hitbox"
-2d_physics/layer_10="layer10"
+2d_physics/layer_10="enemyHitbox"
 2d_physics/layer_13="hurtbox"
 2d_physics/layer_14="layer14"
 

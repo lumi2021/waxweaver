@@ -14,11 +14,15 @@ func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	$mainButtons/versionLabel.text = "v0." + str( GlobalRef.version )
 	SoundManager.deleteMusicNode()
+	
+	if OS.has_feature("web"): # hide file directory buttons if on web
+		$savefiles/openDirectory.hide()
+		$savefiles/reloadSaves.hide()
 
 func _process(delta):
 	$bg/backgroundLayer.scroll(Vector2(0.1,0))
 	$MouseIcon.position = get_local_mouse_position()
-	if waitUntilMusic == 300:
+	if waitUntilMusic == 1200:
 		$Music.play()
 	waitUntilMusic += 1
 	
@@ -81,3 +85,12 @@ func _on_yes_pressed():
 
 func _on_discord_pressed():
 	Saving.open_site("https://discord.com/invite/d6N8tbgW98")
+
+
+func _on_open_directory_pressed():
+	Saving.open_site(ProjectSettings.globalize_path("user://"))
+
+
+func _on_reload_saves_pressed():
+	for child in $savefiles/ScrollContainer/VBoxContainer.get_children():
+		child.setData()

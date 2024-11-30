@@ -86,3 +86,8 @@ func waitForPlayer(delta):
 		if searchTicks > 10:
 			playerSpotted = true
 			$axis/AnimatedSprite2D.play("default")
+
+
+func _on_health_component_smacked():
+	playerSpotted = true
+	$axis/AnimatedSprite2D.play("default")

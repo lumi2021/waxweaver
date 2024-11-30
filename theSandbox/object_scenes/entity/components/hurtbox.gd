@@ -7,7 +7,7 @@ class_name Hurtbox
 
 @export var enemyName :String = "enemy" # name to print if player dies
 
-@export var statusInflictors :Array= []
+@export var statusInflictors :Array[StatusInflictor]= []
 
 enum types {MELEE = 0, RANGED = 1, MAGIC = 2}
 @export var damageType :types = types.MELEE

@@ -119,8 +119,6 @@ target_position = Vector2(5, 0)
 
 [node name="Hitbox" parent="." node_paths=PackedStringArray("healthComponent", "colliderShape") instance=ExtResource("5_ly7sk")]
 healthComponent = NodePath("../HealthComponent")
-enemyBox = null
-invincTime = null
 colliderShape = NodePath("CollisionShape2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
@@ -134,3 +132,5 @@ enemyName = "bird"
 shape = SubResource("CircleShape2D_anxn3")
 
 [node name="pointAtPlayer" type="RayCast2D" parent="."]
+
+[connection signal="smacked" from="HealthComponent" to="." method="_on_health_component_smacked"]

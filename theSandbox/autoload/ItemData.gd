@@ -72,6 +72,8 @@ var data = {
 	73:load("res://items/blocks/furniture/lights/JarFirefly.tres"),
 	74:load("res://items/blocks/natural/MossItem.tres"),
 	76:load("res://items/blocks/foliage/moss/OrbItem.tres"),
+	78:load("res://items/blocks/furniture/stations/MagicInfuser.tres"),
+	79:load("res://items/blocks/furniture/other/LadderPack.tres"),
 	
 	########## item ids ##################
 	3000:load("res://items/tools/flimsy/FlimsySword.tres"), # flimsy tools
@@ -222,7 +224,9 @@ var data = {
 	
 	3124:load("res://items/weapons/slingshot/Slingshot.tres"),
 	3125:load("res://items/material/Glowworm.tres"),
-	
+	3126:load("res://items/weapons/staffs/firebolt/FireBoltStaff.tres"),
+	3127:load("res://items/weapons/staffs/waterbolt/WaterBolt.tres"),
+	3128:load("res://items/weapons/staffs/lightning/LightningStaff.tres"),
 
 	# chairs 6000 - 6049
 	6000:load("res://items/blocks/furniture/chairs/WoodenChair.tres"),
@@ -250,6 +254,7 @@ var heldItemAnims = {
 	"itemTossable" : load("res://item_resources/item_held_scenes/itemTossable.tscn"),
 	"itemGun" : load("res://item_resources/item_held_scenes/item_gun.tscn"),
 	"itemSling": load("res://item_resources/item_held_scenes/item_slingshot.tscn"),
+	"itemStaff": load("res://item_resources/item_held_scenes/item_staff.tscn"),
 }
 
 func matchItemAnimation(id):
@@ -258,6 +263,8 @@ func matchItemAnimation(id):
 		return "itemSwingNoHitbox"
 	if d is ItemDamage:
 		return "itemSwing"
+	if d is ItemStaff:
+		return "itemStaff"
 	if d is ItemBow:
 		return "itemBow"
 	if d is ItemFood:

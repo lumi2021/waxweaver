@@ -51,5 +51,6 @@ func getData():
 	$holder/Hurtbox.damage =  Stats.getMeleeDamage(itemData.damage)
 	$holder/Hurtbox.knockback = itemData.knockbackMult + Stats.getBonusKnockback()
 	rotSpeed = itemData.animSpeed * Stats.getAttackSpeedMult()
-	$holder/Hurtbox.statusInflictors = []
+	var empty :Array[StatusInflictor] = []
+	$holder/Hurtbox.statusInflictors = empty
 	$holder/Hurtbox.statusInflictors += itemData.statusInflictors
