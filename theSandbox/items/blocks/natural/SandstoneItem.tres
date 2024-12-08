@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemBlock" load_steps=3 format=3 uid="uid://devg37aj1dnp1"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemBlock.gd" id="1_iylx4"]
+[ext_resource type="Texture2D" uid="uid://dcnxtbekk7kkc" path="res://items/blocks/natural/sandstone.png" id="2_sq2of"]
+
+[resource]
+script = ExtResource("1_iylx4")
+blockID = 84
+itemName = "Sandstone"
+subtext = ""
+desc = ""
+texture = ExtResource("2_sq2of")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

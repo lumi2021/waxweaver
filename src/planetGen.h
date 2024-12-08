@@ -37,6 +37,8 @@ public:
     void generateOre(PLANETDATA *planet,int x,int y,int oreID,int replaceID,int cycles);
     void generateBox(PLANETDATA *planet,int x, int y, int wallID, int bgID);
     void generateLadderPath(PLANETDATA *planet,int x, int y, int dir);
+
+    float biomeDistanceDetect(Vector2 source, Vector2 pos);
 	
 };
 

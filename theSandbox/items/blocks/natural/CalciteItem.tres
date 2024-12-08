@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemBlock" load_steps=3 format=3 uid="uid://yblshxlmjd3p"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemBlock.gd" id="1_br35l"]
+[ext_resource type="Texture2D" uid="uid://csjgkki8153o" path="res://items/blocks/natural/calcite.png" id="2_d1ggh"]
+
+[resource]
+script = ExtResource("1_br35l")
+blockID = 80
+itemName = "Geode"
+subtext = ""
+desc = ""
+texture = ExtResource("2_d1ggh")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

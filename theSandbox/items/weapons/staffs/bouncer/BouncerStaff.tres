@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="ItemStaff" load_steps=5 format=3 uid="uid://dt55s4ysg6tq2"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemStaff.gd" id="1_r33qk"]
+[ext_resource type="Texture2D" uid="uid://fg24vtpsgfak" path="res://items/weapons/staffs/bouncer/em.png" id="1_rg5p4"]
+[ext_resource type="PackedScene" uid="uid://bqrhlj054mkga" path="res://items/weapons/staffs/bouncer/bouncer.tscn" id="2_nqb0b"]
+[ext_resource type="Texture2D" uid="uid://epqipf1lnd0n" path="res://items/weapons/staffs/bouncer/bouncestaff.png" id="4_3ymsm"]
+
+[resource]
+script = ExtResource("1_r33qk")
+summoningObject = ExtResource("2_nqb0b")
+delay = 0.75
+ejectPower = 500
+emissiveTex = ExtResource("1_rg5p4")
+itemName = "Bounce Staff"
+subtext = ""
+desc = "damage: 1 - 25
+shoots a reflective bolt
+for each bounce, bolts
+gain +2 damage
+ignores defense"
+texture = ExtResource("4_3ymsm")
+maxStackSize = 1
+clickToUse = false
+infiniteReach = false

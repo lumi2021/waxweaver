@@ -13,7 +13,8 @@ ejectPower = 300
 emissiveTex = ExtResource("1_tsi38")
 itemName = "Waterbolt Staff"
 subtext = ""
-desc = "Shoots a ball of water"
+desc = "damage: 0
+shoots a ball of water"
 texture = ExtResource("3_18ixa")
 maxStackSize = 1
 clickToUse = false

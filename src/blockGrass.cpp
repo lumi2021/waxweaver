@@ -28,6 +28,33 @@ Dictionary BLOCKGRASS::onTick(int x, int y, PLANETDATA *planet, int dir) {
 
     Dictionary changes = {};
 
+    // grow foliage 17, 38
+    int timeAlive = planet->getGlobalTick() - planet->getTimeData(x,y);
+    if (timeAlive > 9000){
+        if(std::rand() % 10 != 0 ){
+            planet->setTimeData(x,y,planet->getGlobalTick());
+            return changes;
+        }
+        
+        Vector2i above = Vector2i(Vector2(0,-1).rotated(acos(0.0)*dir));
+        
+        if( planet->getTileData(x+above.x,y+above.y) > 1 ){
+            return changes;
+        }
+
+        int newid = 17;
+
+        if (std::rand() % 20 == 0 ){
+            newid = 38;
+        }
+
+        changes[Vector2i(x+above.x,y+above.y)] = newid;
+        planet->setTimeData(x,y,planet->getGlobalTick());
+        return changes;
+
+    }
+
+
     if (std::rand() % 500 != 0) {
         return changes;
     }
@@ -74,6 +101,9 @@ Dictionary BLOCKGRASS::onTick(int x, int y, PLANETDATA *planet, int dir) {
     
         }
     }
+
+
+
     
     return changes;
     

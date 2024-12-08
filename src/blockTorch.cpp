@@ -21,7 +21,7 @@ BLOCKTORCH::BLOCKTORCH() {
     hasCollision = false;
 
     lightMultiplier = 1.0;
-    lightEmmission = 2.8;
+    lightEmmission = 2.4;
 
     rotateTextureToGravity = true;
 

@@ -59,31 +59,28 @@ Dictionary BLOCKCROPPOTATO::onTick(int x, int y, PLANETDATA *planet, int dir){
         return changes;
     }
 
-    if ( timeAlive > 10000 ) { // age if unloaded
 
-        planet->setInfoData( x,y,4 );
-        changes[Vector2i(x,y)] = 37;
-        return changes;
-        
-    }
+    if ( timeAlive > 600 ) { // aged long enough
 
-    if ( timeAlive > 1800 ) { // aged long enough
+        int wow = (timeAlive / 600) - 1;
 
-        if ( std::rand() % 1000 == 0 ){
+        if (wow >= 10){
+            wow = 9;
+        }
+
+        if ( std::rand() % (10-wow) == 0 ){
 
             planet->setInfoData( x,y,step + 1 );
             changes[Vector2i(x,y)] = 37;
-            return changes;
-
-        } else if ( timeAlive > 3000 ) {
-            // assume that shit grew if its been long enough
-            planet->setInfoData( x,y,step + 1 );
-            changes[Vector2i(x,y)] = 37;
+            planet->setTimeData(x,y,planet->getGlobalTick() );
             return changes;
 
         }
 
+        planet->setTimeData(x,y,planet->getGlobalTick() );
+
     }
+
 
 
 

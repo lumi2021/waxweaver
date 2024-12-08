@@ -2,18 +2,19 @@
 
 [ext_resource type="Texture2D" uid="uid://dwudb2nqlk404" path="res://items/weapons/staffs/firebolt/em.png" id="1_sfe4q"]
 [ext_resource type="Script" path="res://item_resources/item_classes/ItemStaff.gd" id="2_geubm"]
-[ext_resource type="PackedScene" uid="uid://bqrhlj054mkga" path="res://items/weapons/staffs/firebolt/firebolt.tscn" id="3_fsnso"]
+[ext_resource type="PackedScene" uid="uid://bbpyaglllipqh" path="res://items/weapons/staffs/firebolt/firebolt.tscn" id="3_kc2ds"]
 [ext_resource type="Texture2D" uid="uid://bmdtpo28adxw0" path="res://items/weapons/staffs/firebolt/fireboltStaff.png" id="4_lw735"]
 
 [resource]
 script = ExtResource("2_geubm")
-summoningObject = ExtResource("3_fsnso")
+summoningObject = ExtResource("3_kc2ds")
 delay = 0.5
 ejectPower = 430
 emissiveTex = ExtResource("1_sfe4q")
 itemName = "Fireball Staff"
 subtext = ""
-desc = "Shoots a bouncy fireball
+desc = "damage: 7
+shoots a bouncy fireball
 10% chance to burn"
 texture = ExtResource("4_lw735")
 maxStackSize = 1

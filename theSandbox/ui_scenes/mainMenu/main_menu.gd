@@ -2,9 +2,12 @@ extends Node2D
 
 var state :int=0 
 # 0: main 
-#1: save files 
-#2: naming new save
+# 1: save files 
+# 2: naming new save
 # 3: are you sure?
+# 4: options
+# 5: web disclaimer
+# 6: controls + tutorial
 
 @onready var selectedslot = $savefiles/ScrollContainer/VBoxContainer/saveslot
 
@@ -15,9 +18,15 @@ func _ready():
 	$mainButtons/versionLabel.text = "v0." + str( GlobalRef.version )
 	SoundManager.deleteMusicNode()
 	
+	CreatureData.creatureAmount = 0 # ensures mob cap is reset if u leave game
+	CreatureData.passiveAmount = 0
+	
 	if OS.has_feature("web"): # hide file directory buttons if on web
 		$savefiles/openDirectory.hide()
 		$savefiles/reloadSaves.hide()
+		
+		if !Saving.checkforgamesave(): # loads disclaimer if on web and there are no saves
+			enterState(5)
 
 func _process(delta):
 	$bg/backgroundLayer.scroll(Vector2(0.1,0))
@@ -37,12 +46,22 @@ func enterState(newstate):
 			if state == 1:
 				$savefiles.hide()
 			$mainButtons.show()
+			
 		2:
 			$createNewWorld.show()
 			$savefiles.hide()
 		3:
 			$areyousure.show()
 			$savefiles.hide()
+		4:
+			$mainButtons.hide()
+			$optionsMenu.show()
+		5:
+			$mainButtons.hide()
+			$disclaimer.show()
+		6:
+			$mainButtons.hide()
+			$tutorial.show()
 	
 	$bg/AnimatedSprite2D.visible = newstate == 0
 	$bg/AnimatedSprite2D2.visible = newstate == 0
@@ -67,6 +86,8 @@ func createNewSave(slot):
 
 func _on_confirm_pressed():
 	Saving.worldName = $createNewWorld/TextEdit.text
+	$createNewWorld/Label.text = "generating... please be patient"
+	await get_tree().create_timer(0.5).timeout
 	selectedslot.createNewWorld()
 
 
@@ -94,3 +115,25 @@ func _on_open_directory_pressed():
 func _on_reload_saves_pressed():
 	for child in $savefiles/ScrollContainer/VBoxContainer.get_children():
 		child.setData()
+
+
+func _on_options_menu_menu_closed():
+	enterState(0)
+
+
+func _on_options_pressed():
+	enterState(4)
+
+
+func _on_okay_disclaimer_pressed():
+	$disclaimer.hide()
+	enterState(0)
+
+
+func _on_gobacktutorial_pressed():
+	$tutorial.hide()
+	enterState(0)
+
+
+func _on_tutorial_pressed():
+	enterState(6)

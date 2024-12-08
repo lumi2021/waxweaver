@@ -13,7 +13,8 @@ ejectPower = 3
 emissiveTex = ExtResource("1_0eit8")
 itemName = "Zeus Staff"
 subtext = ""
-desc = ""
+desc = "damage: 20
+shoots a bolt of lightning"
 texture = ExtResource("3_e7y3w")
 maxStackSize = 1
 clickToUse = false

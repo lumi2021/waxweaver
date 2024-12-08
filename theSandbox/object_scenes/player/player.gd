@@ -140,9 +140,9 @@ func _process(delta):
 		return
 	
 	#map toggle
-	if Input.is_action_just_pressed("map"):
-		GlobalRef.camera.mapbg.visible = !GlobalRef.camera.mapbg.visible
-		GlobalRef.camera.map.visible = GlobalRef.camera.mapbg.visible
+	#if Input.is_action_just_pressed("map"):
+	#	GlobalRef.camera.mapbg.visible = !GlobalRef.camera.mapbg.visible
+	#	GlobalRef.camera.map.visible = GlobalRef.camera.mapbg.visible
 	
 	# suffocates player if they are in a block
 	if $suffocatingCast/suffocate.is_colliding() and !noClip:
@@ -816,7 +816,10 @@ func scanForStations():
 	var scan :Array[int]= []
 	for x in range(12):
 		for y in range(12):
-			var pos = Vector2(x,y) + scanBody.posToTile(scanBody.to_local(global_position)) - Vector2(6,6)
+			var peegas = scanBody.posToTile(scanBody.to_local(global_position))
+			if peegas == null:
+				continue
+			var pos = Vector2(x,y) + peegas - Vector2(6,6)
 			
 			var tile = scanBody.DATAC.getTileData(pos.x,pos.y)
 			if !scan.has(tile):
@@ -1117,7 +1120,7 @@ func respawn():
 	if is_instance_valid(GlobalRef.playerSpawnPlanet):
 		var spawn = GlobalRef.playerSpawn
 		if spawn == null:
-			spawn =  Vector2(4,GlobalRef.playerSpawnPlanet.DATAC.findSpawnPosition())
+			spawn =  Vector2(GlobalRef.playerSpawnPlanet.DATAC.findSpawnPosition(BlockData.theChunker.returnLookup()))
 		if GlobalRef.playerSpawnPlanet != planetOn:
 			global_position = spawn + GlobalRef.playerSpawnPlanet.position
 			state = 0 
@@ -1126,9 +1129,15 @@ func respawn():
 				detachFromPlanet()
 			attachToPlanet(GlobalRef.playerSpawnPlanet)
 		else:
+			var t = planetOn.posToTile(spawn)
+			if planetOn.DATAC.getTileData(t.x,t.y) != 55:
+				var pee = lastPlanetOn.DATAC.findSpawnPosition(BlockData.theChunker.returnLookup())
+				position = Vector2(pee)
+				GlobalRef.sendChat("Bed was missing!")
+				return
 			position = spawn
 	else:
-		var pee = lastPlanetOn.DATAC.findSpawnPosition()
+		var pee = lastPlanetOn.DATAC.findSpawnPosition(BlockData.theChunker.returnLookup())
 		position = Vector2(pee)
 	
 	airTime = 0.0 # cancel fall damage

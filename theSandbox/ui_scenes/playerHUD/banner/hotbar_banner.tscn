@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://daqevwntvcp3o"]
+[gd_scene load_steps=29 format=3 uid="uid://daqevwntvcp3o"]
 
 [ext_resource type="Script" path="res://ui_scenes/playerHUD/banner/hotbar_banner.gd" id="1_iyyfi"]
 [ext_resource type="PackedScene" uid="uid://cr7y1t1hoywt1" path="res://ui_scenes/playerHUD/inventory/inventory_slot.tscn" id="2_il2kt"]
@@ -11,7 +11,9 @@
 [ext_resource type="FontFile" uid="uid://c3vw44vws5n61" path="res://zeeg/font/I-pixel-u.ttf" id="6_bqidn"]
 [ext_resource type="FontFile" uid="uid://bn0yrqolh4ms8" path="res://zeeg/font/Arcadepix Plus.ttf" id="7_tlsqg"]
 [ext_resource type="Texture2D" uid="uid://b0ux0djrrr28d" path="res://ui_scenes/playerHUD/defense/coolShield.png" id="8_5tjvp"]
+[ext_resource type="Texture2D" uid="uid://s5exoi1grx6o" path="res://ui_scenes/playerHUD/armor/trinketicon.png" id="8_tkheo"]
 [ext_resource type="Texture2D" uid="uid://q1g4ghc2dp45" path="res://ui_scenes/playerHUD/crafting/visibleEyes.png" id="9_8uxfg"]
+[ext_resource type="Texture2D" uid="uid://2bhi0hinykfv" path="res://ui_scenes/playerHUD/armor/vanityHat.png" id="9_j450m"]
 [ext_resource type="Texture2D" uid="uid://dsx73vuxh2j7g" path="res://ui_scenes/playerHUD/bossBar/bossBarEmpty.png" id="13_wl3ai"]
 [ext_resource type="Texture2D" uid="uid://ew4r1qdxj6uk" path="res://ui_scenes/playerHUD/bossBar/bossBarFull.png" id="14_ooqiu"]
 [ext_resource type="Script" path="res://ui_scenes/playerHUD/banner/hb.gd" id="15_odhhx"]
@@ -330,7 +332,7 @@ position = Vector2(72, 85)
 slotToDisplay = 39
 
 [node name="defense" type="Sprite2D" parent="Menu"]
-position = Vector2(114, 105)
+position = Vector2(105, 104)
 texture = ExtResource("8_5tjvp")
 centered = false
 
@@ -344,71 +346,81 @@ text = "0"
 label_settings = SubResource("LabelSettings_0g03e")
 horizontal_alignment = 1
 
+[node name="thing" type="TextureRect" parent="Menu"]
+offset_left = 153.0
+offset_top = 101.0
+offset_right = 177.0
+offset_bottom = 117.0
+tooltip_text = "trinket slots"
+mouse_filter = 0
+texture = ExtResource("8_tkheo")
+expand_mode = 2
+stretch_mode = 2
+
+[node name="thing2" type="TextureRect" parent="Menu"]
+offset_left = 126.0
+offset_top = 104.0
+offset_right = 150.0
+offset_bottom = 120.0
+tooltip_text = "vanity slots"
+mouse_filter = 0
+texture = ExtResource("9_j450m")
+expand_mode = 2
+stretch_mode = 2
+
 [node name="ArmorSlots" type="Node2D" parent="Menu"]
 position = Vector2(105, 50)
 
 [node name="slot40" parent="Menu/ArmorSlots" instance=ExtResource("2_il2kt")]
 slotToDisplay = 40
-customToolTip = "helmet slot"
 
 [node name="slot41" parent="Menu/ArmorSlots" instance=ExtResource("2_il2kt")]
 position = Vector2(0, 19)
 slotToDisplay = 41
-customToolTip = "chestplate slot"
 
 [node name="slot42" parent="Menu/ArmorSlots" instance=ExtResource("2_il2kt")]
 position = Vector2(0, 38)
 slotToDisplay = 42
-customToolTip = "leggings slot"
 
 [node name="VanitySlots" type="Node2D" parent="Menu"]
 position = Vector2(124, 50)
 
 [node name="slot50" parent="Menu/VanitySlots" instance=ExtResource("2_il2kt")]
 slotToDisplay = 50
-customToolTip = "vanity hat slot"
 
 [node name="slot51" parent="Menu/VanitySlots" instance=ExtResource("2_il2kt")]
 position = Vector2(0, 19)
 slotToDisplay = 51
-customToolTip = "vanity shirt slot"
 
 [node name="slot52" parent="Menu/VanitySlots" instance=ExtResource("2_il2kt")]
 position = Vector2(0, 38)
 slotToDisplay = 52
-customToolTip = "vanity pants slot"
 
 [node name="AccessorySlots" type="Node2D" parent="Menu"]
 position = Vector2(150, 50)
 
 [node name="slot43" parent="Menu/AccessorySlots" instance=ExtResource("2_il2kt")]
 slotToDisplay = 43
-customToolTip = "trinket slot"
 
 [node name="slot44" parent="Menu/AccessorySlots" instance=ExtResource("2_il2kt")]
 position = Vector2(0, 19)
 slotToDisplay = 44
-customToolTip = "trinket slot"
 
 [node name="slot45" parent="Menu/AccessorySlots" instance=ExtResource("2_il2kt")]
 position = Vector2(0, 38)
 slotToDisplay = 45
-customToolTip = "trinket slot"
 
 [node name="slot46" parent="Menu/AccessorySlots" instance=ExtResource("2_il2kt")]
 position = Vector2(17, 0)
 slotToDisplay = 46
-customToolTip = "trinket slot"
 
 [node name="slot47" parent="Menu/AccessorySlots" instance=ExtResource("2_il2kt")]
 position = Vector2(17, 19)
 slotToDisplay = 47
-customToolTip = "trinket slot"
 
 [node name="slot48" parent="Menu/AccessorySlots" instance=ExtResource("2_il2kt")]
 position = Vector2(17, 38)
 slotToDisplay = 48
-customToolTip = "trinket slot"
 
 [node name="Crafting" type="Node2D" parent="Menu"]
 position = Vector2(6, 157)
@@ -457,14 +469,14 @@ position = Vector2(395, 7)
 [node name="barShadow" type="Sprite2D" parent="HealthBar"]
 modulate = Color(0.972549, 0.631373, 0.266667, 1)
 position = Vector2(1, 1)
-scale = Vector2(50, 6)
+scale = Vector2(100, 6)
 texture = ExtResource("5_ryv7v")
 centered = false
 offset = Vector2(-1, 0)
 
 [node name="bar" type="Sprite2D" parent="HealthBar"]
 modulate = Color(1, 0.784314, 0.333333, 1)
-scale = Vector2(50, 6)
+scale = Vector2(100, 6)
 texture = ExtResource("5_ryv7v")
 centered = false
 offset = Vector2(-1, 0)
@@ -474,7 +486,7 @@ offset_left = -209.0
 offset_top = 1.0
 offset_right = 2.0
 offset_bottom = 13.0
-text = "50 / 50"
+text = "100 / 100"
 label_settings = SubResource("LabelSettings_utrlr")
 horizontal_alignment = 2
 

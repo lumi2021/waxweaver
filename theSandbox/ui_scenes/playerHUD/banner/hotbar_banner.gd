@@ -185,6 +185,19 @@ func interpretCommand(text):
 		previousMessage = text
 	
 	var command = text.get_slice(" ",0)
+	
+	if command == "cheats":
+		GlobalRef.cheatsEnabled = true
+		Saving.autosave()
+	
+	if !GlobalRef.cheatsEnabled:
+		if OS.has_feature("standalone"):
+			GlobalRef.sendChat("Cheats are currently disabled.")
+			GlobalRef.sendChat("Type 'cheats' to enable them.")
+			GlobalRef.sendChat("Enabling cheats will lock this save")
+			GlobalRef.sendChat("from earning achievements permanently.")
+			return
+	
 	match command:
 		"fullbright":
 			GlobalRef.lightmap.visible = !GlobalRef.lightmap.visible

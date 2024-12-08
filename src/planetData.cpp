@@ -352,7 +352,7 @@ Array PLANETDATA::createAllChunks(PackedScene *chunkScene, Node *chunkContainer,
     return FAGGOT;
 }
 
-Vector2i PLANETDATA::findSpawnPosition(){
+Vector2i PLANETDATA::findSpawnPosition(LOOKUPBLOCK *lookup){
     
     for(int y = 0; y < planetSize; y++){
         int id = getTileData(planetSize/2,y);
@@ -360,7 +360,7 @@ Vector2i PLANETDATA::findSpawnPosition(){
         int vert = ((y - 4) * 8) - (planetSize * 4) + 4;
 
 
-        if(id > 1){
+        if(lookup->hasCollision(id)){
             return Vector2i(4,vert);
         }
         if(std::abs(water) > 0.5){

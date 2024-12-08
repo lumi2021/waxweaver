@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bqrhlj054mkga"]
+[gd_scene load_steps=10 format=3 uid="uid://bbpyaglllipqh"]
 
 [ext_resource type="Script" path="res://items/weapons/staffs/firebolt/firebolt.gd" id="1_8rxlo"]
 [ext_resource type="Texture2D" uid="uid://mf6pwpiprm5c" path="res://items/material/string.png" id="2_btghn"]
@@ -52,7 +52,7 @@ shape = SubResource("CircleShape2D_wrhcr")
 enemyBox = false
 damage = 7
 enemyName = "firebolt"
-statusInflictors = [SubResource("Resource_4pjkj")]
+statusInflictors = Array[ExtResource("4_jq1tr")]([SubResource("Resource_4pjkj")])
 damageType = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]

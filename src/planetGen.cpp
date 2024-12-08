@@ -28,6 +28,8 @@ void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
     int lastSpawnedTree = 16;
     int baseSurface = std::max( planetSize / 4, (planetSize/2) - 128 );
     int skySize = (planetSize - (baseSurface * 2)) / 2;
+    Vector2 desertPos = Vector2(0, planetSize/2 );
+    Vector2 snowPos = Vector2(planetSize, planetSize/2 );
 
     // first pass
     // basic terrain, lakes and oceans
@@ -38,17 +40,69 @@ void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
             int side = Vector2(x,y).rotated(acos(0.0) * quad).x;
             double dis = getBlockDistance(x,y,planet);
             double surface = (noise->get_noise_1d(side*2.0) * 8.0)  +  baseSurface;
+            int biome = 0;
+
+            int bodyMaterial = 2;    // stone layer        // these ids are used to determine what material to place depending on the biome
+            int surfaceMaterial = 3; // dirt layer
+            int toplayerMaterial = 4; // grass layer
+
+            float desertDis = biomeDistanceDetect(desertPos,Vector2(x,y));
+            if (desertDis < (planetSize/3) - 2 ){
+                int chance = 1;
+                if (desertDis > (planetSize/3) - 8 ){
+                    chance = 2;
+                }
+                if (desertDis > (planetSize/3) - 6 ){
+                    chance = 4;
+                }
+                if (desertDis > (planetSize/3) - 4 ){
+                    chance = 8;
+                }
+                
+                if (std::rand() % chance == 0){
+                    biome = 1; // is desert
+                    bodyMaterial = 84;
+                    surfaceMaterial = 14;
+                    toplayerMaterial = 14;
+                }
+            }
+
+            float snowDis = biomeDistanceDetect(snowPos,Vector2(x,y));
+            if (snowDis < (planetSize/3) - 2 ){
+                int chance = 1;
+                if (snowDis > (planetSize/3) - 8 ){
+                    chance = 2;
+                }
+                if (snowDis > (planetSize/3) - 6 ){
+                    chance = 4;
+                }
+                if (snowDis > (planetSize/3) - 4 ){
+                    chance = 8;
+                }
+                
+                if (std::rand() % chance == 0){
+                    biome = 2; // is snow
+                    bodyMaterial = 86;
+                    surfaceMaterial = 85;
+                    toplayerMaterial = 85;
+                }
+
+                if( noise->get_noise_2d((x * 4) + 9999, (y * 4) + 9999) > 0.25 ){
+                    biome = 2;
+                    bodyMaterial = 2;
+                }
+            }
 
             if (dis <= surface){
-                planet->setTileData(x,y,2);
-                planet->setBGData(x,y,2);
+                planet->setTileData(x,y,bodyMaterial);
+                planet->setBGData(x,y,bodyMaterial);
             }
             else if (dis <= surface + 4){
-                planet->setTileData(x,y,3);
-                planet->setBGData(x,y,3);
+                planet->setTileData(x,y,surfaceMaterial);
+                planet->setBGData(x,y,surfaceMaterial);
             }
             else if (dis <= surface + 5){
-                planet->setTileData(x,y,4);
+                planet->setTileData(x,y,toplayerMaterial);
                 //planet->setBGData(x,y,0);
             }
 
@@ -56,15 +110,28 @@ void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
 
             int caveSize = 2;
             double n = noise->get_noise_2d(x * caveSize, y * caveSize) + r;
+
+            if (dis <= 24){
+                n = n * (dis/24.0);
+                if ( n < 0.35 && n > -0.35 ){
+                    planet->setBGData(x,y,80);
+                    planet->setTileData(x,y,80);
+                }
+            }
+
             if ( n < 0.25 && n > -0.25 ){
                 planet->setTileData(x,y, airOrCaveAir(x,y,planet) );
             }
+
+
 
             // lake / ocean stuff
             double lakeSurface = (noise->get_noise_1d((2000 + ( planetSize * quad * 0.75)) + (side*0.75)) * 64.0)  + baseSurface;
             if (dis >= lakeSurface && dis <= surface + 6){
                 
                 planet->setTileData(x,y, 4 );
+                if (biome == 1){planet->setTileData(x,y, 84 );} // sandstone if desert
+                if (biome == 2){ planet->setTileData(x,y, 85 ); } // snow if snow biome
                 //planet->setBGData(x,y,3);
 
                 int poop = dis - (baseSurface - 15);
@@ -74,8 +141,10 @@ void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
                 }
 
                 if ( dis <= baseSurface + 3 && dis >= lakeSurface + poop) {
+                    
                     planet->setTileData(x,y, 14 );
                     planet->setBGData(x,y,3);
+                    if (biome == 2){ planet->setTileData(x,y, 86 ); planet->setBGData(x,y,86); }
                 }
                 
                 if (dis >= lakeSurface + 8){
@@ -108,6 +177,12 @@ void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
             int side = Vector2(x,y).rotated(acos(0.0) * quad).x;
             int baseSurface = std::max( planetSize / 4, (planetSize/2) - 128 );
             double dis = getBlockDistance(x,y,planet);
+            int biome = 0;
+
+            float snowDis = biomeDistanceDetect(snowPos,Vector2(x,y));
+            if (snowDis < (planetSize/3) - 2 ){
+                biome = 2;
+            }
 
             if (planet->getTileData(x,y) == 4){
                 Vector2i up = Vector2i( Vector2(0,-1).rotated(acos(0.0)*quad) );
@@ -238,6 +313,9 @@ void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
 
             int basecaveSize = 2;
             double basen = noise->get_noise_2d(x * basecaveSize, y * basecaveSize) + r;
+            if (biome == 2){
+                basen = 99.0; // refuse to generate moss in snow biome
+            }
             if ( basen < 0.35 && basen > -0.35 ){
 
                 if ( n > 0.3 ){
@@ -266,8 +344,9 @@ void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
     generateLadderPath(planet,randX,randY, planet->getPositionLookup(randX,randY) );
 
     // generate boss platform
-    int h = (((std::rand() % 200) + 64) * ((( std::rand() % 2 ) * 2) - 1)) + 384;
-    int v = (noise->get_noise_1d(h*2.0) * 8.0) + (baseSurface/2) - 4;
+    int sky = ((planetSize/2)-baseSurface);
+    int h = sky + ( std::rand() % (planetSize-sky) );
+    int v = (noise->get_noise_1d(h*2.0) * 8.0) + sky - 2;
 
     // create rectangle
     for( int x = 0; x < 8; x++ ){
@@ -455,4 +534,8 @@ void PLANETGEN::generateLadderPath(PLANETDATA *planet,int x, int y, int dir){
 
     }
 
+}
+
+float PLANETGEN::biomeDistanceDetect(Vector2 source, Vector2 pos){
+    return source.distance_to(pos);
 }

@@ -11,6 +11,7 @@ func _process(delta):
 	rotation = GlobalRef.camera.rotation
 	
 	if parent.get_local_mouse_position().length() > 48:
+		$RightClick.visible = false
 		return
 	var editBody = parent.getEditingBody()
 	if !is_instance_valid(editBody):

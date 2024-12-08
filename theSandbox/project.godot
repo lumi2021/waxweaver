@@ -36,6 +36,7 @@ PlayerData="*res://autoload/PlayerData.gd"
 Indicators="*res://autoload/Indicators.gd"
 Background="*res://autoload/Background.gd"
 Saving="*res://autoload/Saving.gd"
+Options="*res://autoload/Options.gd"
 
 [debug]
 

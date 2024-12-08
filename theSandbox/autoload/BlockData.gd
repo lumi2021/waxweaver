@@ -57,7 +57,9 @@ func spawnGroundItem(tilex:int,tiley:int,id:int,planet):
 			
 			if randi() % 2 == 0:
 				return
-				
+		17: # is wheat seed
+			if randi() % 6 != 0:
+				return
 			
 		19: # is chair
 			id = 6000 + ( planet.DATAC.getInfoData(tilex,tiley) / 4)
@@ -77,6 +79,12 @@ func spawnGroundItem(tilex:int,tiley:int,id:int,planet):
 		76: # is glowing orb
 			if planet.DATAC.getInfoData(tilex,tiley) == 0:
 				return # returns if not fully grown
+		83: # wheat
+			if planet.DATAC.getInfoData(tilex,tiley) < 2:
+				spawnItemRaw(tilex,tiley,17,planet)
+				return # deletes if wheat isnt fullygrown
+			spawnItemRaw(tilex,tiley,17,planet)
+			spawnItemRaw(tilex,tiley,17,planet)
 	
 	var ins = groundItemScene.instantiate()
 	ins.itemID = id
@@ -242,6 +250,12 @@ func doBlockAction(action:String,tileX:int,tileY:int,planet):
 			var p = planet.tileToPos(Vector2(tileX,tileY))
 			var g = planet.to_global(p)
 			SoundManager.playSound("ambient/treerustle",g,1.0,0.02)
+		"sparkle":
+			var ins = load("res://items/blocks/foliage/rockFoliage/sparkle_part.tscn").instantiate()
+			ins.position = planet.tileToPos(Vector2(tileX,tileY))
+			ins.z_index = 5
+			ins.z_as_relative = false
+			planet.entityContainer.add_child(ins)
 
 func checkForEmmission(id):
 	var d = theChunker.getBlockDictionary(id)

@@ -8,7 +8,7 @@
 script = ExtResource("2_yar2i")
 effectName = "fragile"
 seconds = 30.0
-chance = 50
+chance = 90
 
 [resource]
 script = ExtResource("1_oat03")
@@ -16,10 +16,10 @@ healingAmount = 5
 eatTime = 1.0
 particleColor = Color(0.913725, 0.713726, 0.0862745, 1)
 statusInflictors = Array[ExtResource("2_yar2i")]([SubResource("Resource_hnu38")])
-itemName = "Hard Boiled Egg"
+itemName = "Raw Egg"
 subtext = ""
 desc = "Tastes okay.
-May reduce defense."
+Reduces defense. "
 texture = ExtResource("2_iiy3s")
 maxStackSize = 6
 clickToUse = false

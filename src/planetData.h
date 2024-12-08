@@ -64,7 +64,7 @@ public:
 
     Array createAllChunks(PackedScene *chunkScene, Node *chunkContainer, int sizeInChunks);
 
-    Vector2i findSpawnPosition();
+    Vector2i findSpawnPosition(LOOKUPBLOCK *lookup);
     int getBlockPosition(int x,int y,Vector2 centerPoint);
 
     void savePlanet();

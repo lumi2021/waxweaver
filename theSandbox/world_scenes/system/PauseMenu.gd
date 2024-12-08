@@ -15,6 +15,7 @@ func _on_savegame_pressed():
 func _on_unpause_pressed():
 	get_tree().paused = false
 	hide()
+	$optionsMenu.hide()
 
 
 func _on_saveandquit_pressed():
@@ -23,3 +24,7 @@ func _on_saveandquit_pressed():
 	SoundManager.deleteAllSounds()
 	get_tree().change_scene_to_file("res://ui_scenes/mainMenu/main_menu.tscn")
 
+
+
+func _on_options_pressed():
+	$optionsMenu.show()

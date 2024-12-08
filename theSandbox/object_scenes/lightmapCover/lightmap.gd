@@ -11,6 +11,13 @@ func _ready():
 	
 	sprite.material.set_shader_parameter("lightingMask",GlobalRef.lightRenderVP.get_texture())
 	$dropShadow.texture = GlobalRef.dropShadowRenderVP.get_texture()
+	
+	if !Options.options["showShadow"]:
+		$dropShadow.hide()
+	Options.connect("updatedOptions",fuck)
+
+func fuck():
+	$dropShadow.visible = Options.options["showShadow"]
 
 func _process(delta):
 	var g = GlobalRef.camera.global_position

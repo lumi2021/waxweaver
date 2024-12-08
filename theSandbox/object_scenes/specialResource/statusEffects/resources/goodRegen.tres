@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="StatusEffectPassiveHealing" load_steps=3 format=3 uid="uid://bv8nrm768whln"]
+
+[ext_resource type="Texture2D" uid="uid://c8pdg5ojxk2ve" path="res://object_scenes/specialResource/statusEffects/playerDisplayIcon/regen.png" id="1_4160k"]
+[ext_resource type="Script" path="res://object_scenes/specialResource/statusEffects/StatusEffectPassiveHealing.gd" id="2_vpo27"]
+
+[resource]
+script = ExtResource("2_vpo27")
+rateInSeconds = 1.0
+amount = 3
+displayName = "Good Regeneration"
+icon = ExtResource("1_4160k")
+dyeColor = Color(1, 1, 1, 1)
+incompatibleEffects = Array[String]([])

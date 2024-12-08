@@ -26,7 +26,7 @@ BLOCKTALLGRASS::BLOCKTALLGRASS() {
 
     connectTexturesToMe = false;
 
-    //itemToDrop = 7;
+    itemToDrop = 17;
 
     animated = true;
 

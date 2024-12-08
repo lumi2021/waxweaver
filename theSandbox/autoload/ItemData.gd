@@ -13,6 +13,7 @@ var data = {
 	14:load("res://items/blocks/natural/SandItem.tres"),
 	15:load("res://items/torches/TorchItem.tres"),
 	16:load("res://items/blocks/furniture/stations/Furnace.tres"),
+	17:load("res://items/blocks/foliage/crops/WheatSeed.tres"),
 	18:load("res://items/blocks/ores/CopperOre.tres"),
 	20:load("res://items/blocks/furniture/stations/WorkBench.tres"),
 	21:load("res://items/blocks/building/GlassItem.tres"),
@@ -74,6 +75,12 @@ var data = {
 	76:load("res://items/blocks/foliage/moss/OrbItem.tres"),
 	78:load("res://items/blocks/furniture/stations/MagicInfuser.tres"),
 	79:load("res://items/blocks/furniture/other/LadderPack.tres"),
+	80:load("res://items/blocks/natural/CalciteItem.tres"),
+	81:load("res://items/blocks/foliage/rockFoliage/crystal.tres"),
+	83:load("res://items/blocks/foliage/crops/WheatItem.tres"),
+	84:load("res://items/blocks/natural/SandstoneItem.tres"),
+	85:load("res://items/blocks/natural/SnowItem.tres"),
+	86:load("res://items/blocks/natural/IceItem.tres"),
 	
 	########## item ids ##################
 	3000:load("res://items/tools/flimsy/FlimsySword.tres"), # flimsy tools
@@ -227,6 +234,11 @@ var data = {
 	3126:load("res://items/weapons/staffs/firebolt/FireBoltStaff.tres"),
 	3127:load("res://items/weapons/staffs/waterbolt/WaterBolt.tres"),
 	3128:load("res://items/weapons/staffs/lightning/LightningStaff.tres"),
+	3129:load("res://items/weapons/staffs/bouncer/BouncerStaff.tres"),
+	
+	3130:load("res://items/food/BreadSlice.tres"),
+	3131:load("res://items/food/BreakfastSandwich.tres"),
+	3132:load("res://items/food/PoachedEgg.tres"),
 
 	# chairs 6000 - 6049
 	6000:load("res://items/blocks/furniture/chairs/WoodenChair.tres"),

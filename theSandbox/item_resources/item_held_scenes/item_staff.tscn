@@ -15,7 +15,6 @@ handSprite = NodePath("origin/handSprite")
 [node name="spr" type="Sprite2D" parent="origin"]
 position = Vector2(4.04982, -0.128988)
 rotation = -0.785398
-scale = Vector2(1, 1)
 texture = ExtResource("2_otmvp")
 offset = Vector2(2.70199, -2.77245)
 
@@ -28,7 +27,6 @@ offset = Vector2(2.70199, -2.77245)
 [node name="Marker2D" type="Marker2D" parent="origin/spr"]
 position = Vector2(6.23753, -6.30798)
 rotation = 0.785398
-scale = Vector2(1, 1)
 
 [node name="handSprite" type="Sprite2D" parent="origin"]
 modulate = Color(1, 0.784314, 0.333333, 1)

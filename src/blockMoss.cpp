@@ -55,6 +55,9 @@ Dictionary BLOCKMOSS::onTick(int x, int y, PLANETDATA *planet, int dir){
             if (r == 0){
                 itemToGrow = 76;
             }
+            if (r == 1){
+                itemToGrow = 26;
+            }
 
             if (r >= 16){
                 planet->setTimeData(x,y,planet->getGlobalTick());

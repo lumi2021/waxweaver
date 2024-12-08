@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://bx0771l28p0cu"]
+[gd_scene load_steps=35 format=3 uid="uid://bx0771l28p0cu"]
 
 [ext_resource type="Script" path="res://ui_scenes/mainMenu/main_menu.gd" id="1_y2dfr"]
 [ext_resource type="Texture2D" uid="uid://16yss77fimhy" path="res://ui_scenes/mainMenu/bg.png" id="2_2i3we"]
@@ -14,6 +14,10 @@
 [ext_resource type="FontFile" uid="uid://bn0yrqolh4ms8" path="res://zeeg/font/Arcadepix Plus.ttf" id="9_j42vm"]
 [ext_resource type="Texture2D" uid="uid://cx2m6wjr7efm6" path="res://ui_scenes/mainMenu/reload.png" id="10_xaeay"]
 [ext_resource type="AudioStream" uid="uid://ce5rfwabi53cj" path="res://sound/ambient/softwind.ogg" id="11_ny3be"]
+[ext_resource type="PackedScene" uid="uid://crkseldnn7m4" path="res://ui_scenes/options/options_menu.tscn" id="12_oduev"]
+[ext_resource type="Texture2D" uid="uid://dmywa8ylssaw6" path="res://ui_scenes/mainMenu/tutorialControls.png" id="14_bv80d"]
+[ext_resource type="Texture2D" uid="uid://dlexgb4yfmn38" path="res://items/food/birdMeat.png" id="15_lq83u"]
+[ext_resource type="Texture2D" uid="uid://csibj827o7h0h" path="res://ui_scenes/mainMenu/saveSlot/rect.png" id="16_kilqg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_e2jik"]
 atlas = ExtResource("2_q71dy")
@@ -104,6 +108,63 @@ shadow_size = 8
 shadow_color = Color(0, 0, 0, 1)
 shadow_offset = Vector2(-1, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_gvndp"]
+font_size = 32
+font_color = Color(0.341176, 0.341176, 0.341176, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8vrhq"]
+bg_color = Color(0.709804, 0.709804, 0.709804, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_slyn1"]
+bg_color = Color(0.658824, 0.658824, 0.658824, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y2px4"]
+bg_color = Color(0.509804, 0.509804, 0.509804, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_givww"]
+content_margin_left = 1.0
+content_margin_top = 0.0
+content_margin_right = 4.0
+content_margin_bottom = 0.0
+bg_color = Color(1, 1, 1, 0.176471)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 2
+anti_aliasing = false
+
+[sub_resource type="Theme" id="Theme_y2kaf"]
+VScrollBar/styles/grabber = SubResource("StyleBoxFlat_8vrhq")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxFlat_slyn1")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_y2px4")
+VScrollBar/styles/scroll = SubResource("StyleBoxFlat_givww")
+VScrollBar/styles/scroll_focus = null
+VSlider/constants/center_grabber = 0
+
 [node name="mainMenu" type="Node2D"]
 script = ExtResource("1_y2dfr")
 
@@ -147,10 +208,17 @@ texture = ExtResource("6_nmr1r")
 
 [node name="play" parent="mainButtons" instance=ExtResource("6_amthu")]
 offset_left = 360.0
-offset_top = 197.0
+offset_top = 173.0
 offset_right = 387.0
-offset_bottom = 214.0
+offset_bottom = 190.0
 buttonText = "play"
+
+[node name="tutorial" parent="mainButtons" instance=ExtResource("6_amthu")]
+offset_left = 336.0
+offset_top = 199.0
+offset_right = 386.0
+offset_bottom = 216.0
+buttonText = "tutorial"
 
 [node name="options" parent="mainButtons" instance=ExtResource("6_amthu")]
 offset_left = 339.0
@@ -318,6 +386,105 @@ offset_right = 279.0
 offset_bottom = 146.0
 buttonText = "no"
 
+[node name="optionsMenu" parent="." instance=ExtResource("12_oduev")]
+visible = false
+position = Vector2(98, 2)
+
+[node name="disclaimer" type="Node2D" parent="."]
+visible = false
+
+[node name="NinePatchRect" type="NinePatchRect" parent="disclaimer"]
+offset_left = 41.0
+offset_top = 21.0
+offset_right = 358.0
+offset_bottom = 276.0
+texture = ExtResource("16_kilqg")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="Label" type="Label" parent="disclaimer/NinePatchRect"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 16.0
+offset_right = 315.0
+offset_bottom = 48.0
+text = "disclaimer"
+label_settings = SubResource("LabelSettings_gvndp")
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="disclaimer/NinePatchRect"]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 59.0
+offset_right = 302.0
+offset_bottom = 237.0
+text = "this game is very performance heavy, and you may experience lag or stutters while playing on the web version of the game. If you do, please go to itch.io and check out the downloadble version of the game, which is much more stable and will offer better performance. Be sure to read the tutorial and have fun!"
+autowrap_mode = 2
+
+[node name="okayDisclaimer" parent="disclaimer/NinePatchRect" instance=ExtResource("6_amthu")]
+layout_mode = 0
+offset_left = 149.0
+offset_top = 225.0
+offset_right = 165.0
+offset_bottom = 242.0
+buttonText = "OK"
+
+[node name="tutorial" type="Node2D" parent="."]
+visible = false
+
+[node name="g" type="NinePatchRect" parent="tutorial"]
+offset_left = 71.0
+offset_top = 9.0
+offset_right = 336.0
+offset_bottom = 295.0
+texture = ExtResource("16_kilqg")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="gobacktutorial" parent="tutorial/g" instance=ExtResource("6_amthu")]
+layout_mode = 0
+offset_left = 230.0
+offset_top = 260.0
+offset_right = 246.0
+offset_bottom = 277.0
+buttonText = "OK"
+
+[node name="g" type="ScrollContainer" parent="tutorial/g"]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 14.0
+offset_right = 257.0
+offset_bottom = 254.0
+theme = SubResource("Theme_y2kaf")
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="g" type="ColorRect" parent="tutorial/g/g"]
+custom_minimum_size = Vector2(8, 780)
+layout_mode = 2
+color = Color(1, 1, 1, 0)
+
+[node name="TutorialControls" type="Sprite2D" parent="tutorial/g/g/g"]
+position = Vector2(120, 393)
+texture = ExtResource("14_bv80d")
+
+[node name="BirdMeat" type="Sprite2D" parent="tutorial/g/g/g"]
+position = Vector2(216, 767)
+texture = ExtResource("15_lq83u")
+
+[node name="Label" type="Label" parent="tutorial/g/g/g"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 638.0
+offset_right = 225.0
+offset_bottom = 711.0
+text = "the goal of the game is to find resources to become stronger, build a cool house, and to eventually beat the boss. There are lots of ways to go about it though, so experiment and have fun!"
+autowrap_mode = 2
+
 [node name="MouseIcon" type="Sprite2D" parent="."]
 position = Vector2(430, 268)
 texture = ExtResource("8_d6c0u")
@@ -335,6 +502,8 @@ volume_db = -12.0
 bus = &"MUSIC"
 
 [connection signal="pressed" from="mainButtons/play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="mainButtons/tutorial" to="." method="_on_tutorial_pressed"]
+[connection signal="pressed" from="mainButtons/options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="mainButtons/discord" to="." method="_on_discord_pressed"]
 [connection signal="pressed" from="mainButtons/quit" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="savefiles/backSave" to="." method="_on_back_save_pressed"]
@@ -344,3 +513,6 @@ bus = &"MUSIC"
 [connection signal="pressed" from="createNewWorld/cancel" to="." method="_on_cancel_pressed"]
 [connection signal="pressed" from="areyousure/yes" to="." method="_on_yes_pressed"]
 [connection signal="pressed" from="areyousure/no" to="." method="_on_cancel_pressed"]
+[connection signal="menuClosed" from="optionsMenu" to="." method="_on_options_menu_menu_closed"]
+[connection signal="pressed" from="disclaimer/NinePatchRect/okayDisclaimer" to="." method="_on_okay_disclaimer_pressed"]
+[connection signal="pressed" from="tutorial/g/gobacktutorial" to="." method="_on_gobacktutorial_pressed"]

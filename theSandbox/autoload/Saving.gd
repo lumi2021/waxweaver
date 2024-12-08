@@ -77,3 +77,10 @@ func downloadsave(key):
 	if OS.has_feature('web'):
 		var data = read_save(key)
 		JavaScriptBridge.download_buffer( var_to_bytes(JSON.stringify(data)), key + ".sdata" )
+
+func checkforgamesave():
+	for i in range(10):
+		if has_save("save" + str(i+1)):
+			return true
+	return false
+			

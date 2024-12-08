@@ -95,7 +95,7 @@ func generateNewSystem():
 		player.system = self
 		objectContainer.add_child(player)
 		
-		var pee = forestPlanet.DATAC.findSpawnPosition()
+		var pee = forestPlanet.DATAC.findSpawnPosition(BlockData.theChunker.returnLookup())
 		player.position = Vector2(pee) + forestPlanet.position
 		player.attachToPlanet(forestPlanet)
 		player.respawn()
@@ -130,6 +130,7 @@ func saveGameToFile():
 	gameData["playerHealth"] = GlobalRef.player.healthComponent.health
 	gameData["playtime"] = GlobalRef.globalTick
 	gameData["worldname"] = Saving.worldName
+	gameData["cheats"] = GlobalRef.cheatsEnabled
 	if GlobalRef.playerSpawnPlanet != null:
 		gameData["spawnPlanet"] = planets.find(GlobalRef.playerSpawnPlanet) # gets planet id
 		gameData["spawnpoint"] = var_to_str(GlobalRef.playerSpawn)
@@ -183,6 +184,9 @@ func loadSaveFromFile():
 		GlobalRef.savedHealth = gameData["playerHealth"]
 	else:
 		GlobalRef.savedHealth = 100
+	
+	# cheats
+	GlobalRef.cheatsEnabled = gameData["cheats"]
 		
 func posToTile(pos):
 	# just ensures anything emitted into the main system doesnt crash
@@ -207,3 +211,5 @@ func _process(delta):
 		get_tree().paused = !get_tree().paused
 		
 		$PauseMenu.visible = get_tree().paused
+		$PauseMenu/optionsMenu.hide()
+
