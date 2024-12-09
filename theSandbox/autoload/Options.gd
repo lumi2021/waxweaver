@@ -2,9 +2,9 @@ extends Node
 
 var defaultOptions :Dictionary= {
 	"showShadow":true,
-	"musicVolume":1.0,
-	"sfxVolume":1.0,
-	"ambientVolume":1.0,
+	"musicVolume":1.5,
+	"sfxVolume":1.5,
+	"ambientVolume":1.5,
 }
 
 var options :Dictionary = {}

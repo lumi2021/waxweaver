@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemMirror" load_steps=3 format=3 uid="uid://co08vo8upub8l"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemMirror.gd" id="1_psuht"]
+[ext_resource type="Texture2D" uid="uid://bwrt50hwvoptu" path="res://items/tools/special/magicMirror.png" id="2_wfcoa"]
+
+[resource]
+script = ExtResource("1_psuht")
+itemName = "Familiar Locket"
+subtext = ""
+desc = "teleports you to spawn
+\"reminds you of home\""
+texture = ExtResource("2_wfcoa")
+maxStackSize = 1
+clickToUse = true
+infiniteReach = true

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemBlock" load_steps=3 format=3 uid="uid://ela235h3u7ts"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemBlock.gd" id="1_es8qm"]
+[ext_resource type="Texture2D" uid="uid://bhlf7ig8pttpl" path="res://items/blocks/natural/clay.png" id="2_1qm1m"]
+
+[resource]
+script = ExtResource("1_es8qm")
+blockID = 88
+itemName = "Clay"
+subtext = ""
+desc = ""
+texture = ExtResource("2_1qm1m")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

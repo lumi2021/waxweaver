@@ -5,6 +5,12 @@ var dead :bool= false
 
 var deadTicks :float=0.0
 
+var hitplayer :bool = false
+
+func _ready():
+	if hitplayer:
+		$Hurtbox.enemyBox = true
+
 func _process(delta):
 	
 	if dead:

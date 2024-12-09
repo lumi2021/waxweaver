@@ -7,5 +7,6 @@
 script = ExtResource("1_wjrmy")
 displayName = "Tough"
 icon = ExtResource("1_00p12")
+description = "+5 defense!"
 dyeColor = Color(1, 1, 1, 1)
 incompatibleEffects = Array[String]([])

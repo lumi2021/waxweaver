@@ -8,6 +8,7 @@
 script = ExtResource("1_r7sbl")
 displayName = "Wet"
 icon = ExtResource("1_a6kh5")
+description = "you're wet!"
 dyeColor = Color(0.811765, 0.811765, 0.811765, 1)
 particle = ExtResource("1_36fxg")
 incompatibleEffects = Array[String]([])

@@ -81,6 +81,11 @@ var data = {
 	84:load("res://items/blocks/natural/SandstoneItem.tres"),
 	85:load("res://items/blocks/natural/SnowItem.tres"),
 	86:load("res://items/blocks/natural/IceItem.tres"),
+	87:load("res://items/blocks/foliage/trees/cactus/Cactus.tres"),
+	88:load("res://items/blocks/natural/ClayItem.tres"),
+	-88:load("res://items/walls/ClayWall.tres"),
+	89:load("res://items/blocks/building/Brick.tres"),
+	-89:load("res://items/walls/BrickWall.tres"),
 	
 	########## item ids ##################
 	3000:load("res://items/tools/flimsy/FlimsySword.tres"), # flimsy tools
@@ -239,6 +244,7 @@ var data = {
 	3130:load("res://items/food/BreadSlice.tres"),
 	3131:load("res://items/food/BreakfastSandwich.tres"),
 	3132:load("res://items/food/PoachedEgg.tres"),
+	3133:load("res://items/tools/special/MagicMirror.tres"),
 
 	# chairs 6000 - 6049
 	6000:load("res://items/blocks/furniture/chairs/WoodenChair.tres"),

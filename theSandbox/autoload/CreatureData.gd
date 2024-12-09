@@ -22,7 +22,8 @@ var creatures = {
 	"cobble":"res://object_scenes/entity/enemy_scenes/cobble/cobble.tscn",
 	"apparition":"res://object_scenes/entity/enemy_scenes/apparition/apparition.tscn",
 	"flower":"res://object_scenes/entity/enemy_scenes/flower/flower.tscn",
-	"mimic":"res://object_scenes/entity/enemy_scenes/mimic/mimic.tscn",
+	"mimic":"res://object_scenes/entity/enemy_scenes/mimic/mimic.tscn",\
+	"skull":"res://object_scenes/entity/enemy_scenes/skull/skull.tscn",
 	
 	# bosses
 	"bossShip":"res://object_scenes/entity/enemy_scenes/bosses/shipBossForest/boss_ship.tscn",
@@ -56,11 +57,31 @@ func determineContext(tile,planet):
 	if abs(planet.DATAC.getWaterData(tile.x,tile.y)) > 0.5:
 		return 3 # is water
 	
-	if planet.getSurfaceDistance(tile.x,tile.y) > 20.0:
-		return 2 # is cave
-	
-	if GlobalRef.isNight():
-		return 1 # surface night
+	var biome = planet.DATAC.getBiome(tile.x,tile.y)
+	match biome:
+		0: # no biome
+			if planet.getSurfaceDistance(tile.x,tile.y) > 20.0:
+				return 2 # is cave
+			if GlobalRef.isNight():
+				return 1 # surface night
+			return 0 #surface day
+		1: # desert
+			if planet.getSurfaceDistance(tile.x,tile.y) > 20.0:
+				return 6 # is cave
+			if GlobalRef.isNight():
+				return 5 # surface night
+			return 4 #surface day
+		2: # snow
+			if planet.getSurfaceDistance(tile.x,tile.y) > 20.0:
+				return 9 # is cave
+			if GlobalRef.isNight():
+				return 8 # surface night
+			return 7 #surface day
+		3: #moss
+			if planet.getSurfaceDistance(tile.x,tile.y) > 20.0:
+				return 10 # is underground moss
+			elif GlobalRef.isNight():
+				return 1 # surface night
 	return 0 #surface day
 
 func scanValid(planet,tile):

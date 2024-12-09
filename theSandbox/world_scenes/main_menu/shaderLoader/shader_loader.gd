@@ -16,8 +16,6 @@ var motd :Array[String]= [ # messages to display when opening the window
 	"hi chat",
 	"bring it back!",
 	"what if goku was betrayed and imprisoned in the hyberbolic time chamber?",
-	"weaverwax",
-	"this is the last update sorry",
 	"please play my hideo game",
 	"buy bug ball 3D NOW!",
 	"gordon feetman",
@@ -25,7 +23,7 @@ var motd :Array[String]= [ # messages to display when opening the window
 	"shoutout tom fulp",
 	"goodnight, back to the future on VHS",
 	"proud daily second award winner",
-	"green square!",
+	"green square!!",
 	"oldest trick in the book...",
 	"okay, seventh gear!",
 	"so unorganized...",
@@ -33,6 +31,11 @@ var motd :Array[String]= [ # messages to display when opening the window
 	"dude, like... spiral out dude... learn to swim man...",
 	"billions must smile",
 	"stay prog my friends",
+	"fat fucking squishy snail",
+	"True...",
+	"you live only once so try to spend as much time on Computer as it is possible.",
+	"a growlers production.",
+	"oohh fiddlesticks, what now?"
 	
 ]
 

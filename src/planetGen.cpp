@@ -179,6 +179,11 @@ void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
             double dis = getBlockDistance(x,y,planet);
             int biome = 0;
 
+            float desertDis = biomeDistanceDetect(desertPos,Vector2(x,y));
+            if (desertDis < (planetSize/3) - 2 ){
+                biome = 1;
+            }
+
             float snowDis = biomeDistanceDetect(snowPos,Vector2(x,y));
             if (snowDis < (planetSize/3) - 2 ){
                 biome = 2;
@@ -235,6 +240,38 @@ void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
 
             }
 
+            if (planet->getTileData(x,y) == 14){ // is sand
+                Vector2i up = Vector2i( Vector2(0,-1).rotated(acos(0.0)*quad) );
+                if( planet->getTileData(x+up.x,y+up.y) == 0 ){ // if space is free
+                    
+                    if(planet->getWaterData(x+up.x,y+up.y) > 0.4 ){ // is underwater
+                        if(std::rand() % 10 == 0){
+                            generateOre(planet,x,y,88,14,8);
+                        }
+                    }
+                    
+                    else if(biome == 1){ // is desert
+                        if(std::rand() % 5 == 0){ // 1 in 5 chance to spawn cactus
+                            planet->setTileData(x+up.x,y+up.y,87); // spawn cactus
+                            planet->setTimeData(x+up.x,y+up.y, ((std::rand() % 40000) + 6000 ) * -1 ); // age cactus randomly
+                        }
+
+                    }
+
+
+                }
+            
+            }
+
+            if (planet->getTileData(x,y) == 84){ // is sandstone
+                if(dis < baseSurface - 16){
+                    if(std::rand() % 220 == 0){
+                        generateOre(planet,x,y,88,84,8); // generate clay 
+                    }
+                }
+                
+            }
+            
             // ores
             if(dis < baseSurface - 16){
 

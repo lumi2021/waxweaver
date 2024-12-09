@@ -6,5 +6,6 @@
 script = ExtResource("1_ne0pv")
 lightAmount = 0.6
 displayName = "Glowing"
+description = "you glow in the dark!"
 dyeColor = Color(1.1, 1.1, 1.1, 1)
 incompatibleEffects = Array[String]([])

@@ -3,6 +3,7 @@ class_name StatusEffect
 
 @export var displayName :String= ""
 @export var icon :Texture2D
+@export var description :String = ""
 
 var healthComponent :HealthComponent
 var time := 1.0

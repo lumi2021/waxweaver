@@ -79,6 +79,9 @@ public:
     float getWaterRow(int i);
 
     void copyLightFromShip(PLANETDATA *planet,int planetX, int planetY, int dir, LOOKUPBLOCK *lookup);
+    int getBiome(int x,int y);
+
+    float biomeDistanceDetect(Vector2 source, Vector2 pos);
 
 };
 

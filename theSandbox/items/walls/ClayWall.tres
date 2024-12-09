@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemWall" load_steps=3 format=3 uid="uid://cfiedgrwgblqa"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemWall.gd" id="1_bhlf3"]
+[ext_resource type="Texture2D" uid="uid://ffc5akk0bnpb" path="res://items/walls/clayWall.png" id="2_m1uew"]
+
+[resource]
+script = ExtResource("1_bhlf3")
+blockID = -88
+itemName = "Clay Wall"
+subtext = ""
+desc = ""
+texture = ExtResource("2_m1uew")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

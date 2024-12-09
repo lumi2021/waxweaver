@@ -44,6 +44,8 @@ void PLANETDATA::_bind_methods() {
     ClassDB::bind_method(D_METHOD("loadFromString","tileString","bgString","infoString","timeString","waterString"), &PLANETDATA::loadFromString);
     ClassDB::bind_method(D_METHOD("findFloor","x","y"), &PLANETDATA::findFloor);
     ClassDB::bind_method(D_METHOD("copyLightFromShip","planet","planetX","planetY","dir","lookup"), &PLANETDATA::copyLightFromShip);
+
+    ClassDB::bind_method(D_METHOD("getBiome","x","y"), &PLANETDATA::getBiome);
 }
 
 void PLANETDATA::createEmptyArrays(int size, Vector2 centerPoint) {
@@ -649,4 +651,32 @@ void PLANETDATA::copyLightFromShip(PLANETDATA *planet,int planetX, int planetY, 
         }
     }
 
+}
+
+int PLANETDATA::getBiome(int x,int y){
+    Vector2 desertPos = Vector2(0, planetSize/2 );
+    Vector2 snowPos = Vector2(planetSize, planetSize/2 );
+    
+    float desertDis = biomeDistanceDetect(desertPos,Vector2(x,y));
+    if (desertDis < (planetSize/3) - 2 ){
+        return 1; // biome is desert
+    }
+
+    float snowDis = biomeDistanceDetect(snowPos,Vector2(x,y));
+    if (snowDis < (planetSize/3) - 2 ){
+        return 2; // biome is snowy
+    }
+
+    Vector2i below = Vector2i( Vector2(0,1).rotated( acos(0.0) * getPositionLookup(x,y) ) );
+    if ( getTileData(x + below.x,y + below.y) == 74 ){
+        return 3; // biome is mossy
+    }
+
+
+    return 0; // no biome
+
+}
+
+float PLANETDATA::biomeDistanceDetect(Vector2 source, Vector2 pos){
+    return source.distance_to(pos);
 }

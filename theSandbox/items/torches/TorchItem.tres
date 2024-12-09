@@ -7,6 +7,9 @@
 script = ExtResource("1_wbry3")
 blockID = 15
 itemName = "Torch"
+subtext = ""
+desc = ""
 texture = ExtResource("2_yat23")
 maxStackSize = 99
-clickToUse = false
+clickToUse = true
+infiniteReach = false

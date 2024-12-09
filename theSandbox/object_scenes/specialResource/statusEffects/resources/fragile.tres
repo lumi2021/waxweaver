@@ -7,5 +7,6 @@
 script = ExtResource("1_f7st7")
 displayName = "Fragile"
 icon = ExtResource("1_ut0hq")
+description = "defense halved!"
 dyeColor = Color(1, 1, 0.87451, 1)
 incompatibleEffects = Array[String]([])

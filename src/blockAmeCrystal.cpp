@@ -24,6 +24,7 @@ BLOCKAMECRYSTAL::BLOCKAMECRYSTAL() {
     itemToDrop = 81;
     isTransparent = true;
     multitile = true;
+    soundMaterial = 6;
 
 }
 
