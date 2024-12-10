@@ -11,6 +11,7 @@ summoningObject = ExtResource("2_yfwru")
 delay = 0.5
 ejectPower = 3
 emissiveTex = ExtResource("1_0eit8")
+manaCost = 80
 itemName = "Zeus Staff"
 subtext = ""
 desc = "damage: 20

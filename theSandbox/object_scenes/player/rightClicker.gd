@@ -90,6 +90,7 @@ func onRightClick():
 				SoundManager.playSound("interacts/chest",get_global_mouse_position(),1.0,0.1)
 		34: # loot chest
 			
+			GlobalRef.playerHasInteractedWithChest = true
 			editBody.chestDictionary[tile] = LootData.getChestLoot(editBody.planetType)
 			editBody.DATAC.setTileData(tile.x,tile.y,33)
 			

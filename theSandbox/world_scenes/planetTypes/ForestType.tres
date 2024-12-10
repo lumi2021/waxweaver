@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="PlanetType" load_steps=73 format=3 uid="uid://drr030n6brnua"]
+[gd_resource type="Resource" script_class="PlanetType" load_steps=74 format=3 uid="uid://drr030n6brnua"]
 
 [ext_resource type="Script" path="res://object_scenes/specialResource/lootTables/RollableItem.gd" id="1_5rukt"]
 [ext_resource type="Script" path="res://world_scenes/planetTypes/planetType.gd" id="1_j2ok1"]
@@ -63,6 +63,11 @@ weight = 50
 [sub_resource type="Resource" id="Resource_52jrs"]
 script = ExtResource("2_jpcmu")
 id = "skull"
+weight = 100
+
+[sub_resource type="Resource" id="Resource_nm8ge"]
+script = ExtResource("2_jpcmu")
+id = "spider"
 weight = 100
 
 [sub_resource type="Resource" id="Resource_5e5dr"]
@@ -287,7 +292,7 @@ weight = 10
 [sub_resource type="Resource" id="Resource_cw8l8"]
 script = ExtResource("2_jpcmu")
 id = "skull"
-weight = 20
+weight = 3
 
 [sub_resource type="Resource" id="Resource_i0iyx"]
 script = ExtResource("1_5rukt")
@@ -455,7 +460,7 @@ underground = Array[ExtResource("2_jpcmu")]([SubResource("Resource_sxmvn"), SubR
 water = Array[ExtResource("2_jpcmu")]([SubResource("Resource_mp2va")])
 desertDay = Array[ExtResource("2_jpcmu")]([])
 desertNight = Array[ExtResource("2_jpcmu")]([])
-desertUnderground = Array[ExtResource("2_jpcmu")]([SubResource("Resource_52jrs")])
+desertUnderground = Array[ExtResource("2_jpcmu")]([SubResource("Resource_52jrs"), SubResource("Resource_nm8ge")])
 snowyDay = Array[ExtResource("2_jpcmu")]([SubResource("Resource_tstxf")])
 snowyNight = Array[ExtResource("2_jpcmu")]([])
 snowyUnderground = Array[ExtResource("2_jpcmu")]([])

@@ -210,7 +210,6 @@ size = Vector2(8, 14)
 [node name="Mimic" type="CharacterBody2D"]
 collision_layer = 128
 script = ExtResource("1_dcghv")
-creatureSlots = 10
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_ki7kb")]
 maxHealth = 25

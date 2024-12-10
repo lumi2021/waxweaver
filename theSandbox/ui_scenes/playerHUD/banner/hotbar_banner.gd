@@ -59,10 +59,11 @@ func _process(delta):
 	$ChestInventory.visible = PlayerData.chestOBJ != null
 	$Menu/Crafting.visible = PlayerData.chestOBJ == null
 	
-	# hotbar scrolling
+	# mana
 	
-	
-	
+	$HealthBar/manabar.max_value = PlayerData.manaMax
+	$HealthBar/manabar.value = PlayerData.mana
+	$HealthBar/manabar.visible = PlayerData.mana != PlayerData.manaMax
 	
 	# cheat commands
 	if Input.is_action_just_pressed("openCommand"):
@@ -189,9 +190,12 @@ func interpretCommand(text):
 	if command == "cheats":
 		GlobalRef.cheatsEnabled = true
 		Saving.autosave()
+		GlobalRef.sendChat("Cheats enabled!")
+		GlobalRef.sendChat("This save can no longer earn achievements.")
+		return
 	
 	if !GlobalRef.cheatsEnabled:
-		if OS.has_feature("standalone"):
+		if OS.has_feature("standalone"): # only stop commands if release version
 			GlobalRef.sendChat("Cheats are currently disabled.")
 			GlobalRef.sendChat("Type 'cheats' to enable them.")
 			GlobalRef.sendChat("Enabling cheats will lock this save")

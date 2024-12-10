@@ -24,6 +24,11 @@ var chestOBJ = null
 ## MONEY ##
 var money :int = 0
 
+## mana ##
+var manaMax :int= 250
+var mana :int = 250
+var manaIdleTicks :int = 0
+
 func _ready():
 	initializeInventory()
 
@@ -43,6 +48,21 @@ func _process(delta):
 			selectedSlot = selectedSlotRemember
 			emit_signal("selectedSlotChanged")
 	
+	
+	if manaIdleTicks > 0:
+		manaIdleTicks -= 1
+	else:
+		mana += 1
+		mana = min(mana,manaMax)
+	
+func useMana(amount) -> bool:
+	if amount > mana:
+		return false
+	
+	mana -= amount
+	manaIdleTicks = 90
+	return true
+
 func initializeInventory():
 	inventory = []
 	for i in range(78):

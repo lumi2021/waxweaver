@@ -1,11 +1,26 @@
-[gd_scene load_steps=11 format=3 uid="uid://c4vnene6eybd3"]
+[gd_scene load_steps=15 format=3 uid="uid://c4vnene6eybd3"]
 
 [ext_resource type="Texture2D" uid="uid://dvwg4uswn5lkx" path="res://object_scenes/entity/enemy_scenes/skull/sprite.png" id="1_74wdj"]
 [ext_resource type="Script" path="res://object_scenes/entity/enemy_scenes/skull/skull.gd" id="1_yun8d"]
+[ext_resource type="Script" path="res://object_scenes/specialResource/lootTables/LootTable.gd" id="3_8l680"]
 [ext_resource type="Script" path="res://object_scenes/entity/components/health_component.gd" id="3_kd3sd"]
 [ext_resource type="Texture2D" uid="uid://mf6pwpiprm5c" path="res://items/material/string.png" id="4_loae8"]
+[ext_resource type="Script" path="res://object_scenes/specialResource/lootTables/RollableItem.gd" id="4_uya5x"]
 [ext_resource type="PackedScene" uid="uid://c05kukkqfrg40" path="res://object_scenes/entity/components/hitbox.tscn" id="5_8s46h"]
 [ext_resource type="PackedScene" uid="uid://84sah16y8gwq" path="res://object_scenes/entity/components/delete_me_outside_of_chunk.tscn" id="6_t0kk4"]
+
+[sub_resource type="Resource" id="Resource_3xqbc"]
+script = ExtResource("4_uya5x")
+id = 3134
+amountMin = 1
+amountMax = 2
+weight = 1000
+
+[sub_resource type="Resource" id="Resource_urowb"]
+script = ExtResource("3_8l680")
+rollType = 2
+rollCount = 1
+table = Array[ExtResource("4_uya5x")]([SubResource("Resource_3xqbc")])
 
 [sub_resource type="Curve" id="Curve_tppsp"]
 max_value = 0.5
@@ -29,7 +44,9 @@ script = ExtResource("1_yun8d")
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("3_kd3sd")
 maxHealth = 20
+knockbackResist = 0.3
 defense = 10
+loottable = SubResource("Resource_urowb")
 statusImmunities = Array[String](["burning"])
 
 [node name="Sprite" type="Sprite2D" parent="."]

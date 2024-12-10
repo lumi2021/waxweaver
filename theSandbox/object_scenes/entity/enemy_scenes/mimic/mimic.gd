@@ -6,6 +6,12 @@ var chargeDir :Vector2 = Vector2(1,0)
 var chargeDelay :int = 0
 var chargingTicks :int = 0
 
+func _ready():
+	if !GlobalRef.playerHasInteractedWithChest:
+		queue_free()
+		# delete mimic if player has never opened a loot chest
+		# ensures new players dont end up thinking all chests are evil mimics
+
 func _process(delta):
 	match state:
 		0:

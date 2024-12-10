@@ -131,6 +131,7 @@ func saveGameToFile():
 	gameData["playtime"] = GlobalRef.globalTick
 	gameData["worldname"] = Saving.worldName
 	gameData["cheats"] = GlobalRef.cheatsEnabled
+	gameData["mimicsSpawnable"] = GlobalRef.playerHasInteractedWithChest
 	if GlobalRef.playerSpawnPlanet != null:
 		gameData["spawnPlanet"] = planets.find(GlobalRef.playerSpawnPlanet) # gets planet id
 		gameData["spawnpoint"] = var_to_str(GlobalRef.playerSpawn)
@@ -187,6 +188,9 @@ func loadSaveFromFile():
 	
 	# cheats
 	GlobalRef.cheatsEnabled = gameData["cheats"]
+	
+	# game data
+	GlobalRef.playerHasInteractedWithChest = gameData["mimicsSpawnable"]
 		
 func posToTile(pos):
 	# just ensures anything emitted into the main system doesnt crash

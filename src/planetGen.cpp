@@ -547,7 +547,7 @@ void PLANETGEN::generateBox(PLANETDATA *planet,int x, int y, int wallID, int bgI
 }
 
 void PLANETGEN::generateLadderPath(PLANETDATA *planet,int x, int y, int dir){
-    int length = (std::rand() % 128) + 64;
+    int length = (std::rand() % 128) + 128;
 
     for (int i = 0; i < length; i++){
         Vector2i pos = Vector2i( Vector2(0,i).rotated( acos(0.0) * dir ) );

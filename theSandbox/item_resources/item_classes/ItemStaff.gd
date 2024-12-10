@@ -6,3 +6,5 @@ class_name ItemStaff
 @export var ejectPower :int = 0
 
 @export var emissiveTex :Texture2D 
+
+@export var manaCost :int = 10

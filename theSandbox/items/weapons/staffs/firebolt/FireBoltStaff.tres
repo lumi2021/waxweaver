@@ -11,6 +11,7 @@ summoningObject = ExtResource("3_kc2ds")
 delay = 0.5
 ejectPower = 430
 emissiveTex = ExtResource("1_sfe4q")
+manaCost = 20
 itemName = "Fireball Staff"
 subtext = ""
 desc = "damage: 7

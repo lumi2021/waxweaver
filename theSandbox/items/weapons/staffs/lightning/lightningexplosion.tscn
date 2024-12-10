@@ -31,7 +31,7 @@ shape = SubResource("CircleShape2D_j0fbk")
 
 [node name="Hurtbox2" parent="." instance=ExtResource("1_vofra")]
 enemyBox = false
-damage = 20
+damage = 25
 knockback = 2.0
 enemyName = "lightning"
 damageType = 2

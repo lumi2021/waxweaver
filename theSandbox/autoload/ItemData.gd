@@ -245,6 +245,8 @@ var data = {
 	3131:load("res://items/food/BreakfastSandwich.tres"),
 	3132:load("res://items/food/PoachedEgg.tres"),
 	3133:load("res://items/tools/special/MagicMirror.tres"),
+	3134:load("res://items/material/Bone.tres"),
+	3135:load("res://items/material/bonemeal/bonemeal.tres"),
 
 	# chairs 6000 - 6049
 	6000:load("res://items/blocks/furniture/chairs/WoodenChair.tres"),

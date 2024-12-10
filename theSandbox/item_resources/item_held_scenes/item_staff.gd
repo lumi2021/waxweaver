@@ -17,8 +17,10 @@ func onUsing(delta):
 	
 	if time > itemData.delay:
 		time = 0.0
-		summonObject()
-	
+		if PlayerData.useMana(itemData.manaCost):
+			summonObject()
+		else:
+			pass # insert stuck sound
 	
 func onNotUsing(delta):
 	time += delta
