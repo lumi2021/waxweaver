@@ -256,6 +256,10 @@ func doBlockAction(action:String,tileX:int,tileY:int,planet):
 			ins.z_index = 5
 			ins.z_as_relative = false
 			planet.entityContainer.add_child(ins)
+		"furnacesound":
+			var p = planet.tileToPos(Vector2(tileX,tileY))
+			var g = planet.to_global(p)
+			SoundManager.playSound("ambient/furnaceCrackle",g,1.0,0.02)
 
 func checkForEmmission(id):
 	var d = theChunker.getBlockDictionary(id)

@@ -52,3 +52,8 @@ func _physics_process(delta):
 		spr.rotation = lerp_angle(spr.rotation,base + (0.05 * vel.y),0.1)
 	
 	floorRay.rotation = getWorldRot(self)
+
+
+func _on_health_component_smacked():
+	if randi() % 100 == 0:
+		SoundManager.playSound("items/fish",global_position,1.0)

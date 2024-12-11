@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://c1b1vgh12jqww"]
+[gd_scene load_steps=28 format=3 uid="uid://c1b1vgh12jqww"]
 
 [ext_resource type="Script" path="res://object_scenes/player/player.gd" id="1_7l8c2"]
 [ext_resource type="PackedScene" uid="uid://meikam2oyy13" path="res://object_scenes/entity/components/health_component.tscn" id="2_vteuo"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://object_scenes/player/rightClicker.gd" id="10_v34o7"]
 [ext_resource type="Texture2D" uid="uid://celgr5v0qm8m3" path="res://ui_scenes/mouseCursor/mouseIcon.png" id="11_k042u"]
 [ext_resource type="PackedScene" uid="uid://c05kukkqfrg40" path="res://object_scenes/entity/components/hitbox.tscn" id="12_wduni"]
+[ext_resource type="Texture2D" uid="uid://mf6pwpiprm5c" path="res://items/material/string.png" id="13_1otht"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8s1yf"]
 size = Vector2(6, 6)
@@ -246,13 +247,23 @@ size = Vector2(6, 6)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8bj8a"]
 size = Vector2(6, 6)
 
-[node name="Player" type="CharacterBody2D"]
+[sub_resource type="Curve" id="Curve_13sxk"]
+max_value = 2.0
+_data = [Vector2(0, 0), 0.0, 20.4801, 0, 0, Vector2(0.154412, 1.16189), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_ffu50"]
+offsets = PackedFloat32Array(0.135246, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0.8, 1, 1)
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("manaFilledPart")]
 collision_layer = 2
 collision_mask = 17
 collision_priority = 8.0
 platform_on_leave = 2
 platform_floor_layers = 0
 script = ExtResource("1_7l8c2")
+manaFilledPart = NodePath("manaFilled")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_8s1yf")
@@ -396,6 +407,31 @@ hit_from_inside = true
 
 [node name="swimmingDetector" parent="." instance=ExtResource("9_2illf")]
 isEnemy = false
+
+[node name="manaFilled" type="CPUParticles2D" parent="."]
+position = Vector2(0, -6)
+emitting = false
+amount = 4
+lifetime = 0.7
+one_shot = true
+explosiveness = 1.0
+lifetime_randomness = 0.21
+local_coords = true
+texture = ExtResource("13_1otht")
+emission_shape = 1
+emission_sphere_radius = 4.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 10.95
+initial_velocity_max = 10.95
+angular_velocity_min = -424.11
+angular_velocity_max = 424.11
+orbit_velocity_min = -1.55
+orbit_velocity_max = 0.9
+angle_min = -720.0
+angle_max = 720.0
+scale_amount_curve = SubResource("Curve_13sxk")
+color_ramp = SubResource("Gradient_ffu50")
 
 [node name="rightClicker" type="Node2D" parent="."]
 process_mode = 3

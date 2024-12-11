@@ -58,3 +58,19 @@ Dictionary BLOCKFURNACE::onBreak(int x, int y, PLANETDATA *planet, int dir){
     return changes;
 
 }
+
+Dictionary BLOCKFURNACE::onTick(int x, int y, PLANETDATA *planet, int dir){
+    
+    Dictionary changes = {};
+    
+        int tick = planet->getGlobalTick();
+        if( tick % 60 == 0 ){
+            if( std::rand() % 12 == 0 ){
+                changes[ Vector2i(x,y) ] = "furnacesound";
+            }
+
+        }
+
+	return changes;
+
+}

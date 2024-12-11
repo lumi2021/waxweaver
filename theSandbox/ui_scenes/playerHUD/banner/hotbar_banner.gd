@@ -195,7 +195,7 @@ func interpretCommand(text):
 		return
 	
 	if !GlobalRef.cheatsEnabled:
-		if OS.has_feature("standalone"): # only stop commands if release version
+		if OS.has_feature("template"): # only stop commands if release version
 			GlobalRef.sendChat("Cheats are currently disabled.")
 			GlobalRef.sendChat("Type 'cheats' to enable them.")
 			GlobalRef.sendChat("Enabling cheats will lock this save")
@@ -314,6 +314,9 @@ func interpretCommand(text):
 		"god":
 			GlobalRef.player.healthComponent.god = !GlobalRef.player.healthComponent.god
 			GlobalRef.sendChat("Toggled god mode")
+		"music":
+			SoundManager.randomMusicTick = 9999
+			GlobalRef.sendChat("Playing music")
 		_:
 			GlobalRef.sendError("Error: command doesn't exist")
 			return

@@ -20,7 +20,7 @@ func onUsing(delta):
 		if PlayerData.useMana(itemData.manaCost):
 			summonObject()
 		else:
-			pass # insert stuck sound
+			SoundManager.playSound("items/staffOutofMana",global_position,1.0)
 	
 func onNotUsing(delta):
 	time += delta

@@ -181,10 +181,9 @@ func loadSaveFromFile():
 		Saving.worldName = gameData["worldname"]
 	
 	# player health
-	if gameData.has("playerHealth"):
-		GlobalRef.savedHealth = gameData["playerHealth"]
-	else:
-		GlobalRef.savedHealth = 100
+	GlobalRef.savedHealth = gameData["playerHealth"]
+	if GlobalRef.savedHealth <= 0:
+		GlobalRef.savedHealth = 60
 	
 	# cheats
 	GlobalRef.cheatsEnabled = gameData["cheats"]

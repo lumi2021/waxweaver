@@ -85,9 +85,12 @@ func waitForPlayer(delta):
 		searchTicks += 1
 		if searchTicks > 10:
 			playerSpotted = true
+			SoundManager.playSound("enemy/birdcrow",global_position,0.6)
 			$axis/AnimatedSprite2D.play("default")
 
 
 func _on_health_component_smacked():
-	playerSpotted = true
-	$axis/AnimatedSprite2D.play("default")
+	if !playerSpotted:
+		SoundManager.playSound("enemy/birdcrow",global_position,0.6)
+		playerSpotted = true
+		$axis/AnimatedSprite2D.play("default")

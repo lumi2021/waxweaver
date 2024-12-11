@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemWall" load_steps=3 format=3 uid="uid://dli3yof27voed"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemWall.gd" id="1_8kuu7"]
+[ext_resource type="Texture2D" uid="uid://doejrt1mb5oo6" path="res://items/walls/sandstonewall.png" id="2_dvvrb"]
+
+[resource]
+script = ExtResource("1_8kuu7")
+blockID = -84
+itemName = "Sandstone Wall"
+subtext = ""
+desc = ""
+texture = ExtResource("2_dvvrb")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

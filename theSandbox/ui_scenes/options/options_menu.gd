@@ -55,11 +55,11 @@ func _on_ambslide_value_changed(value):
 
 
 func _on_sfx_pressed():
-	sfxSlider.value = 1.0
+	sfxSlider.value = 1.5
 func _on_music_pressed():
-	musicSlider.value = 1.0
+	musicSlider.value = 1.5
 func _on_ambient_pressed():
-	ambientSlider.value = 1.0
+	ambientSlider.value = 1.5
 
 
 func _on_fullscreen_pressed():

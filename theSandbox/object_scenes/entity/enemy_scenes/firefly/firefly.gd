@@ -21,9 +21,11 @@ func _process(delta):
 		targetY = 1
 	if airCast.is_colliding():
 		targetY = -1
-	if !GlobalRef.isNight():
-		
-		targetY = -0.2
+	
+	if getSurface() < 8.0:
+		if !GlobalRef.isNight():
+			targetY = -1.2
+			
 	
 	var l = 1 - pow(2, ( -delta/3.803 ) )
 	vel = Vector2( lerp(vel.x,targetX * 100,l), lerp(vel.y,targetY * 100,l*2.0)  )

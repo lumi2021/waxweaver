@@ -48,11 +48,19 @@ func _process(delta):
 			selectedSlot = selectedSlotRemember
 			emit_signal("selectedSlotChanged")
 	
+	if !is_instance_valid(GlobalRef.player):
+		return
 	
 	if manaIdleTicks > 0:
 		manaIdleTicks -= 1
 	else:
+		if mana == manaMax - 1:
+			SoundManager.playSound("items/manaFull",GlobalRef.player.global_position,1.2)
+			GlobalRef.player.manaFilled()
+		
 		mana += 1
+		if GlobalRef.playerHC.checkIfHasEffect("focused"):
+			mana += 1
 		mana = min(mana,manaMax)
 	
 func useMana(amount) -> bool:

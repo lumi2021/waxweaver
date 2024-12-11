@@ -39,6 +39,8 @@ var cheatsEnabled :bool= false
 ## prevents mimic spawns until player has opened a chest
 var playerHasInteractedWithChest :bool= false
 
+var playerHC :HealthComponent
+
 func clearEverything():
 	player = null
 	camera = null

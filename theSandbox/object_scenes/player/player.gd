@@ -67,6 +67,8 @@ var lastFloorTile := 0
 # footstep
 var stream :AudioStreamOggVorbis = null #SoundManager.getMineSound(blockID)
 
+@export var manaFilledPart :CPUParticles2D
+
 ######################################################################
 ########################### BASIC FUNTIONS ###########################
 ######################################################################
@@ -74,6 +76,7 @@ var stream :AudioStreamOggVorbis = null #SoundManager.getMineSound(blockID)
 
 func _ready():
 	GlobalRef.player = self
+	GlobalRef.playerHC = healthComponent
 	PlayerData.connect("selectedSlotChanged",swapSlot)
 	PlayerData.connect("armorUpdated",changeArmor)
 	
@@ -1164,3 +1167,7 @@ func playFootstepSound():
 	SoundManager.playSound("enemy/step",global_position,0.5,0.1)
 	if stream != null:
 		SoundManager.playSoundStream(stream,global_position,0.5,0.1)
+
+func manaFilled():
+	manaFilledPart.position = Vector2(0,-6).rotated( rotated * (PI/2) )
+	manaFilledPart.emitting = true

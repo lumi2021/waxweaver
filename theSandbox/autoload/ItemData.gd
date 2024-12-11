@@ -79,6 +79,7 @@ var data = {
 	81:load("res://items/blocks/foliage/rockFoliage/crystal.tres"),
 	83:load("res://items/blocks/foliage/crops/WheatItem.tres"),
 	84:load("res://items/blocks/natural/SandstoneItem.tres"),
+	-84:load("res://items/walls/SandstoneWall.tres"),
 	85:load("res://items/blocks/natural/SnowItem.tres"),
 	86:load("res://items/blocks/natural/IceItem.tres"),
 	87:load("res://items/blocks/foliage/trees/cactus/Cactus.tres"),
@@ -247,6 +248,7 @@ var data = {
 	3133:load("res://items/tools/special/MagicMirror.tres"),
 	3134:load("res://items/material/Bone.tres"),
 	3135:load("res://items/material/bonemeal/bonemeal.tres"),
+	3136:load("res://items/food/MagicDinner.tres"),
 
 	# chairs 6000 - 6049
 	6000:load("res://items/blocks/furniture/chairs/WoodenChair.tres"),

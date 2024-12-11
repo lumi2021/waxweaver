@@ -34,13 +34,21 @@ func _process(delta):
 		
 		if musicNode == null:
 			randomMusicTick += delta
-			if randomMusicTick >= 280:
+			if randomMusicTick >= 240:
 				if randi() % 1000 != 0:
 					return
-				if randi() % 2 == 0:
-					playMusic("music/planet ambience",1.0)
-				else:
-					playMusic("music/harnessforplanet",0.4)
+				var penis = randi() % 5 
+				match penis:
+					0:
+						playMusic("music/planet ambience",1.0)
+					1:
+						playMusic("music/harnessforplanet",0.4)
+					2:
+						playMusic("music/baron",0.12) # https://www.newgrounds.com/audio/listen/1381586
+					3:
+						playMusic("music/air",0.2) # https://www.newgrounds.com/audio/listen/1380380
+					4:
+						playMusic("music/pan",0.2) # https://www.newgrounds.com/audio/listen/1382109
 		if ambientNode == null:
 			randomAmbientTick += delta
 			if randomAmbientTick >= 2:
