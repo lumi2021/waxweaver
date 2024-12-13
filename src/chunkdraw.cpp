@@ -289,7 +289,7 @@ Array CHUNKDRAW::tickUpdate(PLANETDATA *planet,Vector2i pos,bool onScreen,float 
                     int rightHasCollider = cock->hasCollision( planet->getTileData(blockRight.x,blockRight.y) );
                     int leftHasCollider = cock->hasCollision( planet->getTileData(blockLeft.x,blockLeft.y) );
 
-                    if ( planet->getPositionLookup(blockRight.x,blockRight.y) != blockSide ){ rightHasCollider = true; }
+                    if ( planet->getPositionLookup(blockRight.x,blockRight.y) != blockSide ){ rightHasCollider = true; } // set right or left colliders to true if water is on corner so it doesnt spill over
                     if ( planet->getPositionLookup(blockLeft.x,blockLeft.y) != blockSide ){ leftHasCollider = true; }
 
                     int coolValue = rightHasCollider + ( leftHasCollider * 2 );
