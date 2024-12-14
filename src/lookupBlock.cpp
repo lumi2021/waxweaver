@@ -116,6 +116,7 @@ LOOKUPBLOCK::LOOKUPBLOCK() {
     penis[89] = new BLOCKBRICK();
     penis[90] = new BLOCKSEAGRASS();
     penis[91] = new BLOCKWIRE();
+    penis[92] = new BLOCKTELEPORTER();
 
     for(BLOCK *i : penis){ // i increase automatically !
         i->setLookUp(this);

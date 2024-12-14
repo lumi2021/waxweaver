@@ -260,12 +260,22 @@ func doBlockAction(action:String,tileX:int,tileY:int,planet):
 			var p = planet.tileToPos(Vector2(tileX,tileY))
 			var g = planet.to_global(p)
 			SoundManager.playSound("ambient/furnaceCrackle",g,1.0,0.02)
-		"spark": # edit to spark
-			var ins = load("res://items/blocks/foliage/rockFoliage/sparkle_part.tscn").instantiate()
+		"spark":
+			var ins = load("res://items/electrical/electric_spark.tscn").instantiate()
 			ins.position = planet.tileToPos(Vector2(tileX,tileY))
+			ins.rotation = (PI/2) * planet.DATAC.getPositionLookup(tileX,tileY)
 			ins.z_index = 5
 			ins.z_as_relative = false
 			planet.entityContainer.add_child(ins)
+		"teleport":
+			var pos = planet.tileToPos(Vector2(tileX,tileY))
+			var dir = planet.DATAC.getPositionLookup(tileX,tileY)
+			var info = planet.DATAC.getInfoData(tileX,tileY)
+			var offset = Vector2( 4,-8 )
+			if info == 1:
+				offset = Vector2( -4,-8 )
+			
+			GlobalRef.player.position = pos + offset.rotated( dir * (PI/2) )
 
 func checkForEmmission(id):
 	var d = theChunker.getBlockDictionary(id)
