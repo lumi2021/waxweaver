@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemLever" load_steps=3 format=3 uid="uid://bcbgq1bnffawk"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemLever.gd" id="1_ijoj8"]
+[ext_resource type="Texture2D" uid="uid://ytuxjfxfeuvm" path="res://items/electrical/input/lever.png" id="2_dpcbw"]
+
+[resource]
+script = ExtResource("1_ijoj8")
+blockID = 97
+itemName = "Lever"
+subtext = ""
+desc = "enables shit"
+texture = ExtResource("2_dpcbw")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

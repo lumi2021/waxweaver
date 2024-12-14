@@ -21,7 +21,7 @@ func _process(delta):
 	if tile == null:
 		return
 	var blockType = editBody.DATAC.getTileData(tile.x,tile.y)
-	$RightClick.visible = [19,22,23,25,33,34,47,48,55,62,63].has(blockType)
+	$RightClick.visible = [19,22,23,25,33,34,47,48,55,62,63,97].has(blockType)
 	
 func onRightClick():
 	
@@ -150,7 +150,22 @@ func onRightClick():
 					PlayerData.emit_signal("updateInventory")
 			else:
 				GlobalRef.sendChat("i need a wax lollipop!!")
-		91: # wire testd
-			var d = editBody.DATAC.energize( tile.x, tile.y, editBody, BlockData.getLookup() )
-			editBody.editTiles( d )
+		97: # lever
+			var info :int= editBody.DATAC.getInfoData( tile.x, tile.y )
 			
+			var scan :Vector2i = Vector2i( Vector2( 1,0 ).rotated( (info/2) * (PI/2) ))
+			
+			var tileBelowLever = editBody.DATAC.getTileData( scan.x + tile.x, scan.y + tile.y )
+			if tileBelowLever == 91 or tileBelowLever == 93:
+				var d = editBody.DATAC.energize( tile.x, tile.y, editBody, BlockData.getLookup() )
+				editBody.editTiles( d )
+			else:
+				var d = editBody.DATAC.energize( scan.x + tile.x, scan.y + tile.y , editBody, BlockData.getLookup() )
+				editBody.editTiles( d )
+			
+			var flip := info % 2
+			print("flicked!")
+			print((info/2))
+			print(flip)
+			editBody.DATAC.setInfoData( tile.x, tile.y, ((info/2)*2) + abs(1-flip) )
+			editBody.editTiles( {Vector2i(tile.x, tile.y):97} )

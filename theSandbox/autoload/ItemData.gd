@@ -91,6 +91,7 @@ var data = {
 	92:load("res://items/electrical/teleport/teleporter.tres"),
 	94:load("res://items/blocks/furniture/stations/SolderingIron.tres"),
 	96:load("res://items/electrical/lamp/Lamp.tres"),
+	97:load("res://items/electrical/input/leverswitch.tres"),
 	
 	########## item ids ##################
 	3000:load("res://items/tools/flimsy/FlimsySword.tres"), # flimsy tools

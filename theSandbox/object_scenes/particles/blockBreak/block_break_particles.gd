@@ -8,18 +8,21 @@ var ticks = 0
 var infoID = 0
 var blockID = 0
 
+var doneByPlayer :bool = false
+
 func _ready():
 	
 	if textureID < 2:
 		queue_free()
 	
 	var blockData = BlockData.theChunker.getBlockDictionary(textureID)
-	
 	texture = blockData["texture"]
-	sound.stream = SoundManager.getBreakSound(blockID)
-	sound.volume_db = SoundManager.blockBreakVol
-	sound.pitch_scale = randf_range(0.9,1.1)
-	sound.play()
+	if doneByPlayer:
+		playsound()
+	else:
+		var dis = global_position.distance_to( GlobalRef.player.global_position )
+		if dis < 200:
+			playsound()
 	
 	if blockData["multitile"]:
 		var img = texture.get_image()
@@ -41,3 +44,10 @@ func _process(delta):
 	ticks += delta * 60
 	if ticks > 45:
 		queue_free()
+
+func playsound():
+	sound.stream = SoundManager.getBreakSound(blockID)
+	sound.volume_db = SoundManager.blockBreakVol
+	sound.pitch_scale = randf_range(0.9,1.1)
+	sound.play()
+

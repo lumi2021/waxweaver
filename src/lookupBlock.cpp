@@ -121,6 +121,7 @@ LOOKUPBLOCK::LOOKUPBLOCK() {
     penis[94] = new BLOCKSOLDERINGIRON();
     penis[95] = new BLOCKLAMPON();
     penis[96] = new BLOCKLAMPOFF();
+    penis[97] = new BLOCKLEVER();
 
     for(BLOCK *i : penis){ // i increase automatically !
         i->setLookUp(this);

@@ -25,11 +25,11 @@ func checkIfNatural(id):
 	var d = theChunker.getBlockDictionary(id)
 	return d["natural"]
 
-func breakBlock(x,y,planet,blockID,infoID):
+func breakBlock(x,y,planet,blockID,infoID,doneByPlayer:bool=false):
 	
 	var data = theChunker.getBlockDictionary(blockID)
 	
-	spawnBreakParticle(x,y,blockID,data["breakParticleID"],planet,infoID)
+	spawnBreakParticle(x,y,blockID,data["breakParticleID"],planet,infoID,doneByPlayer)
 	spawnGroundItem(x,y,data["itemToDrop"],planet)
 	
 	planet.editTiles( theChunker.runBreak(planet.DATAC,Vector2i.ZERO,x,y,blockID) )
@@ -39,7 +39,7 @@ func breakWall(x,y,planet,blockID):
 		return
 	
 	var data = theChunker.getBlockDictionary(blockID)
-	spawnBreakParticle(x,y,blockID,data["breakParticleID"],planet,0)
+	spawnBreakParticle(x,y,blockID,data["breakParticleID"],planet,0,true)
 	if ItemData.itemExists(-blockID):
 		spawnGroundItem(x,y,-blockID,planet)
 
@@ -114,7 +114,7 @@ func spawnItemVelocity(pos:Vector2,id:int,planet,velocity:Vector2,amount:int=1):
 	ins.coolVelcoity = true
 	planet.entityContainer.add_child(ins)
 
-func spawnBreakParticle(tilex:int,tiley:int,id:int,otherId:int,planet,infoID:int):
+func spawnBreakParticle(tilex:int,tiley:int,id:int,otherId:int,planet,infoID:int,doneByPlayer:bool=false):
 	
 	var newId = id
 	if otherId != -1:
@@ -125,6 +125,7 @@ func spawnBreakParticle(tilex:int,tiley:int,id:int,otherId:int,planet,infoID:int
 	ins.infoID = infoID
 	ins.blockID = id
 	ins.position = planet.tileToPos(Vector2(tilex,tiley))
+	ins.doneByPlayer = doneByPlayer
 	planet.entityContainer.add_child(ins)
 
 ## multiTile stuff

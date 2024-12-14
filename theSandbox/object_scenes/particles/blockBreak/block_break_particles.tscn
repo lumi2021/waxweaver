@@ -26,3 +26,5 @@ script = ExtResource("2_aa3k4")
 volume_db = -2.0
 bus = &"BLOCKS"
 area_mask = 0
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]

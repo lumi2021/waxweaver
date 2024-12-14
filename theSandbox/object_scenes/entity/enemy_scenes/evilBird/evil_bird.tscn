@@ -91,6 +91,7 @@ radius = 5.0
 collision_layer = 128
 collision_mask = 17
 script = ExtResource("1_6ektk")
+creatureSlots = 10
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_myc62")]
 maxHealth = 20

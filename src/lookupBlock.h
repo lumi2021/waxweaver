@@ -113,6 +113,7 @@
 #include "blockSolderingIron.h" // id 94
 #include "blockLampOn.h" // id 95
 #include "blockLampOff.h" // id 96
+#include "blockLever.h" // id 97
 
 // adding a new block? make sure you increment the PENIS array !
 
@@ -130,7 +131,7 @@ public:
 	
 	Array allBlocks;
 
-	BLOCK *penis[97]; // must be largest id + 1
+	BLOCK *penis[98]; // must be largest id + 1
 
 	LOOKUPBLOCK();
 	~LOOKUPBLOCK();
