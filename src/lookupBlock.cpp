@@ -223,6 +223,12 @@ bool LOOKUPBLOCK::isBGImmune(int id){
     return g->backgroundColorImmune;
 }
 
+bool LOOKUPBLOCK::isOnlyConnectToSelf(int id){
+    BLOCK* g = penis[id];
+
+    return g->connectToSelfOnly;
+}
+
 Dictionary LOOKUPBLOCK::runOnTick(int x, int y, PLANETDATA *planet, int dir, int blockID){
    
     return penis[blockID]->onTick(x,y,planet,dir);

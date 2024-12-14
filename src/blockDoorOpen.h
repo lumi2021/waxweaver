@@ -19,6 +19,7 @@ public:
 	~BLOCKDOOROPEN();
 
 	Dictionary onBreak(int x, int y, PLANETDATA *planet, int dir);
+	Dictionary onEnergize(int x, int y, PLANETDATA *planet, int dir);
 
 };
 

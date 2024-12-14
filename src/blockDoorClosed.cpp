@@ -58,3 +58,11 @@ Dictionary BLOCKDOORCLOSED::onBreak(int x, int y, PLANETDATA *planet, int dir){
     return changes;
 
 }
+
+Dictionary BLOCKDOORCLOSED::onEnergize(int x, int y, PLANETDATA *planet, int dir){
+    Dictionary changes = {};
+
+    changes[Vector2i(x,y)] = "forceOpen";
+    
+    return changes;
+}

@@ -37,6 +37,7 @@ public:
     bool rotateTextureToGravity;
     bool connectedTexture;
     bool connectTexturesToMe;
+    bool connectToSelfOnly;
 
     bool hasCollision;
 

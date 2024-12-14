@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="ItemTypeBlock" load_steps=3 format=3 uid="uid://kil140srxrn7"]
 
 [ext_resource type="Script" path="res://item_resources/item_classes/ItemTypeBlock.gd" id="1_1rs8b"]
-[ext_resource type="Texture2D" uid="uid://d0lp3v25si5ex" path="res://items/electrical/wire.png" id="2_tbs4k"]
+[ext_resource type="Texture2D" uid="uid://cesm3uekquumi" path="res://items/electrical/wireItem.png" id="2_hnuk5"]
 
 [resource]
 script = ExtResource("1_1rs8b")
@@ -9,8 +9,8 @@ blockID = 91
 multiTileId = 0
 itemName = "Wire"
 subtext = ""
-desc = ""
-texture = ExtResource("2_tbs4k")
+desc = "Can be used to power various things"
+texture = ExtResource("2_hnuk5")
 maxStackSize = 99
 clickToUse = false
 infiniteReach = false

@@ -14,6 +14,11 @@ BLOCKWIRE::BLOCKWIRE() {
 
     itemToDrop = 91;
     rotateTextureToGravity = true;
+    connectedTexture = true;
+    connectTexturesToMe = false;
+    connectToSelfOnly = true;
+    hasCollision = false;
+    isTransparent = true;
 }
 
 

@@ -267,6 +267,7 @@ func doBlockAction(action:String,tileX:int,tileY:int,planet):
 			ins.z_index = 5
 			ins.z_as_relative = false
 			planet.entityContainer.add_child(ins)
+			SoundManager.playSound("blocks/zap",planet.to_global(ins.position),1.0)
 		"teleport":
 			var pos = planet.tileToPos(Vector2(tileX,tileY))
 			var dir = planet.DATAC.getPositionLookup(tileX,tileY)
@@ -276,6 +277,10 @@ func doBlockAction(action:String,tileX:int,tileY:int,planet):
 				offset = Vector2( -4,-8 )
 			
 			GlobalRef.player.position = pos + offset.rotated( dir * (PI/2) )
+		"forceOpen":
+			GlobalRef.player.openDoor(Vector2i(tileX,tileY),planet,1)
+		"forceClose":
+			GlobalRef.player.closeDoor(Vector2i(tileX,tileY),planet)
 
 func checkForEmmission(id):
 	var d = theChunker.getBlockDictionary(id)

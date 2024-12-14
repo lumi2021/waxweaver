@@ -74,7 +74,16 @@ Array CHUNKDRAW::generateTexturesFromData(PLANETDATA *planet,Vector2i pos,Node *
                     int s = rotate; // make sure connected texture doesn't always rotate
                     
                     int frame = 0;
-                    if( cock->isConnectedTexture(blockID) ){ frame = scanBlockOpen(planet,worldX,worldY,blockSide * s); }
+                    if( cock->isConnectedTexture(blockID) ){ 
+                        
+                        if( cock->isOnlyConnectToSelf(blockID) ){
+                            frame = scanSelfOpen(planet,worldX,worldY,blockSide * s,blockID); 
+                        }else{
+
+                            frame = scanBlockOpen(planet,worldX,worldY,blockSide * s); 
+                        }
+                    
+                    }
                     if( cock->isMultitile(blockID) ){ frame = blockInfo * 8; }
                     Rect2i blockRect = Rect2i(frame,0,8,8);
                     individualBlock = blockImg->get_region(blockRect);
@@ -446,6 +455,37 @@ int CHUNKDRAW::scanBackOpen(PLANETDATA *planet,int x,int y){
 
     blockID = planet->getBGData(x,y+1);
     connectTexturesToMe = !cock->isTextureConnector(blockID);
+    openB = 8 * connectTexturesToMe;
+
+	return (openL + openR + openT + openB) * 8;
+}
+
+int CHUNKDRAW::scanSelfOpen(PLANETDATA *planet,int x,int y,int dir,int ogBlock){
+	int openL = 1;
+	int openR = 2;
+	int openT = 4;
+	int openB = 8;
+	//what the fuck is this
+
+    Vector2i L = Vector2i( Vector2(-1,0).rotated(acos(0.0)*dir)  );
+
+    int blockID = planet->getTileData(x+L.x,y+L.y);
+    int connectTexturesToMe = ogBlock != blockID;
+    openL = 1 * connectTexturesToMe;
+
+    Vector2i R = Vector2i( Vector2(1,0).rotated(acos(0.0)*dir)  );
+    blockID = planet->getTileData(x+R.x,y+R.y);
+    connectTexturesToMe = ogBlock != blockID;
+    openR = 2 * connectTexturesToMe;
+
+    Vector2i T = Vector2i( Vector2(0,-1).rotated(acos(0.0)*dir)  );
+    blockID = planet->getTileData(x+T.x,y+T.y);
+    connectTexturesToMe = ogBlock != blockID;
+    openT = 4 * connectTexturesToMe;
+
+    Vector2i B = Vector2i( Vector2(0,1).rotated(acos(0.0)*dir)  );
+    blockID = planet->getTileData(x+B.x,y+B.y);
+    connectTexturesToMe = ogBlock != blockID;
     openB = 8 * connectTexturesToMe;
 
 	return (openL + openR + openT + openB) * 8;

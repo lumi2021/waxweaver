@@ -18,6 +18,7 @@ BLOCK::BLOCK() {
     rotateTextureToGravity = false;
     connectedTexture = false;
     connectTexturesToMe = true;
+    connectToSelfOnly = false;
 
     hasCollision = true;
 

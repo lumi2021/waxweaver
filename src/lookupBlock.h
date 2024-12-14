@@ -148,6 +148,7 @@ public:
 	int getMiningLevel(int id);
 
 	bool isBGImmune(int id);
+	bool isOnlyConnectToSelf(int id);
 
 	Dictionary runOnTick(int x, int y, PLANETDATA *planet, int dir, int blockID);
 	Dictionary runOnBreak(int x, int y, PLANETDATA *planet, int dir, int blockID);

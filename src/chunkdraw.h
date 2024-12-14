@@ -58,6 +58,7 @@ public:
 
 	int scanBlockOpen(PLANETDATA *planet,int x,int y,int dir);
 	int scanBackOpen(PLANETDATA *planet,int x,int y);
+	int scanSelfOpen(PLANETDATA *planet,int x,int y,int dir,int ogBlock);
 	Vector2i scanForBorder(PLANETDATA *planet,int x,int y);
 	Dictionary getBlockDictionary(int id);
 
