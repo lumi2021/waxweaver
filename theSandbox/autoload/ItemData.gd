@@ -89,6 +89,8 @@ var data = {
 	-89:load("res://items/walls/BrickWall.tres"),
 	91:load("res://items/electrical/Wire.tres"),
 	92:load("res://items/electrical/teleport/teleporter.tres"),
+	94:load("res://items/blocks/furniture/stations/SolderingIron.tres"),
+	96:load("res://items/electrical/lamp/Lamp.tres"),
 	
 	########## item ids ##################
 	3000:load("res://items/tools/flimsy/FlimsySword.tres"), # flimsy tools
@@ -263,8 +265,18 @@ var data = {
 	# chests 6100 - 6149
 	6100:load("res://items/blocks/furniture/chests/WoodenChest.tres"),
 	
-	# beds 6150 - 6200
+	# beds 6150 - 6199
 	6150:load("res://items/blocks/furniture/beds/WhiteBed.tres"),
+	
+	# hidden wires
+	6200:load("res://items/electrical/wireHidden/WoodWire.tres"),
+	6201:load("res://items/electrical/wireHidden/StonebrickWire.tres"),
+	6202:load("res://items/electrical/wireHidden/StoneWire.tres"),
+	6203:load("res://items/electrical/wireHidden/SandstoneWire.tres"),
+	6204:load("res://items/electrical/wireHidden/DirtHiddenWire.tres"),
+	6205:load("res://items/electrical/wireHidden/BrickWire.tres"),
+	6206:load("res://items/electrical/wireHidden/BrownbrickWire.tres"),
+	
 }
 
 var heldItemAnims = {

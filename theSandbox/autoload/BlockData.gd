@@ -85,6 +85,8 @@ func spawnGroundItem(tilex:int,tiley:int,id:int,planet):
 				return # deletes if wheat isnt fullygrown
 			spawnItemRaw(tilex,tiley,17,planet)
 			spawnItemRaw(tilex,tiley,17,planet)
+		93: # hidden wire
+			id = 6200 + planet.DATAC.getInfoData(tilex,tiley)
 	
 	var ins = groundItemScene.instantiate()
 	ins.itemID = id
@@ -279,8 +281,13 @@ func doBlockAction(action:String,tileX:int,tileY:int,planet):
 			GlobalRef.player.position = pos + offset.rotated( dir * (PI/2) )
 		"forceOpen":
 			GlobalRef.player.openDoor(Vector2i(tileX,tileY),planet,1)
+			SoundManager.playSound("interacts/door",planet.to_globaddl(planet.tileToPos(Vector2(tileX,tileY))),1.2,0.1)
 		"forceClose":
+			var info = planet.DATAC.getInfoData(tileX,tileY) % 8
+			if [0,2,5,7].has(info):
+				return
 			GlobalRef.player.closeDoor(Vector2i(tileX,tileY),planet)
+			SoundManager.playSound("interacts/door",planet.to_global(planet.tileToPos(Vector2(tileX,tileY))),1.2,0.1)
 
 func checkForEmmission(id):
 	var d = theChunker.getBlockDictionary(id)

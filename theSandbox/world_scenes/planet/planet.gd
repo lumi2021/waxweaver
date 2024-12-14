@@ -115,20 +115,10 @@ func _physics_process(delta):
 			continue
 		
 		var changesArray = chunk.tickUpdate()
-		var committedChanges = {}
+		var committedChanges = changesArray[1]
 		
-		for d in changesArray:
-			if d is bool:
-				if d:
-					chunk.drawLiquid()
-				continue
-			var toss = false
-			for i in d.keys():
-				if committedChanges.has(i):
-					toss = true
-			if !toss:
-				for i in d.keys():
-					committedChanges[i] = d[i]
+		if changesArray[0]:
+			chunk.drawLiquid()
 		
 		#Updates light
 		#shouldUpdateLight += int(chunk.MUSTUPDATELIGHT)

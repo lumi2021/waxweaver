@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemBlock" load_steps=3 format=3 uid="uid://bl2vlpfkl3nn6"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemBlock.gd" id="1_3ah0h"]
+[ext_resource type="Texture2D" uid="uid://b84iq5g078yu3" path="res://items/electrical/lamp/lampOn.png" id="2_rvcu0"]
+
+[resource]
+script = ExtResource("1_3ah0h")
+blockID = 96
+itemName = "Electric Lamp"
+subtext = ""
+desc = "Toggles on electric pulse"
+texture = ExtResource("2_rvcu0")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

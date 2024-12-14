@@ -36,7 +36,7 @@ Dictionary BLOCKWIRE::onEnergize(int x, int y, PLANETDATA *planet, int dir){
     planet->setTimeData( x,y, planet->getGlobalTick() ); // set time to global tick, so that future wires don't try to re-energize this block
     
     Dictionary brap = planet->energize(x,y,planet,lookup);
-    changes.merge( brap, true ); // get dictionary about future energizations, this will stack
+    changes.merge( brap ); // get dictionary about future energizations, this will stack
     
     if (brap.is_empty()){
         changes[Vector2i(x,y)] = "spark"; // if there are no tiles to be edited, play spark animation. nice effect for loose wires

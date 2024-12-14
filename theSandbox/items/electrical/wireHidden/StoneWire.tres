@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ItemTypeBlock" load_steps=3 format=3 uid="uid://dj3serg5xkj62"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemTypeBlock.gd" id="1_r5fhh"]
+[ext_resource type="Texture2D" uid="uid://cuyldl5urtvmd" path="res://items/electrical/wireHidden/stone.png" id="2_ilrjx"]
+
+[resource]
+script = ExtResource("1_r5fhh")
+blockID = 93
+multiTileId = 2
+itemName = "Stone Wire"
+subtext = ""
+desc = "A wire that looks like stone"
+texture = ExtResource("2_ilrjx")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ItemTypeBlock" load_steps=3 format=3 uid="uid://cq0w5evw0dd6c"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemTypeBlock.gd" id="1_1r56b"]
+[ext_resource type="Texture2D" uid="uid://b52x1stixxoh6" path="res://items/electrical/wireHidden/brownbrick.png" id="2_l32g0"]
+
+[resource]
+script = ExtResource("1_1r56b")
+blockID = 93
+multiTileId = 6
+itemName = "Brown brick Wire"
+subtext = ""
+desc = "A wire that looks like brown brick"
+texture = ExtResource("2_l32g0")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

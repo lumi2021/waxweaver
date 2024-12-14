@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="ItemMultitile" load_steps=3 format=3 uid="uid://mcrdild2a43y"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemMultitile.gd" id="1_x1q3d"]
+[ext_resource type="Texture2D" uid="uid://bmaeqpjmgur00" path="res://items/blocks/furniture/stations/solderingIron.png" id="2_00xe3"]
+
+[resource]
+script = ExtResource("1_x1q3d")
+blockID = 94
+size = Vector2i(1, 1)
+grounded = true
+needsWalls = false
+itemName = "Soldering Iron"
+subtext = ""
+desc = "Used to craft wires and other
+electrical doohickies"
+texture = ExtResource("2_00xe3")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

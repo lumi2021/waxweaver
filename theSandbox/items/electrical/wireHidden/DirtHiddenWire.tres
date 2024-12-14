@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ItemTypeBlock" load_steps=3 format=3 uid="uid://btx684c0pyvfc"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemTypeBlock.gd" id="1_i51xw"]
+[ext_resource type="Texture2D" uid="uid://b5uif1etf5p6e" path="res://items/electrical/wireHidden/dirt.png" id="2_r0838"]
+
+[resource]
+script = ExtResource("1_i51xw")
+blockID = 93
+multiTileId = 4
+itemName = "Dirt Wire"
+subtext = ""
+desc = "A wire that looks like dirt"
+texture = ExtResource("2_r0838")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

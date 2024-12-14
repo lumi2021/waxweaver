@@ -238,6 +238,7 @@ Array CHUNKDRAW::drawLiquid(PLANETDATA *planet,Vector2i pos,bool shipChunk){
 Array CHUNKDRAW::tickUpdate(PLANETDATA *planet,Vector2i pos,bool onScreen,float daylight){
 
     Array collectedChanges;
+    Dictionary allChanges = {};
     bool shouldRedrawLiquid = false;
 
     for(int x = 0; x < 8; x++){
@@ -253,7 +254,8 @@ Array CHUNKDRAW::tickUpdate(PLANETDATA *planet,Vector2i pos,bool onScreen,float 
             int blockSide = planet->getPositionLookup(worldX,worldY);
 
 
-            collectedChanges.append( cock->runOnTick(worldX,worldY,planet,blockSide,blockID) );
+            //collectedChanges.append( cock->runOnTick(worldX,worldY,planet,blockSide,blockID) );
+            allChanges.merge( cock->runOnTick(worldX,worldY,planet,blockSide,blockID) );
 
             // SIMULATE WATER //
 
@@ -385,6 +387,7 @@ Array CHUNKDRAW::tickUpdate(PLANETDATA *planet,Vector2i pos,bool onScreen,float 
    }
 
     collectedChanges.append(shouldRedrawLiquid);
+    collectedChanges.append(allChanges);
 
     return collectedChanges;
         

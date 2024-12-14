@@ -692,7 +692,7 @@ Dictionary PLANETDATA::energize(int x, int y,PLANETDATA *planet, LOOKUPBLOCK *lo
         int blockID = getTileData( x + pos.x, y + pos.y );
         int dir = getPositionLookup( x + pos.x, y + pos.y );
 
-        accumulatedChanges.merge( lookup->runOnEnergize( x + pos.x, y + pos.y, this, dir, blockID ),true ); // decide whether or not to overwrite
+        accumulatedChanges.merge( lookup->runOnEnergize( x + pos.x, y + pos.y, this, dir, blockID ) ); // decide whether or not to overwrite
         
     }
     
