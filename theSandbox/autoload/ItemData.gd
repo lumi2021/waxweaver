@@ -87,6 +87,7 @@ var data = {
 	-88:load("res://items/walls/ClayWall.tres"),
 	89:load("res://items/blocks/building/Brick.tres"),
 	-89:load("res://items/walls/BrickWall.tres"),
+	91:load("res://items/electrical/Wire.tres"),
 	
 	########## item ids ##################
 	3000:load("res://items/tools/flimsy/FlimsySword.tres"), # flimsy tools

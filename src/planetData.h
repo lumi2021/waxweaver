@@ -8,6 +8,8 @@
 #include <godot_cpp/variant/string.hpp>
 #include <godot_cpp/variant/packed_string_array.hpp>
 
+#include <godot_cpp/variant/utility_functions.hpp>
+
 
 namespace godot {
 
@@ -82,6 +84,8 @@ public:
     int getBiome(int x,int y);
 
     float biomeDistanceDetect(Vector2 source, Vector2 pos);
+
+    Dictionary energize(int x, int y,PLANETDATA *planet, LOOKUPBLOCK *lookup);
 
 };
 

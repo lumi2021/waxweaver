@@ -260,7 +260,16 @@ func doBlockAction(action:String,tileX:int,tileY:int,planet):
 			var p = planet.tileToPos(Vector2(tileX,tileY))
 			var g = planet.to_global(p)
 			SoundManager.playSound("ambient/furnaceCrackle",g,1.0,0.02)
+		"spark": # edit to spark
+			var ins = load("res://items/blocks/foliage/rockFoliage/sparkle_part.tscn").instantiate()
+			ins.position = planet.tileToPos(Vector2(tileX,tileY))
+			ins.z_index = 5
+			ins.z_as_relative = false
+			planet.entityContainer.add_child(ins)
 
 func checkForEmmission(id):
 	var d = theChunker.getBlockDictionary(id)
 	return d["lightEmmission"]
+
+func getLookup():
+	return theChunker.returnLookup()

@@ -18,3 +18,11 @@ BLOCKSTONE::BLOCKSTONE() {
 
 BLOCKSTONE::~BLOCKSTONE() {
 }
+
+Dictionary BLOCKSTONE::onEnergize(int x, int y, PLANETDATA *planet, int dir){
+    Dictionary changes = {};
+
+    changes[ Vector2i(x,y) ] = 13;
+
+    return changes;
+}

@@ -46,6 +46,8 @@ void PLANETDATA::_bind_methods() {
     ClassDB::bind_method(D_METHOD("copyLightFromShip","planet","planetX","planetY","dir","lookup"), &PLANETDATA::copyLightFromShip);
 
     ClassDB::bind_method(D_METHOD("getBiome","x","y"), &PLANETDATA::getBiome);
+
+    ClassDB::bind_method(D_METHOD("energize","x","y","planet","lookup"), &PLANETDATA::energize);
 }
 
 void PLANETDATA::createEmptyArrays(int size, Vector2 centerPoint) {
@@ -679,4 +681,28 @@ int PLANETDATA::getBiome(int x,int y){
 
 float PLANETDATA::biomeDistanceDetect(Vector2 source, Vector2 pos){
     return source.distance_to(pos);
+}
+
+Dictionary PLANETDATA::energize(int x, int y,PLANETDATA *planet, LOOKUPBLOCK *lookup){
+    Dictionary accumulatedChanges = {};
+    
+    //int blockID = getTileData( x, y );
+    //int dir = getPositionLookup( x, y );
+    //accumulatedChanges.merge( lookup->runOnEnergize( x, y, this, dir, blockID ),true );
+
+    godot::UtilityFunctions::print("energizing!");
+
+    for (int i = 0; i < 4; i++){ // go through each surrounding direction
+
+        Vector2i pos = Vector2i( Vector2(1,0).rotated( acos(0.0) * i )  );
+        int blockID = getTileData( x + pos.x, y + pos.y );
+        int dir = getPositionLookup( x + pos.x, y + pos.y );
+
+        accumulatedChanges.merge( lookup->runOnEnergize( x + pos.x, y + pos.y, this, dir, blockID ),true ); // decide whether or not to overwrite
+        
+        //lookup->runOnEnergize( x + pos.x, y + pos.y, this, dir, blockID );
+
+    }
+    
+    return accumulatedChanges;
 }

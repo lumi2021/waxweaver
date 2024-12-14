@@ -115,6 +115,7 @@ LOOKUPBLOCK::LOOKUPBLOCK() {
     penis[88] = new BLOCKCLAY();
     penis[89] = new BLOCKBRICK();
     penis[90] = new BLOCKSEAGRASS();
+    penis[91] = new BLOCKWIRE();
 
     for(BLOCK *i : penis){ // i increase automatically !
         i->setLookUp(this);
@@ -232,3 +233,10 @@ Dictionary LOOKUPBLOCK::runOnBreak(int x, int y, PLANETDATA *planet, int dir, in
     return penis[blockID]->onBreak(x,y,planet,dir);
 
 }
+
+Dictionary LOOKUPBLOCK::runOnEnergize(int x, int y, PLANETDATA *planet, int dir, int blockID){
+   
+    return penis[blockID]->onEnergize(x,y,planet,dir);
+
+}
+

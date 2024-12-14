@@ -18,6 +18,8 @@ public:
 	BLOCKSTONE();
 	~BLOCKSTONE();
 
+	Dictionary onEnergize(int x, int y, PLANETDATA *planet, int dir);
+
 };
 
 }

@@ -150,3 +150,8 @@ func onRightClick():
 					PlayerData.emit_signal("updateInventory")
 			else:
 				GlobalRef.sendChat("i need a wax lollipop!!")
+		13: # wire test
+			var d = editBody.DATAC.energize( tile.x, tile.y, editBody, BlockData.getLookup() )
+			print(d)
+			editBody.editTiles( d )
+			
