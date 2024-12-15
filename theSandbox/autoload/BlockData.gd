@@ -282,14 +282,29 @@ func doBlockAction(action:String,tileX:int,tileY:int,planet):
 			GlobalRef.player.position = pos + offset.rotated( dir * (PI/2) )
 		"forceOpen":
 			GlobalRef.player.openDoor(Vector2i(tileX,tileY),planet,1)
-			SoundManager.playSound("interacts/door",planet.to_globaddl(planet.tileToPos(Vector2(tileX,tileY))),1.2,0.1)
+			SoundManager.playSound("interacts/door",planet.to_global(planet.tileToPos(Vector2(tileX,tileY))),1.2,0.1)
 		"forceClose":
 			var info = planet.DATAC.getInfoData(tileX,tileY) % 8
 			if [0,2,5,7].has(info):
 				return
 			GlobalRef.player.closeDoor(Vector2i(tileX,tileY),planet)
 			SoundManager.playSound("interacts/door",planet.to_global(planet.tileToPos(Vector2(tileX,tileY))),1.2,0.1)
-
+		"spitter":
+			print("spitting!")
+			
+			var dir :Vector2i= Vector2i(Vector2(1,0).rotated( planet.DATAC.getInfoData(tileX,tileY) * (PI/2) ))
+			var ins = load("res://items/electrical/spitter/spitter_block_spit.tscn").instantiate()
+			ins.position = planet.tileToPos( Vector2(tileX+dir.x,tileY+dir.y) )
+			ins.direction = Vector2( dir.x, dir.y )
+			ins.planet = planet
+			ins.blockID = planet.DATAC.getTileData( tileX+dir.x,tileY+dir.y )
+			ins.info = planet.DATAC.getInfoData( tileX+dir.x,tileY+dir.y )
+			planet.entityContainer.add_child( ins )
+			
+			print(planet.DATAC.getTileData( tileX+dir.x,tileY+dir.y ))
+			
+			planet.editTiles( { Vector2i(tileX+dir.x,tileY+dir.y) : 0 } )
+			
 func checkForEmmission(id):
 	var d = theChunker.getBlockDictionary(id)
 	return d["lightEmmission"]

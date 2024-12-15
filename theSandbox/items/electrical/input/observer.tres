@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemBlock" load_steps=3 format=3 uid="uid://dc2l0i8h0nfkn"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemBlock.gd" id="1_u8akl"]
+[ext_resource type="Texture2D" uid="uid://dauerikjtv7m2" path="res://items/electrical/input/obsItem.png" id="2_xr6ry"]
+
+[resource]
+script = ExtResource("1_u8akl")
+blockID = 98
+itemName = "Observer"
+subtext = ""
+desc = "Energizes when block in
+front of it has changed.
+Interact to change direction."
+texture = ExtResource("2_xr6ry")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

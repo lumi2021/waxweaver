@@ -90,8 +90,13 @@ var data = {
 	91:load("res://items/electrical/Wire.tres"),
 	92:load("res://items/electrical/teleport/teleporter.tres"),
 	94:load("res://items/blocks/furniture/stations/SolderingIron.tres"),
-	96:load("res://items/electrical/lamp/Lamp.tres"),
+	95:load("res://items/electrical/lamp/Lamp.tres"),
 	97:load("res://items/electrical/input/leverswitch.tres"),
+	98:load("res://items/electrical/input/observer.tres"),
+	99:load("res://items/electrical/input/clock.tres"),
+	100:load("res://items/electrical/input/repeater.tres"),
+	101:load("res://items/electrical/drill/drill.tres"),
+	102:load("res://items/electrical/spitter/Spitter.tres"),
 	
 	########## item ids ##################
 	3000:load("res://items/tools/flimsy/FlimsySword.tres"), # flimsy tools
@@ -296,7 +301,7 @@ var heldItemAnims = {
 
 func matchItemAnimation(id):
 	var d = getItem(id)
-	if d is ItemBlock or d is ItemPlant or d is ItemBucket or d is ItemTypeBlock:
+	if d is ItemBlock or d is ItemPlant or d is ItemBucket or d is ItemTypeBlock or d is ItemWall:
 		return "itemSwingNoHitbox"
 	if d is ItemDamage:
 		return "itemSwing"

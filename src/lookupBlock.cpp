@@ -97,6 +97,7 @@ LOOKUPBLOCK::LOOKUPBLOCK() {
     penis[70] = new BLOCKPAINTKAIAGHOSTS();
     penis[71] = new BLOCKPAINTKAIACREATURE();
     penis[72] = new BLOCKPAINTKAIAWASHED();
+    
     penis[73] = new BLOCKJARFIREFLY();
     penis[74] = new BLOCKMOSS();
     penis[75] = new BLOCKMOSSVINE();
@@ -122,6 +123,11 @@ LOOKUPBLOCK::LOOKUPBLOCK() {
     penis[95] = new BLOCKLAMPON();
     penis[96] = new BLOCKLAMPOFF();
     penis[97] = new BLOCKLEVER();
+    penis[98] = new BLOCKOBSERVER();
+    penis[99] = new BLOCKCLOCK();
+    penis[100] = new BLOCKREPEATER();
+    penis[101] = new BLOCKDRILL();
+    penis[102] = new BLOCKSPITTER();
 
     for(BLOCK *i : penis){ // i increase automatically !
         i->setLookUp(this);

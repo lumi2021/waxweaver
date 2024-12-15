@@ -29,7 +29,7 @@ Dictionary BLOCKWIRE::onEnergize(int x, int y, PLANETDATA *planet, int dir){
     Dictionary changes = {};
 
     int timeAlive = planet->getGlobalTick() - planet->getTimeData(x,y); // we check the time value to make sure tiles that have already been energized are not energized again
-    if (timeAlive < 4){
+    if (timeAlive < 1){
         return changes;
     }
 

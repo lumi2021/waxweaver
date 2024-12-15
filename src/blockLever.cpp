@@ -11,7 +11,7 @@ BLOCKLEVER::BLOCKLEVER() {
     setTexture("res://items/electrical/input/lever.png");
 
     itemToDrop = 97;
-    rotateTextureToGravity = true;
+    rotateTextureToGravity = false;
     hasCollision = false;
     isTransparent = true;
     connectTexturesToMe = false;

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ItemBlock" load_steps=3 format=3 uid="uid://b2gm11bgu22qk"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemBlock.gd" id="1_xjr83"]
+[ext_resource type="Texture2D" uid="uid://brohr2mogpua1" path="res://items/electrical/drill/drillItem.png" id="2_ij48x"]
+
+[resource]
+script = ExtResource("1_xjr83")
+blockID = 101
+itemName = "Drill"
+subtext = ""
+desc = "Mines a block when energized.
+Interact to rotate."
+texture = ExtResource("2_ij48x")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

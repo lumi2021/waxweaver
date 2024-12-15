@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ItemBlock" load_steps=3 format=3 uid="uid://dfmlkymhkermb"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemBlock.gd" id="1_uw64r"]
+[ext_resource type="Texture2D" uid="uid://tbi0ko1da3bs" path="res://items/electrical/input/repItem.png" id="2_apod0"]
+
+[resource]
+script = ExtResource("1_uw64r")
+blockID = 100
+itemName = "Resistor"
+subtext = ""
+desc = "Slows passage of energy. 
+Interact to change direction."
+texture = ExtResource("2_apod0")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

@@ -21,7 +21,7 @@ func _process(delta):
 	if tile == null:
 		return
 	var blockType = editBody.DATAC.getTileData(tile.x,tile.y)
-	$RightClick.visible = [19,22,23,25,33,34,47,48,55,62,63,97].has(blockType)
+	$RightClick.visible = [19,22,23,25,33,34,47,48,55,62,63,97,98,99,100,101,102].has(blockType)
 	
 func onRightClick():
 	
@@ -164,8 +164,47 @@ func onRightClick():
 				editBody.editTiles( d )
 			
 			var flip := info % 2
-			print("flicked!")
-			print((info/2))
-			print(flip)
 			editBody.DATAC.setInfoData( tile.x, tile.y, ((info/2)*2) + abs(1-flip) )
 			editBody.editTiles( {Vector2i(tile.x, tile.y):97} )
+		98: # observer
+			var info :int= editBody.DATAC.getInfoData( tile.x, tile.y )
+			var target = (info + 2) % 8
+			editBody.DATAC.setInfoData( tile.x, tile.y, target )
+			editBody.editTiles( {Vector2i(tile.x, tile.y):98} )
+		99: # clock trigger
+			var info :int= editBody.DATAC.getInfoData( tile.x, tile.y )
+			var target = (info + 1) % 8
+			editBody.DATAC.setInfoData( tile.x, tile.y, target )
+			print(target)
+			match target:
+				0:
+					GlobalRef.sendChat("clock set to 1 second")
+				1:
+					GlobalRef.sendChat("clock set to 0.5 seconds")
+				2:
+					GlobalRef.sendChat("clock set to 0.33 seconds")
+				3:
+					GlobalRef.sendChat("clock set to once per tick")
+				4:
+					GlobalRef.sendChat("clock set to 2 seconds")
+				5:
+					GlobalRef.sendChat("clock set to 5 seconds")
+				6:
+					GlobalRef.sendChat("clock set to 10 seconds")
+				7:
+					GlobalRef.sendChat("clock set to 30 seconds")
+		100:
+			var info :int= editBody.DATAC.getInfoData( tile.x, tile.y )
+			var target = (info + 2) % 8
+			editBody.DATAC.setInfoData( tile.x, tile.y, target )
+			editBody.editTiles( {Vector2i(tile.x, tile.y):100} )
+		101:
+			var info :int= editBody.DATAC.getInfoData( tile.x, tile.y )
+			var target = (info + 1) % 4
+			editBody.DATAC.setInfoData( tile.x, tile.y, target )
+			editBody.editTiles( {Vector2i(tile.x, tile.y):101} )
+		102:
+			var info :int= editBody.DATAC.getInfoData( tile.x, tile.y )
+			var target = (info + 1) % 4
+			editBody.DATAC.setInfoData( tile.x, tile.y, target )
+			editBody.editTiles( {Vector2i(tile.x, tile.y):102} )
