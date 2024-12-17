@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://bhm2hwrbyr14h"]
+[gd_scene load_steps=9 format=3 uid="uid://bhm2hwrbyr14h"]
 
 [ext_resource type="Texture2D" uid="uid://mwjxc6goor4m" path="res://items/blocks/natural/dirt.png" id="1_38qci"]
 [ext_resource type="Script" path="res://object_scenes/ground_item/ground_item.gd" id="1_vgw6l"]
 [ext_resource type="Material" uid="uid://hml1020mcabx" path="res://object_scenes/ground_item/groundItemOutlineShader.tres" id="3_tijq4"]
 [ext_resource type="Material" uid="uid://bgt1d2rew6mm5" path="res://object_scenes/ground_item/tintItemShader.tres" id="4_h5b80"]
+[ext_resource type="PackedScene" uid="uid://dbdj5a5aqufqf" path="res://object_scenes/entity/components/floor_detector.tscn" id="5_ji8vt"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_husnc"]
 
@@ -11,11 +12,12 @@
 radius = 9.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vmqcq"]
-radius = 2.0
+radius = 3.0
 
 [node name="GroundItem" type="CharacterBody2D"]
 collision_layer = 4
 collision_mask = 49
+floor_stop_on_slope = false
 platform_on_leave = 2
 platform_floor_layers = 0
 script = ExtResource("1_vgw6l")
@@ -64,6 +66,8 @@ color = Color(0.227451, 0.0470588, 0.207843, 0)
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2(-4.76837e-07, -4.76837e-07)
 rect = Rect2(-32, -32, 64, 64)
+
+[node name="FloorDetector" parent="." instance=ExtResource("5_ji8vt")]
 
 [connection signal="body_entered" from="stack" to="." method="_on_stack_body_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

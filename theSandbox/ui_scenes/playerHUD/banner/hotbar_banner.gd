@@ -317,6 +317,8 @@ func interpretCommand(text):
 		"music":
 			SoundManager.randomMusicTick = 9999
 			GlobalRef.sendChat("Playing music")
+		"conveyor":
+			GlobalRef.conveyorspeed = float(text.get_slice(" ",1))
 		_:
 			GlobalRef.sendError("Error: command doesn't exist")
 			return

@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://c1b1vgh12jqww"]
+[gd_scene load_steps=29 format=3 uid="uid://c1b1vgh12jqww"]
 
 [ext_resource type="Script" path="res://object_scenes/player/player.gd" id="1_7l8c2"]
 [ext_resource type="PackedScene" uid="uid://meikam2oyy13" path="res://object_scenes/entity/components/health_component.tscn" id="2_vteuo"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://celgr5v0qm8m3" path="res://ui_scenes/mouseCursor/mouseIcon.png" id="11_k042u"]
 [ext_resource type="PackedScene" uid="uid://c05kukkqfrg40" path="res://object_scenes/entity/components/hitbox.tscn" id="12_wduni"]
 [ext_resource type="Texture2D" uid="uid://mf6pwpiprm5c" path="res://items/material/string.png" id="13_1otht"]
+[ext_resource type="PackedScene" uid="uid://dbdj5a5aqufqf" path="res://object_scenes/entity/components/floor_detector.tscn" id="14_7njdi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8s1yf"]
 size = Vector2(6, 6)
@@ -447,5 +448,7 @@ texture = ExtResource("10_bh305")
 [node name="MouseIcon" type="Sprite2D" parent="rightClicker"]
 position = Vector2(4, 4)
 texture = ExtResource("11_k042u")
+
+[node name="FloorDetector" parent="." instance=ExtResource("14_7njdi")]
 
 [connection signal="healthChanged" from="HealthComponent" to="." method="_on_health_component_health_changed"]

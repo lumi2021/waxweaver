@@ -339,6 +339,20 @@ func saveChestString():
 	
 	chestOBJ.chestDictionary[currentSelectedChest] = chestString
 
+func saveChestFromArray(data):
+	var chestString = ""
+	for i in range(25):
+		var slot :int= i
+		var id :int= data[slot][0] 
+		if id == -1:
+			continue
+		var amount :int= data[slot][1]
+		var string :String= str(id) + "x" + str(amount) + "x" + str(i)
+		# 3010x1x0,13x99x16,
+		chestString = chestString + string + ","
+	
+	return chestString
+
 func loadChestString(chestString:String):
 	# parse string
 	var a :PackedStringArray = chestString.split(",",false)

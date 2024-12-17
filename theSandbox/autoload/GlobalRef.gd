@@ -35,6 +35,9 @@ var dayLength :int= 9000
 var currentTime :float= 0 # 0.0 - 1.0
 var daylightMult :float = 1.0
 
+# game info
+var conveyorspeed :float= 30.0
+
 var cheatsEnabled :bool= false
 ## prevents mimic spawns until player has opened a chest
 var playerHasInteractedWithChest :bool= false

@@ -97,6 +97,9 @@ var data = {
 	100:load("res://items/electrical/input/repeater.tres"),
 	101:load("res://items/electrical/drill/drill.tres"),
 	102:load("res://items/electrical/spitter/Spitter.tres"),
+	103:load("res://items/electrical/input/extender.tres"),
+	104:load("res://items/electrical/placer/Placer.tres"),
+	105:load("res://items/electrical/conveyorbelt/conveyorBelt.tres"),
 	
 	########## item ids ##################
 	3000:load("res://items/tools/flimsy/FlimsySword.tres"), # flimsy tools

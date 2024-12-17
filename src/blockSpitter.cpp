@@ -32,15 +32,16 @@ Dictionary BLOCKSPITTER::onEnergize(int x, int y, PLANETDATA *planet, int dir){
 
     int rot = info;
     Vector2i scan = Vector2i( Vector2( 1,0 ).rotated(acos(0.0)*rot) );
-    Vector2i scan2 = Vector2i( Vector2( 2,0 ).rotated(acos(0.0)*rot) );
+    //Vector2i scan2 = Vector2i( Vector2( 2,0 ).rotated(acos(0.0)*rot) );
 
     int tile = planet->getTileData(x+scan.x,y+scan.y);
     if(tile > 1){
 
-        int tile2 = planet->getTileData(x+scan2.x,y+scan2.y);
-        if(tile2 < 2){
-            changes[Vector2i(x,y)] = "spitter";
-        }
+        changes[Vector2i(x,y)] = "spitter";
+        //int tile2 = planet->getTileData(x+scan2.x,y+scan2.y);
+        //if(tile2 < 2){
+        //    changes[Vector2i(x,y)] = "spitter";
+        //}
     }
 	
     

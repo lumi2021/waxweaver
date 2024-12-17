@@ -11,6 +11,7 @@ class_name Player
 
 @onready var healthComponent :HealthComponent= $HealthComponent
 @onready var shipFinder = $ShipFinder
+@onready var floorDetector = $FloorDetector
 
 var rotated = 0
 var rotationDelayTicks = 0
@@ -237,11 +238,18 @@ func normalMovement(delta):
 	if GlobalRef.chatIsOpen:
 		dir = 0
 	
+	var speedAdd :float= 0.0
+	match floorDetector.getFloorTile():
+		105:
+			speedAdd = GlobalRef.conveyorspeed
+		106:
+			speedAdd = -GlobalRef.conveyorspeed
+			
 	var newVel = velocity.rotated(-rotSource)
 	if beingKnockedback:
-		newVel.x = lerp(newVel.x, dir * speed, 0.025) # make framerate independent
+		newVel.x = lerp(newVel.x, (dir * speed) + speedAdd, 0.025) # make framerate independent
 	else:
-		newVel.x = lerp(newVel.x, dir * speed, 1.0-pow(2.0,(-delta/0.04)))
+		newVel.x = lerp(newVel.x, (dir * speed) + speedAdd, 1.0-pow(2.0,(-delta/0.04)))
 	newVel.y += Stats.getGravity() * delta
 	newVel.y = min(newVel.y,Stats.getTerminalVelocity())
 	

@@ -290,8 +290,6 @@ func doBlockAction(action:String,tileX:int,tileY:int,planet):
 			GlobalRef.player.closeDoor(Vector2i(tileX,tileY),planet)
 			SoundManager.playSound("interacts/door",planet.to_global(planet.tileToPos(Vector2(tileX,tileY))),1.2,0.1)
 		"spitter":
-			print("spitting!")
-			
 			var dir :Vector2i= Vector2i(Vector2(1,0).rotated( planet.DATAC.getInfoData(tileX,tileY) * (PI/2) ))
 			var ins = load("res://items/electrical/spitter/spitter_block_spit.tscn").instantiate()
 			ins.position = planet.tileToPos( Vector2(tileX+dir.x,tileY+dir.y) )
@@ -300,11 +298,48 @@ func doBlockAction(action:String,tileX:int,tileY:int,planet):
 			ins.blockID = planet.DATAC.getTileData( tileX+dir.x,tileY+dir.y )
 			ins.info = planet.DATAC.getInfoData( tileX+dir.x,tileY+dir.y )
 			planet.entityContainer.add_child( ins )
-			
-			print(planet.DATAC.getTileData( tileX+dir.x,tileY+dir.y ))
-			
 			planet.editTiles( { Vector2i(tileX+dir.x,tileY+dir.y) : 0 } )
-			
+		"placer":
+			# if this is being ran, chest and empty space are already confirmed
+			var chestPos :Vector2i= Vector2i(tileX,tileY)+Vector2i(Vector2(-1,0).rotated( planet.DATAC.getInfoData(tileX,tileY) * (PI/2) ))
+			if planet.chestDictionary.has(Vector2(chestPos)):
+				var chestString = planet.chestDictionary[Vector2(chestPos)]
+				var chestData = PlayerData.loadChestString(chestString)
+				
+				if PlayerData.currentSelectedChest == Vector2(chestPos):
+					PlayerData.closeChest()
+				
+				var slot = -1
+				for i in range(25):
+					var id = chestData[i][0]
+					var data = ItemData.getItem(id)
+					if data is ItemBlock:
+						slot = i
+						break
+					if data is ItemPlant:
+						slot = i
+						break
+				if slot == -1:
+					return
+				
+				var blockID = chestData[slot][0]
+				var amount = chestData[slot][1]
+				
+				if amount > 1:
+					chestData[slot] = [blockID,amount-1]
+				else:
+					chestData[slot] = [-1,-1] # delete item if only 1 left
+				
+				var newString = PlayerData.saveChestFromArray(chestData)
+				planet.chestDictionary[Vector2(chestPos)] = newString
+				
+				var placePos :Vector2i= Vector2i(tileX,tileY)+Vector2i(Vector2(1,0).rotated( planet.DATAC.getInfoData(tileX,tileY) * (PI/2) ))
+				planet.editTiles( {placePos: blockID},true )
+				
+			else:
+				print("no chest data found")
+
+
 func checkForEmmission(id):
 	var d = theChunker.getBlockDictionary(id)
 	return d["lightEmmission"]

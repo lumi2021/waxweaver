@@ -119,6 +119,10 @@
 #include "blockRepeater.h" // id 100
 #include "blockDrill.h" // id 101
 #include "blockSpitter.h" // id 102
+#include "blockExtender.h" // id 103
+#include "blockPlacer.h" // id 104
+#include "blockConveyorRight.h" // id 105
+#include "blockConveyorLeft.h" // id 106
 
 // adding a new block? make sure you increment the PENIS array !
 
@@ -136,7 +140,7 @@ public:
 	
 	Array allBlocks;
 
-	BLOCK *penis[103]; // must be largest id + 1
+	BLOCK *penis[107]; // must be largest id + 1
 
 	LOOKUPBLOCK();
 	~LOOKUPBLOCK();

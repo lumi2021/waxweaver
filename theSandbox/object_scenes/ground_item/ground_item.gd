@@ -6,6 +6,8 @@ class_name GroundItem
 
 @onready var tint = $textureRoot/texture/tint
 
+@onready var floorDetector = $FloorDetector
+
 var rotSide = 0
 
 var gravity = 600
@@ -78,6 +80,11 @@ func _process(delta):
 		newVelocity.y += gravity * delta
 		newVelocity.y = min(newVelocity.y,150)
 	
+	match floorDetector.getFloorTile():
+		105:
+			newVelocity.x = GlobalRef.conveyorspeed
+		106:
+			newVelocity.x = -GlobalRef.conveyorspeed
 	
 	velocity = newVelocity.rotated(rotSide*(PI/2))
 	

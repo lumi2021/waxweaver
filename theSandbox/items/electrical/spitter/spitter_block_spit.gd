@@ -44,8 +44,8 @@ func _process(delta):
 		planet.DATAC.setInfoData(tile.x,tile.y,info)
 		planet.editTiles( { Vector2i( tile.x,tile.y ):blockID },true )
 		
-		if ticks != 0:
-			queue_free()
+		#if ticks != 0:
+		queue_free()
 	#sprite.rotate(6.0*delta)
 	
 	ticks += 1
