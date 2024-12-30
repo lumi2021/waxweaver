@@ -32,6 +32,10 @@ Dictionary BLOCKSTRUCTURE::onTick(int x, int y, PLANETDATA *planet, int dir){
             return generateBossShipPlatform(x,y,planet,dir);
         case 3:
             return genetatePond(x,y,planet,dir);
+        case 4:
+            return generateIglooBase(x,y,planet,dir);
+        case 5:
+            return generateIglooDoor(x,y,planet,dir);
 
 
     }
@@ -97,7 +101,7 @@ Dictionary BLOCKSTRUCTURE::generateCavernHouse(int worldx, int worldy, PLANETDAT
     32,0,0,64,32,32,32,32,32,-1,
     32,0,0,0,32,0,0,0,32,-1, 
     32,0,0,0,47,0,0,0,32,-1,
-    32,0,0,0,47,0,0,64,32,-1,
+    32,0,0,64,47,0,0,64,32,-1,
     32,0,0,0,32,0,0,0,32,-1, 
     32,32,32,32,32,0,25,25,25,25,
     -1,-1,-1,-1,32,0,0,0,32,-1,
@@ -218,6 +222,99 @@ Dictionary BLOCKSTRUCTURE::genetatePond(int worldx, int worldy, PLANETDATA *plan
 
 
             changes[pos] = tiles[i];
+            i++;
+        }
+    
+    }
+
+    return changes;
+
+}
+
+Dictionary BLOCKSTRUCTURE::generateIglooBase(int worldx, int worldy, PLANETDATA *planet, int dir){
+    Dictionary changes = {};
+
+    // remember: vertical strips
+    int tiles[70] = {
+     -1, -1, -1, -1, -1, 54, -1,
+     -1, -1,109,109,109,109,109,
+     -1,109,  0,  0,  0,  0,109,
+    109,  0,  0,  0,  0,  0,109,
+    109,  0,  0,  0,  0,  0,109,
+    109,  0,  0,  0,  0,  0,109,
+    109,  0,  0,  0,  0,  0,109,
+     -1,109,  0,  0,  0,  0,109,
+     -1, -1,109,109,109,109,109,
+     -1, -1, -1, -1, -1, 54, -1,
+    };
+
+    int doorside = std::rand() % 2;
+
+    int i = 0;
+    for( int x = 0; x < 10; x++ ){
+        for( int y = 0; y < 7; y++ ){
+            
+            if (tiles[i] == 54){ // is structure for door
+                if (doorside == 0){
+                    if(x==9){ i++; continue; }
+                }
+
+                if (doorside == 1){
+                    if(x==0){ i++; continue; }
+                }
+
+            
+            }
+
+
+            if (tiles[i] == -1){ 
+                i++;
+                continue; } // skips generation if id is -1
+
+            Vector2 p = Vector2(x-4,y-3).rotated(acos(0.0)*dir);
+            Vector2i pos = Vector2i(p.x + worldx,p.y + worldy);
+
+            changes[pos] = tiles[i];
+
+            planet->setBGData(pos.x,pos.y,109);
+            if (tiles[i] == 54){
+                planet->setInfoData(pos.x,pos.y,5);
+            }
+        
+            i++;
+        }
+    
+    }
+
+    return changes;
+
+}
+
+Dictionary BLOCKSTRUCTURE::generateIglooDoor(int worldx, int worldy, PLANETDATA *planet, int dir){
+    Dictionary changes = {};
+
+    // remember: vertical strips
+    int tiles[12] = {
+    109,  0,  0,109,
+    109,  0,  0,109,
+    109,  0,  0,109,
+    };
+
+    int i = 0;
+    for( int x = 0; x < 3; x++ ){
+        for( int y = 0; y < 4; y++ ){
+            
+            if (tiles[i] == -1){ 
+                i++;
+                continue; } // skips generation if id is -1
+
+            Vector2 p = Vector2(x-1,y-2).rotated(acos(0.0)*dir);
+            Vector2i pos = Vector2i(p.x + worldx,p.y + worldy);
+
+            changes[pos] = tiles[i];
+
+            planet->setBGData(pos.x,pos.y,109);
+        
             i++;
         }
     

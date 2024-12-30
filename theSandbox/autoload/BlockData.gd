@@ -30,7 +30,7 @@ func breakBlock(x,y,planet,blockID,infoID,doneByPlayer:bool=false):
 	var data = theChunker.getBlockDictionary(blockID)
 	
 	spawnBreakParticle(x,y,blockID,data["breakParticleID"],planet,infoID,doneByPlayer)
-	spawnGroundItem(x,y,data["itemToDrop"],planet)
+	spawnGroundItem(x,y,data["itemToDrop"],planet,blockID)
 	
 	planet.editTiles( theChunker.runBreak(planet.DATAC,Vector2i.ZERO,x,y,blockID) )
 
@@ -44,7 +44,7 @@ func breakWall(x,y,planet,blockID):
 		spawnGroundItem(x,y,-blockID,planet)
 
 
-func spawnGroundItem(tilex:int,tiley:int,id:int,planet):
+func spawnGroundItem(tilex:int,tiley:int,id:int,planet,oldBlock:int=0):
 	
 	## special cases ##
 	match id:
@@ -55,8 +55,10 @@ func spawnGroundItem(tilex:int,tiley:int,id:int,planet):
 			if randi() % 30 == 0:
 				spawnItemRaw(tilex,tiley,3037,planet)
 			
-			if randi() % 2 == 0:
-				return
+			if oldBlock == 9:
+				if randi() % 3 != 0:
+					return # returns if dropped from big tree
+		
 		17: # is wheat seed
 			if randi() % 6 != 0:
 				return
@@ -87,6 +89,10 @@ func spawnGroundItem(tilex:int,tiley:int,id:int,planet):
 			spawnItemRaw(tilex,tiley,17,planet)
 		93: # hidden wire
 			id = 6200 + planet.DATAC.getInfoData(tilex,tiley)
+		110:
+			if oldBlock == 111:
+				if randi() % 3 != 0:
+					return # returns if dropped from big tree
 	
 	var ins = groundItemScene.instantiate()
 	ins.itemID = id
@@ -295,6 +301,7 @@ func doBlockAction(action:String,tileX:int,tileY:int,planet):
 			ins.position = planet.tileToPos( Vector2(tileX+dir.x,tileY+dir.y) )
 			ins.direction = Vector2( dir.x, dir.y )
 			ins.planet = planet
+			ins.ogTile = Vector2( tileX+dir.x,tileY+dir.y )
 			ins.blockID = planet.DATAC.getTileData( tileX+dir.x,tileY+dir.y )
 			ins.info = planet.DATAC.getInfoData( tileX+dir.x,tileY+dir.y )
 			planet.entityContainer.add_child( ins )
@@ -310,6 +317,7 @@ func doBlockAction(action:String,tileX:int,tileY:int,planet):
 					PlayerData.closeChest()
 				
 				var slot = -1
+				var type = 0
 				for i in range(25):
 					var id = chestData[i][0]
 					var data = ItemData.getItem(id)
@@ -318,15 +326,22 @@ func doBlockAction(action:String,tileX:int,tileY:int,planet):
 						break
 					if data is ItemPlant:
 						slot = i
+						type = 1
+						break
+					if data is ItemTypeBlock:
+						slot = i
+						type = 2
 						break
 				if slot == -1:
+					var p = planet.to_global( planet.tileToPos( Vector2(chestPos.x,chestPos.y) ) )
+					SoundManager.playSound("blocks/placer",p,1.0,0.1)
 					return
 				
-				var blockID = chestData[slot][0]
+				var itemID = chestData[slot][0]
 				var amount = chestData[slot][1]
 				
 				if amount > 1:
-					chestData[slot] = [blockID,amount-1]
+					chestData[slot] = [itemID,amount-1]
 				else:
 					chestData[slot] = [-1,-1] # delete item if only 1 left
 				
@@ -334,11 +349,50 @@ func doBlockAction(action:String,tileX:int,tileY:int,planet):
 				planet.chestDictionary[Vector2(chestPos)] = newString
 				
 				var placePos :Vector2i= Vector2i(tileX,tileY)+Vector2i(Vector2(1,0).rotated( planet.DATAC.getInfoData(tileX,tileY) * (PI/2) ))
+				
+				var blockID = 2
+				var data = ItemData.getItem(itemID)
+				match type:
+					0:
+						blockID = data.blockID
+					1:
+						blockID = data.blockToPlace
+					2:
+						blockID = data.blockID
+						planet.DATAC.setInfoData(placePos.x,placePos.y,data.multiTileId)
+				
 				planet.editTiles( {placePos: blockID},true )
 				
-			else:
-				print("no chest data found")
+				var s = SoundManager.getMineSound(blockID)
+				var p = planet.to_global( planet.tileToPos( Vector2(placePos.x,placePos.y) ) )
+				SoundManager.playSoundStream( s,p, SoundManager.blockPlaceVol, 0.1,"BLOCKS")
 
+				
+			else:
+				var p = planet.to_global( planet.tileToPos( Vector2(chestPos.x,chestPos.y) ) )
+				SoundManager.playSound("blocks/placer",p,1.0,0.1)
+		
+		"hopper":
+			
+			var dir :int= planet.DATAC.getPositionLookup(tileX,tileY)
+			var chestPos = Vector2(0,1).rotated( (PI/2) * dir ) + Vector2(tileX,tileY)
+			
+			var ins = load("res://items/electrical/hopper/hoppe_item_detector.tscn").instantiate()
+			ins.position = planet.tileToPos(Vector2(tileX,tileY))
+			ins.planet = planet
+			ins.chestPos = chestPos
+			ins.rotation = (PI/2) * dir
+			planet.entityContainer.add_child(ins)
+		"trapdoorOpen":
+			var dick = GlobalRef.player.setAllTrapdoors(Vector2(tileX,tileY),48,planet)
+			planet.editTiles( dick )
+			var p = planet.to_global( planet.tileToPos(Vector2(tileX,tileY) ) )
+			SoundManager.playSound("interacts/door",p,1.2,0.1)
+		"trapdoorClose":
+			var dick = GlobalRef.player.setAllTrapdoors(Vector2(tileX,tileY),47,planet)
+			planet.editTiles( dick )
+			var p = planet.to_global( planet.tileToPos(Vector2(tileX,tileY) ) )
+			SoundManager.playSound("interacts/door",p,1.2,0.1)
 
 func checkForEmmission(id):
 	var d = theChunker.getBlockDictionary(id)

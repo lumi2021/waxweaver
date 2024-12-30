@@ -9,7 +9,8 @@ blockID = 93
 multiTileId = 6
 itemName = "Brown brick Wire"
 subtext = ""
-desc = "A wire that looks like brown brick"
+desc = "A wire that looks like brown brick
+"
 texture = ExtResource("2_l32g0")
 maxStackSize = 99
 clickToUse = false

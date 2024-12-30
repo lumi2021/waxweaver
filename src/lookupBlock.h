@@ -123,6 +123,12 @@
 #include "blockPlacer.h" // id 104
 #include "blockConveyorRight.h" // id 105
 #include "blockConveyorLeft.h" // id 106
+#include "blockHopper.h" // id 107
+#include "blockIceicle.h" // id 108
+#include "blockSnowbrick.h" // id 109
+#include "blockPineSapling.h" // id 110
+#include "blockPineLeaves.h" // id 111
+#include "blockPineSolidLeaf.h" // id 112
 
 // adding a new block? make sure you increment the PENIS array !
 
@@ -140,7 +146,7 @@ public:
 	
 	Array allBlocks;
 
-	BLOCK *penis[107]; // must be largest id + 1
+	BLOCK *penis[113]; // must be largest id + 1
 
 	LOOKUPBLOCK();
 	~LOOKUPBLOCK();

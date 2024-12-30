@@ -1,6 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://d0j06gpiq8jxo"]
+[gd_scene load_steps=7 format=3 uid="uid://d0j06gpiq8jxo"]
 
 [ext_resource type="Script" path="res://ui_scenes/mainMenu/textbutton/text_button.gd" id="1_mi3f6"]
+[ext_resource type="AudioStream" uid="uid://cqa50gn4ua5pu" path="res://sound/ui/menuUp.ogg" id="2_5wrln"]
+[ext_resource type="AudioStream" uid="uid://djc8uidvq5l2w" path="res://sound/ui/menuDown.ogg" id="3_8nn65"]
+[ext_resource type="AudioStream" uid="uid://jicgxgt0ypoa" path="res://sound/ui/menuSelect.ogg" id="4_qrasv"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_f2sph"]
 font_color = Color(0, 0, 0, 1)
@@ -35,6 +38,25 @@ offset_right = 27.0
 offset_bottom = 17.0
 text = "text"
 label_settings = SubResource("LabelSettings_nqjjx")
+
+[node name="buttonUp" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_5wrln")
+volume_db = -6.0
+max_polyphony = 3
+bus = &"SFX"
+
+[node name="buttonDown" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_8nn65")
+volume_db = -16.0
+max_polyphony = 3
+bus = &"SFX"
+
+[node name="buttonSelect" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("4_qrasv")
+volume_db = -6.0
+max_polyphony = 3
+bus = &"SFX"
 
 [connection signal="button_down" from="." to="." method="_on_button_down"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

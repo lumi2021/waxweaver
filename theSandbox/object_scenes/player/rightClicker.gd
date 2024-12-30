@@ -166,6 +166,9 @@ func onRightClick():
 			var flip := info % 2
 			editBody.DATAC.setInfoData( tile.x, tile.y, ((info/2)*2) + abs(1-flip) )
 			editBody.editTiles( {Vector2i(tile.x, tile.y):97} )
+			
+			SoundManager.playSound("mining/woodBreak",global_position,0.8,0.1)
+			
 		98: # observer
 			var info :int= editBody.DATAC.getInfoData( tile.x, tile.y )
 			var target = (info + 2) % 8

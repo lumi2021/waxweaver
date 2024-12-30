@@ -60,8 +60,13 @@ Dictionary BLOCKSAPLING::onTick(int x, int y, PLANETDATA *planet, int dir){
         for(int i = 0; i < treeHeight; i++){
 
             Vector2 poo = Vector2(0,-i).rotated(acos(0.0)*dir);
+            Vector2i what = Vector2i(Vector2(x+poo.x,y+poo.y));
+            int existingTile = planet->getTileData(what.x,what.y);
+            
+            if (existingTile < 2 || existingTile == 9 || existingTile == 10 || existingTile == 11 || existingTile == 12 || existingTile == 7){
+                changes[what] = 8;
 
-            changes[Vector2i(Vector2(x+poo.x,y+poo.y))] = 8;
+            }
 
 
         }
@@ -77,14 +82,17 @@ Dictionary BLOCKSAPLING::onTick(int x, int y, PLANETDATA *planet, int dir){
                 for(int leafY = 0; leafY < 5; leafY++){
 
                     int getFromMap = (leafX * 5) + leafY;
+
+                    if (map[getFromMap] == 0){
+                        continue;
+                    } 
+
                     Vector2 leafVec = Vector2(leafX-2,leafY-2).rotated(acos(0.0)*dir);
                     Vector2i coolPos = Vector2i(Vector2(x+pee.x+leafVec.x,y+pee.y+leafVec.y));
                     
                     int existingTile = planet->getTileData(coolPos.x,coolPos.y);
 
-                    if (existingTile < 2 || existingTile == 10 || existingTile == 11){
-
-                        if ( lookup->hasCollision(map[getFromMap]) ){continue;}
+                    if (existingTile < 2 || existingTile == 9 || existingTile == 10 || existingTile == 11 || existingTile == 12){
 
                         changes[coolPos] = map[getFromMap];
                     
@@ -101,14 +109,17 @@ Dictionary BLOCKSAPLING::onTick(int x, int y, PLANETDATA *planet, int dir){
                 for(int leafY = 0; leafY < 5; leafY++){
 
                     int getFromMap = (leafX * 5) + leafY;
+
+                    if (map[getFromMap] == 0){
+                        continue;
+                    } 
+
                     Vector2 leafVec = Vector2(leafX-2,leafY-2).rotated(acos(0.0)*dir);
                     Vector2i coolPos = Vector2i(Vector2(x+pee.x+leafVec.x,y+pee.y+leafVec.y));
                     
                     int existingTile = planet->getTileData(coolPos.x,coolPos.y);
 
-                    if (existingTile < 2 || existingTile == 10 || existingTile == 11){
-
-                        if ( lookup->hasCollision(map[getFromMap]) ){continue;}
+                    if (existingTile < 2 || existingTile == 9 || existingTile == 10 || existingTile == 11 || existingTile == 12){
 
                         changes[coolPos] = map[getFromMap];
                     

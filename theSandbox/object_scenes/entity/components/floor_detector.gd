@@ -26,8 +26,10 @@ func _process(delta):
 		return
 	
 	var t = planet.posToTile(parent.position)
+	if t == null:
+		return
 	var dir = planet.DATAC.getPositionLookup(t.x,t.y)
-	var rot = Vector2(0,1).rotated(dir * (PI/2))
+	var rot = Vector2i(Vector2(0,1).rotated(dir * (PI/2)))
 	tile = planet.DATAC.getTileData(t.x + rot.x,t.y + rot.y)
 	info = planet.DATAC.getInfoData(t.x + rot.x,t.y + rot.y)
 

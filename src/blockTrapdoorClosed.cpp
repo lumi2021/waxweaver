@@ -43,3 +43,12 @@ Dictionary BLOCKTRAPDOORCLOSED::onTick(int x, int y, PLANETDATA *planet, int dir
 		return changes;
 
 	}
+
+Dictionary BLOCKTRAPDOORCLOSED::onEnergize(int x, int y, PLANETDATA *planet, int dir){
+    Dictionary changes = {};
+
+    changes[ Vector2i(x,y) ] = "trapdoorOpen";
+
+    return changes;
+
+}

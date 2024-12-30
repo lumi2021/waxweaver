@@ -48,6 +48,8 @@ void PLANETDATA::_bind_methods() {
     ClassDB::bind_method(D_METHOD("getBiome","x","y"), &PLANETDATA::getBiome);
 
     ClassDB::bind_method(D_METHOD("energize","x","y","planet","lookup"), &PLANETDATA::energize);
+
+    ClassDB::bind_method(D_METHOD("pregenerateStrucutres","lookup"), &PLANETDATA::pregenerateStrucutres);
 }
 
 void PLANETDATA::createEmptyArrays(int size, Vector2 centerPoint) {
@@ -697,4 +699,27 @@ Dictionary PLANETDATA::energize(int x, int y,PLANETDATA *planet, LOOKUPBLOCK *lo
     }
     
     return accumulatedChanges;
+}
+
+Dictionary PLANETDATA::pregenerateStrucutres(LOOKUPBLOCK *lookup){
+
+    Dictionary accumulatedChanges = {};
+
+    // we want to scan world multiple times incase structures generate more structure blocks. this will allow us to make dungeon-ish type creations
+    // perform structure check maximum 20 times. this might be slow but this function is only ran once at world generation
+        
+    for(int x = 0; x < planetSize; x++){ // loop through entire planet
+        for(int y = 0; y < planetSize; y++){
+            int tile = getTileData(x,y); // structure block is 54
+            if(tile == 54){
+                int dir = getPositionLookup( x, y );
+                accumulatedChanges.merge( lookup->runOnTick( x, y, this, dir, 54 ) );
+            }
+
+        }
+    }
+
+    
+    return accumulatedChanges;
+
 }

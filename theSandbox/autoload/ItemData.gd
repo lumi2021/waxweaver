@@ -100,6 +100,10 @@ var data = {
 	103:load("res://items/electrical/input/extender.tres"),
 	104:load("res://items/electrical/placer/Placer.tres"),
 	105:load("res://items/electrical/conveyorbelt/conveyorBelt.tres"),
+	107:load("res://items/electrical/hopper/hopper.tres"),
+	109:load("res://items/blocks/building/Snowbrick.tres"),
+	-109:load("res://items/walls/snowbrickwall.tres"),
+	110:load("res://items/blocks/foliage/trees/pineTree/PineSapling.tres"),
 	
 	########## item ids ##################
 	3000:load("res://items/tools/flimsy/FlimsySword.tres"), # flimsy tools

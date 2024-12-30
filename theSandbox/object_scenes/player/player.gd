@@ -70,6 +70,9 @@ var stream :AudioStreamOggVorbis = null #SoundManager.getMineSound(blockID)
 
 @export var manaFilledPart :CPUParticles2D
 
+var holdingtick :int = 0
+var justswapped :bool = false
+
 ######################################################################
 ########################### BASIC FUNTIONS ###########################
 ######################################################################
@@ -99,6 +102,11 @@ func _process(delta):
 	tick+=1
 	
 	$rightClicker.global_position = get_global_mouse_position()
+	
+	if Input.is_action_pressed("mouse_left"): # this is stupid just for item bug
+		holdingtick += 1
+	else:
+		holdingtick = 0
 	
 	match state:
 		0: #On planet
@@ -668,8 +676,11 @@ func swapSlot():
 	var itemID = PlayerData.getSelectedItemID()
 	var s = ItemData.matchItemAnimation(itemID)
 	
+	justswapped = true
+	
 	if s == null:
 		heldItemAnim = null
+		$PlayerLayers/handFront.visible = true
 		return
 	
 	var ins = ItemData.heldItemAnims[s].instantiate()
@@ -678,6 +689,12 @@ func swapSlot():
 	
 	heldItemAnim = ins
 	itemRoot.add_child(ins)
+	if holdingtick < 2:
+		return
+	
+	if Input.is_action_pressed("mouse_left") and !heldItemAnim.usedUp:
+		heldItemAnim.onFirstUse()
+	
 
 func runItemProcess(delta):
 	
@@ -692,13 +709,15 @@ func runItemProcess(delta):
 	else:
 		$PlayerLayers/handFront.visible = !heldItemAnim.visible
 	
-	if Input.is_action_just_pressed("mouse_left") and !heldItemAnim.usedUp:
+	if Input.is_action_just_pressed("mouse_left") and !heldItemAnim.usedUp and !justswapped:
 		heldItemAnim.onFirstUse()
 	
 	if usingItem and !heldItemAnim.usedUp:
 		heldItemAnim.onUsing(delta)
 	else:
 		heldItemAnim.onNotUsing(delta)
+	
+	justswapped = false
 
 
 func setAllTrapdoors(tile:Vector2,replaceID:int,body):

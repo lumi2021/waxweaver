@@ -50,7 +50,16 @@ func _ready():
 	noise.seed = randi()
 	if system.planetsShouldGenerate:
 		generateTerrain()
-	
+		
+		for i in range(20): # pregenerate structures
+			var structures :Dictionary= DATAC.pregenerateStrucutres( BlockData.getLookup() )
+			if structures.is_empty():
+				return
+			
+			editTiles(structures)
+			print("\nROLL " + str(i + 1))
+			print(structures)
+		
 	
 ########################################################################
 ############################## ORBITING ################################
@@ -170,18 +179,34 @@ func editTiles(changeCommit,doneByPlayer:bool=false):
 			chunksToUpdate.append(chunkVector)
 		
 		#Theres gotta be a way to clean this up
+		var morganfreemansayingtrue := false
 		if int(change.x) % 8 == 0:
 			if !chunksToUpdate.has(chunkVector + Vector2( -1 , 0 )):
 				chunksToUpdate.append(chunkVector + Vector2( -1 , 0 ))
+			morganfreemansayingtrue = true
 		elif int(change.x) % 8 == 7:
 			if !chunksToUpdate.has(chunkVector + Vector2( 1 , 0 )):
 				chunksToUpdate.append(chunkVector + Vector2( 1 , 0 ))
+			morganfreemansayingtrue = true
 		if int(change.y) % 8 == 0:
 			if !chunksToUpdate.has(chunkVector + Vector2( 0 , -1 )):
 				chunksToUpdate.append(chunkVector + Vector2( 0 , -1 ))
+			morganfreemansayingtrue = true
 		elif int(change.y) % 8 == 7:
 			if !chunksToUpdate.has(chunkVector + Vector2( 0 , 1 )):
 				chunksToUpdate.append(chunkVector + Vector2( 0 , 1 ))
+			morganfreemansayingtrue = true
+		
+		if c < -1:
+			if morganfreemansayingtrue:
+				if !chunksToUpdate.has(chunkVector + Vector2( 1 , 1 )):
+					chunksToUpdate.append(chunkVector + Vector2( 1 , 1 ))
+				if !chunksToUpdate.has(chunkVector + Vector2( -1 , 1 )):
+					chunksToUpdate.append(chunkVector + Vector2( -1 , 1 ))
+				if !chunksToUpdate.has(chunkVector + Vector2( 1 , -1 )):
+					chunksToUpdate.append(chunkVector + Vector2( 1 , -1 ))
+				if !chunksToUpdate.has(chunkVector + Vector2( -1 , -1 )):
+					chunksToUpdate.append(chunkVector + Vector2( -1 , -1 ))
 	
 	for vec in chunksToUpdate:
 		if chunkDictionary.has(vec):

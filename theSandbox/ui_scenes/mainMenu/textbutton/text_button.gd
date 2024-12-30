@@ -33,12 +33,16 @@ func _process(delta):
 
 func _on_mouse_entered():
 	focused = true
+	$buttonUp.play()
 	
 
 func _on_mouse_exited():
 	focused = false
+	if $buttonSelect.playing:
+		$buttonDown.play()
 
 
 func _on_button_down():
 	$Node2D.position = Vector2(-2,2)
 	$Node2D.modulate = Color(1,0.463,0.333)
+	$buttonSelect.play()

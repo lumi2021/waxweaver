@@ -87,6 +87,8 @@ public:
 
     Dictionary energize(int x, int y,PLANETDATA *planet, LOOKUPBLOCK *lookup);
 
+    Dictionary pregenerateStrucutres(LOOKUPBLOCK *lookup);
+
 };
 
 }

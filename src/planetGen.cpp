@@ -189,7 +189,7 @@ void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
                 biome = 2;
             }
 
-            if (planet->getTileData(x,y) == 4){
+            if (planet->getTileData(x,y) == 4){ // is grass
                 Vector2i up = Vector2i( Vector2(0,-1).rotated(acos(0.0)*quad) );
                 if( planet->getTileData(x+up.x,y+up.y) == 0 ){
                     
@@ -203,12 +203,6 @@ void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
                         planet->setTileData(x+up.x,y+up.y,26); // spawn lily
                     }
 
-
-                    if(r % 10 == 0){
-                        planet->setTileData(x+up.x,y+up.y,7);
-                        planet->setTimeData(x+up.x,y+up.y,-16000); // spawn tree sapling
-                    }
-
                     if(std::rand() % 64 == 0){
                         planet->setTileData(x+up.x,y+up.y,38); // spawn natural potato
                         planet->setInfoData(x+up.x,y+up.y,4);
@@ -219,7 +213,21 @@ void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
                             planet->setTileData(x+up.x,y+up.y,54); // spawn house structure
                             planet->setInfoData(x+up.x,y+up.y,0);
                         }
+
+                        if(std::rand() % 5 == 0 && y % 3 == 0){
+                            planet->setTileData(x+up.x,y+up.y,7);
+                            planet->setTimeData(x+up.x,y+up.y,-16000); // spawn tree sapling
+                        }
+
+                    }else{
+
+                        if(std::rand() % 5 == 0 && x % 3 == 0){
+                            planet->setTileData(x+up.x,y+up.y,7);
+                            planet->setTimeData(x+up.x,y+up.y,-16000); // spawn tree sapling
+                        }
+
                     }
+
 
                     if ( quad == 2 ){
                         if(std::rand() % 4 == 0){
@@ -256,6 +264,32 @@ void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
                             planet->setTimeData(x+up.x,y+up.y, ((std::rand() % 40000) + 6000 ) * -1 ); // age cactus randomly
                         }
 
+                    }
+
+
+                }
+            
+            }
+
+            if (planet->getTileData(x,y) == 85){ // is snow
+                Vector2i up = Vector2i( Vector2(0,-1).rotated(acos(0.0)*quad) );
+                if( planet->getTileData(x+up.x,y+up.y) < 2 ){ // if space is free
+                    
+                    if(std::abs(planet->getWaterData(x+up.x,y+up.y))> 0.1 ){ // is underwater
+                        int donothing = 1;
+                    }
+                    
+                    else if(y % 3 == 0){ // is makes sure trees are too squashed together
+                        if(std::rand() % 3 == 0){ // 1 in 5 chance to spawn pine tree
+                            planet->setTileData(x+up.x,y+up.y,110); // spawn pine tree sapling
+                            planet->setTimeData(x+up.x,y+up.y, -10000 ); // age tree so it instantly grows
+                        }
+
+                    }
+
+                    if(std::rand() % 100 == 0){ // odds to spawn igloo
+                        planet->setTileData(x+up.x,y+up.y,54); // structureblock
+                        planet->setInfoData(x+up.x,y+up.y, 4 ); // igloo info id
                     }
 
 
@@ -305,34 +339,37 @@ void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
                         if(std::rand() % 3 == 0){
                             planet->setTileData(x,y,52); // spawn stalactite
                             planet->setInfoData(x,y, std::rand() % 2 );
-
                         }else if(std::rand() % 300 == 0){
                             planet->setTileData(x,y,54);
                             planet->setInfoData(x,y, 1 ); // generate cavern house
-
                         }
+                    }
 
-                        
-
+                    if( planet->getTileData(up.x,up.y) == 86 ){ // found ice ceiling
+                        if(std::rand() % 3 == 0){
+                            planet->setTileData(x,y,108); // spawn iceicle
+                            planet->setInfoData(x,y, std::rand() % 2 );
+                        }
                     }
 
 
                     Vector2i down = Vector2i( Vector2(0,1).rotated(acos(0.0)*quad) ) + Vector2i(x,y) ;
                     if( planet->getTileData(down.x,down.y) == 2 ){
-                        // found suitable ground underground
-
+                        // found suitable stone ground underground
                         if(std::rand() % 260 == 0){
                             planet->setTileData(x,y,54); // spawn pond
                             planet->setInfoData(x,y, 3 );
                         }
 
-
                         if(std::rand() % 260 == 0){
                             planet->setTileData(x,y,34); // spawn loot chest
                         }
 
-                        
-
+                    }else if( planet->getTileData(down.x,down.y) == 86 ){ // if 
+                        // found suitable ice ground underground
+                        if(std::rand() % 100 == 0){
+                            planet->setTileData(x,y,34); // spawn loot chest
+                        }
 
                     }
                     

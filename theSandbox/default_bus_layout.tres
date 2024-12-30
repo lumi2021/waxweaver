@@ -1,13 +1,17 @@
-[gd_resource type="AudioBusLayout" load_steps=3 format=3 uid="uid://dnv5iee1ihp1w"]
+[gd_resource type="AudioBusLayout" load_steps=4 format=3 uid="uid://dnv5iee1ihp1w"]
 
 [sub_resource type="AudioEffectLimiter" id="AudioEffectLimiter_fvq1p"]
 resource_name = "Limiter"
-ceiling_db = -6.0
 
 [sub_resource type="AudioEffectReverb" id="AudioEffectReverb_7jj48"]
 resource_name = "Reverb"
 room_size = 0.18
 wet = 0.0
+
+[sub_resource type="AudioEffectLimiter" id="AudioEffectLimiter_q7kk3"]
+resource_name = "Limiter"
+ceiling_db = -5.0
+soft_clip_db = 1.0
 
 [resource]
 bus/1/name = &"SFX"
@@ -26,6 +30,8 @@ bus/2/mute = false
 bus/2/bypass_fx = false
 bus/2/volume_db = 0.0
 bus/2/send = &"SFX"
+bus/2/effect/0/effect = SubResource("AudioEffectLimiter_q7kk3")
+bus/2/effect/0/enabled = true
 bus/3/name = &"INVENTORY"
 bus/3/solo = false
 bus/3/mute = false
@@ -37,7 +43,7 @@ bus/4/solo = false
 bus/4/mute = false
 bus/4/bypass_fx = false
 bus/4/volume_db = 0.0
-bus/4/send = &"SFX"
+bus/4/send = &"Master"
 bus/5/name = &"MUSIC"
 bus/5/solo = false
 bus/5/mute = false

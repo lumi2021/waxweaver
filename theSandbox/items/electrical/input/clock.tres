@@ -10,7 +10,8 @@ itemName = "Clock"
 subtext = ""
 desc = "Energizes repeatedly at 
 a set rate.
-Set to 1 second by default."
+Set to 1 second by default.
+Interact to change rate."
 texture = ExtResource("2_va8yw")
 maxStackSize = 99
 clickToUse = false

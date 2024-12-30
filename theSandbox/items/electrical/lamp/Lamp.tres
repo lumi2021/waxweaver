@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_3ah0h")
-blockID = 96
+blockID = 95
 itemName = "Electric Lamp"
 subtext = ""
 desc = "Toggles on electric pulse"

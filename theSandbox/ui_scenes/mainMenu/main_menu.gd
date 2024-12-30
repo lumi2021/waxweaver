@@ -17,6 +17,7 @@ func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	$mainButtons/versionLabel.text = "v0." + str( GlobalRef.version )
 	SoundManager.deleteMusicNode()
+	SoundManager.randomMusicTick = 170
 	
 	CreatureData.creatureAmount = 0 # ensures mob cap is reset if u leave game
 	CreatureData.passiveAmount = 0
@@ -137,3 +138,13 @@ func _on_gobacktutorial_pressed():
 
 func _on_tutorial_pressed():
 	enterState(6)
+
+
+func _on_text_edit_text_changed():
+	
+	$createNewWorld/TextEdit.text = $createNewWorld/TextEdit.text.replace("\n","")
+	$createNewWorld/TextEdit.set_caret_column( $createNewWorld/TextEdit.text.length() )
+	
+	if $createNewWorld/TextEdit.text.length() > 20:
+		$createNewWorld/TextEdit.text = $createNewWorld/TextEdit.text.left(20)
+		$createNewWorld/TextEdit.set_caret_column(20)

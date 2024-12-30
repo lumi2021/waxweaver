@@ -31,6 +31,7 @@ func setData():
 	
 	if gameData.has("worldname"):
 		$info/h/worldName.text = gameData["worldname"]
+		$info/h/worldName.text = $info/h/worldName.text.left(20)
 	else:
 		$info/h/worldName.text = saveFile
 	

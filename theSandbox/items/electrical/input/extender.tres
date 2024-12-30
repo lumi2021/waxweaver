@@ -11,7 +11,8 @@ subtext = ""
 desc = "Teleports electric pulse
 forward until it hits something.
 Has a range of 10 blocks.
-Interact to rotate."
+Interact to rotate.
+"
 texture = ExtResource("2_f86io")
 maxStackSize = 99
 clickToUse = false

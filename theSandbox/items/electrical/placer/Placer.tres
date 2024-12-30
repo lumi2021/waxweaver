@@ -8,7 +8,8 @@ script = ExtResource("1_p2ej1")
 blockID = 104
 itemName = "Placer"
 subtext = ""
-desc = "Places a block from a chest.
+desc = "Places a block from a chest
+when energized.
 Interact to rotate."
 texture = ExtResource("2_dbdve")
 maxStackSize = 99

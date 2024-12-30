@@ -8,7 +8,7 @@ script = ExtResource("1_u8akl")
 blockID = 98
 itemName = "Observer"
 subtext = ""
-desc = "Energizes when block in
+desc = "Energizes when the block in
 front of it has changed.
 Interact to change direction."
 texture = ExtResource("2_xr6ry")

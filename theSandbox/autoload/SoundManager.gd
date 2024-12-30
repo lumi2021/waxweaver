@@ -16,6 +16,8 @@ var randomAmbientTick :float = 0
 var musicNode = null
 var ambientNode = null
 
+var lastplayedmusic :int = -1
+
 func _process(delta):
 	
 	#blockPlaceVol = 0.8
@@ -34,10 +36,16 @@ func _process(delta):
 		
 		if musicNode == null:
 			randomMusicTick += delta
-			if randomMusicTick >= 240:
-				if randi() % 1000 != 0:
-					return
-				var penis = randi() % 5 
+			if randomMusicTick >= 180:
+				var penis = randi() % 7
+				if lastplayedmusic == penis:
+					penis += 1
+					penis = penis % 7
+				
+				if GlobalRef.globalTick < 900:
+					penis = 3
+				
+				
 				match penis:
 					0:
 						playMusic("music/planet ambience",1.0)
@@ -49,15 +57,21 @@ func _process(delta):
 						playMusic("music/air",0.2) # https://www.newgrounds.com/audio/listen/1380380
 					4:
 						playMusic("music/pan",0.2) # https://www.newgrounds.com/audio/listen/1382109
+					5:
+						playMusic("music/eyes",0.2) # https://www.newgrounds.com/audio/listen/1381914
+					6:
+						playMusic("music/ticks",0.1) # https://www.newgrounds.com/audio/listen/1382542
+				
+				lastplayedmusic = penis
+		
 		if ambientNode == null:
 			randomAmbientTick += delta
 			if randomAmbientTick >= 2:
-				if randi() % 1000 != 0:
-					return
 				if randi() % 2 == 0:
 					playAmbient("ambient/softwindnoloop",0.1)
 				else:
 					playAmbient("ambient/spookywind",0.1)
+
 
 func playSound(file:String,globalPos:Vector2,volumeLinear:float,pitchVariation:float=0.0,bus:String="SFX") -> void:
 	

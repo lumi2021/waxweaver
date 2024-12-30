@@ -9,7 +9,8 @@ blockID = 93
 multiTileId = 3
 itemName = "Sandstone Wire"
 subtext = ""
-desc = "A wire that looks like sandstone"
+desc = "A wire that looks like sandstone
+"
 texture = ExtResource("2_uprko")
 maxStackSize = 99
 clickToUse = false

@@ -25,6 +25,10 @@ public:
 	Dictionary generateCavernHouse(int worldx, int worldy, PLANETDATA *planet, int dir);
 	Dictionary generateBossShipPlatform(int worldx, int worldy, PLANETDATA *planet, int dir);
 	Dictionary genetatePond(int worldx, int worldy, PLANETDATA *planet, int dir);
+
+	// igloo parts
+	Dictionary generateIglooBase(int worldx, int worldy, PLANETDATA *planet, int dir);
+	Dictionary generateIglooDoor(int worldx, int worldy, PLANETDATA *planet, int dir);
 };
 
 }

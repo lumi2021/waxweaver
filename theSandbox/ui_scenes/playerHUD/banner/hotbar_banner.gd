@@ -179,8 +179,8 @@ func updateHealth():
 
 func interpretCommand(text):
 	
-	#remove accidental slash
-	text = text.left(-1)
+	#removes enters
+	text = text.replace("\n","")
 	
 	if text != "":
 		previousMessage = text
@@ -478,3 +478,4 @@ func connectBossHealthbar():
 	hb.textSet(hc.health,hc.maxHealth)
 	hb.show()
 	hb.set_process(true)
+
