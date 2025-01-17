@@ -73,6 +73,9 @@ var stream :AudioStreamOggVorbis = null #SoundManager.getMineSound(blockID)
 var holdingtick :int = 0
 var justswapped :bool = false
 
+var jumpsRemaining :int = 0
+var hoverTicks :int= 0
+
 ######################################################################
 ########################### BASIC FUNTIONS ###########################
 ######################################################################
@@ -349,6 +352,8 @@ func WATERJUMPCAMERALETSGO(body,vel,rot,onFloor,delta):
 	var inWater = abs(body.DATAC.getWaterData(tile.x,tile.y)) > 0.3
 	if inWater: # code if currently in water
 		wasInWater = true
+		hoverTicks = 0
+		jumpsRemaining = Stats.extraJumps
 		healthComponent.inflictStatus("wet",8)
 		vel.y = min(vel.y,30 + (Stats.swimMult * 2.5))
 		if Input.is_action_pressed("jump") and !GlobalRef.chatIsOpen:
@@ -363,10 +368,48 @@ func WATERJUMPCAMERALETSGO(body,vel,rot,onFloor,delta):
 		wasInWater = false
 		# code for leaving water
 			
-	if onFloor:
+	if onFloor: # this is where the regular jump is done
+		jumpsRemaining = Stats.extraJumps
+		if hoverTicks > 0 and $Bubble.scale.x > 0.1:
+			$Bubble.scale = Vector2.ZERO
+			var fart = load("res://object_scenes/particles/bubblewand/bubblepop.tscn").instantiate()
+			fart.position = position
+			get_parent().add_child(fart)
+		hoverTicks = 0
 		if Input.is_action_just_pressed("jump") and !GlobalRef.chatIsOpen:
 			vel.y = Stats.getJump()
+			
 		GlobalRef.camera.rotation = lerp_angle(GlobalRef.camera.rotation,rot,1.0-pow(2.0,(-delta/0.06)))
+	elif jumpsRemaining > 0:
+		if Input.is_action_just_pressed("jump") and !GlobalRef.chatIsOpen:
+			vel.y = Stats.getJump()
+			jumpsRemaining -= 1
+			airTime = 0.0 # cancel fall damage
+			var fart = load("res://object_scenes/particles/doubleJump/doublejumpparticle.tscn").instantiate()
+			fart.position = position
+			fart.rotation = sprite.rotation
+			get_parent().add_child(fart)
+	elif Stats.specialProperties.has("bubblehover"):
+		if hoverTicks == 0:
+			if Input.is_action_just_pressed("jump"):
+				hoverTicks = 120
+		elif hoverTicks > 0 and Input.is_action_pressed("jump"):
+			hoverTicks -= 1
+			vel.y = lerp(vel.y,0.0,0.5)
+			airTime = 0
+			$Bubble.scale = lerp($Bubble.scale,Vector2(1,1),0.2)
+			$Bubble.rotation = sprite.rotation
+			if hoverTicks == 0:
+				hoverTicks = -10
+				$Bubble.scale = Vector2.ZERO
+				var fart = load("res://object_scenes/particles/bubblewand/bubblepop.tscn").instantiate()
+				fart.position = position
+				get_parent().add_child(fart)
+		elif Input.is_action_just_released("jump") and hoverTicks > 0:
+			$Bubble.scale = Vector2.ZERO
+			var fart = load("res://object_scenes/particles/bubblewand/bubblepop.tscn").instantiate()
+			fart.position = position
+			get_parent().add_child(fart)
 	
 	return vel
 

@@ -11,6 +11,7 @@ var swimMult :float = 1.0
 const TERMVELOCITY :float = 300.0
 const GRAVITY :float = 1000.0
 
+var extraJumps :int = 0
 
 ## COMBAT ##
 var additiveDefense :int= 0 # Bonus defense
@@ -93,6 +94,7 @@ func resetStats():
 	knockbackBonus = 0.0
 	attackSpeedMult = 1.0
 	criticalStrikeChance = 4
+	extraJumps = 0
 	
 	trinkets = []
 	specialProperties = []
@@ -119,6 +121,7 @@ func updateStats():
 		knockbackBonus += data.addKnockback
 		attackSpeedMult += data.addAttackSpeed
 		criticalStrikeChance += data.addcriticalStrikeChance
+		extraJumps += data.extraJumps
 		
 		specialProperties += data.specialProperties
 	

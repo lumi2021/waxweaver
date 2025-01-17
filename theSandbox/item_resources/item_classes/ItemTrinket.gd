@@ -14,6 +14,7 @@ class_name ItemTrinket
 @export var addSpeed :float = 0.0
 @export var addJump :float = 0.0
 @export var addSwim :float = 0.0
+@export var extraJumps :int = 0
 @export_subgroup("Combat")
 @export var addDefense :int = 0
 @export var addMeleeDamage :float = 0.0

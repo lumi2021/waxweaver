@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ItemGift" load_steps=20 format=3 uid="uid://bi2twuht27huo"]
+[gd_resource type="Resource" script_class="ItemGift" load_steps=30 format=3 uid="uid://bi2twuht27huo"]
 
 [ext_resource type="Script" path="res://object_scenes/specialResource/lootTables/LootTable.gd" id="1_1rtil"]
 [ext_resource type="Script" path="res://item_resources/item_classes/ItemGift.gd" id="1_xngf1"]
@@ -103,11 +103,81 @@ amountMin = 1
 amountMax = 1
 weight = 10
 
+[sub_resource type="Resource" id="Resource_o2pm3"]
+script = ExtResource("2_vawkx")
+id = 3137
+amountMin = 1
+amountMax = 1
+weight = 10
+
+[sub_resource type="Resource" id="Resource_rnvb0"]
+script = ExtResource("2_vawkx")
+id = 3138
+amountMin = 1
+amountMax = 1
+weight = 10
+
+[sub_resource type="Resource" id="Resource_mkpar"]
+script = ExtResource("2_vawkx")
+id = 3066
+amountMin = 1
+amountMax = 1
+weight = 10
+
+[sub_resource type="Resource" id="Resource_qfo3o"]
+script = ExtResource("2_vawkx")
+id = 3067
+amountMin = 1
+amountMax = 1
+weight = 10
+
+[sub_resource type="Resource" id="Resource_kr81l"]
+script = ExtResource("2_vawkx")
+id = 3068
+amountMin = 1
+amountMax = 1
+weight = 10
+
+[sub_resource type="Resource" id="Resource_fpepo"]
+script = ExtResource("2_vawkx")
+id = 3068
+amountMin = 1
+amountMax = 1
+weight = 10
+
+[sub_resource type="Resource" id="Resource_iwufd"]
+script = ExtResource("2_vawkx")
+id = 3069
+amountMin = 1
+amountMax = 1
+weight = 10
+
+[sub_resource type="Resource" id="Resource_ms5pq"]
+script = ExtResource("2_vawkx")
+id = 3076
+amountMin = 1
+amountMax = 1
+weight = 20
+
+[sub_resource type="Resource" id="Resource_apgno"]
+script = ExtResource("2_vawkx")
+id = 3078
+amountMin = 1
+amountMax = 1
+weight = 20
+
+[sub_resource type="Resource" id="Resource_4wt1b"]
+script = ExtResource("2_vawkx")
+id = 3130
+amountMin = 4
+amountMax = 8
+weight = 40
+
 [sub_resource type="Resource" id="Resource_js6nd"]
 script = ExtResource("1_1rtil")
 rollType = 1
 rollCount = 3
-table = Array[ExtResource("2_vawkx")]([SubResource("Resource_duaum"), SubResource("Resource_46tpd"), SubResource("Resource_c3m72"), SubResource("Resource_djtx3"), SubResource("Resource_412es"), SubResource("Resource_hwil7"), SubResource("Resource_c6kf2"), SubResource("Resource_18leo"), SubResource("Resource_bqrhn"), SubResource("Resource_xaw8v"), SubResource("Resource_mpj0c"), SubResource("Resource_vdobr"), SubResource("Resource_bwgnr"), SubResource("Resource_x5lmx")])
+table = Array[ExtResource("2_vawkx")]([SubResource("Resource_duaum"), SubResource("Resource_46tpd"), SubResource("Resource_c3m72"), SubResource("Resource_djtx3"), SubResource("Resource_412es"), SubResource("Resource_hwil7"), SubResource("Resource_c6kf2"), SubResource("Resource_18leo"), SubResource("Resource_bqrhn"), SubResource("Resource_xaw8v"), SubResource("Resource_mpj0c"), SubResource("Resource_vdobr"), SubResource("Resource_bwgnr"), SubResource("Resource_x5lmx"), SubResource("Resource_o2pm3"), SubResource("Resource_rnvb0"), SubResource("Resource_mkpar"), SubResource("Resource_qfo3o"), SubResource("Resource_kr81l"), SubResource("Resource_fpepo"), SubResource("Resource_iwufd"), SubResource("Resource_ms5pq"), SubResource("Resource_apgno"), SubResource("Resource_4wt1b")])
 
 [resource]
 script = ExtResource("1_xngf1")

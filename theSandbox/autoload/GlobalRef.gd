@@ -1,7 +1,7 @@
 extends Node
 
 ########### GAME INFO #################
-var version :float = 21
+var version :float = 22
 
 
 #######################################
@@ -70,7 +70,6 @@ func _process(delta):
 	
 	var wave = sin( ( currentTime * PI ) / 0.5 ) + 0.5
 	daylightMult = clamp( wave,0.0,1.0 )
-	
 	
 func isNight():
 	return currentTime > 0.55

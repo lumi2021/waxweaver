@@ -353,8 +353,16 @@ Array CHUNKDRAW::tickUpdate(PLANETDATA *planet,Vector2i pos,bool onScreen,float 
             double lightEmmission = cock->getLightEmmission(blockID); // get current block emmision
 
             bool passthru = cock->isTransparent(blockID);
-            if( passthru && lightEmmission < 0.01 ){ blockID = airOrCaveAir(worldX,worldY,planet); } // make something have the same properties as air if transparent UNLESS it emits light
+            if( passthru ){
+                if (lightEmmission < 0.01){
+                    blockID = airOrCaveAir(worldX,worldY,planet);
+                }
+                else if (lightEmmission < (5.0 * daylight) && bgID < 2){
+                    blockID = airOrCaveAir(worldX,worldY,planet);
+                }
             
+            } // make something have the same properties as air if transparent UNLESS it emits light
+
             double mutliplier = cock->getLightMultiplier(blockID);
 
             if (std::abs(water)> 0.2){
@@ -373,6 +381,7 @@ Array CHUNKDRAW::tickUpdate(PLANETDATA *planet,Vector2i pos,bool onScreen,float 
                     lightEmmission = 0.0;
                 }
             }
+
 
 
 

@@ -18,8 +18,7 @@ public:
 	BLOCKVANITYPRESENT();
 	~BLOCKVANITYPRESENT();
 
-    Dictionary onTick(int x, int y, PLANETDATA *planet, int dir);
-
+    
 };
 
 }

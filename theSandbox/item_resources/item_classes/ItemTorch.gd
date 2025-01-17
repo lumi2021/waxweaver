@@ -65,6 +65,8 @@ func getBlockIsSolid(id):
 		collider = true
 	if id == 56:
 		collider = true
+	if id == 116:
+		collider = true
 	
 	return collider
 

@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://bq0kvpqe4e67a"]
+
+[ext_resource type="Texture2D" uid="uid://mf6pwpiprm5c" path="res://items/material/string.png" id="1_37pkn"]
+[ext_resource type="Script" path="res://object_scenes/particles/doubleJump/doublejumpparticle.gd" id="2_rl1y8"]
+
+[sub_resource type="Curve" id="Curve_dy4ix"]
+max_value = 2.0
+_data = [Vector2(0.00367647, 1), 0.0, 9.81778, 0, 0, Vector2(0.0772059, 1.41088), -0.98394, -0.98394, 0, 0, Vector2(1, 0), -2.32659, 0.0, 0, 0]
+point_count = 3
+
+[node name="doublejumpparticle" type="CPUParticles2D"]
+emitting = false
+lifetime = 0.8
+one_shot = true
+explosiveness = 1.0
+local_coords = true
+texture = ExtResource("1_37pkn")
+emission_shape = 3
+emission_rect_extents = Vector2(8, 2)
+direction = Vector2(0, 1)
+spread = 0.0
+gravity = Vector2(0, 0)
+initial_velocity_max = 54.7
+angular_velocity_min = -720.0
+angular_velocity_max = 720.0
+angle_min = -720.0
+angle_max = 720.0
+scale_amount_curve = SubResource("Curve_dy4ix")
+script = ExtResource("2_rl1y8")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

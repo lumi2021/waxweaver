@@ -1,8 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://bs18dnn7rrvnt"]
+[gd_scene load_steps=7 format=3 uid="uid://bs18dnn7rrvnt"]
 
 [ext_resource type="Script" path="res://item_resources/item_held_scenes/item_swing.gd" id="1_vpor5"]
 [ext_resource type="Texture2D" uid="uid://bbhygnshkya87" path="res://object_scenes/player/hand.png" id="2_yqhsd"]
 [ext_resource type="PackedScene" uid="uid://8jw6pruiu3cf" path="res://object_scenes/entity/components/hurtbox.tscn" id="3_epa84"]
+[ext_resource type="Script" path="res://object_scenes/specialResource/statusEffects/StatusInflictor.gd" id="4_lyabm"]
+
+[sub_resource type="Resource" id="Resource_m5oe3"]
+script = ExtResource("4_lyabm")
+effectName = ""
+seconds = 2.0
+chance = 100
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oq2lk"]
 size = Vector2(22, 4)
@@ -27,6 +34,7 @@ texture = ExtResource("2_yqhsd")
 rotation = -0.785398
 enemyBox = false
 enemyName = "player"
+statusInflictors = Array[ExtResource("4_lyabm")]([SubResource("Resource_m5oe3")])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="holder/Hurtbox"]
 position = Vector2(13, 0)

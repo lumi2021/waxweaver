@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://cw3kwexa7d6yr"]
+
+[ext_resource type="Script" path="res://item_resources/Item.gd" id="1_7prxr"]
+[ext_resource type="Texture2D" uid="uid://bm2yanm2xlrcn" path="res://items/blocks/ores/fibersDrop.png" id="2_fct48"]
+
+[resource]
+script = ExtResource("1_7prxr")
+itemName = "Ancient Fibers"
+subtext = ""
+desc = ""
+texture = ExtResource("2_fct48")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

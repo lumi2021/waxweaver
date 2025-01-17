@@ -18,6 +18,8 @@ public:
 	BLOCKOREGOLD();
 	~BLOCKOREGOLD();
 
+	Dictionary onTick(int x, int y, PLANETDATA *planet, int dir);
+
 };
 
 }

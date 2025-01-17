@@ -57,8 +57,8 @@ func _ready():
 				return
 			
 			editTiles(structures)
-			print("\nROLL " + str(i + 1))
-			print(structures)
+			#print("\nROLL " + str(i + 1))
+			#print(structures)
 		
 	
 ########################################################################
@@ -67,8 +67,6 @@ func _ready():
 
 func _process(delta):
 	##Orbit##
-	#if planetType == "forest":
-	#	print(chestDictionary)
 	
 	if orbiting != null and tickAlive > 240:
 		

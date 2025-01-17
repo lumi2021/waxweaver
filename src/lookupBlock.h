@@ -129,6 +129,21 @@
 #include "blockPineSapling.h" // id 110
 #include "blockPineLeaves.h" // id 111
 #include "blockPineSolidLeaf.h" // id 112
+#include "blockOreFiber.h" // id 113
+#include "blockMarble.h" // id 114
+#include "blockMarbleBrick.h" // id 115
+#include "blockMarblePillar.h" // id 116
+#include "blockCampfire.h" // id 117
+#include "blockStoneMossy.h" // id 118
+#include "blockRockDebris.h" // id 119
+#include "blockShelf.h" // id 120
+#include "blockBook.h" // id 121
+#include "blockTable.h" // id 122
+#include "blockFlowerPot.h" // id 123
+#include "blockChain.h" // id 124
+#include "blockLantern.h" // id 125
+#include "blockGrandfatherClock.h" // id 126
+#include "blockWindchime.h" // id 127
 
 // adding a new block? make sure you increment the PENIS array !
 
@@ -146,7 +161,7 @@ public:
 	
 	Array allBlocks;
 
-	BLOCK *penis[113]; // must be largest id + 1
+	BLOCK *penis[128]; // must be largest id + 1
 
 	LOOKUPBLOCK();
 	~LOOKUPBLOCK();

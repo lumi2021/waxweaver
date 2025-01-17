@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemBlock" load_steps=3 format=3 uid="uid://cnt0favyrwo7g"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemBlock.gd" id="1_wqjtw"]
+[ext_resource type="Texture2D" uid="uid://dth1bigvybwek" path="res://items/blocks/furniture/lights/lantern.png" id="2_deyxc"]
+
+[resource]
+script = ExtResource("1_wqjtw")
+blockID = 125
+itemName = "Lantern"
+subtext = ""
+desc = ""
+texture = ExtResource("2_deyxc")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

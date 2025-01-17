@@ -54,3 +54,16 @@ func getData():
 	var empty :Array[StatusInflictor] = []
 	$holder/Hurtbox.statusInflictors = empty
 	$holder/Hurtbox.statusInflictors += itemData.statusInflictors
+	
+	if Stats.specialProperties.has("firecharm"):
+		var status = StatusInflictor.new()
+		status.effectName = "burning"
+		status.seconds = 5
+		status.chance = 25
+		$holder/Hurtbox.statusInflictors.append(status)
+	if Stats.specialProperties.has("poisoncharm"):
+		var status = StatusInflictor.new()
+		status.effectName = "poison"
+		status.seconds = 5
+		status.chance = 25
+		$holder/Hurtbox.statusInflictors.append(status)

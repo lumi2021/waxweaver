@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ItemMultitile" load_steps=3 format=3 uid="uid://b1xu52ogqwo41"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemMultitile.gd" id="1_4ugwf"]
+[ext_resource type="Texture2D" uid="uid://djrddun4s8cun" path="res://items/blocks/furniture/other/windchimeItem.png" id="2_acx20"]
+
+[resource]
+script = ExtResource("1_4ugwf")
+blockID = 127
+size = Vector2i(1, 2)
+grounded = false
+needsWalls = false
+itemName = "Windchimes"
+subtext = ""
+desc = ""
+texture = ExtResource("2_acx20")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

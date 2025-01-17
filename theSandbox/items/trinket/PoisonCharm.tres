@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="ItemTrinket" load_steps=3 format=3 uid="uid://ddw7kirumerdl"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemTrinket.gd" id="1_6psww"]
+[ext_resource type="Texture2D" uid="uid://cqwqbd737nx02" path="res://items/trinket/poisoncharm.png" id="2_3kbtr"]
+
+[resource]
+script = ExtResource("1_6psww")
+description = "All melee attacks have a 25%
+chance of inflicting poison for 5 seconds
+"
+specialProperties = Array[String](["poisoncharm"])
+sceneToLoad = ""
+addSpeed = 0.0
+addJump = 0.0
+addSwim = 0.0
+extraJumps = 0
+addDefense = 0
+addMeleeDamage = 0.0
+addRangedDamage = 0.0
+addHealingMultiplier = 0.0
+addKnockback = 0.0
+addAttackSpeed = 0.0
+addcriticalStrikeChance = 0
+itemName = "Poisonous Spellbook"
+subtext = ""
+desc = ""
+texture = ExtResource("2_3kbtr")
+maxStackSize = 1
+clickToUse = false
+infiniteReach = false

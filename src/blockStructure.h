@@ -29,6 +29,19 @@ public:
 	// igloo parts
 	Dictionary generateIglooBase(int worldx, int worldy, PLANETDATA *planet, int dir);
 	Dictionary generateIglooDoor(int worldx, int worldy, PLANETDATA *planet, int dir);
+
+	// underground random
+	Dictionary selectRandomUGStructure(int worldx, int worldy, PLANETDATA *planet, int dir);
+	Dictionary generateUGDecorHouse(int worldx, int worldy, PLANETDATA *planet, int dir);
+	Dictionary generateUGDecorWell(int worldx, int worldy, PLANETDATA *planet, int dir);
+	Dictionary generateUGDecorWindchime(int worldx, int worldy, PLANETDATA *planet, int dir);
+	
+	// pillar
+	Dictionary generatePillarTop(int worldx, int worldy, PLANETDATA *planet, int dir);
+	Dictionary generatePillarMid(int worldx, int worldy, PLANETDATA *planet, int dir);
+	Dictionary generatePillarBottom(int worldx, int worldy, PLANETDATA *planet, int dir);
+
+	Dictionary generateMarbleThing(int worldx, int worldy, PLANETDATA *planet, int dir);
 };
 
 }

@@ -1,7 +1,7 @@
 extends Node
 
 var creatureAmount = 0
-var creatureLimit = 50 # max evil mobs
+var creatureLimit = 30 # max evil mobs
 
 var passiveAmount = 0
 var passiveLimit = 15 # max passive mobs
@@ -22,8 +22,9 @@ var creatures = {
 	"cobble":"res://object_scenes/entity/enemy_scenes/cobble/cobble.tscn",
 	"apparition":"res://object_scenes/entity/enemy_scenes/apparition/apparition.tscn",
 	"flower":"res://object_scenes/entity/enemy_scenes/flower/flower.tscn",
-	"mimic":"res://object_scenes/entity/enemy_scenes/mimic/mimic.tscn",\
+	"mimic":"res://object_scenes/entity/enemy_scenes/mimic/mimic.tscn",
 	"skull":"res://object_scenes/entity/enemy_scenes/skull/skull.tscn",
+	"snowman":"res://object_scenes/entity/enemy_scenes/snowman/snowman.tscn",
 	
 	# bosses
 	"bossShip":"res://object_scenes/entity/enemy_scenes/bosses/shipBossForest/boss_ship.tscn",

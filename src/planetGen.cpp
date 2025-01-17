@@ -111,16 +111,29 @@ void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
             int caveSize = 2;
             double n = noise->get_noise_2d(x * caveSize, y * caveSize) + r;
 
+            double marble = noise->get_noise_2d((x+9999) * 1, (y-3123) * 1) + r;
+
             if (dis <= 24){
                 n = n * (dis/24.0);
                 if ( n < 0.35 && n > -0.35 ){
                     planet->setBGData(x,y,80);
                     planet->setTileData(x,y,80);
                 }
+
+                marble = marble + (1.0 - (dis/24.0));
             }
 
             if ( n < 0.25 && n > -0.25 ){
                 planet->setTileData(x,y, airOrCaveAir(x,y,planet) );
+            }
+
+            if( marble > 0.75 ){
+                if ( n < 0.38 && n > -0.38 ){
+                    if(planet->getTileData(x,y) == 2){
+                        planet->setTileData(x,y,114);
+                    }
+
+                }
             }
 
 
@@ -305,14 +318,21 @@ void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
                 }
                 
             }
+
+            if (planet->getTileData(x,y) == 86){ // is ice
+                if(std::rand() % 350 == 0){
+                    generateOre(planet,x,y,113,86,3); // generate fibers
+                }
+                
+            }
             
             // ores
             if(dis < baseSurface - 16){
 
                 
-                if( dis < 48 ) {
+                if( dis < 64 ) {
 
-                    if(std::rand() % 350 == 0){
+                    if(std::rand() % 340 == 0){
                         generateOre(planet,x,y,27,2,7); // generate iron
                     }
 
@@ -332,6 +352,10 @@ void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
                     generateOre(planet,x,y,28,2,10); // generate gravel
                 }
 
+                if(std::rand() % 420 == 0){
+                    generateOre(planet,x,y,118,2,12); // generate mossy stone
+                }
+
                 if (planet->getTileData(x,y) == 1){ // cave air
 
                     Vector2i up = Vector2i( Vector2(0,-1).rotated(acos(0.0)*quad) ) + Vector2i(x,y) ;
@@ -342,7 +366,11 @@ void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
                         }else if(std::rand() % 300 == 0){
                             planet->setTileData(x,y,54);
                             planet->setInfoData(x,y, 1 ); // generate cavern house
+                        }else if(std::rand() % 260 == 0){
+                            planet->setTileData(x,y,54);
+                            planet->setInfoData(x,y, 7 ); // generate pillar
                         }
+                        
                     }
 
                     if( planet->getTileData(up.x,up.y) == 86 ){ // found ice ceiling
@@ -356,13 +384,24 @@ void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
                     Vector2i down = Vector2i( Vector2(0,1).rotated(acos(0.0)*quad) ) + Vector2i(x,y) ;
                     if( planet->getTileData(down.x,down.y) == 2 ){
                         // found suitable stone ground underground
+
+                        if(std::rand() % 3 == 0){
+                            planet->setTileData(x,y,119); // spawn rock debris
+                            planet->setInfoData(x,y,std::rand() % 12 );
+                        }
+
                         if(std::rand() % 260 == 0){
                             planet->setTileData(x,y,54); // spawn pond
                             planet->setInfoData(x,y, 3 );
                         }
 
-                        if(std::rand() % 260 == 0){
+                        if(std::rand() % 250 == 0){
                             planet->setTileData(x,y,34); // spawn loot chest
+                        }
+
+                        if(std::rand() % 140 == 0){
+                            planet->setTileData(x,y,54); // spawn decor random structure
+                            planet->setInfoData(x,y, 6 );
                         }
 
                     }else if( planet->getTileData(down.x,down.y) == 86 ){ // if 
@@ -371,8 +410,16 @@ void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
                             planet->setTileData(x,y,34); // spawn loot chest
                         }
 
+                    }else if( planet->getTileData(down.x,down.y) == 114 ){ // if gronud marble
+                        if(std::rand() % 30 == 0){
+                            planet->setTileData(x,y,54); // spawn marble poop
+                            planet->setInfoData(x,y, 10 );
+                        }
+
+                        if(std::rand() % 200 == 0){
+                            planet->setTileData(x,y,34); // spawn chest
+                        }
                     }
-                    
 
                 }
 
@@ -548,6 +595,7 @@ void PLANETGEN::generateOre(PLANETDATA *planet,int x,int y,int oreID,int replace
 
             if( planet->getTileData(pos.x,pos.y) == replaceID ){
                 planet->setTileData(pos.x,pos.y,oreID);
+                planet->setTimeData(pos.x,pos.y,-10000);
             }
 
 

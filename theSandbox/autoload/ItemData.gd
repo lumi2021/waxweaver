@@ -104,6 +104,21 @@ var data = {
 	109:load("res://items/blocks/building/Snowbrick.tres"),
 	-109:load("res://items/walls/snowbrickwall.tres"),
 	110:load("res://items/blocks/foliage/trees/pineTree/PineSapling.tres"),
+	113:load("res://items/blocks/ores/FiberOre.tres"),
+	114:load("res://items/blocks/natural/MarbleItem.tres"),
+	115:load("res://items/blocks/building/MarbleBrick.tres"),
+	-115:load("res://items/walls/MarbleBrickWall.tres"),
+	116:load("res://items/blocks/building/MarblePillar.tres"),
+	117:load("res://items/blocks/furniture/lights/campfireframes/Campfire.tres"),
+	118:load("res://items/blocks/natural/MossyStone.tres"),
+	120:load("res://items/blocks/furniture/other/Shelf.tres"),
+	121:load("res://items/blocks/furniture/other/Books.tres"),
+	122:load("res://items/blocks/furniture/other/Table.tres"),
+	123:load("res://items/blocks/furniture/flowerpots/FlowerPot.tres"),
+	124:load("res://items/blocks/furniture/other/Chain.tres"),
+	125:load("res://items/blocks/furniture/lights/Lantern.tres"),
+	126:load("res://items/blocks/furniture/other/GrandfatherClock.tres"),
+	127:load("res://items/blocks/furniture/other/Windchime.tres"),
 	
 	########## item ids ##################
 	3000:load("res://items/tools/flimsy/FlimsySword.tres"), # flimsy tools
@@ -266,6 +281,15 @@ var data = {
 	3134:load("res://items/material/Bone.tres"),
 	3135:load("res://items/material/bonemeal/bonemeal.tres"),
 	3136:load("res://items/food/MagicDinner.tres"),
+	
+	3137:load("res://items/trinket/DoubleJump.tres"),
+	3138:load("res://items/trinket/BubbleWand.tres"),
+	3139:load("res://items/trinket/FireCharm.tres"),
+	3140:load("res://items/trinket/PoisonCharm.tres"),
+	# insert futher trinkets
+	
+	3150:load("res://items/material/StickyWax.tres"),
+	
 
 	# chairs 6000 - 6049
 	6000:load("res://items/blocks/furniture/chairs/WoodenChair.tres"),

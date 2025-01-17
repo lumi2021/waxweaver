@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemBlock" load_steps=3 format=3 uid="uid://cny2ukmrjuuyb"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemBlock.gd" id="1_f8noo"]
+[ext_resource type="Texture2D" uid="uid://cse27didtmine" path="res://items/blocks/building/pillarItem.png" id="2_vk1ej"]
+
+[resource]
+script = ExtResource("1_f8noo")
+blockID = 116
+itemName = "Marble Pillar"
+subtext = ""
+desc = ""
+texture = ExtResource("2_vk1ej")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

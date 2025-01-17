@@ -393,6 +393,10 @@ func doBlockAction(action:String,tileX:int,tileY:int,planet):
 			planet.editTiles( dick )
 			var p = planet.to_global( planet.tileToPos(Vector2(tileX,tileY) ) )
 			SoundManager.playSound("interacts/door",p,1.2,0.1)
+		"windchime":
+			var p = planet.tileToPos(Vector2(tileX,tileY))
+			var g = planet.to_global(p)
+			SoundManager.playSound("ambient/windchime",g,0.8,0.1)
 
 func checkForEmmission(id):
 	var d = theChunker.getBlockDictionary(id)

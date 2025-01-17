@@ -213,6 +213,44 @@ func onRightClick():
 			editBody.editTiles( {Vector2i(tile.x, tile.y):106} )
 		106:
 			editBody.editTiles( {Vector2i(tile.x, tile.y):105} )
+		123:
+			var plant = -1
+			var itemHeld = PlayerData.getSelectedItemID()
+			match itemHeld:
+				26:
+					plant = 1
+				87:
+					plant = 2
+				76:
+					plant = 3
+				59:
+					plant = 4
+				7:
+					plant = 5
+				110:
+					plant = 6
+
+			
+			if plant > -1:
+				editBody.DATAC.setInfoData(tile.x, tile.y, plant)
+				editBody.editTiles( {Vector2i(tile.x, tile.y):123} )
+		126:
+			var time = GlobalRef.currentTime + 0.2916
+			if time > 1.0:
+				time -= 1.0
+			var hour = int(time * 24.0)
+			var minute :int= int(time * 2400.0 * 0.6) - (hour*100 * 0.6)
+			var sign = " am."
+			if hour > 12:
+				hour -= 12
+				sign = " pm."
+			elif hour == 0:
+				hour = 12
+			
+			if minute < 10:
+				GlobalRef.sendChat("The time is " + str(hour) + ":0" + str(minute)+sign)
+			else:
+				GlobalRef.sendChat("The time is " + str(hour) + ":" + str(minute)+sign)
 
 func rotateTile(editBody,tile,block):
 	var info :int= editBody.DATAC.getInfoData( tile.x, tile.y )
