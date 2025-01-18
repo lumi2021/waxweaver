@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="ItemDamage" load_steps=3 format=3 uid="uid://cvlseplo1l43e"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemDamage.gd" id="1_nr4te"]
+[ext_resource type="Texture2D" uid="uid://bi3esnvr7erj0" path="res://items/tools/fossil/fossilSword.png" id="2_ocvmf"]
+
+[resource]
+script = ExtResource("1_nr4te")
+damage = 25
+animSpeed = 11.0
+knockbackMult = 1.0
+weaponScale = 1.0
+statusInflictors = Array[Resource("res://object_scenes/specialResource/statusEffects/StatusInflictor.gd")]([])
+itemName = "Fossil Sword"
+subtext = ""
+desc = ""
+texture = ExtResource("2_ocvmf")
+maxStackSize = 1
+clickToUse = false
+infiniteReach = false

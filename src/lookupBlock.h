@@ -144,6 +144,8 @@
 #include "blockLantern.h" // id 125
 #include "blockGrandfatherClock.h" // id 126
 #include "blockWindchime.h" // id 127
+#include "blockOreFossil.h" // id 128
+#include "blockTrinketStation.h" // id 129
 
 // adding a new block? make sure you increment the PENIS array !
 
@@ -161,7 +163,7 @@ public:
 	
 	Array allBlocks;
 
-	BLOCK *penis[128]; // must be largest id + 1
+	BLOCK *penis[130]; // must be largest id + 1
 
 	LOOKUPBLOCK();
 	~LOOKUPBLOCK();

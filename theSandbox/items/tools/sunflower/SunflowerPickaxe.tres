@@ -5,11 +5,11 @@
 
 [resource]
 script = ExtResource("1_whk1e")
-miningMultiplier = 2.0
+miningMultiplier = 1.8
 miningLevel = 3
 damage = 4
 animSpeed = 8.0
-knockbackMult = 1.0
+knockbackMult = 1.5
 weaponScale = 1.0
 statusInflictors = Array[Resource("res://object_scenes/specialResource/statusEffects/StatusInflictor.gd")]([])
 itemName = "Sunflower Pickaxe"

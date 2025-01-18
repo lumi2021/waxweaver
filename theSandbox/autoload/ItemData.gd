@@ -119,6 +119,8 @@ var data = {
 	125:load("res://items/blocks/furniture/lights/Lantern.tres"),
 	126:load("res://items/blocks/furniture/other/GrandfatherClock.tres"),
 	127:load("res://items/blocks/furniture/other/Windchime.tres"),
+	128:load("res://items/blocks/ores/FossilOre.tres"),
+	129:load("res://items/blocks/furniture/stations/TrinketStation.tres"),
 	
 	########## item ids ##################
 	3000:load("res://items/tools/flimsy/FlimsySword.tres"), # flimsy tools
@@ -289,6 +291,10 @@ var data = {
 	# insert futher trinkets
 	
 	3150:load("res://items/material/StickyWax.tres"),
+	3151:load("res://items/tools/fiber/FiberSword.tres"),
+	3152:load("res://items/tools/fiber/FiberPickaxe.tres"),
+	3153:load("res://items/tools/fossil/FossilSword.tres"),
+	3154:load("res://items/tools/fossil/FossilPickaxe.tres"),
 	
 
 	# chairs 6000 - 6049

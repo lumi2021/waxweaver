@@ -312,10 +312,15 @@ void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
 
             if (planet->getTileData(x,y) == 84){ // is sandstone
                 if(dis < baseSurface - 16){
-                    if(std::rand() % 220 == 0){
+                    if(std::rand() % 120 == 0){
                         generateOre(planet,x,y,88,84,8); // generate clay 
                     }
+
+                    if(std::rand() % 200 == 0){
+                        generateOre(planet,x,y,128,84,8); // generate fossil 
+                    }
                 }
+
                 
             }
 

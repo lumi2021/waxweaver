@@ -153,6 +153,8 @@ LOOKUPBLOCK::LOOKUPBLOCK() {
     penis[125] = new BLOCKLANTERN();
     penis[126] = new BLOCKGRANDFATHERCLOCK();
     penis[127] = new BLOCKWINDCHIME();
+    penis[128] = new BLOCKOREFOSSIL();
+    penis[129] = new BLOCKTRINKETSTATION();
 
     for(BLOCK *i : penis){ // i increase automatically !
         i->setLookUp(this);
