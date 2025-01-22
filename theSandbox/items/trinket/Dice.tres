@@ -5,7 +5,8 @@
 
 [resource]
 script = ExtResource("1_myb8r")
-description = "+4% critical strike chance"
+description = "+4% critical strike chance
+"
 specialProperties = Array[String]([])
 sceneToLoad = ""
 addSpeed = 0.0
@@ -19,6 +20,7 @@ addHealingMultiplier = 0.0
 addKnockback = 0.0
 addAttackSpeed = 0.0
 addcriticalStrikeChance = 4
+miningMultiplier = 0.0
 itemName = "Dice"
 subtext = ""
 desc = ""

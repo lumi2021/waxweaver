@@ -24,6 +24,8 @@ var criticalStrikeChance :int = 4 # chance out of 100
 
 ## OTHER ##
 var respawnWait :float = 8.0 # how long until player respawns
+var miningMultiplier :float = 1.0 # additional mining speed
+
 
 var trinkets :Array[int]= [] # array of trinket ids
 var specialProperties :Array[String] = [] # array of special tags to give player
@@ -96,6 +98,8 @@ func resetStats():
 	criticalStrikeChance = 4
 	extraJumps = 0
 	
+	miningMultiplier = 1.0
+	
 	trinkets = []
 	specialProperties = []
 
@@ -122,6 +126,7 @@ func updateStats():
 		attackSpeedMult += data.addAttackSpeed
 		criticalStrikeChance += data.addcriticalStrikeChance
 		extraJumps += data.extraJumps
+		miningMultiplier += data.miningMultiplier
 		
 		specialProperties += data.specialProperties
 	

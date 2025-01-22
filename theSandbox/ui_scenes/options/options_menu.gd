@@ -14,6 +14,7 @@ func loadOptions():
 	musicSlider.value = Options.options["musicVolume"]
 	ambientSlider.value = Options.options["ambientVolume"]
 	setShadowText()
+	setAutosaveText()
 
 func _on_dropshadow_pressed():
 	Options.options["showShadow"] = !Options.options["showShadow"]
@@ -74,3 +75,12 @@ func _on_fullscreen_pressed():
 	else:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
 	
+
+
+func _on_autosaving_pressed():
+	Options.options["autosaving"] = !Options.options["autosaving"]
+	Options.applyOptions()
+	setAutosaveText()
+
+func setAutosaveText():
+	$ScrollContainer/g/buttons/autosaving.buttonText = "autosaving: " + str(Options.options["autosaving"])

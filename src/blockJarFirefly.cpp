@@ -17,6 +17,7 @@ BLOCKJARFIREFLY::BLOCKJARFIREFLY() {
     connectTexturesToMe = false;
     lightEmmission = 1.0;
     hasCollision = false;
+    isTransparent = true;
 
 }
 

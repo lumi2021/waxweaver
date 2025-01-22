@@ -16,10 +16,11 @@ size = Vector2(8, 12)
 [sub_resource type="CircleShape2D" id="CircleShape2D_21xya"]
 radius = 5.0
 
-[node name="snowman" type="CharacterBody2D"]
+[node name="snowman" type="CharacterBody2D" node_paths=PackedStringArray("healthComp")]
 collision_layer = 128
 script = ExtResource("1_oxbvs")
 creatureSlots = 8
+healthComp = NodePath("HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_fmili")
@@ -44,10 +45,10 @@ shape = SubResource("RectangleShape2D_88fnb")
 script = ExtResource("4_mr5eo")
 maxHealth = 25
 knockbackResist = 1.2
-defense = 2
+defense = 8
 
 [node name="Hurtbox" parent="." instance=ExtResource("5_413e3")]
-damage = 18
+damage = 30
 enemyName = "snowman"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]

@@ -80,7 +80,8 @@ func spawnGroundItem(tilex:int,tiley:int,id:int,planet,oldBlock:int=0):
 			id = 6150 # for now
 		76: # is glowing orb
 			if planet.DATAC.getInfoData(tilex,tiley) == 0:
-				return # returns if not fully grown
+				if randi() % 10 != 0: # 10 % chance 
+					return # returns if not fully grown and roll failed
 		83: # wheat
 			if planet.DATAC.getInfoData(tilex,tiley) < 2:
 				spawnItemRaw(tilex,tiley,17,planet)

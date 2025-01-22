@@ -31,10 +31,11 @@ radius = 7.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_bm3sh"]
 radius = 6.0
 
-[node name="spider" type="CharacterBody2D" node_paths=PackedStringArray("sprite")]
+[node name="spider" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "healthComp")]
 collision_layer = 128
 script = ExtResource("1_rpbfy")
 sprite = NodePath("Sprite")
+healthComp = NodePath("HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_arcvd")

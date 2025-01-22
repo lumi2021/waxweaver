@@ -6,17 +6,25 @@
 [resource]
 script = ExtResource("1_40754")
 description = "13% Jump Increase
-Immune to fall damage"
-specialProperties = Array[String](["fallImmune"])
+"
+specialProperties = Array[String]([])
 sceneToLoad = ""
 addSpeed = 0.0
 addJump = 0.13
 addSwim = 0.0
+extraJumps = 0
 addDefense = 0
 addMeleeDamage = 0.0
 addRangedDamage = 0.0
+addHealingMultiplier = 0.0
+addKnockback = 0.0
+addAttackSpeed = 0.0
+addcriticalStrikeChance = 0
+miningMultiplier = 0.0
 itemName = "Spring Shoes"
 subtext = ""
+desc = ""
 texture = ExtResource("2_u4ftn")
 maxStackSize = 1
 clickToUse = false
+infiniteReach = false

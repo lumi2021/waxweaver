@@ -5,6 +5,7 @@ var defaultOptions :Dictionary= {
 	"musicVolume":1.5,
 	"sfxVolume":1.5,
 	"ambientVolume":1.5,
+	"autosaving":true,
 }
 
 var options :Dictionary = {}

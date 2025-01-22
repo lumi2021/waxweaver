@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="ItemTrinket" load_steps=3 format=3 uid="uid://bxjbfot6gg8mb"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemTrinket.gd" id="1_u3es3"]
+[ext_resource type="Texture2D" uid="uid://cg3gaclaieaql" path="res://items/trinket/diceset.png" id="2_vdach"]
+
+[resource]
+script = ExtResource("1_u3es3")
+description = "+16% critical strike chance"
+specialProperties = Array[String]([])
+sceneToLoad = ""
+addSpeed = 0.0
+addJump = 0.0
+addSwim = 0.0
+extraJumps = 0
+addDefense = 0
+addMeleeDamage = 0.0
+addRangedDamage = 0.0
+addHealingMultiplier = 0.0
+addKnockback = 0.0
+addAttackSpeed = 0.0
+addcriticalStrikeChance = 16
+itemName = "Polyhedral 7-Die Set"
+subtext = ""
+desc = ""
+texture = ExtResource("2_vdach")
+maxStackSize = 1
+clickToUse = false
+infiniteReach = false

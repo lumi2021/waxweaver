@@ -203,7 +203,8 @@ func _exit_tree():
 	saveGameToFile()
 
 func _process(delta):
-	autosaveTicks += 1
+	if Options.options["autosaving"]:
+		autosaveTicks += 1
 	if autosaveTicks > 10800: # every 3 minutes
 		if GlobalRef.player.velocity.length() < 2.0: # make sure player is standing still
 			Saving.autosave()

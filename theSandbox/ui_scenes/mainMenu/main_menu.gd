@@ -8,6 +8,7 @@ var state :int=0
 # 4: options
 # 5: web disclaimer
 # 6: controls + tutorial
+# 7: credits
 
 @onready var selectedslot = $savefiles/ScrollContainer/VBoxContainer/saveslot
 
@@ -63,6 +64,9 @@ func enterState(newstate):
 		6:
 			$mainButtons.hide()
 			$tutorial.show()
+		7:
+			$mainButtons.hide()
+			$credits.show()
 	
 	$bg/AnimatedSprite2D.visible = newstate == 0
 	$bg/AnimatedSprite2D2.visible = newstate == 0
@@ -148,3 +152,12 @@ func _on_text_edit_text_changed():
 	if $createNewWorld/TextEdit.text.length() > 20:
 		$createNewWorld/TextEdit.text = $createNewWorld/TextEdit.text.left(20)
 		$createNewWorld/TextEdit.set_caret_column(20)
+
+
+func _on_credits_pressed():
+	enterState(7)
+
+
+func _on_gobackcredits_pressed():
+	$credits.hide()
+	enterState(0)

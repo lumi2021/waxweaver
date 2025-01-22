@@ -59,7 +59,7 @@ size = Vector2(6, 6)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yntbc"]
 size = Vector2(8, 8)
 
-[node name="Cobble" type="CharacterBody2D" node_paths=PackedStringArray("HC", "rotationOrigin", "sprite", "wallWay", "floorRay")]
+[node name="Cobble" type="CharacterBody2D" node_paths=PackedStringArray("HC", "rotationOrigin", "sprite", "wallWay", "floorRay", "healthComp")]
 collision_layer = 128
 collision_mask = 17
 script = ExtResource("1_uxt3j")
@@ -69,6 +69,7 @@ sprite = NodePath("axis/spr")
 wallWay = NodePath("axis/wall")
 floorRay = NodePath("axis/floor")
 walkSpeed = 25.0
+healthComp = NodePath("HealthComponent")
 
 [node name="DeleteMeOutsideOfChunk" parent="." instance=ExtResource("2_liknb")]
 

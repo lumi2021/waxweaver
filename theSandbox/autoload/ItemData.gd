@@ -288,13 +288,28 @@ var data = {
 	3138:load("res://items/trinket/BubbleWand.tres"),
 	3139:load("res://items/trinket/FireCharm.tres"),
 	3140:load("res://items/trinket/PoisonCharm.tres"),
-	# insert futher trinkets
+	3141:load("res://items/trinket/screwdriver.tres"),
+	3142:load("res://items/trinket/Dash.tres"),
+	3143:load("res://items/trinket/DiceSnakeEyes.tres"),
+	3144:load("res://items/trinket/DiceSet.tres"),
+	3145:load("res://items/trinket/GoldenFeather.tres"),
+	3146:load("res://items/trinket/SickKicks.tres"),
+	3147:load("res://items/trinket/FallDamageResist.tres"),
+	3148:load("res://items/trinket/SuperKicks.tres"),
+	3149:load("res://items/trinket/DefensiveShield.tres"),
 	
 	3150:load("res://items/material/StickyWax.tres"),
 	3151:load("res://items/tools/fiber/FiberSword.tres"),
 	3152:load("res://items/tools/fiber/FiberPickaxe.tres"),
 	3153:load("res://items/tools/fossil/FossilSword.tres"),
 	3154:load("res://items/tools/fossil/FossilPickaxe.tres"),
+	3155:load("res://items/armors/fiber/FiberHelmet.tres"),
+	3156:load("res://items/armors/fiber/FiberChest.tres"),
+	3157:load("res://items/armors/fiber/FiberPants.tres"),
+	3158:load("res://items/weapons/bows/FiberBow.tres"),
+	
+	3159:load("res://items/trinket/Hardhat.tres"),
+	3160:load("res://items/trinket/Jackhammer.tres"),
 	
 
 	# chairs 6000 - 6049

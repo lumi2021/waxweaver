@@ -10,8 +10,8 @@ amount = 2
 
 [sub_resource type="Resource" id="Resource_pkf0u"]
 script = ExtResource("1_lr6cn")
-ingredient = 3
-amount = 15
+ingredient = 15
+amount = 3
 
 [resource]
 script = ExtResource("1_uscuk")

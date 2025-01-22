@@ -6,7 +6,7 @@
 [sub_resource type="Resource" id="Resource_80o3m"]
 script = ExtResource("1_bxcyj")
 ingredient = 30
-amount = 12
+amount = 15
 
 [sub_resource type="Resource" id="Resource_oyfut"]
 script = ExtResource("1_bxcyj")

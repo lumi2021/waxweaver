@@ -23,4 +23,5 @@ class_name ItemTrinket
 @export var addKnockback :float = 0.0
 @export var addAttackSpeed :float = 0.0
 @export var addcriticalStrikeChance: int = 0
-
+@export_subgroup("Other")
+@export var miningMultiplier :float=0.0

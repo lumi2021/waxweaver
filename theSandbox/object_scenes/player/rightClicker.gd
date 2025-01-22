@@ -75,9 +75,7 @@ func onRightClick():
 			SoundManager.playSound("items/ladderClimb",parent.global_position,1.5,0.1)
 
 		33: # chest 
-			if PlayerData.chestOBJ == editBody and PlayerData.currentSelectedChest == tile:
-				PlayerData.closeChest()
-				return
+			PlayerData.closeChest() # force close any existing chest
 			
 			if PlayerData.loadChest(editBody,tile):
 				# chest visual

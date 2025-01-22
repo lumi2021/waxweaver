@@ -1,9 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://crkseldnn7m4"]
+[gd_scene load_steps=14 format=3 uid="uid://crkseldnn7m4"]
 
 [ext_resource type="Script" path="res://ui_scenes/options/options_menu.gd" id="1_6t7st"]
 [ext_resource type="Texture2D" uid="uid://csibj827o7h0h" path="res://ui_scenes/mainMenu/saveSlot/rect.png" id="1_hp6kx"]
 [ext_resource type="PackedScene" uid="uid://d0j06gpiq8jxo" path="res://ui_scenes/mainMenu/textbutton/text_button.tscn" id="2_6rvf4"]
-[ext_resource type="Texture2D" uid="uid://c7ev8d65uf6k5" path="res://whitebeard.png" id="4_dvs2e"]
 [ext_resource type="Texture2D" uid="uid://dlexgb4yfmn38" path="res://items/food/birdMeat.png" id="4_p3wdg"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_21cv2"]
@@ -131,17 +130,12 @@ horizontal_scroll_mode = 0
 vertical_scroll_mode = 2
 
 [node name="g" type="ColorRect" parent="ScrollContainer"]
-custom_minimum_size = Vector2(3, 389.085)
+custom_minimum_size = Vector2(3, 246.19)
 layout_mode = 2
 mouse_filter = 2
 color = Color(1, 1, 1, 0)
 
 [node name="buttons" type="Node2D" parent="ScrollContainer/g"]
-
-[node name="Whitebeard" type="Sprite2D" parent="ScrollContainer/g/buttons"]
-position = Vector2(88, 307)
-scale = Vector2(0.6, 0.825)
-texture = ExtResource("4_dvs2e")
 
 [node name="dropshadow" parent="ScrollContainer/g/buttons" instance=ExtResource("2_6rvf4")]
 offset_left = 8.0
@@ -150,6 +144,14 @@ offset_right = 160.0
 offset_bottom = 207.0
 tooltip_text = "this can help with performance"
 buttonText = "show drop shadow: true"
+
+[node name="autosaving" parent="ScrollContainer/g/buttons" instance=ExtResource("2_6rvf4")]
+offset_left = 8.0
+offset_top = 220.0
+offset_right = 160.0
+offset_bottom = 237.0
+tooltip_text = "this can help with performance"
+buttonText = "autosaving: true"
 
 [node name="fullscreen" parent="ScrollContainer/g/buttons" instance=ExtResource("2_6rvf4")]
 offset_left = 8.0
@@ -265,6 +267,7 @@ horizontal_alignment = 2
 
 [connection signal="pressed" from="done" to="." method="_on_done_pressed"]
 [connection signal="pressed" from="ScrollContainer/g/buttons/dropshadow" to="." method="_on_dropshadow_pressed"]
+[connection signal="pressed" from="ScrollContainer/g/buttons/autosaving" to="." method="_on_autosaving_pressed"]
 [connection signal="pressed" from="ScrollContainer/g/buttons/fullscreen" to="." method="_on_fullscreen_pressed"]
 [connection signal="pressed" from="ScrollContainer/g/buttons/sfxslider/sfx" to="." method="_on_sfx_pressed"]
 [connection signal="value_changed" from="ScrollContainer/g/buttons/sfxslider/sfxslide" to="." method="_on_sfxslide_value_changed"]

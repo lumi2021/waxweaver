@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="ItemTrinket" load_steps=3 format=3 uid="uid://v3bbhkghvsro"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemTrinket.gd" id="1_r4qer"]
+[ext_resource type="Texture2D" uid="uid://dspbh1qus0wux" path="res://items/trinket/dash.png" id="2_5hgep"]
+
+[resource]
+script = ExtResource("1_r4qer")
+description = "Double tap to dash"
+specialProperties = Array[String](["dash"])
+sceneToLoad = ""
+addSpeed = 0.0
+addJump = 0.0
+addSwim = 0.0
+extraJumps = 0
+addDefense = 0
+addMeleeDamage = 0.0
+addRangedDamage = 0.0
+addHealingMultiplier = 0.0
+addKnockback = 0.0
+addAttackSpeed = 0.0
+addcriticalStrikeChance = 0
+itemName = "Sweatpants"
+subtext = ""
+desc = ""
+texture = ExtResource("2_5hgep")
+maxStackSize = 1
+clickToUse = false
+infiniteReach = false

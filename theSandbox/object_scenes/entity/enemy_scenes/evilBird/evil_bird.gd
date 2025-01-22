@@ -87,7 +87,10 @@ func waitForPlayer(delta):
 			playerSpotted = true
 			SoundManager.playSound("enemy/birdcrow",global_position,0.6)
 			$axis/AnimatedSprite2D.play("default")
-
+	
+	if getSurface() < 0.0 and !GlobalRef.isNight():
+		playerSpotted = true
+		$axis/AnimatedSprite2D.play("default")
 
 func _on_health_component_smacked():
 	if !playerSpotted:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cx52pej1x1k6c"]
+[gd_scene load_steps=24 format=3 uid="uid://cx52pej1x1k6c"]
 
 [ext_resource type="Script" path="res://object_scenes/entity/enemy_scenes/bosses/shipBossForest/boss_ship.gd" id="1_favl4"]
 [ext_resource type="PackedScene" uid="uid://meikam2oyy13" path="res://object_scenes/entity/components/health_component.tscn" id="2_7ituk"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://object_scenes/specialResource/lootTables/RollableItem.gd" id="4_7dmrj"]
 [ext_resource type="PackedScene" uid="uid://c05kukkqfrg40" path="res://object_scenes/entity/components/hitbox.tscn" id="4_rjc2y"]
 [ext_resource type="PackedScene" uid="uid://8jw6pruiu3cf" path="res://object_scenes/entity/components/hurtbox.tscn" id="5_rcdpc"]
+[ext_resource type="Texture2D" uid="uid://drre76kq8r6ee" path="res://object_scenes/entity/enemy_scenes/bosses/shipBossForest/angry.png" id="6_0c1kt"]
 
 [sub_resource type="Resource" id="Resource_2u0ia"]
 script = ExtResource("4_7dmrj")
@@ -39,6 +40,18 @@ table = Array[ExtResource("4_7dmrj")]([SubResource("Resource_2u0ia"), SubResourc
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lndia"]
 size = Vector2(54, 34)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_voa27"]
+atlas = ExtResource("6_0c1kt")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ai31"]
+atlas = ExtResource("6_0c1kt")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ge6b6"]
+atlas = ExtResource("6_0c1kt")
+region = Rect2(128, 0, 64, 64)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_p2sfa"]
 atlas = ExtResource("3_vvna7")
 region = Rect2(0, 0, 64, 64)
@@ -53,6 +66,20 @@ region = Rect2(128, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ohjlr"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_voa27")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ai31")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ge6b6")
+}],
+"loop": true,
+"name": &"angry",
+"speed": 19.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_p2sfa")
@@ -96,7 +123,6 @@ shape = SubResource("RectangleShape2D_lndia")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="axis"]
 sprite_frames = SubResource("SpriteFrames_ohjlr")
-frame_progress = 0.0369894
 
 [node name="Hitbox" parent="axis" node_paths=PackedStringArray("healthComponent", "colliderShape") instance=ExtResource("4_rjc2y")]
 position = Vector2(0, 4)

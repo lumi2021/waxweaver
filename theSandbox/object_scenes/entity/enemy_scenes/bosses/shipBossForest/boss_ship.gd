@@ -69,7 +69,7 @@ func position4swoopAttack(delta):
 	if swoopWait > 120:
 		
 		if swoopTimes >= 3:
-			if healthcomponent.getHealthPercent() < 0.75: # switch to praffinspawning
+			if healthcomponent.getHealthPercent() < 0.95: # switch to praffinspawning
 				settle = determineSettlePosition()
 				
 				velocity += Vector2(0,20).rotated( getWorldRot(self) )
@@ -107,6 +107,8 @@ func chase(delta):
 		chaseTicks += 1
 	else:
 		healthcomponent.defense = 0
+		if sprite.animation == "default": # get mad !
+			sprite.play("angry")
 	
 	velocity = lerp( velocity, getExactDirToPlayer()*200.0, 0.01 )
 	

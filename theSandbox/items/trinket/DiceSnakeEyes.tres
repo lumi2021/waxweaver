@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="ItemTrinket" load_steps=3 format=3 uid="uid://baot22q65w3f"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemTrinket.gd" id="1_2hbib"]
+[ext_resource type="Texture2D" uid="uid://ykjp06t16byu" path="res://items/trinket/diceEyes.png" id="2_if5li"]
+
+[resource]
+script = ExtResource("1_2hbib")
+description = "+8% critical strike chance
+"
+specialProperties = Array[String]([])
+sceneToLoad = ""
+addSpeed = 0.0
+addJump = 0.0
+addSwim = 0.0
+extraJumps = 0
+addDefense = 0
+addMeleeDamage = 0.0
+addRangedDamage = 0.0
+addHealingMultiplier = 0.0
+addKnockback = 0.0
+addAttackSpeed = 0.0
+addcriticalStrikeChance = 8
+miningMultiplier = 0.0
+itemName = "Snake Eyes"
+subtext = ""
+desc = ""
+texture = ExtResource("2_if5li")
+maxStackSize = 1
+clickToUse = false
+infiniteReach = false

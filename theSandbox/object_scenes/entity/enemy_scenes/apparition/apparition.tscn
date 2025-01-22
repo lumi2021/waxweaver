@@ -28,7 +28,7 @@ size = Vector2(6, 12)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yntbc"]
 size = Vector2(6, 9)
 
-[node name="Apparition" type="CharacterBody2D" node_paths=PackedStringArray("HC", "rotationOrigin", "sprite", "wallWay", "floorRay")]
+[node name="Apparition" type="CharacterBody2D" node_paths=PackedStringArray("HC", "rotationOrigin", "sprite", "wallWay", "floorRay", "healthComp")]
 collision_layer = 128
 collision_mask = 17
 script = ExtResource("1_47mpa")
@@ -37,6 +37,7 @@ rotationOrigin = NodePath("axis")
 sprite = NodePath("axis/spr")
 wallWay = NodePath("axis/wall")
 floorRay = NodePath("axis/floor")
+healthComp = NodePath("HealthComponent")
 
 [node name="DeleteMeOutsideOfChunk" parent="." instance=ExtResource("2_mu7bf")]
 

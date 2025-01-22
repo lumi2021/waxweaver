@@ -13,6 +13,9 @@ class_name Player
 @onready var shipFinder = $ShipFinder
 @onready var floorDetector = $FloorDetector
 
+@onready var gift = preload("res://object_scenes/particles/giftopenparticle/giftopenparticle.tscn")
+@onready var aura = preload("res://object_scenes/particles/playerAura/player_aura.tscn")
+
 var rotated = 0
 var rotationDelayTicks = 0
 
@@ -75,6 +78,9 @@ var justswapped :bool = false
 
 var jumpsRemaining :int = 0
 var hoverTicks :int= 0
+var dashIdle :int = 0
+var canDash :bool = true
+var dashDelay :int = 0
 
 ######################################################################
 ########################### BASIC FUNTIONS ###########################
@@ -241,11 +247,26 @@ func normalMovement(delta):
 	if squishHeadUnderCeiling(): # reduce speed if squashed
 		speed *= 0.25
 	
+	var doubleTapped = false
+	
 	var dir = 0
 	dir = int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left"))
+	
+	if healthComponent.checkIfHasEffect("confused"):
+		dir *= -1
+	
 	if dir != 0:
+		
+		if GlobalRef.playerSide == int(dir == 1):
+			if dashIdle < 10 and dashIdle > 0:
+				doubleTapped = true
+		dashIdle = -1
+		
 		GlobalRef.playerSide = int(dir == 1)
 		
+	else:
+		dashIdle += 1
+	
 	if GlobalRef.chatIsOpen:
 		dir = 0
 	
@@ -255,12 +276,22 @@ func normalMovement(delta):
 			speedAdd = GlobalRef.conveyorspeed
 		106:
 			speedAdd = -GlobalRef.conveyorspeed
-			
+	
+	
 	var newVel = velocity.rotated(-rotSource)
 	if beingKnockedback:
 		newVel.x = lerp(newVel.x, (dir * speed) + speedAdd, 0.025) # make framerate independent
 	else:
 		newVel.x = lerp(newVel.x, (dir * speed) + speedAdd, 1.0-pow(2.0,(-delta/0.04)))
+	
+	if doubleTapped and canDash and dashDelay <= 0 and Stats.hasProperty("dash"):
+		newVel.x = 1800.0 * dir
+		canDash = false
+		dashDelay = 30
+	if dashDelay > 0:
+		dashDelay -= 1
+		dashingParticle()
+	
 	newVel.y += Stats.getGravity() * delta
 	newVel.y = min(newVel.y,Stats.getTerminalVelocity())
 	
@@ -352,6 +383,7 @@ func WATERJUMPCAMERALETSGO(body,vel,rot,onFloor,delta):
 	var inWater = abs(body.DATAC.getWaterData(tile.x,tile.y)) > 0.3
 	if inWater: # code if currently in water
 		wasInWater = true
+		$Bubble.scale = Vector2.ZERO
 		hoverTicks = 0
 		jumpsRemaining = Stats.extraJumps
 		healthComponent.inflictStatus("wet",8)
@@ -370,6 +402,7 @@ func WATERJUMPCAMERALETSGO(body,vel,rot,onFloor,delta):
 			
 	if onFloor: # this is where the regular jump is done
 		jumpsRemaining = Stats.extraJumps
+		canDash = true
 		if hoverTicks > 0 and $Bubble.scale.x > 0.1:
 			$Bubble.scale = Vector2.ZERO
 			var fart = load("res://object_scenes/particles/bubblewand/bubblepop.tscn").instantiate()
@@ -1241,3 +1274,18 @@ func playFootstepSound():
 func manaFilled():
 	manaFilledPart.position = Vector2(0,-6).rotated( rotated * (PI/2) )
 	manaFilledPart.emitting = true
+
+func spawnGiftParticle():
+	var ins = gift.instantiate()
+	ins.position = position
+	get_parent().add_child(ins)
+
+func dashingParticle():
+	var vel = velocity.rotated(-getProperRotationSource()) 
+	if dashDelay % 2 == 0 and abs(vel.x) > 150:
+		var ins = aura.instantiate()
+		ins.startFrame = $PlayerLayers/body.frame
+		ins.position = position
+		ins.rotation = sprite.rotation
+		ins.modulate.a = min((abs(vel.x)-150.0) / 150.0,1.0)
+		get_parent().add_child(ins)

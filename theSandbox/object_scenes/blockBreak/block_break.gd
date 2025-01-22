@@ -86,7 +86,7 @@ func _process(delta):
 		
 		var itemData = ItemData.data[PlayerData.inventory[PlayerData.selectedSlot][0]]
 		if itemData is ItemMining:
-			damage += delta * itemData.miningMultiplier
+			damage += delta * itemData.miningMultiplier * Stats.miningMultiplier
 			cantMineSparkTick += delta
 			
 			var canMine :bool= blockMiningLevel <= itemData.miningLevel

@@ -87,11 +87,12 @@ radius = 5.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_anxn3"]
 radius = 5.0
 
-[node name="EvilBird" type="CharacterBody2D"]
+[node name="EvilBird" type="CharacterBody2D" node_paths=PackedStringArray("healthComp")]
 collision_layer = 128
 collision_mask = 17
 script = ExtResource("1_6ektk")
 creatureSlots = 10
+healthComp = NodePath("HealthComponent")
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_myc62")]
 maxHealth = 20

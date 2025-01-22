@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://bgkafiqwqag7t"]
+
+[ext_resource type="Texture2D" uid="uid://ebeea0rf5p68" path="res://object_scenes/specialResource/statusEffects/effectParticles/confusion.png" id="1_rewcw"]
+[ext_resource type="Script" path="res://object_scenes/specialResource/statusEffects/effectParticles/statusParticle.gd" id="2_l6klw"]
+
+[sub_resource type="Curve" id="Curve_5ubax"]
+_data = [Vector2(0, 0), 0.0, 2.65653, 0, 0, Vector2(0.485294, 0.980363), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.73244, 0.0, 0, 0]
+point_count = 3
+
+[node name="confusedPart" type="CPUParticles2D"]
+amount = 1
+lifetime = 2.0
+local_coords = true
+texture = ExtResource("1_rewcw")
+emission_shape = 1
+emission_sphere_radius = 5.0
+gravity = Vector2(0, -2)
+angular_velocity_min = -13.25
+angular_velocity_max = 10.05
+angle_min = -30.0
+angle_max = 30.0
+scale_amount_curve = SubResource("Curve_5ubax")
+script = ExtResource("2_l6klw")

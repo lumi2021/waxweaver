@@ -37,9 +37,10 @@ radius = 3.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_ejps4"]
 radius = 4.0
 
-[node name="skull" type="CharacterBody2D"]
+[node name="skull" type="CharacterBody2D" node_paths=PackedStringArray("healthComp")]
 collision_layer = 128
 script = ExtResource("1_yun8d")
+healthComp = NodePath("HealthComponent")
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("3_kd3sd")

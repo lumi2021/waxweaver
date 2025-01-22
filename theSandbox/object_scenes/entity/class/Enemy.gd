@@ -3,6 +3,7 @@ class_name Enemy
 
 @export var creatureSlots :int= 5
 @export var passive :bool= false
+@export var healthComp :HealthComponent = null
 
 var planet = null
 
@@ -90,6 +91,12 @@ func getDirectionTowardsPlayer() -> int:
 		
 	if playerQuad != myQuad:
 		targetdir *= -1
+	
+	if is_instance_valid(healthComp):
+		if healthComp.checkIfHasEffect("confused"):
+			targetdir *= -1
+		
+	
 	return targetdir
 
 func getPlayerDistance():
