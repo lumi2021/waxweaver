@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="PlanetType" load_steps=99 format=3 uid="uid://drr030n6brnua"]
+[gd_resource type="Resource" script_class="PlanetType" load_steps=115 format=3 uid="uid://drr030n6brnua"]
 
 [ext_resource type="Script" path="res://object_scenes/specialResource/lootTables/RollableItem.gd" id="1_5rukt"]
 [ext_resource type="Script" path="res://world_scenes/planetTypes/planetType.gd" id="1_j2ok1"]
@@ -150,6 +150,55 @@ id = 3136
 amountMin = 1
 amountMax = 1
 weight = 10
+
+[sub_resource type="Resource" id="Resource_ugbl3"]
+script = ExtResource("1_5rukt")
+id = 3163
+amountMin = 1
+amountMax = 1
+weight = 2
+
+[sub_resource type="Resource" id="Resource_tjd8c"]
+script = ExtResource("1_5rukt")
+id = 3164
+amountMin = 1
+amountMax = 1
+weight = 2
+
+[sub_resource type="Resource" id="Resource_1r5sg"]
+script = ExtResource("1_5rukt")
+id = 3165
+amountMin = 1
+amountMax = 1
+weight = 2
+
+[sub_resource type="Resource" id="Resource_7k8kt"]
+script = ExtResource("1_5rukt")
+id = 3166
+amountMin = 1
+amountMax = 1
+weight = 2
+
+[sub_resource type="Resource" id="Resource_ax5nh"]
+script = ExtResource("1_5rukt")
+id = 3167
+amountMin = 1
+amountMax = 1
+weight = 2
+
+[sub_resource type="Resource" id="Resource_nvvrw"]
+script = ExtResource("1_5rukt")
+id = 3169
+amountMin = 15
+amountMax = 35
+weight = 100
+
+[sub_resource type="Resource" id="Resource_jb83j"]
+script = ExtResource("1_5rukt")
+id = 3172
+amountMin = 1
+amountMax = 1
+weight = 30
 
 [sub_resource type="Resource" id="Resource_52jrs"]
 script = ExtResource("2_jpcmu")
@@ -399,6 +448,11 @@ script = ExtResource("2_jpcmu")
 id = "skull"
 weight = 3
 
+[sub_resource type="Resource" id="Resource_c6hy1"]
+script = ExtResource("2_jpcmu")
+id = "confuser"
+weight = 40
+
 [sub_resource type="Resource" id="Resource_i0iyx"]
 script = ExtResource("1_5rukt")
 id = 3033
@@ -539,6 +593,13 @@ amountMin = 1
 amountMax = 1
 weight = 100
 
+[sub_resource type="Resource" id="Resource_6g66u"]
+script = ExtResource("1_5rukt")
+id = 3161
+amountMin = 1
+amountMax = 1
+weight = 5
+
 [sub_resource type="Resource" id="Resource_tstxf"]
 script = ExtResource("2_jpcmu")
 id = "praffin"
@@ -554,10 +615,45 @@ script = ExtResource("2_jpcmu")
 id = "snowman"
 weight = 100
 
+[sub_resource type="Resource" id="Resource_ebow2"]
+script = ExtResource("2_jpcmu")
+id = "penguin"
+weight = 40
+
+[sub_resource type="Resource" id="Resource_3ks8v"]
+script = ExtResource("2_jpcmu")
+id = "praffin"
+weight = 10
+
+[sub_resource type="Resource" id="Resource_m8kvh"]
+script = ExtResource("2_jpcmu")
+id = "snowflake"
+weight = 15
+
 [sub_resource type="Resource" id="Resource_6jcgl"]
 script = ExtResource("2_jpcmu")
 id = "snowman"
-weight = 100
+weight = 80
+
+[sub_resource type="Resource" id="Resource_orrr2"]
+script = ExtResource("2_jpcmu")
+id = "penguin"
+weight = 110
+
+[sub_resource type="Resource" id="Resource_f7k0o"]
+script = ExtResource("2_jpcmu")
+id = "snowflake"
+weight = 40
+
+[sub_resource type="Resource" id="Resource_7ujlb"]
+script = ExtResource("2_jpcmu")
+id = "praffin"
+weight = 10
+
+[sub_resource type="Resource" id="Resource_urpmm"]
+script = ExtResource("2_jpcmu")
+id = "mimic"
+weight = 10
 
 [sub_resource type="Resource" id="Resource_2krwu"]
 script = ExtResource("2_jpcmu")
@@ -592,7 +688,7 @@ weight = 60
 [sub_resource type="Resource" id="Resource_b27hs"]
 script = ExtResource("2_jpcmu")
 id = "apparition"
-weight = 5
+weight = 1
 
 [sub_resource type="Resource" id="Resource_sxmvn"]
 script = ExtResource("2_jpcmu")
@@ -621,8 +717,8 @@ weight = 100
 
 [resource]
 script = ExtResource("1_j2ok1")
-rareItems = Array[ExtResource("1_5rukt")]([SubResource("Resource_i0iyx"), SubResource("Resource_rn0xa"), SubResource("Resource_jt0yo"), SubResource("Resource_0iqcu"), SubResource("Resource_c71ju"), SubResource("Resource_1aa78"), SubResource("Resource_ritix"), SubResource("Resource_yjrof"), SubResource("Resource_85rl2"), SubResource("Resource_0oyo6"), SubResource("Resource_bnrpw"), SubResource("Resource_e6apj"), SubResource("Resource_4ruaf"), SubResource("Resource_x5tb5"), SubResource("Resource_cutux"), SubResource("Resource_x3g7q"), SubResource("Resource_uydqx"), SubResource("Resource_swpu7"), SubResource("Resource_h8ft7"), SubResource("Resource_dyjgs")])
-commonItems = Array[ExtResource("1_5rukt")]([SubResource("Resource_wj633"), SubResource("Resource_xth5j"), SubResource("Resource_fa6ll"), SubResource("Resource_o6u4c"), SubResource("Resource_4bc7s"), SubResource("Resource_wnpcp"), SubResource("Resource_a63aw"), SubResource("Resource_ip3fi"), SubResource("Resource_eesvg"), SubResource("Resource_usrig"), SubResource("Resource_unpgf"), SubResource("Resource_asymn"), SubResource("Resource_rtkgy"), SubResource("Resource_fjti5"), SubResource("Resource_3orkn"), SubResource("Resource_uqukj"), SubResource("Resource_26ufk"), SubResource("Resource_h2pwd"), SubResource("Resource_w5sdp"), SubResource("Resource_j4dqu"), SubResource("Resource_mepk5")])
+rareItems = Array[ExtResource("1_5rukt")]([SubResource("Resource_i0iyx"), SubResource("Resource_rn0xa"), SubResource("Resource_jt0yo"), SubResource("Resource_0iqcu"), SubResource("Resource_c71ju"), SubResource("Resource_1aa78"), SubResource("Resource_ritix"), SubResource("Resource_yjrof"), SubResource("Resource_85rl2"), SubResource("Resource_0oyo6"), SubResource("Resource_bnrpw"), SubResource("Resource_e6apj"), SubResource("Resource_4ruaf"), SubResource("Resource_x5tb5"), SubResource("Resource_cutux"), SubResource("Resource_x3g7q"), SubResource("Resource_uydqx"), SubResource("Resource_swpu7"), SubResource("Resource_h8ft7"), SubResource("Resource_dyjgs"), SubResource("Resource_6g66u")])
+commonItems = Array[ExtResource("1_5rukt")]([SubResource("Resource_wj633"), SubResource("Resource_xth5j"), SubResource("Resource_fa6ll"), SubResource("Resource_o6u4c"), SubResource("Resource_4bc7s"), SubResource("Resource_wnpcp"), SubResource("Resource_a63aw"), SubResource("Resource_ip3fi"), SubResource("Resource_eesvg"), SubResource("Resource_usrig"), SubResource("Resource_unpgf"), SubResource("Resource_asymn"), SubResource("Resource_rtkgy"), SubResource("Resource_fjti5"), SubResource("Resource_3orkn"), SubResource("Resource_uqukj"), SubResource("Resource_26ufk"), SubResource("Resource_h2pwd"), SubResource("Resource_w5sdp"), SubResource("Resource_j4dqu"), SubResource("Resource_mepk5"), SubResource("Resource_ugbl3"), SubResource("Resource_tjd8c"), SubResource("Resource_1r5sg"), SubResource("Resource_7k8kt"), SubResource("Resource_ax5nh"), SubResource("Resource_nvvrw"), SubResource("Resource_jb83j")])
 funItems = Array[ExtResource("1_5rukt")]([SubResource("Resource_b110y"), SubResource("Resource_wncux"), SubResource("Resource_ipvf4"), SubResource("Resource_ak76h"), SubResource("Resource_fskh7"), SubResource("Resource_1pk33"), SubResource("Resource_wcsak"), SubResource("Resource_kmls0"), SubResource("Resource_nwwit"), SubResource("Resource_c23a0"), SubResource("Resource_teygi"), SubResource("Resource_udfw4"), SubResource("Resource_xbaiq"), SubResource("Resource_21me8"), SubResource("Resource_82rrh"), SubResource("Resource_t8s51"), SubResource("Resource_uhqd0"), SubResource("Resource_g3j4j"), SubResource("Resource_gxwe0"), SubResource("Resource_4scg4"), SubResource("Resource_lpikj")])
 fish = Array[ExtResource("1_5rukt")]([SubResource("Resource_5e5dr"), SubResource("Resource_y2h6p"), SubResource("Resource_o5prv"), SubResource("Resource_u24lq"), SubResource("Resource_3xk2w"), SubResource("Resource_hfe3i"), SubResource("Resource_s565u"), SubResource("Resource_2yyvm")])
 surfaceDay = Array[ExtResource("2_jpcmu")]([SubResource("Resource_2krwu"), SubResource("Resource_c7q03"), SubResource("Resource_7kvi4")])
@@ -633,6 +729,6 @@ desertDay = Array[ExtResource("2_jpcmu")]([])
 desertNight = Array[ExtResource("2_jpcmu")]([])
 desertUnderground = Array[ExtResource("2_jpcmu")]([SubResource("Resource_52jrs"), SubResource("Resource_nm8ge")])
 snowyDay = Array[ExtResource("2_jpcmu")]([SubResource("Resource_tstxf"), SubResource("Resource_548wk")])
-snowyNight = Array[ExtResource("2_jpcmu")]([SubResource("Resource_17dk7")])
-snowyUnderground = Array[ExtResource("2_jpcmu")]([SubResource("Resource_6jcgl")])
-moss = Array[ExtResource("2_jpcmu")]([SubResource("Resource_8p1vs"), SubResource("Resource_xojti"), SubResource("Resource_d45g0"), SubResource("Resource_6trxu"), SubResource("Resource_jcp77"), SubResource("Resource_t4a1d"), SubResource("Resource_cw8l8")])
+snowyNight = Array[ExtResource("2_jpcmu")]([SubResource("Resource_17dk7"), SubResource("Resource_ebow2"), SubResource("Resource_3ks8v"), SubResource("Resource_m8kvh")])
+snowyUnderground = Array[ExtResource("2_jpcmu")]([SubResource("Resource_6jcgl"), SubResource("Resource_orrr2"), SubResource("Resource_f7k0o"), SubResource("Resource_7ujlb"), SubResource("Resource_urpmm")])
+moss = Array[ExtResource("2_jpcmu")]([SubResource("Resource_8p1vs"), SubResource("Resource_xojti"), SubResource("Resource_d45g0"), SubResource("Resource_6trxu"), SubResource("Resource_jcp77"), SubResource("Resource_t4a1d"), SubResource("Resource_cw8l8"), SubResource("Resource_c6hy1")])

@@ -29,6 +29,7 @@ var miningMultiplier :float = 1.0 # additional mining speed
 
 var trinkets :Array[int]= [] # array of trinket ids
 var specialProperties :Array[String] = [] # array of special tags to give player
+var statusImmunities :Array[String]= []
 
 signal updatedStats
 
@@ -102,6 +103,7 @@ func resetStats():
 	
 	trinkets = []
 	specialProperties = []
+	statusImmunities = []
 
 func updateStats():
 	
@@ -129,6 +131,9 @@ func updateStats():
 		miningMultiplier += data.miningMultiplier
 		
 		specialProperties += data.specialProperties
+		statusImmunities += data.statusImmunities
+	
+	GlobalRef.playerHC.statusImmunities = statusImmunities
 	
 	emit_signal("updatedStats")
 

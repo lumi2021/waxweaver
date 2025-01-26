@@ -36,6 +36,7 @@ scale_amount_curve = SubResource("Curve_wrtyv")
 [node name="Hurtbox" parent="." instance=ExtResource("3_47oir")]
 damage = 30
 knockback = 2.0
+enemyName = "explosion"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 shape = SubResource("CircleShape2D_4ohmr")
@@ -44,6 +45,7 @@ shape = SubResource("CircleShape2D_4ohmr")
 enemyBox = false
 damage = 30
 knockback = 2.0
+enemyName = "explosion"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox2"]
 shape = SubResource("CircleShape2D_4ohmr")

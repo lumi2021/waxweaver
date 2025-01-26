@@ -44,6 +44,10 @@ var playerHasInteractedWithChest :bool= false
 
 var playerHC :HealthComponent
 
+var claimedPraffinBossPrize :bool = false
+var claimedWormBossPrize :bool = false
+var claimedFinalBossPrize :bool = false
+
 func clearEverything():
 	player = null
 	camera = null
@@ -64,6 +68,9 @@ func clearEverything():
 	dayLength = 9000
 	currentTime = 0
 	daylightMult = 1.0
+	claimedPraffinBossPrize = false
+	claimedWormBossPrize = false
+	claimedFinalBossPrize = false
 
 func _process(delta):
 	currentTime = (globalTick % dayLength) / float(dayLength)

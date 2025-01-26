@@ -56,7 +56,7 @@ func rollWeights(objects:Array):
 	
 	if objects.size() == 0:
 		var j = EnemyRoll.new()
-		j.id == "butterfly"
+		j.id = "butterfly"
 		return j
 	
 	var total = 0

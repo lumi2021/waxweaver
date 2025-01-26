@@ -25,6 +25,9 @@ var creatures = {
 	"mimic":"res://object_scenes/entity/enemy_scenes/mimic/mimic.tscn",
 	"skull":"res://object_scenes/entity/enemy_scenes/skull/skull.tscn",
 	"snowman":"res://object_scenes/entity/enemy_scenes/snowman/snowman.tscn",
+	"penguin":"res://object_scenes/entity/enemy_scenes/penguin/penguin.tscn",
+	"snowflake":"res://object_scenes/entity/enemy_scenes/snowflake/snowflake.tscn",
+	"confuser":"res://object_scenes/entity/enemy_scenes/confuser/confuser.tscn",
 	
 	# bosses
 	"bossShip":"res://object_scenes/entity/enemy_scenes/bosses/shipBossForest/boss_ship.tscn",

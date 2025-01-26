@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="ItemTrinket" load_steps=3 format=3 uid="uid://be4b1y7j3ai77"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemTrinket.gd" id="1_res28"]
+[ext_resource type="Texture2D" uid="uid://dh514blw7yo8s" path="res://items/trinket/instructionManual.png" id="2_ug3n8"]
+
+[resource]
+script = ExtResource("1_res28")
+description = "Grants immunity to confusion"
+specialProperties = Array[String]([])
+sceneToLoad = ""
+addSpeed = 0.0
+addJump = 0.0
+addSwim = 0.0
+extraJumps = 0
+addDefense = 0
+addMeleeDamage = 0.0
+addRangedDamage = 0.0
+addHealingMultiplier = 0.0
+addKnockback = 0.0
+addAttackSpeed = 0.0
+addcriticalStrikeChance = 0
+miningMultiplier = 0.0
+statusImmunities = Array[String](["confused"])
+itemName = "How-To Guide"
+subtext = ""
+desc = ""
+texture = ExtResource("2_ug3n8")
+maxStackSize = 1
+clickToUse = false
+infiniteReach = false

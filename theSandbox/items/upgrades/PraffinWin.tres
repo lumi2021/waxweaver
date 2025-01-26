@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ItemPermanentUpgrade" load_steps=3 format=3 uid="uid://bgcj5di2fd2my"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemPermanentUpgrade.gd" id="1_lrw2v"]
+[ext_resource type="Texture2D" uid="uid://by3qg57rcnkhx" path="res://items/upgrades/reallollipop.png" id="2_2deit"]
+
+[resource]
+script = ExtResource("1_lrw2v")
+upgradeToBestow = 0
+itemName = "Real Lollipop"
+subtext = ""
+desc = "yummy !
+Click to eat !"
+texture = ExtResource("2_2deit")
+maxStackSize = 1
+clickToUse = false
+infiniteReach = true

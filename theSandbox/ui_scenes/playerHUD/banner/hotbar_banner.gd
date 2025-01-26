@@ -45,6 +45,7 @@ func _ready():
 	PlayerData.connect("forceOpenInventory",forceOpenInventory)
 	CreatureData.connect("spawnedBoss",connectBossHealthbar)
 	
+	
 func _process(delta):
 	var pos = to_local(get_global_mouse_position()) - Vector2(6,6)
 	holdSlot.position = Vector2i( pos )

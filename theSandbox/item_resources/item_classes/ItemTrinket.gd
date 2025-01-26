@@ -25,3 +25,4 @@ class_name ItemTrinket
 @export var addcriticalStrikeChance: int = 0
 @export_subgroup("Other")
 @export var miningMultiplier :float=0.0
+@export var statusImmunities :Array[String]

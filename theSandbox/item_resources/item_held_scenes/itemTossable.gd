@@ -8,9 +8,12 @@ var swingOut = false
 
 @onready var explosiveScene = preload("res://object_scenes/entity/enemy_scenes/explosive/explosive.tscn")
 
+var scene :PackedScene
+
 func onEquip():
 	visible = false
 	sprite.texture = itemData.texture
+	scene = itemData.sceneToLoad
 
 func onFirstUse():
 	if swingOut:
@@ -44,12 +47,23 @@ func turnOff():
 
 
 func launchTossable():
-	if itemData is ItemExplosive:
-		var ins = explosiveScene.instantiate()
-		ins.planet = getWorld().get_parent()
-		ins.position = GlobalRef.player.position
-		ins.radius = itemData.radius
-		ins.bounce = itemData.bounce
-		ins.delay = itemData.delay
-		ins.vol = getLocalMouse().normalized() * itemData.speed
-		getWorld().add_child(ins)
+	
+	SoundManager.playSound("items/toss",global_position,0.9,0.05)
+	
+	if scene == null: # just protects old bomb code from BLOWING UP lol
+		if itemData is ItemExplosive:
+			var ins = explosiveScene.instantiate()
+			ins.planet = getWorld().get_parent()
+			ins.position = GlobalRef.player.position
+			ins.radius = itemData.radius
+			ins.bounce = itemData.bounce
+			ins.delay = itemData.delay
+			ins.vol = getLocalMouse().normalized() * itemData.speed
+			getWorld().add_child(ins)
+		return
+	
+	var ins = scene.instantiate()
+	ins.planet = getWorld().get_parent()
+	ins.position = GlobalRef.player.position
+	getWorld().add_child(ins)
+	ins.setVelocity(getLocalMouse().normalized() * itemData.speed)

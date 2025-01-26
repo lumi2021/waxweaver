@@ -249,7 +249,7 @@ buttonText = "discord"
 [node name="credits" parent="mainButtons" instance=ExtResource("6_amthu")]
 offset_left = 341.0
 offset_top = 249.0
-offset_right = 388.0
+offset_right = 386.0
 offset_bottom = 266.0
 buttonText = "credits"
 
@@ -537,7 +537,7 @@ patch_margin_bottom = 8
 layout_mode = 0
 offset_left = 270.0
 offset_top = 231.0
-offset_right = 286.0
+offset_right = 304.0
 offset_bottom = 248.0
 buttonText = "BACK"
 
@@ -548,7 +548,6 @@ offset_top = 9.0
 offset_right = 243.0
 offset_bottom = 244.0
 theme = SubResource("Theme_y2kaf")
-scroll_vertical = 545
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 2
 

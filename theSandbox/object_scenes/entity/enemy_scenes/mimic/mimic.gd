@@ -8,7 +8,7 @@ var chargingTicks :int = 0
 
 func _ready():
 	if !GlobalRef.playerHasInteractedWithChest:
-		queue_free()
+		CreatureData.creatureDeleted(self)
 		# delete mimic if player has never opened a loot chest
 		# ensures new players dont end up thinking all chests are evil mimics
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://cx52pej1x1k6c"]
+[gd_scene load_steps=26 format=3 uid="uid://cx52pej1x1k6c"]
 
 [ext_resource type="Script" path="res://object_scenes/entity/enemy_scenes/bosses/shipBossForest/boss_ship.gd" id="1_favl4"]
 [ext_resource type="PackedScene" uid="uid://meikam2oyy13" path="res://object_scenes/entity/components/health_component.tscn" id="2_7ituk"]
@@ -31,11 +31,25 @@ amountMin = 25
 amountMax = 30
 weight = 1000
 
+[sub_resource type="Resource" id="Resource_8dt1n"]
+script = ExtResource("4_7dmrj")
+id = 3170
+amountMin = 1
+amountMax = 1
+weight = 1000
+
+[sub_resource type="Resource" id="Resource_p26w1"]
+script = ExtResource("4_7dmrj")
+id = 3138
+amountMin = 1
+amountMax = 1
+weight = 100
+
 [sub_resource type="Resource" id="Resource_6idsn"]
 script = ExtResource("3_l1vov")
 rollType = 2
 rollCount = 1
-table = Array[ExtResource("4_7dmrj")]([SubResource("Resource_2u0ia"), SubResource("Resource_64aa2"), SubResource("Resource_6200d")])
+table = Array[ExtResource("4_7dmrj")]([SubResource("Resource_2u0ia"), SubResource("Resource_64aa2"), SubResource("Resource_6200d"), SubResource("Resource_8dt1n"), SubResource("Resource_p26w1")])
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lndia"]
 size = Vector2(54, 34)

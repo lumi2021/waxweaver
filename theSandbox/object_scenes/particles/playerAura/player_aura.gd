@@ -40,7 +40,7 @@ func changeArmor():
 	
 	# check for vanity
 	if vanityHelmet is ItemArmorHelmet:
-		$helmet.Spr.texture =  vanityHelmet.armorTexture
+		$helmet.texture =  vanityHelmet.armorTexture
 
 	if vanityChest is ItemArmorChest:
 		$chestplate.texture =  vanityChest.armorTexture

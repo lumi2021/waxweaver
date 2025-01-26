@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://vbeb86a1lhci"]
+
+[ext_resource type="Script" path="res://item_resources/item_held_scenes/item_spear.gd" id="1_fpsmy"]
+[ext_resource type="Texture2D" uid="uid://bbhygnshkya87" path="res://object_scenes/player/hand.png" id="2_hg4yy"]
+[ext_resource type="Texture2D" uid="uid://fs0n0amosust" path="res://items/weapons/spears/spear.png" id="3_7468y"]
+[ext_resource type="PackedScene" uid="uid://8jw6pruiu3cf" path="res://object_scenes/entity/components/hurtbox.tscn" id="3_ot4cn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qxah0"]
+size = Vector2(10, 8)
+
+[node name="item_spear" type="Node2D" node_paths=PackedStringArray("sprite", "handSprite")]
+script = ExtResource("1_fpsmy")
+sprite = NodePath("origin/sprite")
+handSprite = NodePath("origin/Hand")
+
+[node name="origin" type="Node2D" parent="."]
+
+[node name="sprite" type="Sprite2D" parent="origin"]
+rotation = 0.785398
+scale = Vector2(1, 1)
+texture = ExtResource("3_7468y")
+
+[node name="Hurtbox" parent="origin/sprite" instance=ExtResource("3_ot4cn")]
+position = Vector2(4.24264, -4.24264)
+rotation = -0.785398
+scale = Vector2(1, 1)
+enemyBox = false
+damage = 12
+knockback = 1.1
+enemyName = "spear"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="origin/sprite/Hurtbox"]
+position = Vector2(0.999999, 0)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_qxah0")
+disabled = true
+
+[node name="Hand" type="Sprite2D" parent="origin"]
+modulate = Color(1, 0.784314, 0.333333, 1)
+texture = ExtResource("2_hg4yy")

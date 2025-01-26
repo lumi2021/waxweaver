@@ -136,6 +136,10 @@ func saveGameToFile():
 		gameData["spawnPlanet"] = planets.find(GlobalRef.playerSpawnPlanet) # gets planet id
 		gameData["spawnpoint"] = var_to_str(GlobalRef.playerSpawn)
 	
+	gameData["claimedPraffinBossPrize"] = GlobalRef.claimedPraffinBossPrize
+	gameData["claimedWormBossPrize"] = GlobalRef.claimedWormBossPrize
+	gameData["claimedFinalBossPrize"] = GlobalRef.claimedFinalBossPrize
+	
 	Saving.write_save(Saving.loadedFile,gameData)
 	
 	lastSave = Time.get_unix_time_from_system() # keep track of time elapsed
@@ -167,8 +171,6 @@ func loadSaveFromFile():
 	
 	# inventory
 	PlayerData.inventory = bytes_to_var(gameData["playerInventory"].hex_decode())
-	PlayerData.emit_signal("updateInventory")
-	PlayerData.emit_signal("armorUpdated")
 	
 	# spawnpoint
 	if gameData.has("spawnpoint"):
@@ -185,12 +187,25 @@ func loadSaveFromFile():
 	if GlobalRef.savedHealth <= 0:
 		GlobalRef.savedHealth = 60
 	
+	if gameData.has("claimedPraffinBossPrize"):
+		GlobalRef.claimedPraffinBossPrize = gameData["claimedPraffinBossPrize"]
+		GlobalRef.claimedWormBossPrize = gameData["claimedWormBossPrize"]
+		GlobalRef.claimedFinalBossPrize = gameData["claimedFinalBossPrize"]
+	else:
+		GlobalRef.claimedPraffinBossPrize = false
+		GlobalRef.claimedWormBossPrize = false
+		GlobalRef.claimedFinalBossPrize = false
+	
+	
 	# cheats
 	GlobalRef.cheatsEnabled = gameData["cheats"]
 	
 	# game data
 	GlobalRef.playerHasInteractedWithChest = gameData["mimicsSpawnable"]
-		
+	
+	PlayerData.emit_signal("updateInventory")
+	PlayerData.emit_signal("armorUpdated")
+	
 func posToTile(pos):
 	# just ensures anything emitted into the main system doesnt crash
 	return null

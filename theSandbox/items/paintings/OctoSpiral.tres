@@ -11,9 +11,7 @@ grounded = false
 needsWalls = true
 itemName = "Painting"
 subtext = ""
-desc = "\"Spiral\" - Octo
-spiral out dude 
-learn to swim dude"
+desc = "\"Spiral\" - Octo"
 texture = ExtResource("2_ecxlb")
 maxStackSize = 99
 clickToUse = false

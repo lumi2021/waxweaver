@@ -148,9 +148,9 @@ buttonText = "show drop shadow: true"
 [node name="autosaving" parent="ScrollContainer/g/buttons" instance=ExtResource("2_6rvf4")]
 offset_left = 8.0
 offset_top = 220.0
-offset_right = 160.0
+offset_right = 115.0
 offset_bottom = 237.0
-tooltip_text = "this can help with performance"
+tooltip_text = "saves world every 3 minutes"
 buttonText = "autosaving: true"
 
 [node name="fullscreen" parent="ScrollContainer/g/buttons" instance=ExtResource("2_6rvf4")]

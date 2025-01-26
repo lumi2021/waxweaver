@@ -13,4 +13,4 @@ icon = ExtResource("1_8vup0")
 description = "you're on fire!"
 dyeColor = Color(0.25098, 0.121569, 0.113725, 1)
 particle = ExtResource("1_dde0c")
-incompatibleEffects = Array[String](["wet"])
+incompatibleEffects = Array[String](["wet", "frozen"])

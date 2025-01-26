@@ -15,7 +15,7 @@ func onUse(tileX:int,tileY:int,planetDir:int,planet,lastTile:Vector2):
 			return "failed"
 	
 	var block = planet.DATAC.getTileData(tileX,tileY)
-	var bg = planet.DATAC.getBGData(tileX,tileY)
+	#var bg = planet.DATAC.getBGData(tileX,tileY)
 	
 	if ![0,1].has(block):
 		#Cancel is target tile isn't empty

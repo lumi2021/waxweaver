@@ -53,6 +53,17 @@ func damage(amount,area:Hurtbox=null,hitCrit:bool=false,source:String="idk",type
 	if isPlayer:
 		if parent.dead:
 			return
+		# scan for confusion
+		if Stats.specialProperties.has("inflictConfusion") and is_instance_valid(area):
+			if randi() % 5 == 0: # 20% chance
+				var node :Enemy= null
+				if area.get_parent() is Enemy:
+					node = area.get_parent()
+				else:
+					node = area.get_parent().get_parent()
+				if is_instance_valid(node) and node is Enemy:
+					if is_instance_valid(node.healthComp):
+						node.healthComp.inflictStatus("confused",20.0)
 	
 	if god:
 		return
@@ -122,6 +133,9 @@ func damagePassive(amount,source:String="idk"): # does damage while ignoring def
 func dealKnockback(amount:float,dir:Vector2,mult:float):
 	
 	if god:
+		return
+	
+	if isPlayer and Stats.specialProperties.has("knockbackImmune"):
 		return
 	
 	var q = getWorldPosition()

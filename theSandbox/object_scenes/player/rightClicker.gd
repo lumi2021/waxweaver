@@ -238,17 +238,17 @@ func onRightClick():
 				time -= 1.0
 			var hour = int(time * 24.0)
 			var minute :int= int(time * 2400.0 * 0.6) - (hour*100 * 0.6)
-			var sign = " am."
+			var ballsasscockdick = " am."
 			if hour > 12:
 				hour -= 12
-				sign = " pm."
+				ballsasscockdick = " pm."
 			elif hour == 0:
 				hour = 12
 			
 			if minute < 10:
-				GlobalRef.sendChat("The time is " + str(hour) + ":0" + str(minute)+sign)
+				GlobalRef.sendChat("The time is " + str(hour) + ":0" + str(minute)+ballsasscockdick)
 			else:
-				GlobalRef.sendChat("The time is " + str(hour) + ":" + str(minute)+sign)
+				GlobalRef.sendChat("The time is " + str(hour) + ":" + str(minute)+ballsasscockdick)
 
 func rotateTile(editBody,tile,block):
 	var info :int= editBody.DATAC.getInfoData( tile.x, tile.y )

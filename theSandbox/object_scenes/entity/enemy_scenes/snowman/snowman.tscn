@@ -19,7 +19,6 @@ radius = 5.0
 [node name="snowman" type="CharacterBody2D" node_paths=PackedStringArray("healthComp")]
 collision_layer = 128
 script = ExtResource("1_oxbvs")
-creatureSlots = 8
 healthComp = NodePath("HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

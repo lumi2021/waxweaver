@@ -310,8 +310,21 @@ var data = {
 	
 	3159:load("res://items/trinket/Hardhat.tres"),
 	3160:load("res://items/trinket/Jackhammer.tres"),
+	3161:load("res://items/trinket/ConfusionBrain.tres"),
+	3162:load("res://items/trinket/ShockAbsorber.tres"),
+	3163:load("res://items/trinket/InstructionManual.tres"),
+	3164:load("res://items/trinket/PocketSpigot.tres"),
+	3165:load("res://items/trinket/Antidote.tres"),
+	3166:load("res://items/trinket/Handwarmer.tres"),
+	3167:load("res://items/trinket/RepairKit.tres"),
+	3168:load("res://items/trinket/GoodLuckCharm.tres"),
+	3169:load("res://items/weapons/throwingknives/ThrowingKnife.tres"),
 	
-
+	3170:load("res://items/upgrades/PraffinWin.tres"),
+	3171:load("res://items/weapons/spears/Spear.tres"),
+	3172:load("res://items/weapons/spears/LostSpear.tres"),
+	3173:load("res://items/weapons/spears/AncientSpear.tres"),
+	
 	# chairs 6000 - 6049
 	6000:load("res://items/blocks/furniture/chairs/WoodenChair.tres"),
 	6001:load("res://items/blocks/furniture/chairs/Toilet.tres"),
@@ -349,6 +362,7 @@ var heldItemAnims = {
 	"itemGun" : load("res://item_resources/item_held_scenes/item_gun.tscn"),
 	"itemSling": load("res://item_resources/item_held_scenes/item_slingshot.tscn"),
 	"itemStaff": load("res://item_resources/item_held_scenes/item_staff.tscn"),
+	"itemSpear": load("res://item_resources/item_held_scenes/item_spear.tscn"),
 }
 
 func matchItemAnimation(id):
@@ -375,6 +389,8 @@ func matchItemAnimation(id):
 		return "itemGun"
 	if d is ItemSlingshot:
 		return "itemSling"
+	if d is ItemSpear:
+		return "itemSpear"
 	
 	return null
 

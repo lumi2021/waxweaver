@@ -405,3 +405,7 @@ func checkForEmmission(id):
 
 func getLookup():
 	return theChunker.returnLookup()
+
+func getBlockTexture(blockID) -> Texture2D:
+	var d = theChunker.getBlockDictionary(blockID)
+	return d["texture"]

@@ -99,12 +99,14 @@ func _ready():
 	
 	PlayerData.selectSlot(0)
 	
+	PlayerData.emit_signal("armorUpdated")
 	healthComponent.health = GlobalRef.savedHealth
 	PlayerData.emit_signal("updateHealth")
 	
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	
-	PlayerData.emit_signal("armorUpdated")
+	
+	
 
 func _process(delta):
 	
@@ -306,7 +308,14 @@ func normalMovement(delta):
 		ensureCamPosition()
 		return
 	
+	if healthComponent.checkIfHasEffect("frozen"):
+		var newerVel = velocity.rotated(-rotSource)
+		newerVel.x = lerp(newerVel.x,0.0,0.1)
+		newerVel.y += 1000 * delta
+		newVel = newerVel
+	
 	velocity = newVel.rotated(rotSource)
+	
 	
 	move_and_slide()
 	
@@ -951,16 +960,11 @@ func flipPlayer(dir):
 
 func playerAnimation(dir,newVel,delta):
 	#improve this later
+	if healthComponent.checkIfHasEffect("frozen"):
+		return
+	
 	if dir != 0:
 		flipPlayer(dir)
-	
-	#var glob = global_position - get_global_mouse_position()
-	#var gay = glob.rotated(-GlobalRef.camera.rotation)
-	#var newDir = (int(gay.x < 0) * 2) - 1
-	
-	# rotate player if using item
-	#if Input.is_action_pressed("mouse_left"):
-	#	flipPlayer(newDir)
 	
 	eyeBallAnim()
 	
@@ -1062,7 +1066,16 @@ func changeArmor():
 	Stats.updateStats()
 	newDefense += Stats.getAdditiveDefense()
 	
+	var maxHealth :int = 100
+	if GlobalRef.claimedPraffinBossPrize:
+		maxHealth += 50
+	if GlobalRef.claimedWormBossPrize:
+		maxHealth += 50
+	if GlobalRef.claimedFinalBossPrize:
+		maxHealth += 100
+	
 	healthComponent.defense = newDefense
+	healthComponent.maxHealth = maxHealth
 	GlobalRef.hotbar.updateDefense(newDefense)
 
 ######################################################################

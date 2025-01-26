@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="ItemTrinket" load_steps=3 format=3 uid="uid://dlax18pblgn7l"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemTrinket.gd" id="1_38f4l"]
+[ext_resource type="Texture2D" uid="uid://ci3h3oa61nlh5" path="res://items/trinket/handwarmer.png" id="2_ujbhc"]
+
+[resource]
+script = ExtResource("1_38f4l")
+description = "Grants immunity to being frozen
+"
+specialProperties = Array[String]([])
+sceneToLoad = ""
+addSpeed = 0.0
+addJump = 0.0
+addSwim = 0.0
+extraJumps = 0
+addDefense = 0
+addMeleeDamage = 0.0
+addRangedDamage = 0.0
+addHealingMultiplier = 0.0
+addKnockback = 0.0
+addAttackSpeed = 0.0
+addcriticalStrikeChance = 0
+miningMultiplier = 0.0
+statusImmunities = Array[String](["frozen"])
+itemName = "Handwarmer"
+subtext = ""
+desc = ""
+texture = ExtResource("2_ujbhc")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

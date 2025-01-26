@@ -13,4 +13,3 @@ func _process(delta):
 	var pos = p.posToTile(p.to_local(global_position))
 	var dir = p.DATAC.getPositionLookup(pos.x,pos.y)
 	rotation = (PI/2) * dir
-	print(rotation)
