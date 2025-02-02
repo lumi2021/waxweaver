@@ -15,8 +15,9 @@ var invincible = false
 
 func _ready():
 	if healthComponent == null:
-		print("Error, entity has no health component")
-		queue_free()
+		#print("Error, entity has no health component")
+		#queue_free()
+		pass
 	if colliderShape == null:
 		print("Error, entity has no hitbox collision shape")
 		queue_free()

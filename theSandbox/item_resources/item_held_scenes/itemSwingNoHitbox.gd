@@ -38,3 +38,4 @@ func onNotUsing(delta):
 
 func turnOff():
 	visible = false
+

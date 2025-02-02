@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8f7aethbfkw3"]
+
+[ext_resource type="Script" path="res://object_scenes/entity/enemy_scenes/babyWorm/baby_worm.gd" id="1_x0lh2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7uy2a"]
+
+[node name="babyWorm" type="CharacterBody2D"]
+collision_layer = 128
+collision_mask = 0
+script = ExtResource("1_x0lh2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_7uy2a")
+
+[node name="Line2D" type="Line2D" parent="."]
+
+[node name="segments" type="Node2D" parent="."]

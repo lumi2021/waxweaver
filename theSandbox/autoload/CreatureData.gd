@@ -31,6 +31,7 @@ var creatures = {
 	
 	# bosses
 	"bossShip":"res://object_scenes/entity/enemy_scenes/bosses/shipBossForest/boss_ship.tscn",
+	"bossWorm":"res://object_scenes/entity/enemy_scenes/bosses/bossWorm/worm.tscn",
 }
 
 func _physics_process(delta):
@@ -178,7 +179,11 @@ func pickRandomSpot(planet):
 	return Vector2(tileX + playerTile.x,tileY + playerTile.y)
 
 func summonCommand(planet,position,string):
-
+	
+	if string == "bossWorm" or string == "bossShip":
+		spawnBoss(planet,position,string)
+		return
+	
 	if !creatures.has(string):
 		GlobalRef.sendError("Error: Enemy with that name doesn't exist")
 		return
