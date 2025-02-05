@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_hpqrf")
-damage = 22
+damage = 20
 animSpeed = 8.0
 knockbackMult = 1.4
 weaponScale = 1.0

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ItemPermanentUpgrade" load_steps=3 format=3 uid="uid://d3rb8snscdxy3"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemPermanentUpgrade.gd" id="1_mgtxg"]
+[ext_resource type="Texture2D" uid="uid://blemsbrpyiyf4" path="res://items/upgrades/canOfWorms.png" id="2_eu0q6"]
+
+[resource]
+script = ExtResource("1_mgtxg")
+upgradeToBestow = 1
+itemName = "Can of Worms"
+subtext = ""
+desc = "nasty !!
+Click to eat !!"
+texture = ExtResource("2_eu0q6")
+maxStackSize = 1
+clickToUse = false
+infiniteReach = true

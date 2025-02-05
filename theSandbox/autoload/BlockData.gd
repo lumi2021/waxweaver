@@ -73,6 +73,8 @@ func spawnGroundItem(tilex:int,tiley:int,id:int,planet,oldBlock:int=0):
 			if planet.DATAC.getInfoData(tilex,tiley) >= 4:
 				spawnItemRaw(tilex,tiley,37,planet)
 				spawnItemRaw(tilex,tiley,37,planet)
+				if oldBlock == 37: # only unlock if crop potato and not natural
+					AchievementData.unlockMedal("harvestCrop")
 		53: # is wool
 			id = 3041 + planet.DATAC.getInfoData(tilex,tiley)
 			print( planet.DATAC.getInfoData(tilex,tiley) )
@@ -88,12 +90,17 @@ func spawnGroundItem(tilex:int,tiley:int,id:int,planet,oldBlock:int=0):
 				return # deletes if wheat isnt fullygrown
 			spawnItemRaw(tilex,tiley,17,planet)
 			spawnItemRaw(tilex,tiley,17,planet)
+			
+			AchievementData.unlockMedal("harvestCrop")
+			
 		93: # hidden wire
 			id = 6200 + planet.DATAC.getInfoData(tilex,tiley)
 		110:
 			if oldBlock == 111:
 				if randi() % 3 != 0:
 					return # returns if dropped from big tree
+		130: # is trophy
+			id = 3177 + planet.DATAC.getInfoData(tilex,tiley)
 	
 	var ins = groundItemScene.instantiate()
 	ins.itemID = id

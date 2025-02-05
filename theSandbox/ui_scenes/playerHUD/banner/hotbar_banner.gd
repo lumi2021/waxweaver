@@ -293,14 +293,16 @@ func interpretCommand(text):
 		"respawn":
 			GlobalRef.player.respawn()
 		"kit":
-			PlayerData.addItem(3011,1)
-			PlayerData.addItem(3012,1)
-			PlayerData.addItem(3024,1)
-			PlayerData.addItem(3028,10)
+			PlayerData.addItem(3153,1)
+			PlayerData.addItem(3154,1)
+			PlayerData.addItem(3158,1)
+			PlayerData.addItem(3032,4)
 			PlayerData.addItem(3035,198)
-			PlayerData.addItem(3019,1)
-			PlayerData.addItem(3020,1)
-			PlayerData.addItem(3021,1)
+			PlayerData.addItem(3155,1)
+			PlayerData.addItem(3156,1)
+			PlayerData.addItem(3157,1)
+			PlayerData.addItem(3092,1)
+			PlayerData.addItem(3145,1)
 		"shadow":
 			GlobalRef.lightmap.toggleShadow()
 			GlobalRef.sendChat("Toggled drop shadow")
@@ -473,7 +475,7 @@ func connectBossHealthbar():
 		hb.hide()
 		return
 	
-	var hc :HealthComponent = CreatureData.boss.healthcomponent
+	var hc :HealthComponent = CreatureData.boss.healthComp
 	hb.max_value = hc.maxHealth
 	hb.value = hc.health
 	hb.textSet(hc.health,hc.maxHealth)

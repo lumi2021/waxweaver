@@ -27,7 +27,7 @@ radius = 5.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_lt0bf"]
 radius = 3.0
 
-[node name="firefly" type="CharacterBody2D" node_paths=PackedStringArray("groundCast", "airCast", "HC")]
+[node name="firefly" type="CharacterBody2D" node_paths=PackedStringArray("groundCast", "airCast", "HC", "healthComp")]
 collision_layer = 128
 collision_mask = 17
 script = ExtResource("1_enuet")
@@ -36,6 +36,7 @@ airCast = NodePath("groundCast2")
 HC = NodePath("HealthComponent")
 creatureSlots = 1
 passive = true
+healthComp = NodePath("HealthComponent")
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_5j4s5")]
 maxHealth = 1

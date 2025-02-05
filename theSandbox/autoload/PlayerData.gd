@@ -140,6 +140,9 @@ func swapItem(slot1,slot2):
 	var points = 0
 	var updateArmor = false
 	var updateHeld = false
+	
+	var givemedal = false
+	
 	match slot1:
 		40: #helmet
 			points += int(ItemData.getItem(inventory[slot1][0]) is ItemArmorHelmet)
@@ -168,6 +171,8 @@ func swapItem(slot1,slot2):
 		43,44,45,46,47,48:
 			points += int(ItemData.getItem(inventory[slot1][0]) is ItemTrinket)
 			points += int(ItemData.getItem(inventory[slot2][0]) is ItemTrinket)
+			if points > 0:
+				givemedal = true
 			updateArmor = true
 		
 		
@@ -185,6 +190,9 @@ func swapItem(slot1,slot2):
 	
 	if points < 2:
 		return
+	
+	if givemedal:
+		AchievementData.unlockMedal("equipTrinket")
 	
 	var carry = inventory[slot1].duplicate()
 	inventory[slot1] = inventory[slot2]

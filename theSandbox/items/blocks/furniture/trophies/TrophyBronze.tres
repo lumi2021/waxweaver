@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ItemTypeBlock" load_steps=3 format=3 uid="uid://dl1sf6im3nmd0"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemTypeBlock.gd" id="1_d8hrx"]
+[ext_resource type="Texture2D" uid="uid://dvwlf1mfq30id" path="res://items/blocks/furniture/trophies/bronze.png" id="2_bj7qi"]
+
+[resource]
+script = ExtResource("1_d8hrx")
+blockID = 130
+multiTileId = 0
+itemName = "Bronze Trophy"
+subtext = ""
+desc = ""
+texture = ExtResource("2_bj7qi")
+maxStackSize = 1
+clickToUse = false
+infiniteReach = false

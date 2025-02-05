@@ -1,30 +1,62 @@
-[gd_scene load_steps=6 format=3 uid="uid://biw04iiyu8l56"]
+[gd_scene load_steps=13 format=3 uid="uid://biw04iiyu8l56"]
 
 [ext_resource type="Script" path="res://object_scenes/entity/enemy_scenes/bosses/bossWorm/worm.gd" id="1_43pag"]
 [ext_resource type="PackedScene" uid="uid://meikam2oyy13" path="res://object_scenes/entity/components/health_component.tscn" id="1_p6a8h"]
 [ext_resource type="Texture2D" uid="uid://colhw0vbi2yn4" path="res://object_scenes/entity/enemy_scenes/bosses/bossWorm/body.png" id="3_aldqa"]
+[ext_resource type="Script" path="res://object_scenes/specialResource/lootTables/LootTable.gd" id="3_iqk0a"]
 [ext_resource type="Texture2D" uid="uid://bl50xamy2nebs" path="res://object_scenes/entity/enemy_scenes/bosses/bossWorm/eyes.png" id="4_k5hjl"]
+[ext_resource type="Script" path="res://object_scenes/specialResource/lootTables/RollableItem.gd" id="4_p0rg3"]
+[ext_resource type="AudioStream" uid="uid://bopo8c6ftx7md" path="res://sound/enemy/boss/worm/rumble.ogg" id="7_g6icu"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dh0hg"]
 radius = 16.0
+
+[sub_resource type="Resource" id="Resource_lnqel"]
+script = ExtResource("4_p0rg3")
+id = 3174
+amountMin = 35
+amountMax = 40
+weight = 1000
+
+[sub_resource type="Resource" id="Resource_2sddw"]
+script = ExtResource("4_p0rg3")
+id = 3175
+amountMin = 1
+amountMax = 1
+weight = 1000
+
+[sub_resource type="Resource" id="Resource_3uyms"]
+script = ExtResource("4_p0rg3")
+id = 3178
+amountMin = 1
+amountMax = 1
+weight = 1000
+
+[sub_resource type="Resource" id="Resource_wqrat"]
+script = ExtResource("3_iqk0a")
+rollType = 2
+rollCount = 1
+table = Array[ExtResource("4_p0rg3")]([SubResource("Resource_lnqel"), SubResource("Resource_2sddw"), SubResource("Resource_3uyms")])
 
 [node name="worm" type="CharacterBody2D" node_paths=PackedStringArray("healthComp")]
 collision_layer = 128
 collision_mask = 0
 script = ExtResource("1_43pag")
-creatureSlots = 50
+creatureSlots = 0
 healthComp = NodePath("HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_dh0hg")
 
 [node name="HealthComponent" parent="." instance=ExtResource("1_p6a8h")]
-maxHealth = 2500
+maxHealth = 4000
 knockbackResist = 0.0
-defense = 10
+defense = 14
+loottable = SubResource("Resource_wqrat")
 
 [node name="Line2D" type="Line2D" parent="."]
 texture_repeat = 2
+points = PackedVector2Array(0, 0, -139, 0)
 width = 32.0
 texture = ExtResource("3_aldqa")
 texture_mode = 1
@@ -36,3 +68,12 @@ end_cap_mode = 2
 
 [node name="Eyes" type="Sprite2D" parent="."]
 texture = ExtResource("4_k5hjl")
+
+[node name="rumble" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_g6icu")
+volume_db = -12.0
+pitch_scale = 0.6
+autoplay = true
+bus = &"SFX"
+
+[connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]

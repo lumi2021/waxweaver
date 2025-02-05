@@ -46,6 +46,7 @@ func onUsing(delta):
 			var v = Vector2(abs(bobber.position.x) * 2.0 * h,-180 - bobber.position.y )
 			BlockData.spawnItemVelocity(GlobalRef.currentPlanet.to_local(bobberWaterTarget),fishToGive,GlobalRef.currentPlanet,v)
 			SoundManager.playSound("enemy/swim0",bobber.global_position,1.0,0.1)
+			AchievementData.unlockMedal("fish")
 			reset()
 			
 		reelIn()

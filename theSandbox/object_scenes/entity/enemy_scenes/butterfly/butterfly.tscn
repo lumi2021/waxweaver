@@ -12,7 +12,7 @@ radius = 5.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_lt0bf"]
 radius = 3.0
 
-[node name="butterfly" type="CharacterBody2D" node_paths=PackedStringArray("groundCast", "airCast", "HC", "spr")]
+[node name="butterfly" type="CharacterBody2D" node_paths=PackedStringArray("groundCast", "airCast", "HC", "spr", "healthComp")]
 collision_layer = 128
 collision_mask = 17
 script = ExtResource("1_w5qk2")
@@ -22,11 +22,10 @@ HC = NodePath("HealthComponent")
 spr = NodePath("Spr")
 creatureSlots = 1
 passive = true
+healthComp = NodePath("HealthComponent")
 
 [node name="HealthComponent" parent="." instance=ExtResource("1_d2671")]
 maxHealth = 1
-dropItemArray = Array[int]([3022])
-dropChanceArray = Array[int]([1000])
 
 [node name="DeleteMeOutsideOfChunk" parent="." instance=ExtResource("2_8tlwt")]
 

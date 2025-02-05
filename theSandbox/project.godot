@@ -37,6 +37,8 @@ Indicators="*res://autoload/Indicators.gd"
 Background="*res://autoload/Background.gd"
 Saving="*res://autoload/Saving.gd"
 Options="*res://autoload/Options.gd"
+Ngio="*res://autoload/ngio.gd"
+AchievementData="*res://autoload/AchievementData.gd"
 
 [debug]
 

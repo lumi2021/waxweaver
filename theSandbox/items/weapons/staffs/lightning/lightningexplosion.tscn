@@ -24,7 +24,6 @@ damage = 30
 knockback = 4.0
 enemyName = "lightning"
 damageType = 2
-ignoreDefense = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 shape = SubResource("CircleShape2D_j0fbk")

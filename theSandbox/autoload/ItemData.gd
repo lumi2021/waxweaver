@@ -325,6 +325,15 @@ var data = {
 	3172:load("res://items/weapons/spears/LostSpear.tres"),
 	3173:load("res://items/weapons/spears/AncientSpear.tres"),
 	
+	3174:load("res://items/material/AncientGuts.tres"),
+	3175:load("res://items/upgrades/CanOfWorms.tres"),
+	3176:load("res://items/tools/bossSummoner/WormMeat.tres"),
+	3177:load("res://items/blocks/furniture/trophies/TrophyBronze.tres"),
+	3178:load("res://items/blocks/furniture/trophies/TrophySilver.tres"),
+	3179:load("res://items/blocks/furniture/trophies/TrophyGold.tres"),
+	
+	3180:load("res://items/weapons/staffs/lightning/UpgradedLightningStaff.tres"),
+	
 	# chairs 6000 - 6049
 	6000:load("res://items/blocks/furniture/chairs/WoodenChair.tres"),
 	6001:load("res://items/blocks/furniture/chairs/Toilet.tres"),

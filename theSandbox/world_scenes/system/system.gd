@@ -14,6 +14,8 @@ var planetsShouldGenerate = true
 var autosaveTicks :int= 0
 var lastSave :float= Time.get_unix_time_from_system()
 
+var ticks :int= -600
+
 func _ready():
 	planetsShouldGenerate = !Saving.has_save(Saving.loadedFile)
 	
@@ -25,9 +27,14 @@ func _ready():
 	GlobalRef.lightRenderVP = $lightRenderViewport
 	GlobalRef.dropShadowRenderVP = $dropShadowViewport
 	
+	await get_tree().create_timer(5.0).timeout
 	
+	AchievementData.unlockMedal("openGame")
 
 func generateNewSystem():
+	
+	GlobalRef.savedHealth = 100
+	
 	for planet in cosmicBodyContainer.get_children():
 		planet.queue_free()
 	
@@ -143,7 +150,10 @@ func saveGameToFile():
 	Saving.write_save(Saving.loadedFile,gameData)
 	
 	lastSave = Time.get_unix_time_from_system() # keep track of time elapsed
-
+	
+	PlayerData.emit_signal("updateInventory")
+	PlayerData.emit_signal("armorUpdated")
+	
 func loadSaveFromFile():
 	var gameData = Saving.read_save( Saving.loadedFile )
 	if gameData == null:
@@ -232,3 +242,7 @@ func _process(delta):
 		$PauseMenu.visible = get_tree().paused
 		$PauseMenu/optionsMenu.hide()
 
+	ticks += 1
+	if ticks % 300 == 0:
+		if GlobalRef.player.position.length() < 64:
+			AchievementData.unlockMedal("findCore")

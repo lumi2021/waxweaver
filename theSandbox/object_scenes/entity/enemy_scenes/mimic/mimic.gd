@@ -87,3 +87,7 @@ func charge(delta):
 
 func rotAxis():
 	$axis.rotation = getWorldRot(self)
+
+
+func _on_health_component_died():
+	AchievementData.unlockMedal("killMimic")

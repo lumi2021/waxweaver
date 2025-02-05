@@ -91,7 +91,7 @@ func onRightClick():
 			GlobalRef.playerHasInteractedWithChest = true
 			editBody.chestDictionary[tile] = LootData.getChestLoot(editBody.planetType)
 			editBody.DATAC.setTileData(tile.x,tile.y,33)
-			
+			AchievementData.unlockMedal("lootChest")
 			if PlayerData.loadChest(editBody,tile):
 				# chest visual
 				var ins = load("res://object_scenes/chest/chest_open.tscn").instantiate()
@@ -194,24 +194,24 @@ func onRightClick():
 					GlobalRef.sendChat("clock set to 10 seconds")
 				7:
 					GlobalRef.sendChat("clock set to 30 seconds")
-		100:
+		100: # repeater
 			var info :int= editBody.DATAC.getInfoData( tile.x, tile.y )
 			var target = (info + 2) % 8
 			editBody.DATAC.setInfoData( tile.x, tile.y, target )
 			editBody.editTiles( {Vector2i(tile.x, tile.y):100} )
-		101:
+		101: #drill
 			rotateTile(editBody,tile,101)
-		102:
+		102: # spitter
 			rotateTile(editBody,tile,102)
-		103:
+		103: # extender
 			rotateTile(editBody,tile,103)
-		104:
+		104: # placer
 			rotateTile(editBody,tile,104)
-		105:
+		105: # conveyor belt
 			editBody.editTiles( {Vector2i(tile.x, tile.y):106} )
-		106:
+		106: # conveyor belt
 			editBody.editTiles( {Vector2i(tile.x, tile.y):105} )
-		123:
+		123: # flower pot
 			var plant = -1
 			var itemHeld = PlayerData.getSelectedItemID()
 			match itemHeld:

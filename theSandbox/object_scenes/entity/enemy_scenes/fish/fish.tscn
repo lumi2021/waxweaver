@@ -12,13 +12,14 @@ radius = 3.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_6v8f3"]
 radius = 5.0
 
-[node name="fish" type="CharacterBody2D" node_paths=PackedStringArray("floorRay", "spr")]
+[node name="fish" type="CharacterBody2D" node_paths=PackedStringArray("floorRay", "spr", "healthComp")]
 collision_layer = 128
 script = ExtResource("1_rog8r")
 floorRay = NodePath("RayCast2D")
 spr = NodePath("Spr")
 creatureSlots = 2
 passive = true
+healthComp = NodePath("HealthComponent")
 
 [node name="Spr" type="Sprite2D" parent="."]
 texture = ExtResource("2_q7qhg")

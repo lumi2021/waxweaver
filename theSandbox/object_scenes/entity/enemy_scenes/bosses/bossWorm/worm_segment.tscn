@@ -1,13 +1,18 @@
-[gd_scene load_steps=6 format=3 uid="uid://c3ydnq2t16oo4"]
+[gd_scene load_steps=8 format=3 uid="uid://c3ydnq2t16oo4"]
 
 [ext_resource type="PackedScene" uid="uid://c05kukkqfrg40" path="res://object_scenes/entity/components/hitbox.tscn" id="1_cdlmc"]
 [ext_resource type="Script" path="res://object_scenes/entity/enemy_scenes/bosses/bossWorm/worm_segment.gd" id="1_k8wo7"]
 [ext_resource type="PackedScene" uid="uid://8jw6pruiu3cf" path="res://object_scenes/entity/components/hurtbox.tscn" id="2_6a6wj"]
+[ext_resource type="Texture2D" uid="uid://mf6pwpiprm5c" path="res://items/material/string.png" id="4_3cvnt"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cj3u1"]
 radius = 16.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8jjid"]
+
+[sub_resource type="Curve" id="Curve_1js5e"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [node name="wormSegment" type="Node2D"]
 script = ExtResource("1_k8wo7")
@@ -19,8 +24,26 @@ colliderShape = NodePath("CollisionShape2D")
 shape = SubResource("CircleShape2D_cj3u1")
 
 [node name="Hurtbox" parent="." instance=ExtResource("2_6a6wj")]
-damage = 0
+damage = 33
 enemyName = "giant worm"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 shape = SubResource("CircleShape2D_8jjid")
+
+[node name="transformPart" type="CPUParticles2D" parent="."]
+emitting = false
+one_shot = true
+preprocess = 0.15
+explosiveness = 1.0
+texture = ExtResource("4_3cvnt")
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 54.2
+initial_velocity_max = 68.55
+angular_velocity_min = -197.26
+angular_velocity_max = 207.12
+damping_min = 65.068
+damping_max = 100.0
+angle_min = -720.0
+angle_max = 720.0
+scale_amount_curve = SubResource("Curve_1js5e")

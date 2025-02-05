@@ -2,6 +2,7 @@ extends Item
 class_name ItemGift
 
 @export var loottable :Loot
+@export var unlockAchievement :bool = false
 
 func onUse(tileX:int,tileY:int,planetDir:int,planet,lastTile:Vector2):
 	var items :Array[LootItem] = loottable.getLoot()
@@ -13,3 +14,6 @@ func onUse(tileX:int,tileY:int,planetDir:int,planet,lastTile:Vector2):
 		Indicators.itemPopup(ItemData.getItemName(item.id),item.amount,GlobalRef.player.global_position)
 		
 	GlobalRef.player.spawnGiftParticle()
+	
+	if unlockAchievement:
+		AchievementData.unlockMedal("findVanity")

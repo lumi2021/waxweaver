@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://dnfvp781gydlo"]
+
+[ext_resource type="Texture2D" uid="uid://csibj827o7h0h" path="res://ui_scenes/mainMenu/saveSlot/rect.png" id="1_gmu36"]
+[ext_resource type="Texture2D" uid="uid://1bga37fjmf40" path="res://ui_scenes/achievements/icons/unknown.png" id="2_rihx7"]
+[ext_resource type="Script" path="res://ui_scenes/achievements/medal_box.gd" id="2_us2fp"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_76brd"]
+font_color = Color(1, 0.784314, 0.333333, 1)
+
+[node name="MedalBox" type="NinePatchRect"]
+custom_minimum_size = Vector2(350, 74)
+texture = ExtResource("1_gmu36")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+script = ExtResource("2_us2fp")
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(35, 36)
+texture = ExtResource("2_rihx7")
+
+[node name="NameText" type="Label" parent="Icon"]
+offset_left = 32.0
+offset_top = -25.0
+offset_right = 303.0
+offset_bottom = -2.0
+text = "achievement name"
+label_settings = SubResource("LabelSettings_76brd")
+
+[node name="DescText" type="Label" parent="Icon"]
+offset_left = 32.0
+offset_top = -7.0
+offset_right = 305.0
+offset_bottom = 37.0
+text = "achievement description. blah blah blah blah, yeah this is the achievement"
+autowrap_mode = 2

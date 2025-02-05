@@ -323,3 +323,5 @@ position = Vector2(0, -3)
 shape = SubResource("RectangleShape2D_lsqwh")
 
 [node name="playerFinder" type="RayCast2D" parent="."]
+
+[connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]

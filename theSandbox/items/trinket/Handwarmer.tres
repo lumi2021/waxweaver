@@ -26,6 +26,6 @@ itemName = "Handwarmer"
 subtext = ""
 desc = ""
 texture = ExtResource("2_ujbhc")
-maxStackSize = 99
+maxStackSize = 1
 clickToUse = false
 infiniteReach = false

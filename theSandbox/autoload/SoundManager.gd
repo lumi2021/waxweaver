@@ -24,6 +24,8 @@ func _process(delta):
 	#blockMineVol  = 1.0
 	#blockBreakVol = 1.2
 	
+	
+	
 	if is_instance_valid(GlobalRef.currentPlanet) and is_instance_valid(GlobalRef.player):
 		var pos = GlobalRef.currentPlanet.posToTile(GlobalRef.player.position)
 		if pos == null:
@@ -63,6 +65,7 @@ func _process(delta):
 						playMusic("music/ticks",0.1) # https://www.newgrounds.com/audio/listen/1382542
 				
 				lastplayedmusic = penis
+		
 		
 		if ambientNode == null:
 			randomAmbientTick += delta
@@ -175,3 +178,19 @@ func deleteAmbientNode():
 	ambientNode = null
 	
 	randomAmbientTick = -10.0
+
+func startBossMusic():
+	deleteMusicNode()
+	await get_tree().create_timer(0.05).timeout
+	playMusic("music/boss",0.0)
+	musicNode.volume_db = -80.0
+	var tweenIn = get_tree().create_tween()
+	tweenIn.tween_property(musicNode,"volume_db",-8.0,8.0).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUART)
+
+func stopBossMusic():
+	var tweenOut = get_tree().create_tween()
+	tweenOut.tween_property(musicNode,"volume_db",-80.0,6.0).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUART)
+	
+	await tweenOut.finished
+	deleteMusicNode()
+	

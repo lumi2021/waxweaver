@@ -82,7 +82,9 @@ func _on_craft_button_pressed():
 			var canCraftAgain = PlayerData.craftItem(recipe)
 			displayCanCraft(canCraftAgain)
 		SoundManager.playSound("inventory/pickupItem",get_global_mouse_position(),1.2,0.1)
-
+	
+		AchievementData.craftingItemUnlocks(itemID)
+	
 func _on_craft_button_mouse_entered():
 	parent.displayCraftingInfo(recipe)
 	var id = recipe.itemToCraft

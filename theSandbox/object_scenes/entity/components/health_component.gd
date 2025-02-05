@@ -20,6 +20,7 @@ var health :int= 0
 signal healthChanged
 signal smacked
 signal statusUpdated
+signal died
 
 # status stuff
 var statusEffects :Array[StatusEffect] = []
@@ -28,6 +29,8 @@ var statusEffects :Array[StatusEffect] = []
 @export var damageTypeImmunities :Array = []
 
 var god :bool= false # prevents damage and knockback if true
+
+var alreadyDead :bool = false
 
 func _ready():
 	health = maxHealth
@@ -153,6 +156,8 @@ func die(source:String="idk"):
 	
 	SoundManager.playSound("enemy/killSquish",parent.global_position,0.5, 0.1 )
 	
+	emit_signal("died")
+	
 	if isPlayer:
 		clearAllStatus()
 		parent.dieAndRespawn()
@@ -162,8 +167,11 @@ func die(source:String="idk"):
 			GlobalRef.sendError("Player died")
 		return
 	
+	if !alreadyDead:
+		rollDrops()
 	
-	rollDrops()
+	alreadyDead = true
+	
 	CreatureData.creatureDeleted(parent)
 
 func getWorldPosition():

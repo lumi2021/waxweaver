@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ItemTypeBlock" load_steps=3 format=3 uid="uid://c2gxbvxmvkegt"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemTypeBlock.gd" id="1_7kxfj"]
+[ext_resource type="Texture2D" uid="uid://dndkntgmop31n" path="res://items/blocks/furniture/trophies/silver.png" id="2_dj1ge"]
+
+[resource]
+script = ExtResource("1_7kxfj")
+blockID = 130
+multiTileId = 1
+itemName = "Silver Trophy"
+subtext = ""
+desc = ""
+texture = ExtResource("2_dj1ge")
+maxStackSize = 1
+clickToUse = false
+infiniteReach = false

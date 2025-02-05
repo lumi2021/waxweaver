@@ -82,6 +82,8 @@ var dashIdle :int = 0
 var canDash :bool = true
 var dashDelay :int = 0
 
+
+
 ######################################################################
 ########################### BASIC FUNTIONS ###########################
 ######################################################################
@@ -340,6 +342,8 @@ func normalMovement(delta):
 		
 		if fallDamage > 10:
 			healthComponent.damage(fallDamage,null,false,"fall damage")
+			if fallDamage >= 90 and healthComponent.health > 0 and healthComponent.health < 10:
+				AchievementData.unlockMedal("takeFall")
 		airTime = 0.0
 
 func WATERJUMPCAMERALETSGO(body,vel,rot,onFloor,delta):
@@ -1040,16 +1044,19 @@ func changeArmor():
 	if helmet is ItemArmorHelmet:
 		helmetSpr.texture =  helmet.armorTexture
 		newDefense += helmet.defense
+		AchievementData.unlockMedal("equipArmor")
 	else:
 		helmetSpr.texture = null
 	if chest is ItemArmorChest:
 		chestSpr.texture =  chest.armorTexture
 		newDefense += chest.defense
+		AchievementData.unlockMedal("equipArmor")
 	else:
 		chestSpr.texture = null
 	if legs is ItemArmorLegs:
 		legsSpr.texture =  legs.armorTexture
 		newDefense += legs.defense
+		AchievementData.unlockMedal("equipArmor")
 	else:
 		legsSpr.texture = null
 	
@@ -1226,7 +1233,7 @@ func dieAndRespawn():
 	respawn()
 	
 	# reset variables
-	healthComponent.heal(60)
+	healthComponent.heal( int(healthComponent.maxHealth * 0.6) )
 	rotated = 0
 	sprite.visible = true
 	dead = false
@@ -1285,8 +1292,9 @@ func playFootstepSound():
 		SoundManager.playSoundStream(stream,global_position,0.5,0.1)
 
 func manaFilled():
-	manaFilledPart.position = Vector2(0,-6).rotated( rotated * (PI/2) )
-	manaFilledPart.emitting = true
+	if is_instance_valid(manaFilledPart):
+		manaFilledPart.position = Vector2(0,-6).rotated( rotated * (PI/2) )
+		manaFilledPart.emitting = true
 
 func spawnGiftParticle():
 	var ins = gift.instantiate()

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemSummoner" load_steps=3 format=3 uid="uid://njqbfawh6msu"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemSummoner.gd" id="1_4ed1q"]
+[ext_resource type="Texture2D" uid="uid://ckkseqpd1dtui" path="res://items/tools/bossSummoner/wormMeat.png" id="2_5ba4l"]
+
+[resource]
+script = ExtResource("1_4ed1q")
+bossToSummon = "bossWorm"
+itemName = "Worm Meat"
+subtext = ""
+desc = "Summons the giant worm"
+texture = ExtResource("2_5ba4l")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = true

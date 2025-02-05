@@ -91,3 +91,10 @@ func changeBG(file):
 func changeZoom():
 	$HotbarBanner.scale = Vector2(1.0/zoom.x,1.0/zoom.y)
 	$HotbarBanner.position = (Vector2(400,300) * $HotbarBanner.scale * -0.5) - Vector2(1,1)
+
+func shake(amount:int):
+	offset.x = randi_range(-amount,amount)
+	offset.y = randi_range(-amount,amount)
+
+func resetShake():
+	offset = Vector2.ZERO

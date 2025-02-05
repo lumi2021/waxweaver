@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://bx5gr3kq7el30"]
+
+[ext_resource type="Script" path="res://item_resources/Item.gd" id="1_mty11"]
+[ext_resource type="Texture2D" uid="uid://chjtidwmbxhig" path="res://items/material/ancientGuts.png" id="2_ejeem"]
+
+[resource]
+script = ExtResource("1_mty11")
+itemName = "Ancient Guts"
+subtext = ""
+desc = ""
+texture = ExtResource("2_ejeem")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

@@ -162,3 +162,7 @@ func run(delta):
 	vel.y -= 200.0 * delta
 	setVelocity(vel)
 	move_and_slide()
+
+
+func _on_health_component_died():
+	AchievementData.unlockMedal("defeatPraffin")
