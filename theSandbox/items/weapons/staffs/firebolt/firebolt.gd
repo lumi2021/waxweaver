@@ -10,6 +10,7 @@ var hitplayer :bool = false
 func _ready():
 	if hitplayer:
 		$Hurtbox.enemyBox = true
+		$Hurtbox.damage = 25
 
 func _process(delta):
 	

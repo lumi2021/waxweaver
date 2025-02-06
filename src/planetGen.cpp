@@ -318,6 +318,8 @@ void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
             }
 
             if (planet->getTileData(x,y) == 84){ // is sandstone
+                Vector2i up = Vector2i( Vector2(0,-1).rotated(acos(0.0)*quad) );
+
                 if(dis < baseSurface - 16){
                     if(std::rand() % 120 == 0){
                         generateOre(planet,x,y,88,84,8); // generate clay 
@@ -326,7 +328,29 @@ void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
                     if(std::rand() % 200 == 0){
                         generateOre(planet,x,y,128,84,8); // generate fossil 
                     }
+
+                    if(planet->getTileData(x+up.x,y+up.y) < 2){
+                        if(std::rand() % 2 == 0 && y % 100 == 0){
+                            planet->setTileData(x+up.x,y+up.y,54); // structureblock
+                            planet->setInfoData(x+up.x,y+up.y, 11 ); // temple info id
+                        }
+                    }
+
                 }
+                
+                if(planet->getTileData(x+up.x,y+up.y) < 2){
+
+                    if(std::rand() % 2 == 0){ // 50% chance to spawn desert grass
+                        planet->setTileData(x+up.x,y+up.y,131);
+                        planet->setInfoData(x+up.x,y+up.y,std::rand() % 4); // set appearance
+                    }
+
+                    if(std::rand() % 3 == 0 && y % 3 == 0){ // generate pink tree
+                        planet->setTileData(x+up.x,y+up.y,135);
+                        planet->setTimeData(x+up.x,y+up.y,-9999);
+                    }
+                }
+                
 
                 
             }

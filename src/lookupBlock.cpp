@@ -157,6 +157,13 @@ LOOKUPBLOCK::LOOKUPBLOCK() {
     penis[129] = new BLOCKTRINKETSTATION();
     penis[130] = new BLOCKTROPHY();
     penis[131] = new BLOCKGRASSDESERT();
+    penis[132] = new BLOCKPINKTREELOG();
+    penis[133] = new BLOCKPINKTREELEAVES();
+    penis[134] = new BLOCKPINKTREEFLOWERING();
+    penis[135] = new BLOCKPINKTREESAPLING();
+    penis[136] = new BLOCKPINKWOOD();
+    penis[137] = new BLOCKSANDSTONEBRICK();
+    penis[138] = new BLOCKSANDSTONEEYE();
 
     for(BLOCK *i : penis){ // i increase automatically !
         i->setLookUp(this);

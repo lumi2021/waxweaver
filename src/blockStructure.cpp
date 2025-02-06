@@ -46,6 +46,8 @@ Dictionary BLOCKSTRUCTURE::onTick(int x, int y, PLANETDATA *planet, int dir){
             return generatePillarBottom(x,y,planet,dir);
         case 10:
             return generateMarbleThing(x,y,planet,dir);
+        case 11:
+            return generateDesertTemple(x,y,planet,dir);
 
 
     }
@@ -658,6 +660,46 @@ Dictionary BLOCKSTRUCTURE::generateMarbleThing(int worldx, int worldy, PLANETDAT
             if (b < 2 || b == 54 || b == 119){
                 changes[pos] = tiles[i];
             }
+            i++;
+        }
+    
+    }
+
+    return changes;
+
+}
+
+Dictionary BLOCKSTRUCTURE::generateDesertTemple(int worldx, int worldy, PLANETDATA *planet, int dir){
+    Dictionary changes = {};
+
+    // remember: vertical strips
+    int tiles[81] = {
+    137,137,137,  0,  0,  0,  0,137,137,
+    137, 88,137,138,137,  0,  0,137,137,
+    137, 88,137,  0,  0,  0,  0,137,137,
+    137, 88,137,  0,  0,  0,  0,137,137,
+    137, 88,137,  0,  0,  0,138,137,137,
+    137, 88,137,  0,  0,  0,  0,137,137,
+    137, 88,137,  0,  0,  0,  0,137,137,
+    137, 88,137,138,137,  0,  0,137,137,
+    137,137,137,  0,  0,  0,  0,137,137,
+    };
+
+    int i = 0;
+    for( int x = 0; x < 9; x++ ){
+        for( int y = 0; y < 9; y++ ){
+            
+            if (tiles[i] == -1){ 
+                i++;
+                continue; } // skips generation if id is -1
+
+            Vector2 p = Vector2(x-4,y-7).rotated(acos(0.0)*dir);
+            Vector2i pos = Vector2i(p.x + worldx,p.y + worldy);
+            
+            int b = planet->getTileData(pos.x,pos.y);
+
+            changes[pos] = tiles[i];
+            
             i++;
         }
     

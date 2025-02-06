@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemWall" load_steps=3 format=3 uid="uid://bcbe7snfpb4y1"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemWall.gd" id="1_rji2o"]
+[ext_resource type="Texture2D" uid="uid://bwum4g82b5j76" path="res://items/walls/pinkWoodWall.png" id="2_jqqtk"]
+
+[resource]
+script = ExtResource("1_rji2o")
+blockID = -136
+itemName = "Pink Wood Wall"
+subtext = ""
+desc = ""
+texture = ExtResource("2_jqqtk")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

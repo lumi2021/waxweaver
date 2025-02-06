@@ -42,6 +42,7 @@ public:
 	Dictionary generatePillarBottom(int worldx, int worldy, PLANETDATA *planet, int dir);
 
 	Dictionary generateMarbleThing(int worldx, int worldy, PLANETDATA *planet, int dir);
+	Dictionary generateDesertTemple(int worldx, int worldy, PLANETDATA *planet, int dir);
 };
 
 }

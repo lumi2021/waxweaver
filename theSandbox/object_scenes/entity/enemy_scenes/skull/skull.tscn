@@ -12,8 +12,8 @@
 [sub_resource type="Resource" id="Resource_3xqbc"]
 script = ExtResource("4_uya5x")
 id = 3134
-amountMin = 1
-amountMax = 2
+amountMin = 2
+amountMax = 3
 weight = 1000
 
 [sub_resource type="Resource" id="Resource_urowb"]
@@ -44,7 +44,7 @@ healthComp = NodePath("HealthComponent")
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("3_kd3sd")
-maxHealth = 20
+maxHealth = 25
 knockbackResist = 0.3
 defense = 10
 loottable = SubResource("Resource_urowb")

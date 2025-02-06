@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemBlock" load_steps=3 format=3 uid="uid://cyle1isn1tjx"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemBlock.gd" id="1_7owpc"]
+[ext_resource type="Texture2D" uid="uid://cng6b8jm83tcj" path="res://items/blocks/building/sandstoneBrick.png" id="2_r64m5"]
+
+[resource]
+script = ExtResource("1_7owpc")
+blockID = 137
+itemName = "Sandstone Brick"
+subtext = ""
+desc = ""
+texture = ExtResource("2_r64m5")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

@@ -121,6 +121,12 @@ var data = {
 	127:load("res://items/blocks/furniture/other/Windchime.tres"),
 	128:load("res://items/blocks/ores/FossilOre.tres"),
 	129:load("res://items/blocks/furniture/stations/TrinketStation.tres"),
+	135:load("res://items/blocks/foliage/trees/pinkTree/PinkTreeSapling.tres"),
+	136:load("res://items/blocks/building/PinkWood.tres"),
+	-136:load("res://items/walls/PinkWoodWall.tres"),
+	137:load("res://items/blocks/building/SandstoneBrick.tres"),
+	-137:load("res://items/walls/SandstoneBrickWall.tres"),
+	138:load("res://items/blocks/building/SandstoneEye.tres"),
 	
 	########## item ids ##################
 	3000:load("res://items/tools/flimsy/FlimsySword.tres"), # flimsy tools
@@ -333,6 +339,10 @@ var data = {
 	3179:load("res://items/blocks/furniture/trophies/TrophyGold.tres"),
 	
 	3180:load("res://items/weapons/staffs/lightning/UpgradedLightningStaff.tres"),
+	
+	3181:load("res://items/armors/fossil/FossilHelmet.tres"),
+	3182:load("res://items/armors/fossil/FossilChest.tres"),
+	3183:load("res://items/armors/fossil/FossilPants.tres"),
 	
 	# chairs 6000 - 6049
 	6000:load("res://items/blocks/furniture/chairs/WoodenChair.tres"),

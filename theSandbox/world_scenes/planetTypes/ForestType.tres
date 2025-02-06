@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="PlanetType" load_steps=122 format=3 uid="uid://drr030n6brnua"]
+[gd_resource type="Resource" script_class="PlanetType" load_steps=121 format=3 uid="uid://drr030n6brnua"]
 
 [ext_resource type="Script" path="res://object_scenes/specialResource/lootTables/RollableItem.gd" id="1_5rukt"]
 [ext_resource type="Script" path="res://world_scenes/planetTypes/planetType.gd" id="1_j2ok1"]
@@ -473,11 +473,6 @@ script = ExtResource("2_jpcmu")
 id = "flower"
 weight = 10
 
-[sub_resource type="Resource" id="Resource_cw8l8"]
-script = ExtResource("2_jpcmu")
-id = "skull"
-weight = 3
-
 [sub_resource type="Resource" id="Resource_c6hy1"]
 script = ExtResource("2_jpcmu")
 id = "confuser"
@@ -766,4 +761,4 @@ desertUnderground = Array[ExtResource("2_jpcmu")]([SubResource("Resource_52jrs")
 snowyDay = Array[ExtResource("2_jpcmu")]([SubResource("Resource_tstxf"), SubResource("Resource_548wk")])
 snowyNight = Array[ExtResource("2_jpcmu")]([SubResource("Resource_17dk7"), SubResource("Resource_ebow2"), SubResource("Resource_3ks8v"), SubResource("Resource_m8kvh")])
 snowyUnderground = Array[ExtResource("2_jpcmu")]([SubResource("Resource_6jcgl"), SubResource("Resource_orrr2"), SubResource("Resource_f7k0o"), SubResource("Resource_7ujlb"), SubResource("Resource_urpmm")])
-moss = Array[ExtResource("2_jpcmu")]([SubResource("Resource_8p1vs"), SubResource("Resource_xojti"), SubResource("Resource_d45g0"), SubResource("Resource_6trxu"), SubResource("Resource_jcp77"), SubResource("Resource_t4a1d"), SubResource("Resource_cw8l8"), SubResource("Resource_c6hy1")])
+moss = Array[ExtResource("2_jpcmu")]([SubResource("Resource_8p1vs"), SubResource("Resource_xojti"), SubResource("Resource_d45g0"), SubResource("Resource_6trxu"), SubResource("Resource_jcp77"), SubResource("Resource_t4a1d"), SubResource("Resource_c6hy1")])
