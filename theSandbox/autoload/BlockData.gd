@@ -50,6 +50,12 @@ func spawnGroundItem(tilex:int,tiley:int,id:int,planet,oldBlock:int=0):
 	match id:
 		-1:
 			return
+		18:
+			AchievementData.unlockMedal("obtainOre")
+		24:
+			AchievementData.unlockMedal("obtainOre")
+		27:
+			AchievementData.unlockMedal("obtainOre")
 		7: # is tree sapling
 			
 			if randi() % 30 == 0:

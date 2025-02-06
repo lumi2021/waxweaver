@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="PlanetType" load_steps=115 format=3 uid="uid://drr030n6brnua"]
+[gd_resource type="Resource" script_class="PlanetType" load_steps=122 format=3 uid="uid://drr030n6brnua"]
 
 [ext_resource type="Script" path="res://object_scenes/specialResource/lootTables/RollableItem.gd" id="1_5rukt"]
 [ext_resource type="Script" path="res://world_scenes/planetTypes/planetType.gd" id="1_j2ok1"]
@@ -200,15 +200,45 @@ amountMin = 1
 amountMax = 1
 weight = 30
 
+[sub_resource type="Resource" id="Resource_13oga"]
+script = ExtResource("2_jpcmu")
+id = "mummy"
+weight = 100
+
+[sub_resource type="Resource" id="Resource_hdiye"]
+script = ExtResource("2_jpcmu")
+id = "snail"
+weight = 100
+
+[sub_resource type="Resource" id="Resource_vompv"]
+script = ExtResource("2_jpcmu")
+id = "mummy"
+weight = 100
+
 [sub_resource type="Resource" id="Resource_52jrs"]
 script = ExtResource("2_jpcmu")
 id = "skull"
-weight = 100
+weight = 75
 
 [sub_resource type="Resource" id="Resource_nm8ge"]
 script = ExtResource("2_jpcmu")
 id = "spider"
 weight = 100
+
+[sub_resource type="Resource" id="Resource_gd2ba"]
+script = ExtResource("2_jpcmu")
+id = "worm"
+weight = 100
+
+[sub_resource type="Resource" id="Resource_48inu"]
+script = ExtResource("2_jpcmu")
+id = "mummy"
+weight = 30
+
+[sub_resource type="Resource" id="Resource_6a4ml"]
+script = ExtResource("2_jpcmu")
+id = "snail"
+weight = 50
 
 [sub_resource type="Resource" id="Resource_5e5dr"]
 script = ExtResource("1_5rukt")
@@ -710,6 +740,11 @@ script = ExtResource("2_jpcmu")
 id = "mimic"
 weight = 5
 
+[sub_resource type="Resource" id="Resource_qc22m"]
+script = ExtResource("2_jpcmu")
+id = "snail"
+weight = 5
+
 [sub_resource type="Resource" id="Resource_mp2va"]
 script = ExtResource("2_jpcmu")
 id = "fish"
@@ -723,11 +758,11 @@ funItems = Array[ExtResource("1_5rukt")]([SubResource("Resource_b110y"), SubReso
 fish = Array[ExtResource("1_5rukt")]([SubResource("Resource_5e5dr"), SubResource("Resource_y2h6p"), SubResource("Resource_o5prv"), SubResource("Resource_u24lq"), SubResource("Resource_3xk2w"), SubResource("Resource_hfe3i"), SubResource("Resource_s565u"), SubResource("Resource_2yyvm")])
 surfaceDay = Array[ExtResource("2_jpcmu")]([SubResource("Resource_2krwu"), SubResource("Resource_c7q03"), SubResource("Resource_7kvi4")])
 surfaceNight = Array[ExtResource("2_jpcmu")]([SubResource("Resource_fcrlm"), SubResource("Resource_r6phs"), SubResource("Resource_l3ot6"), SubResource("Resource_b27hs")])
-underground = Array[ExtResource("2_jpcmu")]([SubResource("Resource_sxmvn"), SubResource("Resource_juyfm"), SubResource("Resource_qb7kf"), SubResource("Resource_qmk12")])
+underground = Array[ExtResource("2_jpcmu")]([SubResource("Resource_sxmvn"), SubResource("Resource_juyfm"), SubResource("Resource_qb7kf"), SubResource("Resource_qmk12"), SubResource("Resource_qc22m")])
 water = Array[ExtResource("2_jpcmu")]([SubResource("Resource_mp2va")])
-desertDay = Array[ExtResource("2_jpcmu")]([])
-desertNight = Array[ExtResource("2_jpcmu")]([])
-desertUnderground = Array[ExtResource("2_jpcmu")]([SubResource("Resource_52jrs"), SubResource("Resource_nm8ge")])
+desertDay = Array[ExtResource("2_jpcmu")]([SubResource("Resource_13oga"), SubResource("Resource_hdiye")])
+desertNight = Array[ExtResource("2_jpcmu")]([SubResource("Resource_vompv")])
+desertUnderground = Array[ExtResource("2_jpcmu")]([SubResource("Resource_52jrs"), SubResource("Resource_nm8ge"), SubResource("Resource_gd2ba"), SubResource("Resource_48inu"), SubResource("Resource_6a4ml")])
 snowyDay = Array[ExtResource("2_jpcmu")]([SubResource("Resource_tstxf"), SubResource("Resource_548wk")])
 snowyNight = Array[ExtResource("2_jpcmu")]([SubResource("Resource_17dk7"), SubResource("Resource_ebow2"), SubResource("Resource_3ks8v"), SubResource("Resource_m8kvh")])
 snowyUnderground = Array[ExtResource("2_jpcmu")]([SubResource("Resource_6jcgl"), SubResource("Resource_orrr2"), SubResource("Resource_f7k0o"), SubResource("Resource_7ujlb"), SubResource("Resource_urpmm")])

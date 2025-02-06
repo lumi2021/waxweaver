@@ -29,6 +29,8 @@ var creatures = {
 	"snowflake":"res://object_scenes/entity/enemy_scenes/snowflake/snowflake.tscn",
 	"confuser":"res://object_scenes/entity/enemy_scenes/confuser/confuser.tscn",
 	"worm":"res://object_scenes/entity/enemy_scenes/babyWorm/baby_worm.tscn",
+	"mummy":"res://object_scenes/entity/enemy_scenes/mummyPraffin/mummyPraffin.tscn",
+	"snail":"res://object_scenes/entity/enemy_scenes/snail/snail.tscn",
 	
 	# bosses
 	"bossShip":"res://object_scenes/entity/enemy_scenes/bosses/shipBossForest/boss_ship.tscn",
@@ -181,9 +183,9 @@ func pickRandomSpot(planet):
 
 func summonCommand(planet,position,string):
 	
-	#if string == "bossWorm" or string == "bossShip":
-	spawnBoss(planet,position,string)
-	return
+	if string == "bossWorm" or string == "bossShip":
+		spawnBoss(planet,position,string)
+		return
 	
 	if !creatures.has(string):
 		GlobalRef.sendError("Error: Enemy with that name doesn't exist")

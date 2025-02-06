@@ -42,7 +42,7 @@ Dictionary BLOCKCACTUS::onTick(int x, int y, PLANETDATA *planet, int dir){
         }
         return changes;
     }
-    if( stage == 3){return changes;}
+    if( stage >= 3){return changes;}
 
     Vector2i above = Vector2i(Vector2(0,-1).rotated(acos(0.0)*dir));
     if (planet->getTileData(x+above.x,y+above.y) > 1){ // check if block above isnt filled, cancel so we don't grow into existing blocks
@@ -59,8 +59,9 @@ Dictionary BLOCKCACTUS::onTick(int x, int y, PLANETDATA *planet, int dir){
         
         planet->setInfoData(x,y,1);
         planet->setInfoData(x+above.x,y+above.y,2);
-        if (std::rand() % 10 == 0){
-            planet->setInfoData(x+above.x,y+above.y,3); // 10 percent chance to end growth
+        if (std::rand() % 4 == 0){
+            planet->setInfoData(x+above.x,y+above.y,3); // 25 percent chance to end growth
+            if(std::rand() % 2 == 0){ planet->setInfoData(x+above.x,y+above.y,4); } // planet flower chance
         }
 
 

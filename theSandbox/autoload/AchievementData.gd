@@ -13,6 +13,12 @@ var medalDictionary = {
 		"desc":"craft a workbench",
 		"ngMedal":82863,
 	},
+	"obtainOre":{
+		"icon":"res://ui_scenes/achievements/icons/medal17.png",
+		"name":"rock and stone",
+		"desc":"obtain your first ore",
+		"ngMedal":82916,
+	},
 	"lootChest":{
 		"icon":"res://ui_scenes/achievements/icons/medal3.png",
 		"name":"lucky find",
@@ -120,6 +126,9 @@ func unlockMedal(medalName:String):
 	if !medalDictionary.has(medalName):
 		print("ERROR: A medal with medal name " + medalName + " doesn't exist!!")
 		return
+	
+	if GlobalRef.cheatsEnabled:
+		print("Tried to give achievement, but this world has cheats enabled!")
 	
 	var medal = medalDictionary[medalName]
 	Ngio.request("Medal.unlock", {"id": medal["ngMedal"]})

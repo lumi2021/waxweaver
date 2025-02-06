@@ -272,6 +272,13 @@ void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
                     }
                     
                     else if(biome == 1){ // is desert
+
+                        if(std::rand() % 2 == 0){ // 50% chance to spawn desert grass
+                            planet->setTileData(x+up.x,y+up.y,131);
+                            planet->setInfoData(x+up.x,y+up.y,std::rand() % 4); // set appearance
+                        }
+
+
                         if(std::rand() % 5 == 0){ // 1 in 5 chance to spawn cactus
                             planet->setTileData(x+up.x,y+up.y,87); // spawn cactus
                             planet->setTimeData(x+up.x,y+up.y, ((std::rand() % 40000) + 6000 ) * -1 ); // age cactus randomly

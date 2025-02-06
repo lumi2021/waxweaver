@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://xt3vfsegvgjj"]
+[gd_scene load_steps=16 format=3 uid="uid://xt3vfsegvgjj"]
 
 [ext_resource type="Script" path="res://object_scenes/entity/enemy_scenes/spider/spider.gd" id="1_rpbfy"]
 [ext_resource type="Texture2D" uid="uid://b6xs2nif25drt" path="res://object_scenes/entity/enemy_scenes/spider/sprite.png" id="2_cn8la"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://object_scenes/specialResource/lootTables/LootTable.gd" id="5_ba1cl"]
 [ext_resource type="PackedScene" uid="uid://8jw6pruiu3cf" path="res://object_scenes/entity/components/hurtbox.tscn" id="5_tyfpu"]
 [ext_resource type="Script" path="res://object_scenes/specialResource/lootTables/RollableItem.gd" id="6_nwrfc"]
+[ext_resource type="Script" path="res://object_scenes/specialResource/statusEffects/StatusInflictor.gd" id="9_nx6ue"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_arcvd"]
 radius = 3.8
@@ -27,6 +28,12 @@ table = Array[ExtResource("6_nwrfc")]([SubResource("Resource_cleda")])
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_k1ben"]
 radius = 7.0
+
+[sub_resource type="Resource" id="Resource_swkgj"]
+script = ExtResource("9_nx6ue")
+effectName = "poison"
+seconds = 5.0
+chance = 25
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bm3sh"]
 radius = 6.0
@@ -68,6 +75,7 @@ shape = SubResource("CircleShape2D_k1ben")
 damage = 16
 knockback = 0.2
 enemyName = "spider"
+statusInflictors = Array[ExtResource("9_nx6ue")]([SubResource("Resource_swkgj")])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 shape = SubResource("CircleShape2D_bm3sh")
