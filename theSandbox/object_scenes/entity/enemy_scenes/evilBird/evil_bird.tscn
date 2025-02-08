@@ -99,6 +99,7 @@ maxHealth = 20
 knockbackResist = 0.8
 defense = 4
 loottable = SubResource("Resource_pleow")
+moneyToDrop = 10
 
 [node name="DeleteMeOutsideOfChunk" parent="." instance=ExtResource("3_nn12s")]
 

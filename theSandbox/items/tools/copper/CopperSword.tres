@@ -6,10 +6,14 @@
 [resource]
 script = ExtResource("1_1uiqy")
 damage = 8
-animSpeed = 6.0
+animSpeed = 5.0
+knockbackMult = 1.0
 weaponScale = 1.0
+statusInflictors = Array[Resource("res://object_scenes/specialResource/statusEffects/StatusInflictor.gd")]([])
 itemName = "Copper Sword"
 subtext = ""
+desc = ""
 texture = ExtResource("2_knptb")
 maxStackSize = 1
 clickToUse = false
+infiniteReach = false

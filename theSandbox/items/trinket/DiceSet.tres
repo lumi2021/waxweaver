@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_u3es3")
-description = "+16% critical strike chance"
+description = ""
 specialProperties = Array[String]([])
 sceneToLoad = ""
 addSpeed = 0.0
@@ -19,9 +19,11 @@ addHealingMultiplier = 0.0
 addKnockback = 0.0
 addAttackSpeed = 0.0
 addcriticalStrikeChance = 16
+miningMultiplier = 0.0
+statusImmunities = Array[String]([])
 itemName = "Polyhedral 7-Die Set"
 subtext = ""
-desc = ""
+desc = "+16% critical strike chance"
 texture = ExtResource("2_vdach")
 maxStackSize = 1
 clickToUse = false

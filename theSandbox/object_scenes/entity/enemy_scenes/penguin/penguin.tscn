@@ -73,6 +73,7 @@ shape = SubResource("RectangleShape2D_fol0l")
 [node name="HealthComponent" parent="." instance=ExtResource("3_7bje5")]
 maxHealth = 40
 defense = 10
+moneyToDrop = 25
 
 [node name="DeleteMeOutsideOfChunk" parent="." instance=ExtResource("4_tpm0b")]
 

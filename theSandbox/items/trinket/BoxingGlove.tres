@@ -5,8 +5,7 @@
 
 [resource]
 script = ExtResource("1_fcin6")
-description = "+10% knockback
-"
+description = ""
 specialProperties = Array[String]([])
 sceneToLoad = ""
 addSpeed = 0.0
@@ -21,9 +20,10 @@ addKnockback = 0.1
 addAttackSpeed = 0.0
 addcriticalStrikeChance = 0
 miningMultiplier = 0.0
+statusImmunities = Array[String]([])
 itemName = "Boxing Glove"
 subtext = ""
-desc = ""
+desc = "+10% knockback"
 texture = ExtResource("2_41i4j")
 maxStackSize = 1
 clickToUse = false

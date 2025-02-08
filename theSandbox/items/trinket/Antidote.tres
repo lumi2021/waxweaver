@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_xua5g")
-description = "Grants immunity to poison"
+description = ""
 specialProperties = Array[String]([])
 sceneToLoad = ""
 addSpeed = 0.0
@@ -23,7 +23,7 @@ miningMultiplier = 0.0
 statusImmunities = Array[String](["poison"])
 itemName = "Antidote"
 subtext = ""
-desc = ""
+desc = "Grants immunity to poison"
 texture = ExtResource("2_kjr1r")
 maxStackSize = 1
 clickToUse = false

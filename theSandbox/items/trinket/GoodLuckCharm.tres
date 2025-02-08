@@ -5,8 +5,7 @@
 
 [resource]
 script = ExtResource("1_kuvkd")
-description = "Grants immunity to all negative
-status effects."
+description = ""
 specialProperties = Array[String]([])
 sceneToLoad = ""
 addSpeed = 0.0
@@ -24,7 +23,9 @@ miningMultiplier = 0.0
 statusImmunities = Array[String](["confused", "burning", "frozen", "poison", "fragile"])
 itemName = "Good Luck Charm"
 subtext = ""
-desc = ""
+desc = "Grants immunity to all negative
+status effects.
+"
 texture = ExtResource("2_nde7s")
 maxStackSize = 1
 clickToUse = false

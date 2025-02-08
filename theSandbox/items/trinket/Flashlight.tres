@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_jc0t4")
-description = "Emits light around you"
+description = ""
 specialProperties = Array[String](["emitLight"])
 sceneToLoad = ""
 addSpeed = 0.0
@@ -19,9 +19,11 @@ addHealingMultiplier = 0.0
 addKnockback = 0.0
 addAttackSpeed = 0.0
 addcriticalStrikeChance = 0
+miningMultiplier = 0.0
+statusImmunities = Array[String]([])
 itemName = "Flashlight"
 subtext = ""
-desc = ""
+desc = "Emits light around you"
 texture = ExtResource("2_yyi6e")
 maxStackSize = 1
 clickToUse = false

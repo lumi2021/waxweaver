@@ -45,6 +45,7 @@ script = ExtResource("4_mr5eo")
 maxHealth = 25
 knockbackResist = 1.2
 defense = 8
+moneyToDrop = 15
 
 [node name="Hurtbox" parent="." instance=ExtResource("5_413e3")]
 damage = 30

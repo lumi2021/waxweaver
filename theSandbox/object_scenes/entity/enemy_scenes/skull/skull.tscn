@@ -48,6 +48,7 @@ maxHealth = 25
 knockbackResist = 0.3
 defense = 10
 loottable = SubResource("Resource_urowb")
+moneyToDrop = 15
 statusImmunities = Array[String](["burning"])
 
 [node name="Sprite" type="Sprite2D" parent="."]

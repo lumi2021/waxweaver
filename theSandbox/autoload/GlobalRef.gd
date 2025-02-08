@@ -48,6 +48,8 @@ var claimedPraffinBossPrize :bool = false
 var claimedWormBossPrize :bool = false
 var claimedFinalBossPrize :bool = false
 
+signal newDay
+
 func clearEverything():
 	player = null
 	camera = null
@@ -73,10 +75,17 @@ func clearEverything():
 	claimedFinalBossPrize = false
 
 func _process(delta):
+	
+	var isNight :bool= isNight()
+	
 	currentTime = (globalTick % dayLength) / float(dayLength)
 	
 	var wave = sin( ( currentTime * PI ) / 0.5 ) + 0.5
 	daylightMult = clamp( wave,0.0,1.0 )
+	
+	if isNight() != isNight and !isNight():
+		emit_signal("newDay")
+		print("new day")
 	
 func isNight():
 	return currentTime > 0.55

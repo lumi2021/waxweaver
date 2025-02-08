@@ -5,8 +5,7 @@
 
 [resource]
 script = ExtResource("1_waab5")
-description = "Immunity to fall damage
-"
+description = ""
 specialProperties = Array[String](["fallImmune"])
 sceneToLoad = ""
 addSpeed = 0.0
@@ -21,9 +20,10 @@ addKnockback = 0.0
 addAttackSpeed = 0.0
 addcriticalStrikeChance = 0
 miningMultiplier = 0.0
+statusImmunities = Array[String]([])
 itemName = "Invisible Parachute"
 subtext = ""
-desc = ""
+desc = "Immunity to fall damage"
 texture = ExtResource("2_kycd8")
 maxStackSize = 1
 clickToUse = false

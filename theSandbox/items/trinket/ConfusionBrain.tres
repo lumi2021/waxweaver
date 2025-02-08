@@ -5,8 +5,7 @@
 
 [resource]
 script = ExtResource("1_jew7i")
-description = "Enemies that hit you have a chance of becoming confused.
-"
+description = ""
 specialProperties = Array[String](["inflictConfusion"])
 sceneToLoad = ""
 addSpeed = 0.0
@@ -21,9 +20,11 @@ addKnockback = 0.0
 addAttackSpeed = 0.0
 addcriticalStrikeChance = 0
 miningMultiplier = 0.0
+statusImmunities = Array[String]([])
 itemName = "Confusion Brain"
 subtext = ""
-desc = ""
+desc = "Enemies that hit you have a chance of becoming confused.
+"
 texture = ExtResource("2_gnh13")
 maxStackSize = 1
 clickToUse = false

@@ -96,6 +96,7 @@ maxHealth = 24
 knockbackResist = 0.4
 defense = 8
 loottable = SubResource("Resource_1luut")
+moneyToDrop = 18
 statusImmunities = Array[String](["confused"])
 
 [node name="Beam" type="Sprite2D" parent="."]

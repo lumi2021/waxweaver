@@ -23,6 +23,7 @@ var chestOBJ = null
 
 ## MONEY ##
 var money :int = 0
+signal updateMoney
 
 ## mana ##
 var manaMax :int= 250
@@ -537,4 +538,22 @@ func checkIfCraftable(recipe:CraftingRecipe):
 		if !checkForIngredient(ing.ingredient,ing.amount):
 			return false
 	return true
-	
+
+func addMoney(amount:int):
+	money += amount
+	emit_signal("updateMoney")
+	if money > 5000:
+		AchievementData.unlockMedal("haveMoney")
+
+func loseMoney(amount:int):
+	money -= amount
+	if money < 0:
+		money = 0
+	emit_signal("updateMoney")
+
+func spendMoney(amount:int) -> bool: # returns false if not enough cash
+	if money - amount < 0:
+		return false
+	money -= amount
+	emit_signal("updateMoney")
+	return true

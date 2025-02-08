@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_bnowt")
-description = "+25% mining speed
+description = "
 "
 specialProperties = Array[String]([])
 sceneToLoad = ""
@@ -21,9 +21,10 @@ addKnockback = 0.0
 addAttackSpeed = 0.0
 addcriticalStrikeChance = 0
 miningMultiplier = 0.25
+statusImmunities = Array[String]([])
 itemName = "Hardhat"
 subtext = ""
-desc = ""
+desc = "+25% mining speed"
 texture = ExtResource("2_2ltod")
 maxStackSize = 1
 clickToUse = false

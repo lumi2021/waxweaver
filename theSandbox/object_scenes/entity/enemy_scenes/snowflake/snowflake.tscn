@@ -28,6 +28,7 @@ shape = SubResource("CircleShape2D_8hjdl")
 
 [node name="HealthComponent" parent="." instance=ExtResource("4_538ho")]
 maxHealth = 40
+moneyToDrop = 20
 
 [node name="wallcast" type="RayCast2D" parent="."]
 

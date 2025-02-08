@@ -5,9 +5,7 @@
 
 [resource]
 script = ExtResource("1_ol2hn")
-description = "13% Jump Increase
-15% Increased Move Speed
-"
+description = ""
 specialProperties = Array[String]([])
 sceneToLoad = ""
 addSpeed = 0.15
@@ -22,9 +20,11 @@ addKnockback = 0.0
 addAttackSpeed = 0.0
 addcriticalStrikeChance = 0
 miningMultiplier = 0.0
+statusImmunities = Array[String]([])
 itemName = "Sick Kicks"
 subtext = ""
-desc = ""
+desc = "13% Jump Increase
+15% Increased Move Speed"
 texture = ExtResource("2_05nd6")
 maxStackSize = 1
 clickToUse = false

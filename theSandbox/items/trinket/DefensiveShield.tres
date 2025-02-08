@@ -5,8 +5,7 @@
 
 [resource]
 script = ExtResource("1_dw53k")
-description = "+10% knockback
-+5 defense"
+description = ""
 specialProperties = Array[String]([])
 sceneToLoad = ""
 addSpeed = 0.0
@@ -20,9 +19,12 @@ addHealingMultiplier = 0.0
 addKnockback = 0.1
 addAttackSpeed = 0.0
 addcriticalStrikeChance = 0
+miningMultiplier = 0.0
+statusImmunities = Array[String]([])
 itemName = "Defensive Shield"
 subtext = ""
-desc = ""
+desc = "+10% knockback
++5 defense"
 texture = ExtResource("2_e3818")
 maxStackSize = 1
 clickToUse = false

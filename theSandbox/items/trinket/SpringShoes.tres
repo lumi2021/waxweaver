@@ -5,8 +5,7 @@
 
 [resource]
 script = ExtResource("1_40754")
-description = "13% Jump Increase
-"
+description = ""
 specialProperties = Array[String]([])
 sceneToLoad = ""
 addSpeed = 0.0
@@ -21,9 +20,10 @@ addKnockback = 0.0
 addAttackSpeed = 0.0
 addcriticalStrikeChance = 0
 miningMultiplier = 0.0
+statusImmunities = Array[String]([])
 itemName = "Spring Shoes"
 subtext = ""
-desc = ""
+desc = "13% Jump Increase"
 texture = ExtResource("2_u4ftn")
 maxStackSize = 1
 clickToUse = false

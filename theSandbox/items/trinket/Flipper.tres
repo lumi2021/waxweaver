@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_kwdw2")
-description = "+100% swim movement"
+description = ""
 specialProperties = Array[String]([])
 sceneToLoad = ""
 addSpeed = 0.0
@@ -19,9 +19,11 @@ addHealingMultiplier = 0.0
 addKnockback = 0.0
 addAttackSpeed = 0.0
 addcriticalStrikeChance = 0
+miningMultiplier = 0.0
+statusImmunities = Array[String]([])
 itemName = "Flipper"
 subtext = ""
-desc = ""
+desc = "+100% swim movement"
 texture = ExtResource("2_1cr0d")
 maxStackSize = 1
 clickToUse = false

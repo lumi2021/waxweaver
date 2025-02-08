@@ -5,8 +5,7 @@
 
 [resource]
 script = ExtResource("1_inku2")
-description = "15% Increased Move Speed
-"
+description = ""
 specialProperties = Array[String]([])
 sceneToLoad = ""
 addSpeed = 0.15
@@ -21,9 +20,10 @@ addKnockback = 0.0
 addAttackSpeed = 0.0
 addcriticalStrikeChance = 0
 miningMultiplier = 0.0
+statusImmunities = Array[String]([])
 itemName = "Comfty Socks"
 subtext = ""
-desc = ""
+desc = "15% Increased Move Speed"
 texture = ExtResource("2_t7q5b")
 maxStackSize = 1
 clickToUse = false

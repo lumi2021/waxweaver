@@ -34,6 +34,7 @@ func _ready():
 func generateNewSystem():
 	
 	GlobalRef.savedHealth = 100
+	PlayerData.money = 0
 	
 	for planet in cosmicBodyContainer.get_children():
 		planet.queue_free()
@@ -147,6 +148,8 @@ func saveGameToFile():
 	gameData["claimedWormBossPrize"] = GlobalRef.claimedWormBossPrize
 	gameData["claimedFinalBossPrize"] = GlobalRef.claimedFinalBossPrize
 	
+	gameData["money"] = PlayerData.money
+	
 	Saving.write_save(Saving.loadedFile,gameData)
 	
 	lastSave = Time.get_unix_time_from_system() # keep track of time elapsed
@@ -212,6 +215,11 @@ func loadSaveFromFile():
 	
 	# game data
 	GlobalRef.playerHasInteractedWithChest = gameData["mimicsSpawnable"]
+	
+	if gameData.has("money"):
+		PlayerData.money = gameData["money"]
+	else:
+		PlayerData.money = 0
 	
 	PlayerData.emit_signal("updateInventory")
 	PlayerData.emit_signal("armorUpdated")

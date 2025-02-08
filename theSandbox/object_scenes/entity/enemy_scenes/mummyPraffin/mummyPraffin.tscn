@@ -72,6 +72,7 @@ maxHealth = 40
 knockbackResist = 0.8
 defense = 4
 loottable = SubResource("Resource_eg51c")
+moneyToDrop = 12
 
 [node name="swimmingDetector" parent="." instance=ExtResource("6_n51jg")]
 

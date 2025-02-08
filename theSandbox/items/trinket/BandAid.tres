@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_p71ni")
-description = "+10% healing multiplier"
+description = ""
 specialProperties = Array[String]([])
 sceneToLoad = ""
 addSpeed = 0.0
@@ -20,9 +20,10 @@ addKnockback = 0.0
 addAttackSpeed = 0.0
 addcriticalStrikeChance = 0
 miningMultiplier = 0.0
+statusImmunities = Array[String]([])
 itemName = "BandAid"
 subtext = ""
-desc = ""
+desc = "+10% healing multiplier"
 texture = ExtResource("2_0h5bv")
 maxStackSize = 1
 clickToUse = false

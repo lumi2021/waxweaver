@@ -5,8 +5,7 @@
 
 [resource]
 script = ExtResource("1_e8i5u")
-description = "Gain an additional jump
-"
+description = ""
 specialProperties = Array[String]([])
 sceneToLoad = ""
 addSpeed = 0.0
@@ -21,9 +20,10 @@ addKnockback = 0.0
 addAttackSpeed = 0.0
 addcriticalStrikeChance = 0
 miningMultiplier = 0.0
+statusImmunities = Array[String]([])
 itemName = "Cool Feather"
 subtext = ""
-desc = ""
+desc = "Gain an additional jump"
 texture = ExtResource("2_0erva")
 maxStackSize = 1
 clickToUse = false

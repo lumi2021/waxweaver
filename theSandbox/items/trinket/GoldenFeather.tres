@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_flupr")
-description = "Gain 2 additional jumps"
+description = ""
 specialProperties = Array[String]([])
 sceneToLoad = ""
 addSpeed = 0.0
@@ -19,9 +19,11 @@ addHealingMultiplier = 0.0
 addKnockback = 0.0
 addAttackSpeed = 0.0
 addcriticalStrikeChance = 0
+miningMultiplier = 0.0
+statusImmunities = Array[String]([])
 itemName = "Golden Feather"
 subtext = ""
-desc = ""
+desc = "Gain 2 additional jumps"
 texture = ExtResource("2_mboqg")
 maxStackSize = 1
 clickToUse = false

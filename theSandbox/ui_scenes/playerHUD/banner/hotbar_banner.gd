@@ -18,7 +18,10 @@ var previousMessage = ""
 
 var longassstring :PackedStringArray
 
+
 @onready var hb = $BossHealthbar/hb
+
+var shopPosition :Vector2= Vector2.ZERO
 
 func _ready():
 	
@@ -43,8 +46,11 @@ func _ready():
 	# connect health bar
 	PlayerData.connect("updateHealth",updateHealth)
 	PlayerData.connect("forceOpenInventory",forceOpenInventory)
+	PlayerData.connect("updateMoney",updateMoney)
 	CreatureData.connect("spawnedBoss",connectBossHealthbar)
 	
+	await get_tree().create_timer(0.25).timeout
+	updateMoney()
 	
 func _process(delta):
 	var pos = to_local(get_global_mouse_position()) - Vector2(6,6)
@@ -55,10 +61,19 @@ func _process(delta):
 		
 		if !invOpen:
 			PlayerData.closeChest()
+			$shop.hide()
 		$ItemPreview.position.x = (194 * int(invOpen)) + (3 * (1-int(invOpen) ))
 	
 	$ChestInventory.visible = PlayerData.chestOBJ != null
 	$Menu/Crafting.visible = PlayerData.chestOBJ == null
+	
+	if $ChestInventory.visible:
+		$shop.hide()
+	
+	if $shop.visible:
+		$Menu/Crafting.visible = false
+		if shopPosition.distance_to(GlobalRef.player.global_position) > 64:
+			$shop.hide()
 	
 	# mana
 	
@@ -119,6 +134,7 @@ func clickedSlot(slot):
 			PlayerData.inventory[slot][1] = maxStack
 			PlayerData.inventory[49][1] = total - maxStack 
 		PlayerData.emit_signal("updateInventory")
+		SoundManager.playSound("inventory/pickupItem",GlobalRef.player.global_position,1.0,0.12,"INVENTORY")
 
 func splitSlot(slot):
 	if !invOpen:
@@ -136,6 +152,7 @@ func splitSlot(slot):
 		PlayerData.inventory[49] = [PlayerData.inventory[slot][0],amount-half]
 		PlayerData.emit_signal("updateInventory")
 		PlayerData.emit_signal("selectedSlotChanged")
+		SoundManager.playSound("inventory/pickupItem",GlobalRef.player.global_position,1.0,0.12,"INVENTORY")
 		if slot >= 53:
 			PlayerData.saveChestString()
 		return
@@ -147,6 +164,7 @@ func splitSlot(slot):
 			PlayerData.inventory[49] = [-1,-1]
 		PlayerData.emit_signal("updateInventory")
 		PlayerData.emit_signal("selectedSlotChanged")
+		SoundManager.playSound("inventory/pickupItem",GlobalRef.player.global_position,1.0,0.12,"INVENTORY")
 		if slot >= 53:
 			PlayerData.saveChestString()
 		return
@@ -167,6 +185,7 @@ func splitSlot(slot):
 			PlayerData.inventory[49] = [-1,-1]
 		PlayerData.emit_signal("updateInventory")
 		PlayerData.emit_signal("selectedSlotChanged")
+		SoundManager.playSound("inventory/pickupItem",GlobalRef.player.global_position,1.0,0.12,"INVENTORY")
 		if slot >= 53:
 			PlayerData.saveChestString()
 		return
@@ -322,6 +341,8 @@ func interpretCommand(text):
 			GlobalRef.sendChat("Playing music")
 		"conveyor":
 			GlobalRef.conveyorspeed = float(text.get_slice(" ",1))
+		"rich":
+			PlayerData.addMoney(1000)
 		_:
 			GlobalRef.sendError("Error: command doesn't exist")
 			return
@@ -378,8 +399,6 @@ func displayItemName(text:String,itemData:Item):
 	elif itemData is ItemTrinket:
 		infoText += "trinket \n"
 		size += 18
-		infoText += itemData.description
-		size += (itemData.description.count("\n") + 1) * 18
 	elif itemData is ItemGift:
 		infoText += "left click to open! \n"
 		size += 18
@@ -392,6 +411,7 @@ func displayItemName(text:String,itemData:Item):
 	if itemData.desc != "":
 		infoText += itemData.desc
 		size += (itemData.desc.count("\n")+1) * 18
+		infoText += "\n"
 	
 	
 	if itemData.materialIn.size() > 0:
@@ -482,3 +502,12 @@ func connectBossHealthbar():
 	hb.show()
 	hb.set_process(true)
 
+func updateMoney():
+	$Menu/money.text = "$" + str(PlayerData.money)
+
+func showShop():
+	shopPosition = GlobalRef.player.global_position
+	$shop.show()
+
+func isShopVisible():
+	return $shop.visible

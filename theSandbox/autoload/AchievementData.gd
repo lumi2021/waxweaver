@@ -51,7 +51,7 @@ var medalDictionary = {
 	},
 	"craftStaff":{
 		"icon":"res://ui_scenes/achievements/icons/medal8.png",
-		"name":"wizard shit",
+		"name":"wizard shee",
 		"desc":"craft a staff of any type",
 		"ngMedal":82870,
 	},
@@ -74,17 +74,17 @@ var medalDictionary = {
 		"desc":"dig down until you no longer can",
 		"ngMedal":82872,
 	},
+	"makePurchase":{
+		"icon":"res://ui_scenes/achievements/icons/medal19.png",
+		"name":"ebay dot com",
+		"desc":"buy something at the shop",
+		"ngMedal":82982,
+	},
 	"takeFall":{
 		"icon":"res://ui_scenes/achievements/icons/medal12.png",
 		"name":"yeowch !!",
 		"desc":"take 90+ points of fall damage and live",
 		"ngMedal":82873,
-	},
-	"haveMoney":{
-		"icon":"res://ui_scenes/achievements/icons/medal13.png",
-		"name":"money smart",
-		"desc":"have over 1000 money in the bank",
-		"ngMedal":82874,
 	},
 	"defeatPraffin":{
 		"icon":"res://ui_scenes/achievements/icons/medal14.png",
@@ -94,15 +94,35 @@ var medalDictionary = {
 	},
 	"researchStation":{
 		"icon":"res://ui_scenes/achievements/icons/medal16.png",
-		"name":"i fucking looove science !!!",
+		"name":"i freaking looove science !!!",
 		"desc":"create the research station",
 		"ngMedal":82876,
+	},
+	"haveMoney":{
+		"icon":"res://ui_scenes/achievements/icons/medal13.png",
+		"name":"money smart",
+		"desc":"have over 5000 money in the bank",
+		"ngMedal":82874,
 	},
 	"defeatWorm":{
 		"icon":"res://ui_scenes/achievements/icons/medal15.png",
 		"name":"worm odyssey",
 		"desc":"defeat the giant worm",
 		"ngMedal":82877,
+	},
+	
+	"unknown":{
+		"icon":"res://ui_scenes/achievements/icons/medal18.png",
+		"name":"fill this later",
+		"desc":"fill this later",
+		"ngMedal":82984,
+	},
+	
+	"defeatFinal":{
+		"icon":"res://ui_scenes/achievements/icons/medal20.png",
+		"name":"final",
+		"desc":"defeat the final boss and beat the game",
+		"ngMedal":82983,
 	},
 	
 }

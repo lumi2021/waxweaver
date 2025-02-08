@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_h0v7e")
-description = "Grants immunity to burning"
+description = ""
 specialProperties = Array[String]([])
 sceneToLoad = ""
 addSpeed = 0.0
@@ -23,7 +23,7 @@ miningMultiplier = 0.0
 statusImmunities = Array[String](["burning"])
 itemName = "Pocket Spigot"
 subtext = ""
-desc = ""
+desc = "Grants immunity to burning"
 texture = ExtResource("2_21nlm")
 maxStackSize = 1
 clickToUse = false

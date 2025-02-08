@@ -21,7 +21,7 @@ func _process(delta):
 	if tile == null:
 		return
 	var blockType = editBody.DATAC.getTileData(tile.x,tile.y)
-	$RightClick.visible = [19,22,23,25,33,34,47,48,55,62,63,97,98,99,100,101,102,103,104].has(blockType)
+	$RightClick.visible = [19,22,23,25,33,34,47,48,55,62,63,97,98,99,100,101,102,103,104,123,134,139].has(blockType)
 	
 func onRightClick():
 	
@@ -227,6 +227,8 @@ func onRightClick():
 					plant = 5
 				110:
 					plant = 6
+				135:
+					plant = 7
 
 			
 			if plant > -1:
@@ -249,7 +251,18 @@ func onRightClick():
 				GlobalRef.sendChat("The time is " + str(hour) + ":0" + str(minute)+ballsasscockdick)
 			else:
 				GlobalRef.sendChat("The time is " + str(hour) + ":" + str(minute)+ballsasscockdick)
-
+		
+		134: # flowing leaf
+			BlockData.spawnItemRaw(tile.x,tile.y,134,editBody)
+			editBody.editTiles( {Vector2i(tile.x, tile.y):133} )
+		
+		139: # shop computer
+			PlayerData.emit_signal("forceOpenInventory")
+			var p = editBody.to_global(editBody.tileToPos(tile))
+			SoundManager.playSound("blocks/computer",p,0.8)
+			GlobalRef.hotbar.showShop()
+			editBody.editTiles( {Vector2i(tile.x, tile.y):140} )
+		
 func rotateTile(editBody,tile,block):
 	var info :int= editBody.DATAC.getInfoData( tile.x, tile.y )
 	var target = (info + 1) % 4

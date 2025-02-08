@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_cq5fg")
-description = "Grants immunity to fragile"
+description = ""
 specialProperties = Array[String]([])
 sceneToLoad = ""
 addSpeed = 0.0
@@ -23,7 +23,7 @@ miningMultiplier = 0.0
 statusImmunities = Array[String](["fragile"])
 itemName = "Repair Kit"
 subtext = ""
-desc = ""
+desc = "Grants immunity to fragile"
 texture = ExtResource("2_8klyd")
 maxStackSize = 1
 clickToUse = false

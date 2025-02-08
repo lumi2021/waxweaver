@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_abvku")
-description = "+50% mining speed"
+description = ""
 specialProperties = Array[String]([])
 sceneToLoad = ""
 addSpeed = 0.0
@@ -20,9 +20,10 @@ addKnockback = 0.0
 addAttackSpeed = 0.0
 addcriticalStrikeChance = 0
 miningMultiplier = 0.5
+statusImmunities = Array[String]([])
 itemName = "Jackhammer"
 subtext = ""
-desc = ""
+desc = "+50% mining speed"
 texture = ExtResource("2_cja12")
 maxStackSize = 1
 clickToUse = false

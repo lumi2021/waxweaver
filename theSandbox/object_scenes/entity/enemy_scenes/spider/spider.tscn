@@ -61,6 +61,7 @@ script = ExtResource("3_gfi00")
 maxHealth = 15
 defense = 4
 loottable = SubResource("Resource_igsjl")
+moneyToDrop = 8
 
 [node name="Hitbox" parent="." node_paths=PackedStringArray("healthComponent", "colliderShape") instance=ExtResource("4_ei6ps")]
 healthComponent = NodePath("../HealthComponent")

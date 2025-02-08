@@ -78,6 +78,7 @@ maxHealth = 20
 knockbackResist = 0.65
 defense = 3
 loottable = SubResource("Resource_6wfwh")
+moneyToDrop = 8
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_bsfip")

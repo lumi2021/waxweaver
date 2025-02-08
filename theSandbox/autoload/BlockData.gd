@@ -107,6 +107,8 @@ func spawnGroundItem(tilex:int,tiley:int,id:int,planet,oldBlock:int=0):
 					return # returns if dropped from big tree
 		130: # is trophy
 			id = 3177 + planet.DATAC.getInfoData(tilex,tiley)
+		142: # is shingle
+			id = 6230 + planet.DATAC.getInfoData(tilex,tiley)
 	
 	var ins = groundItemScene.instantiate()
 	ins.itemID = id
@@ -411,7 +413,10 @@ func doBlockAction(action:String,tileX:int,tileY:int,planet):
 			var p = planet.tileToPos(Vector2(tileX,tileY))
 			var g = planet.to_global(p)
 			SoundManager.playSound("ambient/windchime",g,0.8,0.1)
-
+		"shopCheck":
+			if !GlobalRef.hotbar.isShopVisible():
+				planet.editTiles( {Vector2i(tileX,tileY):139} )
+		
 func checkForEmmission(id):
 	var d = theChunker.getBlockDictionary(id)
 	return d["lightEmmission"]

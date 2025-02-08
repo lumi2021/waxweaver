@@ -5,14 +5,13 @@
 
 [resource]
 script = ExtResource("1_3d2vv")
-description = "-15% Movement Speed
--13% Jump
-+5 Defense"
+description = ""
 specialProperties = Array[String]([])
 sceneToLoad = ""
 addSpeed = -0.15
 addJump = -0.13
 addSwim = 0.0
+extraJumps = 0
 addDefense = 5
 addMeleeDamage = 0.0
 addRangedDamage = 0.0
@@ -20,8 +19,13 @@ addHealingMultiplier = 0.0
 addKnockback = 0.0
 addAttackSpeed = 0.0
 addcriticalStrikeChance = 0
+miningMultiplier = 0.0
+statusImmunities = Array[String]([])
 itemName = "Curse of Stone"
 subtext = ""
+desc = "-15% Movement Speed
+-13% Jump
++5 Defense"
 texture = ExtResource("2_l2qnh")
 maxStackSize = 1
 clickToUse = false

@@ -10,7 +10,8 @@ defense = 0
 armorTexture = ExtResource("1_a4b85")
 itemName = "Naked Hat"
 subtext = ""
-desc = "used to visually remove armor"
+desc = "used to visually remove armor
+"
 texture = ExtResource("3_i6o5a")
 maxStackSize = 1
 clickToUse = false

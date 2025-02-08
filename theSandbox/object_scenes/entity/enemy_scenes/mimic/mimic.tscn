@@ -286,6 +286,7 @@ healthComp = NodePath("HealthComponent")
 maxHealth = 25
 defense = 10
 loottable = SubResource("Resource_8luun")
+moneyToDrop = 50
 
 [node name="DeleteMeOutsideOfChunk" parent="." instance=ExtResource("5_sycl1")]
 

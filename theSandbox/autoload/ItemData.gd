@@ -121,12 +121,20 @@ var data = {
 	127:load("res://items/blocks/furniture/other/Windchime.tres"),
 	128:load("res://items/blocks/ores/FossilOre.tres"),
 	129:load("res://items/blocks/furniture/stations/TrinketStation.tres"),
+	134:load("res://items/blocks/foliage/trees/pinkTree/PinkPedals.tres"),
 	135:load("res://items/blocks/foliage/trees/pinkTree/PinkTreeSapling.tres"),
 	136:load("res://items/blocks/building/PinkWood.tres"),
 	-136:load("res://items/walls/PinkWoodWall.tres"),
 	137:load("res://items/blocks/building/SandstoneBrick.tres"),
 	-137:load("res://items/walls/SandstoneBrickWall.tres"),
 	138:load("res://items/blocks/building/SandstoneEye.tres"),
+	139:load("res://items/blocks/furniture/shop/ShopComputer.tres"),
+	141:load("res://items/blocks/building/blackstone.tres"),
+	-141:load("res://items/walls/blackstonewall.tres"),
+	-143:load("res://items/walls/wallpaper/BlueWallpaper.tres"),
+	-144:load("res://items/walls/wallpaper/GreenWallpaper.tres"),
+	-145:load("res://items/walls/wallpaper/YellowWallpaper.tres"),
+	-146:load("res://items/walls/wallpaper/GrandmaWallpaper.tres"),
 	
 	########## item ids ##################
 	3000:load("res://items/tools/flimsy/FlimsySword.tres"), # flimsy tools
@@ -366,6 +374,13 @@ var data = {
 	6204:load("res://items/electrical/wireHidden/DirtHiddenWire.tres"),
 	6205:load("res://items/electrical/wireHidden/BrickWire.tres"),
 	6206:load("res://items/electrical/wireHidden/BrownbrickWire.tres"),
+	
+	6230:load("res://items/blocks/building/shingle/RedShingle.tres"),
+	6231:load("res://items/blocks/building/shingle/GreenShingle.tres"),
+	6232:load("res://items/blocks/building/shingle/BlueShingle.tres"),
+	6233:load("res://items/blocks/building/shingle/CyanShingle.tres"),
+	6234:load("res://items/blocks/building/shingle/PurpleShingle.tres"),
+	6235:load("res://items/blocks/building/shingle/YellowShingle.tres"),
 	
 }
 

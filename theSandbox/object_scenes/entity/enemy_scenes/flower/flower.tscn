@@ -52,6 +52,7 @@ healthComp = NodePath("HealthComponent")
 maxHealth = 32
 knockbackResist = 0.8
 loottable = SubResource("Resource_kh8ft")
+moneyToDrop = 30
 
 [node name="swimmingDetector" parent="." instance=ExtResource("4_6s8f7")]
 

@@ -8,8 +8,8 @@ script = ExtResource("1_ho02p")
 blockID = 107
 itemName = "Hopper"
 subtext = ""
-desc = "Picks up items above it when energized.
-"
+desc = "Picks up items above it when 
+energized."
 texture = ExtResource("2_uweav")
 maxStackSize = 99
 clickToUse = false

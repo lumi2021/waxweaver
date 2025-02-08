@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_ht1ny")
 damage = 14
-animSpeed = 6.2
+animSpeed = 6.0
 knockbackMult = 1.3
 weaponScale = 1.0
 statusInflictors = Array[Resource("res://object_scenes/specialResource/statusEffects/StatusInflictor.gd")]([])

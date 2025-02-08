@@ -5,8 +5,7 @@
 
 [resource]
 script = ExtResource("1_38f4l")
-description = "Grants immunity to being frozen
-"
+description = ""
 specialProperties = Array[String]([])
 sceneToLoad = ""
 addSpeed = 0.0
@@ -24,7 +23,8 @@ miningMultiplier = 0.0
 statusImmunities = Array[String](["frozen"])
 itemName = "Handwarmer"
 subtext = ""
-desc = ""
+desc = "Grants immunity to being frozen
+"
 texture = ExtResource("2_ujbhc")
 maxStackSize = 1
 clickToUse = false

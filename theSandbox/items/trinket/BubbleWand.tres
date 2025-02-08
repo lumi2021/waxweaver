@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_qta85")
-description = "Gain the ability to hover in the air"
+description = ""
 specialProperties = Array[String](["bubblehover"])
 sceneToLoad = ""
 addSpeed = 0.0
@@ -19,9 +19,12 @@ addHealingMultiplier = 0.0
 addKnockback = 0.0
 addAttackSpeed = 0.0
 addcriticalStrikeChance = 0
+miningMultiplier = 0.0
+statusImmunities = Array[String]([])
 itemName = "Bubble Wand"
 subtext = ""
-desc = ""
+desc = "Gain the ability to hover in the air
+"
 texture = ExtResource("2_6xbyy")
 maxStackSize = 1
 clickToUse = false

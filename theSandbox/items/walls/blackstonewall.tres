@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemWall" load_steps=3 format=3 uid="uid://bni3ofhc2utyy"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemWall.gd" id="1_kpkc8"]
+[ext_resource type="Texture2D" uid="uid://bwckkkghenaoo" path="res://items/walls/blackstonewall.png" id="2_km2ae"]
+
+[resource]
+script = ExtResource("1_kpkc8")
+blockID = -141
+itemName = "Blackstone Wall"
+subtext = ""
+desc = ""
+texture = ExtResource("2_km2ae")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

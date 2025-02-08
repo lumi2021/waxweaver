@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_efrk4")
-description = "Eliminates all knockback"
+description = ""
 specialProperties = Array[String](["knockbackImmune"])
 sceneToLoad = ""
 addSpeed = 0.0
@@ -20,9 +20,10 @@ addKnockback = 0.0
 addAttackSpeed = 0.0
 addcriticalStrikeChance = 0
 miningMultiplier = 0.0
+statusImmunities = Array[String]([])
 itemName = "Shock Absorber"
 subtext = ""
-desc = ""
+desc = "Eliminates all knockback"
 texture = ExtResource("2_ypdqg")
 maxStackSize = 1
 clickToUse = false

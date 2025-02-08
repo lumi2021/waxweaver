@@ -7,7 +7,9 @@
 script = ExtResource("1_nd758")
 type = 2
 itemName = "Magic Bucket"
-subtext = "Places infinite water"
+subtext = ""
+desc = "Places infinite water"
 texture = ExtResource("2_74qvt")
 maxStackSize = 1
 clickToUse = false
+infiniteReach = false

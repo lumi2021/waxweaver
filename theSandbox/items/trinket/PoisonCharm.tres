@@ -5,9 +5,7 @@
 
 [resource]
 script = ExtResource("1_6psww")
-description = "All melee attacks have a 25%
-chance of inflicting poison for 5 seconds
-"
+description = ""
 specialProperties = Array[String](["poisoncharm"])
 sceneToLoad = ""
 addSpeed = 0.0
@@ -21,9 +19,13 @@ addHealingMultiplier = 0.0
 addKnockback = 0.0
 addAttackSpeed = 0.0
 addcriticalStrikeChance = 0
+miningMultiplier = 0.0
+statusImmunities = Array[String]([])
 itemName = "Poisonous Spellbook"
 subtext = ""
-desc = ""
+desc = "All melee attacks have a 25%
+chance of inflicting poison for 5 seconds
+"
 texture = ExtResource("2_3kbtr")
 maxStackSize = 1
 clickToUse = false

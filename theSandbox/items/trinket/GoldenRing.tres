@@ -5,8 +5,7 @@
 
 [resource]
 script = ExtResource("1_m4ekn")
-description = "+2 Defense
-"
+description = ""
 specialProperties = Array[String]([])
 sceneToLoad = ""
 addSpeed = 0.0
@@ -21,9 +20,10 @@ addKnockback = 0.0
 addAttackSpeed = 0.0
 addcriticalStrikeChance = 0
 miningMultiplier = 0.0
+statusImmunities = Array[String]([])
 itemName = "Golden Ring"
 subtext = ""
-desc = ""
+desc = "+2 Defense"
 texture = ExtResource("2_ofwah")
 maxStackSize = 1
 clickToUse = false

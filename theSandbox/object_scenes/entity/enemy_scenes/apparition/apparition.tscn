@@ -46,6 +46,7 @@ maxHealth = 40
 knockbackResist = 0.8
 defense = 2
 loottable = SubResource("Resource_6jtyr")
+moneyToDrop = 20
 
 [node name="Hitbox" parent="." node_paths=PackedStringArray("healthComponent", "colliderShape") instance=ExtResource("4_6kicg")]
 healthComponent = NodePath("../HealthComponent")

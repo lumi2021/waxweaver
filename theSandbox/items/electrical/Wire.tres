@@ -9,7 +9,8 @@ blockID = 91
 multiTileId = 0
 itemName = "Wire"
 subtext = ""
-desc = "Can be used to power various things"
+desc = "Can be used to power 
+various things"
 texture = ExtResource("2_hnuk5")
 maxStackSize = 99
 clickToUse = false

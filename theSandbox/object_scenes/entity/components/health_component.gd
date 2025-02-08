@@ -11,6 +11,7 @@ var health :int= 0
 
 ## list of items enemy will drop
 @export var loottable :Loot
+@export var moneyToDrop :int = 0
 
 @export var statusImmunities :Array[String] = []
 
@@ -165,10 +166,15 @@ func die(source:String="idk"):
 			GlobalRef.sendError("Player died from: " + source)
 		else:
 			GlobalRef.sendError("Player died")
+		var moneyLost = int(PlayerData.money * 0.3)
+		PlayerData.loseMoney(moneyLost)
+		if moneyLost > 0:
+			GlobalRef.sendError("You lost " + str(moneyLost) + " monies")
 		return
 	
 	if !alreadyDead:
 		rollDrops()
+		rewardMoney()
 	
 	alreadyDead = true
 	
@@ -264,3 +270,9 @@ func getWorld():
 
 func getHealthPercent():
 	return float(health)/float(maxHealth)
+
+func rewardMoney():
+	if moneyToDrop <= 0:
+		return
+	var moneyRand = moneyToDrop + randi_range(-2,2)
+	PlayerData.addMoney(max(moneyRand,1))

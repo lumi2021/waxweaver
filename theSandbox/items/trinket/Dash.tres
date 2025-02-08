@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_r4qer")
-description = "Double tap to dash"
+description = ""
 specialProperties = Array[String](["dash"])
 sceneToLoad = ""
 addSpeed = 0.0
@@ -19,9 +19,11 @@ addHealingMultiplier = 0.0
 addKnockback = 0.0
 addAttackSpeed = 0.0
 addcriticalStrikeChance = 0
+miningMultiplier = 0.0
+statusImmunities = Array[String]([])
 itemName = "Sweatpants"
 subtext = ""
-desc = ""
+desc = "Double tap to dash"
 texture = ExtResource("2_5hgep")
 maxStackSize = 1
 clickToUse = false

@@ -728,6 +728,10 @@ func useItem():
 	if !GlobalRef.playerCanUseItem:
 		return
 	
+	if PlayerData.selectedSlot == 49 and GlobalRef.hotbar.isShopVisible():
+		print("yeah")
+		return
+	
 	var itemData = PlayerData.getSelectedItemData()
 	if itemData == null:
 		$PlayerLayers/handFront.visible = true
@@ -788,6 +792,9 @@ func swapSlot():
 func runItemProcess(delta):
 	
 	if !GlobalRef.playerCanUseItem:
+		return
+		
+	if PlayerData.selectedSlot == 49 and GlobalRef.hotbar.isShopVisible():
 		return
 	
 	if !is_instance_valid(heldItemAnim):

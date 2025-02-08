@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_res28")
-description = "Grants immunity to confusion"
+description = ""
 specialProperties = Array[String]([])
 sceneToLoad = ""
 addSpeed = 0.0
@@ -23,7 +23,8 @@ miningMultiplier = 0.0
 statusImmunities = Array[String](["confused"])
 itemName = "How-To Guide"
 subtext = ""
-desc = ""
+desc = "Grants immunity to confusion
+"
 texture = ExtResource("2_ug3n8")
 maxStackSize = 1
 clickToUse = false
