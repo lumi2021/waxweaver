@@ -30,6 +30,8 @@ func onNotUsing(delta):
 
 func summonObject():
 	
+	if itemData.summoningObject == null:
+		return
 	
 	var ins = itemData.summoningObject.instantiate()
 	ins.planet = getWorld().get_parent()

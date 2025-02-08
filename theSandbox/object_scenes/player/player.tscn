@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://c1b1vgh12jqww"]
+[gd_scene load_steps=32 format=3 uid="uid://c1b1vgh12jqww"]
 
 [ext_resource type="Script" path="res://object_scenes/player/player.gd" id="1_7l8c2"]
 [ext_resource type="PackedScene" uid="uid://meikam2oyy13" path="res://object_scenes/entity/components/health_component.tscn" id="2_vteuo"]
@@ -258,6 +258,14 @@ point_count = 3
 offsets = PackedFloat32Array(0.135246, 1)
 colors = PackedColorArray(1, 1, 1, 1, 0, 0.8, 1, 1)
 
+[sub_resource type="Curve" id="Curve_7pmm8"]
+_data = [Vector2(0, 0.558157), 0.0, 4.87009, 0, 0, Vector2(0.238971, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.50529, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_vdxao"]
+offsets = PackedFloat32Array(0, 0.614754)
+colors = PackedColorArray(1, 1, 1, 1, 1, 0.701338, 0.930029, 1)
+
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 17
@@ -455,5 +463,30 @@ texture = ExtResource("11_k042u")
 scale = Vector2(1e-05, 1e-05)
 texture = ExtResource("15_76chl")
 offset = Vector2(0, -3)
+
+[node name="rotateRand" type="Node2D" parent="."]
+
+[node name="teleport" type="CPUParticles2D" parent="rotateRand"]
+position = Vector2(0, -3)
+emitting = false
+lifetime = 0.8
+one_shot = true
+explosiveness = 0.46
+texture = ExtResource("13_1otht")
+emission_shape = 3
+emission_rect_extents = Vector2(1, 6)
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 22.35
+initial_velocity_max = 22.35
+angular_velocity_min = -461.11
+angular_velocity_max = 404.38
+damping_min = 26.133
+damping_max = 26.133
+angle_min = -720.0
+angle_max = 720.0
+scale_amount_curve = SubResource("Curve_7pmm8")
+color_ramp = SubResource("Gradient_vdxao")
 
 [connection signal="healthChanged" from="HealthComponent" to="." method="_on_health_component_health_changed"]

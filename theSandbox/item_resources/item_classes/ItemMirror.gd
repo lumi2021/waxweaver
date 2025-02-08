@@ -8,3 +8,4 @@ func onUse(tileX:int,tileY:int,planetDir:int,planet,lastTile:Vector2):
 	if !hc.checkIfHasEffect("teleportsickness"):
 		GlobalRef.player.respawn()
 		hc.inflictStatus("teleportsickness",4.0)
+		GlobalRef.player.teleport()

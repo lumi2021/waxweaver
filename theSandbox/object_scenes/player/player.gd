@@ -173,6 +173,8 @@ func _process(delta):
 	if $suffocatingCast/suffocate.is_colliding() and !noClip:
 		healthComponent.inflictStatus("suffocating",0.1)
 	
+	$rotateRand.rotation = sprite.rotation
+	
 ######################################################################
 ############################## MOVEMENT ##############################
 ######################################################################
@@ -1320,3 +1322,7 @@ func dashingParticle():
 		ins.rotation = sprite.rotation
 		ins.modulate.a = min((abs(vel.x)-150.0) / 150.0,1.0)
 		get_parent().add_child(ins)
+
+func teleport():
+	$rotateRand/teleport.emitting = true
+	SoundManager.playSound("items/teleport",global_position,0.6,0.04)

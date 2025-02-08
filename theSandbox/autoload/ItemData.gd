@@ -352,6 +352,9 @@ var data = {
 	3182:load("res://items/armors/fossil/FossilChest.tres"),
 	3183:load("res://items/armors/fossil/FossilPants.tres"),
 	
+	3184:load("res://items/weapons/staffs/teleport/TeleportationRod.tres"),
+	3185:load("res://items/tools/glowstick/Glowstick.tres"),
+	
 	# chairs 6000 - 6049
 	6000:load("res://items/blocks/furniture/chairs/WoodenChair.tres"),
 	6001:load("res://items/blocks/furniture/chairs/Toilet.tres"),

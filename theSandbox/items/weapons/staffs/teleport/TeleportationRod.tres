@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ItemTeleportationRod" load_steps=4 format=3 uid="uid://dkjhrt8wikgnc"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemTeleportationRod.gd" id="1_pwdwl"]
+[ext_resource type="Texture2D" uid="uid://pl1df2eyqcu4" path="res://items/weapons/staffs/teleport/em.png" id="1_sja3r"]
+[ext_resource type="Texture2D" uid="uid://bvwoo27qtubtk" path="res://items/weapons/staffs/teleport/teleport.png" id="3_g4mvk"]
+
+[resource]
+script = ExtResource("1_pwdwl")
+penis = false
+delay = 0.0
+ejectPower = 0
+emissiveTex = ExtResource("1_sja3r")
+manaCost = 0
+itemName = "Teleportation Staff"
+subtext = ""
+desc = "Click to teleport anywhere on 
+screen"
+texture = ExtResource("3_g4mvk")
+maxStackSize = 1
+clickToUse = true
+infiniteReach = true

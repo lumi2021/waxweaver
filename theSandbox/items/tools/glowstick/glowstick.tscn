@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://kyp64owir2w0"]
+
+[ext_resource type="Script" path="res://items/tools/glowstick/glowstick.gd" id="1_63xj8"]
+[ext_resource type="Texture2D" uid="uid://yjnu484gnicp" path="res://items/tools/glowstick/sprite.png" id="2_dynxy"]
+[ext_resource type="PackedScene" uid="uid://84sah16y8gwq" path="res://object_scenes/entity/components/delete_me_outside_of_chunk.tscn" id="3_2yktr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qc727"]
+radius = 1.0
+
+[node name="glowstick" type="CharacterBody2D"]
+collision_layer = 128
+script = ExtResource("1_63xj8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_qc727")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_dynxy")
+
+[node name="DeleteMeOutsideOfChunk" parent="." instance=ExtResource("3_2yktr")]
