@@ -393,7 +393,7 @@ func displayItemName(text:String,itemData:Item):
 		infoText += "eat time: " + str(itemData.eatTime) + "\n"
 		size += 18
 	elif itemData is ItemPlant:
-		infoText += "can be planted on: \n[ "+ str(itemData.descCanPlaceOn) + " ]\n"
+		infoText += "can be planted on top of: \n[ "+ str(itemData.descCanPlaceOn) + " ]\n"
 		size += 18
 		size += 18
 	elif itemData is ItemTrinket:
