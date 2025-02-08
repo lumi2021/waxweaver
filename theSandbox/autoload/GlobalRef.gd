@@ -50,6 +50,8 @@ var claimedFinalBossPrize :bool = false
 
 signal newDay
 
+var playerGravityOverride :int = -1
+
 func clearEverything():
 	player = null
 	camera = null

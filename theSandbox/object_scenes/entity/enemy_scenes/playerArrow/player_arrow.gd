@@ -18,7 +18,8 @@ var itemID :int= 3004
 
 func _ready():
 	SoundManager.playSound("items/bowFire",global_position,5.0,0.1)
-	setVelocity(dir.normalized() * speed)
+	#setVelocity(dir.normalized() * speed)
+	velocity = to_local(get_global_mouse_position()).normalized() * speed
 	$axis/Hurtbox.damage = damage
 	$axis/Hurtbox.statusInflictors = statusInflictors
 	$axis.rotation = velocity.angle()

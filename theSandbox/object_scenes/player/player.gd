@@ -228,6 +228,8 @@ func setPlanetRotation():
 		rotationDelayTicks = 8
 
 func getProperRotationSource():
+	if GlobalRef.playerGravityOverride != -1:
+		return GlobalRef.playerGravityOverride * (PI/2)
 	if state == 0:
 		return rotated*(PI/2)
 	return shipOn.rotation
@@ -729,7 +731,6 @@ func useItem():
 		return
 	
 	if PlayerData.selectedSlot == 49 and GlobalRef.hotbar.isShopVisible():
-		print("yeah")
 		return
 	
 	var itemData = PlayerData.getSelectedItemData()
@@ -1097,6 +1098,8 @@ func changeArmor():
 ######################################################################
 
 func getPlanetPosition():
+	if GlobalRef.playerGravityOverride != -1:
+		return GlobalRef.playerGravityOverride
 	if !is_instance_valid(planetOn):
 		return 0
 	var p = planetOn.posToTile(position)
