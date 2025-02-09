@@ -37,6 +37,8 @@ signal doneEditingTiles
 # Chest Data
 var chestDictionary :Dictionary= {}
 
+var planetTypeOverride :String = ""
+
 func _ready():
 	
 	if orbiting != null:
@@ -228,11 +230,15 @@ func generateEmptyArray():
 	DATAC.createEmptyArrays(s,centerPoint)
 
 func generateTerrain():
+	
+	match Saving.worldName:
+		"skyblock":
+			BlockData.theGenerator.generateLunarPlanet(DATAC,noise)
+			return
+	
+	
 	match planetType:
 		"forest":BlockData.theGenerator.generateForestPlanet(DATAC,noise)
-		"lunar":BlockData.theGenerator.generateLunarPlanet(DATAC,noise)
-		"sun":BlockData.theGenerator.generateSunPlanet(DATAC,noise)
-		"arid":BlockData.theGenerator.generateAridPlanet(DATAC,noise)
 	
 	return
 

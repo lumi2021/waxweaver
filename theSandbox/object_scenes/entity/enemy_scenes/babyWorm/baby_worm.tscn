@@ -1,9 +1,24 @@
-[gd_scene load_steps=6 format=3 uid="uid://c8f7aethbfkw3"]
+[gd_scene load_steps=10 format=3 uid="uid://c8f7aethbfkw3"]
 
 [ext_resource type="Script" path="res://object_scenes/entity/enemy_scenes/babyWorm/baby_worm.gd" id="1_x0lh2"]
 [ext_resource type="Script" path="res://object_scenes/entity/components/health_component.gd" id="2_fnhfe"]
 [ext_resource type="Texture2D" uid="uid://bqm8qvrifan67" path="res://object_scenes/entity/enemy_scenes/babyWorm/body.png" id="3_5xgtc"]
+[ext_resource type="Script" path="res://object_scenes/specialResource/lootTables/LootTable.gd" id="3_e8dgo"]
+[ext_resource type="Script" path="res://object_scenes/specialResource/lootTables/RollableItem.gd" id="4_gej8h"]
 [ext_resource type="PackedScene" uid="uid://84sah16y8gwq" path="res://object_scenes/entity/components/delete_me_outside_of_chunk.tscn" id="4_t1nu3"]
+
+[sub_resource type="Resource" id="Resource_iw1r7"]
+script = ExtResource("4_gej8h")
+id = 128
+amountMin = 2
+amountMax = 2
+weight = 10
+
+[sub_resource type="Resource" id="Resource_iu6qv"]
+script = ExtResource("3_e8dgo")
+rollType = 2
+rollCount = 1
+table = Array[ExtResource("4_gej8h")]([SubResource("Resource_iw1r7")])
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7uy2a"]
 radius = 2.0
@@ -19,7 +34,8 @@ script = ExtResource("2_fnhfe")
 maxHealth = 250
 knockbackResist = 0.35
 defense = 10
-moneyToDrop = 30
+loottable = SubResource("Resource_iu6qv")
+moneyToDrop = 50
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_7uy2a")

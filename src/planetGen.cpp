@@ -524,14 +524,70 @@ void PLANETGEN::generateLunarPlanet(PLANETDATA *planet,FastNoiseLite *noise){
     for(int x = 0; x < planetSize; x++){
         for(int y = 0; y < planetSize; y++){
 
-            int quad = planet->getPositionLookup(x,y);
-            int side = Vector2(x,y).rotated(acos(0.0) * quad).x;
+            //int quad = planet->getPositionLookup(x,y);
+            //int side = Vector2(x,y).rotated(acos(0.0) * quad).x;
             double dis = getBlockDistance(x,y,planet);
-            double surface = (noise->get_noise_1d(side*4.0) * 12.0)  + (planetSize / 4);
+            //double surface = (noise->get_noise_1d(side*4.0) * 12.0)  + (planetSize / 4);
+            
+            if( x == (planetSize/2) - 6 ){
+                if(y==368){
+                    planet->setTileData(x,y,63);
+                    planet->setInfoData(x,y,0);
+                }
+                if(y==369){
+                    planet->setTileData(x,y,63);
+                    planet->setInfoData(x,y,2);
+                }
+                if(y==370){
+                    planet->setTileData(x,y,63);
+                    planet->setInfoData(x,y,4);
+                }
+            }
+            if( x == (planetSize/2) - 5 ){
+                if(y==368){
+                    planet->setTileData(x,y,63);
+                    planet->setInfoData(x,y,1);
+                }
+                if(y==369){
+                    planet->setTileData(x,y,63);
+                    planet->setInfoData(x,y,3);
+                }
+                if(y==370){
+                    planet->setTileData(x,y,63);
+                    planet->setInfoData(x,y,5);
+                }
+            }
 
-            if (dis <= surface){
+            if (dis <= 14 && x == planetSize/2 ){
+                
+                planet->setTileData(x,y,7);
+                planet->setTimeData(x,y,-18000);
+            }
+
+            if (dis <= 13){
+                planet->setTileData(x,y,4);
+                planet->setBGData(x,y,3);
+                planet->setTimeData(x,y,-18000);
+            }
+
+            if (dis <= 11){
+                planet->setTileData(x,y,2);
+                planet->setBGData(x,y,2);
+            }
+
+            if (dis <= 6){
+                planet->setTileData(x,y,14);
+                planet->setBGData(x,y,2);
+            }
+
+            if (dis <= 5){
                 planet->setTileData(x,y,28);
-                planet->setBGData(x,y,28);
+                planet->setBGData(x,y,2);
+            }
+
+            if (dis <= 4){
+                planet->setTileData(x,y,80);
+                planet->setBGData(x,y,80);
             }
             if (dis <= 3){
                 planet->setTileData(x,y,5);

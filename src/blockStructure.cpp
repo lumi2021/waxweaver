@@ -678,7 +678,7 @@ Dictionary BLOCKSTRUCTURE::generateDesertTemple(int worldx, int worldy, PLANETDA
     137, 88,137,138,137,  0,  0,137,137,
     137, 88,137,  0,  0,  0,  0,137,137,
     137, 88,137,  0,  0,  0,  0,137,137,
-    137, 88,137,  0,  0,  0,138,137,137,
+    137, 88,137,  0,  0,147,138,137,137,
     137, 88,137,  0,  0,  0,  0,137,137,
     137, 88,137,  0,  0,  0,  0,137,137,
     137, 88,137,138,137,  0,  0,137,137,
@@ -699,6 +699,9 @@ Dictionary BLOCKSTRUCTURE::generateDesertTemple(int worldx, int worldy, PLANETDA
             int b = planet->getTileData(pos.x,pos.y);
 
             changes[pos] = tiles[i];
+            if (x == 2 || x == 6){
+                planet->setBGData(pos.x,pos.y,137);
+            }
             
             i++;
         }

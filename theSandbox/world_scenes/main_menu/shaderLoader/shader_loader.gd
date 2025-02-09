@@ -13,7 +13,7 @@ var materialsToLoad = [
 ]
 
 var motd :Array[String]= [ # messages to display when opening the window
-	"hi chat",
+	"hi",
 	"bring it back!",
 	"what if goku was betrayed and imprisoned in the hyberbolic time chamber?",
 	"please play my hideo game",
@@ -27,16 +27,24 @@ var motd :Array[String]= [ # messages to display when opening the window
 	"oldest trick in the book...",
 	"okay, seventh gear!",
 	"so unorganized...",
-	"the thanksgiving dinner and its consequences have been a disaster for the my tummy",
 	"dude, like... spiral out dude... learn to swim man...",
 	"billions must smile",
 	"stay prog my friends",
 	"fat fucking squishy snail",
 	"True...",
 	"you live only once so try to spend as much time on Computer as it is possible.",
-	"a growlers production.",
-	"oohh fiddlesticks, what now?"
-	
+	"top dog entertainment",
+	"oohh fiddlesticks, what now?",
+	"secret: try naming your world 'skyblock' !!",
+	"this is half life 3 actually",
+	"game by poop studios",
+	"fish",
+	"A whole orange will float on water, but a peeled orange, will sink. Who gives a shit?",
+	"it looks, robot lived in.",
+	"timmy christmas 2",
+	"have you seen the movie tron? I haven't",
+	"a chair ! its MINE !",
+	"shoutout fallenchungus"
 ]
 
 

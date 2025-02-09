@@ -65,5 +65,8 @@ func launchTossable():
 	var ins = scene.instantiate()
 	ins.planet = getWorld().get_parent()
 	ins.position = GlobalRef.player.position
+	if ins.has_method("setItemData"):
+		ins.setItemData(itemData)
 	getWorld().add_child(ins)
 	ins.setVelocity(getLocalMouse().normalized() * itemData.speed)
+	

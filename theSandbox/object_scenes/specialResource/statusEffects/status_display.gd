@@ -10,7 +10,7 @@ func _ready():
 		return
 	
 	sprite.texture = status.icon
-	$ColorRect.tooltip_text = status.displayName
+	$ColorRect.tooltip_text = status.displayName + ": " + status.description
 
 func _process(delta):
 	

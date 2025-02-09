@@ -354,6 +354,9 @@ var data = {
 	
 	3184:load("res://items/weapons/staffs/teleport/TeleportationRod.tres"),
 	3185:load("res://items/tools/glowstick/Glowstick.tres"),
+	3186:load("res://items/weapons/splashPotion/PoisonSplash.tres"),
+	3187:load("res://items/weapons/splashPotion/BurnSplash.tres"),
+	3188:load("res://items/weapons/splashPotion/FragileSplash.tres"),
 	
 	# chairs 6000 - 6049
 	6000:load("res://items/blocks/furniture/chairs/WoodenChair.tres"),

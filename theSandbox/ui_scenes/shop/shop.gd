@@ -64,6 +64,7 @@ var deals = [
 	
 	{"id":141,"price":2,"stock":99},
 	{"id":135,"price":25,"stock":5},
+	{"id":74,"price":5,"stock":99},
 	
 	{"id":-143,"price":1,"stock":999}, # wallpapers
 	{"id":-144,"price":1,"stock":999},

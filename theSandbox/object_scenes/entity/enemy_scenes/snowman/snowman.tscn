@@ -1,10 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://cd1rikypwdp2o"]
+[gd_scene load_steps=15 format=3 uid="uid://cd1rikypwdp2o"]
 
 [ext_resource type="Texture2D" uid="uid://lf7knf1tqtai" path="res://object_scenes/entity/enemy_scenes/snowman/sprite.png" id="1_8f5el"]
 [ext_resource type="Script" path="res://object_scenes/entity/enemy_scenes/snowman/snowman.gd" id="1_oxbvs"]
 [ext_resource type="PackedScene" uid="uid://c05kukkqfrg40" path="res://object_scenes/entity/components/hitbox.tscn" id="3_scfbq"]
 [ext_resource type="Script" path="res://object_scenes/entity/components/health_component.gd" id="4_mr5eo"]
 [ext_resource type="PackedScene" uid="uid://8jw6pruiu3cf" path="res://object_scenes/entity/components/hurtbox.tscn" id="5_413e3"]
+[ext_resource type="Script" path="res://object_scenes/specialResource/lootTables/LootTable.gd" id="5_qd81y"]
+[ext_resource type="Script" path="res://object_scenes/specialResource/lootTables/RollableItem.gd" id="6_dvvqo"]
 [ext_resource type="PackedScene" uid="uid://84sah16y8gwq" path="res://object_scenes/entity/components/delete_me_outside_of_chunk.tscn" id="6_hqw2f"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fmili"]
@@ -12,6 +14,26 @@ radius = 3.9
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_88fnb"]
 size = Vector2(8, 12)
+
+[sub_resource type="Resource" id="Resource_l3r6g"]
+script = ExtResource("6_dvvqo")
+id = 85
+amountMin = 1
+amountMax = 3
+weight = 1000
+
+[sub_resource type="Resource" id="Resource_6k76s"]
+script = ExtResource("6_dvvqo")
+id = 113
+amountMin = 2
+amountMax = 2
+weight = 10
+
+[sub_resource type="Resource" id="Resource_6hfcb"]
+script = ExtResource("5_qd81y")
+rollType = 2
+rollCount = 1
+table = Array[ExtResource("6_dvvqo")]([SubResource("Resource_l3r6g"), SubResource("Resource_6k76s")])
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_21xya"]
 radius = 5.0
@@ -45,6 +67,7 @@ script = ExtResource("4_mr5eo")
 maxHealth = 25
 knockbackResist = 1.2
 defense = 8
+loottable = SubResource("Resource_6hfcb")
 moneyToDrop = 15
 
 [node name="Hurtbox" parent="." instance=ExtResource("5_413e3")]

@@ -10,6 +10,7 @@ rateInSeconds = 0.8
 amount = 1
 displayName = "Poisoned"
 icon = ExtResource("1_lwdml")
+description = "man..."
 dyeColor = Color(0.54902, 0.215686, 1, 1)
 particle = ExtResource("1_2q6v8")
 incompatibleEffects = Array[String]([])
