@@ -5,10 +5,18 @@ var tick = 0
 
 var text :String= ""
 
+var money :int = -1
+
 func _ready():
 	rotation = GlobalRef.camera.rotation
 	
 	$Label.text = text
+	
+	if money > 0:
+		$Label.text = "+$" + str(money)
+		modulate = Color.DARK_TURQUOISE
+		modulate.a = 0.5
+	
 	velocity = Vector2(1,0).rotated(randf_range(-PI,PI))
 	position += Vector2(0,-26).rotated(rotation)
 	velocity.y = abs(velocity.y) * -2.5

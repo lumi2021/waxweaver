@@ -1,0 +1,110 @@
+[gd_scene load_steps=13 format=3 uid="uid://cblyu3va6f7nb"]
+
+[ext_resource type="Texture2D" uid="uid://oog0o4drq8i2" path="res://object_scenes/entity/enemy_scenes/bosses/finalBoss/placeholder.png" id="1_7t0sj"]
+[ext_resource type="Script" path="res://object_scenes/entity/enemy_scenes/bosses/finalBoss/finalboss.gd" id="1_corla"]
+[ext_resource type="Script" path="res://object_scenes/entity/enemy_scenes/bosses/finalBoss/stateMachine.gd" id="2_vqqcn"]
+[ext_resource type="PackedScene" uid="uid://meikam2oyy13" path="res://object_scenes/entity/components/health_component.tscn" id="3_5f3wk"]
+[ext_resource type="Texture2D" uid="uid://bhb8m7cw81do1" path="res://object_scenes/entity/enemy_scenes/bosses/finalBoss/wing.png" id="4_5wiyy"]
+[ext_resource type="Texture2D" uid="uid://dwn0y416j0nd3" path="res://object_scenes/entity/enemy_scenes/bosses/finalBoss/wing2.png" id="5_7ww4e"]
+[ext_resource type="PackedScene" uid="uid://c05kukkqfrg40" path="res://object_scenes/entity/components/hitbox.tscn" id="5_jxmok"]
+[ext_resource type="Texture2D" uid="uid://dv1jkplg7pqxa" path="res://object_scenes/entity/enemy_scenes/bosses/finalBoss/pupil.png" id="5_re03b"]
+[ext_resource type="PackedScene" uid="uid://8jw6pruiu3cf" path="res://object_scenes/entity/components/hurtbox.tscn" id="6_qbeg4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ka7pc"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0w4o5"]
+radius = 17.0294
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8q0by"]
+radius = 9.0
+
+[node name="FINALBOSS" type="CharacterBody2D" node_paths=PackedStringArray("healthComp")]
+collision_layer = 128
+collision_mask = 0
+script = ExtResource("1_corla")
+healthComp = NodePath("HealthComponent")
+
+[node name="stateMachine" type="Node" parent="."]
+script = ExtResource("2_vqqcn")
+
+[node name="HealthComponent" parent="." instance=ExtResource("3_5f3wk")]
+maxHealth = 5000
+knockbackResist = 0.1
+defense = 12
+moneyToDrop = 2500
+statusImmunities = Array[String](["confused"])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ka7pc")
+
+[node name="axis" type="Node2D" parent="."]
+
+[node name="fuck" type="Node2D" parent="axis"]
+
+[node name="g" type="Node2D" parent="axis/fuck"]
+position = Vector2(-15, -14)
+
+[node name="g2" type="Node2D" parent="axis/fuck"]
+position = Vector2(15, -14)
+
+[node name="g3" type="Node2D" parent="axis/fuck"]
+position = Vector2(14, 15)
+
+[node name="g4" type="Node2D" parent="axis/fuck"]
+position = Vector2(-15, 15)
+
+[node name="Wing" type="Sprite2D" parent="axis"]
+position = Vector2(0, -8)
+texture = ExtResource("4_5wiyy")
+offset = Vector2(-57, 25)
+
+[node name="Wing2" type="Sprite2D" parent="axis"]
+position = Vector2(0, -8)
+texture = ExtResource("4_5wiyy")
+offset = Vector2(57, 25)
+flip_h = true
+
+[node name="Wing3" type="Sprite2D" parent="axis"]
+position = Vector2(-4, 11)
+texture = ExtResource("5_7ww4e")
+offset = Vector2(-16, 35)
+
+[node name="Wing4" type="Sprite2D" parent="axis"]
+position = Vector2(4, 11)
+texture = ExtResource("5_7ww4e")
+offset = Vector2(16, 35)
+flip_h = true
+
+[node name="Hitbox" parent="axis" node_paths=PackedStringArray("healthComponent", "colliderShape") instance=ExtResource("5_jxmok")]
+healthComponent = NodePath("../../HealthComponent")
+colliderShape = NodePath("CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="axis/Hitbox"]
+shape = SubResource("CircleShape2D_0w4o5")
+
+[node name="dup" type="Sprite2D" parent="axis"]
+clip_children = 2
+texture = ExtResource("1_7t0sj")
+
+[node name="dupp" type="Sprite2D" parent="axis/dup"]
+texture = ExtResource("5_re03b")
+hframes = 6
+
+[node name="EyeWhites" type="Sprite2D" parent="axis"]
+clip_children = 2
+texture = ExtResource("1_7t0sj")
+
+[node name="Pupil" type="Sprite2D" parent="axis/EyeWhites"]
+texture = ExtResource("5_re03b")
+hframes = 6
+
+[node name="Hurtbox" parent="." instance=ExtResource("6_qbeg4")]
+damage = 10
+knockback = 1.2
+enemyName = "weaver"
+ignoreDefense = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("CircleShape2D_8q0by")
+
+[node name="playerScan" type="RayCast2D" parent="."]

@@ -9,10 +9,13 @@ var state :int=0
 # 5: web disclaimer
 # 6: controls + tutorial
 # 7: credits
+# 8: medals
 
 @onready var selectedslot = $savefiles/ScrollContainer/VBoxContainer/saveslot
 
 var waitUntilMusic :int= 0
+
+var holdToClearSave :int = 0
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
@@ -36,6 +39,16 @@ func _process(delta):
 	if waitUntilMusic == 1200:
 		$Music.play()
 	waitUntilMusic += 1
+	if Input.is_action_pressed("pause"):
+		holdToClearSave += 1
+		if holdToClearSave > 600:
+			print("reset all medal progress. you now have no medals!")
+			holdToClearSave = 0
+			Saving.clearSave("medals")
+			AchievementData.unlockedmedals = {}
+			get_tree().reload_current_scene()
+	else:
+		holdToClearSave = 0
 	
 func enterState(newstate):
 	match newstate:
@@ -67,6 +80,9 @@ func enterState(newstate):
 		7:
 			$mainButtons.hide()
 			$credits.show()
+		8:
+			$mainButtons.hide()
+			$achievementsMenu.show()
 	
 	$bg/AnimatedSprite2D.visible = newstate == 0
 	$bg/AnimatedSprite2D2.visible = newstate == 0
@@ -160,4 +176,13 @@ func _on_credits_pressed():
 
 func _on_gobackcredits_pressed():
 	$credits.hide()
+	enterState(0)
+
+
+func _on_medals_pressed():
+	enterState(8)
+
+
+func _on_achievements_menu_menu_closed():
+	$achievementsMenu.hide()
 	enterState(0)

@@ -35,6 +35,7 @@ func generateNewSystem():
 	
 	GlobalRef.savedHealth = 100
 	PlayerData.money = 0
+	GlobalRef.cheatsEnabled = false
 	
 	for planet in cosmicBodyContainer.get_children():
 		planet.queue_free()
@@ -245,12 +246,30 @@ func _process(delta):
 			print("Game autosaved!")
 	
 	if Input.is_action_just_pressed("pause"):
+		if GlobalRef.hotbar.cheatOrigin.visible:
+			return
 		get_tree().paused = !get_tree().paused
-		
 		$PauseMenu.visible = get_tree().paused
 		$PauseMenu/optionsMenu.hide()
+		$PauseMenu/achievementsMenu.hide()
 
 	ticks += 1
 	if ticks % 300 == 0:
 		if GlobalRef.player.position.length() < 64:
 			AchievementData.unlockMedal("findCore")
+	
+	if Input.is_action_just_pressed("fullscreen"):
+		fullscreentoggle()
+	
+func fullscreentoggle():
+	if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+		
+	elif DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+
+	elif DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_MAXIMIZED:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+	else:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
+	

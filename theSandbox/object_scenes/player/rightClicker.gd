@@ -21,7 +21,7 @@ func _process(delta):
 	if tile == null:
 		return
 	var blockType = editBody.DATAC.getTileData(tile.x,tile.y)
-	$RightClick.visible = [19,22,23,25,33,34,47,48,55,62,63,97,98,99,100,101,102,103,104,123,134,139].has(blockType)
+	$RightClick.visible = [19,22,23,25,33,34,47,48,55,62,63,97,98,99,100,101,102,103,104,123,126,134,139].has(blockType)
 	
 func onRightClick():
 	
@@ -234,7 +234,7 @@ func onRightClick():
 			if plant > -1:
 				editBody.DATAC.setInfoData(tile.x, tile.y, plant)
 				editBody.editTiles( {Vector2i(tile.x, tile.y):123} )
-		126:
+		126: # grandfather clock
 			var time = GlobalRef.currentTime + 0.2916
 			if time > 1.0:
 				time -= 1.0
@@ -257,6 +257,9 @@ func onRightClick():
 			editBody.editTiles( {Vector2i(tile.x, tile.y):133} )
 		
 		139: # shop computer
+			
+			PlayerData.closeChest()
+			
 			PlayerData.emit_signal("forceOpenInventory")
 			var p = editBody.to_global(editBody.tileToPos(tile))
 			SoundManager.playSound("blocks/computer",p,0.8)

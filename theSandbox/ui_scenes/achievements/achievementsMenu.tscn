@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://d32dl3s4offu"]
+[gd_scene load_steps=10 format=3 uid="uid://d32dl3s4offu"]
 
 [ext_resource type="Texture2D" uid="uid://csibj827o7h0h" path="res://ui_scenes/mainMenu/saveSlot/rect.png" id="1_1s8nc"]
 [ext_resource type="Script" path="res://ui_scenes/achievements/achievementsMenu.gd" id="1_88024"]
+[ext_resource type="PackedScene" uid="uid://d0j06gpiq8jxo" path="res://ui_scenes/mainMenu/textbutton/text_button.tscn" id="3_epdkn"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ja3aa"]
 font_size = 32
@@ -78,7 +79,7 @@ offset_left = 15.0
 offset_top = 18.0
 offset_right = 384.0
 offset_bottom = 54.0
-text = "achievements"
+text = "medals !"
 label_settings = SubResource("LabelSettings_ja3aa")
 horizontal_alignment = 1
 
@@ -93,3 +94,12 @@ vertical_scroll_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
 layout_mode = 2
+
+[node name="textButton" parent="." instance=ExtResource("3_epdkn")]
+offset_left = 330.0
+offset_top = 26.0
+offset_right = 357.0
+offset_bottom = 43.0
+buttonText = "back"
+
+[connection signal="pressed" from="textButton" to="." method="_on_text_button_pressed"]

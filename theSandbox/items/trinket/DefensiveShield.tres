@@ -12,7 +12,7 @@ addSpeed = 0.0
 addJump = 0.0
 addSwim = 0.0
 extraJumps = 0
-addDefense = 5
+addDefense = 2
 addMeleeDamage = 0.0
 addRangedDamage = 0.0
 addHealingMultiplier = 0.0
@@ -24,7 +24,7 @@ statusImmunities = Array[String]([])
 itemName = "Defensive Shield"
 subtext = ""
 desc = "+10% knockback
-+5 defense"
++2 defense"
 texture = ExtResource("2_e3818")
 maxStackSize = 1
 clickToUse = false

@@ -22,6 +22,7 @@ func onFirstUse():
 	$holder/Hurtbox/CollisionShape2D.disabled = false
 
 func onUsing(delta):
+	visible = true
 	rotOrigin.rotation_degrees += rotSpeed * delta * 60.0
 	if rotOrigin.rotation_degrees > 50:
 		if !clickUsage:

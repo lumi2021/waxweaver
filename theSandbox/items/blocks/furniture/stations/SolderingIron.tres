@@ -7,7 +7,7 @@
 script = ExtResource("1_x1q3d")
 blockID = 94
 size = Vector2i(1, 1)
-grounded = true
+grounded = false
 needsWalls = false
 itemName = "Soldering Iron"
 subtext = ""

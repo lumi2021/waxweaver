@@ -44,7 +44,9 @@ var motd :Array[String]= [ # messages to display when opening the window
 	"timmy christmas 2",
 	"have you seen the movie tron? I haven't",
 	"a chair ! its MINE !",
-	"shoutout fallenchungus"
+	"shoutout fallenchungus",
+	"fuck my stupid chud life",
+	"basically, this shit is yummy to me",
 ]
 
 

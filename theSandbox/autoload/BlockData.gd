@@ -67,6 +67,8 @@ func spawnGroundItem(tilex:int,tiley:int,id:int,planet,oldBlock:int=0):
 		
 		17: # is wheat seed
 			if randi() % 6 != 0:
+				if randi() % 6 == 0:
+					spawnItemRaw(tilex,tiley,148,planet)
 				return
 			
 		19: # is chair
@@ -109,6 +111,12 @@ func spawnGroundItem(tilex:int,tiley:int,id:int,planet,oldBlock:int=0):
 			id = 3177 + planet.DATAC.getInfoData(tilex,tiley)
 		142: # is shingle
 			id = 6230 + planet.DATAC.getInfoData(tilex,tiley)
+		148: # lettuce
+			if planet.DATAC.getInfoData(tilex,tiley) >= 3:
+				spawnItemRaw(tilex,tiley,3189,planet)
+				spawnItemRaw(tilex,tiley,148,planet)
+				spawnItemRaw(tilex,tiley,148,planet)
+				AchievementData.unlockMedal("harvestCrop")
 	
 	var ins = groundItemScene.instantiate()
 	ins.itemID = id

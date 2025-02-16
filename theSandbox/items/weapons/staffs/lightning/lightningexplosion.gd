@@ -4,7 +4,7 @@ var old :int = 0
 
 func _ready():
 	$CPUParticles2D.emitting = true
-	SoundManager.playSound("items/lightning",global_position,1.0,0.02)
+	SoundManager.playSound("items/lightning",global_position,0.75,0.02)
 
 func _process(delta):
 	old += 1

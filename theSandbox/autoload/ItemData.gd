@@ -135,6 +135,7 @@ var data = {
 	-144:load("res://items/walls/wallpaper/GreenWallpaper.tres"),
 	-145:load("res://items/walls/wallpaper/YellowWallpaper.tres"),
 	-146:load("res://items/walls/wallpaper/GrandmaWallpaper.tres"),
+	148:load("res://items/blocks/foliage/crops/LettuceSeed.tres"),
 	
 	########## item ids ##################
 	3000:load("res://items/tools/flimsy/FlimsySword.tres"), # flimsy tools
@@ -357,6 +358,13 @@ var data = {
 	3186:load("res://items/weapons/splashPotion/PoisonSplash.tres"),
 	3187:load("res://items/weapons/splashPotion/BurnSplash.tres"),
 	3188:load("res://items/weapons/splashPotion/FragileSplash.tres"),
+	
+	3189:load("res://items/blocks/foliage/crops/LettuceItem.tres"),
+	3190:load("res://items/food/PotatoBread.tres"),
+	3191:load("res://items/food/FishSandwich.tres"),
+	
+	3192:load("res://items/trinket/Medkit.tres"),
+	3193:load("res://items/trinket/Drill.tres"),
 	
 	# chairs 6000 - 6049
 	6000:load("res://items/blocks/furniture/chairs/WoodenChair.tres"),

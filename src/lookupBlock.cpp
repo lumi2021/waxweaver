@@ -173,6 +173,7 @@ LOOKUPBLOCK::LOOKUPBLOCK() {
     penis[145] = new BLOCKWALLPAPERYELLOW();
     penis[146] = new BLOCKWALLPAPERGMA();
     penis[147] = new BLOCKMINIBOSSSPAWNER();
+    penis[148] = new BLOCKCROPLETTUCE();
 
     for(BLOCK *i : penis){ // i increase automatically !
         i->setLookUp(this);

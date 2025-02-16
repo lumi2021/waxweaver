@@ -13,7 +13,7 @@ script = ExtResource("4_lpus1")
 id = 3125
 amountMin = 1
 amountMax = 1
-weight = 250
+weight = 333
 
 [sub_resource type="Resource" id="Resource_jmug5"]
 script = ExtResource("3_wpxss")

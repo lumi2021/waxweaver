@@ -16,6 +16,7 @@ func _on_unpause_pressed():
 	get_tree().paused = false
 	hide()
 	$optionsMenu.hide()
+	$achievementsMenu.hide()
 
 
 func _on_saveandquit_pressed():
@@ -28,3 +29,9 @@ func _on_saveandquit_pressed():
 
 func _on_options_pressed():
 	$optionsMenu.show()
+
+
+func _on_medals_pressed():
+	$achievementsMenu.clear()
+	$achievementsMenu.initializeAchievements()
+	$achievementsMenu.show()

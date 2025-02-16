@@ -1,0 +1,94 @@
+[gd_scene load_steps=10 format=3 uid="uid://caajj4s02m2dw"]
+
+[ext_resource type="Script" path="res://object_scenes/entity/enemy_scenes/bosses/finalBoss/bossStatusProjectile.gd" id="1_ekqux"]
+[ext_resource type="Texture2D" uid="uid://mf6pwpiprm5c" path="res://items/material/string.png" id="2_mkea8"]
+[ext_resource type="PackedScene" uid="uid://8jw6pruiu3cf" path="res://object_scenes/entity/components/hurtbox.tscn" id="3_3ybu6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nsvc5"]
+radius = 1.0
+
+[sub_resource type="Curve" id="Curve_lkqdu"]
+max_value = 2.0
+_data = [Vector2(0, 1.3716), 0.0, 0.0, 0, 0, Vector2(1, 0), -0.995804, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_rmdkf"]
+offsets = PackedFloat32Array(0, 0.168033, 1)
+colors = PackedColorArray(1, 0.55, 0.64, 1, 1, 0.188235, 0.345098, 1, 0.976471, 0, 1, 1)
+
+[sub_resource type="Curve" id="Curve_edi33"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.34953, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_typ5s"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.5381, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jgjfv"]
+radius = 5.0
+
+[node name="bossStatus" type="CharacterBody2D"]
+collision_layer = 128
+script = ExtResource("1_ekqux")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_nsvc5")
+
+[node name="flame" type="CPUParticles2D" parent="."]
+amount = 16
+lifetime = 0.2
+texture = ExtResource("2_mkea8")
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_max = 2.55
+angular_velocity_min = -720.0
+angular_velocity_max = 720.0
+orbit_velocity_min = -0.2
+orbit_velocity_max = 0.2
+angle_min = -720.0
+angle_max = 720.0
+scale_amount_curve = SubResource("Curve_lkqdu")
+color_ramp = SubResource("Gradient_rmdkf")
+
+[node name="end" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 16
+lifetime = 0.6
+one_shot = true
+explosiveness = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_max = 43.0
+damping_min = 27.065
+damping_max = 27.065
+angle_min = -720.0
+angle_max = 720.0
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_edi33")
+
+[node name="start" type="CPUParticles2D" parent="."]
+emitting = false
+lifetime = 1.2
+one_shot = true
+explosiveness = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 24.85
+initial_velocity_max = 48.75
+radial_accel_min = -58.0
+radial_accel_max = -58.0
+angle_min = -720.0
+angle_max = 720.0
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_typ5s")
+
+[node name="Hurtbox" parent="." instance=ExtResource("3_3ybu6")]
+damage = 38
+enemyName = "weaver bullet"
+damageType = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("CircleShape2D_jgjfv")
+
+[connection signal="finished" from="end" to="." method="_on_end_finished"]
+[connection signal="hitsomething" from="Hurtbox" to="." method="_on_hurtbox_hitsomething"]

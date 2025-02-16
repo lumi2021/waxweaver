@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_3tdcg")
 healingAmount = 20
-eatTime = 4.0
+eatTime = 0.5
 particleColor = Color(0.870588, 0.627451, 0.266667, 1)
 statusInflictors = Array[Resource("res://object_scenes/specialResource/statusEffects/StatusInflictor.gd")]([])
 itemName = "Egg Sandwich"

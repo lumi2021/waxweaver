@@ -38,7 +38,7 @@ var deals = [
 	{"id":3078,"price":50,"stock":1},
 	{"id":3095,"price":999,"stock":5},
 	{"id":3124,"price":200,"stock":1},
-	{"id":3125,"price":40,"stock":1},
+	{"id":3125,"price":40,"stock":10},
 	{"id":3135,"price":20,"stock":99},
 	{"id":3169,"price":15,"stock":99},
 	{"id":95,"price":30,"stock":3},
@@ -54,6 +54,7 @@ var deals = [
 	{"id":107,"price":30,"stock":3},
 	{"id":91,"price":15,"stock":10},
 	{"id":3076,"price":10,"stock":1},
+	{"id":30,"price":20,"stock":20},
 	
 	{"id":6230,"price":3,"stock":99}, # shingles
 	{"id":6231,"price":3,"stock":99},

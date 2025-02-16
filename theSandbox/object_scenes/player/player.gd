@@ -296,6 +296,7 @@ func normalMovement(delta):
 		newVel.x = 1800.0 * dir
 		canDash = false
 		dashDelay = 30
+		beingKnockedback = false
 	if dashDelay > 0:
 		dashDelay -= 1
 		dashingParticle()
@@ -460,6 +461,9 @@ func WATERJUMPCAMERALETSGO(body,vel,rot,onFloor,delta):
 			var fart = load("res://object_scenes/particles/bubblewand/bubblepop.tscn").instantiate()
 			fart.position = position
 			get_parent().add_child(fart)
+	
+	if GlobalRef.playerGravityOverride != -1:
+		GlobalRef.camera.rotation = lerp_angle(GlobalRef.camera.rotation,rot,1.0-pow(2.0,(-delta/0.06)))
 	
 	return vel
 
@@ -1245,6 +1249,7 @@ func dieAndRespawn():
 	respawn()
 	
 	# reset variables
+	healthComponent.clearAllStatus()
 	healthComponent.heal( int(healthComponent.maxHealth * 0.6) )
 	rotated = 0
 	sprite.visible = true

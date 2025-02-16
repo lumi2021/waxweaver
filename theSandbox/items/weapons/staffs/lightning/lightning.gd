@@ -6,13 +6,18 @@ extends Enemy
 @onready var s = preload("res://items/weapons/staffs/lightning/lightningexplosion.tscn")
 
 var framesAlive :int = 0
+
+var shotByPlayer :bool = true
+
 func _ready():
 	rotation = velocity.angle()
-	position = GlobalRef.player.position + Vector2(0,-2).rotated(getWorldRot(self))
+	if shotByPlayer:
+		position = GlobalRef.player.position + Vector2(0,-2).rotated(getWorldRot(self))
 
 func zap():
 	
-	position = GlobalRef.player.position + Vector2(0,-2).rotated(getWorldRot(self))
+	if shotByPlayer:
+		position = GlobalRef.player.position + Vector2(0,-2).rotated(getWorldRot(self))
 	
 	var dis :int= 160
 	

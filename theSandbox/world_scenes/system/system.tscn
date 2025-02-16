@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dpnd8ekgo4bj3"]
+[gd_scene load_steps=11 format=3 uid="uid://dpnd8ekgo4bj3"]
 
 [ext_resource type="Script" path="res://world_scenes/system/system.gd" id="1_vw61b"]
 [ext_resource type="PackedScene" uid="uid://d083d45d28pl3" path="res://ui_scenes/camera/game_camera.tscn" id="2_ic1ng"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://d0j06gpiq8jxo" path="res://ui_scenes/mainMenu/textbutton/text_button.tscn" id="5_0l5e1"]
 [ext_resource type="Texture2D" uid="uid://celgr5v0qm8m3" path="res://ui_scenes/mouseCursor/mouseIcon.png" id="5_8xxx0"]
 [ext_resource type="PackedScene" uid="uid://crkseldnn7m4" path="res://ui_scenes/options/options_menu.tscn" id="6_4o6g1"]
+[ext_resource type="PackedScene" uid="uid://d32dl3s4offu" path="res://ui_scenes/achievements/achievementsMenu.tscn" id="7_s47mu"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_nswgb"]
 font_size = 32
@@ -101,16 +102,23 @@ buttonText = "save game"
 
 [node name="options" parent="PauseMenu" instance=ExtResource("5_0l5e1")]
 offset_left = 11.0
-offset_top = 128.0
+offset_top = 156.0
 offset_right = 58.0
-offset_bottom = 145.0
+offset_bottom = 173.0
 buttonText = "options"
+
+[node name="medals" parent="PauseMenu" instance=ExtResource("5_0l5e1")]
+offset_left = 11.0
+offset_top = 128.0
+offset_right = 55.0
+offset_bottom = 145.0
+buttonText = "medals"
 
 [node name="saveandquit" parent="PauseMenu" instance=ExtResource("5_0l5e1")]
 offset_left = 11.0
-offset_top = 156.0
+offset_top = 185.0
 offset_right = 100.0
-offset_bottom = 173.0
+offset_bottom = 202.0
 buttonText = "save and quit"
 
 [node name="unpause" parent="PauseMenu" instance=ExtResource("5_0l5e1")]
@@ -124,6 +132,9 @@ buttonText = "back to game"
 visible = false
 position = Vector2(194, 0)
 
+[node name="achievementsMenu" parent="PauseMenu" instance=ExtResource("7_s47mu")]
+visible = false
+
 [node name="MouseIcon" type="Sprite2D" parent="PauseMenu"]
 position = Vector2(251, 192)
 texture = ExtResource("5_8xxx0")
@@ -131,5 +142,6 @@ offset = Vector2(4, 4)
 
 [connection signal="pressed" from="PauseMenu/savegame" to="PauseMenu" method="_on_savegame_pressed"]
 [connection signal="pressed" from="PauseMenu/options" to="PauseMenu" method="_on_options_pressed"]
+[connection signal="pressed" from="PauseMenu/medals" to="PauseMenu" method="_on_medals_pressed"]
 [connection signal="pressed" from="PauseMenu/saveandquit" to="PauseMenu" method="_on_saveandquit_pressed"]
 [connection signal="pressed" from="PauseMenu/unpause" to="PauseMenu" method="_on_unpause_pressed"]

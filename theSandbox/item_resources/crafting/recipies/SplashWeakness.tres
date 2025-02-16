@@ -15,7 +15,7 @@ amount = 10
 
 [resource]
 script = ExtResource("1_gpjwh")
-itemToCraft = 2188
+itemToCraft = 3188
 amountToCraft = 2
 ingredients = Array[ExtResource("1_qg4xt")]([SubResource("Resource_x1ljc"), SubResource("Resource_3gxvg")])
 requiresStation = true

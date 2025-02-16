@@ -164,6 +164,7 @@
 #include "blockWallpaperYellow.h" // id 145
 #include "blockWallpaperGMA.h" // id 146
 #include "blockMiniBossSpawner.h" // id 147
+#include "blockCropLettuce.h" // id 148
 
 // adding a new block? make sure you increment the PENIS array !
 
@@ -181,7 +182,7 @@ public:
 	
 	Array allBlocks;
 
-	BLOCK *penis[148]; // must be largest id + 1
+	BLOCK *penis[149]; // must be largest id + 1
 
 	LOOKUPBLOCK();
 	~LOOKUPBLOCK();

@@ -139,6 +139,14 @@ func _ready():
 	if data != null:
 		unlockedmedals = Saving.read_save("medals")
 	
+	for medal in unlockedmedals.keys():
+		print("unlocking medal on ng: " + str(medal))
+		Ngio.request("Medal.unlock", {"id": medalDictionary[medal]["ngMedal"]})
+		
+		# here we'll make sure players get medals they unlocked incase
+		# of failures on ng servers, which is very possible
+		# given how long this game is
+		
 	add_child(canvas)
 	
 func unlockMedal(medalName:String):
@@ -148,8 +156,9 @@ func unlockMedal(medalName:String):
 		return
 	
 	if GlobalRef.cheatsEnabled:
-		print("Tried to give achievement, but this world has cheats enabled!")
-	
+		print("Tried to give achievement, but this world has cheats enabled!: " + medalName)
+		return
+		
 	var medal = medalDictionary[medalName]
 	Ngio.request("Medal.unlock", {"id": medal["ngMedal"]})
 	# request ng to unlock medal regardless if medal is unlocked locally

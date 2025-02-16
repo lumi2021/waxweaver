@@ -18,6 +18,8 @@ public:
 	BLOCKTROPHY();
 	~BLOCKTROPHY();
 
+	Dictionary onTick(int x, int y, PLANETDATA *planet, int dir);
+
 };
 
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://bx0771l28p0cu"]
+[gd_scene load_steps=39 format=3 uid="uid://bx0771l28p0cu"]
 
 [ext_resource type="Script" path="res://ui_scenes/mainMenu/main_menu.gd" id="1_y2dfr"]
 [ext_resource type="Texture2D" uid="uid://16yss77fimhy" path="res://ui_scenes/mainMenu/bg.png" id="2_2i3we"]
@@ -16,6 +16,7 @@
 [ext_resource type="AudioStream" uid="uid://ce5rfwabi53cj" path="res://sound/ambient/softwind.ogg" id="11_ny3be"]
 [ext_resource type="PackedScene" uid="uid://crkseldnn7m4" path="res://ui_scenes/options/options_menu.tscn" id="12_oduev"]
 [ext_resource type="Texture2D" uid="uid://dmywa8ylssaw6" path="res://ui_scenes/mainMenu/tutorialControls.png" id="14_bv80d"]
+[ext_resource type="PackedScene" uid="uid://d32dl3s4offu" path="res://ui_scenes/achievements/achievementsMenu.tscn" id="14_pgst0"]
 [ext_resource type="Texture2D" uid="uid://dlexgb4yfmn38" path="res://items/food/birdMeat.png" id="15_lq83u"]
 [ext_resource type="Texture2D" uid="uid://6mmultwm20pw" path="res://ui_scenes/mainMenu/creditIcons.png" id="16_avgr1"]
 [ext_resource type="Texture2D" uid="uid://csibj827o7h0h" path="res://ui_scenes/mainMenu/saveSlot/rect.png" id="16_kilqg"]
@@ -215,49 +216,57 @@ offset_bottom = 299.0
 text = "v0.0.0"
 
 [node name="Logo" type="Sprite2D" parent="mainButtons"]
-position = Vector2(243, 47)
+position = Vector2(243, 45)
 texture = ExtResource("6_nmr1r")
 
-[node name="play" parent="mainButtons" instance=ExtResource("6_amthu")]
+[node name="buttons" type="Node2D" parent="mainButtons"]
+position = Vector2(-3, 101)
+
+[node name="play" parent="mainButtons/buttons" instance=ExtResource("6_amthu")]
 offset_left = 359.0
-offset_top = 150.0
 offset_right = 386.0
-offset_bottom = 167.0
 buttonText = "play"
 
-[node name="tutorial" parent="mainButtons" instance=ExtResource("6_amthu")]
-offset_left = 336.0
-offset_top = 175.0
+[node name="medals" parent="mainButtons/buttons" instance=ExtResource("6_amthu")]
+offset_left = 342.0
+offset_top = 28.0
 offset_right = 386.0
-offset_bottom = 192.0
+offset_bottom = 45.0
+buttonText = "medals"
+
+[node name="tutorial" parent="mainButtons/buttons" instance=ExtResource("6_amthu")]
+offset_left = 336.0
+offset_top = 56.0
+offset_right = 386.0
+offset_bottom = 73.0
 buttonText = "tutorial"
 
-[node name="options" parent="mainButtons" instance=ExtResource("6_amthu")]
+[node name="options" parent="mainButtons/buttons" instance=ExtResource("6_amthu")]
 offset_left = 339.0
-offset_top = 199.0
+offset_top = 84.0
 offset_right = 386.0
-offset_bottom = 216.0
+offset_bottom = 101.0
 buttonText = "options"
 
-[node name="discord" parent="mainButtons" instance=ExtResource("6_amthu")]
+[node name="discord" parent="mainButtons/buttons" instance=ExtResource("6_amthu")]
 offset_left = 339.0
-offset_top = 225.0
+offset_top = 112.0
 offset_right = 386.0
-offset_bottom = 242.0
+offset_bottom = 129.0
 buttonText = "discord"
 
-[node name="credits" parent="mainButtons" instance=ExtResource("6_amthu")]
+[node name="credits" parent="mainButtons/buttons" instance=ExtResource("6_amthu")]
 offset_left = 341.0
-offset_top = 249.0
+offset_top = 140.0
 offset_right = 386.0
-offset_bottom = 266.0
+offset_bottom = 157.0
 buttonText = "credits"
 
-[node name="quit" parent="mainButtons" instance=ExtResource("6_amthu")]
+[node name="quit" parent="mainButtons/buttons" instance=ExtResource("6_amthu")]
 offset_left = 361.0
-offset_top = 271.0
+offset_top = 168.0
 offset_right = 386.0
-offset_bottom = 288.0
+offset_bottom = 185.0
 buttonText = "quit"
 
 [node name="savefiles" type="Node2D" parent="."]
@@ -423,6 +432,9 @@ buttonText = "no"
 [node name="optionsMenu" parent="." instance=ExtResource("12_oduev")]
 visible = false
 position = Vector2(98, 2)
+
+[node name="achievementsMenu" parent="." instance=ExtResource("14_pgst0")]
+visible = false
 
 [node name="disclaimer" type="Node2D" parent="."]
 visible = false
@@ -832,12 +844,13 @@ stream = ExtResource("9_ailx1")
 volume_db = -12.0
 bus = &"MUSIC"
 
-[connection signal="pressed" from="mainButtons/play" to="." method="_on_play_pressed"]
-[connection signal="pressed" from="mainButtons/tutorial" to="." method="_on_tutorial_pressed"]
-[connection signal="pressed" from="mainButtons/options" to="." method="_on_options_pressed"]
-[connection signal="pressed" from="mainButtons/discord" to="." method="_on_discord_pressed"]
-[connection signal="pressed" from="mainButtons/credits" to="." method="_on_credits_pressed"]
-[connection signal="pressed" from="mainButtons/quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="mainButtons/buttons/play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="mainButtons/buttons/medals" to="." method="_on_medals_pressed"]
+[connection signal="pressed" from="mainButtons/buttons/tutorial" to="." method="_on_tutorial_pressed"]
+[connection signal="pressed" from="mainButtons/buttons/options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="mainButtons/buttons/discord" to="." method="_on_discord_pressed"]
+[connection signal="pressed" from="mainButtons/buttons/credits" to="." method="_on_credits_pressed"]
+[connection signal="pressed" from="mainButtons/buttons/quit" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="savefiles/backSave" to="." method="_on_back_save_pressed"]
 [connection signal="pressed" from="savefiles/openDirectory" to="." method="_on_open_directory_pressed"]
 [connection signal="pressed" from="savefiles/reloadSaves" to="." method="_on_reload_saves_pressed"]
@@ -847,6 +860,7 @@ bus = &"MUSIC"
 [connection signal="pressed" from="areyousure/yes" to="." method="_on_yes_pressed"]
 [connection signal="pressed" from="areyousure/no" to="." method="_on_cancel_pressed"]
 [connection signal="menuClosed" from="optionsMenu" to="." method="_on_options_menu_menu_closed"]
+[connection signal="menuClosed" from="achievementsMenu" to="." method="_on_achievements_menu_menu_closed"]
 [connection signal="pressed" from="disclaimer/NinePatchRect/okayDisclaimer" to="." method="_on_okay_disclaimer_pressed"]
 [connection signal="pressed" from="tutorial/g/gobacktutorial" to="." method="_on_gobacktutorial_pressed"]
 [connection signal="pressed" from="credits/g/gobackcredits" to="." method="_on_gobackcredits_pressed"]

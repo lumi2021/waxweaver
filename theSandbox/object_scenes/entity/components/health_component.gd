@@ -276,3 +276,4 @@ func rewardMoney():
 		return
 	var moneyRand = moneyToDrop + randi_range(-2,2)
 	PlayerData.addMoney(max(moneyRand,1))
+	Indicators.moneyPopup(max(moneyRand,1),parent.global_position)

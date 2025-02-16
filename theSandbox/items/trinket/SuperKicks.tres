@@ -21,7 +21,7 @@ addAttackSpeed = 0.0
 addcriticalStrikeChance = 0
 miningMultiplier = 0.0
 statusImmunities = Array[String]([])
-itemName = ""
+itemName = "Super Kicks"
 subtext = ""
 desc = "15% Jump Increase
 15% Increased Move Speed
