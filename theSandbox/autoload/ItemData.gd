@@ -366,6 +366,9 @@ var data = {
 	3192:load("res://items/trinket/Medkit.tres"),
 	3193:load("res://items/trinket/Drill.tres"),
 	
+	3194:load("res://items/tools/bossSummoner/WeaverSpawner.tres"),
+	3195:load("res://items/upgrades/CandyEyeball.tres"),
+	
 	# chairs 6000 - 6049
 	6000:load("res://items/blocks/furniture/chairs/WoodenChair.tres"),
 	6001:load("res://items/blocks/furniture/chairs/Toilet.tres"),

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemSummoner" load_steps=3 format=3 uid="uid://vu2skwqw4i7l"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemSummoner.gd" id="1_a74ap"]
+[ext_resource type="Texture2D" uid="uid://y6shbxrg1ijl" path="res://items/tools/bossSummoner/finalBoss.png" id="2_mbo55"]
+
+[resource]
+script = ExtResource("1_a74ap")
+bossToSummon = "bossFinal"
+itemName = "Ancient Soul"
+subtext = ""
+desc = "Summons the weaver"
+texture = ExtResource("2_mbo55")
+maxStackSize = 99
+clickToUse = true
+infiniteReach = true

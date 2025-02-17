@@ -30,6 +30,11 @@ var focusedPosition :Vector2 = Vector2.ZERO
 @onready var pupilSprite = $axis/EyeWhites/Pupil
 @onready var whitesSprite = $axis/EyeWhites
 
+@onready var fade = $CanvasLayer/ColorRect
+@onready var hitboxcollider = $axis/Hitbox/CollisionShape2D
+
+@onready var bleed = $bleed
+
 var tick:int=0
 
 var eyeRotate :int= 1 
@@ -39,6 +44,9 @@ var split :int = 0
 var haventSeenPlayerTicks :int = 0
 
 var animTick :float = 0.0
+
+func _ready():
+	wingScale(0.01)
 
 func _process(delta):
 	tick += 1
@@ -73,7 +81,24 @@ func slowToStop(delta):
 func focusOnPosition(delta):
 	velocity = lerp(velocity,position.direction_to( focusedPosition ) * 200.0,0.04)
 	move_and_slide()
+
+func transforming(delta):
 	
+	var vel = getVelocity()
+	vel = Vector2(0,-8)
+	if $axis/Wing.scale.x > 0.5:
+		vel = Vector2(0,8)
+	setVelocity(vel)
+	
+	move_and_slide()
+
+func dead(delta):
+	
+	var vel = getVelocity()
+	vel = Vector2(0,-8)
+	setVelocity(vel)
+	
+	move_and_slide()
 
 func spawnBeam(dir:int,globalpos:Vector2):
 	var ins = beam.instantiate()
@@ -90,6 +115,7 @@ func spawnBullets(amount:int):
 		ins.position = position + dir
 		ins.velocity = dir * 2.5
 		get_parent().add_child(ins)
+		SoundManager.playSound("enemy/boss/final/projectile",ins.global_position,0.5, 0.1 )
 		await get_tree().create_timer(0.6).timeout
 
 func spawnStatusBullets(amount:int,delay:float):
@@ -100,6 +126,8 @@ func spawnStatusBullets(amount:int,delay:float):
 		ins.velocity = dir * 4.0
 		ins.planet = planet
 		get_parent().add_child(ins)
+		SoundManager.playSound("enemy/boss/final/projectile",ins.global_position,0.5, 0.1 )
+		
 		await get_tree().create_timer(delay).timeout
 
 func seperate(amount:int):
@@ -115,7 +143,7 @@ func seperate(amount:int):
 		$axis/dup.modulate.a = lerp($axis/dup.modulate.a,1.0,0.2)
 
 func eyeLookAtPlayer():
-	pupilSprite.position = lerp(pupilSprite.position,getExactDirToPlayer() * 6,0.08  )
+	pupilSprite.position = lerp(pupilSprite.position,getExactDirToPlayer().rotated(-getWorldRot(self)) * 6,0.08  )
 	pupilSprite.rotation = 0.0
 	pupilSprite.frame = 0
 	pupilSprite.scale = Vector2(1.0,1.0)
@@ -144,6 +172,13 @@ func eyeLookAtPlayerPhase2(delta):
 	pupilSprite.rotate(64.0*delta*eyeRotate)
 	pupilSprite.frame = 5
 	var r = randf_range(0.8,1.2)
+	pupilSprite.scale = Vector2(r,r)
+
+func eyeDead(delta):
+	pupilSprite.position = lerp(pupilSprite.position,Vector2.ZERO,0.1  )
+	pupilSprite.rotate(90.0*delta*eyeRotate)
+	pupilSprite.frame = 5
+	var r = randf_range(0.4,1.8)
 	pupilSprite.scale = Vector2(r,r)
 
 func syncDuplicate():
@@ -188,8 +223,7 @@ func moveBody(oldPos:Vector2,newPos:Vector2):
 		
 		var segmentSpace :Vector2= segment.global_position - previousSegment.global_position
 		var targetPosition = previousSegment.global_position + (segmentSpace.normalized() * 24)
-		
-		var angle = rad_to_deg(segmentSpace.angle())
+		var angle = rad_to_deg(segmentSpace.angle() - getWorldRot(self))
 		var min = -158
 		var max = -112
 		match i:
@@ -216,8 +250,23 @@ func moveBody(oldPos:Vector2,newPos:Vector2):
 
 func animateWings():
 	var s = sin(animTick * 8) * 0.1 
+	
+	if healthComp.alreadyDead:
+		s = 0.0
+	
 	$axis/Wing.rotation = $axis/fuck/g.position.angle() + s + PI
 	$axis/Wing2.rotation = $axis/fuck/g2.position.angle() + -s
 	
 	$axis/Wing3.rotation = $axis/fuck/g4.position.angle() + PI + (PI/2) + (-s*0.5)
 	$axis/Wing4.rotation = $axis/fuck/g3.position.angle() - (PI/2) + (s*0.5)
+
+func wingScale(amount:float):
+	var s = Vector2(amount,amount)
+	$axis/Wing.scale = s
+	$axis/Wing2.scale = s
+	$axis/Wing3.scale = s
+	$axis/Wing4.scale = s
+
+func disableEvil():
+	GlobalRef.bossEvil = false
+	GlobalRef.emit_signal("changeEvilState")

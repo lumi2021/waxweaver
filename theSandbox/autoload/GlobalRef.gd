@@ -1,7 +1,7 @@
 extends Node
 
 ########### GAME INFO #################
-var version :float = 23.2
+var version :float = 24
 
 
 #######################################
@@ -51,6 +51,8 @@ var claimedFinalBossPrize :bool = false
 signal newDay
 
 var playerGravityOverride :int = -1
+var bossEvil :bool = false
+signal changeEvilState
 
 func clearEverything():
 	player = null

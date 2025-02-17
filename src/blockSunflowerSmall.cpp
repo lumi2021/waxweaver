@@ -40,12 +40,17 @@ Dictionary BLOCKSUNFLOWERSMALL::onTick(int x, int y, PLANETDATA *planet, int dir
 
     if ( planet->getInfoData( x,y ) == 4 || planet->getInfoData( x,y ) == 6 ){
 
+        Dictionary empty = {};
         int size = (std::rand() % 10) + 7;
 
         for( int i = -1; i < size; i++ ){
 
             Vector2i rot = Vector2i(Vector2(0,-i).rotated(acos(0.0)*dir));
             changes[Vector2i(x+rot.x,y+rot.y)] = 56;
+            int p = planet->getTileData(x+rot.x,y+rot.y);
+
+            if (p > 1 && p != 60 && p != 59){ return empty; } // cancel if stem is blocked
+
             planet->setInfoData(x+rot.x,y+rot.y,0);
 
             if ( std::rand() % 3 == 0 ) {
@@ -53,9 +58,12 @@ Dictionary BLOCKSUNFLOWERSMALL::onTick(int x, int y, PLANETDATA *planet, int dir
 
                 planet->setInfoData(x+rot.x,y+rot.y,b);
                 Vector2i pee = Vector2i(Vector2( ( b * 2 ) - 3 ,0).rotated(acos(0.0)*dir));
-                changes[Vector2i(x+rot.x+pee.x,y+rot.y+pee.y)] = 58;
-                planet->setInfoData(x+rot.x+pee.x,y+rot.y+pee.y,b-1);
 
+                if (planet->getTileData(x+rot.x+pee.x, y+rot.y+pee.y) < 2){ // dont grow leaf unless there is space, but doesn't cancel everything
+
+                    changes[Vector2i(x+rot.x+pee.x,y+rot.y+pee.y)] = 58;
+                    planet->setInfoData(x+rot.x+pee.x,y+rot.y+pee.y,b-1);
+                }
 
             }
 
@@ -65,6 +73,9 @@ Dictionary BLOCKSUNFLOWERSMALL::onTick(int x, int y, PLANETDATA *planet, int dir
                     for(int yy = -1; yy <2; yy++){
                         Vector2i trueCoord = Vector2i(Vector2(xx,yy).rotated(acos(0.0)*dir).round() );
                         Vector2i balls = Vector2i( x+trueCoord.x+rot.x, y+trueCoord.y+rot.y );
+
+                        if (planet->getTileData(balls.x,balls.y) > 1){ return empty; } // cancel if flowerr is blocked
+
                         changes[Vector2i(balls.x,balls.y)] = 57;
                         planet->setInfoData(balls.x,balls.y,gay);
                         gay++;
@@ -76,7 +87,6 @@ Dictionary BLOCKSUNFLOWERSMALL::onTick(int x, int y, PLANETDATA *planet, int dir
 
 
         }
-
 
     }
 

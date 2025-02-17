@@ -82,6 +82,7 @@ var dashIdle :int = 0
 var canDash :bool = true
 var dashDelay :int = 0
 
+var holdingDirection :int = 0
 
 
 ######################################################################
@@ -265,12 +266,18 @@ func normalMovement(delta):
 	
 	if dir != 0:
 		
+		
 		if GlobalRef.playerSide == int(dir == 1):
-			if dashIdle < 10 and dashIdle > 0:
+			if dashIdle < 10 and dashIdle > 0 and holdingDirection < 10:
 				doubleTapped = true
 		dashIdle = -1
 		
 		GlobalRef.playerSide = int(dir == 1)
+		
+		holdingDirection += 1
+		
+		if Input.is_action_just_pressed("move_left") or Input.is_action_just_pressed("move_right"):
+			holdingDirection = 0
 		
 	else:
 		dashIdle += 1
@@ -293,7 +300,7 @@ func normalMovement(delta):
 		newVel.x = lerp(newVel.x, (dir * speed) + speedAdd, 1.0-pow(2.0,(-delta/0.04)))
 	
 	if doubleTapped and canDash and dashDelay <= 0 and Stats.hasProperty("dash"):
-		newVel.x = 1800.0 * dir
+		newVel.x = 1800.0 * dir * Stats.speedMult
 		canDash = false
 		dashDelay = 30
 		beingKnockedback = false
@@ -401,6 +408,7 @@ func WATERJUMPCAMERALETSGO(body,vel,rot,onFloor,delta):
 	var inWater = abs(body.DATAC.getWaterData(tile.x,tile.y)) > 0.3
 	if inWater: # code if currently in water
 		wasInWater = true
+		canDash = true
 		$Bubble.scale = Vector2.ZERO
 		hoverTicks = 0
 		jumpsRemaining = Stats.extraJumps
@@ -888,6 +896,7 @@ func attachToLadder(tile,editBody):
 	setAllPlayerFrames(9)
 	snapToPosition(tile,editBody)
 	wasInWater = false
+	beingKnockedback = false
 
 func snapToPositionChair(tile,editBody):
 	var info = editBody.DATAC.getInfoData(tile.x,tile.y)

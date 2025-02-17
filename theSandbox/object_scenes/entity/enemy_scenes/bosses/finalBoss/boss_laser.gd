@@ -9,7 +9,8 @@ var charged :bool = false
 @onready var ray = $RayCast2D
 func _ready():
 	ray.force_raycast_update()
-
+	$AudioStreamPlayer2D.play()
+	
 func _process(delta):
 	
 	if charged:
@@ -22,10 +23,12 @@ func _process(delta):
 			$Line2D.width = 2
 		else:
 			$Line2D.width = 0
-			
+		
+		$AudioStreamPlayer2D.pitch_scale += 0.01
+		
 		if aliveTime < 80:
 			charged = true
-			
+			$AudioStreamPlayer2D.pitch_scale = 2.0
 			$Hurtbox/CollisionShape2D.call_deferred("set_disabled",false)
 	
 	aliveTime -= 1

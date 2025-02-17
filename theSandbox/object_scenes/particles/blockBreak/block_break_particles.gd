@@ -36,6 +36,12 @@ func _ready():
 		var tex = ImageTexture.create_from_image(croppedImg)
 			
 		texture = tex
+	elif blockData["animated"]:
+		var img = texture.get_image()
+		var croppedImg :Image= img.get_region( Rect2i( Vector2i(0,0), Vector2i(8,8) ) )
+		var tex = ImageTexture.create_from_image(croppedImg)
+			
+		texture = tex
 	
 	one_shot = true
 	emitting = true

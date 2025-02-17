@@ -17,6 +17,7 @@ var health :int= 0
 
 @onready var parent = get_parent()
 @export var isPlayer :bool = false
+@export var deleteOnDeath :bool = true
 
 signal healthChanged
 signal smacked
@@ -155,7 +156,8 @@ func dealKnockback(amount:float,dir:Vector2,mult:float):
 	
 func die(source:String="idk"):
 	
-	SoundManager.playSound("enemy/killSquish",parent.global_position,0.5, 0.1 )
+	if deleteOnDeath:
+		SoundManager.playSound("enemy/killSquish",parent.global_position,0.5, 0.1 )
 	
 	emit_signal("died")
 	
@@ -172,13 +174,19 @@ func die(source:String="idk"):
 			GlobalRef.sendError("You lost " + str(moneyLost) + " monies")
 		return
 	
-	if !alreadyDead:
-		rollDrops()
-		rewardMoney()
+	if deleteOnDeath:
+		if !alreadyDead:
+			rollDrops()
+			rewardMoney()
 	
 	alreadyDead = true
 	
-	CreatureData.creatureDeleted(parent)
+	if deleteOnDeath:
+		CreatureData.creatureDeleted(parent)
+
+func forceDrops():
+	rollDrops()
+	rewardMoney()
 
 func getWorldPosition():
 	var angle1 = Vector2(1,1)

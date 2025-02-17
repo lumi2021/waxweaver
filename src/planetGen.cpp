@@ -502,7 +502,7 @@ void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
 
     // generate boss platform
     int sky = ((planetSize/2)-baseSurface);
-    int h = sky + ( std::rand() % (planetSize-sky) );
+    int h = (planetSize/2) + ( std::rand() % 300 ) - 150;
     int v = (noise->get_noise_1d(h*2.0) * 8.0) + sky - 2;
 
     // create rectangle

@@ -16,8 +16,6 @@ BLOCKTALLGRASS::BLOCKTALLGRASS() {
 
     breakTime = 0.0;
 
-    breakParticleID = 8;
-
     hasCollision = false;
 
     lightMultiplier = 1.0;

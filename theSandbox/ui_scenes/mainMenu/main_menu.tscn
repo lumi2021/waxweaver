@@ -515,7 +515,7 @@ layout_mode = 2
 color = Color(1, 1, 1, 0)
 
 [node name="TutorialControls" type="Sprite2D" parent="tutorial/g/g/g"]
-position = Vector2(120, 393)
+position = Vector2(119, 316)
 texture = ExtResource("14_bv80d")
 
 [node name="BirdMeat" type="Sprite2D" parent="tutorial/g/g/g"]
@@ -528,7 +528,7 @@ offset_left = 15.0
 offset_top = 638.0
 offset_right = 225.0
 offset_bottom = 711.0
-text = "the goal of the game is to find resources to become stronger, build a cool house, and to eventually beat the boss. There are lots of ways to go about it though, so experiment and have fun!"
+text = "the goal of the game is to find resources to become stronger, build a cool house, and to eventually beat the 3 bosses. There are lots of ways to go about it though, so experiment and have fun!"
 autowrap_mode = 2
 
 [node name="credits" type="Node2D" parent="."]
@@ -596,7 +596,7 @@ art"
 position = Vector2(0, 68)
 
 [node name="icon" type="Sprite2D" parent="credits/g/g/g/profile2"]
-position = Vector2(37, 43)
+position = Vector2(39, 41)
 texture = ExtResource("16_avgr1")
 hframes = 5
 vframes = 4
@@ -615,7 +615,7 @@ offset_left = 75.0
 offset_top = 32.0
 offset_right = 199.0
 offset_bottom = 67.0
-text = "additional art
+text = "vanity & armor art
 additional music"
 
 [node name="profile3" type="Node2D" parent="credits/g/g/g"]
@@ -641,7 +641,8 @@ offset_left = 75.0
 offset_top = 32.0
 offset_right = 199.0
 offset_bottom = 67.0
-text = "music"
+text = "permission to use
+music"
 
 [node name="profile4" type="Node2D" parent="credits/g/g/g"]
 position = Vector2(0, 204)
@@ -692,7 +693,7 @@ offset_left = 75.0
 offset_top = 32.0
 offset_right = 199.0
 offset_bottom = 67.0
-text = "additional art"
+text = "painting art"
 
 [node name="profile6" type="Node2D" parent="credits/g/g/g"]
 position = Vector2(0, 338)
@@ -717,7 +718,7 @@ offset_left = 75.0
 offset_top = 32.0
 offset_right = 199.0
 offset_bottom = 67.0
-text = "additional art"
+text = "painting art"
 
 [node name="profile7" type="Node2D" parent="credits/g/g/g"]
 position = Vector2(0, 406)
@@ -742,7 +743,8 @@ offset_left = 75.0
 offset_top = 32.0
 offset_right = 199.0
 offset_bottom = 67.0
-text = "additional art"
+text = "painting art
+vanity art"
 
 [node name="profile8" type="Node2D" parent="credits/g/g/g"]
 position = Vector2(0, 472)
@@ -767,7 +769,7 @@ offset_left = 75.0
 offset_top = 32.0
 offset_right = 199.0
 offset_bottom = 67.0
-text = "additional art"
+text = "painting art"
 
 [node name="profile9" type="Node2D" parent="credits/g/g/g"]
 position = Vector2(0, 543)
@@ -792,13 +794,13 @@ offset_left = 75.0
 offset_top = 32.0
 offset_right = 199.0
 offset_bottom = 67.0
-text = "additional art"
+text = "painting art"
 
 [node name="profile10" type="Node2D" parent="credits/g/g/g"]
-position = Vector2(0, 615)
+position = Vector2(0, 620)
 
 [node name="icon" type="Sprite2D" parent="credits/g/g/g/profile10"]
-position = Vector2(39, 42)
+position = Vector2(39, 39)
 texture = ExtResource("16_avgr1")
 hframes = 5
 vframes = 4
@@ -817,7 +819,32 @@ offset_left = 75.0
 offset_top = 32.0
 offset_right = 199.0
 offset_bottom = 67.0
-text = "additional art"
+text = "painting art"
+
+[node name="profile11" type="Node2D" parent="credits/g/g/g"]
+position = Vector2(0, 692)
+
+[node name="icon" type="Sprite2D" parent="credits/g/g/g/profile11"]
+position = Vector2(39, 39)
+texture = ExtResource("16_avgr1")
+hframes = 5
+vframes = 4
+frame = 10
+
+[node name="name" type="Label" parent="credits/g/g/g/profile11"]
+modulate = Color(1, 0.784314, 0.333333, 1)
+offset_left = 75.0
+offset_top = 14.0
+offset_right = 142.0
+offset_bottom = 30.0
+text = "kekiiro"
+
+[node name="desc" type="Label" parent="credits/g/g/g/profile11"]
+offset_left = 75.0
+offset_top = 32.0
+offset_right = 199.0
+offset_bottom = 67.0
+text = "painting art"
 
 [node name="title" type="Label" parent="credits"]
 offset_left = 76.0

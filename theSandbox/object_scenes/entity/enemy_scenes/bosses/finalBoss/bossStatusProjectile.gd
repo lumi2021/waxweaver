@@ -10,10 +10,10 @@ func _ready():
 	match r:
 		0:
 			status.effectName = "poison"
-			status.seconds = "20"
+			status.seconds = "30"
 		1:
 			status.effectName = "burning"
-			status.seconds = "20"
+			status.seconds = "30"
 		2:
 			status.effectName = "fragile"
 			status.seconds = "15"
@@ -25,7 +25,7 @@ func _ready():
 			status.seconds = "5"
 		5:
 			status.effectName = "wet"
-			status.seconds = "30"
+			status.seconds = "15"
 	$Hurtbox.statusInflictors.append(status)
 
 func _process(delta):

@@ -52,6 +52,15 @@ Dictionary BLOCKSOILDRY::onTick(int x, int y, PLANETDATA *planet, int dir){
 
             }
 
+            Vector2i above = Vector2i( Vector2( 0,-1 ).rotated(acos(0.0)*dir)  ) + Vector2i(x,y);
+            if(abs(planet->getWaterData(above.x,above.y)) > 0.2 ){
+
+                changes[ Vector2i(x,y) ] = 35;// replace with wet soil if water above
+
+                return changes;
+
+            }
+
             
         }
         

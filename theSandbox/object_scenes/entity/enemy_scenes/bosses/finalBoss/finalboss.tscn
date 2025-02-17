@@ -1,14 +1,36 @@
-[gd_scene load_steps=13 format=3 uid="uid://cblyu3va6f7nb"]
+[gd_scene load_steps=19 format=3 uid="uid://cblyu3va6f7nb"]
 
 [ext_resource type="Texture2D" uid="uid://oog0o4drq8i2" path="res://object_scenes/entity/enemy_scenes/bosses/finalBoss/placeholder.png" id="1_7t0sj"]
 [ext_resource type="Script" path="res://object_scenes/entity/enemy_scenes/bosses/finalBoss/finalboss.gd" id="1_corla"]
 [ext_resource type="Script" path="res://object_scenes/entity/enemy_scenes/bosses/finalBoss/stateMachine.gd" id="2_vqqcn"]
 [ext_resource type="PackedScene" uid="uid://meikam2oyy13" path="res://object_scenes/entity/components/health_component.tscn" id="3_5f3wk"]
 [ext_resource type="Texture2D" uid="uid://bhb8m7cw81do1" path="res://object_scenes/entity/enemy_scenes/bosses/finalBoss/wing.png" id="4_5wiyy"]
+[ext_resource type="Script" path="res://object_scenes/specialResource/lootTables/LootTable.gd" id="4_b7olq"]
+[ext_resource type="Script" path="res://object_scenes/specialResource/lootTables/RollableItem.gd" id="5_5sk3f"]
 [ext_resource type="Texture2D" uid="uid://dwn0y416j0nd3" path="res://object_scenes/entity/enemy_scenes/bosses/finalBoss/wing2.png" id="5_7ww4e"]
 [ext_resource type="PackedScene" uid="uid://c05kukkqfrg40" path="res://object_scenes/entity/components/hitbox.tscn" id="5_jxmok"]
 [ext_resource type="Texture2D" uid="uid://dv1jkplg7pqxa" path="res://object_scenes/entity/enemy_scenes/bosses/finalBoss/pupil.png" id="5_re03b"]
 [ext_resource type="PackedScene" uid="uid://8jw6pruiu3cf" path="res://object_scenes/entity/components/hurtbox.tscn" id="6_qbeg4"]
+
+[sub_resource type="Resource" id="Resource_suadw"]
+script = ExtResource("5_5sk3f")
+id = 3179
+amountMin = 1
+amountMax = 1
+weight = 1000
+
+[sub_resource type="Resource" id="Resource_q6jvx"]
+script = ExtResource("5_5sk3f")
+id = 3195
+amountMin = 1
+amountMax = 1
+weight = 1000
+
+[sub_resource type="Resource" id="Resource_us0v2"]
+script = ExtResource("4_b7olq")
+rollType = 2
+rollCount = 1
+table = Array[ExtResource("5_5sk3f")]([SubResource("Resource_suadw"), SubResource("Resource_q6jvx")])
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ka7pc"]
 
@@ -17,6 +39,11 @@ radius = 17.0294
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8q0by"]
 radius = 9.0
+
+[sub_resource type="Curve" id="Curve_353bx"]
+max_value = 8.0
+_data = [Vector2(0, 5.17221), 0.0, 6.91239, 0, 0, Vector2(1, 0), -16.9985, 0.0, 0, 0]
+point_count = 2
 
 [node name="FINALBOSS" type="CharacterBody2D" node_paths=PackedStringArray("healthComp")]
 collision_layer = 128
@@ -28,11 +55,13 @@ healthComp = NodePath("HealthComponent")
 script = ExtResource("2_vqqcn")
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_5f3wk")]
-maxHealth = 5000
+maxHealth = 4000
 knockbackResist = 0.1
 defense = 12
+loottable = SubResource("Resource_us0v2")
 moneyToDrop = 2500
 statusImmunities = Array[String](["confused"])
+deleteOnDeath = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_ka7pc")
@@ -54,22 +83,26 @@ position = Vector2(14, 15)
 position = Vector2(-15, 15)
 
 [node name="Wing" type="Sprite2D" parent="axis"]
+z_index = -2
 position = Vector2(0, -8)
 texture = ExtResource("4_5wiyy")
 offset = Vector2(-57, 25)
 
 [node name="Wing2" type="Sprite2D" parent="axis"]
+z_index = -2
 position = Vector2(0, -8)
 texture = ExtResource("4_5wiyy")
 offset = Vector2(57, 25)
 flip_h = true
 
 [node name="Wing3" type="Sprite2D" parent="axis"]
+z_index = -2
 position = Vector2(-4, 11)
 texture = ExtResource("5_7ww4e")
 offset = Vector2(-16, 35)
 
 [node name="Wing4" type="Sprite2D" parent="axis"]
+z_index = -2
 position = Vector2(4, 11)
 texture = ExtResource("5_7ww4e")
 offset = Vector2(16, 35)
@@ -108,3 +141,36 @@ ignoreDefense = true
 shape = SubResource("CircleShape2D_8q0by")
 
 [node name="playerScan" type="RayCast2D" parent="."]
+
+[node name="bleed" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 16
+lifetime = 0.5
+explosiveness = 0.29
+emission_shape = 1
+emission_sphere_radius = 8.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 50.65
+initial_velocity_max = 91.44
+angular_velocity_min = -384.66
+angular_velocity_max = 483.29
+orbit_velocity_min = -0.3
+orbit_velocity_max = 0.3
+damping_min = 65.754
+damping_max = 94.521
+angle_min = -720.0
+angle_max = 720.0
+scale_amount_max = 1.4
+scale_amount_curve = SubResource("Curve_353bx")
+color = Color(0.858824, 0, 0.0705882, 1)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+offset_left = -32.0
+offset_top = -37.0
+offset_right = 439.0
+offset_bottom = 342.0
+mouse_filter = 2
+color = Color(1, 1, 1, 0)

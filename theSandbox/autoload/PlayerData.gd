@@ -483,6 +483,9 @@ func clearHandSlot():
 func _unhandled_input(event):
 	if event.is_action_pressed("mouse_right"):
 		
+		if GlobalRef.player.dead:
+			return # can't drop items, player is dead
+		
 		var slot = getHandSlot()
 		if slot[0] == -1:
 			return

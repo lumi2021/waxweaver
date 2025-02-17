@@ -50,6 +50,9 @@ func _process(delta):
 	else:
 		holdToClearSave = 0
 	
+	if Input.is_action_just_pressed("fullscreen"):
+		fullscreentoggle()
+	
 func enterState(newstate):
 	match newstate:
 		1:
@@ -186,3 +189,17 @@ func _on_medals_pressed():
 func _on_achievements_menu_menu_closed():
 	$achievementsMenu.hide()
 	enterState(0)
+
+	
+func fullscreentoggle():
+	if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+		
+	elif DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+
+	elif DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_MAXIMIZED:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+	else:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
+	

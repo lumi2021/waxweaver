@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://cvahd524cfs7g"]
+[gd_scene load_steps=9 format=3 uid="uid://cvahd524cfs7g"]
 
 [ext_resource type="PackedScene" uid="uid://8jw6pruiu3cf" path="res://object_scenes/entity/components/hurtbox.tscn" id="1_5oqu6"]
 [ext_resource type="Script" path="res://object_scenes/entity/enemy_scenes/bosses/finalBoss/boss_laser.gd" id="1_c4qj4"]
+[ext_resource type="AudioStream" uid="uid://yhtjwjx6qrpo" path="res://sound/enemy/boss/final/beamBlast.ogg" id="3_kgs5a"]
 
 [sub_resource type="Gradient" id="Gradient_3a32f"]
 colors = PackedColorArray(0, 1, 0.831373, 1, 1, 1, 1, 1)
@@ -39,7 +40,7 @@ end_cap_mode = 1
 round_precision = 4
 
 [node name="Hurtbox" parent="." instance=ExtResource("1_5oqu6")]
-damage = 45
+damage = 52
 knockback = 0.0
 enemyName = "weaver laser"
 
@@ -70,3 +71,7 @@ angle_min = -720.0
 angle_max = 720.0
 scale_amount_curve = SubResource("Curve_c15lu")
 color_ramp = SubResource("Gradient_0wxf5")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_kgs5a")
+pitch_scale = 0.45

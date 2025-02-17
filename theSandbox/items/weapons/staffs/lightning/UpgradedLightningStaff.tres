@@ -11,10 +11,12 @@ summoningObject = ExtResource("3_jmolj")
 delay = 0.2
 ejectPower = 3
 emissiveTex = ExtResource("1_oyu4u")
-manaCost = 40
+manaCost = 30
 itemName = "True Zeus Staff"
 subtext = ""
-desc = ""
+desc = "damage: 20
+cost: 30 mana
+shoots bolts of lightning"
 texture = ExtResource("4_ofgvv")
 maxStackSize = 1
 clickToUse = false

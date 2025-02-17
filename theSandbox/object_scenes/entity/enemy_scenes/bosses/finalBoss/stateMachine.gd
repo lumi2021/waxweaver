@@ -24,7 +24,8 @@ func _ready():
 	add_state("gravityphase2")
 	add_state("bulletsphase2")
 	add_state("dead")
-	set_state(states.idlephase2)
+	add_state("leave")
+	set_state(states.intro)
 
 func _state_logic(delta):
 	
@@ -49,6 +50,13 @@ func _state_logic(delta):
 		states.status:
 			parent.focusOnPosition(delta)
 			parent.eyeSpastic(3)
+		states.transform:
+			parent.transforming(delta)
+			if parent.velocity.y > 0:
+				parent.eyeLookAtPlayerPhase2(delta)
+			else:
+				parent.eyeSpastic(4)
+			
 		states.idlephase2:
 			parent.idlePhase1(delta)
 			parent.eyeLookAtPlayerPhase2(delta)
@@ -68,12 +76,40 @@ func _state_logic(delta):
 		states.statusphase2:
 			parent.focusOnPosition(delta)
 			parent.eyeSpastic(3)
+		states.dead:
+			parent.dead(delta)
+			parent.eyeDead(delta)
+		states.leave:
+			parent.dead(delta)
+			parent.eyeLookAtPlayer()
+			parent.slowToStop(delta)
 	
 	parent.moveBody(pos,parent.position)
 		
 func _get_transition(delta):
+	
+	if state == states.dead:
+		return null
+	if state == states.leave:
+		return null
+	if parent.healthComp.health <= 0:
+		return states.dead
+	if GlobalRef.player.dead:
+		return states.leave
+	
 	match state:
+		
+		states.intro:
+			stateTimer += 1
+			if stateTimer > 200:
+				stateTimer = 0
+				return states.idle
+		
 		states.idle:
+			
+			if parent.healthComp.getHealthPercent() < 0.5:
+				return states.transform
+			
 			if idleTicks > 140:
 				var r = randi() % 3
 				if r == 0:
@@ -97,6 +133,13 @@ func _get_transition(delta):
 			if stateTimer > 320:
 				stateTimer = 0
 				return states.idle
+		
+		states.transform:
+			stateTimer += 1
+			if stateTimer > 300:
+				stateTimer = 0
+				return states.idlephase2
+		
 		
 		####### PHASE 2 #########
 		states.idlephase2:
@@ -137,6 +180,18 @@ func _get_transition(delta):
 
 func _enter_state(new_state,old_state):
 	match new_state:
+		
+		states.intro:
+			await get_tree().create_timer(0.03).timeout
+			var tween = get_tree().create_tween()
+			tween.tween_property(parent.fade,"color:a",1.0,1.5)
+			await tween.finished
+			
+			parent.global_position = GlobalRef.player.global_position + Vector2(0,-72)
+			
+			var tweenout = get_tree().create_tween()
+			tweenout.tween_property(parent.fade,"color:a",0.0,1.5)
+		
 		states.idle:
 			parent.focusedPosition = parent.global_position
 		states.beam:
@@ -148,6 +203,21 @@ func _enter_state(new_state,old_state):
 		states.status:
 			parent.focusedPosition = GlobalRef.player.position + Vector2(0,-32).rotated(parent.getWorldRot(parent))
 			parent.spawnStatusBullets(12,0.5)
+		
+		states.transform:
+			
+			parent.hitboxcollider.call_deferred("set_disabled",true)
+			
+			var tween = get_tree().create_tween()
+			tween.tween_property(parent.fade,"color:a",1.0,1.5)
+			await tween.finished
+			parent.wingScale(1.0)
+			GlobalRef.bossEvil = true
+			GlobalRef.emit_signal("changeEvilState")
+			var tweenout = get_tree().create_tween()
+			tweenout.tween_property(parent.fade,"color:a",0.0,1.5)
+			await tweenout.finished
+			parent.hitboxcollider.call_deferred("set_disabled",false)
 		
 		states.idlephase2:
 			await get_tree().create_timer(0.1).timeout
@@ -182,10 +252,38 @@ func _enter_state(new_state,old_state):
 			elif quad > 3:
 				quad = 0
 			parent.overrideGravity(quad,16.0)
+			SoundManager.playSound("enemy/confuseRay",parent.global_position,0.6, 0.1 )
 		
 		states.statusphase2:
 			parent.focusedPosition = GlobalRef.player.position + Vector2(0,-32).rotated(parent.getWorldRot(parent))
 			parent.spawnStatusBullets(24,0.25)
+		
+		
+		states.dead:
+			
+			parent.bleed.emitting = true
+			await get_tree().create_timer(2.0).timeout
+			var tween = get_tree().create_tween()
+			tween.tween_property(parent.fade,"color:a",1.0,3.0)
+			await tween.finished
+			parent.disableEvil()
+			parent.healthComp.forceDrops()
+			SoundManager.playSound("enemy/killSquish",parent.global_position,0.5, 0.1 )
+			AchievementData.unlockMedal("defeatFinal")
+			CreatureData.creatureDeleted(parent)
+		
+		states.leave:
+			
+			var tween = get_tree().create_tween()
+			tween.tween_property(parent.fade,"color:a",1.0,1.5)
+			await tween.finished
+			parent.axis.hide()
+			parent.disableEvil()
+			GlobalRef.playerGravityOverride = -1
+			var tweenout = get_tree().create_tween()
+			tweenout.tween_property(parent.fade,"color:a",0.0,1.5)
+			await tweenout.finished
+			CreatureData.creatureDeleted(parent)
 		
 func _exit_state(old_state, new_state):
 	match old_state:
@@ -200,6 +298,7 @@ func ensureplayerisnthiding():
 		parent.haventSeenPlayerTicks = 0
 		GlobalRef.player.global_position = parent.global_position
 		GlobalRef.player.teleport()
+
 
 ######################################################
 ############# DONT TOUCH ANY OF THIS #################

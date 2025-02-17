@@ -120,7 +120,7 @@ var medalDictionary = {
 	
 	"defeatFinal":{
 		"icon":"res://ui_scenes/achievements/icons/medal20.png",
-		"name":"final",
+		"name":"weaver",
 		"desc":"defeat the final boss and beat the game",
 		"ngMedal":82983,
 	},

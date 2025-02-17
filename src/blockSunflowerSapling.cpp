@@ -41,6 +41,7 @@ Dictionary BLOCKSUNFLOWERSAPLING::onTick(int x, int y, PLANETDATA *planet, int d
     Dictionary changes = {};
 
 
+
     int timeAlive = planet->getGlobalTick() - planet->getTimeData(x,y);
 
     Vector2i BREAK = Vector2i(Vector2(0,1).rotated(acos(0.0)*dir));
@@ -51,7 +52,14 @@ Dictionary BLOCKSUNFLOWERSAPLING::onTick(int x, int y, PLANETDATA *planet, int d
 
     }
 
+    
+
     if ( timeAlive > 4500 ){
+
+        Dictionary empty = {};
+
+        int r = std::rand() % 10;
+        if(r != 0){ return empty; }
 
         int size = (std::rand() % 10) + 7;
 
@@ -59,6 +67,10 @@ Dictionary BLOCKSUNFLOWERSAPLING::onTick(int x, int y, PLANETDATA *planet, int d
 
             Vector2i rot = Vector2i(Vector2(0,-i).rotated(acos(0.0)*dir));
             changes[Vector2i(x+rot.x,y+rot.y)] = 56;
+            int p = planet->getTileData(x+rot.x,y+rot.y);
+
+            if (p > 1 && p != 60 && p != 59){ planet->setTimeData(x,y,planet->getGlobalTick()); return empty; } // cancel if stem is blocked
+
             planet->setInfoData(x+rot.x,y+rot.y,0);
 
             if ( std::rand() % 3 == 0 ) {
@@ -66,9 +78,12 @@ Dictionary BLOCKSUNFLOWERSAPLING::onTick(int x, int y, PLANETDATA *planet, int d
 
                 planet->setInfoData(x+rot.x,y+rot.y,b);
                 Vector2i pee = Vector2i(Vector2( ( b * 2 ) - 3 ,0).rotated(acos(0.0)*dir));
-                changes[Vector2i(x+rot.x+pee.x,y+rot.y+pee.y)] = 58;
-                planet->setInfoData(x+rot.x+pee.x,y+rot.y+pee.y,b-1);
 
+                if (planet->getTileData(x+rot.x+pee.x, y+rot.y+pee.y) < 2){ // dont grow leaf unless there is space, but doesn't cancel everything
+
+                    changes[Vector2i(x+rot.x+pee.x,y+rot.y+pee.y)] = 58;
+                    planet->setInfoData(x+rot.x+pee.x,y+rot.y+pee.y,b-1);
+                }
 
             }
 
@@ -78,6 +93,9 @@ Dictionary BLOCKSUNFLOWERSAPLING::onTick(int x, int y, PLANETDATA *planet, int d
                     for(int yy = -1; yy <2; yy++){
                         Vector2i trueCoord = Vector2i(Vector2(xx,yy).rotated(acos(0.0)*dir).round() );
                         Vector2i balls = Vector2i( x+trueCoord.x+rot.x, y+trueCoord.y+rot.y );
+
+                        if (planet->getTileData(balls.x,balls.y) > 1){ planet->setTimeData(x,y,planet->getGlobalTick()); return empty; } // cancel if flowerr is blocked
+
                         changes[Vector2i(balls.x,balls.y)] = 57;
                         planet->setInfoData(balls.x,balls.y,gay);
                         gay++;

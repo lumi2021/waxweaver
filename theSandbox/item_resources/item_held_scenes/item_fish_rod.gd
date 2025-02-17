@@ -143,7 +143,7 @@ func onNotUsing(delta):
 func reelIn():
 	
 	SoundManager.playSound("items/fishingRodReelIn",bobber.global_position,1.0,0.1)
-	
+	$Bobber/CPUParticles2D.emitting = false
 	line.clear_points()
 	bobber.visible = false
 	delayTick = 30
