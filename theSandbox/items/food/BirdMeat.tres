@@ -8,7 +8,7 @@
 script = ExtResource("2_yar2i")
 effectName = "fragile"
 seconds = 30.0
-chance = 90
+chance = 95
 
 [resource]
 script = ExtResource("1_oat03")

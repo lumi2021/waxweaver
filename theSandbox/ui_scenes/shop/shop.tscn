@@ -1,19 +1,26 @@
-[gd_scene load_steps=5 format=3 uid="uid://b1mdxx5hdn5h0"]
+[gd_scene load_steps=7 format=3 uid="uid://b1mdxx5hdn5h0"]
 
 [ext_resource type="Script" path="res://ui_scenes/shop/shop.gd" id="1_604ev"]
 [ext_resource type="Texture2D" uid="uid://dx82ru7gr64h2" path="res://ui_scenes/playerHUD/inventory/nineRect.png" id="2_ihb7r"]
 [ext_resource type="FontFile" uid="uid://c3vw44vws5n61" path="res://zeeg/font/I-pixel-u.ttf" id="3_dkgmq"]
+[ext_resource type="Texture2D" uid="uid://6jb2yml8qf6k" path="res://ui_scenes/shop/shuffle.png" id="4_qc3cp"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_b5int"]
 font = ExtResource("3_dkgmq")
 font_size = 8
+
+[sub_resource type="LabelSettings" id="LabelSettings_h8rgk"]
+font = ExtResource("3_dkgmq")
+font_size = 8
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
 
 [node name="shop" type="Node2D"]
 script = ExtResource("1_604ev")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 offset_right = 187.0
-offset_bottom = 56.0
+offset_bottom = 74.0
 mouse_filter = 0
 texture = ExtResource("2_ihb7r")
 patch_margin_left = 2
@@ -22,7 +29,7 @@ patch_margin_right = 2
 patch_margin_bottom = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-offset_top = 22.0
+offset_top = 24.0
 offset_right = 186.0
 offset_bottom = 51.0
 alignment = 1
@@ -30,17 +37,39 @@ alignment = 1
 [node name="Label" type="Label" parent="."]
 modulate = Color(0.658824, 0.658824, 0.658824, 1)
 offset_left = 9.0
-offset_top = 4.0
+offset_top = 5.0
 offset_right = 187.0
-offset_bottom = 20.0
+offset_bottom = 24.0
 text = "the store"
 
 [node name="Label2" type="Label" parent="."]
-modulate = Color(0.129412, 0.129412, 0.129412, 1)
-offset_left = 66.0
-offset_top = 6.0
-offset_right = 180.0
-offset_bottom = 23.0
+modulate = Color(0.196078, 0.196078, 0.196078, 1)
+offset_left = 1.0
+offset_top = 56.0
+offset_right = 186.0
+offset_bottom = 71.0
 text = "refreshes every morning!"
 label_settings = SubResource("LabelSettings_b5int")
+horizontal_alignment = 1
+
+[node name="Shuffle" type="Sprite2D" parent="."]
+position = Vector2(172, 14)
+texture = ExtResource("4_qc3cp")
+
+[node name="Label3" type="Label" parent="."]
+offset_left = 122.0
+offset_top = 9.0
+offset_right = 162.0
+offset_bottom = 25.0
+text = "$200"
+label_settings = SubResource("LabelSettings_h8rgk")
 horizontal_alignment = 2
+
+[node name="rerolll" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
+offset_left = 164.0
+offset_top = 6.0
+offset_right = 180.0
+offset_bottom = 22.0
+
+[connection signal="pressed" from="rerolll" to="." method="_on_rerolll_pressed"]

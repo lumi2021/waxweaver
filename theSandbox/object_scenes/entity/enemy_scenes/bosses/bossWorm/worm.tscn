@@ -54,6 +54,7 @@ knockbackResist = 0.0
 defense = 14
 loottable = SubResource("Resource_wqrat")
 moneyToDrop = 1200
+attackVolume = 0.5
 
 [node name="Line2D" type="Line2D" parent="."]
 texture_repeat = 2

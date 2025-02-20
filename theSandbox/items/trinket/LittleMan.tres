@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="ItemTrinket" load_steps=3 format=3 uid="uid://dq8hw7h5xdimu"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemTrinket.gd" id="1_6r85b"]
+[ext_resource type="Texture2D" uid="uid://bpi8l4n3h26in" path="res://items/trinket/littleMan.png" id="2_kiqrk"]
+
+[resource]
+script = ExtResource("1_6r85b")
+description = ""
+specialProperties = Array[String](["mana25"])
+sceneToLoad = ""
+addSpeed = 0.0
+addJump = 0.0
+addSwim = 0.0
+extraJumps = 0
+addDefense = 0
+addMeleeDamage = 0.0
+addRangedDamage = 0.0
+addHealingMultiplier = 0.0
+addKnockback = 0.0
+addAttackSpeed = 0.0
+addcriticalStrikeChance = 0
+miningMultiplier = 0.0
+statusImmunities = Array[String]([])
+itemName = "Little Man"
+subtext = ""
+desc = "mana cost reduced by 25%
+doesn't stack"
+texture = ExtResource("2_kiqrk")
+maxStackSize = 1
+clickToUse = false
+infiniteReach = false

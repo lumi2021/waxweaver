@@ -13,6 +13,6 @@ itemName = "Poached Egg"
 subtext = ""
 desc = "Tastes great!"
 texture = ExtResource("2_8g2el")
-maxStackSize = 5
+maxStackSize = 6
 clickToUse = false
 infiniteReach = false

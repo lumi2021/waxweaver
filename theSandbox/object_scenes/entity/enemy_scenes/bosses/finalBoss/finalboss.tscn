@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cblyu3va6f7nb"]
+[gd_scene load_steps=21 format=3 uid="uid://cblyu3va6f7nb"]
 
 [ext_resource type="Texture2D" uid="uid://oog0o4drq8i2" path="res://object_scenes/entity/enemy_scenes/bosses/finalBoss/placeholder.png" id="1_7t0sj"]
 [ext_resource type="Script" path="res://object_scenes/entity/enemy_scenes/bosses/finalBoss/finalboss.gd" id="1_corla"]
@@ -26,11 +26,25 @@ amountMin = 1
 amountMax = 1
 weight = 1000
 
+[sub_resource type="Resource" id="Resource_ww2a4"]
+script = ExtResource("5_5sk3f")
+id = 3199
+amountMin = 1
+amountMax = 1
+weight = 1000
+
+[sub_resource type="Resource" id="Resource_66ske"]
+script = ExtResource("5_5sk3f")
+id = 3200
+amountMin = 1
+amountMax = 1
+weight = 1000
+
 [sub_resource type="Resource" id="Resource_us0v2"]
 script = ExtResource("4_b7olq")
 rollType = 2
 rollCount = 1
-table = Array[ExtResource("5_5sk3f")]([SubResource("Resource_suadw"), SubResource("Resource_q6jvx")])
+table = Array[ExtResource("5_5sk3f")]([SubResource("Resource_suadw"), SubResource("Resource_q6jvx"), SubResource("Resource_ww2a4"), SubResource("Resource_66ske")])
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ka7pc"]
 

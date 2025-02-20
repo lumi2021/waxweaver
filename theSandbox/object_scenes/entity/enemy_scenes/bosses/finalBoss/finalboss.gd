@@ -54,6 +54,8 @@ func _process(delta):
 	seperate(split)
 	
 	$axis.rotation = getWorldRot(self)
+	
+	setLight(1.5)
 
 func scanPlayer():
 	$playerScan.target_position = to_local(GlobalRef.player.global_position)

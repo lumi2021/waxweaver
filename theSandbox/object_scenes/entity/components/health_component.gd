@@ -19,6 +19,8 @@ var health :int= 0
 @export var isPlayer :bool = false
 @export var deleteOnDeath :bool = true
 
+@export var attackVolume :float = 0.8
+
 signal healthChanged
 signal smacked
 signal statusUpdated
@@ -73,7 +75,7 @@ func damage(amount,area:Hurtbox=null,hitCrit:bool=false,source:String="idk",type
 	if god:
 		return
 	
-	SoundManager.playSound("enemy/attackEnemy",parent.global_position,0.8,0.2)
+	SoundManager.playSound("enemy/attackEnemy",parent.global_position,attackVolume,0.2)
 	var trueAmount = amount
 	var def = defense
 	if checkIfHasEffect("fragile"):

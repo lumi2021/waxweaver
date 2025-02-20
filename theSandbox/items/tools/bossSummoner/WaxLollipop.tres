@@ -8,7 +8,8 @@ script = ExtResource("1_0bogw")
 itemName = "Wax Lollipop"
 subtext = ""
 desc = "An acceptable offering...
-Use at the altar to summon a boss"
+Use at the altar to summon
+a boss"
 texture = ExtResource("2_e12ix")
 maxStackSize = 99
 clickToUse = false

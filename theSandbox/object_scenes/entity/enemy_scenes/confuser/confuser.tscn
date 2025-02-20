@@ -40,7 +40,7 @@ script = ExtResource("7_10u2r")
 id = 76
 amountMin = 1
 amountMax = 1
-weight = 50
+weight = 1000
 
 [sub_resource type="Resource" id="Resource_1luut"]
 script = ExtResource("6_bod53")
@@ -94,7 +94,7 @@ shape = SubResource("CircleShape2D_7d84j")
 [node name="HealthComponent" parent="." instance=ExtResource("5_bwpiq")]
 maxHealth = 24
 knockbackResist = 0.4
-defense = 8
+defense = 6
 loottable = SubResource("Resource_1luut")
 moneyToDrop = 18
 statusImmunities = Array[String](["confused"])

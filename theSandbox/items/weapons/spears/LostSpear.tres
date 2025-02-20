@@ -5,11 +5,11 @@
 
 [resource]
 script = ExtResource("1_7cwx7")
-damage = 12
+damage = 14
 speedMult = 1.1
 itemName = "Lost Spear"
 subtext = ""
-desc = "damage: 12"
+desc = "damage: 14"
 texture = ExtResource("2_8xif4")
 maxStackSize = 1
 clickToUse = false

@@ -21,7 +21,7 @@ func _process(delta):
 	if tile == null:
 		return
 	var blockType = editBody.DATAC.getTileData(tile.x,tile.y)
-	$RightClick.visible = [19,22,23,25,33,34,47,48,55,62,63,97,98,99,100,101,102,103,104,123,126,134,139].has(blockType)
+	$RightClick.visible = [19,22,23,25,33,34,47,48,55,62,63,97,98,99,100,101,102,103,104,123,126,134,139,152,153].has(blockType)
 	
 func onRightClick():
 	
@@ -266,6 +266,13 @@ func onRightClick():
 			GlobalRef.hotbar.showShop()
 			editBody.editTiles( {Vector2i(tile.x, tile.y):140} )
 		
+		152: # info scanner
+			var info :int= editBody.DATAC.getInfoData( tile.x, tile.y )
+			var target = (info + 2) % 8
+			editBody.DATAC.setInfoData( tile.x, tile.y, target )
+			editBody.editTiles( {Vector2i(tile.x, tile.y):152} )
+		153: # fireball trap
+			rotateTile(editBody,tile,153)
 func rotateTile(editBody,tile,block):
 	var info :int= editBody.DATAC.getInfoData( tile.x, tile.y )
 	var target = (info + 1) % 4

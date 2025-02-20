@@ -7,18 +7,18 @@
 [sub_resource type="Resource" id="Resource_gxcic"]
 script = ExtResource("2_a5o16")
 effectName = "normalRegen"
-seconds = 60.0
+seconds = 40.0
 chance = 100
 
 [resource]
 script = ExtResource("1_xjiba")
 healingAmount = 100
-eatTime = 1.5
+eatTime = 1.6
 particleColor = Color(1, 1, 1, 1)
 statusInflictors = Array[ExtResource("2_a5o16")]([SubResource("Resource_gxcic")])
 itemName = "Fish Sandwich"
 subtext = ""
-desc = ""
+desc = "Gives BIG regen"
 texture = ExtResource("3_iim72")
 maxStackSize = 1
 clickToUse = false

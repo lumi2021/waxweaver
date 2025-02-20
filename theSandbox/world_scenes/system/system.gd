@@ -150,6 +150,7 @@ func saveGameToFile():
 	gameData["claimedFinalBossPrize"] = GlobalRef.claimedFinalBossPrize
 	
 	gameData["money"] = PlayerData.money
+	gameData["shopItems"] = Saving.shopItems
 	
 	Saving.write_save(Saving.loadedFile,gameData)
 	
@@ -210,6 +211,10 @@ func loadSaveFromFile():
 		GlobalRef.claimedWormBossPrize = false
 		GlobalRef.claimedFinalBossPrize = false
 	
+	if gameData.has("shopItems"):
+		Saving.shopItems = gameData["shopItems"]
+	else:
+		Saving.shopItems = []
 	
 	# cheats
 	GlobalRef.cheatsEnabled = gameData["cheats"]

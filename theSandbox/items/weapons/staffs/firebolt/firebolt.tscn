@@ -21,7 +21,7 @@ radius = 2.0
 script = ExtResource("4_jq1tr")
 effectName = "burning"
 seconds = 10.0
-chance = 10
+chance = 25
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vb75v"]
 radius = 5.0

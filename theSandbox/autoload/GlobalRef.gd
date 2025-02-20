@@ -1,7 +1,7 @@
 extends Node
 
 ########### GAME INFO #################
-var version :float = 24
+var version :float = 24.2
 
 
 #######################################

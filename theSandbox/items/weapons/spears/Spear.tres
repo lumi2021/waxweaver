@@ -5,11 +5,11 @@
 
 [resource]
 script = ExtResource("1_fd007")
-damage = 20
+damage = 24
 speedMult = 1.0
 itemName = "Iron Spear"
 subtext = ""
-desc = "damage:  20"
+desc = "damage:  24"
 texture = ExtResource("2_34q1e")
 maxStackSize = 1
 clickToUse = false

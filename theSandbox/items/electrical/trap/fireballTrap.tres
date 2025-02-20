@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemBlock" load_steps=3 format=3 uid="uid://cb73tbpxfh21u"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemBlock.gd" id="1_ko20c"]
+[ext_resource type="Texture2D" uid="uid://b6rkk2lvbdhly" path="res://items/electrical/trap/freball.png" id="2_gt8iv"]
+
+[resource]
+script = ExtResource("1_ko20c")
+blockID = 153
+itemName = "Fireball Trap"
+subtext = ""
+desc = "Shoots a fireball when
+energized.
+Does 14 damage."
+texture = ExtResource("2_gt8iv")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

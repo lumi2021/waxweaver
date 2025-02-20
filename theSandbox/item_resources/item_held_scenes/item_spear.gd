@@ -33,17 +33,19 @@ func onNotUsing(delta):
 	
 	$origin/sprite/Hurtbox.shuffleId()
 	
+	var speed = itemData.speedMult* (2.0 - Stats.getAttackSpeedMult())
+	
 	extending = true
 	$origin/sprite/Hurtbox/CollisionShape2D.call_deferred("set_disabled",false)
 	var tweenOut = get_tree().create_tween()
-	tweenOut.tween_property(spear,"position:x",15,0.2 * itemData.speedMult).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUART)
+	tweenOut.tween_property(spear,"position:x",15,0.2 * speed).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUART)
 	
 	await tweenOut.finished
 	
 	await get_tree().create_timer(0.2 * itemData.speedMult).timeout
 	
 	var tweenIn = get_tree().create_tween()
-	tweenIn.tween_property(spear,"position:x",0,0.4 * itemData.speedMult)
+	tweenIn.tween_property(spear,"position:x",0,0.4 * speed)
 	
 	await tweenIn.finished
 	hide()

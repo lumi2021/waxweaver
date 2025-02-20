@@ -144,8 +144,7 @@ func _ready():
 		Ngio.request("Medal.unlock", {"id": medalDictionary[medal]["ngMedal"]})
 		
 		# here we'll make sure players get medals they unlocked incase
-		# of failures on ng servers, which is very possible
-		# given how long this game is
+		# of failures on ng servers
 		
 	add_child(canvas)
 	
@@ -171,6 +170,7 @@ func unlockMedal(medalName:String):
 		canvas.add_child(ins)
 		unlockedmedals[medalName] = true
 		saveMedals()
+		Saving.autosave()
 
 func saveMedals():
 	Saving.write_save("medals",unlockedmedals)

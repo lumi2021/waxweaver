@@ -66,6 +66,7 @@ var deals = [
 	{"id":141,"price":2,"stock":99},
 	{"id":135,"price":25,"stock":5},
 	{"id":74,"price":5,"stock":99},
+	{"id":3196,"price":10,"stock":20},
 	
 	{"id":-143,"price":1,"stock":999}, # wallpapers
 	{"id":-144,"price":1,"stock":999},
@@ -110,13 +111,14 @@ var rareDeals = [
 	{"id":3141,"price":300,"stock":1},
 	{"id":3142,"price":300,"stock":1},
 	{"id":3147,"price":300,"stock":1},
-	{"id":3162,"price":600,"stock":1},
-	{"id":3161,"price":600,"stock":1},
+	{"id":3162,"price":500,"stock":1},
+	{"id":3161,"price":200,"stock":1},
 	{"id":3163,"price":200,"stock":1},
 	{"id":3164,"price":200,"stock":1},
 	{"id":3165,"price":200,"stock":1},
 	{"id":3166,"price":200,"stock":1},
 	{"id":3167,"price":200,"stock":1},
+	{"id":3197,"price":200,"stock":1},
 	
 	{"id":3010,"price":100,"stock":1}, # vanity
 	{"id":3022,"price":100,"stock":1},
@@ -159,15 +161,15 @@ var rareDeals = [
 	{"id":3123,"price":100,"stock":1},
 	
 	
-	
 	{"id":6001,"price":100,"stock":1}, # toilet
 ]
 
+var rerollTween = null
 
 func _ready():
 	GlobalRef.connect("newDay",generateShopItems)
 	await get_tree().create_timer(0.2).timeout
-	generateShopItems()
+	loadFreshShopItems()
 
 func generateShopItems():
 	
@@ -176,23 +178,76 @@ func generateShopItems():
 		
 	var sale = randi() % 6
 	
+	var shopItems :Array= []
+	
 	for i in range(6):
 		var ins = slotScene.instantiate()
+		ins.slotID = i
 		if i <= 1:
-			var item:Dictionary = rareDeals.pick_random()
+			var sampleID = randi() % rareDeals.size()
+			var item:Dictionary = rareDeals[sampleID]
 			ins.itemID = item["id"]
 			ins.price = item["price"]
 			ins.amountAvailable = item["stock"]
+			shopItems.append(sampleID)
 		else:
-			var item:Dictionary = deals.pick_random()
+			var sampleID = randi() % deals.size()
+			var item:Dictionary = deals[sampleID]
 			ins.itemID = item["id"]
 			ins.price = item["price"]
 			ins.amountAvailable = item["stock"]
+			shopItems.append(sampleID)
 		
 		if sale == i:
 			ins.onSale = true
 		$HBoxContainer.add_child(ins)
 	
+	shopItems.append(sale)
+	Saving.shopItems = shopItems
+	
 	if GlobalRef.hotbar.isShopVisible():
 		SoundManager.playSound("blocks/computer",GlobalRef.player.global_position,0.8)
+
+func loadFreshShopItems():
+	if Saving.shopItems.size() < 7: # if shop is empty or invalid
+		generateShopItems() # generate new items
+		return
+	
+	for i in range(6):
+		var ins = slotScene.instantiate()
+		ins.slotID = i
+		if i <= 1:
+			var sampleID = Saving.shopItems[i]
+			if sampleID == -1:
+				ins.forceStock = true
+				sampleID = 0
+			var item:Dictionary = rareDeals[sampleID]
+			ins.itemID = item["id"]
+			ins.price = item["price"]
+			ins.amountAvailable = item["stock"]
+		else:
+			var sampleID = Saving.shopItems[i]
+			if sampleID == -1:
+				ins.forceStock = true
+				sampleID = 0
+			var item:Dictionary = deals[sampleID]
+			ins.itemID = item["id"]
+			ins.price = item["price"]
+			ins.amountAvailable = item["stock"]
 		
+		if Saving.shopItems[6] == i:
+			ins.onSale = true
+		$HBoxContainer.add_child(ins)
+	
+
+
+func _on_rerolll_pressed():
+	if !PlayerData.spendMoney(200):
+		return
+	generateShopItems()
+	if rerollTween != null:
+		if rerollTween.is_running():
+			return
+	$Shuffle.rotation = 0.0
+	rerollTween = get_tree().create_tween()
+	rerollTween.tween_property($Shuffle,"rotation",PI * -2.0,1.0).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)

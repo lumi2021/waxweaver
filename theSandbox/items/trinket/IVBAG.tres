@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="ItemTrinket" load_steps=3 format=3 uid="uid://b8xe05xedn1jw"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemTrinket.gd" id="1_hkjiu"]
+[ext_resource type="Texture2D" uid="uid://xb6gyqv7mxcm" path="res://items/trinket/ivbag.png" id="2_yqwf3"]
+
+[resource]
+script = ExtResource("1_hkjiu")
+description = ""
+specialProperties = Array[String](["iv"])
+sceneToLoad = ""
+addSpeed = 0.0
+addJump = 0.0
+addSwim = 0.0
+extraJumps = 0
+addDefense = 0
+addMeleeDamage = 0.0
+addRangedDamage = 0.0
+addHealingMultiplier = 0.0
+addKnockback = 0.0
+addAttackSpeed = 0.0
+addcriticalStrikeChance = 0
+miningMultiplier = 0.0
+statusImmunities = Array[String]([])
+itemName = "IV Bag"
+subtext = ""
+desc = "Gain passive regen."
+texture = ExtResource("2_yqwf3")
+maxStackSize = 1
+clickToUse = false
+infiniteReach = false

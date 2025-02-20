@@ -3,6 +3,7 @@ extends Node
 var loadedFile = "save1"
 var worldName = "save1"
 
+var shopItems :Array= []
 
 # handles save files
 # static save files, save1, save2, save3....

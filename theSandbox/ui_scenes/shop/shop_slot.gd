@@ -9,6 +9,9 @@ var mouseInside :bool = false
 
 var onSale :bool = false
 
+var slotID :int = 0
+var forceStock : bool = false
+
 func _ready():
 	
 	
@@ -18,6 +21,12 @@ func _ready():
 	
 	setInfo()
 	PlayerData.connect("updateMoney",updatePriceLabel)
+	
+	if forceStock:
+		amountAvailable = 0
+		$soldOutSprite.show()
+		$price.hide()
+		$itemSprite.modulate = Color.BLACK
 
 func setInfo():
 	$itemSprite.texture = ItemData.getItemTexture(itemID)
@@ -73,6 +82,7 @@ func _on_purchase_pressed():
 		$soldOutSprite.show()
 		$price.hide()
 		$itemSprite.modulate = Color.BLACK
+		Saving.shopItems[slotID] = -1
 	
 	updatePriceLabel()
 	SoundManager.playSound("inventory/purchase",GlobalRef.player.global_position,0.3,0.1)

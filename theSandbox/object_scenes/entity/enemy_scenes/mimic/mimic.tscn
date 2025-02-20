@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://bthq5vg68i2lm"]
+[gd_scene load_steps=47 format=3 uid="uid://bthq5vg68i2lm"]
 
 [ext_resource type="Script" path="res://object_scenes/entity/enemy_scenes/mimic/mimic.gd" id="1_dcghv"]
 [ext_resource type="Texture2D" uid="uid://bfqu4i3lpr4xn" path="res://object_scenes/entity/enemy_scenes/mimic/sprite.png" id="1_tg52t"]
@@ -157,11 +157,18 @@ amountMin = 1
 amountMax = 1
 weight = 1
 
+[sub_resource type="Resource" id="Resource_6bsyt"]
+script = ExtResource("4_mhdw4")
+id = 3197
+amountMin = 1
+amountMax = 1
+weight = 1
+
 [sub_resource type="Resource" id="Resource_8luun"]
 script = ExtResource("3_xqe57")
 rollType = 0
 rollCount = 1
-table = Array[ExtResource("4_mhdw4")]([SubResource("Resource_qqf2t"), SubResource("Resource_6er51"), SubResource("Resource_mqx2q"), SubResource("Resource_3w52b"), SubResource("Resource_u50pf"), SubResource("Resource_3crnm"), SubResource("Resource_sjoa6"), SubResource("Resource_x86q8"), SubResource("Resource_puh3t"), SubResource("Resource_ffi5u"), SubResource("Resource_v7vrn"), SubResource("Resource_7gpm7"), SubResource("Resource_mhdrb"), SubResource("Resource_ukh2j"), SubResource("Resource_lwnt8"), SubResource("Resource_6lpbr"), SubResource("Resource_y57gj"), SubResource("Resource_knnua"), SubResource("Resource_aar2u"), SubResource("Resource_4mub4"), SubResource("Resource_vos5o")])
+table = Array[ExtResource("4_mhdw4")]([SubResource("Resource_qqf2t"), SubResource("Resource_6er51"), SubResource("Resource_mqx2q"), SubResource("Resource_3w52b"), SubResource("Resource_u50pf"), SubResource("Resource_3crnm"), SubResource("Resource_sjoa6"), SubResource("Resource_x86q8"), SubResource("Resource_puh3t"), SubResource("Resource_ffi5u"), SubResource("Resource_v7vrn"), SubResource("Resource_7gpm7"), SubResource("Resource_mhdrb"), SubResource("Resource_ukh2j"), SubResource("Resource_lwnt8"), SubResource("Resource_6lpbr"), SubResource("Resource_y57gj"), SubResource("Resource_knnua"), SubResource("Resource_aar2u"), SubResource("Resource_4mub4"), SubResource("Resource_vos5o"), SubResource("Resource_6bsyt")])
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xb1h5"]
 radius = 3.9

@@ -14,7 +14,7 @@ emissiveTex = ExtResource("1_rg5p4")
 manaCost = 25
 itemName = "Bounce Staff"
 subtext = ""
-desc = "damage: 1 - 25
+desc = "damage: 3 - 27
 shoots a reflective bolt
 for each bounce, bolts
 gain +2 damage

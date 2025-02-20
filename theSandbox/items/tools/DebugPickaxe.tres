@@ -14,12 +14,7 @@ weaponScale = 1.0
 statusInflictors = Array[Resource("res://object_scenes/specialResource/statusEffects/StatusInflictor.gd")]([])
 itemName = "Debug Pickaxe"
 subtext = ""
-desc = "
-Congrats on beating the boss!
-This is the end of the current demo. The boss will eventually drop parts necessary to build the ship.
-For now, have an op pickaxe.
-
-
+desc = "its very cool
 "
 texture = ExtResource("2_4seis")
 maxStackSize = 1

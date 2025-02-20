@@ -17,7 +17,10 @@ func onUsing(delta):
 	
 	if time > itemData.delay:
 		time = 0.0
-		if PlayerData.useMana(itemData.manaCost):
+		var cost :int= itemData.manaCost
+		if Stats.specialProperties.has("mana25"):
+			cost = int(itemData.manaCost * 0.75)
+		if PlayerData.useMana(cost):
 			summonObject()
 		else:
 			SoundManager.playSound("items/staffOutofMana",global_position,1.0)

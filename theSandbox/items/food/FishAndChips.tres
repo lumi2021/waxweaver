@@ -1,17 +1,24 @@
-[gd_resource type="Resource" script_class="ItemFood" load_steps=3 format=3 uid="uid://cfptsoiqwvrqx"]
+[gd_resource type="Resource" script_class="ItemFood" load_steps=5 format=3 uid="uid://cfptsoiqwvrqx"]
 
 [ext_resource type="Script" path="res://item_resources/item_classes/ItemFood.gd" id="1_7eoh4"]
+[ext_resource type="Script" path="res://object_scenes/specialResource/statusEffects/StatusInflictor.gd" id="2_ljydc"]
 [ext_resource type="Texture2D" uid="uid://cbj7om1k8f4ty" path="res://items/food/fishAndChips.png" id="2_ufmxc"]
+
+[sub_resource type="Resource" id="Resource_11wch"]
+script = ExtResource("2_ljydc")
+effectName = "normalRegen"
+seconds = 20.0
+chance = 100
 
 [resource]
 script = ExtResource("1_7eoh4")
 healingAmount = 50
 eatTime = 2.0
 particleColor = Color(0.866667, 0.639216, 0.435294, 1)
-statusInflictors = Array[Resource("res://object_scenes/specialResource/statusEffects/StatusInflictor.gd")]([])
+statusInflictors = Array[ExtResource("2_ljydc")]([SubResource("Resource_11wch")])
 itemName = "Fish and Chips"
 subtext = ""
-desc = ""
+desc = "Gives regen"
 texture = ExtResource("2_ufmxc")
 maxStackSize = 1
 clickToUse = false

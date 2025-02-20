@@ -11,10 +11,11 @@ summoningObject = ExtResource("2_sxvap")
 delay = 0.5
 ejectPower = 300
 emissiveTex = ExtResource("1_tsi38")
+manaCost = 10
 itemName = "Waterbolt Staff"
 subtext = ""
 desc = "damage: 0
-shoots a ball of water"
+spawns infinite water"
 texture = ExtResource("3_18ixa")
 maxStackSize = 1
 clickToUse = false

@@ -329,6 +329,10 @@ void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
                         generateOre(planet,x,y,128,84,8); // generate fossil 
                     }
 
+                    if(std::rand() % 400 == 0){
+                        generateOre(planet,x,y,151,84,5); // generate gold
+                    }
+
                     if(planet->getTileData(x+up.x,y+up.y) < 2){
                         if(std::rand() % 2 == 0 && y % 100 == 0){
                             planet->setTileData(x+up.x,y+up.y,54); // structureblock
@@ -356,8 +360,8 @@ void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
             }
 
             if (planet->getTileData(x,y) == 86){ // is ice
-                if(std::rand() % 350 == 0){
-                    generateOre(planet,x,y,113,86,3); // generate fibers
+                if(std::rand() % 250 == 0){
+                    generateOre(planet,x,y,113,86,5); // generate fibers
                 }
                 
             }

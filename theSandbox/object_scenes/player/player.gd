@@ -117,6 +117,10 @@ func _process(delta):
 	
 	$rightClicker.global_position = get_global_mouse_position()
 	
+	if Stats.specialProperties.has("iv"):
+		healthComponent.inflictStatus("normalRegen",0.1)
+	
+	
 	if Input.is_action_pressed("mouse_left"): # this is stupid just for item bug
 		holdingtick += 1
 	else:
@@ -744,8 +748,8 @@ func useItem():
 	if !GlobalRef.playerCanUseItem:
 		return
 	
-	if PlayerData.selectedSlot == 49 and GlobalRef.hotbar.isShopVisible():
-		return
+	#if PlayerData.selectedSlot == 49 and GlobalRef.hotbar.isShopVisible():
+	#	return
 	
 	var itemData = PlayerData.getSelectedItemData()
 	if itemData == null:
@@ -809,8 +813,8 @@ func runItemProcess(delta):
 	if !GlobalRef.playerCanUseItem:
 		return
 		
-	if PlayerData.selectedSlot == 49 and GlobalRef.hotbar.isShopVisible():
-		return
+	#if PlayerData.selectedSlot == 49 and GlobalRef.hotbar.isShopVisible():
+	#	return
 	
 	if !is_instance_valid(heldItemAnim):
 		return

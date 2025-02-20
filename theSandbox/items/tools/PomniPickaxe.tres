@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ItemMining" load_steps=3 format=3 uid="uid://d0uoj00woq4hj"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemMining.gd" id="1_4wmte"]
+[ext_resource type="Texture2D" uid="uid://crycp556ootu2" path="res://items/tools/pomniPickaxe.png" id="2_imqdm"]
+
+[resource]
+script = ExtResource("1_4wmte")
+miningMultiplier = 6.0
+miningLevel = 5
+damage = 10
+animSpeed = 8.0
+knockbackMult = 1.8
+weaponScale = 1.0
+statusInflictors = Array[Resource("res://object_scenes/specialResource/statusEffects/StatusInflictor.gd")]([])
+itemName = "Squishy Pickaxe"
+subtext = ""
+desc = ""
+texture = ExtResource("2_imqdm")
+maxStackSize = 1
+clickToUse = false
+infiniteReach = false

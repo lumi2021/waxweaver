@@ -23,7 +23,7 @@ miningMultiplier = 0.0
 statusImmunities = Array[String]([])
 itemName = "Curse of Fragility"
 subtext = ""
-desc = "-10 Defense
+desc = "-4 Defense
 +20% Movement speed
 +20% jump"
 texture = ExtResource("2_i4d0h")

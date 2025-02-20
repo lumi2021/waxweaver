@@ -3,6 +3,8 @@ extends Node
 @onready var groundItemScene = preload("res://object_scenes/ground_item/ground_item.tscn")
 @onready var blockBreakParticle = preload("res://object_scenes/particles/blockBreak/block_break_particles.tscn")
 
+@onready var trapfireball = preload("res://items/weapons/staffs/firebolt/firebolt.tscn")
+
 var theChunker = null
 var theGenerator = null
 
@@ -121,7 +123,7 @@ func spawnGroundItem(tilex:int,tiley:int,id:int,planet,oldBlock:int=0):
 	var ins = groundItemScene.instantiate()
 	ins.itemID = id
 	ins.position = planet.tileToPos(Vector2(tilex,tiley))
-	planet.entityContainer.add_child(ins)
+	planet.entityContainer.call_deferred("add_child",ins)
 
 func spawnItemRaw(tilex:int,tiley:int,id:int,planet,amount:int=1,droppedByPlayer:bool=false,dropDir:int=1):
 	# spawns an item without considering special cases
@@ -424,7 +426,15 @@ func doBlockAction(action:String,tileX:int,tileY:int,planet):
 		"shopCheck":
 			if !GlobalRef.hotbar.isShopVisible():
 				planet.editTiles( {Vector2i(tileX,tileY):139} )
-		
+		"trapfireball":
+			var ins = trapfireball.instantiate()
+			ins.position = planet.tileToPos(Vector2(tileX,tileY))
+			ins.planet = planet
+			var r = randf_range(-0.1,0.1)
+			ins.velocity = Vector2(240,0).rotated( planet.DATAC.getInfoData(tileX,tileY) * (PI/2) + r)
+			
+			planet.entityContainer.add_child(ins)
+			
 func checkForEmmission(id):
 	var d = theChunker.getBlockDictionary(id)
 	return d["lightEmmission"]

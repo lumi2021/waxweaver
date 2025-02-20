@@ -28,6 +28,7 @@ shape = SubResource("CircleShape2D_wrhcr")
 
 [node name="Hurtbox" parent="." instance=ExtResource("2_lx72p")]
 enemyBox = false
+damage = 3
 enemyName = "bounce"
 damageType = 2
 ignoreDefense = true

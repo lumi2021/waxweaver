@@ -21,6 +21,8 @@ func onFirstUse():
 	rotOrigin.rotation_degrees = -60.0
 	visible = true
 	swingOut = true
+	if GlobalRef.hotbar.invOpen:
+		return
 	launchTossable()
 	PlayerData.consumeSelected()
 
