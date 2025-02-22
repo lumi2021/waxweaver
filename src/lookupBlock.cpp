@@ -179,6 +179,10 @@ LOOKUPBLOCK::LOOKUPBLOCK() {
     penis[151] = new BLOCKOREGOLDDESERT();
     penis[152] = new BLOCKINFOSCANNER();
     penis[153] = new BLOCKTRAPFIREBALL();
+    
+    penis[154] = new BLOCKPAINTEELWORKOUTGUY(); // painting batch 4
+    penis[155] = new BLOCKPAINTORKPILL();
+    penis[156] = new BLOCKPAINTORKTRIBUTE();
 
     for(BLOCK *i : penis){ // i increase automatically !
         i->setLookUp(this);

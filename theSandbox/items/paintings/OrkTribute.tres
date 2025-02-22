@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ItemMultitile" load_steps=3 format=3 uid="uid://c32px8yuph625"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemMultitile.gd" id="1_0vsbr"]
+[ext_resource type="Texture2D" uid="uid://crqkm4p0wmr02" path="res://items/paintings/aaaFrame.png" id="2_e1iqf"]
+
+[resource]
+script = ExtResource("1_0vsbr")
+blockID = 156
+size = Vector2i(3, 3)
+grounded = false
+needsWalls = true
+itemName = "Painting"
+subtext = ""
+desc = "\"Tribute\" by OrkOrk"
+texture = ExtResource("2_e1iqf")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

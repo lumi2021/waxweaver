@@ -829,7 +829,7 @@ position = Vector2(39, 39)
 texture = ExtResource("16_avgr1")
 hframes = 5
 vframes = 4
-frame = 10
+frame = 13
 
 [node name="name" type="Label" parent="credits/g/g/g/profile11"]
 modulate = Color(1, 0.784314, 0.333333, 1)
@@ -837,7 +837,7 @@ offset_left = 75.0
 offset_top = 14.0
 offset_right = 142.0
 offset_bottom = 30.0
-text = "kekiiro"
+text = "orkork"
 
 [node name="desc" type="Label" parent="credits/g/g/g/profile11"]
 offset_left = 75.0

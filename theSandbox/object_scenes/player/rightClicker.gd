@@ -21,7 +21,7 @@ func _process(delta):
 	if tile == null:
 		return
 	var blockType = editBody.DATAC.getTileData(tile.x,tile.y)
-	$RightClick.visible = [19,22,23,25,33,34,47,48,55,62,63,97,98,99,100,101,102,103,104,123,126,134,139,152,153].has(blockType)
+	$RightClick.visible = [19,22,23,25,33,34,47,48,55,62,63,97,98,99,100,101,102,103,104,123,126,134,139,147,152,153].has(blockType)
 	
 func onRightClick():
 	
@@ -265,6 +265,15 @@ func onRightClick():
 			SoundManager.playSound("blocks/computer",p,0.8)
 			GlobalRef.hotbar.showShop()
 			editBody.editTiles( {Vector2i(tile.x, tile.y):140} )
+		
+		147: # minboss
+			if PlayerData.checkForIngredient(76,5):
+				if CreatureData.spawnBoss(parent.planetOn,parent.position + Vector2(0,-64).rotated(parent.rotated*(PI/2)) ,"miniboss"):
+					GlobalRef.sendChat("Summoned magician!!")
+					PlayerData.consumeItems([76],[5])
+					PlayerData.emit_signal("updateInventory")
+			else:
+				GlobalRef.sendChat("i need 5 glowing orbs...")
 		
 		152: # info scanner
 			var info :int= editBody.DATAC.getInfoData( tile.x, tile.y )

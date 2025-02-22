@@ -98,12 +98,6 @@ var medalDictionary = {
 		"desc":"create the research station",
 		"ngMedal":82876,
 	},
-	"haveMoney":{
-		"icon":"res://ui_scenes/achievements/icons/medal13.png",
-		"name":"money smart",
-		"desc":"have over 5000 money in the bank",
-		"ngMedal":82874,
-	},
 	"defeatWorm":{
 		"icon":"res://ui_scenes/achievements/icons/medal15.png",
 		"name":"worm odyssey",
@@ -111,10 +105,17 @@ var medalDictionary = {
 		"ngMedal":82877,
 	},
 	
-	"unknown":{
+	"haveMoney":{
+		"icon":"res://ui_scenes/achievements/icons/medal13.png",
+		"name":"money smart",
+		"desc":"have over 5000 money in the bank",
+		"ngMedal":82874,
+	},
+	
+	"defeatminiboss":{
 		"icon":"res://ui_scenes/achievements/icons/medal18.png",
-		"name":"fill this later",
-		"desc":"fill this later",
+		"name":"secret sorcerer",
+		"desc":"defeat the magician mini boss",
 		"ngMedal":82984,
 	},
 	

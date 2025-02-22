@@ -140,6 +140,9 @@ var data = {
 	150:load("res://items/blocks/building/SunflowerBrick.tres"),
 	152:load("res://items/electrical/input/infoScanner.tres"),
 	153:load("res://items/electrical/trap/fireballTrap.tres"),
+	154:load("res://items/paintings/EelWorkout.tres"),
+	155:load("res://items/paintings/OrkPillford.tres"),
+	156:load("res://items/paintings/OrkTribute.tres"),
 	
 	########## item ids ##################
 	3000:load("res://items/tools/flimsy/FlimsySword.tres"), # flimsy tools
@@ -377,6 +380,19 @@ var data = {
 	3198:load("res://items/tools/PomniPickaxe.tres"),
 	3199:load("res://items/weapons/staffs/explosive/explosiveStaff.tres"),
 	3200:load("res://items/trinket/IVBAG.tres"),
+	
+	3201:load("res://items/vanity/finalGroup/BackwardsHat.tres"),
+	3202:load("res://items/vanity/finalGroup/Beater.tres"),
+	3203:load("res://items/vanity/finalGroup/Box.tres"),
+	3204:load("res://items/vanity/finalGroup/dresspants.tres"),
+	3205:load("res://items/vanity/finalGroup/Gi.tres"),
+	3206:load("res://items/vanity/finalGroup/Goku.tres"),
+	3207:load("res://items/vanity/finalGroup/Hoodie.tres"),
+	3208:load("res://items/vanity/finalGroup/SSJ.tres"),
+	3209:load("res://items/vanity/finalGroup/Suit.tres"),
+	3210:load("res://items/vanity/finalGroup/Ushanka.tres"),
+	3211:load("res://items/vanity/finalGroup/VestAndShirt.tres"),
+	3212:load("res://items/vanity/finalGroup/WeldingGoggles.tres"),
 	
 	# chairs 6000 - 6049
 	6000:load("res://items/blocks/furniture/chairs/WoodenChair.tres"),

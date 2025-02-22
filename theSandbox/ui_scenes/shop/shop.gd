@@ -96,6 +96,9 @@ var rareDeals = [
 	{"id":70,"price":200,"stock":1},
 	{"id":71,"price":200,"stock":1},
 	{"id":72,"price":200,"stock":1},
+	{"id":154,"price":200,"stock":1},
+	{"id":155,"price":200,"stock":1},
+	{"id":156,"price":200,"stock":1},
 	
 	{"id":3033,"price":300,"stock":1}, # trinkets
 	{"id":3034,"price":300,"stock":1},
@@ -159,6 +162,18 @@ var rareDeals = [
 	{"id":3121,"price":100,"stock":1},
 	{"id":3122,"price":100,"stock":1},
 	{"id":3123,"price":100,"stock":1},
+	{"id":3201,"price":100,"stock":1},
+	{"id":3202,"price":100,"stock":1},
+	{"id":3203,"price":100,"stock":1},
+	{"id":3204,"price":100,"stock":1},
+	{"id":3205,"price":100,"stock":1},
+	{"id":3206,"price":100,"stock":1},
+	{"id":3207,"price":100,"stock":1},
+	{"id":3208,"price":100,"stock":1},
+	{"id":3209,"price":100,"stock":1},
+	{"id":3210,"price":100,"stock":1},
+	{"id":3211,"price":100,"stock":1},
+	{"id":3212,"price":100,"stock":1},
 	
 	
 	{"id":6001,"price":100,"stock":1}, # toilet

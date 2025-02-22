@@ -36,8 +36,8 @@ var creatures = {
 	"bossShip":"res://object_scenes/entity/enemy_scenes/bosses/shipBossForest/boss_ship.tscn",
 	"bossWorm":"res://object_scenes/entity/enemy_scenes/bosses/bossWorm/worm.tscn",
 	"bossFinal":"res://object_scenes/entity/enemy_scenes/bosses/finalBoss/finalboss.tscn",
+	"miniboss":"res://object_scenes/entity/enemy_scenes/bosses/miniboss/miniboss.tscn",
 }
-
 func _physics_process(delta):
 	if GlobalRef.currentPlanet == null:
 		return
@@ -184,7 +184,7 @@ func pickRandomSpot(planet):
 
 func summonCommand(planet,position,string):
 	
-	if string == "bossWorm" or string == "bossShip" or string == "bossFinal":
+	if string == "bossWorm" or string == "bossShip" or string == "bossFinal" or string == "miniboss":
 		spawnBoss(planet,position,string)
 		return
 	

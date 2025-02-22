@@ -19,7 +19,7 @@ func onFirstUse():
 	visible = true
 	swingOut = true
 	mm()
-	$holder/Hurtbox/CollisionShape2D.disabled = false
+	$holder/Hurtbox/CollisionShape2D.call_deferred("set_disabled",false)
 
 func onUsing(delta):
 	visible = true

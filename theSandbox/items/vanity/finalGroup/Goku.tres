@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemArmorHelmet" load_steps=4 format=3 uid="uid://du4gv3or6o3wk"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemArmorHelmet.gd" id="1_3w6b1"]
+[ext_resource type="Texture2D" uid="uid://dw6sc5ms1pajd" path="res://items/vanity/finalGroup/goku.png" id="1_uxxh1"]
+[ext_resource type="Texture2D" uid="uid://bxwqrpnyf5ty5" path="res://items/vanity/finalGroup/gokuitem.png" id="3_j0mh5"]
+
+[resource]
+script = ExtResource("1_3w6b1")
+defense = 1
+armorTexture = ExtResource("1_uxxh1")
+itemName = "Monkey Hair"
+subtext = ""
+desc = ""
+texture = ExtResource("3_j0mh5")
+maxStackSize = 1
+clickToUse = false
+infiniteReach = false

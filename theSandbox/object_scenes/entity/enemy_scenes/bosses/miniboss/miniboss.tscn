@@ -1,0 +1,131 @@
+[gd_scene load_steps=20 format=3 uid="uid://co2ecvinhlu7b"]
+
+[ext_resource type="Script" path="res://object_scenes/entity/enemy_scenes/bosses/miniboss/miniboss.gd" id="1_ceifj"]
+[ext_resource type="Texture2D" uid="uid://be0kcnio5uvd2" path="res://object_scenes/entity/enemy_scenes/bosses/miniboss/robe.png" id="1_dba3a"]
+[ext_resource type="Texture2D" uid="uid://dtbv3qjft4xjv" path="res://items/blocks/foliage/moss/orbItem.png" id="1_qgteg"]
+[ext_resource type="PackedScene" uid="uid://meikam2oyy13" path="res://object_scenes/entity/components/health_component.tscn" id="2_p47tm"]
+[ext_resource type="Script" path="res://object_scenes/specialResource/lootTables/LootTable.gd" id="3_08nq4"]
+[ext_resource type="Script" path="res://object_scenes/specialResource/lootTables/RollableItem.gd" id="4_nfqih"]
+[ext_resource type="Texture2D" uid="uid://mf6pwpiprm5c" path="res://items/material/string.png" id="5_vj812"]
+[ext_resource type="PackedScene" uid="uid://c05kukkqfrg40" path="res://object_scenes/entity/components/hitbox.tscn" id="6_14b5l"]
+[ext_resource type="Texture2D" uid="uid://bjma61jgwg78p" path="res://object_scenes/entity/enemy_scenes/confuser/beam.png" id="6_p611r"]
+[ext_resource type="PackedScene" uid="uid://8jw6pruiu3cf" path="res://object_scenes/entity/components/hurtbox.tscn" id="7_r0yb6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kv1xl"]
+size = Vector2(6, 6)
+
+[sub_resource type="Resource" id="Resource_aaev1"]
+script = ExtResource("4_nfqih")
+id = 128
+amountMin = 2
+amountMax = 4
+weight = 1000
+
+[sub_resource type="Resource" id="Resource_kalre"]
+script = ExtResource("4_nfqih")
+id = 113
+amountMin = 2
+amountMax = 4
+weight = 1000
+
+[sub_resource type="Resource" id="Resource_44ssp"]
+script = ExtResource("4_nfqih")
+id = 3184
+amountMin = 1
+amountMax = 1
+weight = 15
+
+[sub_resource type="Resource" id="Resource_6nf5w"]
+script = ExtResource("3_08nq4")
+rollType = 2
+rollCount = 1
+table = Array[ExtResource("4_nfqih")]([SubResource("Resource_aaev1"), SubResource("Resource_kalre"), SubResource("Resource_44ssp")])
+
+[sub_resource type="Curve" id="Curve_m8jo7"]
+_data = [Vector2(0, 0.558157), 0.0, 4.87009, 0, 0, Vector2(0.238971, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.50529, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_tww55"]
+offsets = PackedFloat32Array(0, 0.614754)
+colors = PackedColorArray(1, 1, 1, 1, 1, 0.701338, 0.930029, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k3xe2"]
+size = Vector2(10, 19)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mvyx5"]
+size = Vector2(14, 15)
+
+[node name="Miniboss" type="CharacterBody2D" node_paths=PackedStringArray("healthComp")]
+collision_layer = 128
+collision_mask = 0
+script = ExtResource("1_ceifj")
+creatureSlots = 0
+healthComp = NodePath("HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_kv1xl")
+
+[node name="HealthComponent" parent="." instance=ExtResource("2_p47tm")]
+maxHealth = 1800
+defense = 10
+loottable = SubResource("Resource_6nf5w")
+moneyToDrop = 400
+
+[node name="axis" type="Node2D" parent="."]
+
+[node name="OrbItem" type="Sprite2D" parent="axis"]
+texture = ExtResource("1_qgteg")
+
+[node name="Robe" type="Sprite2D" parent="axis"]
+position = Vector2(0, 11)
+texture = ExtResource("1_dba3a")
+hframes = 3
+
+[node name="teleport" type="CPUParticles2D" parent="axis"]
+position = Vector2(0, 7)
+emitting = false
+lifetime = 0.8
+one_shot = true
+explosiveness = 0.46
+texture = ExtResource("5_vj812")
+emission_shape = 3
+emission_rect_extents = Vector2(1, 6)
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 22.35
+initial_velocity_max = 22.35
+angular_velocity_min = -461.11
+angular_velocity_max = 404.38
+damping_min = 26.133
+damping_max = 26.133
+angle_min = -720.0
+angle_max = 720.0
+scale_amount_curve = SubResource("Curve_m8jo7")
+color_ramp = SubResource("Gradient_tww55")
+
+[node name="Hitbox" parent="axis" node_paths=PackedStringArray("healthComponent", "colliderShape") instance=ExtResource("6_14b5l")]
+position = Vector2(0, 11)
+healthComponent = NodePath("../../HealthComponent")
+colliderShape = NodePath("CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="axis/Hitbox"]
+position = Vector2(0, -3.5)
+shape = SubResource("RectangleShape2D_k3xe2")
+
+[node name="Hurtbox" parent="axis" instance=ExtResource("7_r0yb6")]
+position = Vector2(0, 8)
+damage = 10
+enemyName = "magician"
+ignoreDefense = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="axis/Hurtbox"]
+position = Vector2(0, 3.5)
+shape = SubResource("RectangleShape2D_mvyx5")
+
+[node name="Beam" type="Sprite2D" parent="."]
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("6_p611r")
+
+[connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
+[connection signal="smacked" from="HealthComponent" to="." method="_on_health_component_smacked"]
