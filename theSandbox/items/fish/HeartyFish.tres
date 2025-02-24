@@ -7,18 +7,18 @@
 [sub_resource type="Resource" id="Resource_s0krv"]
 script = ExtResource("2_ctuud")
 effectName = "normalRegen"
-seconds = 25.0
+seconds = 60.0
 chance = 100
 
 [resource]
 script = ExtResource("1_xfts2")
-healingAmount = 0
-eatTime = 3.0
-particleColor = Color(1, 1, 1, 1)
+healingAmount = 5
+eatTime = 1.0
+particleColor = Color(0.137255, 0.14902, 0.333333, 1)
 statusInflictors = Array[ExtResource("2_ctuud")]([SubResource("Resource_s0krv")])
 itemName = "Hearty Fish"
 subtext = ""
-desc = "Gives regeneration for 25 seconds.
+desc = "Gives regeneration for 1 minute.
 "
 texture = ExtResource("3_mmfd2")
 maxStackSize = 1

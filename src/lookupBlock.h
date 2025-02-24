@@ -170,9 +170,14 @@
 #include "blockOreGoldDesert.h" // id 151
 #include "blockInfoScanner.h" // id 152
 #include "blockTrapFireball.h" // id 153
+
+// paintings batch 4
 #include "blockPaintEelWorkOutGuy.h" // id 154
 #include "blockPaintOrkPill.h" // id 155
 #include "blockPaintOrkTribute.h" // id 156
+#include "blockPaintStagJourney.h" // id 157
+#include "blockPaintStagFish.h" // id 158
+#include "blockPaintStagSeen.h" // id 159
 
 // adding a new block? make sure you increment the PENIS array !
 
@@ -190,7 +195,7 @@ public:
 	
 	Array allBlocks;
 
-	BLOCK *penis[157]; // must be largest id + 1
+	BLOCK *penis[160]; // must be largest id + 1
 
 	LOOKUPBLOCK();
 	~LOOKUPBLOCK();

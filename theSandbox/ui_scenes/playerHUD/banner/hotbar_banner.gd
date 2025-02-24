@@ -390,7 +390,7 @@ func displayItemName(text:String,itemData:Item):
 	elif itemData is ItemFood:
 		infoText += "heals: " + str(itemData.healingAmount) + "\n"
 		size += 18
-		infoText += "eat time: " + str(itemData.eatTime) + "\n"
+		infoText += "eat time: " + str(itemData.eatTime) + " seconds \n"
 		size += 18
 	elif itemData is ItemPlant:
 		infoText += "can be planted on top of: \n[ "+ str(itemData.descCanPlaceOn) + " ]\n"
@@ -406,6 +406,13 @@ func displayItemName(text:String,itemData:Item):
 		infoText += "damage: " + str(itemData.damage) + "\n"
 		size += 18
 		infoText += "speed: " + str(itemData.velocityMultiplier) + "\n"
+		size += 18
+	elif itemData is ItemBow:
+		infoText += "damage: " + str(itemData.damage) + "\n"
+		size += 18
+		infoText += "velocity: " + str(itemData.velocity) + "\n"
+		size += 18
+		infoText += "delay: " + str(itemData.fireRate) + "\n"
 		size += 18
 	
 	if itemData.desc != "":

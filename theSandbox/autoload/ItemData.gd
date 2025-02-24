@@ -143,6 +143,9 @@ var data = {
 	154:load("res://items/paintings/EelWorkout.tres"),
 	155:load("res://items/paintings/OrkPillford.tres"),
 	156:load("res://items/paintings/OrkTribute.tres"),
+	157:load("res://items/paintings/StagJourney.tres"),
+	158:load("res://items/paintings/StagBigBite.tres"),
+	159:load("res://items/paintings/StagSeen.tres"),
 	
 	########## item ids ##################
 	3000:load("res://items/tools/flimsy/FlimsySword.tres"), # flimsy tools
@@ -393,6 +396,10 @@ var data = {
 	3210:load("res://items/vanity/finalGroup/Ushanka.tres"),
 	3211:load("res://items/vanity/finalGroup/VestAndShirt.tres"),
 	3212:load("res://items/vanity/finalGroup/WeldingGoggles.tres"),
+	
+	3213:load("res://items/weapons/arrows/FossilArrow.tres"),
+	3214:load("res://items/weapons/arrows/FlameArrow.tres"),
+	3215:load("res://items/weapons/staffs/truefirebolt/TrueFirebolt.tres"),
 	
 	# chairs 6000 - 6049
 	6000:load("res://items/blocks/furniture/chairs/WoodenChair.tres"),

@@ -99,6 +99,9 @@ var rareDeals = [
 	{"id":154,"price":200,"stock":1},
 	{"id":155,"price":200,"stock":1},
 	{"id":156,"price":200,"stock":1},
+	{"id":157,"price":200,"stock":1},
+	{"id":158,"price":200,"stock":1},
+	{"id":159,"price":200,"stock":1},
 	
 	{"id":3033,"price":300,"stock":1}, # trinkets
 	{"id":3034,"price":300,"stock":1},

@@ -1,14 +1,22 @@
-extends CharacterBody2D
+extends Enemy
 
 var dead :bool= false
 
+var penis :bool = true
+
 func _ready():
 	$start.emitting = true
+	
+	if penis:
+		$Hurtbox.damage = 25
+		$Hurtbox.enemyBox = false
 
 func _process(delta):
 	if dead:
 		return
 	var t = to_local(GlobalRef.player.global_position).normalized()
+	if penis:
+		t = to_local( get_global_mouse_position() ).normalized()
 	
 	var speed :float= 200.0
 	var dot = velocity.normalized().dot( to_local(GlobalRef.player.global_position).normalized() )
@@ -20,6 +28,8 @@ func _process(delta):
 	
 	if c:
 		startDelete()
+	
+	setLight(0.8)
 
 func startDelete():
 	dead = true

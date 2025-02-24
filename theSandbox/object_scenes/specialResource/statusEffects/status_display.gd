@@ -10,7 +10,7 @@ func _ready():
 		return
 	
 	sprite.texture = status.icon
-	$ColorRect.tooltip_text = status.displayName + ": " + status.description
+	$Label2.text = status.displayName + ": " + status.description
 
 func _process(delta):
 	
@@ -30,3 +30,11 @@ func _process(delta):
 
 func reload():
 	get_parent().get_parent().updateStatus()
+
+
+func _on_color_rect_mouse_entered():
+	$Label2.show()
+
+
+func _on_color_rect_mouse_exited():
+	$Label2.hide()

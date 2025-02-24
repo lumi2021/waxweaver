@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="ItemStaff" load_steps=5 format=3 uid="uid://bj01tyede3fl8"]
+
+[ext_resource type="Texture2D" uid="uid://ch8i21kxbetrq" path="res://items/weapons/staffs/truefirebolt/em.png" id="1_b8ig0"]
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemStaff.gd" id="1_dtfvk"]
+[ext_resource type="PackedScene" uid="uid://cf307rfoa81sw" path="res://object_scenes/entity/enemy_scenes/bosses/miniboss/boss_projectile.tscn" id="3_frwgg"]
+[ext_resource type="Texture2D" uid="uid://boadba4lo7hbf" path="res://items/weapons/staffs/truefirebolt/truefirebolt.png" id="4_btkir"]
+
+[resource]
+script = ExtResource("1_dtfvk")
+summoningObject = ExtResource("3_frwgg")
+delay = 0.25
+ejectPower = 300
+emissiveTex = ExtResource("1_b8ig0")
+manaCost = 30
+itemName = "True Firebolt Staff"
+subtext = ""
+desc = "damage: 25
+cost: 30 mana
+casts big fireballs that 
+follow the mouse"
+texture = ExtResource("4_btkir")
+maxStackSize = 1
+clickToUse = false
+infiniteReach = false

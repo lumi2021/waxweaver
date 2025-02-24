@@ -3,6 +3,7 @@ class_name ItemTorch
 
 @export var blockID := 0
 
+var replaceableBlocks :Array[int] = [0,1,17,77,82,90,131]
 
 func onUse(tileX:int,tileY:int,planetDir:int,planet,lastTile:Vector2):
 	
@@ -12,7 +13,7 @@ func onUse(tileX:int,tileY:int,planetDir:int,planet,lastTile:Vector2):
 	
 	var block = planet.DATAC.getTileData(tileX,tileY)
 	
-	if ![0,1].has(block):
+	if !replaceableBlocks.has(block):
 		#Cancel is target tile isn't empty
 		return "failure"
 	

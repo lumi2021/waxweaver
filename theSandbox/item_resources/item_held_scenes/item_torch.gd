@@ -6,6 +6,8 @@ var rotSpeed = 10.0
 
 var swingOut = false
 
+var doneFullSwing :int= false
+
 func onEquip():
 	visible = true
 	$AnimationPlayer.play("torch")
@@ -19,16 +21,19 @@ func onFirstUse():
 
 func onUsing(delta):
 	always()
-	rotOrigin.rotation_degrees += rotSpeed * delta * 60.0
+	
+	if !doneFullSwing:
+		rotOrigin.rotation_degrees += rotSpeed * delta * 60.0
 	if rotOrigin.rotation_degrees > 50:
-		if !clickUsage:
-			rotOrigin.rotation_degrees = -60.0
-		else:
-			swingOut = false
-			turnOff()
+		rotOrigin.rotation_degrees = -60.0
+		swingOut = false
+		doneFullSwing = true
+		turnOff()
+	print("using")
 
 func onNotUsing(delta):
 	always()
+	doneFullSwing = false
 	if swingOut:
 		rotOrigin.rotation_degrees += rotSpeed * delta * 60.0
 		if rotOrigin.rotation_degrees > 50:
@@ -36,7 +41,8 @@ func onNotUsing(delta):
 			turnOff()
 	else:
 		turnOff()
-
+	print("notusing")
+	
 func turnOff():
 	rotOrigin.rotation = 0.0
 

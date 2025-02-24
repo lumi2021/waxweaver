@@ -14,7 +14,7 @@ emissiveTex = ExtResource("1_0eit8")
 manaCost = 80
 itemName = "Zeus Staff"
 subtext = ""
-desc = "damage: 20
+desc = "damage: 25
 cost: 80 mana
 shoots a bolt of lightning"
 texture = ExtResource("3_e7y3w")

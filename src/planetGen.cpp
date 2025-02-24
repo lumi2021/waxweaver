@@ -533,7 +533,7 @@ void PLANETGEN::generateLunarPlanet(PLANETDATA *planet,FastNoiseLite *noise){
             double dis = getBlockDistance(x,y,planet);
             //double surface = (noise->get_noise_1d(side*4.0) * 12.0)  + (planetSize / 4);
             
-            if( x == (planetSize/2) - 6 ){
+            if( x == (planetSize/2) - 10 ){
                 if(y==368){
                     planet->setTileData(x,y,63);
                     planet->setInfoData(x,y,0);
@@ -547,7 +547,7 @@ void PLANETGEN::generateLunarPlanet(PLANETDATA *planet,FastNoiseLite *noise){
                     planet->setInfoData(x,y,4);
                 }
             }
-            if( x == (planetSize/2) - 5 ){
+            if( x == (planetSize/2) - 9 ){
                 if(y==368){
                     planet->setTileData(x,y,63);
                     planet->setInfoData(x,y,1);
@@ -559,6 +559,11 @@ void PLANETGEN::generateLunarPlanet(PLANETDATA *planet,FastNoiseLite *noise){
                 if(y==370){
                     planet->setTileData(x,y,63);
                     planet->setInfoData(x,y,5);
+                }
+            }
+            if( x == (planetSize/2) - 8 ){
+                if(y==370){
+                    planet->setTileData(x,y,147);
                 }
             }
 

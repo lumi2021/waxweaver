@@ -20,6 +20,6 @@ itemName = "Apple"
 subtext = ""
 desc = "Gives minor regen"
 texture = ExtResource("2_fwlgt")
-maxStackSize = 1
+maxStackSize = 5
 clickToUse = false
 infiniteReach = false

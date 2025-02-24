@@ -17,13 +17,11 @@ handSprite = NodePath("origin/Hand")
 
 [node name="sprite" type="Sprite2D" parent="origin"]
 rotation = 0.785398
-scale = Vector2(1, 1)
 texture = ExtResource("3_7468y")
 
 [node name="Hurtbox" parent="origin/sprite" instance=ExtResource("3_ot4cn")]
 position = Vector2(4.24264, -4.24264)
 rotation = -0.785398
-scale = Vector2(1, 1)
 enemyBox = false
 damage = 12
 knockback = 1.1
@@ -31,7 +29,6 @@ enemyName = "spear"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="origin/sprite/Hurtbox"]
 position = Vector2(0.999999, 0)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_qxah0")
 disabled = true
 

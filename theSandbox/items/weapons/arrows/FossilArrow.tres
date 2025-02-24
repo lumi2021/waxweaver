@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemArrow" load_steps=3 format=3 uid="uid://gd5vvvna4mm4"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemArrow.gd" id="1_hdpw7"]
+[ext_resource type="Texture2D" uid="uid://caqh50chtbxy5" path="res://items/weapons/arrows/fossilArrows.png" id="2_54m3u"]
+
+[resource]
+script = ExtResource("1_hdpw7")
+damage = 13
+velocityMultiplier = 1.4
+statusInflictors = Array[Resource("res://object_scenes/specialResource/statusEffects/StatusInflictor.gd")]([])
+itemName = "Fossil Arrow"
+subtext = ""
+desc = ""
+texture = ExtResource("2_54m3u")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

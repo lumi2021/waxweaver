@@ -33,6 +33,8 @@ func onFirstUse():
 
 func onUsing(delta):
 	
+	$CPUParticles2D.position = bobber.position
+	
 	if delayTick > 0:
 		delayTick -= 1
 		onNotUsing(delta)
@@ -56,6 +58,8 @@ func onUsing(delta):
 		castLine()
 
 func onNotUsing(delta):
+	
+	$CPUParticles2D.position = bobber.position
 	
 	if delayTick > 0:
 		delayTick -= 1
@@ -126,7 +130,8 @@ func onNotUsing(delta):
 					scanningForFish = false
 					var data = PlanetTypeInfo.getData(GlobalRef.currentPlanet.planetType)
 					fishToGive = data.getFish().id
-					$Bobber/CPUParticles2D.emitting = true
+					$CPUParticles2D.emitting = true
+					$CPUParticles2D.show()
 					fishTick = 2.0
 			
 			if FOUNDFISH:
@@ -143,7 +148,9 @@ func onNotUsing(delta):
 func reelIn():
 	
 	SoundManager.playSound("items/fishingRodReelIn",bobber.global_position,1.0,0.1)
-	$Bobber/CPUParticles2D.emitting = false
+	$CPUParticles2D.emitting = false
+	$CPUParticles2D.hide()
+	$CPUParticles2D.restart()
 	line.clear_points()
 	bobber.visible = false
 	delayTick = 30
@@ -166,7 +173,7 @@ func castLine():
 	bobberVel = Vector2(200 * get_parent().get_parent().scale.x,-150).rotated( GlobalRef.player.rotated * (PI/2) )
 		
 func reset():
-	$Bobber/CPUParticles2D.emitting = false
+	$CPUParticles2D.emitting = false
 	rollFishTime()
 	FOUNDFISH = false
 

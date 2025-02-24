@@ -117,7 +117,7 @@ func _process(delta):
 	
 	$rightClicker.global_position = get_global_mouse_position()
 	
-	if Stats.specialProperties.has("iv"):
+	if Stats.specialProperties.has("iv") and healthComponent.health < healthComponent.maxHealth:
 		healthComponent.inflictStatus("normalRegen",0.1)
 	
 	

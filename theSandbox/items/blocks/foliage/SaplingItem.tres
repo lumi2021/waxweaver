@@ -6,10 +6,12 @@
 [resource]
 script = ExtResource("1_xjcb8")
 blockToPlace = 7
-acceptableBlocks = Array[int]([3, 4, 35, 36])
-descCanPlaceOn = "grass, dirt, soil"
+acceptableBlocks = Array[int]([3, 4, 35, 36, 74])
+descCanPlaceOn = "grass, dirt, soil, moss"
 itemName = "Sapling"
 subtext = ""
+desc = ""
 texture = ExtResource("2_dxlc7")
 maxStackSize = 99
 clickToUse = false
+infiniteReach = false

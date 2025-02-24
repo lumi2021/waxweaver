@@ -77,6 +77,8 @@ func spawnBullets(amount:int):
 		ins.position = position
 		var dir :Vector2= Vector2(0,48).rotated( randf_range(0.0,2.0*PI) )
 		ins.velocity = dir * 2.5
+		ins.penis = false
+		ins.planet = planet
 		get_parent().add_child(ins)
 		bump()
 		SoundManager.playSound("enemy/boss/final/projectile",ins.global_position,0.5, 0.1 )

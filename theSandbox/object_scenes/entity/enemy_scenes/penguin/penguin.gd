@@ -113,6 +113,8 @@ func hunt(delta):
 	
 	animation(true)
 	
+	$diggin.playing = false
+	
 	#continue to scan for line of sight
 	playerPointer.target_position = to_local(GlobalRef.player.global_position)
 	if playerPointer.is_colliding(): # player isn't seen

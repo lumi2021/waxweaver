@@ -6,6 +6,8 @@ class_name ItemPlant
 
 @export var descCanPlaceOn :String = "my balls"
 
+var replaceableBlocks :Array[int] = [0,1,17,77,82,90,131]
+
 func onUse(tileX:int,tileY:int,planetDir:int,planet,lastTile:Vector2):
 	
 	if planet == null:
@@ -14,7 +16,7 @@ func onUse(tileX:int,tileY:int,planetDir:int,planet,lastTile:Vector2):
 	
 	var block = planet.DATAC.getTileData(tileX,tileY)
 	
-	if block > 1:
+	if !replaceableBlocks.has(block):
 		#Cancel is target tile isn't empty
 		return
 	

@@ -24,6 +24,10 @@ func _process(delta):
 	move_and_slide()
 	
 	moveBody(pos,position)
+	var b = getTile() > 1
+	if $dig.playing != b:
+		$dig.playing = b
+		
 
 func moveBody(oldPos:Vector2,newPos:Vector2):
 	var change :Vector2 = newPos - oldPos

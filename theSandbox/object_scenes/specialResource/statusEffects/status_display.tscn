@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://binbl27kyjbs7"]
+[gd_scene load_steps=6 format=3 uid="uid://binbl27kyjbs7"]
 
 [ext_resource type="Texture2D" uid="uid://bt417epchjrs4" path="res://object_scenes/specialResource/statusEffects/playerDisplayIcon/poisoned.png" id="1_sov4t"]
 [ext_resource type="Script" path="res://object_scenes/specialResource/statusEffects/status_display.gd" id="1_tksxm"]
@@ -9,6 +9,12 @@ font = ExtResource("2_287t3")
 font_size = 8
 outline_size = 3
 outline_color = Color(0.129412, 0.129412, 0.129412, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_merb7"]
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 3
+shadow_color = Color(0, 0, 0, 1)
 
 [node name="StatusDisplay" type="Node2D"]
 script = ExtResource("1_tksxm")
@@ -31,3 +37,15 @@ offset_right = 5.0
 offset_bottom = 5.0
 mouse_filter = 1
 color = Color(1, 1, 1, 0)
+
+[node name="Label2" type="Label" parent="."]
+visible = false
+z_index = 425
+offset_left = -376.0
+offset_right = -2.0
+offset_bottom = 16.0
+label_settings = SubResource("LabelSettings_merb7")
+horizontal_alignment = 2
+
+[connection signal="mouse_entered" from="ColorRect" to="." method="_on_color_rect_mouse_entered"]
+[connection signal="mouse_exited" from="ColorRect" to="." method="_on_color_rect_mouse_exited"]

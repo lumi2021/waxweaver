@@ -10,6 +10,19 @@ var used :bool = false
 func onEquip():
 	hide()
 	$origin/sprite/Hurtbox.damage = itemData.damage
+	
+	if Stats.specialProperties.has("firecharm"):
+		var status = StatusInflictor.new()
+		status.effectName = "burning"
+		status.seconds = 5
+		status.chance = 25
+		$origin/sprite/Hurtbox.statusInflictors.append(status)
+	if Stats.specialProperties.has("poisoncharm"):
+		var status = StatusInflictor.new()
+		status.effectName = "poison"
+		status.seconds = 5
+		status.chance = 25
+		$origin/sprite/Hurtbox.statusInflictors.append(status)
 
 func onFirstUse():
 	show()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c8f7aethbfkw3"]
+[gd_scene load_steps=13 format=3 uid="uid://c8f7aethbfkw3"]
 
 [ext_resource type="Script" path="res://object_scenes/entity/enemy_scenes/babyWorm/baby_worm.gd" id="1_x0lh2"]
 [ext_resource type="Script" path="res://object_scenes/entity/components/health_component.gd" id="2_fnhfe"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://object_scenes/specialResource/lootTables/LootTable.gd" id="3_e8dgo"]
 [ext_resource type="Script" path="res://object_scenes/specialResource/lootTables/RollableItem.gd" id="4_gej8h"]
 [ext_resource type="PackedScene" uid="uid://84sah16y8gwq" path="res://object_scenes/entity/components/delete_me_outside_of_chunk.tscn" id="4_t1nu3"]
+[ext_resource type="AudioStream" uid="uid://c8bcs8s6yao8k" path="res://sound/enemy/penguinDig.ogg" id="7_ldqsu"]
 
 [sub_resource type="Resource" id="Resource_iw1r7"]
 script = ExtResource("4_gej8h")
@@ -67,3 +68,9 @@ end_cap_mode = 2
 [node name="segments" type="Node2D" parent="."]
 
 [node name="DeleteMeOutsideOfChunk" parent="." instance=ExtResource("4_t1nu3")]
+
+[node name="dig" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_ldqsu")
+volume_db = 12.0
+pitch_scale = 0.39
+max_distance = 600.0

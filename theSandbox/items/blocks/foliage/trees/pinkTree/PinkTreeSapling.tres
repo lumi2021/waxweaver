@@ -6,8 +6,8 @@
 [resource]
 script = ExtResource("1_3enxw")
 blockToPlace = 135
-acceptableBlocks = Array[int]([14, 3, 4, 84])
-descCanPlaceOn = "dirt, grass, sand, sandstone"
+acceptableBlocks = Array[int]([14, 3, 4, 84, 74])
+descCanPlaceOn = "dirt, grass, sand, sandstone, moss"
 itemName = "Pink Tree Sapling"
 subtext = ""
 desc = " "
