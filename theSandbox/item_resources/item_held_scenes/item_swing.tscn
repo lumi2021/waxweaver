@@ -20,6 +20,7 @@ sprite = NodePath("holder/sprite")
 handSprite = NodePath("holder/handSprite")
 
 [node name="holder" type="Node2D" parent="."]
+rotation = -1.0472
 
 [node name="sprite" type="Sprite2D" parent="holder"]
 position = Vector2(1, -1)

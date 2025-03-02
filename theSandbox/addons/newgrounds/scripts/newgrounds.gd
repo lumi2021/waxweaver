@@ -50,6 +50,15 @@ signal on_highscore_submitted(board_id: int, score: NewgroundsScoreboardItem)
 var aes = AESContext.new();
 
 const C = preload("res://addons/newgrounds/scripts/newgrounds_consts.gd")
+
+var ping_cooldown_max:float = 900.0
+var ping_cooldown:float = ping_cooldown_max
+func _physics_process(delta):
+	ping_cooldown -= delta
+	if ping_cooldown < 0.0:
+		components.ping()
+		ping_cooldown = ping_cooldown_max
+
 func _ready():
 	_load_session();
 	_init_medals();

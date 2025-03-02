@@ -20,9 +20,13 @@ func onFirstUse():
 	swingOut = true
 	mm()
 	$holder/Hurtbox/CollisionShape2D.call_deferred("set_disabled",false)
-
+	
 func onUsing(delta):
 	visible = true
+	
+	if $holder/Hurtbox/CollisionShape2D.disabled:
+		$holder/Hurtbox/CollisionShape2D.call_deferred("set_disabled",false)
+	
 	rotOrigin.rotation_degrees += rotSpeed * delta * 60.0
 	if rotOrigin.rotation_degrees > 50:
 		if !clickUsage:
@@ -44,6 +48,7 @@ func onNotUsing(delta):
 func turnOff():
 	visible = false
 	$holder/Hurtbox/CollisionShape2D.disabled = true
+
 
 func mm():
 	$holder/Hurtbox.shuffleId()

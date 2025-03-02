@@ -83,7 +83,7 @@ var medalDictionary = {
 	"takeFall":{
 		"icon":"res://ui_scenes/achievements/icons/medal12.png",
 		"name":"yeowch !!",
-		"desc":"take 90+ points of fall damage and live",
+		"desc":"take 90+ points of fall damage and barely live",
 		"ngMedal":82873,
 	},
 	"defeatPraffin":{

@@ -487,6 +487,8 @@ func _unhandled_input(event):
 	selectSlot(event["keycode"]-49)
 
 func selectSlot(slot):
+	if PlayerData.selectedSlot == slot:
+		return
 	PlayerData.selectSlot(slot)
 	for i in $Hotbar.get_children():
 		i.updateSelected()

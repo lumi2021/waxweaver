@@ -15,7 +15,7 @@ script = ExtResource("4_rlqay")
 id = 3095
 amountMin = 1
 amountMax = 1
-weight = 500
+weight = 750
 
 [sub_resource type="Resource" id="Resource_jagty"]
 script = ExtResource("4_rlqay")
