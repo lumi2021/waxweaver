@@ -59,6 +59,7 @@ func wander(delta):
 	move_and_slide()
 	
 	playerPointer.target_position = to_local(GlobalRef.player.global_position)
+	playerPointer.force_raycast_update()
 	if !playerPointer.is_colliding(): # line of sight made
 		state = 1
 	

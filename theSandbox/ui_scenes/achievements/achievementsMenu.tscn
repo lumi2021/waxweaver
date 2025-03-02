@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://d32dl3s4offu"]
+[gd_scene load_steps=11 format=3 uid="uid://d32dl3s4offu"]
 
 [ext_resource type="Texture2D" uid="uid://csibj827o7h0h" path="res://ui_scenes/mainMenu/saveSlot/rect.png" id="1_1s8nc"]
 [ext_resource type="Script" path="res://ui_scenes/achievements/achievementsMenu.gd" id="1_88024"]
 [ext_resource type="PackedScene" uid="uid://d0j06gpiq8jxo" path="res://ui_scenes/mainMenu/textbutton/text_button.tscn" id="3_epdkn"]
+[ext_resource type="Texture2D" uid="uid://dhe0t0uxqsjlf" path="res://ui_scenes/achievements/ng.png" id="4_d4sxd"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ja3aa"]
 font_size = 32
@@ -98,8 +99,30 @@ layout_mode = 2
 [node name="textButton" parent="." instance=ExtResource("3_epdkn")]
 offset_left = 330.0
 offset_top = 26.0
-offset_right = 357.0
+offset_right = 359.0
 offset_bottom = 43.0
 buttonText = "back"
 
+[node name="Ng" type="Sprite2D" parent="."]
+position = Vector2(41, 32)
+texture = ExtResource("4_d4sxd")
+
+[node name="connecttong" type="Button" parent="Ng"]
+modulate = Color(1, 1, 1, 0)
+offset_left = -17.0
+offset_top = -10.0
+offset_right = 15.0
+offset_bottom = 17.0
+tooltip_text = "connect to newgrounds"
+
+[node name="Label" type="Label" parent="Ng"]
+modulate = Color(0.337255, 0.337255, 0.337255, 1)
+offset_left = 19.0
+offset_top = -4.0
+offset_right = 81.0
+offset_bottom = 12.0
+
 [connection signal="pressed" from="textButton" to="." method="_on_text_button_pressed"]
+[connection signal="mouse_entered" from="Ng/connecttong" to="." method="_on_connecttong_mouse_entered"]
+[connection signal="mouse_exited" from="Ng/connecttong" to="." method="_on_connecttong_mouse_exited"]
+[connection signal="pressed" from="Ng/connecttong" to="." method="_on_connecttong_pressed"]

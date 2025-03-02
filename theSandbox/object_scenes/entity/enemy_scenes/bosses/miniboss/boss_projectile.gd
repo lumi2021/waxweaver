@@ -4,6 +4,8 @@ var dead :bool= false
 
 var penis :bool = true
 
+var life :float = 0.0
+
 func _ready():
 	$start.emitting = true
 	
@@ -30,6 +32,10 @@ func _process(delta):
 		startDelete()
 	
 	setLight(0.8)
+	
+	if life > 10.0:
+		startDelete()
+	life += delta
 
 func startDelete():
 	dead = true

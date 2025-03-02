@@ -23,6 +23,7 @@ func _ready():
 		4:
 			status.effectName = "frozen"
 			status.seconds = "5"
+			GlobalRef.playerGravityOverride = -1
 		5:
 			status.effectName = "wet"
 			status.seconds = "15"

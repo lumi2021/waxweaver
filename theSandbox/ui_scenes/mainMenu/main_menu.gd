@@ -17,11 +17,17 @@ var waitUntilMusic :int= 0
 
 var holdToClearSave :int = 0
 
+var enableConsole :int = 0
+
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-	$mainButtons/versionLabel.text = "v0." + str( GlobalRef.version )
+	$mainButtons/versionLabel.text = "v1." + str( GlobalRef.version )
 	SoundManager.deleteMusicNode()
 	SoundManager.randomMusicTick = 170
+	
+	GlobalRef.playerGravityOverride = -1 # ensure gravity is reset
+	GlobalRef.bossEvil = false
+	GlobalRef.emit_signal("changeEvilState")
 	
 	CreatureData.creatureAmount = 0 # ensures mob cap is reset if u leave game
 	CreatureData.passiveAmount = 0
@@ -52,6 +58,12 @@ func _process(delta):
 	
 	if Input.is_action_just_pressed("fullscreen"):
 		fullscreentoggle()
+	
+	
+	if Input.is_action_just_pressed("openCommand"):
+		enableConsole += 1
+		if enableConsole >= 5:
+			GlobalRef.commandLineAvailable = true
 	
 func enterState(newstate):
 	match newstate:

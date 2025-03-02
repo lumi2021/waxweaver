@@ -140,12 +140,8 @@ func _ready():
 	if data != null:
 		unlockedmedals = Saving.read_save("medals")
 	
-	for medal in unlockedmedals.keys():
-		print("unlocking medal on ng: " + str(medal))
-		Ngio.request("Medal.unlock", {"id": medalDictionary[medal]["ngMedal"]})
-		
-		# here we'll make sure players get medals they unlocked incase
-		# of failures on ng servers
+	if OS.has_feature('web'):
+		unlockAllLostMedals()
 		
 	add_child(canvas)
 	
@@ -160,7 +156,8 @@ func unlockMedal(medalName:String):
 		return
 		
 	var medal = medalDictionary[medalName]
-	Ngio.request("Medal.unlock", {"id": medal["ngMedal"]})
+	
+	NG.medal_unlock(medal["ngMedal"])
 	# request ng to unlock medal regardless if medal is unlocked locally
 	# not efficient but it will make sure if players play on itch first they
 	# will still be able to unlock medals
@@ -195,3 +192,16 @@ func craftingItemUnlocks(itemId:int):
 			AchievementData.unlockMedal("craftStaff")
 		3180:
 			AchievementData.unlockMedal("craftStaff")
+
+func _exit_tree():
+	if !OS.has_feature('web'):
+		NG.sign_out()
+
+func unlockAllLostMedals():
+	for medal in unlockedmedals.keys():
+		print("unlocking medal on ng: " + str(medal))
+		
+		NG.medal_unlock(medalDictionary[medal]["ngMedal"])
+		
+		# here we'll make sure players get medals they unlocked incase
+		# of failures on ng servers

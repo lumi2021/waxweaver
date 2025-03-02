@@ -83,6 +83,10 @@ func _process(delta):
 	
 	# cheat commands
 	if Input.is_action_just_pressed("openCommand"):
+		
+		if !GlobalRef.commandLineAvailable:
+			return
+		
 		if cheatOrigin.visible:
 			interpretCommand(textBox.text)
 		
@@ -335,7 +339,7 @@ func interpretCommand(text):
 			PlayerData.emit_signal("armorUpdated")
 		"god":
 			GlobalRef.player.healthComponent.god = !GlobalRef.player.healthComponent.god
-			GlobalRef.sendChat("Toggled god mode")
+			GlobalRef.sendChat("Toggled god mode: " + str(GlobalRef.player.healthComponent.god))
 		"music":
 			SoundManager.randomMusicTick = 9999
 			GlobalRef.sendChat("Playing music")
@@ -343,6 +347,7 @@ func interpretCommand(text):
 			GlobalRef.conveyorspeed = float(text.get_slice(" ",1))
 		"rich":
 			PlayerData.addMoney(1000)
+			GlobalRef.sendChat("Added 1000 money")
 		_:
 			GlobalRef.sendError("Error: command doesn't exist")
 			return

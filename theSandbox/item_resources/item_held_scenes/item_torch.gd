@@ -29,7 +29,6 @@ func onUsing(delta):
 		swingOut = false
 		doneFullSwing = true
 		turnOff()
-	print("using")
 
 func onNotUsing(delta):
 	always()
@@ -41,7 +40,6 @@ func onNotUsing(delta):
 			turnOff()
 	else:
 		turnOff()
-	print("notusing")
 	
 func turnOff():
 	rotOrigin.rotation = 0.0

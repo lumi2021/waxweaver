@@ -27,7 +27,7 @@ func _process(delta):
 		explode()
 	
 	life += delta
-	if life > 5.0:
+	if life > 3.0:
 		deactivate()
 	
 

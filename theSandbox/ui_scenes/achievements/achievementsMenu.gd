@@ -4,8 +4,13 @@ extends Node2D
 
 signal menuClosed
 
+var nghover :bool = false
+
 func _ready():
 	initializeAchievements()
+	NG.on_session_change.connect(connectNG)
+	if OS.has_feature('web'):
+		$Ng.hide()
 
 func initializeAchievements():
 	for medal in AchievementData.medalDictionary:
@@ -24,3 +29,30 @@ func clear():
 func _on_text_button_pressed():
 	hide()
 	emit_signal("menuClosed")
+
+
+func _on_connecttong_pressed():
+	NG.sign_in()
+	$Ng.scale = Vector2(0.5,0.5)
+	if NG.signed_in:
+		$Ng/Label.text = "signed in!"
+	
+func connectNG(session):
+	$Ng/Label.text = "signed in!"
+	AchievementData.unlockAllLostMedals()
+	clear()
+	initializeAchievements()
+
+
+func _on_connecttong_mouse_entered():
+	nghover = true
+
+
+func _on_connecttong_mouse_exited():
+	nghover = false
+
+func _process(delta):
+	if nghover:
+		$Ng.scale = lerp($Ng.scale,Vector2(1.2,1.2),0.2)
+	else:
+		$Ng.scale = lerp($Ng.scale,Vector2(1.0,1.0),0.2)

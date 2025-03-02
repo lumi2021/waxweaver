@@ -267,6 +267,7 @@ func _enter_state(new_state,old_state):
 			tween.tween_property(parent.fade,"color:a",1.0,3.0)
 			await tween.finished
 			parent.disableEvil()
+			GlobalRef.playerGravityOverride = -1
 			parent.healthComp.forceDrops()
 			SoundManager.playSound("enemy/killSquish",parent.global_position,0.5, 0.1 )
 			AchievementData.unlockMedal("defeatFinal")

@@ -37,8 +37,10 @@ Indicators="*res://autoload/Indicators.gd"
 Background="*res://autoload/Background.gd"
 Saving="*res://autoload/Saving.gd"
 Options="*res://autoload/Options.gd"
-Ngio="*res://autoload/ngio.gd"
+Ngio="res://autoload/ngio.gd"
 AchievementData="*res://autoload/AchievementData.gd"
+NG="*res://addons/newgrounds/scripts/newgrounds.tscn"
+NGCloudSave="*res://addons/newgrounds/scripts/newgrounds_cloudsave.gd"
 
 [debug]
 
@@ -59,6 +61,10 @@ window/stretch/mode="viewport"
 version_control/plugin_name="GitPlugin"
 version_control/autoload_on_startup=true
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/newgrounds/plugin.cfg")
+
 [file_customization]
 
 folder_colors={
@@ -74,6 +80,10 @@ folder_colors={
 "res://world_scenes/": "pink",
 "res://zeeg/": "gray"
 }
+
+[global_group]
+
+CloudSave="Newgrounds Cloudsave"
 
 [gui]
 
@@ -283,6 +293,12 @@ fullscreen={
 2d_physics/layer_10="enemyHitbox"
 2d_physics/layer_13="hurtbox"
 2d_physics/layer_14="layer14"
+
+[newgrounds.io]
+
+app_id="59400:3PiwlLGz"
+AES-128_key="qPiM6RHMpElqmhkXkpW+Jw=="
+opened_getting_started_page=true
 
 [physics]
 

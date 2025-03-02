@@ -12,8 +12,8 @@ chance = 100
 
 [resource]
 script = ExtResource("1_2ogf0")
-healingAmount = 7
-eatTime = 3.0
+healingAmount = 12
+eatTime = 2.8
 particleColor = Color(0.713726, 0.196078, 0.2, 1)
 statusInflictors = Array[ExtResource("2_0ndlw")]([SubResource("Resource_7rwj7")])
 itemName = "Apple"

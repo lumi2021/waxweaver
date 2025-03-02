@@ -51,23 +51,38 @@ func _on_mouse_exited():
 	mouseInside = false
 
 func _on_purchase_pressed():
-	# check all fail conditions
+	if Input.is_action_pressed("shift"):
+		for i in range(101):
+			var response = makePurchase()
+			if !response:
+				if i == 0:
+					return
+				SoundManager.playSound("inventory/purchase",GlobalRef.player.global_position,0.3,0.1)
+				AchievementData.unlockMedal("makePurchase")
+				return
 	
+	else:
+		if makePurchase():
+			SoundManager.playSound("inventory/purchase",GlobalRef.player.global_position,0.3,0.1)
+			AchievementData.unlockMedal("makePurchase")
+	
+func makePurchase() -> bool:
+	# check all fail conditions
 	if amountAvailable <= 0:
-		return # return of out of stock
+		return false# return of out of stock
 	
 	var itemData :Item= ItemData.getItem(itemID)
 	var handSlot = PlayerData.getHandSlot()
 	if handSlot[0] != -1: # if hold slot isn't empty
 		if handSlot[0] != itemID:
-			return # return if player holding different item
+			return false# return if player holding different item
 		# player is holding same item
 		if handSlot[1] + 1 > itemData.maxStackSize:
-			return # return if player is holding too much of the item
+			return false# return if player is holding too much of the item
 	
 	if PlayerData.money - price < 0:
 		updatePriceLabel()
-		return # return if player is broke, add some flair here maybe
+		return false# return if player is broke, add some flair here maybe
 	
 	PlayerData.spendMoney(price)
 	
@@ -85,9 +100,8 @@ func _on_purchase_pressed():
 		Saving.shopItems[slotID] = -1
 	
 	updatePriceLabel()
-	SoundManager.playSound("inventory/purchase",GlobalRef.player.global_position,0.3,0.1)
 	
-	AchievementData.unlockMedal("makePurchase")
+	return true # successful purchase
 	
 func updatePriceLabel():
 	if PlayerData.money - price < 0:

@@ -64,6 +64,13 @@ func _on_color_rect_gui_input(event):
 				parent.clickedSlot(slotToDisplay)
 				
 				if slotToDisplay < 10 and !parent.invOpen:
+					if PlayerData.inventory[49][0] != -1:
+						# is holding item
+						if PlayerData.inventory[slotToDisplay][0] == -1:
+							PlayerData.inventory[slotToDisplay] = PlayerData.inventory[49]
+							PlayerData.inventory[49] = [-1,-1]
+							PlayerData.emit_signal("updateInventory")
+						
 					parent.selectSlot(slotToDisplay)
 				
 			if event["button_index"] == 2:

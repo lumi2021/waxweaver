@@ -132,7 +132,7 @@ func saveGameToFile():
 		chestDictionary.append( chestHex )
 	
 	gameData["version"] = GlobalRef.version
-	gameData["versionEra"] = 0 # 0:alpha, 1:release
+	gameData["versionEra"] = 1 # 0:alpha, 1:release
 	gameData["planets"] = planetDictionary
 	gameData["chests"] = chestDictionary
 	gameData["playerInventory"] = var_to_bytes(PlayerData.inventory).hex_encode()
