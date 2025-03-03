@@ -10,6 +10,7 @@ var size :Vector2 = Vector2(1,2)
 
 @export var chairType :int = 0
 
+var replaceableBlocks :Array[int] = [0,1,17,77,82,90,131]
 
 func onUse(tileX:int,tileY:int,planetDir:int,planet,lastTile:Vector2):
 	
@@ -59,7 +60,7 @@ func checkAvailableArea(startX,startY,dimensions:Vector2,planet,originalDir):
 			if curDir != originalDir:
 				# invalid if on corner of world
 				return false
-			if ![0,1].has(block):
+			if !replaceableBlocks.has(block):
 				# invalid if solid tile exists
 				return false
 			

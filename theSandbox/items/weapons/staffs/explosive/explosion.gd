@@ -9,7 +9,7 @@ var deadTicks :float=0.0
 
 var radius = 3
 
-var immortalTiles :Array[int]= [5,63,34,128,113]
+var immortalTiles :Array[int]= [5,63,34,128,113,147]
 
 func _process(delta):
 	

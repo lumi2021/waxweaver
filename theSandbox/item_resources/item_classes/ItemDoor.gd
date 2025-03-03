@@ -10,6 +10,8 @@ var grounded :bool = true
 @export var doorType :int = 0
 
 
+var replaceableBlocks :Array[int] = [0,1,17,77,82,90,131]
+
 func onUse(tileX:int,tileY:int,planetDir:int,planet,lastTile:Vector2):
 	
 	if planet == null:
@@ -72,7 +74,7 @@ func checkIfPlaceable(tileX:int,tileY:int,planet):
 			if grounded && yi == size.y: # return false if not grounded
 				if !BlockData.theChunker.getBlockDictionary(tile)["hasCollision"]:
 					return false
-			elif tile >= 2: # return false if block in the way
+			elif !replaceableBlocks.has(tile): # return false if block in the way
 				return false
 			
 			if worldX < 0 or worldX >= planet.SIZEINCHUNKS * 8:

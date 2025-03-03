@@ -17,7 +17,7 @@ var red :bool= false
 
 @onready var partScene = preload("res://object_scenes/particles/explosion/explosion_particle.tscn")
 
-var immortalTiles :Array[int]= [5,63,34,128,113]
+var immortalTiles :Array[int]= [5,63,34,128,113,147]
 
 func _ready():
 	setVelocity(vol)

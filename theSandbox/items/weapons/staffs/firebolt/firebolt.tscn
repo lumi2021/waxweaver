@@ -27,6 +27,7 @@ colors = PackedColorArray(1, 0.698039, 0, 1, 1, 0.52549, 0, 1, 1, 0.15757, 0, 1,
 radius = 1.0
 
 [node name="firebolt" type="CharacterBody2D"]
+collision_layer = 128
 script = ExtResource("1_8rxlo")
 
 [node name="Hurtbox" parent="." instance=ExtResource("3_sorgb")]

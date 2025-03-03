@@ -8,6 +8,8 @@ extends Node
 var theChunker = null
 var theGenerator = null
 
+var replaceableBlocks :Array[int] = [0,1,17,77,82,90,131]
+
 func _ready():
 	var ins = CHUNKDRAW.new()
 	theChunker = ins
@@ -178,7 +180,7 @@ func checkIfPlaceable(tileX:int,tileY:int,planet,size:Vector2i,grounded:bool,sta
 			if grounded && yi == size.y: # return false if not grounded
 				if !BlockData.theChunker.getBlockDictionary(tile)["hasCollision"]:
 					return false
-			elif tile >= 2 and tile != blockIgnore: # return false if block in the way
+			elif !replaceableBlocks.has(tile) and tile != blockIgnore: # return false if block in the way
 				return false
 			
 			if worldX < 0 or worldX >= planet.SIZEINCHUNKS * 8:
