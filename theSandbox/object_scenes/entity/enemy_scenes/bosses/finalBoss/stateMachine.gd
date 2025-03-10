@@ -260,7 +260,7 @@ func _enter_state(new_state,old_state):
 		
 		
 		states.dead:
-			
+			GlobalRef.playerGravityOverride = -1
 			parent.bleed.emitting = true
 			await get_tree().create_timer(2.0).timeout
 			var tween = get_tree().create_tween()

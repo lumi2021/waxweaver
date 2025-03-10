@@ -31,6 +31,8 @@ void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
     Vector2 desertPos = Vector2(0, planetSize/2 );
     Vector2 snowPos = Vector2(planetSize, planetSize/2 );
 
+    bool hasMadeMinibossTemple = false;
+
     // first pass
     // basic terrain, lakes and oceans
     for(int x = 0; x < planetSize; x++){
@@ -333,10 +335,11 @@ void PLANETGEN::generateForestPlanet(PLANETDATA *planet,FastNoiseLite *noise){
                         generateOre(planet,x,y,151,84,5); // generate gold
                     }
 
-                    if(planet->getTileData(x+up.x,y+up.y) < 2){
-                        if(std::rand() % 2 == 0 && y % 100 == 0){
+                    if(planet->getTileData(x+up.x,y+up.y) < 2 && y % 100 == 0){
+                        if(std::rand() % 2 == 0 || hasMadeMinibossTemple == false){
                             planet->setTileData(x+up.x,y+up.y,54); // structureblock
                             planet->setInfoData(x+up.x,y+up.y, 11 ); // temple info id
+                            hasMadeMinibossTemple = true;
                         }
                     }
 

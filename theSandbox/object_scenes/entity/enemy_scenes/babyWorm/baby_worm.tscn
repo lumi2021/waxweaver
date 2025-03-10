@@ -42,6 +42,7 @@ radius = 2.0
 collision_layer = 128
 collision_mask = 0
 script = ExtResource("1_x0lh2")
+creatureSlots = 10
 healthComp = NodePath("HealthComponent")
 
 [node name="HealthComponent" type="Node" parent="."]
@@ -71,6 +72,6 @@ end_cap_mode = 2
 
 [node name="dig" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("7_ldqsu")
-volume_db = 12.0
+volume_db = 9.0
 pitch_scale = 0.39
 max_distance = 600.0

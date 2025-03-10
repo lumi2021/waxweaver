@@ -1,7 +1,7 @@
 extends Node
 
 ########### GAME INFO #################
-var version :float = 0.5
+var version :float = 0.6
 
 
 #######################################
@@ -55,6 +55,9 @@ var bossEvil :bool = false
 signal changeEvilState
 
 var commandLineAvailable :bool = false
+
+func _ready():
+	pass
 
 func clearEverything():
 	player = null
