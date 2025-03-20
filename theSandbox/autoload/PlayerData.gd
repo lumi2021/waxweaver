@@ -77,7 +77,7 @@ func initializeInventory():
 	for i in range(78):
 		inventory.append([-1,-1])
 
-func addItem(itemID,amount):
+func addItem(itemID,amount,rangeMin:int=0,rangeMax:int=40):
 	
 	var itemCountLeft = amount
 	
@@ -85,10 +85,10 @@ func addItem(itemID,amount):
 	
 	if itemData == null:
 		printerr("ERROR: Failed to grab item data.")
-		return # avoid crashes
+		return # return null
 	
 	var itemMax = itemData.maxStackSize
-	for slot in inventoryHasItem(itemID):
+	for slot in inventoryHasItem(itemID,rangeMin,rangeMax):
 		var add = inventory[slot][1] + itemCountLeft
 		if add > itemMax:
 			itemCountLeft -= (itemMax - inventory[slot][1])
@@ -100,7 +100,7 @@ func addItem(itemID,amount):
 			emit_signal("onlyUpdateCraft")
 			return 0
 	
-	var emptySlot = findEmptySlot()
+	var emptySlot = findEmptySlot(rangeMin,rangeMax)
 	if emptySlot == null:
 		return itemCountLeft
 	
@@ -108,7 +108,7 @@ func addItem(itemID,amount):
 		while itemCountLeft > itemMax:
 			inventory[emptySlot] = [itemID,itemMax]
 			itemCountLeft -= itemMax
-			emptySlot = findEmptySlot()
+			emptySlot = findEmptySlot(rangeMin,rangeMax)
 			if emptySlot == null:
 				emit_signal("updateInventory")
 				return itemCountLeft
@@ -120,17 +120,19 @@ func addItem(itemID,amount):
 	return 0
 	
 
-func findEmptySlot():
-	for i in range(40):
-		if inventory[i][0] == -1:
-			return i
+func findEmptySlot(rangeMin:int=0,rangeMax:int=40):
+	for i in range(rangeMax):
+		var slot = i + rangeMin
+		if inventory[slot][0] == -1:
+			return slot
 	return null
 
-func inventoryHasItem(itemID):
+func inventoryHasItem(itemID,rangeMin:int=0,rangeMax:int=40):
 	var slots = []
-	for i in range(40):
-		if inventory[i][0] == itemID:
-			slots.append(i)
+	for i in range(rangeMax):
+		var slot = i + rangeMin
+		if inventory[slot][0] == itemID:
+			slots.append(slot)
 	return slots
 
 func swapItem(slot1,slot2):

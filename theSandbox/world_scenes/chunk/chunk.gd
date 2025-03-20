@@ -19,6 +19,8 @@ var MUSTUPDATELIGHT :bool= false
 
 var planet :Planet= null
 
+var drawnForFirstTime :bool = false
+
 func _ready():
 	
 	planet = get_parent().get_parent()
@@ -33,7 +35,10 @@ func _ready():
 	body.set_process(false)
 	
 	drawData()
-
+	var d :Dictionary= BlockData.theChunker.runOnLoad(planet.DATAC,Vector2i(pos))
+	planet.editTiles(d)
+	
+	
 func tickUpdate():
 	
 	MUSTUPDATELIGHT = true

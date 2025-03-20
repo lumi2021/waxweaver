@@ -14,10 +14,10 @@ BLOCKCHAIR::BLOCKCHAIR() {
     rotateTextureToGravity = true;
     hasCollision = false;
     connectTexturesToMe = false;
-    lightMultiplier = 0.99;
     itemToDrop = 19;
     breakParticleID = 2;
     isTransparent = true;
+    soundMaterial = 2;
 
 }
 

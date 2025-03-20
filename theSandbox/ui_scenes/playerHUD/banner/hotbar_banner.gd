@@ -193,7 +193,68 @@ func splitSlot(slot):
 		if slot >= 53:
 			PlayerData.saveChestString()
 		return
+
+func transferSlot(slot):
+	
+	if !invOpen:
+		return # dont do anything if inventory isnt open
+	
+	if PlayerData.inventory[slot][0] == -1:
+		return # dont do anything on empty slots
+	
+	if slot >= 53: # is inside chest
+		var yo = PlayerData.inventory[slot]
+		var amountLeft = PlayerData.addItem(yo[0],yo[1])
+		if amountLeft == null:
+			return
+		if amountLeft > 0:
+			PlayerData.inventory[slot][1] = amountLeft
+		else:
+			PlayerData.inventory[slot] = [-1,-1]
+		PlayerData.emit_signal("updateInventory")
+		SoundManager.playSound("inventory/pickupItem",GlobalRef.player.global_position,1.0,0.12,"INVENTORY")
+		return
 		
+	if $ChestInventory.visible: # and inside main inventory
+		var yo = PlayerData.inventory[slot]
+		var amountLeft = PlayerData.addItem(yo[0],yo[1],53,25)
+		if amountLeft == null:
+			return
+		if amountLeft > 0:
+			PlayerData.inventory[slot][1] = amountLeft
+		else:
+			PlayerData.inventory[slot] = [-1,-1]
+		PlayerData.emit_signal("updateInventory")
+		SoundManager.playSound("inventory/pickupItem",GlobalRef.player.global_position,1.0,0.12,"INVENTORY")
+		return
+	
+	# not interacting with chest anymore
+	if slot < 10: # is hotbar
+		var yo = PlayerData.inventory[slot]
+		var amountLeft = PlayerData.addItem(yo[0],yo[1],10,30)
+		if amountLeft == null:
+			return
+		if amountLeft > 0:
+			PlayerData.inventory[slot][1] = amountLeft
+		else:
+			PlayerData.inventory[slot] = [-1,-1]
+		PlayerData.emit_signal("updateInventory")
+		SoundManager.playSound("inventory/pickupItem",GlobalRef.player.global_position,1.0,0.12,"INVENTORY")
+		return
+	else:
+		var yo = PlayerData.inventory[slot]
+		var amountLeft = PlayerData.addItem(yo[0],yo[1],0,10)
+		if amountLeft == null:
+			return
+		if amountLeft > 0:
+			PlayerData.inventory[slot][1] = amountLeft
+		else:
+			PlayerData.inventory[slot] = [-1,-1]
+		PlayerData.emit_signal("updateInventory")
+		SoundManager.playSound("inventory/pickupItem",GlobalRef.player.global_position,1.0,0.12,"INVENTORY")
+		PlayerData.emit_signal("selectedSlotChanged")
+		return
+
 func updateHealth():
 	var h :HealthComponent = GlobalRef.player.healthComponent
 	$HealthBar/healthText.text = str(h.health) + " / " + str(h.maxHealth)

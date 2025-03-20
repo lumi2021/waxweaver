@@ -1,9 +1,11 @@
 extends Node
 
 ########### GAME INFO #################
-var version :float = 0.6
+var version :float = 1
 
+############# REFERENCE ###############
 
+var immortalTiles :Array[int]= [5,63,34,128,113,147]
 #######################################
 
 var player : Player = null

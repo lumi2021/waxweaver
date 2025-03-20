@@ -12,6 +12,8 @@ var parent :Node2D= null
 
 var isCraftable = false
 
+var hovering :bool = false
+
 func _ready():
 	displayRecipe()
 	updateCraftability()
@@ -23,6 +25,7 @@ func displayRecipe():
 	var amount :int= recipe.amountToCraft
 	
 	sprite.texture = ItemData.getItemTexture(itemID)
+	$spritePreview.texture = sprite.texture
 	amountLabel.text = str( amount )
 
 func updateCraftability():
@@ -90,9 +93,19 @@ func _on_craft_button_mouse_entered():
 	var id = recipe.itemToCraft
 	var n = ItemData.getItemName(id)
 	GlobalRef.hotbar.displayItemName(n,ItemData.getItem(id))
-
+	hovering = true
+	set_process(true)
 
 func _on_craft_button_mouse_exited():
 	parent.displayCraftingInfo(null)
 	GlobalRef.hotbar.displayItemName("",null)
+	hovering = false
 
+func _process(delta):
+	if hovering:
+		$spritePreview.modulate.a = lerp($spritePreview.modulate.a,0.5,0.25)
+	else:
+		$spritePreview.modulate.a = lerp($spritePreview.modulate.a,0.0,0.25)
+		if $spritePreview.modulate.a < 0.1:
+			$spritePreview.modulate.a = 0.0
+			set_process(false)

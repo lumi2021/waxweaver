@@ -6,15 +6,17 @@ var chestPos :Vector2 = Vector2.ZERO
 var planet :Planet
 
 func _ready():
-	await Engine.get_main_loop().physics_frame # wait one frame so collider can update
+	await Engine.get_main_loop().physics_frame # wait two frames so collider can update
 	await Engine.get_main_loop().physics_frame
 	
 	var items :Array= itemScanner.get_overlapping_bodies()
 	# this should only be ground items
 	
 	for item in items:
+		if item.pickedByHopper:
+			continue
 		var itemsLeft :int= addItemToChest(item.itemID,item.amount)
-		print(itemsLeft)
+		item.pickedByHopper = true
 		if itemsLeft == 0:
 			item.queue_free()
 			continue

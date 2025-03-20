@@ -137,7 +137,9 @@ var data = {
 	-146:load("res://items/walls/wallpaper/GrandmaWallpaper.tres"),
 	148:load("res://items/blocks/foliage/crops/LettuceSeed.tres"),
 	149:load("res://items/blocks/building/CactusBrick.tres"),
+	-149:load("res://items/walls/CactusBrickWall.tres"),
 	150:load("res://items/blocks/building/SunflowerBrick.tres"),
+	-150:load("res://items/walls/SunflowerWall.tres"),
 	152:load("res://items/electrical/input/infoScanner.tres"),
 	153:load("res://items/electrical/trap/fireballTrap.tres"),
 	154:load("res://items/paintings/EelWorkout.tres"),
@@ -146,6 +148,10 @@ var data = {
 	157:load("res://items/paintings/StagJourney.tres"),
 	158:load("res://items/paintings/StagBigBite.tres"),
 	159:load("res://items/paintings/StagSeen.tres"),
+	160:load("res://items/electrical/input/NumberScanner.tres"),
+	161:load("res://items/electrical/spitter/Sucker.tres"),
+	162:load("res://items/blocks/furniture/itemFrame/itemframe.tres"),
+	163:load("res://items/blocks/furniture/other/PinkTable.tres"),
 	
 	########## item ids ##################
 	3000:load("res://items/tools/flimsy/FlimsySword.tres"), # flimsy tools
@@ -404,10 +410,11 @@ var data = {
 	# chairs 6000 - 6049
 	6000:load("res://items/blocks/furniture/chairs/WoodenChair.tres"),
 	6001:load("res://items/blocks/furniture/chairs/Toilet.tres"),
+	6002:load("res://items/blocks/furniture/chairs/PinkChair.tres"),
 	
 	# doors 6050 - 6099
 	6050:load("res://items/blocks/furniture/doors/WoodDoor.tres"),
-	6051:load("res://items/tools/golden/GoldenPickaxe.tres"),
+	6051:load("res://items/blocks/furniture/doors/PinkDoor.tres"),
 	
 	# chests 6100 - 6149
 	6100:load("res://items/blocks/furniture/chests/WoodenChest.tres"),
@@ -496,3 +503,9 @@ func getItemTexture(id):
 	if !is_instance_valid(d):
 		return ""
 	return d.texture
+
+func getItemMaxStack(id):
+	var d = getItem(id)
+	if !is_instance_valid(d):
+		return 99
+	return d.maxStackSize

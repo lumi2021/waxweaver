@@ -179,6 +179,11 @@
 #include "blockPaintStagFish.h" // id 158
 #include "blockPaintStagSeen.h" // id 159
 
+#include "blockNumberScanner.h" // 160
+#include "blockSucker.h" // id 161
+#include "blockItemFrame.h" // id 162
+#include "blockTablePink.h" // id 163
+
 // adding a new block? make sure you increment the PENIS array !
 
 namespace godot {
@@ -195,7 +200,7 @@ public:
 	
 	Array allBlocks;
 
-	BLOCK *penis[160]; // must be largest id + 1
+	BLOCK *penis[164]; // must be largest id + 1
 
 	LOOKUPBLOCK();
 	~LOOKUPBLOCK();
@@ -222,6 +227,7 @@ public:
 	Dictionary runOnTick(int x, int y, PLANETDATA *planet, int dir, int blockID);
 	Dictionary runOnBreak(int x, int y, PLANETDATA *planet, int dir, int blockID);
 	Dictionary runOnEnergize(int x, int y, PLANETDATA *planet, int dir, int blockID);
+	Dictionary runOnLoad(int x, int y, PLANETDATA *planet, int dir, int blockID);
 
 };
 

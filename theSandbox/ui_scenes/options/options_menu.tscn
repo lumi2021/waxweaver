@@ -130,7 +130,7 @@ horizontal_scroll_mode = 0
 vertical_scroll_mode = 2
 
 [node name="g" type="ColorRect" parent="ScrollContainer"]
-custom_minimum_size = Vector2(3, 246.19)
+custom_minimum_size = Vector2(3, 271.515)
 layout_mode = 2
 mouse_filter = 2
 color = Color(1, 1, 1, 0)
@@ -139,25 +139,25 @@ color = Color(1, 1, 1, 0)
 
 [node name="dropshadow" parent="ScrollContainer/g/buttons" instance=ExtResource("2_6rvf4")]
 offset_left = 8.0
-offset_top = 190.0
+offset_top = 175.0
 offset_right = 160.0
-offset_bottom = 207.0
+offset_bottom = 192.0
 tooltip_text = "this can help with performance"
 buttonText = "show drop shadow: true"
 
 [node name="autosaving" parent="ScrollContainer/g/buttons" instance=ExtResource("2_6rvf4")]
 offset_left = 8.0
-offset_top = 220.0
+offset_top = 203.0
 offset_right = 115.0
-offset_bottom = 237.0
+offset_bottom = 220.0
 tooltip_text = "saves world every 3 minutes"
 buttonText = "autosaving: true"
 
 [node name="fullscreen" parent="ScrollContainer/g/buttons" instance=ExtResource("2_6rvf4")]
 offset_left = 8.0
-offset_top = 156.0
+offset_top = 148.0
 offset_right = 115.0
-offset_bottom = 173.0
+offset_bottom = 165.0
 buttonText = "toggle fullscreen"
 
 [node name="sfxslider" type="Node2D" parent="ScrollContainer/g/buttons"]
@@ -265,6 +265,39 @@ offset_bottom = 17.0
 text = "100"
 horizontal_alignment = 2
 
+[node name="rotateSlider" type="Node2D" parent="ScrollContainer/g/buttons"]
+position = Vector2(9, 232)
+
+[node name="rotation" parent="ScrollContainer/g/buttons/rotateSlider" instance=ExtResource("2_6rvf4")]
+offset_right = 35.0
+buttonText = "camera ease"
+
+[node name="rotslide" type="HSlider" parent="ScrollContainer/g/buttons/rotateSlider"]
+offset_left = -1.0
+offset_top = 16.0
+offset_right = 152.0
+offset_bottom = 32.0
+theme_override_constants/center_grabber = 1
+theme_override_constants/grabber_offset = -2075
+theme_override_icons/grabber = ExtResource("4_p3wdg")
+theme_override_icons/grabber_highlight = ExtResource("4_p3wdg")
+theme_override_icons/grabber_disabled = ExtResource("4_p3wdg")
+theme_override_icons/tick = ExtResource("4_p3wdg")
+theme_override_styles/slider = SubResource("StyleBoxFlat_bfi1e")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_fldro")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_3lk7d")
+value = 1.0
+scrollable = false
+
+[node name="Label" type="Label" parent="ScrollContainer/g/buttons/rotateSlider"]
+modulate = Color(0.368627, 0.368627, 0.368627, 1)
+offset_left = 85.0
+offset_top = 1.0
+offset_right = 150.0
+offset_bottom = 17.0
+text = "normal"
+horizontal_alignment = 2
+
 [connection signal="pressed" from="done" to="." method="_on_done_pressed"]
 [connection signal="pressed" from="ScrollContainer/g/buttons/dropshadow" to="." method="_on_dropshadow_pressed"]
 [connection signal="pressed" from="ScrollContainer/g/buttons/autosaving" to="." method="_on_autosaving_pressed"]
@@ -275,3 +308,5 @@ horizontal_alignment = 2
 [connection signal="value_changed" from="ScrollContainer/g/buttons/musicslider/musslide" to="." method="_on_musslide_value_changed"]
 [connection signal="pressed" from="ScrollContainer/g/buttons/ambientslider/ambient" to="." method="_on_ambient_pressed"]
 [connection signal="value_changed" from="ScrollContainer/g/buttons/ambientslider/ambslide" to="." method="_on_ambslide_value_changed"]
+[connection signal="pressed" from="ScrollContainer/g/buttons/rotateSlider/rotation" to="." method="_on_rotation_pressed"]
+[connection signal="value_changed" from="ScrollContainer/g/buttons/rotateSlider/rotslide" to="." method="_on_rotslide_value_changed"]

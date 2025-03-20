@@ -235,7 +235,9 @@ func generateTerrain():
 		"skyblock":
 			BlockData.theGenerator.generateLunarPlanet(DATAC,noise)
 			return
-	
+		"lattice":
+			BlockData.theGenerator.generateLatticePlanet(DATAC,noise)
+			return
 	
 	match planetType:
 		"forest":BlockData.theGenerator.generateForestPlanet(DATAC,noise)

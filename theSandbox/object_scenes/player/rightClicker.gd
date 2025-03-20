@@ -21,7 +21,7 @@ func _process(delta):
 	if tile == null:
 		return
 	var blockType = editBody.DATAC.getTileData(tile.x,tile.y)
-	$RightClick.visible = [19,22,23,25,33,34,47,48,55,62,63,97,98,99,100,101,102,103,104,123,126,134,139,147,152,153].has(blockType)
+	$RightClick.visible = [19,22,23,25,33,34,47,48,55,62,63,97,98,99,100,101,102,103,104,123,126,134,139,147,152,153,160,161,162].has(blockType)
 	
 func onRightClick():
 	
@@ -282,8 +282,44 @@ func onRightClick():
 			editBody.editTiles( {Vector2i(tile.x, tile.y):152} )
 		153: # fireball trap
 			rotateTile(editBody,tile,153)
-func rotateTile(editBody,tile,block):
+		160: # numerical sensor
+			rotateTile(editBody,tile,160,10)
+		161: # sucker
+			rotateTile(editBody,tile,161)
+		162: # item frame
+			
+			var segment = editBody.DATAC.getInfoData(tile.x,tile.y)
+			match segment:
+				1:
+					tile = tile + Vector2(-1,0).rotated( rot * (PI/2) )
+				2:
+					tile = tile + Vector2(0,-1).rotated( rot * (PI/2) )
+				3:
+					tile = tile + Vector2(-1,-1).rotated( rot * (PI/2) )
+			
+			
+			var time = editBody.DATAC.getTimeData(tile.x,tile.y)
+			
+			if time < 0:
+				BlockData.spawnItemRaw(tile.x,tile.y,time*-1,editBody)
+				editBody.DATAC.setTimeData(tile.x,tile.y, 1) # remove item
+				return
+			var id = PlayerData.getSelectedItemID()
+			if id == -1:
+				return # return if not holding item
+				
+			PlayerData.consumeSelected()
+			editBody.DATAC.setTimeData(tile.x,tile.y, id * -1)
+			
+			var ins = load("res://items/blocks/furniture/itemFrame/item_frame_display.tscn").instantiate()
+			ins.position = editBody.tileToPos(tile)
+			ins.itemId = id
+			ins.planet = editBody
+			parent.get_parent().add_child(ins)
+
+
+func rotateTile(editBody,tile,block,step:int=4):
 	var info :int= editBody.DATAC.getInfoData( tile.x, tile.y )
-	var target = (info + 1) % 4
+	var target = (info + 1) % step
 	editBody.DATAC.setInfoData( tile.x, tile.y, target )
 	editBody.editTiles( {Vector2i(tile.x, tile.y):block} )

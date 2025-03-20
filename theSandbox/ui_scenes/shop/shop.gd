@@ -55,6 +55,8 @@ var deals = [
 	{"id":91,"price":15,"stock":10},
 	{"id":3076,"price":10,"stock":1},
 	{"id":30,"price":20,"stock":20},
+	{"id":160,"price":25,"stock":10},
+	{"id":161,"price":25,"stock":5},
 	
 	{"id":6230,"price":3,"stock":99}, # shingles
 	{"id":6231,"price":3,"stock":99},
@@ -67,6 +69,7 @@ var deals = [
 	{"id":135,"price":25,"stock":5},
 	{"id":74,"price":5,"stock":99},
 	{"id":3196,"price":10,"stock":20},
+	
 	
 	{"id":-143,"price":1,"stock":999}, # wallpapers
 	{"id":-144,"price":1,"stock":999},

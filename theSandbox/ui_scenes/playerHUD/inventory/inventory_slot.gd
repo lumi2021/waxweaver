@@ -61,6 +61,11 @@ func _on_color_rect_gui_input(event):
 	if event is InputEventMouseButton:
 		if event["pressed"]:
 			if event["button_index"] == 1:
+				
+				if Input.is_action_pressed("shift"):
+					parent.transferSlot(slotToDisplay)
+					return
+				
 				parent.clickedSlot(slotToDisplay)
 				
 				if slotToDisplay < 10 and !parent.invOpen:

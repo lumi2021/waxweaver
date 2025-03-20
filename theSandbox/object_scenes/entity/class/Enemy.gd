@@ -20,6 +20,14 @@ func getTile():
 		return 0
 	
 	return planet.DATAC.getTileData(pos.x,pos.y)
+	
+func getTime():
+	var pos = getPos()
+	
+	if pos == null:
+		return 0
+	
+	return planet.DATAC.getTimeData(pos.x,pos.y)
 
 func getWater():
 	var pos = getPos()

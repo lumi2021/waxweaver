@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bbhdrrjvh4jrw"]
+[gd_scene load_steps=17 format=3 uid="uid://bbhdrrjvh4jrw"]
 
 [ext_resource type="Script" path="res://object_scenes/entity/enemy_scenes/penguin/penguin.gd" id="1_1yoqu"]
 [ext_resource type="Texture2D" uid="uid://kqc7ljn2iai7" path="res://object_scenes/entity/enemy_scenes/penguin/sprite.png" id="2_x05ct"]
@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://8jw6pruiu3cf" path="res://object_scenes/entity/components/hurtbox.tscn" id="4_0rgty"]
 [ext_resource type="PackedScene" uid="uid://84sah16y8gwq" path="res://object_scenes/entity/components/delete_me_outside_of_chunk.tscn" id="4_tpm0b"]
 [ext_resource type="Texture2D" uid="uid://mwjxc6goor4m" path="res://items/blocks/natural/dirt.png" id="5_udoxk"]
+[ext_resource type="Script" path="res://object_scenes/specialResource/lootTables/LootTable.gd" id="6_gse8c"]
+[ext_resource type="Script" path="res://object_scenes/specialResource/lootTables/RollableItem.gd" id="7_prvjg"]
 [ext_resource type="AudioStream" uid="uid://c8bcs8s6yao8k" path="res://sound/enemy/penguinDig.ogg" id="8_pxhdn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i6j3q"]
@@ -17,6 +19,19 @@ size = Vector2(6, 11)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fol0l"]
 size = Vector2(6, 6)
+
+[sub_resource type="Resource" id="Resource_1b0sq"]
+script = ExtResource("7_prvjg")
+id = 3159
+amountMin = 1
+amountMax = 1
+weight = 20
+
+[sub_resource type="Resource" id="Resource_b7krw"]
+script = ExtResource("6_gse8c")
+rollType = 2
+rollCount = 1
+table = Array[ExtResource("7_prvjg")]([SubResource("Resource_1b0sq")])
 
 [sub_resource type="Curve" id="Curve_sld51"]
 max_value = 0.25
@@ -73,6 +88,7 @@ shape = SubResource("RectangleShape2D_fol0l")
 [node name="HealthComponent" parent="." instance=ExtResource("3_7bje5")]
 maxHealth = 40
 defense = 10
+loottable = SubResource("Resource_b7krw")
 moneyToDrop = 25
 
 [node name="DeleteMeOutsideOfChunk" parent="." instance=ExtResource("4_tpm0b")]

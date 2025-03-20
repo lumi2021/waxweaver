@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://cgpaaoiolupne"]
+
+[ext_resource type="Script" path="res://items/blocks/furniture/itemFrame/item_frame_display.gd" id="1_b0rjj"]
+[ext_resource type="Texture2D" uid="uid://cc8esrrppap1k" path="res://items/blocks/building/brick.png" id="1_t81vv"]
+
+[node name="itemFrameDisplay" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_b0rjj")
+creatureSlots = 0
+passive = true
+
+[node name="sprite2" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0.117647, 0.301961)
+z_index = -1
+position = Vector2(5, 5)
+texture = ExtResource("1_t81vv")
+
+[node name="sprite" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(4, 4)
+texture = ExtResource("1_t81vv")

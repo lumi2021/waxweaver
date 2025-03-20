@@ -72,6 +72,7 @@ public:
 	double getBlockDistance(int x, int y, PLANETDATA *planet);
 
 	void resetLight(PLANETDATA *planet,Vector2i pos);
+	Dictionary runOnLoad(PLANETDATA *planet,Vector2i pos);
 
 };
 

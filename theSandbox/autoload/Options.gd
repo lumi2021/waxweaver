@@ -6,6 +6,7 @@ var defaultOptions :Dictionary= {
 	"sfxVolume":1.5,
 	"ambientVolume":1.5,
 	"autosaving":true,
+	"cameraRotationOverwrite":-1.0,
 }
 
 var options :Dictionary = {}

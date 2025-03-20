@@ -13,6 +13,7 @@ void CHUNKDRAW::_bind_methods() {
     ClassDB::bind_method(D_METHOD("scanBlockOpen","planetDATAC","x","y","dir"), &CHUNKDRAW::scanBlockOpen);
     ClassDB::bind_method(D_METHOD("returnLookup"), &CHUNKDRAW::returnLookup);
     ClassDB::bind_method(D_METHOD("resetLight","planetDatac","pos"), &CHUNKDRAW::resetLight);
+    ClassDB::bind_method(D_METHOD("runOnLoad","planetDatac","pos"), &CHUNKDRAW::runOnLoad);
     ADD_SIGNAL(MethodInfo("chunkDrawn", PropertyInfo(Variant::OBJECT, "node"), PropertyInfo(Variant::OBJECT, "image"), PropertyInfo(Variant::OBJECT, "backImage")));
     ADD_SIGNAL(MethodInfo("attemptSpawnEnemy", PropertyInfo(Variant::OBJECT, "planetData") , PropertyInfo(Variant::VECTOR2, "tile") , PropertyInfo(Variant::INT, "id") , PropertyInfo(Variant::INT, "blockSide") ));
 }
@@ -411,6 +412,25 @@ void CHUNKDRAW::resetLight(PLANETDATA *planet,Vector2i pos){
             planet->setLightData(worldX,worldY,0.0);
         }
     }
+}
+
+Dictionary CHUNKDRAW::runOnLoad(PLANETDATA *planet,Vector2i pos){
+
+    Dictionary changes = {};
+
+    for(int x = 0; x < 8; x++){
+        for(int y = 0; y < 8; y++){
+            int worldX = x+(pos.x*8);
+            int worldY = y+(pos.y*8);
+
+            int blockID = planet->getTileData(worldX,worldY);
+            int blockSide = planet->getPositionLookup(worldX,worldY);
+
+            changes.merge( cock->runOnLoad(worldX,worldY,planet,blockSide,blockID) );
+        }
+    }
+
+    return changes;
 }
 
 

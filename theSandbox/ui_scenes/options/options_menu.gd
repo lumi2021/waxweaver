@@ -3,6 +3,7 @@ extends Node2D
 @onready var sfxSlider = $ScrollContainer/g/buttons/sfxslider/sfxslide
 @onready var musicSlider = $ScrollContainer/g/buttons/musicslider/musslide
 @onready var ambientSlider = $ScrollContainer/g/buttons/ambientslider/ambslide
+@onready var rotationSlider = $ScrollContainer/g/buttons/rotateSlider/rotslide
 
 signal menuClosed
 
@@ -13,6 +14,8 @@ func loadOptions():
 	sfxSlider.value = Options.options["sfxVolume"]
 	musicSlider.value = Options.options["musicVolume"]
 	ambientSlider.value = Options.options["ambientVolume"]
+	rotationSlider.value = int(Options.options["cameraRotationOverwrite"] * 100.0)
+	
 	setShadowText()
 	setAutosaveText()
 
@@ -84,3 +87,18 @@ func _on_autosaving_pressed():
 
 func setAutosaveText():
 	$ScrollContainer/g/buttons/autosaving.buttonText = "autosaving: " + str(Options.options["autosaving"])
+
+
+func _on_rotslide_value_changed(value):
+	if value == 0:
+		Options.options["cameraRotationOverwrite"] = -1.0
+		$ScrollContainer/g/buttons/rotateSlider/Label.text = "normal"
+	else:
+		Options.options["cameraRotationOverwrite"] = value * 0.01
+		$ScrollContainer/g/buttons/rotateSlider/Label.text = str(value)
+
+func _on_rotation_pressed():
+	Options.options["cameraRotationOverwrite"] = -1.0
+	$ScrollContainer/g/buttons/rotateSlider/Label.text = "normal"
+	rotationSlider.value = 0
+	

@@ -420,7 +420,7 @@ func WATERJUMPCAMERALETSGO(body,vel,rot,onFloor,delta):
 		vel.y = min(vel.y,30 + (Stats.swimMult * 2.5))
 		if Input.is_action_pressed("jump") and !GlobalRef.chatIsOpen:
 			vel.y = -25 - Stats.getSwim()
-		GlobalRef.camera.rotation = lerp_angle(GlobalRef.camera.rotation,rot,1.0-pow(2.0,(-delta/0.06)))
+		lerpCameraRotation(rot,delta)
 		vel.x = clamp(vel.x, -Stats.getSwim(),Stats.getSwim() )
 		airTime = 0.0 # cancel fall damage
 		return vel
@@ -442,7 +442,7 @@ func WATERJUMPCAMERALETSGO(body,vel,rot,onFloor,delta):
 		if Input.is_action_just_pressed("jump") and !GlobalRef.chatIsOpen:
 			vel.y = Stats.getJump()
 			
-		GlobalRef.camera.rotation = lerp_angle(GlobalRef.camera.rotation,rot,1.0-pow(2.0,(-delta/0.06)))
+		lerpCameraRotation(rot,delta)
 	elif jumpsRemaining > 0:
 		if Input.is_action_just_pressed("jump") and !GlobalRef.chatIsOpen:
 			vel.y = Stats.getJump()
@@ -475,8 +475,7 @@ func WATERJUMPCAMERALETSGO(body,vel,rot,onFloor,delta):
 			get_parent().add_child(fart)
 	
 	if GlobalRef.playerGravityOverride != -1:
-		GlobalRef.camera.rotation = lerp_angle(GlobalRef.camera.rotation,rot,1.0-pow(2.0,(-delta/0.06)))
-	
+		lerpCameraRotation(rot,delta)
 	return vel
 
 func chairMovement(delta):
@@ -486,8 +485,7 @@ func chairMovement(delta):
 	
 	if shipOn != null:
 		sprite.rotation = shipOn.rotation
-		GlobalRef.camera.rotation = lerp_angle(GlobalRef.camera.rotation,shipOn.rotation,1.0-pow(2.0,(-delta/0.2)))
-	
+		lerpCameraRotation(shipOn.rotation,delta)
 	if Input.is_action_pressed("jump"):
 		movementState = 0
 	
@@ -574,8 +572,7 @@ func ladderMovement(delta):
 	updateLight()
 	ensureCamPosition()
 	
-	GlobalRef.camera.rotation = lerp_angle(GlobalRef.camera.rotation,rotated*(PI/2),0.3)
-
+	lerpCameraRotation(rotated*(PI/2),delta)
 func bedMovement(delta):
 	
 	velocity = Vector2.ZERO
@@ -607,8 +604,7 @@ func inSpaceMovement(delta):
 	
 	sprite.rotate(1.0 * delta)
 	
-	GlobalRef.camera.rotation = lerp_angle(GlobalRef.camera.rotation,0,1.0-pow(2.0,(-delta/0.2)))
-	
+	lerpCameraRotation(0,delta)
 	move_and_slide()
 	ensureCamPosition()
 
@@ -977,7 +973,12 @@ func scanForStations():
 ############################ ANIMATION ###############################
 ######################################################################
 
-func squishHeadUnderCeiling():
+func squishHeadUnderCeiling() -> bool:
+	
+	if Input.is_action_pressed("crouch"):
+		squishSprites(0.68)
+		return true
+	
 	var underCeiling = isUnderCeiling(rotated*(PI/2))
 	if underCeiling:
 		squishSprites(0.68)
@@ -1344,3 +1345,10 @@ func dashingParticle():
 func teleport():
 	$rotateRand/teleport.emitting = true
 	SoundManager.playSound("items/teleport",global_position,0.6,0.04)
+
+func lerpCameraRotation(rot,delta):
+	var interpolation :float= 1.0-pow(2.0,(-delta/0.06))
+	var o :float = Options.options["cameraRotationOverwrite"]
+	if o > 0.0:
+		interpolation = o
+	GlobalRef.camera.rotation = lerp_angle(GlobalRef.camera.rotation,rot,interpolation)

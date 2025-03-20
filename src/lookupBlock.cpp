@@ -187,6 +187,11 @@ LOOKUPBLOCK::LOOKUPBLOCK() {
     penis[158] = new BLOCKPAINTSTAGFISH();
     penis[159] = new BLOCKPAINTSTAGSEEN();
 
+    penis[160] = new BLOCKNUMBERSCANNER();
+    penis[161] = new BLOCKSUCKER();
+    penis[162] = new BLOCKITEMFRAME();
+    penis[163] = new BLOCKTABLEPINK();
+
     for(BLOCK *i : penis){ // i increase automatically !
         i->setLookUp(this);
     }
@@ -313,6 +318,12 @@ Dictionary LOOKUPBLOCK::runOnBreak(int x, int y, PLANETDATA *planet, int dir, in
 Dictionary LOOKUPBLOCK::runOnEnergize(int x, int y, PLANETDATA *planet, int dir, int blockID){
    
     return penis[blockID]->onEnergize(x,y,planet,dir);
+
+}
+
+Dictionary LOOKUPBLOCK::runOnLoad(int x, int y, PLANETDATA *planet, int dir, int blockID){
+   
+    return penis[blockID]->onLoad(x,y,planet,dir);
 
 }
 

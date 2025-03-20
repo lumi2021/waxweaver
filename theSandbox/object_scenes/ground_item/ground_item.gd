@@ -28,6 +28,7 @@ var dropvel :Vector2 = Vector2.ZERO
 var frozen = false
 
 var coolVelcoity :bool = false
+var pickedByHopper :bool = false
 
 func _ready():
 	var itemData = ItemData.getItem(itemID)

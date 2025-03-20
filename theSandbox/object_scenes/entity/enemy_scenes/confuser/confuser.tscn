@@ -93,8 +93,8 @@ shape = SubResource("CircleShape2D_7d84j")
 
 [node name="HealthComponent" parent="." instance=ExtResource("5_bwpiq")]
 maxHealth = 24
-knockbackResist = 0.4
-defense = 6
+knockbackResist = 0.2
+defense = 4
 loottable = SubResource("Resource_1luut")
 moneyToDrop = 18
 statusImmunities = Array[String](["confused"])

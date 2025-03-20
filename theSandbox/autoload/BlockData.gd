@@ -324,16 +324,52 @@ func doBlockAction(action:String,tileX:int,tileY:int,planet):
 			GlobalRef.player.closeDoor(Vector2i(tileX,tileY),planet)
 			SoundManager.playSound("interacts/door",planet.to_global(planet.tileToPos(Vector2(tileX,tileY))),1.2,0.1)
 		"spitter":
+			
 			var dir :Vector2i= Vector2i(Vector2(1,0).rotated( planet.DATAC.getInfoData(tileX,tileY) * (PI/2) ))
+			var blockid = planet.DATAC.getTileData( tileX+dir.x,tileY+dir.y )
+			if GlobalRef.immortalTiles.has( blockid ):
+				return # cancel if block shouldnt be moved
+			
 			var ins = load("res://items/electrical/spitter/spitter_block_spit.tscn").instantiate()
 			ins.position = planet.tileToPos( Vector2(tileX+dir.x,tileY+dir.y) )
 			ins.direction = Vector2( dir.x, dir.y )
 			ins.planet = planet
 			ins.ogTile = Vector2( tileX+dir.x,tileY+dir.y )
-			ins.blockID = planet.DATAC.getTileData( tileX+dir.x,tileY+dir.y )
+			ins.blockID = blockid
 			ins.info = planet.DATAC.getInfoData( tileX+dir.x,tileY+dir.y )
 			planet.entityContainer.add_child( ins )
 			planet.editTiles( { Vector2i(tileX+dir.x,tileY+dir.y) : 0 } )
+		"sucker":
+			var dir :Vector2i= Vector2i(Vector2(1,0).rotated( planet.DATAC.getInfoData(tileX,tileY) * (PI/2) ))
+			
+			#get block
+			var scanned :int = 0
+			for i in range(16):
+				if i < 2:
+					continue
+				var s :Vector2i = dir * i
+				var tile = planet.DATAC.getTileData( tileX+s.x,tileY+s.y )
+				if tile >= 2:
+					scanned = i
+					break
+			if scanned < 2:
+				return
+			
+			var vec :Vector2i = dir * scanned
+			
+			var blockid = planet.DATAC.getTileData( tileX+vec.x,tileY+vec.y )
+			if GlobalRef.immortalTiles.has( blockid ):
+				return # cancel if block shouldnt be moved
+			
+			var ins = load("res://items/electrical/spitter/spitter_block_spit.tscn").instantiate()
+			ins.position = planet.tileToPos( Vector2(tileX+vec.x,tileY+vec.y) )
+			ins.direction = Vector2( dir.x * -1, dir.y * -1 )
+			ins.planet = planet
+			ins.ogTile = Vector2( tileX+vec.x,tileY+vec.y )
+			ins.blockID = blockid
+			ins.info = planet.DATAC.getInfoData( tileX+vec.x,tileY+vec.y )
+			planet.entityContainer.add_child( ins )
+			planet.editTiles( { Vector2i(tileX+vec.x,tileY+vec.y) : 0 } )
 		"placer":
 			# if this is being ran, chest and empty space are already confirmed
 			var chestPos :Vector2i= Vector2i(tileX,tileY)+Vector2i(Vector2(-1,0).rotated( planet.DATAC.getInfoData(tileX,tileY) * (PI/2) ))
@@ -436,7 +472,19 @@ func doBlockAction(action:String,tileX:int,tileY:int,planet):
 			ins.velocity = Vector2(240,0).rotated( planet.DATAC.getInfoData(tileX,tileY) * (PI/2) + r)
 			
 			planet.entityContainer.add_child(ins)
+		"itemFramePlace":
+			var time = planet.DATAC.getTimeData(tileX,tileY)
+			if time > 0:
+				return
+			var itemID = time * -1
 			
+			var ins = load("res://items/blocks/furniture/itemFrame/item_frame_display.tscn").instantiate()
+			ins.position = planet.tileToPos(Vector2(tileX,tileY))
+			ins.itemId = itemID
+			ins.planet = planet
+			planet.entityContainer.add_child(ins)
+		
+		
 func checkForEmmission(id):
 	var d = theChunker.getBlockDictionary(id)
 	return d["lightEmmission"]

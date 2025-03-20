@@ -82,6 +82,11 @@ Dictionary BLOCK::onEnergize(int x, int y, PLANETDATA *planet, int dir){
     return changes;
 }
 
+Dictionary BLOCK::onLoad(int x, int y, PLANETDATA *planet, int dir){
+    Dictionary changes = {};
+    return changes;
+}
+
 void BLOCK::setLookUp(LOOKUPBLOCK *g){
     lookup = g;
 
