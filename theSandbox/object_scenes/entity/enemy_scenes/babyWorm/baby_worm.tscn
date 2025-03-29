@@ -75,3 +75,4 @@ stream = ExtResource("7_ldqsu")
 volume_db = 9.0
 pitch_scale = 0.39
 max_distance = 600.0
+bus = &"SFX"

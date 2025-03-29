@@ -44,7 +44,7 @@ func onRightClick():
 		19: # chair
 			
 			# return if wall is in the way
-			if !parent.wallCheck(get_local_mouse_position()):
+			if !parent.wallCheck(parent.get_local_mouse_position()):
 				return
 			
 			if parent.rotated != editBody.DATAC.getPositionLookup(tile.x,tile.y) and editBody is Planet:

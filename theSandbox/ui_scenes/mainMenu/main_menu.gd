@@ -10,6 +10,7 @@ var state :int=0
 # 6: controls + tutorial
 # 7: credits
 # 8: medals
+# 9: rename world
 
 @onready var selectedslot = $savefiles/ScrollContainer/VBoxContainer/saveslot
 
@@ -18,6 +19,8 @@ var waitUntilMusic :int= 0
 var holdToClearSave :int = 0
 
 var enableConsole :int = 0
+
+var renameWorldContainer:String = "save1"
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
@@ -72,6 +75,7 @@ func enterState(newstate):
 			$mainButtons.hide()
 			$createNewWorld.hide()
 			$areyousure.hide()
+			$renameWorld.hide()
 		0:
 			if state == 1:
 				$savefiles.hide()
@@ -98,6 +102,9 @@ func enterState(newstate):
 		8:
 			$mainButtons.hide()
 			$achievementsMenu.show()
+		9:
+			$renameWorld.show()
+			$savefiles.hide()
 	
 	$bg/AnimatedSprite2D.visible = newstate == 0
 	$bg/AnimatedSprite2D2.visible = newstate == 0
@@ -197,12 +204,17 @@ func _on_gobackcredits_pressed():
 func _on_medals_pressed():
 	enterState(8)
 
+func renameWorld(worldName:String,save:String):
+	$renameWorld/renameTextEdit.text = worldName
+	renameWorldContainer = save
+	enterState(9)
+
 
 func _on_achievements_menu_menu_closed():
 	$achievementsMenu.hide()
 	enterState(0)
 
-	
+
 func fullscreentoggle():
 	if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
@@ -215,3 +227,24 @@ func fullscreentoggle():
 	else:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
 	
+
+
+func _on_renamecancel_pressed():
+	enterState(1)
+
+
+func _on_renameconfirm_pressed():
+	var data = Saving.read_save(renameWorldContainer)
+	data["worldname"] = $renameWorld/renameTextEdit.text
+	Saving.write_save(renameWorldContainer,data)
+	_on_reload_saves_pressed()
+	enterState(1)
+
+
+func _on_rename_text_edit_text_changed():
+	$renameWorld/renameTextEdit.text = $renameWorld/renameTextEdit.text.replace("\n","")
+	$renameWorld/renameTextEdit.set_caret_column( $renameWorld/renameTextEdit.text.length() )
+	
+	if $renameWorld/renameTextEdit.text.length() > 20:
+		$renameWorld/renameTextEdit.text = $renameWorld/renameTextEdit.text.left(20)
+		$renameWorld/renameTextEdit.set_caret_column(20)

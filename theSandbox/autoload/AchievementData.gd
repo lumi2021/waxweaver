@@ -6,66 +6,77 @@ var medalDictionary = {
 		"name":"welcome!",
 		"desc":"create your first world!",
 		"ngMedal":82862,
+		"steam":"MEDAL_WELCOME",
 	},
 	"craftWorkbench":{
 		"icon":"res://ui_scenes/achievements/icons/medal2.png",
 		"name":"get back to work",
 		"desc":"craft a workbench",
 		"ngMedal":82863,
+		"steam":"MEDAL_WORKBENCH",
 	},
 	"obtainOre":{
 		"icon":"res://ui_scenes/achievements/icons/medal17.png",
 		"name":"rock and stone",
 		"desc":"obtain your first ore",
 		"ngMedal":82916,
+		"steam":"MEDAL_ORE",
 	},
 	"lootChest":{
 		"icon":"res://ui_scenes/achievements/icons/medal3.png",
 		"name":"lucky find",
 		"desc":"open a loot chest",
 		"ngMedal":82864,
+		"steam":"MEDAL_LOOT",
 	},
 	"equipArmor":{
 		"icon":"res://ui_scenes/achievements/icons/medal4.png",
 		"name":"lookin' good",
 		"desc":"equip a piece of armor",
 		"ngMedal":82865,
+		"steam":"MEDAL_ARMOR",
 	},
 	"equipTrinket":{
 		"icon":"res://ui_scenes/achievements/icons/medal5.png",
 		"name":"run faster, jump higher",
 		"desc":"equip a trinket",
 		"ngMedal":82866,
+		"steam":"MEDAL_TRINKET",
 	},
 	"fish":{
 		"icon":"res://ui_scenes/achievements/icons/medal6.png",
 		"name":"how does it fish...",
 		"desc":"go fishing",
 		"ngMedal":82867,
+		"steam":"MEDAL_FISH",
 	},
 	"killMimic":{
 		"icon":"res://ui_scenes/achievements/icons/medal7.png",
 		"name":"unlucky find",
 		"desc":"kill a mimic",
 		"ngMedal":82869,
+		"steam":"MEDAL_MIMIC",
 	},
 	"craftStaff":{
 		"icon":"res://ui_scenes/achievements/icons/medal8.png",
 		"name":"wizard shee",
 		"desc":"craft a staff of any type",
 		"ngMedal":82870,
+		"steam":"MEDAL_STAFF",
 	},
 	"findVanity":{
 		"icon":"res://ui_scenes/achievements/icons/medal9.png",
 		"name":"get dressed",
 		"desc":"find a vanity gift and open it",
 		"ngMedal":82868,
+		"steam":"MEDAL_VANITY",
 	},
 	"harvestCrop":{
 		"icon":"res://ui_scenes/achievements/icons/medal10.png",
 		"name":"dude it's just like minecraft !",
 		"desc":"grow and harvest a crop",
 		"ngMedal":82871,
+		"steam":"MEDAL_FARM",
 	},
 	
 	"findCore":{
@@ -73,36 +84,42 @@ var medalDictionary = {
 		"name":"amethyst geode",
 		"desc":"dig down until you no longer can",
 		"ngMedal":82872,
+		"steam":"MEDAL_CORE",
 	},
 	"makePurchase":{
 		"icon":"res://ui_scenes/achievements/icons/medal19.png",
 		"name":"ebay dot com",
 		"desc":"buy something at the shop",
 		"ngMedal":82982,
+		"steam":"MEDAL_SHOP",
 	},
 	"takeFall":{
 		"icon":"res://ui_scenes/achievements/icons/medal12.png",
 		"name":"yeowch !!",
 		"desc":"take 90+ points of fall damage and barely live",
 		"ngMedal":82873,
+		"steam":"MEDAL_FALL",
 	},
 	"defeatPraffin":{
 		"icon":"res://ui_scenes/achievements/icons/medal14.png",
 		"name":"timmy bigness",
 		"desc":"defeat the big praffin",
 		"ngMedal":82875,
+		"steam":"MEDAL_BOSS_PRAFFIN",
 	},
 	"researchStation":{
 		"icon":"res://ui_scenes/achievements/icons/medal16.png",
 		"name":"i freaking looove science !!!",
 		"desc":"create the research station",
 		"ngMedal":82876,
+		"steam":"MEDAL_TRINKETSTATION",
 	},
 	"defeatWorm":{
 		"icon":"res://ui_scenes/achievements/icons/medal15.png",
 		"name":"worm odyssey",
 		"desc":"defeat the giant worm",
 		"ngMedal":82877,
+		"steam":"MEDAL_BOSS_WORM",
 	},
 	
 	"haveMoney":{
@@ -110,6 +127,7 @@ var medalDictionary = {
 		"name":"money smart",
 		"desc":"have over 5000 money in the bank",
 		"ngMedal":82874,
+		"steam":"MEDAL_MONEY",
 	},
 	
 	"defeatminiboss":{
@@ -117,6 +135,7 @@ var medalDictionary = {
 		"name":"secret sorcerer",
 		"desc":"defeat the magician mini boss",
 		"ngMedal":82984,
+		"steam":"MEDAL_BOSS_WIZARD",
 	},
 	
 	"defeatFinal":{
@@ -124,6 +143,7 @@ var medalDictionary = {
 		"name":"weaver",
 		"desc":"defeat the final boss and beat the game",
 		"ngMedal":82983,
+		"steam":"MEDAL_BOSS_FINAL",
 	},
 	
 }
@@ -162,6 +182,11 @@ func unlockMedal(medalName:String):
 	# not efficient but it will make sure if players play on itch first they
 	# will still be able to unlock medals
 	
+	#steam achievement
+	if GlobalRef.steamInitialized:
+		Steam.setAchievement(medal["steam"])
+		Steam.storeStats()
+	
 	if !unlockedmedals.has(medalName):
 		var ins = popupscene.instantiate()
 		ins.medalName = medalName
@@ -191,6 +216,8 @@ func craftingItemUnlocks(itemId:int):
 		3129:
 			AchievementData.unlockMedal("craftStaff")
 		3180:
+			AchievementData.unlockMedal("craftStaff")
+		3184:
 			AchievementData.unlockMedal("craftStaff")
 
 func _exit_tree():

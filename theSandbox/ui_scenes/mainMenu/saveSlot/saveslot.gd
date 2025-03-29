@@ -120,3 +120,6 @@ func deleteSave():
 
 func _on_download_pressed():
 	Saving.downloadsave(saveFile)
+
+func _on_rename_world_pressed():
+	menu.renameWorld( $info/h/worldName.text,saveFile )
