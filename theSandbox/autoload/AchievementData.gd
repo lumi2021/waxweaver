@@ -184,8 +184,7 @@ func unlockMedal(medalName:String):
 	
 	#steam achievement
 	if GlobalRef.steamInitialized:
-		Steam.setAchievement(medal["steam"])
-		Steam.storeStats()
+		Steamworks.unlockmedal(medal["steam"])
 	
 	if !unlockedmedals.has(medalName):
 		var ins = popupscene.instantiate()

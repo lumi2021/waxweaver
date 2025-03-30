@@ -61,11 +61,7 @@ var commandLineAvailable :bool = false
 var steamInitialized:bool=false
 
 func _ready():
-	#3599070 - waxweaver
-	var initialize_response: Dictionary = Steam.steamInitEx(true,3599070)
-	print( initialize_response )
-	steamInitialized = initialize_response["status"] == 0
-			
+	pass
 	
 func clearEverything():
 	player = null
