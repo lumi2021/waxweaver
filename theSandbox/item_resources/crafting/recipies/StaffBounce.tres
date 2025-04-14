@@ -25,3 +25,4 @@ amountToCraft = 1
 ingredients = Array[ExtResource("1_dpsif")]([SubResource("Resource_c1e61"), SubResource("Resource_f0wbp"), SubResource("Resource_p5fip")])
 requiresStation = true
 station = 78
+recipieType = 2

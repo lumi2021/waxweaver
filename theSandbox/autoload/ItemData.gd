@@ -152,6 +152,9 @@ var data = {
 	161:load("res://items/electrical/spitter/Sucker.tres"),
 	162:load("res://items/blocks/furniture/itemFrame/itemframe.tres"),
 	163:load("res://items/blocks/furniture/other/PinkTable.tres"),
+	164:load("res://items/blocks/foliage/LeavesPlaceable.tres"),
+	165:load("res://items/blocks/foliage/leavespineplaceable.tres"),
+	166:load("res://items/electrical/Rubber.tres"),
 	
 	########## item ids ##################
 	3000:load("res://items/tools/flimsy/FlimsySword.tres"), # flimsy tools

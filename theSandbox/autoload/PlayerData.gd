@@ -30,6 +30,9 @@ var manaMax :int= 250
 var mana :int = 250
 var manaIdleTicks :int = 0
 
+var displayedCrafting :int = -1
+signal changedDisplayedCrafting
+
 func _ready():
 	initializeInventory()
 
@@ -562,3 +565,7 @@ func spendMoney(amount:int) -> bool: # returns false if not enough cash
 	money -= amount
 	emit_signal("updateMoney")
 	return true
+
+func updateCraftingDisplay(n):
+	displayedCrafting = n
+	emit_signal("changedDisplayedCrafting")

@@ -71,6 +71,8 @@ public:
 	int airOrCaveAir(int x,int y, PLANETDATA *planet);
 	double getBlockDistance(int x, int y, PLANETDATA *planet);
 
+	void simulateLightOnly(PLANETDATA *planet,Vector2i pos,float daylight);
+
 	void resetLight(PLANETDATA *planet,Vector2i pos);
 	Dictionary runOnLoad(PLANETDATA *planet,Vector2i pos);
 

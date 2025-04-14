@@ -191,6 +191,9 @@ LOOKUPBLOCK::LOOKUPBLOCK() {
     penis[161] = new BLOCKSUCKER();
     penis[162] = new BLOCKITEMFRAME();
     penis[163] = new BLOCKTABLEPINK();
+    penis[164] = new BLOCKLEAVESSTATIC();
+    penis[165] = new BLOCKLEAVESSTATICPINE();
+    penis[166] = new BLOCKRUBBER();
 
     for(BLOCK *i : penis){ // i increase automatically !
         i->setLookUp(this);

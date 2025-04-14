@@ -495,3 +495,105 @@ func getLookup():
 func getBlockTexture(blockID) -> Texture2D:
 	var d = theChunker.getBlockDictionary(blockID)
 	return d["texture"]
+
+func takeBigSreenShot(planet:Planet):
+	
+	var range :int= 96 # in chunks
+	var lightSimAmount :int = 64
+	var bigimageTile = Image.create(range * 64,range * 64,false,Image.FORMAT_RGBA8)
+	var bigimage = Image.create(range * 64,range * 64,false,Image.FORMAT_RGBA8)
+	
+	
+	var shape = RectangleShape2D.new() # this is so thing doesn't argue
+	shape.size = Vector2(8,8)
+	var body :Node2D = Node2D.new()
+	
+	GlobalRef.sendChat("Rendering planet...")
+	await get_tree().process_frame
+	
+	for x in range(range):
+		for y in range(range):
+			var pos = Vector2( x,y )
+			var images :Array= theChunker.generateTexturesFromData(planet.DATAC,pos,body,shape,false)
+			var waterImage :Array= theChunker.drawLiquid(planet.DATAC,pos,false)
+			
+			bigimage.blend_rect( images[1],Rect2(0,0,64,64),Vector2i(x*64,y*64) )
+			
+			var shadow :Image = Image.create(64,64,false,Image.FORMAT_RGBA8)
+			for xx in range(64):
+				for yy in range(64):
+					
+					if xx + x == 62 + range:
+						continue
+					if yy + y == 62 + range:
+						continue
+					
+					if images[0].get_pixel(xx,yy).a > 0.5:
+						shadow.set_pixel(xx,yy, Color(0,0,0,0.4 ) )
+					if images[2].get_pixel(xx,yy).a > 0.5:
+						shadow.set_pixel(xx,yy, Color(0,0,0,0.4 ) )
+			bigimageTile.blend_rect( shadow,Rect2(0,0,64,64),Vector2i(x*64,y*64)+Vector2i(1,1) )
+			bigimageTile.blend_rect( images[0],Rect2(0,0,64,64),Vector2i(x*64,y*64) )
+			bigimageTile.blend_rect( images[2],Rect2(0,0,64,64),Vector2i(x*64,y*64) )
+			bigimageTile.blend_rect( waterImage[0],Rect2(0,0,64,64),Vector2i(x*64,y*64) )
+	
+	bigimage.blend_rect(bigimageTile,Rect2i(0,0,range*64,range*64),Vector2i.ZERO  )
+	
+	GlobalRef.sendChat("Simulating light...")
+	await get_tree().process_frame
+	
+	for l in range(lightSimAmount):
+		for x in range(range):
+			for y in range(range):
+				var pos = Vector2( x,y )
+				theChunker.simulateLightOnly( planet.DATAC,pos,GlobalRef.daylightMult )
+	
+	GlobalRef.sendChat("Generating light image...")
+	await get_tree().process_frame
+	
+	var lightimage :Image= Image.create(range * 8,range * 8,false,Image.FORMAT_RGBA8)
+	
+	for x in range(range*8):
+		for y in range(range*8):
+			var c = abs(planet.DATAC.getLightData(x,y))
+			lightimage.set_pixel(x,y, Color(c,c,c,1.0) )
+	lightimage.resize(range*64,range*64,1)
+	
+	GlobalRef.sendChat("Shading planet... This could take a while...")
+	await get_tree().process_frame
+	await get_tree().process_frame
+	
+	for x in range(range * 64):
+		for y in range(range * 64):
+			var baseColor :Color= bigimage.get_pixel(x,y)
+			var lightColor :Color= lightimage.get_pixel(x,y)
+			
+			# basically doing the shader code
+			lightColor.r *= 1.125
+			lightColor.g *= 1.05
+			lightColor.b *= 1.115
+			
+			lightColor.r = clamp(lightColor.r,0.0,1.0)
+			lightColor.g = clamp(lightColor.g,0.0,1.0)
+			lightColor.b = clamp(lightColor.b,0.0,1.0)
+			
+			lightColor.r = floor(lightColor.r*16.0)/16.0
+			lightColor.g = floor(lightColor.g*16.0)/16.0
+			lightColor.b = floor(lightColor.b*16.0)/16.0
+			
+			if lightColor.r > 0.9:
+				lightColor.r = 1.0
+			if lightColor.g > 0.9:
+				lightColor.g = 1.0
+			if lightColor.b > 0.9:
+				lightColor.b = 1.0
+			
+			bigimage.set_pixel(x,y, baseColor * lightColor)
+	
+	var filename = str( int(Time.get_unix_time_from_system()) )
+	DirAccess.make_dir_recursive_absolute("user://screenshots/")
+	bigimage.save_png("user://screenshots/" + filename + ".png")
+	body.queue_free()
+	
+	GlobalRef.sendChat("Complete! Image saved at user://screenshots/"+ filename + ".png")
+	Saving.open_site(ProjectSettings.globalize_path("user://screenshots"))

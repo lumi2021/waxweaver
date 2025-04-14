@@ -18,6 +18,7 @@ func _ready():
 	displayRecipe()
 	updateCraftability()
 	PlayerData.updateInventory.connect(updateCraftability)
+	PlayerData.changedDisplayedCrafting.connect(changeVisibility)
 	parent.scannedStations.connect(changeVisibility)
 
 func displayRecipe():
@@ -50,7 +51,10 @@ func displayCanCraft(canCraft):
 func changeVisibility():
 	var hasStation = checkForStation()
 	var showw = isCraftable or parent.showUncraftables
-	visible = showw and hasStation
+	var org = PlayerData.displayedCrafting == recipe.recipieType
+	if PlayerData.displayedCrafting == -1:
+		org = true
+	visible = showw and hasStation and org
 
 func checkForStation():
 	if recipe.requiresStation:

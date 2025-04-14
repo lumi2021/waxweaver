@@ -4,6 +4,7 @@ extends Node2D
 
 var deals = [
 	{"id":7,"price":5,"stock":99},
+	{"id":3,"price":1,"stock":9900},
 	{"id":15,"price":2,"stock":99},
 	{"id":17,"price":3,"stock":99},
 	{"id":29,"price":8,"stock":99},

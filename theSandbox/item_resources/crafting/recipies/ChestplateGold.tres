@@ -15,3 +15,4 @@ amountToCraft = 1
 ingredients = Array[ExtResource("1_wrs7g")]([SubResource("Resource_8ovfj")])
 requiresStation = true
 station = 20
+recipieType = 3

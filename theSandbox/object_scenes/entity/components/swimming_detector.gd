@@ -5,12 +5,12 @@ extends Node2D
 var body = null
 var wasInWater = false
 
-var volume = 1.0
+var volume = 0.7
 
 func _ready():
 	if isEnemy:
 		body = get_parent().planet
-		volume = 0.5
+		volume = 0.32
 
 func _process(delta):
 	if !is_instance_valid(body):

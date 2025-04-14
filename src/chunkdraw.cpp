@@ -13,6 +13,7 @@ void CHUNKDRAW::_bind_methods() {
     ClassDB::bind_method(D_METHOD("scanBlockOpen","planetDATAC","x","y","dir"), &CHUNKDRAW::scanBlockOpen);
     ClassDB::bind_method(D_METHOD("returnLookup"), &CHUNKDRAW::returnLookup);
     ClassDB::bind_method(D_METHOD("resetLight","planetDatac","pos"), &CHUNKDRAW::resetLight);
+    ClassDB::bind_method(D_METHOD("simulateLightOnly","planetDatac","pos","daylight"), &CHUNKDRAW::simulateLightOnly);
     ClassDB::bind_method(D_METHOD("runOnLoad","planetDatac","pos"), &CHUNKDRAW::runOnLoad);
     ADD_SIGNAL(MethodInfo("chunkDrawn", PropertyInfo(Variant::OBJECT, "node"), PropertyInfo(Variant::OBJECT, "image"), PropertyInfo(Variant::OBJECT, "backImage")));
     ADD_SIGNAL(MethodInfo("attemptSpawnEnemy", PropertyInfo(Variant::OBJECT, "planetData") , PropertyInfo(Variant::VECTOR2, "tile") , PropertyInfo(Variant::INT, "id") , PropertyInfo(Variant::INT, "blockSide") ));
@@ -410,6 +411,77 @@ void CHUNKDRAW::resetLight(PLANETDATA *planet,Vector2i pos){
             int worldX = x+(pos.x*8);
             int worldY = y+(pos.y*8);
             planet->setLightData(worldX,worldY,0.0);
+        }
+    }
+}
+
+void CHUNKDRAW::simulateLightOnly(PLANETDATA *planet,Vector2i pos,float daylight){
+
+    for(int x = 0; x < 8; x++){
+        for(int y = 0; y < 8; y++){
+            int worldX = x+(pos.x*8);
+            int worldY = y+(pos.y*8);
+
+            int planetSize = planet->planetSize; // GETS PASSED IN
+            
+            int blockID = planet->getTileData(worldX,worldY);
+            int bgID = planet->getBGData(worldX,worldY);
+
+            int blockSide = planet->getPositionLookup(worldX,worldY);
+            
+            double cLight = planet->getLightData(worldX,worldY);
+            if (cLight < 0.0){
+                planet->setLightData(worldX,worldY,std::abs(cLight));
+                continue;
+            }
+
+            double lightL = std::abs(planet->getLightData(worldX - 1,worldY)); // get surrounding light
+
+            double lightR = std::abs(planet->getLightData(worldX + 1,worldY));
+                
+            double lightB = std::abs(planet->getLightData(worldX,worldY + 1));
+
+            double lightT = std::abs(planet->getLightData(worldX,worldY - 1));
+
+            double lightEmmission = cock->getLightEmmission(blockID); // get current block emmision
+
+            bool passthru = cock->isTransparent(blockID);
+            if( passthru ){
+                if (lightEmmission < 0.01){
+                    blockID = airOrCaveAir(worldX,worldY,planet);
+                }
+                else if (lightEmmission < (5.0 * daylight) && bgID < 2){
+                    blockID = airOrCaveAir(worldX,worldY,planet);
+                }
+            
+            } // make something have the same properties as air if transparent UNLESS it emits light
+
+            double mutliplier = cock->getLightMultiplier(blockID);
+            
+            double water = planet->getWaterData(worldX,worldY);
+
+            if (std::abs(water)> 0.2){
+                mutliplier = 0.75;
+            }
+
+            double avgn = (lightL + lightR + lightB + lightT)/4.0;
+            double newLight = ( std::max({ lightB , lightL , lightR , lightT }) + avgn  ) * mutliplier * 0.5;
+
+            if(blockID == 0){
+                lightEmmission = 5.0 * daylight;
+                if(bgID > 1){
+                    lightEmmission = 0.0;
+                }
+                if (std::abs(water)> 0.2){
+                    lightEmmission = 0.0;
+                }
+            }
+
+            newLight = std::max(newLight,lightEmmission);
+
+            planet->setLightData(worldX,worldY,newLight);
+
+
         }
     }
 }

@@ -22,6 +22,7 @@ var longassstring :PackedStringArray
 @onready var hb = $BossHealthbar/hb
 
 var shopPosition :Vector2= Vector2.ZERO
+var screenshotTick :int = 0 # just to make sure screenshot gets delayed
 
 func _ready():
 	
@@ -62,6 +63,8 @@ func _process(delta):
 		if !invOpen:
 			PlayerData.closeChest()
 			$shop.hide()
+			PlayerData.updateCraftingDisplay(-1)
+			$Menu/changerecipedisplay/craftdisplay.frame = 0
 		$ItemPreview.position.x = (194 * int(invOpen)) + (3 * (1-int(invOpen) ))
 	
 	$ChestInventory.visible = PlayerData.chestOBJ != null
@@ -110,6 +113,14 @@ func _process(delta):
 	
 	# fps counter
 	$fps.text = "fps: " + str(1.0/delta ).left(4)
+	
+	if Input.is_action_pressed("screenshot"):
+		screenshotTick += 1
+		if screenshotTick > 100:
+			BlockData.takeBigSreenShot(GlobalRef.currentPlanet)
+			screenshotTick = -99999
+	if Input.is_action_just_released("screenshot"):
+		screenshotTick = 0
 	
 func clickedSlot(slot):
 	if !invOpen:
@@ -211,6 +222,7 @@ func transferSlot(slot):
 			PlayerData.inventory[slot][1] = amountLeft
 		else:
 			PlayerData.inventory[slot] = [-1,-1]
+		PlayerData.saveChestString()
 		PlayerData.emit_signal("updateInventory")
 		SoundManager.playSound("inventory/pickupItem",GlobalRef.player.global_position,1.0,0.12,"INVENTORY")
 		return
@@ -224,6 +236,7 @@ func transferSlot(slot):
 			PlayerData.inventory[slot][1] = amountLeft
 		else:
 			PlayerData.inventory[slot] = [-1,-1]
+		PlayerData.saveChestString()
 		PlayerData.emit_signal("updateInventory")
 		SoundManager.playSound("inventory/pickupItem",GlobalRef.player.global_position,1.0,0.12,"INVENTORY")
 		return
@@ -586,3 +599,31 @@ func showShop():
 
 func isShopVisible():
 	return $shop.visible
+
+
+func _on_changerecipedisplay_pressed():
+	var current = PlayerData.displayedCrafting
+	current += 1
+	if current == 7:
+		current = -1
+	
+	match current:
+		-1:
+			GlobalRef.sendChat("displaying recipes for: everything")
+		0:
+			GlobalRef.sendChat("displaying recipes for: blocks")
+		1:
+			GlobalRef.sendChat("displaying recipes for: walls")
+		2:
+			GlobalRef.sendChat("displaying recipes for: tools/weapons")
+		3:
+			GlobalRef.sendChat("displaying recipes for: equipables")
+		4:
+			GlobalRef.sendChat("displaying recipes for: food")
+		5:
+			GlobalRef.sendChat("displaying recipes for: furniture")
+		6:
+			GlobalRef.sendChat("displaying recipes for: electrical")
+	
+	$Menu/changerecipedisplay/craftdisplay.frame = current + 1
+	PlayerData.updateCraftingDisplay(current)

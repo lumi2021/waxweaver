@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://daqevwntvcp3o"]
+[gd_scene load_steps=37 format=3 uid="uid://daqevwntvcp3o"]
 
 [ext_resource type="Script" path="res://ui_scenes/playerHUD/banner/hotbar_banner.gd" id="1_iyyfi"]
 [ext_resource type="PackedScene" uid="uid://cr7y1t1hoywt1" path="res://ui_scenes/playerHUD/inventory/inventory_slot.tscn" id="2_il2kt"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://s5exoi1grx6o" path="res://ui_scenes/playerHUD/armor/trinketicon.png" id="8_tkheo"]
 [ext_resource type="Texture2D" uid="uid://q1g4ghc2dp45" path="res://ui_scenes/playerHUD/crafting/visibleEyes.png" id="9_8uxfg"]
 [ext_resource type="Texture2D" uid="uid://2bhi0hinykfv" path="res://ui_scenes/playerHUD/armor/vanityHat.png" id="9_j450m"]
+[ext_resource type="Texture2D" uid="uid://day6i0jtfrkbl" path="res://ui_scenes/playerHUD/crafting/organizecategory.png" id="13_mdjvp"]
 [ext_resource type="Texture2D" uid="uid://dsx73vuxh2j7g" path="res://ui_scenes/playerHUD/bossBar/bossBarEmpty.png" id="13_wl3ai"]
 [ext_resource type="Texture2D" uid="uid://dm3wgtc335j2b" path="res://ui_scenes/playerHUD/mana/bar under.png" id="14_gob8w"]
 [ext_resource type="Texture2D" uid="uid://ew4r1qdxj6uk" path="res://ui_scenes/playerHUD/bossBar/bossBarFull.png" id="14_ooqiu"]
@@ -485,6 +486,19 @@ offset_bottom = 142.0
 text = "$99999"
 horizontal_alignment = 1
 
+[node name="changerecipedisplay" type="Button" parent="Menu"]
+self_modulate = Color(1, 1, 1, 0)
+offset_left = 165.0
+offset_top = 143.0
+offset_right = 175.0
+offset_bottom = 151.0
+tooltip_text = "change displayed recipes"
+
+[node name="craftdisplay" type="Sprite2D" parent="Menu/changerecipedisplay"]
+texture = ExtResource("13_mdjvp")
+centered = false
+hframes = 8
+
 [node name="HealthBar" type="Node2D" parent="."]
 position = Vector2(395, 7)
 
@@ -773,4 +787,5 @@ visible = false
 position = Vector2(2, 156)
 
 [connection signal="pressed" from="Menu/craftingViSToggle" to="." method="_on_crafting_vi_s_toggle_pressed"]
+[connection signal="pressed" from="Menu/changerecipedisplay" to="." method="_on_changerecipedisplay_pressed"]
 [connection signal="text_changed" from="Cheat/TextEdit" to="." method="_on_text_edit_text_changed"]

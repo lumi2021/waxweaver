@@ -15,3 +15,4 @@ amountToCraft = 1
 ingredients = Array[ExtResource("1_bdief")]([SubResource("Resource_2xhqb")])
 requiresStation = true
 station = 129
+recipieType = 3
