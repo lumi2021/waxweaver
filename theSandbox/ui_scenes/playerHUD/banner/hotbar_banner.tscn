@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://daqevwntvcp3o"]
+[gd_scene load_steps=39 format=3 uid="uid://daqevwntvcp3o"]
 
 [ext_resource type="Script" path="res://ui_scenes/playerHUD/banner/hotbar_banner.gd" id="1_iyyfi"]
 [ext_resource type="PackedScene" uid="uid://cr7y1t1hoywt1" path="res://ui_scenes/playerHUD/inventory/inventory_slot.tscn" id="2_il2kt"]
@@ -20,8 +20,10 @@
 [ext_resource type="Texture2D" uid="uid://ew4r1qdxj6uk" path="res://ui_scenes/playerHUD/bossBar/bossBarFull.png" id="14_ooqiu"]
 [ext_resource type="Texture2D" uid="uid://2p44fbnlgjrd" path="res://ui_scenes/playerHUD/mana/bar.png" id="15_h0jug"]
 [ext_resource type="Script" path="res://ui_scenes/playerHUD/banner/hb.gd" id="15_odhhx"]
+[ext_resource type="Texture2D" uid="uid://bx5lqwndcg5cl" path="res://ui_scenes/creativeMenu/toggleCreative.png" id="15_yyi2s"]
 [ext_resource type="Texture2D" uid="uid://csibj827o7h0h" path="res://ui_scenes/mainMenu/saveSlot/rect.png" id="16_d7dbx"]
 [ext_resource type="PackedScene" uid="uid://b1mdxx5hdn5h0" path="res://ui_scenes/shop/shop.tscn" id="21_cffew"]
+[ext_resource type="PackedScene" uid="uid://ksl0y6max404" path="res://ui_scenes/creativeMenu/creative_menu.tscn" id="23_a1nnx"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_0g03e"]
 resource_local_to_scene = true
@@ -499,6 +501,25 @@ texture = ExtResource("13_mdjvp")
 centered = false
 hframes = 8
 
+[node name="CreativeMenu" parent="Menu" instance=ExtResource("23_a1nnx")]
+visible = false
+position = Vector2(3, 155)
+
+[node name="creativetoggle" type="Node2D" parent="Menu"]
+visible = false
+position = Vector2(177, 128)
+
+[node name="ToggleCreative" type="Sprite2D" parent="Menu/creativetoggle"]
+texture = ExtResource("15_yyi2s")
+
+[node name="toggleCreative" type="Button" parent="Menu/creativetoggle"]
+modulate = Color(1, 1, 1, 0)
+offset_left = -12.0
+offset_top = -8.0
+offset_right = 9.0
+offset_bottom = 12.0
+tooltip_text = "toggle creative menu"
+
 [node name="HealthBar" type="Node2D" parent="."]
 position = Vector2(395, 7)
 
@@ -788,4 +809,5 @@ position = Vector2(2, 156)
 
 [connection signal="pressed" from="Menu/craftingViSToggle" to="." method="_on_crafting_vi_s_toggle_pressed"]
 [connection signal="pressed" from="Menu/changerecipedisplay" to="." method="_on_changerecipedisplay_pressed"]
+[connection signal="pressed" from="Menu/creativetoggle/toggleCreative" to="." method="_on_toggle_creative_pressed"]
 [connection signal="text_changed" from="Cheat/TextEdit" to="." method="_on_text_edit_text_changed"]

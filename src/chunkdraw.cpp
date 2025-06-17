@@ -15,6 +15,8 @@ void CHUNKDRAW::_bind_methods() {
     ClassDB::bind_method(D_METHOD("resetLight","planetDatac","pos"), &CHUNKDRAW::resetLight);
     ClassDB::bind_method(D_METHOD("simulateLightOnly","planetDatac","pos","daylight"), &CHUNKDRAW::simulateLightOnly);
     ClassDB::bind_method(D_METHOD("runOnLoad","planetDatac","pos"), &CHUNKDRAW::runOnLoad);
+    ClassDB::bind_method(D_METHOD("runOnLoadSingle","planetDatac","pos"), &CHUNKDRAW::runOnLoadSingle);
+
     ADD_SIGNAL(MethodInfo("chunkDrawn", PropertyInfo(Variant::OBJECT, "node"), PropertyInfo(Variant::OBJECT, "image"), PropertyInfo(Variant::OBJECT, "backImage")));
     ADD_SIGNAL(MethodInfo("attemptSpawnEnemy", PropertyInfo(Variant::OBJECT, "planetData") , PropertyInfo(Variant::VECTOR2, "tile") , PropertyInfo(Variant::INT, "id") , PropertyInfo(Variant::INT, "blockSide") ));
 }
@@ -501,6 +503,18 @@ Dictionary CHUNKDRAW::runOnLoad(PLANETDATA *planet,Vector2i pos){
             changes.merge( cock->runOnLoad(worldX,worldY,planet,blockSide,blockID) );
         }
     }
+
+    return changes;
+}
+
+Dictionary CHUNKDRAW::runOnLoadSingle(PLANETDATA *planet,Vector2i pos){
+
+    Dictionary changes = {};
+
+    int blockID = planet->getTileData(pos.x,pos.y);
+    int blockSide = planet->getPositionLookup(pos.x,pos.y);
+
+    changes.merge( cock->runOnLoad(pos.x,pos.y,planet,blockSide,blockID) );
 
     return changes;
 }

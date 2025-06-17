@@ -14,6 +14,8 @@ void LOOKUPBLOCK::_bind_methods() {
     ClassDB::bind_method(D_METHOD("isGravityRotate","id"), &LOOKUPBLOCK::isGravityRotate);
     ClassDB::bind_method(D_METHOD("getTextureImage","id"), &LOOKUPBLOCK::getTextureImage);
     ClassDB::bind_method(D_METHOD("getMiningLevel","id"), &LOOKUPBLOCK::getMiningLevel);
+
+    ClassDB::bind_method(D_METHOD("runOnLoad","x","y","planet","dir","blockID"), &LOOKUPBLOCK::runOnLoad);
 }
 
 // ADD BLOCKS TO ARRAY IN HERE
@@ -194,6 +196,8 @@ LOOKUPBLOCK::LOOKUPBLOCK() {
     penis[164] = new BLOCKLEAVESSTATIC();
     penis[165] = new BLOCKLEAVESSTATICPINE();
     penis[166] = new BLOCKRUBBER();
+    penis[167] = new BLOCKARMORSTAND();
+    penis[168] = new BLOCKPINWHEEL();
 
     for(BLOCK *i : penis){ // i increase automatically !
         i->setLookUp(this);

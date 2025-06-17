@@ -11,7 +11,7 @@ amount = 1
 [resource]
 script = ExtResource("1_80if1")
 itemToCraft = 3031
-amountToCraft = 1
+amountToCraft = 2
 ingredients = Array[ExtResource("1_voaxx")]([SubResource("Resource_vb8ct")])
 requiresStation = true
 station = 46

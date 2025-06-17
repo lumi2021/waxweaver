@@ -18,8 +18,14 @@ var red :bool= false
 @onready var partScene = preload("res://object_scenes/particles/explosion/explosion_particle.tscn")
 
 var immortalTiles :Array[int]= [5,63,34,128,113,147]
+var itemData
+
+var stuck :bool = false
 
 func _ready():
+	
+	$sprite.texture = itemData.texture
+	
 	setVelocity(vol)
 	
 	var tween :Tween= get_tree().create_tween()
@@ -40,7 +46,11 @@ func _process(delta):
 	else:
 		sprite.rotate( vel.x * delta * 0.1 )
 	
+		
+	if stuck:
+		vel = Vector2.ZERO
 	setVelocity(vel)
+	
 	var collision = move_and_collide(velocity*delta)
 	if collision:
 		velocity = velocity.bounce(collision.get_normal())
@@ -49,6 +59,10 @@ func _process(delta):
 		if !isOnFloor():
 			weed.x *= bounce
 		setVelocity(weed)
+		
+		if itemData.sticky:
+			stuck = true
+			
 	
 	
 	tick += delta

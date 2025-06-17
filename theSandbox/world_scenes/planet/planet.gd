@@ -153,6 +153,7 @@ func editTiles(changeCommit,doneByPlayer:bool=false):
 				BlockData.breakBlock(change.x,change.y,self,save,DATAC.getInfoData(change.x,change.y),doneByPlayer)
 				DATAC.setInfoData(change.x,change.y,0)
 				DATAC.setTimeData(change.x,change.y,GlobalRef.globalTick)
+				
 				if chestDictionary.has(Vector2(change.x,change.y)):
 					var p = Vector2(change.x,change.y)
 					PlayerData.dropChestContainer(self,p,chestDictionary[p])
@@ -236,6 +237,12 @@ func generateTerrain():
 			BlockData.theGenerator.generateLunarPlanet(DATAC,noise)
 			return
 		"lattice":
+			BlockData.theGenerator.generateLatticePlanet(DATAC,noise)
+			return
+		"skyblockhardcore":
+			BlockData.theGenerator.generateLunarPlanet(DATAC,noise)
+			return
+		"latticehardcore":
 			BlockData.theGenerator.generateLatticePlanet(DATAC,noise)
 			return
 	

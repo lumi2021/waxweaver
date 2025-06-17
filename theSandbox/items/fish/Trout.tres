@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ItemFood" load_steps=3 format=3 uid="uid://cyp8xwhapg0w6"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemFood.gd" id="1_fvs5m"]
+[ext_resource type="Texture2D" uid="uid://cdnawa6f1tk0t" path="res://items/fish/trout.png" id="2_dsdah"]
+
+[resource]
+script = ExtResource("1_fvs5m")
+healingAmount = 3
+eatTime = 1.2
+particleColor = Color(0.721569, 0.552941, 0.509804, 1)
+statusInflictors = Array[Resource("res://object_scenes/specialResource/statusEffects/StatusInflictor.gd")]([])
+itemName = "Trout"
+subtext = ""
+desc = ""
+texture = ExtResource("2_dsdah")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

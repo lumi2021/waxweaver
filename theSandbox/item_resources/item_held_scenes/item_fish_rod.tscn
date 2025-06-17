@@ -16,7 +16,7 @@ handSprite = NodePath("pivot/handSprite")
 
 [node name="pivot" type="Node2D" parent="."]
 
-[node name="WoodRodNoLine" type="Sprite2D" parent="pivot"]
+[node name="sprite" type="Sprite2D" parent="pivot"]
 position = Vector2(10, -2)
 texture = ExtResource("2_le6rl")
 

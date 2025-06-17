@@ -60,6 +60,7 @@ func launchTossable():
 			ins.radius = itemData.radius
 			ins.bounce = itemData.bounce
 			ins.delay = itemData.delay
+			ins.itemData = itemData
 			ins.vol = getLocalMouse().normalized() * itemData.speed
 			getWorld().add_child(ins)
 		return

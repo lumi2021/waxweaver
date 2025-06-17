@@ -155,6 +155,8 @@ var data = {
 	164:load("res://items/blocks/foliage/LeavesPlaceable.tres"),
 	165:load("res://items/blocks/foliage/leavespineplaceable.tres"),
 	166:load("res://items/electrical/Rubber.tres"),
+	167:load("res://items/blocks/furniture/armorstand/ArmorStand.tres"),
+	168:load("res://items/blocks/furniture/pinwheel/Pinwheel.tres"),
 	
 	########## item ids ##################
 	3000:load("res://items/tools/flimsy/FlimsySword.tres"), # flimsy tools
@@ -409,6 +411,14 @@ var data = {
 	3213:load("res://items/weapons/arrows/FossilArrow.tres"),
 	3214:load("res://items/weapons/arrows/FlameArrow.tres"),
 	3215:load("res://items/weapons/staffs/truefirebolt/TrueFirebolt.tres"),
+	
+	3216:load("res://items/tools/fishingRods/IronRod.tres"),
+	3217:load("res://items/tools/fishingRods/FiberFishingRod.tres"),
+	3218:load("res://items/fish/Trout.tres"),
+	3219:load("res://items/fish/Chub.tres"),
+	3220:load("res://items/tools/explosives/stickyBomb.tres"),
+	3221:load("res://items/tools/explosives/dynamite.tres"),
+	3222:load("res://items/tools/explosives/stickyDynamite.tres"),
 	
 	# chairs 6000 - 6049
 	6000:load("res://items/blocks/furniture/chairs/WoodenChair.tres"),

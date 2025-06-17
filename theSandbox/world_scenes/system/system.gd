@@ -22,6 +22,9 @@ func _ready():
 	generateNewSystem()
 	GlobalRef.system = self
 	
+	if Saving.worldType == 2:
+		GlobalRef.cheatsEnabled = true
+	
 	$lightRenderViewport.world_2d = get_tree().root.get_viewport().world_2d
 	$dropShadowViewport.world_2d = get_tree().root.get_viewport().world_2d
 	GlobalRef.lightRenderVP = $lightRenderViewport
@@ -139,6 +142,7 @@ func saveGameToFile():
 	gameData["playerHealth"] = GlobalRef.player.healthComponent.health
 	gameData["playtime"] = GlobalRef.globalTick
 	gameData["worldname"] = Saving.worldName
+	gameData["worldType"] = Saving.worldType
 	gameData["cheats"] = GlobalRef.cheatsEnabled
 	gameData["mimicsSpawnable"] = GlobalRef.playerHasInteractedWithChest
 	if GlobalRef.playerSpawnPlanet != null:
@@ -197,10 +201,17 @@ func loadSaveFromFile():
 	if gameData.has("worldname"):
 		Saving.worldName = gameData["worldname"]
 	
+	if gameData.has("worldType"):
+		Saving.worldType = gameData["worldType"]
+	else:
+		Saving.worldType = 0
+	
 	# player health
 	GlobalRef.savedHealth = gameData["playerHealth"]
 	if GlobalRef.savedHealth <= 0:
 		GlobalRef.savedHealth = 60
+		if Saving.worldType == 1:
+			GlobalRef.savedHealth = 0
 	
 	if gameData.has("claimedPraffinBossPrize"):
 		GlobalRef.claimedPraffinBossPrize = gameData["claimedPraffinBossPrize"]
@@ -218,6 +229,9 @@ func loadSaveFromFile():
 	
 	# cheats
 	GlobalRef.cheatsEnabled = gameData["cheats"]
+	if Saving.worldType == 2: # is creative
+		GlobalRef.commandLineAvailable = true
+		GlobalRef.cheatsEnabled = true
 	
 	# game data
 	GlobalRef.playerHasInteractedWithChest = gameData["mimicsSpawnable"]

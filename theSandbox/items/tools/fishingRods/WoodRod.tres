@@ -7,8 +7,12 @@
 [resource]
 script = ExtResource("1_458bg")
 noLineTexture = ExtResource("1_0tnpe")
+fishTimeMin = 8.0
+fishTimeMax = 20.0
 itemName = "Fishing Rod"
 subtext = ""
+desc = ""
 texture = ExtResource("3_7rve6")
 maxStackSize = 1
 clickToUse = false
+infiniteReach = false

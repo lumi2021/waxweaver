@@ -403,6 +403,13 @@ offset_right = 157.0
 offset_bottom = 215.0
 buttonText = "cancel"
 
+[node name="worldType" parent="createNewWorld" instance=ExtResource("6_amthu")]
+offset_left = 106.0
+offset_top = 153.0
+offset_right = 222.0
+offset_bottom = 170.0
+buttonText = "gamemode: normal"
+
 [node name="renameWorld" type="Node2D" parent="."]
 visible = false
 
@@ -933,6 +940,7 @@ bus = &"MUSIC"
 [connection signal="text_changed" from="createNewWorld/TextEdit" to="." method="_on_text_edit_text_changed"]
 [connection signal="pressed" from="createNewWorld/confirm" to="." method="_on_confirm_pressed"]
 [connection signal="pressed" from="createNewWorld/cancel" to="." method="_on_cancel_pressed"]
+[connection signal="pressed" from="createNewWorld/worldType" to="." method="_on_world_type_pressed"]
 [connection signal="text_changed" from="renameWorld/renameTextEdit" to="." method="_on_rename_text_edit_text_changed"]
 [connection signal="pressed" from="renameWorld/renameconfirm" to="." method="_on_renameconfirm_pressed"]
 [connection signal="pressed" from="renameWorld/renamecancel" to="." method="_on_renamecancel_pressed"]

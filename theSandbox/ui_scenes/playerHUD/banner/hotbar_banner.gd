@@ -53,6 +53,13 @@ func _ready():
 	await get_tree().create_timer(0.25).timeout
 	updateMoney()
 	
+	if Saving.worldType == 1:
+		$"Death Screen/respawn".hide()
+	
+	if Saving.worldType == 2:
+		$Menu/CreativeMenu.show()
+		$Menu/creativetoggle.show()
+	
 func _process(delta):
 	var pos = to_local(get_global_mouse_position()) - Vector2(6,6)
 	holdSlot.position = Vector2i( pos )
@@ -239,6 +246,10 @@ func transferSlot(slot):
 		PlayerData.saveChestString()
 		PlayerData.emit_signal("updateInventory")
 		SoundManager.playSound("inventory/pickupItem",GlobalRef.player.global_position,1.0,0.12,"INVENTORY")
+		
+		if slot >= 40 and slot <= 52:
+			# slot was an armor/trinket slot
+			PlayerData.emit_signal("armorUpdated")
 		return
 	
 	# not interacting with chest anymore
@@ -266,6 +277,11 @@ func transferSlot(slot):
 		PlayerData.emit_signal("updateInventory")
 		SoundManager.playSound("inventory/pickupItem",GlobalRef.player.global_position,1.0,0.12,"INVENTORY")
 		PlayerData.emit_signal("selectedSlotChanged")
+		
+		if slot >= 40 and slot <= 52:
+			# slot was an armor/trinket slot
+			PlayerData.emit_signal("armorUpdated")
+		
 		return
 
 func updateHealth():
@@ -293,7 +309,7 @@ func interpretCommand(text):
 		return
 	
 	if !GlobalRef.cheatsEnabled:
-		if OS.has_feature("template"): # only stop commands if release version
+		if true:#OS.has_feature("template"): # only stop commands if release version
 			GlobalRef.sendChat("Cheats are currently disabled.")
 			GlobalRef.sendChat("Type 'cheats' to enable them.")
 			GlobalRef.sendChat("Enabling cheats will lock this save")
@@ -627,3 +643,7 @@ func _on_changerecipedisplay_pressed():
 	
 	$Menu/changerecipedisplay/craftdisplay.frame = current + 1
 	PlayerData.updateCraftingDisplay(current)
+
+
+func _on_toggle_creative_pressed():
+	$Menu/CreativeMenu.visible = !$Menu/CreativeMenu.visible

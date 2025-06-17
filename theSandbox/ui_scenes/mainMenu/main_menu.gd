@@ -22,6 +22,8 @@ var enableConsole :int = 0
 
 var renameWorldContainer:String = "save1"
 
+var worldTypeSet :int = 0
+
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	$mainButtons/versionLabel.text = "v1." + str( GlobalRef.version )
@@ -125,11 +127,19 @@ func _on_back_save_pressed():
 
 func createNewSave(slot):
 	selectedslot = slot
+	worldTypeSet = -1
+	
+	_on_world_type_pressed()
 	enterState(2)
 
 func _on_confirm_pressed():
 	Saving.worldName = $createNewWorld/TextEdit.text
 	$createNewWorld/Label.text = "generating... please be patient"
+	
+	if Saving.worldType == 2: # is creative
+		GlobalRef.commandLineAvailable = true
+		GlobalRef.cheatsEnabled = true
+	
 	await get_tree().create_timer(0.5).timeout
 	selectedslot.createNewWorld()
 
@@ -248,3 +258,15 @@ func _on_rename_text_edit_text_changed():
 	if $renameWorld/renameTextEdit.text.length() > 20:
 		$renameWorld/renameTextEdit.text = $renameWorld/renameTextEdit.text.left(20)
 		$renameWorld/renameTextEdit.set_caret_column(20)
+
+
+func _on_world_type_pressed():
+	worldTypeSet = (worldTypeSet + 1) % 3
+	match worldTypeSet:
+		0:
+			$createNewWorld/worldType.buttonText = "gamemode: normal"
+		1:
+			$createNewWorld/worldType.buttonText = "gamemode: permadeath"
+		2:
+			$createNewWorld/worldType.buttonText = "gamemode: creative"
+	Saving.worldType = worldTypeSet

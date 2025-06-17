@@ -7,6 +7,7 @@ extends Node
 
 var theChunker = null
 var theGenerator = null
+var lookup = null
 
 var replaceableBlocks :Array[int] = [0,1,17,77,82,90,131]
 
@@ -18,6 +19,8 @@ func _ready():
 	var g = PLANETGEN.new()
 	theGenerator = g
 	add_child(g)
+	
+	lookup = theChunker.returnLookup()
 	
 	#theChunker.attemptSpawnEnemy.connect(attemptSpawnEnemy)
 
@@ -483,7 +486,31 @@ func doBlockAction(action:String,tileX:int,tileY:int,planet):
 			ins.itemId = itemID
 			ins.planet = planet
 			planet.entityContainer.add_child(ins)
-		
+		"summonArmorStand":
+			#print("yep, im an armor stand")
+			var ins = load("res://items/blocks/furniture/armorstand/armor_stand.tscn").instantiate()
+			ins.position = planet.tileToPos(Vector2(tileX,tileY))
+			ins.planet = planet
+			ins.rotation = (PI/2) * planet.DATAC.getPositionLookup(tileX,tileY)
+			
+			ins.basetilex = tileX
+			ins.basetiley = tileY
+			
+			var FUCK = Vector2i( Vector2(0,-1).rotated(ins.rotation) )
+			ins.toptilex = tileX + FUCK.x
+			ins.toptiley = tileY + FUCK.y
+			
+			planet.entityContainer.add_child(ins)
+		"summonPinwheel":
+			var ins = load("res://items/blocks/furniture/pinwheel/pinwheel.tscn").instantiate()
+			ins.position = planet.tileToPos(Vector2(tileX,tileY))
+			ins.planet = planet
+			ins.rotation = (PI/2) * planet.DATAC.getPositionLookup(tileX,tileY)
+			
+			ins.basetilex = tileX
+			ins.basetiley = tileY
+			
+			planet.entityContainer.add_child(ins)
 		
 func checkForEmmission(id):
 	var d = theChunker.getBlockDictionary(id)

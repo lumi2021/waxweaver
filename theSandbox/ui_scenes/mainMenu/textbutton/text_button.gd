@@ -46,3 +46,7 @@ func _on_button_down():
 	$Node2D.position = Vector2(-2,2)
 	$Node2D.modulate = Color(1,0.463,0.333)
 	$buttonSelect.play()
+
+func forceChangeText(buttonText:String):
+	$shadow.text = buttonText
+	$Node2D/text.text = buttonText

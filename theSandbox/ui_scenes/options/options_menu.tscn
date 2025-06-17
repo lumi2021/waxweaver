@@ -126,7 +126,6 @@ offset_top = 49.0
 offset_right = 186.0
 offset_bottom = 261.0
 theme = SubResource("Theme_kajlr")
-scroll_vertical = 100
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 2
 

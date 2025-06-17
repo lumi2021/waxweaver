@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemFood" load_steps=5 format=3 uid="uid://bdyf77l4hd4se"]
+
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemFood.gd" id="1_yypr7"]
+[ext_resource type="Script" path="res://object_scenes/specialResource/statusEffects/StatusInflictor.gd" id="2_xda8o"]
+[ext_resource type="Texture2D" uid="uid://mona7kac3spa" path="res://items/fish/chub.png" id="3_q5r28"]
+
+[sub_resource type="Resource" id="Resource_rrhkq"]
+script = ExtResource("2_xda8o")
+effectName = "glowing"
+seconds = 240.0
+chance = 100
+
+[resource]
+script = ExtResource("1_yypr7")
+healingAmount = 5
+eatTime = 2.5
+particleColor = Color(0.792157, 0.670588, 0.619608, 1)
+statusInflictors = Array[ExtResource("2_xda8o")]([SubResource("Resource_rrhkq")])
+itemName = "Chub"
+subtext = ""
+desc = "Will make you glow for 4 minutes
+"
+texture = ExtResource("3_q5r28")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

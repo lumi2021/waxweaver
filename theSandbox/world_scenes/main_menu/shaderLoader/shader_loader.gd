@@ -47,6 +47,12 @@ var motd :Array[String]= [ # messages to display when opening the window
 	"shoutout fallenchungus",
 	"fuck my stupid chud life",
 	"basically, this shit is yummy to me",
+	"secret: try naming your world 'lattice' ???",
+	"wanna play in hardcore? name your world 'hardcore'",
+	"geoff keighley said this was his favorite game ever",
+	"you can reach me at gabeN at valve software dot com",
+	"tiddlywinks...",
+	"tobuscus adventures",
 ]
 
 

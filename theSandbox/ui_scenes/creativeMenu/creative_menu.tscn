@@ -1,0 +1,98 @@
+[gd_scene load_steps=9 format=3 uid="uid://ksl0y6max404"]
+
+[ext_resource type="Script" path="res://ui_scenes/creativeMenu/creative_menu.gd" id="1_htgvq"]
+[ext_resource type="Texture2D" uid="uid://b51lnrojcq5n6" path="res://ui_scenes/shop/shopIcon.png" id="1_my2cx"]
+[ext_resource type="Texture2D" uid="uid://bcx22gfxix61f" path="res://ui_scenes/creativeMenu/trash.png" id="3_67wd6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6riis"]
+bg_color = Color(0.709804, 0.709804, 0.709804, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cm1y8"]
+bg_color = Color(0.658824, 0.658824, 0.658824, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_omsf4"]
+bg_color = Color(0.509804, 0.509804, 0.509804, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sesr6"]
+content_margin_left = 1.0
+content_margin_top = 0.0
+content_margin_right = 4.0
+content_margin_bottom = 0.0
+bg_color = Color(1, 1, 1, 0.176471)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 2
+anti_aliasing = false
+
+[sub_resource type="Theme" id="Theme_7bd7p"]
+VScrollBar/styles/grabber = SubResource("StyleBoxFlat_6riis")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxFlat_cm1y8")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_omsf4")
+VScrollBar/styles/scroll = SubResource("StyleBoxFlat_sesr6")
+VScrollBar/styles/scroll_focus = null
+VSlider/constants/center_grabber = 0
+
+[node name="CreativeMenu" type="Node2D"]
+script = ExtResource("1_htgvq")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+offset_right = 398.0
+offset_bottom = 146.0
+texture = ExtResource("1_my2cx")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 390.0
+offset_bottom = 138.0
+theme = SubResource("Theme_7bd7p")
+
+[node name="GridContainer" type="GridContainer" parent="NinePatchRect/ScrollContainer"]
+layout_mode = 2
+columns = 13
+
+[node name="Trash" type="Sprite2D" parent="."]
+position = Vector2(383, -11)
+texture = ExtResource("3_67wd6")
+
+[node name="trash" type="Button" parent="Trash"]
+modulate = Color(1, 1, 1, 0)
+offset_left = -9.0
+offset_top = -9.0
+offset_right = 9.0
+offset_bottom = 9.0
+tooltip_text = "delete held item"
+
+[connection signal="pressed" from="Trash/trash" to="." method="_on_trash_pressed"]

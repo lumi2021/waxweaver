@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://cps1ummtcb7ot"]
+
+[ext_resource type="Script" path="res://items/blocks/furniture/pinwheel/pinwheel.gd" id="1_q7yk4"]
+[ext_resource type="Texture2D" uid="uid://blbplw1c2yc7n" path="res://items/blocks/furniture/pinwheel/stand.png" id="2_k4mf0"]
+[ext_resource type="Texture2D" uid="uid://dnb5vwt44o4jm" path="res://items/blocks/furniture/pinwheel/pinwheel.png" id="3_pr4vk"]
+
+[node name="pinwheel" type="Node2D"]
+z_index = -1
+script = ExtResource("1_q7yk4")
+
+[node name="Stand" type="Sprite2D" parent="."]
+position = Vector2(0, 1)
+texture = ExtResource("2_k4mf0")
+
+[node name="Pinwheel" type="Sprite2D" parent="."]
+position = Vector2(0, -3)
+texture = ExtResource("3_pr4vk")

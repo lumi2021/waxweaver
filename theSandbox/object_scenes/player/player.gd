@@ -112,6 +112,8 @@ func _ready():
 	
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	
+	if healthComponent.health == 0 and Saving.worldType == 1:
+		dieAndRespawn() # for hardcore
 	
 	
 
@@ -351,6 +353,8 @@ func normalMovement(delta):
 	if onFloor and beingKnockedback and newVel.y > 0:
 		beingKnockedback = false
 	
+	
+	
 	if !onFloor:
 		airTime += delta
 		if newVel.y < 0:
@@ -367,7 +371,11 @@ func normalMovement(delta):
 			if fallDamage >= 90 and healthComponent.health > 0 and healthComponent.health < 10:
 				AchievementData.unlockMedal("takeFall")
 		airTime = 0.0
-
+	
+	if is_on_floor(): # prevents fall damage corner bug
+		airTime -= delta
+		airTime = max(airTime,0.0)
+	
 func WATERJUMPCAMERALETSGO(body,vel,rot,onFloor,delta):
 	# uses world to alter velocity
 	if !is_instance_valid(body):
@@ -409,8 +417,8 @@ func WATERJUMPCAMERALETSGO(body,vel,rot,onFloor,delta):
 	
 	# emit light if have trinket
 	if Stats.hasProperty("emitLight"):
-		var amount :float = 0.6
-		var l = body.DATAC.getLightData(tile.x,tile.y)
+		var amount :float = 1.0
+		var l = abs(body.DATAC.getLightData(tile.x,tile.y))
 		if l <= amount:
 			body.DATAC.setLightData(tile.x,tile.y,-amount)
 	
@@ -576,12 +584,22 @@ func ladderMovement(delta):
 	
 	move_and_slide()
 	
+	
+	if Stats.hasProperty("emitLight"): # flashlight
+		var amount :float = 1.0
+		var l = abs(planetOn.DATAC.getLightData(tile.x,tile.y))
+		if l <= amount:
+			planetOn.DATAC.setLightData(tile.x,tile.y,-amount)
+	
 	squishSprites(1.0)
 	eyeBallAnim(delta)
 	updateLight()
 	ensureCamPosition()
 	
 	lerpCameraRotation(rotated*(PI/2),delta)
+	
+	
+	
 func bedMovement(delta):
 	
 	velocity = Vector2.ZERO
@@ -1266,7 +1284,14 @@ func dieAndRespawn():
 	
 	Saving.autosave()
 	GlobalRef.hotbar.showDeathScreen(Stats.respawnWait)
+	
+	if Saving.worldType == 1:
+		noClipSpeed = 250.0
+		$CollisionShape2D.call_deferred("set_disabled",true)
+		return
+	
 	await get_tree().create_timer(Stats.respawnWait).timeout
+	
 	
 	# respawn
 	respawn()

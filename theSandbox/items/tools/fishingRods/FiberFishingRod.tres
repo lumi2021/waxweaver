@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemFishingRod" load_steps=3 format=3 uid="uid://cfvu51xlnqhin"]
+
+[ext_resource type="Texture2D" uid="uid://c8ul0ljk5jfia" path="res://items/tools/fishingRods/fiberPickaxe.png" id="1_wgtsx"]
+[ext_resource type="Script" path="res://item_resources/item_classes/ItemFishingRod.gd" id="2_ap7be"]
+
+[resource]
+script = ExtResource("2_ap7be")
+noLineTexture = ExtResource("1_wgtsx")
+fishTimeMin = 3.0
+fishTimeMax = 8.0
+itemName = "Fiber Fishing Rod"
+subtext = ""
+desc = ""
+texture = ExtResource("1_wgtsx")
+maxStackSize = 1
+clickToUse = false
+infiniteReach = false

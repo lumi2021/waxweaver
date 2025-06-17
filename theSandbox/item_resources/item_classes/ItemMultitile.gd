@@ -7,6 +7,7 @@ class_name ItemMultitile
 
 @export var grounded :bool = false
 @export var needsWalls :bool = false
+@export var runLoad :bool = false
 
 var replaceableBlocks :Array[int] = [0,1,17,77,82,90,131]
 
@@ -19,7 +20,16 @@ func onUse(tileX:int,tileY:int,planetDir:int,planet,lastTile:Vector2):
 	if checkIfPlaceable(tileX,tileY,planet):
 		playSound(tileX,tileY,planet)
 		PlayerData.consumeSelected()
-		planet.editTiles( placeTiles(tileX,tileY,planet),true )
+		var tileDic = placeTiles(tileX,tileY,planet)
+		planet.editTiles( tileDic,true )
+		if runLoad:
+			var lookup = BlockData.lookup
+			for key in tileDic.keys():
+				#print(key)
+				#print(lookup)
+				#print( lookup.runOnLoad(key.x,key.y,planet.DATAC,planetDir,blockID) )
+				var changes = lookup.runOnLoad(key.x,key.y,planet.DATAC,planetDir,blockID)
+				planet.editTiles( changes,false )
 
 
 func placeTiles(tileX:int,tileY:int,planet):

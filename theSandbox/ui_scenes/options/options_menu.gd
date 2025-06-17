@@ -18,7 +18,6 @@ func loadOptions():
 	
 	setShadowText()
 	setAutosaveText()
-	changevsynctext()
 	
 	if Options.options["maxfps"] == 0:
 		$ScrollContainer/g/buttons/maxfps/maxfpsslider.value = 300
@@ -26,7 +25,10 @@ func loadOptions():
 	else:
 		$ScrollContainer/g/buttons/maxfps/maxfpsslider.value = Options.options["maxfps"]
 		$ScrollContainer/g/buttons/maxfps/maxfpslabel.text = str(Options.options["maxfps"])
-
+	
+	#await get_tree().create_timer(2.0).timeout
+	changevsynctext()
+	
 func _on_dropshadow_pressed():
 	Options.options["showShadow"] = !Options.options["showShadow"]
 	Options.applyOptions()
@@ -136,8 +138,9 @@ func _on_vsync_pressed():
 	changevsynctext()
 
 func changevsynctext():
-	match Options.options["vsync"]:
-		0: $ScrollContainer/g/buttons/maxfps/vsync.buttonText = "vsync: disabled"
-		1: $ScrollContainer/g/buttons/maxfps/vsync.buttonText = "vsync: enabled"
-		2: $ScrollContainer/g/buttons/maxfps/vsync.buttonText = "vsync: adaptive"
-		3: $ScrollContainer/g/buttons/maxfps/vsync.buttonText = "vsync: mailbox"
+	var fuck = int(Options.options["vsync"])
+	match fuck:
+		0: $ScrollContainer/g/buttons/maxfps/vsync.forceChangeText("vsync: disabled")
+		1: $ScrollContainer/g/buttons/maxfps/vsync.forceChangeText("vsync: enabled")
+		2: $ScrollContainer/g/buttons/maxfps/vsync.forceChangeText("vsync: adaptive")
+		3: $ScrollContainer/g/buttons/maxfps/vsync.forceChangeText("vsync: mailbox")

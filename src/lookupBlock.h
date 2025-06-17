@@ -186,6 +186,8 @@
 #include "blockLeavesStatic.h" // id 164
 #include "blockLeavesStaticPine.h" // id 165
 #include "blockRubber.h" // id 166
+#include "blockArmorStand.h" // id 167
+#include "blockPinwheel.h" // id 168
 
 // adding a new block? make sure you increment the PENIS array !
 
@@ -203,7 +205,7 @@ public:
 	
 	Array allBlocks;
 
-	BLOCK *penis[167]; // must be largest id + 1
+	BLOCK *penis[169]; // must be largest id + 1
 
 	LOOKUPBLOCK();
 	~LOOKUPBLOCK();

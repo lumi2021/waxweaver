@@ -75,6 +75,7 @@ public:
 
 	void resetLight(PLANETDATA *planet,Vector2i pos);
 	Dictionary runOnLoad(PLANETDATA *planet,Vector2i pos);
+	Dictionary runOnLoadSingle(PLANETDATA *planet,Vector2i pos);
 
 };
 

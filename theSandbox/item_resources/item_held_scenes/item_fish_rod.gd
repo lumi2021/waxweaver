@@ -5,7 +5,7 @@ extends itemHeldClass
 
 var reelOut = false
 
-var delayTick = 0
+var delayTick :float= 0
 
 var bobberVel = Vector2.ZERO
 
@@ -26,7 +26,7 @@ var fishToGive :int= 8
 var fishSound :float= 0.0
 
 func onEquip():
-	pass
+	$pivot/sprite.texture = itemData.noLineTexture
 
 func onFirstUse():
 	pass
@@ -36,7 +36,7 @@ func onUsing(delta):
 	$CPUParticles2D.position = bobber.position
 	
 	if delayTick > 0:
-		delayTick -= 1
+		delayTick -= delta
 		onNotUsing(delta)
 		return
 	
@@ -62,7 +62,7 @@ func onNotUsing(delta):
 	$CPUParticles2D.position = bobber.position
 	
 	if delayTick > 0:
-		delayTick -= 1
+		delayTick -= delta
 	
 	if reelOut:
 		if !bobberInWater:
@@ -153,7 +153,7 @@ func reelIn():
 	$CPUParticles2D.restart()
 	line.clear_points()
 	bobber.visible = false
-	delayTick = 30
+	delayTick = 0.5
 	reelOut = false
 	if scanningForFish:
 		SoundManager.playSound("enemy/swim0",bobber.global_position,1.0,0.1)
@@ -163,7 +163,7 @@ func reelIn():
 	scanningForFish = false
 
 func castLine():
-	delayTick = 30
+	delayTick = 0.5
 	reelOut = true
 	bobber.visible = true
 	bobber.position = Vector2(17,-5)
@@ -179,7 +179,7 @@ func reset():
 
 func rollFishTime():
 	fishTick = 0.0
-	fishTime = randf_range(4.0,12.0)
+	fishTime = randf_range(itemData.fishTimeMin,itemData.fishTimeMax)
 
 func fishNoise(delta):
 	fishSound += delta

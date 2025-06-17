@@ -2,6 +2,7 @@ extends Node
 
 var loadedFile = "save1"
 var worldName = "save1"
+var worldType :int = 0 # normal, hardcore, creative
 
 var shopItems :Array= []
 
