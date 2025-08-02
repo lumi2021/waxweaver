@@ -1,0 +1,883 @@
+[gd_resource type="Resource" script_class="PlanetType" load_steps=138 format=3 uid="uid://drr030n6brnua"]
+
+[ext_resource type="Script" uid="uid://cibriy4spaxs8" path="res://object_scenes/specialResource/lootTables/RollableItem.gd" id="1_5rukt"]
+[ext_resource type="Script" uid="uid://b40jvucddjql" path="res://world_scenes/planetTypes/planetType.gd" id="1_j2ok1"]
+[ext_resource type="Script" uid="uid://c28v51wgoup67" path="res://object_scenes/specialResource/lootTables/EnemyRoll.gd" id="2_jpcmu"]
+
+[sub_resource type="Resource" id="Resource_wj633"]
+script = ExtResource("1_5rukt")
+id = 3040
+amountMin = 2
+amountMax = 4
+weight = 100
+
+[sub_resource type="Resource" id="Resource_xth5j"]
+script = ExtResource("1_5rukt")
+id = 15
+amountMin = 4
+amountMax = 10
+weight = 120
+
+[sub_resource type="Resource" id="Resource_fa6ll"]
+script = ExtResource("1_5rukt")
+id = 3028
+amountMin = 1
+amountMax = 3
+weight = 90
+
+[sub_resource type="Resource" id="Resource_o6u4c"]
+script = ExtResource("1_5rukt")
+id = 3023
+amountMin = 5
+amountMax = 12
+weight = 120
+
+[sub_resource type="Resource" id="Resource_4bc7s"]
+script = ExtResource("1_5rukt")
+id = 3004
+amountMin = 3
+amountMax = 8
+weight = 80
+
+[sub_resource type="Resource" id="Resource_wnpcp"]
+script = ExtResource("1_5rukt")
+id = 3048
+amountMin = 6
+amountMax = 18
+weight = 70
+
+[sub_resource type="Resource" id="Resource_a63aw"]
+script = ExtResource("1_5rukt")
+id = 3053
+amountMin = 1
+amountMax = 1
+weight = 20
+
+[sub_resource type="Resource" id="Resource_ip3fi"]
+script = ExtResource("1_5rukt")
+id = 18
+amountMin = 5
+amountMax = 14
+weight = 50
+
+[sub_resource type="Resource" id="Resource_eesvg"]
+script = ExtResource("1_5rukt")
+id = 17
+amountMin = 2
+amountMax = 5
+weight = 60
+
+[sub_resource type="Resource" id="Resource_usrig"]
+script = ExtResource("1_5rukt")
+id = 121
+amountMin = 2
+amountMax = 4
+weight = 80
+
+[sub_resource type="Resource" id="Resource_unpgf"]
+script = ExtResource("1_5rukt")
+id = 91
+amountMin = 3
+amountMax = 6
+weight = 20
+
+[sub_resource type="Resource" id="Resource_asymn"]
+script = ExtResource("1_5rukt")
+id = 76
+amountMin = 2
+amountMax = 3
+weight = 30
+
+[sub_resource type="Resource" id="Resource_rtkgy"]
+script = ExtResource("1_5rukt")
+id = 73
+amountMin = 1
+amountMax = 1
+weight = 40
+
+[sub_resource type="Resource" id="Resource_fjti5"]
+script = ExtResource("1_5rukt")
+id = 87
+amountMin = 3
+amountMax = 5
+weight = 30
+
+[sub_resource type="Resource" id="Resource_3orkn"]
+script = ExtResource("1_5rukt")
+id = 3078
+amountMin = 1
+amountMax = 1
+weight = 50
+
+[sub_resource type="Resource" id="Resource_uqukj"]
+script = ExtResource("1_5rukt")
+id = 3076
+amountMin = 1
+amountMax = 1
+weight = 50
+
+[sub_resource type="Resource" id="Resource_26ufk"]
+script = ExtResource("1_5rukt")
+id = 3039
+amountMin = 3
+amountMax = 6
+weight = 50
+
+[sub_resource type="Resource" id="Resource_h2pwd"]
+script = ExtResource("1_5rukt")
+id = 3091
+amountMin = 1
+amountMax = 1
+weight = 50
+
+[sub_resource type="Resource" id="Resource_w5sdp"]
+script = ExtResource("1_5rukt")
+id = 3092
+amountMin = 1
+amountMax = 1
+weight = 50
+
+[sub_resource type="Resource" id="Resource_j4dqu"]
+script = ExtResource("1_5rukt")
+id = 3130
+amountMin = 5
+amountMax = 10
+weight = 75
+
+[sub_resource type="Resource" id="Resource_mepk5"]
+script = ExtResource("1_5rukt")
+id = 3136
+amountMin = 1
+amountMax = 1
+weight = 10
+
+[sub_resource type="Resource" id="Resource_ugbl3"]
+script = ExtResource("1_5rukt")
+id = 3163
+amountMin = 1
+amountMax = 1
+weight = 2
+
+[sub_resource type="Resource" id="Resource_tjd8c"]
+script = ExtResource("1_5rukt")
+id = 3164
+amountMin = 1
+amountMax = 1
+weight = 2
+
+[sub_resource type="Resource" id="Resource_1r5sg"]
+script = ExtResource("1_5rukt")
+id = 3165
+amountMin = 1
+amountMax = 1
+weight = 2
+
+[sub_resource type="Resource" id="Resource_7k8kt"]
+script = ExtResource("1_5rukt")
+id = 3166
+amountMin = 1
+amountMax = 1
+weight = 2
+
+[sub_resource type="Resource" id="Resource_ax5nh"]
+script = ExtResource("1_5rukt")
+id = 3167
+amountMin = 1
+amountMax = 1
+weight = 2
+
+[sub_resource type="Resource" id="Resource_nvvrw"]
+script = ExtResource("1_5rukt")
+id = 3169
+amountMin = 15
+amountMax = 35
+weight = 100
+
+[sub_resource type="Resource" id="Resource_jb83j"]
+script = ExtResource("1_5rukt")
+id = 3172
+amountMin = 1
+amountMax = 1
+weight = 30
+
+[sub_resource type="Resource" id="Resource_66udc"]
+script = ExtResource("1_5rukt")
+id = 24
+amountMin = 6
+amountMax = 8
+weight = 30
+
+[sub_resource type="Resource" id="Resource_sd7kh"]
+script = ExtResource("1_5rukt")
+id = 3189
+amountMin = 4
+amountMax = 9
+weight = 50
+
+[sub_resource type="Resource" id="Resource_nsv1f"]
+script = ExtResource("1_5rukt")
+id = 3191
+amountMin = 1
+amountMax = 1
+weight = 30
+
+[sub_resource type="Resource" id="Resource_34obr"]
+script = ExtResource("1_5rukt")
+id = 3196
+amountMin = 5
+amountMax = 5
+weight = 40
+
+[sub_resource type="Resource" id="Resource_5gehw"]
+script = ExtResource("1_5rukt")
+id = 3185
+amountMin = 16
+amountMax = 32
+weight = 40
+
+[sub_resource type="Resource" id="Resource_ojrjc"]
+script = ExtResource("1_5rukt")
+id = 3186
+amountMin = 4
+amountMax = 6
+weight = 30
+
+[sub_resource type="Resource" id="Resource_uetax"]
+script = ExtResource("1_5rukt")
+id = 3187
+amountMin = 4
+amountMax = 6
+weight = 30
+
+[sub_resource type="Resource" id="Resource_06f3x"]
+script = ExtResource("1_5rukt")
+id = 3190
+amountMin = 4
+amountMax = 4
+weight = 40
+
+[sub_resource type="Resource" id="Resource_13oga"]
+script = ExtResource("2_jpcmu")
+id = "mummy"
+weight = 100
+
+[sub_resource type="Resource" id="Resource_hdiye"]
+script = ExtResource("2_jpcmu")
+id = "snail"
+weight = 100
+
+[sub_resource type="Resource" id="Resource_vompv"]
+script = ExtResource("2_jpcmu")
+id = "mummy"
+weight = 100
+
+[sub_resource type="Resource" id="Resource_52jrs"]
+script = ExtResource("2_jpcmu")
+id = "skull"
+weight = 75
+
+[sub_resource type="Resource" id="Resource_nm8ge"]
+script = ExtResource("2_jpcmu")
+id = "spider"
+weight = 100
+
+[sub_resource type="Resource" id="Resource_gd2ba"]
+script = ExtResource("2_jpcmu")
+id = "worm"
+weight = 65
+
+[sub_resource type="Resource" id="Resource_48inu"]
+script = ExtResource("2_jpcmu")
+id = "mummy"
+weight = 50
+
+[sub_resource type="Resource" id="Resource_6a4ml"]
+script = ExtResource("2_jpcmu")
+id = "snail"
+weight = 50
+
+[sub_resource type="Resource" id="Resource_5e5dr"]
+script = ExtResource("1_5rukt")
+id = 3030
+amountMin = 1
+amountMax = 1
+weight = 120
+
+[sub_resource type="Resource" id="Resource_y2h6p"]
+script = ExtResource("1_5rukt")
+id = 37
+amountMin = 1
+amountMax = 1
+weight = 10
+
+[sub_resource type="Resource" id="Resource_o5prv"]
+script = ExtResource("1_5rukt")
+id = 51
+amountMin = 1
+amountMax = 1
+weight = 4
+
+[sub_resource type="Resource" id="Resource_u24lq"]
+script = ExtResource("1_5rukt")
+id = 3027
+amountMin = 1
+amountMax = 1
+weight = 2
+
+[sub_resource type="Resource" id="Resource_3xk2w"]
+script = ExtResource("1_5rukt")
+id = 3077
+amountMin = 1
+amountMax = 1
+weight = 20
+
+[sub_resource type="Resource" id="Resource_hfe3i"]
+script = ExtResource("1_5rukt")
+id = 3078
+amountMin = 1
+amountMax = 1
+weight = 10
+
+[sub_resource type="Resource" id="Resource_s565u"]
+script = ExtResource("1_5rukt")
+id = 3091
+amountMin = 1
+amountMax = 1
+weight = 25
+
+[sub_resource type="Resource" id="Resource_2yyvm"]
+script = ExtResource("1_5rukt")
+id = 3092
+amountMin = 1
+amountMax = 1
+weight = 25
+
+[sub_resource type="Resource" id="Resource_ealgr"]
+script = ExtResource("1_5rukt")
+id = 3218
+amountMin = 1
+amountMax = 1
+weight = 560
+
+[sub_resource type="Resource" id="Resource_xe70s"]
+script = ExtResource("1_5rukt")
+id = 3219
+amountMin = 1
+amountMax = 1
+weight = 50
+
+[sub_resource type="Resource" id="Resource_b110y"]
+script = ExtResource("1_5rukt")
+id = 39
+amountMin = 1
+amountMax = 1
+weight = 100
+
+[sub_resource type="Resource" id="Resource_wncux"]
+script = ExtResource("1_5rukt")
+id = 40
+amountMin = 1
+amountMax = 1
+weight = 70
+
+[sub_resource type="Resource" id="Resource_ipvf4"]
+script = ExtResource("1_5rukt")
+id = 41
+amountMin = 1
+amountMax = 1
+weight = 90
+
+[sub_resource type="Resource" id="Resource_ak76h"]
+script = ExtResource("1_5rukt")
+id = 42
+amountMin = 1
+amountMax = 1
+weight = 90
+
+[sub_resource type="Resource" id="Resource_fskh7"]
+script = ExtResource("1_5rukt")
+id = 43
+amountMin = 1
+amountMax = 1
+weight = 100
+
+[sub_resource type="Resource" id="Resource_1pk33"]
+script = ExtResource("1_5rukt")
+id = 44
+amountMin = 1
+amountMax = 1
+weight = 100
+
+[sub_resource type="Resource" id="Resource_wcsak"]
+script = ExtResource("1_5rukt")
+id = 45
+amountMin = 1
+amountMax = 1
+weight = 100
+
+[sub_resource type="Resource" id="Resource_kmls0"]
+script = ExtResource("1_5rukt")
+id = 49
+amountMin = 1
+amountMax = 1
+weight = 110
+
+[sub_resource type="Resource" id="Resource_nwwit"]
+script = ExtResource("1_5rukt")
+id = 50
+amountMin = 1
+amountMax = 1
+weight = 100
+
+[sub_resource type="Resource" id="Resource_c23a0"]
+script = ExtResource("1_5rukt")
+id = 51
+amountMin = 1
+amountMax = 1
+weight = 90
+
+[sub_resource type="Resource" id="Resource_teygi"]
+script = ExtResource("1_5rukt")
+id = 3010
+amountMin = 1
+amountMax = 1
+weight = 5
+
+[sub_resource type="Resource" id="Resource_udfw4"]
+script = ExtResource("1_5rukt")
+id = 6001
+amountMin = 1
+amountMax = 1
+weight = 5
+
+[sub_resource type="Resource" id="Resource_xbaiq"]
+script = ExtResource("1_5rukt")
+id = 66
+amountMin = 1
+amountMax = 1
+weight = 100
+
+[sub_resource type="Resource" id="Resource_21me8"]
+script = ExtResource("1_5rukt")
+id = 67
+amountMin = 1
+amountMax = 1
+weight = 50
+
+[sub_resource type="Resource" id="Resource_82rrh"]
+script = ExtResource("1_5rukt")
+id = 68
+amountMin = 1
+amountMax = 1
+weight = 100
+
+[sub_resource type="Resource" id="Resource_t8s51"]
+script = ExtResource("1_5rukt")
+id = 69
+amountMin = 1
+amountMax = 1
+weight = 70
+
+[sub_resource type="Resource" id="Resource_uhqd0"]
+script = ExtResource("1_5rukt")
+id = 70
+amountMin = 1
+amountMax = 1
+weight = 100
+
+[sub_resource type="Resource" id="Resource_g3j4j"]
+script = ExtResource("1_5rukt")
+id = 71
+amountMin = 1
+amountMax = 1
+weight = 40
+
+[sub_resource type="Resource" id="Resource_gxwe0"]
+script = ExtResource("1_5rukt")
+id = 72
+amountMin = 1
+amountMax = 1
+weight = 60
+
+[sub_resource type="Resource" id="Resource_4scg4"]
+script = ExtResource("1_5rukt")
+id = 126
+amountMin = 1
+amountMax = 1
+weight = 60
+
+[sub_resource type="Resource" id="Resource_lpikj"]
+script = ExtResource("1_5rukt")
+id = 127
+amountMin = 1
+amountMax = 1
+weight = 10
+
+[sub_resource type="Resource" id="Resource_qqnai"]
+script = ExtResource("1_5rukt")
+id = 154
+amountMin = 1
+amountMax = 1
+weight = 100
+
+[sub_resource type="Resource" id="Resource_v0mwr"]
+script = ExtResource("1_5rukt")
+id = 155
+amountMin = 1
+amountMax = 1
+weight = 100
+
+[sub_resource type="Resource" id="Resource_y5t73"]
+script = ExtResource("1_5rukt")
+id = 156
+amountMin = 1
+amountMax = 1
+weight = 100
+
+[sub_resource type="Resource" id="Resource_hhnne"]
+script = ExtResource("1_5rukt")
+id = 157
+amountMin = 1
+amountMax = 1
+weight = 100
+
+[sub_resource type="Resource" id="Resource_npsph"]
+script = ExtResource("1_5rukt")
+id = 158
+amountMin = 1
+amountMax = 1
+weight = 100
+
+[sub_resource type="Resource" id="Resource_38c5c"]
+script = ExtResource("1_5rukt")
+id = 159
+amountMin = 1
+amountMax = 1
+weight = 100
+
+[sub_resource type="Resource" id="Resource_8p1vs"]
+script = ExtResource("2_jpcmu")
+id = "firefly"
+weight = 100
+
+[sub_resource type="Resource" id="Resource_xojti"]
+script = ExtResource("2_jpcmu")
+id = "evilBird"
+weight = 100
+
+[sub_resource type="Resource" id="Resource_d45g0"]
+script = ExtResource("2_jpcmu")
+id = "spider"
+weight = 80
+
+[sub_resource type="Resource" id="Resource_6trxu"]
+script = ExtResource("2_jpcmu")
+id = "cobble"
+weight = 50
+
+[sub_resource type="Resource" id="Resource_jcp77"]
+script = ExtResource("2_jpcmu")
+id = "mimic"
+weight = 16
+
+[sub_resource type="Resource" id="Resource_t4a1d"]
+script = ExtResource("2_jpcmu")
+id = "flower"
+weight = 10
+
+[sub_resource type="Resource" id="Resource_c6hy1"]
+script = ExtResource("2_jpcmu")
+id = "confuser"
+weight = 35
+
+[sub_resource type="Resource" id="Resource_i0iyx"]
+script = ExtResource("1_5rukt")
+id = 3033
+amountMin = 1
+amountMax = 1
+weight = 100
+
+[sub_resource type="Resource" id="Resource_rn0xa"]
+script = ExtResource("1_5rukt")
+id = 3034
+amountMin = 1
+amountMax = 1
+weight = 100
+
+[sub_resource type="Resource" id="Resource_jt0yo"]
+script = ExtResource("1_5rukt")
+id = 3036
+amountMin = 1
+amountMax = 1
+weight = 100
+
+[sub_resource type="Resource" id="Resource_0iqcu"]
+script = ExtResource("1_5rukt")
+id = 3027
+amountMin = 1
+amountMax = 1
+weight = 5
+
+[sub_resource type="Resource" id="Resource_c71ju"]
+script = ExtResource("1_5rukt")
+id = 3066
+amountMin = 1
+amountMax = 1
+weight = 100
+
+[sub_resource type="Resource" id="Resource_1aa78"]
+script = ExtResource("1_5rukt")
+id = 3067
+amountMin = 1
+amountMax = 1
+weight = 100
+
+[sub_resource type="Resource" id="Resource_ritix"]
+script = ExtResource("1_5rukt")
+id = 3068
+amountMin = 1
+amountMax = 1
+weight = 100
+
+[sub_resource type="Resource" id="Resource_yjrof"]
+script = ExtResource("1_5rukt")
+id = 3069
+amountMin = 1
+amountMax = 1
+weight = 100
+
+[sub_resource type="Resource" id="Resource_85rl2"]
+script = ExtResource("1_5rukt")
+id = 3070
+amountMin = 1
+amountMax = 1
+weight = 20
+
+[sub_resource type="Resource" id="Resource_0oyo6"]
+script = ExtResource("1_5rukt")
+id = 3071
+amountMin = 1
+amountMax = 1
+weight = 20
+
+[sub_resource type="Resource" id="Resource_bnrpw"]
+script = ExtResource("1_5rukt")
+id = 3072
+amountMin = 1
+amountMax = 1
+weight = 20
+
+[sub_resource type="Resource" id="Resource_e6apj"]
+script = ExtResource("1_5rukt")
+id = 3124
+amountMin = 1
+amountMax = 1
+weight = 100
+
+[sub_resource type="Resource" id="Resource_4ruaf"]
+script = ExtResource("1_5rukt")
+id = 3137
+amountMin = 1
+amountMax = 1
+weight = 100
+
+[sub_resource type="Resource" id="Resource_x5tb5"]
+script = ExtResource("1_5rukt")
+id = 3138
+amountMin = 1
+amountMax = 1
+weight = 100
+
+[sub_resource type="Resource" id="Resource_cutux"]
+script = ExtResource("1_5rukt")
+id = 3139
+amountMin = 1
+amountMax = 1
+weight = 50
+
+[sub_resource type="Resource" id="Resource_x3g7q"]
+script = ExtResource("1_5rukt")
+id = 3140
+amountMin = 1
+amountMax = 1
+weight = 50
+
+[sub_resource type="Resource" id="Resource_uydqx"]
+script = ExtResource("1_5rukt")
+id = 3141
+amountMin = 1
+amountMax = 1
+weight = 100
+
+[sub_resource type="Resource" id="Resource_swpu7"]
+script = ExtResource("1_5rukt")
+id = 3142
+amountMin = 1
+amountMax = 1
+weight = 100
+
+[sub_resource type="Resource" id="Resource_h8ft7"]
+script = ExtResource("1_5rukt")
+id = 3147
+amountMin = 1
+amountMax = 1
+weight = 100
+
+[sub_resource type="Resource" id="Resource_dyjgs"]
+script = ExtResource("1_5rukt")
+id = 3159
+amountMin = 1
+amountMax = 1
+weight = 100
+
+[sub_resource type="Resource" id="Resource_6g66u"]
+script = ExtResource("1_5rukt")
+id = 3161
+amountMin = 1
+amountMax = 1
+weight = 5
+
+[sub_resource type="Resource" id="Resource_5qg4x"]
+script = ExtResource("1_5rukt")
+id = 3197
+amountMin = 1
+amountMax = 1
+weight = 100
+
+[sub_resource type="Resource" id="Resource_tstxf"]
+script = ExtResource("2_jpcmu")
+id = "praffin"
+weight = 100
+
+[sub_resource type="Resource" id="Resource_548wk"]
+script = ExtResource("2_jpcmu")
+id = "snowman"
+weight = 40
+
+[sub_resource type="Resource" id="Resource_17dk7"]
+script = ExtResource("2_jpcmu")
+id = "snowman"
+weight = 100
+
+[sub_resource type="Resource" id="Resource_ebow2"]
+script = ExtResource("2_jpcmu")
+id = "penguin"
+weight = 40
+
+[sub_resource type="Resource" id="Resource_3ks8v"]
+script = ExtResource("2_jpcmu")
+id = "praffin"
+weight = 10
+
+[sub_resource type="Resource" id="Resource_m8kvh"]
+script = ExtResource("2_jpcmu")
+id = "snowflake"
+weight = 15
+
+[sub_resource type="Resource" id="Resource_6jcgl"]
+script = ExtResource("2_jpcmu")
+id = "snowman"
+weight = 80
+
+[sub_resource type="Resource" id="Resource_orrr2"]
+script = ExtResource("2_jpcmu")
+id = "penguin"
+weight = 110
+
+[sub_resource type="Resource" id="Resource_f7k0o"]
+script = ExtResource("2_jpcmu")
+id = "snowflake"
+weight = 40
+
+[sub_resource type="Resource" id="Resource_7ujlb"]
+script = ExtResource("2_jpcmu")
+id = "praffin"
+weight = 10
+
+[sub_resource type="Resource" id="Resource_urpmm"]
+script = ExtResource("2_jpcmu")
+id = "mimic"
+weight = 10
+
+[sub_resource type="Resource" id="Resource_2krwu"]
+script = ExtResource("2_jpcmu")
+id = "butterfly"
+weight = 50
+
+[sub_resource type="Resource" id="Resource_c7q03"]
+script = ExtResource("2_jpcmu")
+id = "praffin"
+weight = 40
+
+[sub_resource type="Resource" id="Resource_7kvi4"]
+script = ExtResource("2_jpcmu")
+id = "flower"
+weight = 5
+
+[sub_resource type="Resource" id="Resource_fcrlm"]
+script = ExtResource("2_jpcmu")
+id = "praffin"
+weight = 40
+
+[sub_resource type="Resource" id="Resource_r6phs"]
+script = ExtResource("2_jpcmu")
+id = "firefly"
+weight = 60
+
+[sub_resource type="Resource" id="Resource_l3ot6"]
+script = ExtResource("2_jpcmu")
+id = "evilBird"
+weight = 60
+
+[sub_resource type="Resource" id="Resource_b27hs"]
+script = ExtResource("2_jpcmu")
+id = "apparition"
+weight = 1
+
+[sub_resource type="Resource" id="Resource_sxmvn"]
+script = ExtResource("2_jpcmu")
+id = "cobble"
+weight = 80
+
+[sub_resource type="Resource" id="Resource_juyfm"]
+script = ExtResource("2_jpcmu")
+id = "evilBird"
+weight = 70
+
+[sub_resource type="Resource" id="Resource_qb7kf"]
+script = ExtResource("2_jpcmu")
+id = "spider"
+weight = 60
+
+[sub_resource type="Resource" id="Resource_qmk12"]
+script = ExtResource("2_jpcmu")
+id = "mimic"
+weight = 5
+
+[sub_resource type="Resource" id="Resource_qc22m"]
+script = ExtResource("2_jpcmu")
+id = "snail"
+weight = 5
+
+[sub_resource type="Resource" id="Resource_mp2va"]
+script = ExtResource("2_jpcmu")
+id = "fish"
+weight = 100
+
+[resource]
+script = ExtResource("1_j2ok1")
+rareItems = Array[ExtResource("1_5rukt")]([SubResource("Resource_i0iyx"), SubResource("Resource_rn0xa"), SubResource("Resource_jt0yo"), SubResource("Resource_0iqcu"), SubResource("Resource_c71ju"), SubResource("Resource_1aa78"), SubResource("Resource_ritix"), SubResource("Resource_yjrof"), SubResource("Resource_85rl2"), SubResource("Resource_0oyo6"), SubResource("Resource_bnrpw"), SubResource("Resource_e6apj"), SubResource("Resource_4ruaf"), SubResource("Resource_x5tb5"), SubResource("Resource_cutux"), SubResource("Resource_x3g7q"), SubResource("Resource_uydqx"), SubResource("Resource_swpu7"), SubResource("Resource_h8ft7"), SubResource("Resource_dyjgs"), SubResource("Resource_6g66u"), SubResource("Resource_5qg4x")])
+commonItems = Array[ExtResource("1_5rukt")]([SubResource("Resource_wj633"), SubResource("Resource_xth5j"), SubResource("Resource_fa6ll"), SubResource("Resource_o6u4c"), SubResource("Resource_4bc7s"), SubResource("Resource_wnpcp"), SubResource("Resource_a63aw"), SubResource("Resource_ip3fi"), SubResource("Resource_eesvg"), SubResource("Resource_usrig"), SubResource("Resource_unpgf"), SubResource("Resource_asymn"), SubResource("Resource_rtkgy"), SubResource("Resource_fjti5"), SubResource("Resource_3orkn"), SubResource("Resource_uqukj"), SubResource("Resource_26ufk"), SubResource("Resource_h2pwd"), SubResource("Resource_w5sdp"), SubResource("Resource_j4dqu"), SubResource("Resource_mepk5"), SubResource("Resource_ugbl3"), SubResource("Resource_tjd8c"), SubResource("Resource_1r5sg"), SubResource("Resource_7k8kt"), SubResource("Resource_ax5nh"), SubResource("Resource_nvvrw"), SubResource("Resource_jb83j"), SubResource("Resource_66udc"), SubResource("Resource_sd7kh"), SubResource("Resource_nsv1f"), SubResource("Resource_34obr"), SubResource("Resource_5gehw"), SubResource("Resource_ojrjc"), SubResource("Resource_uetax"), SubResource("Resource_06f3x")])
+funItems = Array[ExtResource("1_5rukt")]([SubResource("Resource_b110y"), SubResource("Resource_wncux"), SubResource("Resource_ipvf4"), SubResource("Resource_ak76h"), SubResource("Resource_fskh7"), SubResource("Resource_1pk33"), SubResource("Resource_wcsak"), SubResource("Resource_kmls0"), SubResource("Resource_nwwit"), SubResource("Resource_c23a0"), SubResource("Resource_teygi"), SubResource("Resource_udfw4"), SubResource("Resource_xbaiq"), SubResource("Resource_21me8"), SubResource("Resource_82rrh"), SubResource("Resource_t8s51"), SubResource("Resource_uhqd0"), SubResource("Resource_g3j4j"), SubResource("Resource_gxwe0"), SubResource("Resource_4scg4"), SubResource("Resource_lpikj"), SubResource("Resource_qqnai"), SubResource("Resource_v0mwr"), SubResource("Resource_y5t73"), SubResource("Resource_hhnne"), SubResource("Resource_npsph"), SubResource("Resource_38c5c")])
+fish = Array[ExtResource("1_5rukt")]([SubResource("Resource_5e5dr"), SubResource("Resource_y2h6p"), SubResource("Resource_o5prv"), SubResource("Resource_u24lq"), SubResource("Resource_3xk2w"), SubResource("Resource_hfe3i"), SubResource("Resource_s565u"), SubResource("Resource_2yyvm"), SubResource("Resource_ealgr"), SubResource("Resource_xe70s")])
+surfaceDay = Array[ExtResource("2_jpcmu")]([SubResource("Resource_2krwu"), SubResource("Resource_c7q03"), SubResource("Resource_7kvi4")])
+surfaceNight = Array[ExtResource("2_jpcmu")]([SubResource("Resource_fcrlm"), SubResource("Resource_r6phs"), SubResource("Resource_l3ot6"), SubResource("Resource_b27hs")])
+underground = Array[ExtResource("2_jpcmu")]([SubResource("Resource_sxmvn"), SubResource("Resource_juyfm"), SubResource("Resource_qb7kf"), SubResource("Resource_qmk12"), SubResource("Resource_qc22m")])
+water = Array[ExtResource("2_jpcmu")]([SubResource("Resource_mp2va")])
+desertDay = Array[ExtResource("2_jpcmu")]([SubResource("Resource_13oga"), SubResource("Resource_hdiye")])
+desertNight = Array[ExtResource("2_jpcmu")]([SubResource("Resource_vompv")])
+desertUnderground = Array[ExtResource("2_jpcmu")]([SubResource("Resource_52jrs"), SubResource("Resource_nm8ge"), SubResource("Resource_gd2ba"), SubResource("Resource_48inu"), SubResource("Resource_6a4ml")])
+snowyDay = Array[ExtResource("2_jpcmu")]([SubResource("Resource_tstxf"), SubResource("Resource_548wk")])
+snowyNight = Array[ExtResource("2_jpcmu")]([SubResource("Resource_17dk7"), SubResource("Resource_ebow2"), SubResource("Resource_3ks8v"), SubResource("Resource_m8kvh")])
+snowyUnderground = Array[ExtResource("2_jpcmu")]([SubResource("Resource_6jcgl"), SubResource("Resource_orrr2"), SubResource("Resource_f7k0o"), SubResource("Resource_7ujlb"), SubResource("Resource_urpmm")])
+moss = Array[ExtResource("2_jpcmu")]([SubResource("Resource_8p1vs"), SubResource("Resource_xojti"), SubResource("Resource_d45g0"), SubResource("Resource_6trxu"), SubResource("Resource_jcp77"), SubResource("Resource_t4a1d"), SubResource("Resource_c6hy1")])

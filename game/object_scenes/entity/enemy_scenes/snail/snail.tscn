@@ -1,0 +1,40 @@
+[gd_scene load_steps=8 format=3 uid="uid://cwlajha5c7137"]
+
+[ext_resource type="Script" uid="uid://ca808rcfnryri" path="res://object_scenes/entity/enemy_scenes/snail/snail.gd" id="1_d5tfw"]
+[ext_resource type="Texture2D" uid="uid://df0cs8lbrwhbv" path="res://object_scenes/entity/enemy_scenes/snail/snail.png" id="1_mwwul"]
+[ext_resource type="PackedScene" uid="uid://c05kukkqfrg40" path="res://object_scenes/entity/components/hitbox.tscn" id="3_15pss"]
+[ext_resource type="PackedScene" uid="uid://meikam2oyy13" path="res://object_scenes/entity/components/health_component.tscn" id="4_f2r61"]
+[ext_resource type="PackedScene" uid="uid://84sah16y8gwq" path="res://object_scenes/entity/components/delete_me_outside_of_chunk.tscn" id="5_mlkdl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l1fx7"]
+size = Vector2(6, 6)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bybgf"]
+radius = 5.0
+
+[node name="Snail" type="CharacterBody2D"]
+collision_layer = 128
+script = ExtResource("1_d5tfw")
+passive = true
+
+[node name="axis" type="Node2D" parent="."]
+
+[node name="Snail" type="Sprite2D" parent="axis"]
+texture = ExtResource("1_mwwul")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_l1fx7")
+
+[node name="Hitbox" parent="." node_paths=PackedStringArray("healthComponent", "colliderShape") instance=ExtResource("3_15pss")]
+healthComponent = NodePath("../HealthComponent")
+colliderShape = NodePath("CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_bybgf")
+
+[node name="HealthComponent" parent="." instance=ExtResource("4_f2r61")]
+maxHealth = 5
+knockbackResist = 0.5
+defense = 9999
+
+[node name="DeleteMeOutsideOfChunk" parent="." instance=ExtResource("5_mlkdl")]

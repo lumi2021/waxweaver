@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemBlock" load_steps=3 format=3 uid="uid://cenhcmukj3spf"]
+
+[ext_resource type="Script" uid="uid://dtm3y7ouvvwk6" path="res://item_resources/item_classes/ItemBlock.gd" id="1_v44c7"]
+[ext_resource type="Texture2D" uid="uid://cu24bodwe40dh" path="res://items/blocks/natural/core.png" id="2_qqyle"]
+
+[resource]
+script = ExtResource("1_v44c7")
+blockID = 5
+itemName = "Core"
+subtext = ""
+desc = ""
+texture = ExtResource("2_qqyle")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

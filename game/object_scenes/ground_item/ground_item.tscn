@@ -1,0 +1,74 @@
+[gd_scene load_steps=9 format=3 uid="uid://bhm2hwrbyr14h"]
+
+[ext_resource type="Texture2D" uid="uid://mwjxc6goor4m" path="res://items/blocks/natural/dirt.png" id="1_38qci"]
+[ext_resource type="Script" uid="uid://cgscgnrmvxi7s" path="res://object_scenes/ground_item/ground_item.gd" id="1_vgw6l"]
+[ext_resource type="Material" uid="uid://hml1020mcabx" path="res://object_scenes/ground_item/groundItemOutlineShader.tres" id="3_tijq4"]
+[ext_resource type="Material" uid="uid://bgt1d2rew6mm5" path="res://object_scenes/ground_item/tintItemShader.tres" id="4_h5b80"]
+[ext_resource type="PackedScene" uid="uid://dbdj5a5aqufqf" path="res://object_scenes/entity/components/floor_detector.tscn" id="5_ji8vt"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_husnc"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tnyss"]
+radius = 9.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vmqcq"]
+radius = 3.0
+
+[node name="GroundItem" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 49
+floor_stop_on_slope = false
+platform_on_leave = 2
+platform_floor_layers = 0
+script = ExtResource("1_vgw6l")
+
+[node name="stack" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="stack"]
+shape = SubResource("CircleShape2D_husnc")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_tnyss")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_vmqcq")
+
+[node name="textureRoot" type="Node2D" parent="."]
+
+[node name="back" type="Sprite2D" parent="textureRoot"]
+modulate = Color(0.415686, 0.415686, 0.678431, 1)
+show_behind_parent = true
+position = Vector2(-1, 1)
+texture = ExtResource("1_38qci")
+
+[node name="texture" type="Sprite2D" parent="textureRoot"]
+clip_children = 2
+material = ExtResource("3_tijq4")
+texture = ExtResource("1_38qci")
+
+[node name="tint" type="ColorRect" parent="textureRoot/texture"]
+material = ExtResource("4_h5b80")
+offset_left = -5.0
+offset_top = -8.0
+offset_right = 5.0
+offset_bottom = 8.0
+mouse_filter = 2
+color = Color(0.227451, 0.0470588, 0.207843, 0)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(-4.76837e-07, -4.76837e-07)
+rect = Rect2(-32, -32, 64, 64)
+
+[node name="FloorDetector" parent="." instance=ExtResource("5_ji8vt")]
+
+[connection signal="body_entered" from="stack" to="." method="_on_stack_body_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

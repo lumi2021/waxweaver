@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemBlock" load_steps=3 format=3 uid="uid://brxhj7d5dhmqs"]
+
+[ext_resource type="Script" uid="uid://dtm3y7ouvvwk6" path="res://item_resources/item_classes/ItemBlock.gd" id="1_ttnq5"]
+[ext_resource type="Texture2D" uid="uid://dycf4mutqkv7b" path="res://items/blocks/furniture/other/shelfItem.png" id="2_u5qtv"]
+
+[resource]
+script = ExtResource("1_ttnq5")
+blockID = 120
+itemName = "Shelf"
+subtext = ""
+desc = ""
+texture = ExtResource("2_u5qtv")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

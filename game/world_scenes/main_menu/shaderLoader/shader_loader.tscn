@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=3 uid="uid://b775llbxvt81"]
+
+[ext_resource type="Script" uid="uid://caygxkylybna6" path="res://world_scenes/main_menu/shaderLoader/shader_loader.gd" id="1_ge4n2"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_stqqx"]
+font_size = 32
+font_color = Color(0.137255, 0.137255, 0.137255, 1)
+
+[node name="shaderLoader" type="Node2D"]
+script = ExtResource("1_ge4n2")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -65.0
+offset_top = -56.0
+offset_right = 458.0
+offset_bottom = 347.0
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="."]
+offset_top = 100.0
+offset_right = 399.0
+offset_bottom = 242.0
+text = "click to focus window"
+label_settings = SubResource("LabelSettings_stqqx")
+horizontal_alignment = 1
+
+[node name="container" type="Node2D" parent="."]
+position = Vector2(197, 167)
+
+[node name="Button" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
+offset_left = -25.0
+offset_top = -24.0
+offset_right = 437.0
+offset_bottom = 322.0
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

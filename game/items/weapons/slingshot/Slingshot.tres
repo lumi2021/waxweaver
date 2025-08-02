@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ItemSlingshot" load_steps=4 format=3 uid="uid://bam2r54tysiwu"]
+
+[ext_resource type="Script" uid="uid://qq23ummvwsgo" path="res://item_resources/item_classes/ItemSlingshot.gd" id="1_s3dj1"]
+[ext_resource type="Script" uid="uid://tywvedof2je2" path="res://object_scenes/specialResource/statusEffects/StatusInflictor.gd" id="2_bu2iy"]
+[ext_resource type="Texture2D" uid="uid://dwflif2hj4wnb" path="res://items/weapons/slingshot/sling.png" id="2_h16u6"]
+
+[resource]
+script = ExtResource("1_s3dj1")
+damage = 10
+velocity = 300.0
+fireRate = 2000.0
+statusInflictors = Array[ExtResource("2_bu2iy")]([])
+itemName = "Slingshot"
+subtext = ""
+desc = "Shoots ANY block as a 
+projectile"
+texture = ExtResource("2_h16u6")
+maxStackSize = 1
+clickToUse = false
+infiniteReach = false

@@ -1,0 +1,106 @@
+[gd_scene load_steps=19 format=3 uid="uid://tt85hgijc7od"]
+
+[ext_resource type="Texture2D" uid="uid://bjxqj3tx6lysf" path="res://object_scenes/entity/enemy_scenes/confuser/limb2.png" id="1_pn43p"]
+[ext_resource type="Script" uid="uid://bfamlto1ujbct" path="res://object_scenes/entity/enemy_scenes/confuser/confuser.gd" id="1_xeefd"]
+[ext_resource type="Texture2D" uid="uid://3egkilqr0os1" path="res://object_scenes/entity/enemy_scenes/confuser/limb3.png" id="2_d2y6m"]
+[ext_resource type="Texture2D" uid="uid://dmi3slsdy38ej" path="res://object_scenes/entity/enemy_scenes/confuser/limb1.png" id="3_dn67g"]
+[ext_resource type="PackedScene" uid="uid://meikam2oyy13" path="res://object_scenes/entity/components/health_component.tscn" id="5_bwpiq"]
+[ext_resource type="PackedScene" uid="uid://c05kukkqfrg40" path="res://object_scenes/entity/components/hitbox.tscn" id="5_bwyp5"]
+[ext_resource type="PackedScene" uid="uid://8jw6pruiu3cf" path="res://object_scenes/entity/components/hurtbox.tscn" id="5_xjyxs"]
+[ext_resource type="Script" uid="uid://1b40bx8yjosq" path="res://object_scenes/specialResource/lootTables/LootTable.gd" id="6_bod53"]
+[ext_resource type="Script" uid="uid://cibriy4spaxs8" path="res://object_scenes/specialResource/lootTables/RollableItem.gd" id="7_10u2r"]
+[ext_resource type="Texture2D" uid="uid://bjma61jgwg78p" path="res://object_scenes/entity/enemy_scenes/confuser/beam.png" id="11_m8s7p"]
+[ext_resource type="PackedScene" uid="uid://84sah16y8gwq" path="res://object_scenes/entity/components/delete_me_outside_of_chunk.tscn" id="11_viggj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ksi7d"]
+size = Vector2(10, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_157qp"]
+size = Vector2(8, 10)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7d84j"]
+radius = 3.8
+
+[sub_resource type="Resource" id="Resource_vwsed"]
+script = ExtResource("7_10u2r")
+id = 3161
+amountMin = 1
+amountMax = 1
+weight = 10
+
+[sub_resource type="Resource" id="Resource_ywm6w"]
+script = ExtResource("7_10u2r")
+id = 74
+amountMin = 1
+amountMax = 2
+weight = 1000
+
+[sub_resource type="Resource" id="Resource_krree"]
+script = ExtResource("7_10u2r")
+id = 76
+amountMin = 1
+amountMax = 1
+weight = 1000
+
+[sub_resource type="Resource" id="Resource_1luut"]
+script = ExtResource("6_bod53")
+rollType = 2
+rollCount = 1
+table = Array[ExtResource("7_10u2r")]([SubResource("Resource_vwsed"), SubResource("Resource_ywm6w"), SubResource("Resource_krree")])
+
+[node name="confuser" type="CharacterBody2D" node_paths=PackedStringArray("healthComp")]
+collision_layer = 128
+script = ExtResource("1_xeefd")
+healthComp = NodePath("HealthComponent")
+
+[node name="axis" type="Node2D" parent="."]
+
+[node name="Limb2" type="Sprite2D" parent="axis"]
+position = Vector2(0, -2)
+texture = ExtResource("1_pn43p")
+offset = Vector2(0, 2)
+
+[node name="Limb3" type="Sprite2D" parent="axis/Limb2"]
+show_behind_parent = true
+position = Vector2(0, 4)
+texture = ExtResource("2_d2y6m")
+offset = Vector2(0, -2)
+
+[node name="Limb1" type="Sprite2D" parent="axis"]
+texture = ExtResource("3_dn67g")
+
+[node name="wallCast" type="RayCast2D" parent="axis"]
+target_position = Vector2(0, -8)
+
+[node name="Hitbox" parent="axis" node_paths=PackedStringArray("healthComponent", "colliderShape") instance=ExtResource("5_bwyp5")]
+healthComponent = NodePath("../../HealthComponent")
+colliderShape = NodePath("CollisionShape2D2")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="axis/Hitbox"]
+shape = SubResource("RectangleShape2D_ksi7d")
+
+[node name="Hurtbox" parent="axis" instance=ExtResource("5_xjyxs")]
+damage = 15
+knockback = 0.2
+enemyName = "confuser"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="axis/Hurtbox"]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_157qp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_7d84j")
+
+[node name="HealthComponent" parent="." instance=ExtResource("5_bwpiq")]
+maxHealth = 24
+knockbackResist = 0.2
+defense = 4
+loottable = SubResource("Resource_1luut")
+moneyToDrop = 18
+statusImmunities = Array[String](["confused"])
+
+[node name="Beam" type="Sprite2D" parent="."]
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("11_m8s7p")
+
+[node name="DeleteMeOutsideOfChunk" parent="." instance=ExtResource("11_viggj")]

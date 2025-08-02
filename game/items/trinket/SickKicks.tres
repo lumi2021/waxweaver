@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="ItemTrinket" load_steps=3 format=3 uid="uid://c88vyt6p1q1br"]
+
+[ext_resource type="Script" uid="uid://c3r1q3r34yi20" path="res://item_resources/item_classes/ItemTrinket.gd" id="1_ol2hn"]
+[ext_resource type="Texture2D" uid="uid://bjw6wo8fj3eo6" path="res://items/trinket/sickKicks.png" id="2_05nd6"]
+
+[resource]
+script = ExtResource("1_ol2hn")
+description = ""
+specialProperties = Array[String]([])
+sceneToLoad = ""
+addSpeed = 0.15
+addJump = 0.13
+addSwim = 0.0
+extraJumps = 0
+addDefense = 0
+addMeleeDamage = 0.0
+addRangedDamage = 0.0
+addHealingMultiplier = 0.0
+addKnockback = 0.0
+addAttackSpeed = 0.0
+addcriticalStrikeChance = 0
+miningMultiplier = 0.0
+statusImmunities = Array[String]([])
+itemName = "Sick Kicks"
+subtext = ""
+desc = "13% Jump Increase
+15% Increased Move Speed"
+texture = ExtResource("2_05nd6")
+maxStackSize = 1
+clickToUse = false
+infiniteReach = false

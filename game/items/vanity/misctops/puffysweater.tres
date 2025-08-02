@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemArmorChest" load_steps=4 format=3 uid="uid://d2se6fth8e3u8"]
+
+[ext_resource type="Texture2D" uid="uid://bum56frjvcl1t" path="res://items/vanity/misctops/puffysweater.png" id="1_o1wu1"]
+[ext_resource type="Script" uid="uid://dbxw3bntn8ipr" path="res://item_resources/item_classes/ItemArmorChest.gd" id="1_ujsc5"]
+[ext_resource type="Texture2D" uid="uid://c6ady5o10a125" path="res://items/vanity/misctops/puffysweatericon.png" id="3_msxp5"]
+
+[resource]
+script = ExtResource("1_ujsc5")
+defense = 1
+armorTexture = ExtResource("1_o1wu1")
+itemName = "Puffy Sweater"
+subtext = ""
+desc = "rotund"
+texture = ExtResource("3_msxp5")
+maxStackSize = 1
+clickToUse = false
+infiniteReach = false

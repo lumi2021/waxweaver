@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemBlock" load_steps=3 format=3 uid="uid://bhrs1xj2eqaja"]
+
+[ext_resource type="Script" uid="uid://dtm3y7ouvvwk6" path="res://item_resources/item_classes/ItemBlock.gd" id="1_f135m"]
+[ext_resource type="Texture2D" uid="uid://dgykujdcpbclg" path="res://items/blocks/furniture/other/chain.png" id="2_u3wps"]
+
+[resource]
+script = ExtResource("1_f135m")
+blockID = 124
+itemName = "Chain"
+subtext = ""
+desc = ""
+texture = ExtResource("2_u3wps")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

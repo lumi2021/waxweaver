@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://gfayyc1bwb0h"]
+
+[ext_resource type="Script" uid="uid://d2ruby11u08dv" path="res://ui_scenes/chat/chat_message.gd" id="1_romb3"]
+[ext_resource type="FontFile" uid="uid://n3r2v6m6uh2n" path="res://zeeg/font/GrapeSoda.ttf" id="1_sv712"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_oe1ui"]
+font = ExtResource("1_sv712")
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 3
+shadow_color = Color(0, 0, 0, 1)
+
+[node name="chatMessage" type="Node2D"]
+script = ExtResource("1_romb3")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -558.0
+offset_top = -21.0
+offset_right = -5.0
+offset_bottom = 3.0
+text = "ERROR: piss yourself"
+label_settings = SubResource("LabelSettings_oe1ui")
+horizontal_alignment = 2

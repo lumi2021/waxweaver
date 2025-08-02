@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="ItemTrinket" load_steps=3 format=3 uid="uid://dybwo18hnvv12"]
+
+[ext_resource type="Script" uid="uid://c3r1q3r34yi20" path="res://item_resources/item_classes/ItemTrinket.gd" id="1_abvku"]
+[ext_resource type="Texture2D" uid="uid://kbln7h7np8cs" path="res://items/trinket/jackhammer.png" id="2_cja12"]
+
+[resource]
+script = ExtResource("1_abvku")
+description = ""
+specialProperties = Array[String]([])
+sceneToLoad = ""
+addSpeed = 0.0
+addJump = 0.0
+addSwim = 0.0
+extraJumps = 0
+addDefense = 0
+addMeleeDamage = 0.0
+addRangedDamage = 0.0
+addHealingMultiplier = 0.0
+addKnockback = 0.0
+addAttackSpeed = 0.0
+addcriticalStrikeChance = 0
+miningMultiplier = 0.5
+statusImmunities = Array[String]([])
+itemName = "Jackhammer"
+subtext = ""
+desc = "+50% mining speed"
+texture = ExtResource("2_cja12")
+maxStackSize = 1
+clickToUse = false
+infiniteReach = false

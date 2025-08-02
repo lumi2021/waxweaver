@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="ItemSplashPotion" load_steps=4 format=3 uid="uid://cssujhu6vrhmt"]
+
+[ext_resource type="Script" uid="uid://so2tnjclnnt8" path="res://item_resources/item_classes/ItemSplashPotion.gd" id="1_co63y"]
+[ext_resource type="PackedScene" uid="uid://boq8kj6p8quns" path="res://items/weapons/splashPotion/splash_potion.tscn" id="1_us7t2"]
+[ext_resource type="Texture2D" uid="uid://jlmpkn6i7mgs" path="res://items/weapons/splashPotion/poison.png" id="3_0rvco"]
+
+[resource]
+script = ExtResource("1_co63y")
+effect = "poison"
+seconds = 10.0
+color = Color(1, 0.568627, 1, 1)
+speed = 300
+bounce = 0.5
+sceneToLoad = ExtResource("1_us7t2")
+itemName = "Poison Splash"
+subtext = ""
+desc = "Throw at enemies to 
+inflict poison"
+texture = ExtResource("3_0rvco")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

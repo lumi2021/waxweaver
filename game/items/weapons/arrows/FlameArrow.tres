@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="ItemArrow" load_steps=5 format=3 uid="uid://cfjfqalibw3pb"]
+
+[ext_resource type="Script" uid="uid://bn1i2808evmlv" path="res://item_resources/item_classes/ItemArrow.gd" id="1_i7ixh"]
+[ext_resource type="Script" uid="uid://tywvedof2je2" path="res://object_scenes/specialResource/statusEffects/StatusInflictor.gd" id="2_5uos1"]
+[ext_resource type="Texture2D" uid="uid://de0odc7jb356r" path="res://items/weapons/arrows/flameArrow.png" id="3_g23wh"]
+
+[sub_resource type="Resource" id="Resource_2mkdq"]
+script = ExtResource("2_5uos1")
+effectName = "burning"
+seconds = 4.0
+chance = 100
+
+[resource]
+script = ExtResource("1_i7ixh")
+damage = 3
+velocityMultiplier = 1.4
+statusInflictors = Array[ExtResource("2_5uos1")]([SubResource("Resource_2mkdq")])
+itemName = "Flaming Arrow"
+subtext = ""
+desc = ""
+texture = ExtResource("3_g23wh")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

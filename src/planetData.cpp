@@ -56,12 +56,12 @@ void PLANETDATA::createEmptyArrays(int size, Vector2 centerPoint) {
 
     int bigSize = size * size;
 
-    tileData = new  int[bigSize];
-    bgData = new  int[bigSize];
-    lightData = new  double[bigSize];
-    timeData = new  int[bigSize];
-    waterData = new  double[bigSize];
-    infoData = new  int[bigSize];
+    tileData = new int[bigSize];
+    bgData = new int[bigSize];
+    lightData = new double[bigSize];
+    timeData = new int[bigSize];
+    waterData = new double[bigSize];
+    infoData = new int[bigSize];
 
     positionLookup = new int[bigSize];
 
@@ -69,6 +69,7 @@ void PLANETDATA::createEmptyArrays(int size, Vector2 centerPoint) {
 
     for(int x = 0; x < size; x++){
         for(int y = 0; y < size; y++){
+            
             setTileData(x,y,0);
             setBGData(x,y,0);
             setLightData(x,y,0.0);

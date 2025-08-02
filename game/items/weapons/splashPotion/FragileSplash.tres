@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="ItemSplashPotion" load_steps=4 format=3 uid="uid://dcebc6uknf0cj"]
+
+[ext_resource type="Script" uid="uid://so2tnjclnnt8" path="res://item_resources/item_classes/ItemSplashPotion.gd" id="1_0pess"]
+[ext_resource type="PackedScene" uid="uid://boq8kj6p8quns" path="res://items/weapons/splashPotion/splash_potion.tscn" id="1_2ptmm"]
+[ext_resource type="Texture2D" uid="uid://ddeibmyf0nnnc" path="res://items/weapons/splashPotion/fragile.png" id="3_3pqhw"]
+
+[resource]
+script = ExtResource("1_0pess")
+effect = "fragile"
+seconds = 20.0
+color = Color(1, 0.686275, 0.662745, 1)
+speed = 300
+bounce = 0.5
+sceneToLoad = ExtResource("1_2ptmm")
+itemName = "Weakness Splash"
+subtext = ""
+desc = "Throw at enemies to 
+inflict fragile, halving defense
+"
+texture = ExtResource("3_3pqhw")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

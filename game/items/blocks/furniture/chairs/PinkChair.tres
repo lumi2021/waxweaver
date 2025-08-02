@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ItemChair" load_steps=3 format=3 uid="uid://cgt4ipt3q641e"]
+
+[ext_resource type="Script" uid="uid://dfmuf6vdnto51" path="res://item_resources/item_classes/ItemChair.gd" id="1_mmp3g"]
+[ext_resource type="Texture2D" uid="uid://dnhqhb6i1vikx" path="res://items/blocks/furniture/chairs/pinkChair.png" id="2_gd4od"]
+
+[resource]
+script = ExtResource("1_mmp3g")
+blockID = 19
+grounded = true
+needsWalls = false
+chairType = 2
+itemName = "Pink Chair"
+subtext = ""
+desc = ""
+texture = ExtResource("2_gd4od")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

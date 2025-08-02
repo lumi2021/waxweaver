@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bbgqoqp0b8tdu"]
+
+[ext_resource type="Script" uid="uid://llp1exoxa4og" path="res://ui_scenes/backgroundLayers/background_layer.gd" id="1_36c1p"]
+
+[node name="BackgroundLayer" type="Node2D"]
+z_index = 16
+script = ExtResource("1_36c1p")

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemBlock" load_steps=3 format=3 uid="uid://cd5j6m7k7sxp1"]
+
+[ext_resource type="Script" uid="uid://dtm3y7ouvvwk6" path="res://item_resources/item_classes/ItemBlock.gd" id="1_7i0pp"]
+[ext_resource type="Texture2D" uid="uid://cc82rh42pqrje" path="res://items/material/bars/CopperBar.png" id="2_g5tao"]
+
+[resource]
+script = ExtResource("1_7i0pp")
+blockID = 29
+itemName = "Copper Bar"
+subtext = ""
+desc = ""
+texture = ExtResource("2_g5tao")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

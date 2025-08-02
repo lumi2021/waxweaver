@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="ItemTrinket" load_steps=3 format=3 uid="uid://yg3pvfte1804"]
+
+[ext_resource type="Script" uid="uid://c3r1q3r34yi20" path="res://item_resources/item_classes/ItemTrinket.gd" id="1_kuvkd"]
+[ext_resource type="Texture2D" uid="uid://1ho2irxqqxcs" path="res://items/trinket/goodluckcharm.png" id="2_nde7s"]
+
+[resource]
+script = ExtResource("1_kuvkd")
+description = ""
+specialProperties = Array[String]([])
+sceneToLoad = ""
+addSpeed = 0.0
+addJump = 0.0
+addSwim = 0.0
+extraJumps = 0
+addDefense = 0
+addMeleeDamage = 0.0
+addRangedDamage = 0.0
+addHealingMultiplier = 0.0
+addKnockback = 0.0
+addAttackSpeed = 0.0
+addcriticalStrikeChance = 0
+miningMultiplier = 0.0
+statusImmunities = Array[String](["confused", "burning", "frozen", "poison", "fragile"])
+itemName = "Good Luck Charm"
+subtext = ""
+desc = "Grants immunity to all negative
+status effects.
+"
+texture = ExtResource("2_nde7s")
+maxStackSize = 1
+clickToUse = false
+infiniteReach = false

@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://mh4q570jpivc"]
-
-[ext_resource type="Script" path="res://ui_scenes/backgrounds/background_layer.gd" id="1_nsg84"]
-
-[node name="backgroundLayer" type="Node2D"]
-script = ExtResource("1_nsg84")
-
-[node name="origin" type="Node2D" parent="."]

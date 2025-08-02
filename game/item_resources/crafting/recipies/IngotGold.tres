@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=4 format=3 uid="uid://bswaggvujlt37"]
+
+[ext_resource type="Script" uid="uid://x5weveb13f6i" path="res://item_resources/crafting/CraftingRecipe.gd" id="1_l8aon"]
+[ext_resource type="Script" uid="uid://c7ioyf1ups1ca" path="res://item_resources/crafting/CraftingIngredient.gd" id="1_waici"]
+
+[sub_resource type="Resource" id="Resource_42iqu"]
+script = ExtResource("1_waici")
+ingredient = 24
+amount = 1
+
+[resource]
+script = ExtResource("1_l8aon")
+itemToCraft = 30
+amountToCraft = 1
+ingredients = Array[ExtResource("1_waici")]([SubResource("Resource_42iqu")])
+requiresStation = true
+station = 16
+recipieType = 0

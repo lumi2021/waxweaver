@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemBlock" load_steps=3 format=3 uid="uid://fj7ikv5o6wca"]
+
+[ext_resource type="Script" uid="uid://dtm3y7ouvvwk6" path="res://item_resources/item_classes/ItemBlock.gd" id="1_k66rc"]
+[ext_resource type="Texture2D" uid="uid://ddqg4p5wdmka8" path="res://items/blocks/building/letterItem.png" id="2_v25hs"]
+
+[resource]
+script = ExtResource("1_k66rc")
+blockID = 62
+itemName = "Letter"
+subtext = ""
+desc = "right click to change letter"
+texture = ExtResource("2_v25hs")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

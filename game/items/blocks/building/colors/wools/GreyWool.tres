@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ItemTypeBlock" load_steps=3 format=3 uid="uid://xna6qf5x8nea"]
+
+[ext_resource type="Script" uid="uid://bjpd2qjm0k7qs" path="res://item_resources/item_classes/ItemTypeBlock.gd" id="1_k6rty"]
+[ext_resource type="Texture2D" uid="uid://cbjytw1crdwnd" path="res://items/blocks/building/colors/wools/woolColor9.png" id="2_1fbgs"]
+
+[resource]
+script = ExtResource("1_k6rty")
+blockID = 53
+multiTileId = 8
+itemName = "Grey Wool"
+subtext = ""
+desc = ""
+texture = ExtResource("2_1fbgs")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

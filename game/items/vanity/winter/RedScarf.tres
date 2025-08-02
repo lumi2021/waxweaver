@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemArmorChest" load_steps=4 format=3 uid="uid://csftio02pkx4h"]
+
+[ext_resource type="Texture2D" uid="uid://brts2esk26xf6" path="res://items/vanity/winter/redScarf.png" id="1_5gkgl"]
+[ext_resource type="Script" uid="uid://dbxw3bntn8ipr" path="res://item_resources/item_classes/ItemArmorChest.gd" id="1_qp6gq"]
+[ext_resource type="Texture2D" uid="uid://b0a4mlfchht4k" path="res://items/vanity/winter/scarfRed.png" id="3_3ft6i"]
+
+[resource]
+script = ExtResource("1_qp6gq")
+defense = 1
+armorTexture = ExtResource("1_5gkgl")
+itemName = "Red Scarf"
+subtext = ""
+desc = ""
+texture = ExtResource("3_3ft6i")
+maxStackSize = 1
+clickToUse = false
+infiniteReach = false

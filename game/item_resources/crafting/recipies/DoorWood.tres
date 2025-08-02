@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=4 format=3 uid="uid://dc7u51ey3m42q"]
+
+[ext_resource type="Script" uid="uid://x5weveb13f6i" path="res://item_resources/crafting/CraftingRecipe.gd" id="1_6rags"]
+[ext_resource type="Script" uid="uid://c7ioyf1ups1ca" path="res://item_resources/crafting/CraftingIngredient.gd" id="1_dcfmk"]
+
+[sub_resource type="Resource" id="Resource_alfi4"]
+script = ExtResource("1_dcfmk")
+ingredient = 13
+amount = 3
+
+[resource]
+script = ExtResource("1_6rags")
+itemToCraft = 6050
+amountToCraft = 1
+ingredients = Array[ExtResource("1_dcfmk")]([SubResource("Resource_alfi4")])
+requiresStation = true
+station = 20
+recipieType = 5

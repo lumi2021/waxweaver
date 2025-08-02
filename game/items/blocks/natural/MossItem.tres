@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemBlock" load_steps=3 format=3 uid="uid://1t4oimq5lyj4"]
+
+[ext_resource type="Script" uid="uid://dtm3y7ouvvwk6" path="res://item_resources/item_classes/ItemBlock.gd" id="1_lnpc0"]
+[ext_resource type="Texture2D" uid="uid://dd0jrla3cgfhn" path="res://items/blocks/natural/mossItem.png" id="2_01y1i"]
+
+[resource]
+script = ExtResource("1_lnpc0")
+blockID = 74
+itemName = "Moss"
+subtext = ""
+desc = ""
+texture = ExtResource("2_01y1i")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

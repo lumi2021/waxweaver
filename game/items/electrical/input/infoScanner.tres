@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemBlock" load_steps=3 format=3 uid="uid://d1m0fup3acsp2"]
+
+[ext_resource type="Script" uid="uid://dtm3y7ouvvwk6" path="res://item_resources/item_classes/ItemBlock.gd" id="1_2rmjl"]
+[ext_resource type="Texture2D" uid="uid://lnol0vneadxh" path="res://items/electrical/input/infoScannerItem.png" id="2_o3g6g"]
+
+[resource]
+script = ExtResource("1_2rmjl")
+blockID = 152
+itemName = "Info Scanner"
+subtext = ""
+desc = "Energizes when the block in
+front of it's state has changed.
+Interact to change direction."
+texture = ExtResource("2_o3g6g")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

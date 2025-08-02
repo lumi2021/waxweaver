@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemDoor" load_steps=3 format=3 uid="uid://6lgpti82rfti"]
+
+[ext_resource type="Script" uid="uid://dv0urpc75fqd3" path="res://item_resources/item_classes/ItemDoor.gd" id="1_olv4r"]
+[ext_resource type="Texture2D" uid="uid://fl25gitj4h3r" path="res://items/blocks/furniture/doors/woodDoor.png" id="2_5jch3"]
+
+[resource]
+script = ExtResource("1_olv4r")
+blockID = 22
+size = Vector2i(1, 2)
+doorType = 0
+itemName = "Wooden Door"
+subtext = ""
+desc = ""
+texture = ExtResource("2_5jch3")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

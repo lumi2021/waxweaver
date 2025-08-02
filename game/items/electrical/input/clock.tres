@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ItemBlock" load_steps=3 format=3 uid="uid://dnvhoxhv3kyse"]
+
+[ext_resource type="Script" uid="uid://dtm3y7ouvvwk6" path="res://item_resources/item_classes/ItemBlock.gd" id="1_f7bhr"]
+[ext_resource type="Texture2D" uid="uid://bchbqwpoh4u05" path="res://items/electrical/input/clock.png" id="2_va8yw"]
+
+[resource]
+script = ExtResource("1_f7bhr")
+blockID = 99
+itemName = "Clock"
+subtext = ""
+desc = "Energizes repeatedly at 
+a set rate.
+Set to 1 second by default.
+Interact to change rate."
+texture = ExtResource("2_va8yw")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

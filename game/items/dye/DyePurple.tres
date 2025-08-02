@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://bfljwjvnnuk6i"]
+
+[ext_resource type="Script" uid="uid://cuvdxt7j1u1ju" path="res://item_resources/Item.gd" id="1_xat4l"]
+[ext_resource type="Texture2D" uid="uid://bjj6acotv36bx" path="res://items/dye/dyePurple.png" id="2_khhbg"]
+
+[resource]
+script = ExtResource("1_xat4l")
+itemName = "Purple Dye"
+subtext = ""
+desc = ""
+texture = ExtResource("2_khhbg")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

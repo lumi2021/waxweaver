@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="StatusEffect" load_steps=3 format=3 uid="uid://swb85iiprme8"]
+
+[ext_resource type="Texture2D" uid="uid://d10qsbfxb0qku" path="res://object_scenes/specialResource/statusEffects/playerDisplayIcon/frozen.png" id="1_by2gg"]
+[ext_resource type="Script" uid="uid://be1sywj1qim6m" path="res://object_scenes/specialResource/statusEffects/StatusEffect.gd" id="1_g73vn"]
+
+[resource]
+script = ExtResource("1_g73vn")
+displayName = "Frozen"
+icon = ExtResource("1_by2gg")
+description = "brrr..."
+dyeColor = Color(0.258824, 0.788235, 1, 1)
+incompatibleEffects = Array[String]([])

@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemDoor" load_steps=3 format=3 uid="uid://osyhxj6uypco"]
+
+[ext_resource type="Script" uid="uid://dv0urpc75fqd3" path="res://item_resources/item_classes/ItemDoor.gd" id="1_8uaox"]
+[ext_resource type="Texture2D" uid="uid://d28g3xdtoik5k" path="res://items/blocks/furniture/doors/pinkDoor.png" id="2_jncwb"]
+
+[resource]
+script = ExtResource("1_8uaox")
+blockID = 22
+size = Vector2i(1, 2)
+doorType = 1
+itemName = "Pink Door"
+subtext = ""
+desc = ""
+texture = ExtResource("2_jncwb")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

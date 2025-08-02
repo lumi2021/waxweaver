@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://b52h6uugm5a1n"]
+
+[ext_resource type="Script" uid="uid://b3l4dhjegtcbw" path="res://items/electrical/spitter/spitter_block_spit.gd" id="1_2oql3"]
+[ext_resource type="Texture2D" uid="uid://0xo4tk0exmhe" path="res://items/electrical/spitter/spitteritemframe1.png" id="1_vka8s"]
+[ext_resource type="PackedScene" uid="uid://84sah16y8gwq" path="res://object_scenes/entity/components/delete_me_outside_of_chunk.tscn" id="3_ul74q"]
+[ext_resource type="Texture2D" uid="uid://j6shj7d8dlo4" path="res://items/electrical/spitter/spitterpart.png" id="4_l0vnw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lwsmd"]
+size = Vector2(6, 6)
+
+[sub_resource type="Curve" id="Curve_bfjui"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 3.1931, 0, 0, Vector2(0.106618, 1.33233), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.38624, 0.0, 0, 0]
+point_count = 3
+
+[node name="spitterBlockSpit" type="CharacterBody2D"]
+collision_layer = 16
+script = ExtResource("1_2oql3")
+creatureSlots = 0
+passive = true
+
+[node name="sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_vka8s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_lwsmd")
+
+[node name="DeleteMeOutsideOfChunk" parent="." instance=ExtResource("3_ul74q")]
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 6
+lifetime = 0.6
+one_shot = true
+explosiveness = 1.0
+texture = ExtResource("4_l0vnw")
+emission_shape = 1
+emission_sphere_radius = 3.0
+direction = Vector2(0, 1)
+gravity = Vector2(0, 0)
+initial_velocity_max = 40.0
+angular_velocity_min = -44.32
+angular_velocity_max = 56.5
+angle_min = -720.0
+angle_max = 720.0
+scale_amount_curve = SubResource("Curve_bfjui")
+color = Color(1, 1, 1, 0.231373)

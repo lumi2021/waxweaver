@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ItemTypeBlock" load_steps=3 format=3 uid="uid://dy6cww6v5gl8f"]
+
+[ext_resource type="Script" uid="uid://bjpd2qjm0k7qs" path="res://item_resources/item_classes/ItemTypeBlock.gd" id="1_5g02m"]
+[ext_resource type="Texture2D" uid="uid://ch67e2pe47ie1" path="res://items/blocks/furniture/trophies/gold.png" id="2_8k8n5"]
+
+[resource]
+script = ExtResource("1_5g02m")
+blockID = 130
+multiTileId = 2
+itemName = "Golden Trophy"
+subtext = ""
+desc = ""
+texture = ExtResource("2_8k8n5")
+maxStackSize = 1
+clickToUse = false
+infiniteReach = false

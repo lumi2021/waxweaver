@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ItemChair" load_steps=3 format=3 uid="uid://bi5an7remydsy"]
+
+[ext_resource type="Script" uid="uid://dfmuf6vdnto51" path="res://item_resources/item_classes/ItemChair.gd" id="1_rlu4u"]
+[ext_resource type="Texture2D" uid="uid://bfpkar8kqd551" path="res://items/blocks/foliage/trees/sunflowerTree/item.png" id="2_fm8gg"]
+
+[resource]
+script = ExtResource("1_rlu4u")
+blockID = 59
+grounded = true
+needsWalls = false
+chairType = 0
+itemName = "Sunflower"
+subtext = ""
+desc = ""
+texture = ExtResource("2_fm8gg")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

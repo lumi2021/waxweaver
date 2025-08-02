@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="ItemTrinket" load_steps=3 format=3 uid="uid://dhcqoqbg1k3ak"]
+
+[ext_resource type="Script" uid="uid://c3r1q3r34yi20" path="res://item_resources/item_classes/ItemTrinket.gd" id="1_cq5fg"]
+[ext_resource type="Texture2D" uid="uid://bkc18s1sq0jts" path="res://items/trinket/repairKit.png" id="2_8klyd"]
+
+[resource]
+script = ExtResource("1_cq5fg")
+description = ""
+specialProperties = Array[String]([])
+sceneToLoad = ""
+addSpeed = 0.0
+addJump = 0.0
+addSwim = 0.0
+extraJumps = 0
+addDefense = 0
+addMeleeDamage = 0.0
+addRangedDamage = 0.0
+addHealingMultiplier = 0.0
+addKnockback = 0.0
+addAttackSpeed = 0.0
+addcriticalStrikeChance = 0
+miningMultiplier = 0.0
+statusImmunities = Array[String](["fragile"])
+itemName = "Repair Kit"
+subtext = ""
+desc = "Grants immunity to fragile"
+texture = ExtResource("2_8klyd")
+maxStackSize = 1
+clickToUse = false
+infiniteReach = false

@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="ItemMultitile" load_steps=3 format=3 uid="uid://b81kb1lx3l0rm"]
+
+[ext_resource type="Script" uid="uid://cjb3fu57wnodq" path="res://item_resources/item_classes/ItemMultitile.gd" id="1_2bxs8"]
+[ext_resource type="Texture2D" uid="uid://crqkm4p0wmr02" path="res://items/paintings/aaaFrame.png" id="2_xofwi"]
+
+[resource]
+script = ExtResource("1_2bxs8")
+blockID = 72
+size = Vector2i(3, 2)
+grounded = false
+needsWalls = true
+runLoad = false
+itemName = "Painting"
+subtext = ""
+desc = "\"Washed\" - kaiakairos"
+texture = ExtResource("2_xofwi")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

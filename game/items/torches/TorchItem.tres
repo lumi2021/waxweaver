@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemTorch" load_steps=3 format=3 uid="uid://cdtfsl3jpc4vv"]
+
+[ext_resource type="Script" uid="uid://2ikdlv2xsshp" path="res://item_resources/item_classes/ItemTorch.gd" id="1_wbry3"]
+[ext_resource type="Texture2D" uid="uid://d1gwtiy7uv0x7" path="res://items/torches/torchItem.png" id="2_yat23"]
+
+[resource]
+script = ExtResource("1_wbry3")
+blockID = 15
+itemName = "Torch"
+subtext = ""
+desc = ""
+texture = ExtResource("2_yat23")
+maxStackSize = 99
+clickToUse = true
+infiniteReach = false

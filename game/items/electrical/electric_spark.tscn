@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://bujulaif3yb2m"]
+
+[ext_resource type="Script" uid="uid://drhdcqphovv2" path="res://items/electrical/electric_spark.gd" id="1_cfrkm"]
+
+[sub_resource type="Curve" id="Curve_2sb7m"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.555147, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.69789, 0.0, 0, 0]
+point_count = 3
+
+[node name="electricSpark" type="CPUParticles2D"]
+emitting = false
+lifetime = 0.4
+one_shot = true
+explosiveness = 0.67
+lifetime_randomness = 0.84
+local_coords = true
+direction = Vector2(0, -1)
+gravity = Vector2(0, 100)
+initial_velocity_min = 17.55
+initial_velocity_max = 49.3
+scale_amount_curve = SubResource("Curve_2sb7m")
+color = Color(1, 0.890196, 0.258824, 1)
+script = ExtResource("1_cfrkm")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

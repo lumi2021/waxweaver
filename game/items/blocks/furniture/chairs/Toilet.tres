@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ItemChair" load_steps=3 format=3 uid="uid://cr6jinmci26pu"]
+
+[ext_resource type="Script" uid="uid://dfmuf6vdnto51" path="res://item_resources/item_classes/ItemChair.gd" id="1_56i2s"]
+[ext_resource type="Texture2D" uid="uid://bhpk4o6ygcckw" path="res://items/blocks/furniture/chairs/toilet.png" id="2_v84ho"]
+
+[resource]
+script = ExtResource("1_56i2s")
+blockID = 19
+grounded = true
+needsWalls = false
+chairType = 1
+itemName = "Toilet"
+subtext = ""
+desc = ""
+texture = ExtResource("2_v84ho")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

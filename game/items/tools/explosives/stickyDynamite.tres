@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="ItemExplosive" load_steps=3 format=3 uid="uid://cqay5b5e6cd6o"]
+
+[ext_resource type="Script" uid="uid://c4or7dic44wno" path="res://item_resources/item_classes/ItemExplosive.gd" id="1_yuaar"]
+[ext_resource type="Texture2D" uid="uid://c4dq6ukvjfqx8" path="res://items/tools/explosives/stickyDynamite.png" id="2_322sv"]
+
+[resource]
+script = ExtResource("1_yuaar")
+radius = 6
+delay = 3.0
+sticky = true
+speed = 300
+bounce = 0.5
+itemName = "Sticky Dynamite"
+subtext = ""
+desc = ""
+texture = ExtResource("2_322sv")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

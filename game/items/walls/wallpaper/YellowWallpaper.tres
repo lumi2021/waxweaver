@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemWall" load_steps=3 format=3 uid="uid://4gpcwqo4q031"]
+
+[ext_resource type="Script" uid="uid://ciejd0y16fbmh" path="res://item_resources/item_classes/ItemWall.gd" id="1_uulaa"]
+[ext_resource type="Texture2D" uid="uid://ch1iiwk7u1tel" path="res://items/walls/wallpaper/yellowWallpaper.png" id="2_82unq"]
+
+[resource]
+script = ExtResource("1_uulaa")
+blockID = -145
+itemName = "Yellow Wallpaper"
+subtext = ""
+desc = ""
+texture = ExtResource("2_82unq")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

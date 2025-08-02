@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bemc1c70c3qrs"]
+
+[ext_resource type="Script" uid="uid://by43m6euwjqkk" path="res://object_scenes/entity/components/enemy_sprite.gd" id="1_421c1"]
+
+[node name="enemySprite" type="Sprite2D"]
+script = ExtResource("1_421c1")

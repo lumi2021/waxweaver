@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemLever" load_steps=3 format=3 uid="uid://bcbgq1bnffawk"]
+
+[ext_resource type="Script" uid="uid://bcjdw1v3m3lj6" path="res://item_resources/item_classes/ItemLever.gd" id="1_ijoj8"]
+[ext_resource type="Texture2D" uid="uid://bmpcj6lupgqk7" path="res://items/electrical/input/leverItem.png" id="2_3radl"]
+
+[resource]
+script = ExtResource("1_ijoj8")
+blockID = 97
+itemName = "Lever"
+subtext = ""
+desc = "Energizes when interacted"
+texture = ExtResource("2_3radl")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemBlock" load_steps=3 format=3 uid="uid://lf0ule01wsyn"]
+
+[ext_resource type="Script" uid="uid://dtm3y7ouvvwk6" path="res://item_resources/item_classes/ItemBlock.gd" id="1_plxb8"]
+[ext_resource type="Texture2D" uid="uid://2w5pedfiktqt" path="res://items/blocks/building/sandstoneEye.png" id="2_nk8qp"]
+
+[resource]
+script = ExtResource("1_plxb8")
+blockID = 138
+itemName = "Chiseled Sandstone"
+subtext = ""
+desc = ""
+texture = ExtResource("2_nk8qp")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

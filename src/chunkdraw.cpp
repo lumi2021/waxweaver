@@ -715,8 +715,8 @@ Dictionary CHUNKDRAW::runBreak(PLANETDATA *planet,Vector2i pos,int x, int y, int
 }
 
 void CHUNKDRAW::getBorderImage( const char* file ) {
-    ResourceLoader rl;
-    texture = rl.load(file);
+    ResourceLoader *rl = ResourceLoader::get_singleton();
+    texture = rl->load(file);
 
     texImage = texture->get_image();
     texImage->convert(Image::FORMAT_RGBA8);
@@ -724,8 +724,8 @@ void CHUNKDRAW::getBorderImage( const char* file ) {
 }
 
 void CHUNKDRAW::getBorderMask( const char* file ) {
-    ResourceLoader rl;
-    maskHold = rl.load(file);
+    ResourceLoader *rl = ResourceLoader::get_singleton();
+    maskHold = rl->load(file);
 
     maskBorder = maskHold->get_image();
     maskBorder->convert(Image::FORMAT_RGBA8);
@@ -733,8 +733,8 @@ void CHUNKDRAW::getBorderMask( const char* file ) {
 }
 
 void CHUNKDRAW::getWaterImage( const char* file ) {
-    ResourceLoader rl;
-    watertexture = rl.load(file);
+    ResourceLoader *rl = ResourceLoader::get_singleton();
+    watertexture = rl->load(file);
 
     watertexImage = watertexture->get_image();
     watertexImage->convert(Image::FORMAT_RGBA8);

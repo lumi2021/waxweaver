@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://c5ikt4hqyhdoy"]
+
+[ext_resource type="Script" uid="uid://baqco5x28tajx" path="res://world_scenes/planet/planet.gd" id="1_8tc4r"]
+
+[node name="Planet" type="Node2D"]
+script = ExtResource("1_8tc4r")
+
+[node name="PLANETDATA" type="PLANETDATA" parent="."]
+
+[node name="ChunkContainer" type="Node2D" parent="."]
+
+[node name="EntityContainer" type="Node2D" parent="." groups=["planet"]]
+visibility_layer = 8

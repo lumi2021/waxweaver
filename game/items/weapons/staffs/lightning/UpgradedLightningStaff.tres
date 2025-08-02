@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="ItemStaff" load_steps=5 format=3 uid="uid://dhan6harur46f"]
+
+[ext_resource type="Texture2D" uid="uid://o5hm4ff2f5rm" path="res://items/weapons/staffs/lightning/emmisive.png" id="1_oyu4u"]
+[ext_resource type="Script" uid="uid://cao08bdwb7tvt" path="res://item_resources/item_classes/ItemStaff.gd" id="1_yvm3l"]
+[ext_resource type="PackedScene" uid="uid://dsfhpye1k1fbr" path="res://items/weapons/staffs/lightning/lightning.tscn" id="3_jmolj"]
+[ext_resource type="Texture2D" uid="uid://vjemsf5g2neo" path="res://items/weapons/staffs/lightning/upgradedZeus.png" id="4_ofgvv"]
+
+[resource]
+script = ExtResource("1_yvm3l")
+summoningObject = ExtResource("3_jmolj")
+delay = 0.2
+ejectPower = 3
+emissiveTex = ExtResource("1_oyu4u")
+manaCost = 30
+itemName = "True Zeus Staff"
+subtext = ""
+desc = "damage: 25
+cost: 30 mana
+shoots bolts of lightning"
+texture = ExtResource("4_ofgvv")
+maxStackSize = 1
+clickToUse = false
+infiniteReach = false

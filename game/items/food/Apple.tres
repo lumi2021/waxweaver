@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="ItemFood" load_steps=5 format=3 uid="uid://bp8efog8e567c"]
+
+[ext_resource type="Script" uid="uid://cuotwfncnpc6y" path="res://item_resources/item_classes/ItemFood.gd" id="1_2ogf0"]
+[ext_resource type="Script" uid="uid://tywvedof2je2" path="res://object_scenes/specialResource/statusEffects/StatusInflictor.gd" id="2_0ndlw"]
+[ext_resource type="Texture2D" uid="uid://dl7o82p7clmi7" path="res://items/food/apple.png" id="2_fwlgt"]
+
+[sub_resource type="Resource" id="Resource_7rwj7"]
+script = ExtResource("2_0ndlw")
+effectName = "regen"
+seconds = 60.0
+chance = 100
+
+[resource]
+script = ExtResource("1_2ogf0")
+healingAmount = 12
+eatTime = 2.8
+particleColor = Color(0.713726, 0.196078, 0.2, 1)
+statusInflictors = Array[ExtResource("2_0ndlw")]([SubResource("Resource_7rwj7")])
+itemName = "Apple"
+subtext = ""
+desc = "Gives minor regen"
+texture = ExtResource("2_fwlgt")
+maxStackSize = 5
+clickToUse = false
+infiniteReach = false

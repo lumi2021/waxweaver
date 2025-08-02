@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemPlant" load_steps=3 format=3 uid="uid://dhi4hck8j3yug"]
+
+[ext_resource type="Script" uid="uid://c8bm37aoe7cax" path="res://item_resources/item_classes/ItemPlant.gd" id="1_7w3an"]
+[ext_resource type="Texture2D" uid="uid://exkt0mho4m10" path="res://items/blocks/foliage/trees/sunflowerTree/seed.png" id="2_51qna"]
+
+[resource]
+script = ExtResource("1_7w3an")
+blockToPlace = 60
+acceptableBlocks = Array[int]([3, 4, 74])
+descCanPlaceOn = "grass, dirt, moss"
+itemName = "Sunflower Seed"
+subtext = ""
+desc = ""
+texture = ExtResource("2_51qna")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

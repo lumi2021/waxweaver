@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=5 format=3 uid="uid://b0yb5k4kebc1s"]
+
+[ext_resource type="Script" uid="uid://c7ioyf1ups1ca" path="res://item_resources/crafting/CraftingIngredient.gd" id="1_lr6cn"]
+[ext_resource type="Script" uid="uid://x5weveb13f6i" path="res://item_resources/crafting/CraftingRecipe.gd" id="1_uscuk"]
+
+[sub_resource type="Resource" id="Resource_83hlg"]
+script = ExtResource("1_lr6cn")
+ingredient = 124
+amount = 2
+
+[sub_resource type="Resource" id="Resource_pkf0u"]
+script = ExtResource("1_lr6cn")
+ingredient = 15
+amount = 3
+
+[resource]
+script = ExtResource("1_uscuk")
+itemToCraft = 125
+amountToCraft = 1
+ingredients = Array[ExtResource("1_lr6cn")]([SubResource("Resource_83hlg"), SubResource("Resource_pkf0u")])
+requiresStation = true
+station = 20
+recipieType = 0

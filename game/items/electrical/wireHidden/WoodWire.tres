@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ItemTypeBlock" load_steps=3 format=3 uid="uid://dm7ncuk87qb8p"]
+
+[ext_resource type="Script" uid="uid://bjpd2qjm0k7qs" path="res://item_resources/item_classes/ItemTypeBlock.gd" id="1_7gw4b"]
+[ext_resource type="Texture2D" uid="uid://ygw3mlr222cs" path="res://items/electrical/wireHidden/wood.png" id="2_bh5h3"]
+
+[resource]
+script = ExtResource("1_7gw4b")
+blockID = 93
+multiTileId = 0
+itemName = "Wood Wire"
+subtext = ""
+desc = "A wire that looks like wood"
+texture = ExtResource("2_bh5h3")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

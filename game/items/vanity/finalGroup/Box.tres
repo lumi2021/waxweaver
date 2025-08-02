@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemArmorChest" load_steps=4 format=3 uid="uid://cg4h6ye6tb77q"]
+
+[ext_resource type="Texture2D" uid="uid://chl0n3mb87hqy" path="res://items/vanity/finalGroup/box.png" id="1_cq8ih"]
+[ext_resource type="Script" uid="uid://dbxw3bntn8ipr" path="res://item_resources/item_classes/ItemArmorChest.gd" id="1_pmdkl"]
+[ext_resource type="Texture2D" uid="uid://d0ijqhetb8eaf" path="res://items/vanity/finalGroup/boxitem.png" id="3_xquqc"]
+
+[resource]
+script = ExtResource("1_pmdkl")
+defense = 1
+armorTexture = ExtResource("1_cq8ih")
+itemName = "Cardboard Box"
+subtext = ""
+desc = ""
+texture = ExtResource("3_xquqc")
+maxStackSize = 1
+clickToUse = false
+infiniteReach = false

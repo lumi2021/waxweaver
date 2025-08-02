@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://cph0hhf8uc43d"]
+
+[ext_resource type="Script" uid="uid://bgbtaqtxqqcr3" path="res://ui_scenes/damageIcons/item_indicator.gd" id="1_hfyta"]
+[ext_resource type="FontFile" uid="uid://c3vw44vws5n61" path="res://zeeg/font/I-pixel-u.ttf" id="2_03ebh"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_57i4o"]
+font = ExtResource("2_03ebh")
+font_size = 8
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+
+[node name="itemIndicator" type="Node2D"]
+modulate = Color(1, 1, 1, 0.392157)
+visibility_layer = 64
+z_index = 2000
+script = ExtResource("1_hfyta")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -50.0
+offset_top = -14.0
+offset_right = 50.0
+offset_bottom = -2.0
+pivot_offset = Vector2(50, 0)
+text = "999"
+label_settings = SubResource("LabelSettings_57i4o")
+horizontal_alignment = 1

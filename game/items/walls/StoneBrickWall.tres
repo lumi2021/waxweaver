@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemWall" load_steps=3 format=3 uid="uid://ty0746ve4mwx"]
+
+[ext_resource type="Script" uid="uid://ciejd0y16fbmh" path="res://item_resources/item_classes/ItemWall.gd" id="1_jvuk8"]
+[ext_resource type="Texture2D" uid="uid://b04qvy1t2c11u" path="res://items/walls/stonebrickwall.png" id="2_kbs5h"]
+
+[resource]
+script = ExtResource("1_jvuk8")
+blockID = -32
+itemName = "Stone Brick Wall"
+subtext = ""
+desc = ""
+texture = ExtResource("2_kbs5h")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

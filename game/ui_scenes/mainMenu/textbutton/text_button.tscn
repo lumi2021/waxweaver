@@ -1,0 +1,63 @@
+[gd_scene load_steps=7 format=3 uid="uid://d0j06gpiq8jxo"]
+
+[ext_resource type="Script" uid="uid://b3fk2eg1734hg" path="res://ui_scenes/mainMenu/textbutton/text_button.gd" id="1_mi3f6"]
+[ext_resource type="AudioStream" uid="uid://cqa50gn4ua5pu" path="res://sound/ui/menuUp.ogg" id="2_5wrln"]
+[ext_resource type="AudioStream" uid="uid://djc8uidvq5l2w" path="res://sound/ui/menuDown.ogg" id="3_8nn65"]
+[ext_resource type="AudioStream" uid="uid://jicgxgt0ypoa" path="res://sound/ui/menuSelect.ogg" id="4_qrasv"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_f2sph"]
+font_color = Color(0, 0, 0, 1)
+shadow_size = 8
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(-1, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_nqjjx"]
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 8
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(-1, 1)
+
+[node name="textButton" type="Button"]
+self_modulate = Color(1, 1, 1, 0)
+offset_right = 27.0
+offset_bottom = 17.0
+script = ExtResource("1_mi3f6")
+
+[node name="shadow" type="Label" parent="."]
+layout_mode = 0
+offset_right = 6.0
+offset_bottom = 17.0
+text = "text"
+label_settings = SubResource("LabelSettings_f2sph")
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="text" type="Label" parent="Node2D"]
+offset_right = 27.0
+offset_bottom = 17.0
+text = "text"
+label_settings = SubResource("LabelSettings_nqjjx")
+
+[node name="buttonUp" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_5wrln")
+volume_db = -6.0
+max_polyphony = 3
+bus = &"SFX"
+
+[node name="buttonDown" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_8nn65")
+volume_db = -16.0
+max_polyphony = 3
+bus = &"SFX"
+
+[node name="buttonSelect" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("4_qrasv")
+volume_db = -6.0
+max_polyphony = 3
+bus = &"SFX"
+
+[connection signal="button_down" from="." to="." method="_on_button_down"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

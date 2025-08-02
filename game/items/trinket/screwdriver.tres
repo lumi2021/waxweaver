@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="ItemTrinket" load_steps=3 format=3 uid="uid://b0hjug0e6wdd8"]
+
+[ext_resource type="Script" uid="uid://c3r1q3r34yi20" path="res://item_resources/item_classes/ItemTrinket.gd" id="1_hd8gf"]
+[ext_resource type="Texture2D" uid="uid://dn2fk508m8r5m" path="res://items/trinket/screwdriver.png" id="2_xbs5y"]
+
+[resource]
+script = ExtResource("1_hd8gf")
+description = ""
+specialProperties = Array[String]([])
+sceneToLoad = ""
+addSpeed = 0.0
+addJump = 0.0
+addSwim = 0.0
+extraJumps = 0
+addDefense = 0
+addMeleeDamage = 0.0
+addRangedDamage = 0.0
+addHealingMultiplier = 0.0
+addKnockback = 0.0
+addAttackSpeed = 0.15
+addcriticalStrikeChance = 0
+miningMultiplier = 0.0
+statusImmunities = Array[String]([])
+itemName = "Screwdriver"
+subtext = ""
+desc = "+15% Attack speed"
+texture = ExtResource("2_xbs5y")
+maxStackSize = 1
+clickToUse = false
+infiniteReach = false

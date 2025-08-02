@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ItemTossable" load_steps=4 format=3 uid="uid://cj10ahfkyfffm"]
+
+[ext_resource type="PackedScene" uid="uid://djbsxj1oe4ph2" path="res://items/weapons/throwingknives/knife.tscn" id="1_7vgn7"]
+[ext_resource type="Script" uid="uid://km3rf2ejnrtl" path="res://item_resources/item_classes/ItemTossable.gd" id="1_lsoor"]
+[ext_resource type="Texture2D" uid="uid://37dp204mlevt" path="res://items/weapons/throwingknives/knife.png" id="3_s8v7r"]
+
+[resource]
+script = ExtResource("1_lsoor")
+speed = 400
+bounce = 0.5
+sceneToLoad = ExtResource("1_7vgn7")
+itemName = "Throwing Knife"
+subtext = ""
+desc = "damage: 12"
+texture = ExtResource("3_s8v7r")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

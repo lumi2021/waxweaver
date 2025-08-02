@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemWall" load_steps=3 format=3 uid="uid://b4n6nsgo474xn"]
+
+[ext_resource type="Script" uid="uid://ciejd0y16fbmh" path="res://item_resources/item_classes/ItemWall.gd" id="1_tu058"]
+[ext_resource type="Texture2D" uid="uid://cj1fpynhn8y75" path="res://items/walls/sunflowerWall.png" id="2_5xpog"]
+
+[resource]
+script = ExtResource("1_tu058")
+blockID = -150
+itemName = "Sunflower Brick Wall"
+subtext = ""
+desc = ""
+texture = ExtResource("2_5xpog")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

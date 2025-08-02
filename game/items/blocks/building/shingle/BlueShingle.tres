@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ItemTypeBlock" load_steps=3 format=3 uid="uid://7kivxb2yarpp"]
+
+[ext_resource type="Script" uid="uid://bjpd2qjm0k7qs" path="res://item_resources/item_classes/ItemTypeBlock.gd" id="1_lmrpa"]
+[ext_resource type="Texture2D" uid="uid://785otrje2ggy" path="res://items/blocks/building/shingle/blueShingle.png" id="2_8fcrx"]
+
+[resource]
+script = ExtResource("1_lmrpa")
+blockID = 142
+multiTileId = 2
+itemName = "Blue Shingle"
+subtext = ""
+desc = ""
+texture = ExtResource("2_8fcrx")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

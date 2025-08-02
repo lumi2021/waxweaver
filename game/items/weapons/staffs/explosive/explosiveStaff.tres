@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="ItemStaff" load_steps=5 format=3 uid="uid://c2p32eqmjk8dd"]
+
+[ext_resource type="Script" uid="uid://cao08bdwb7tvt" path="res://item_resources/item_classes/ItemStaff.gd" id="1_4imci"]
+[ext_resource type="Texture2D" uid="uid://cchjuo4x4x8vj" path="res://items/weapons/staffs/explosive/g.png" id="1_5fgne"]
+[ext_resource type="PackedScene" uid="uid://btxxp0357x78a" path="res://items/weapons/staffs/explosive/explosion.tscn" id="2_enud7"]
+[ext_resource type="Texture2D" uid="uid://rlbarytos4b1" path="res://items/weapons/staffs/explosive/explosive.png" id="4_hm5rp"]
+
+[resource]
+script = ExtResource("1_4imci")
+summoningObject = ExtResource("2_enud7")
+delay = 0.5
+ejectPower = 100
+emissiveTex = ExtResource("1_5fgne")
+manaCost = 20
+itemName = "Explosive Staff"
+subtext = ""
+desc = "mana cost: 20
+Fires an explosive bullet"
+texture = ExtResource("4_hm5rp")
+maxStackSize = 1
+clickToUse = false
+infiniteReach = false

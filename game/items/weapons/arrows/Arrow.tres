@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ItemArrow" load_steps=4 format=3 uid="uid://bylnrcbcmn102"]
+
+[ext_resource type="Script" uid="uid://bn1i2808evmlv" path="res://item_resources/item_classes/ItemArrow.gd" id="1_6m5rf"]
+[ext_resource type="Texture2D" uid="uid://cqtkayy2cs3q3" path="res://items/weapons/arrows/arrow.png" id="2_cdtts"]
+[ext_resource type="Script" uid="uid://tywvedof2je2" path="res://object_scenes/specialResource/statusEffects/StatusInflictor.gd" id="2_gusia"]
+
+[resource]
+script = ExtResource("1_6m5rf")
+damage = 3
+velocityMultiplier = 1.0
+statusInflictors = Array[ExtResource("2_gusia")]([])
+itemName = "Arrow"
+subtext = ""
+desc = ""
+texture = ExtResource("2_cdtts")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

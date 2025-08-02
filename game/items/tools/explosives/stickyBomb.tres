@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="ItemExplosive" load_steps=3 format=3 uid="uid://5ttkocvjwr61"]
+
+[ext_resource type="Script" uid="uid://c4or7dic44wno" path="res://item_resources/item_classes/ItemExplosive.gd" id="1_1dg6i"]
+[ext_resource type="Texture2D" uid="uid://bsvd7k6bqejqe" path="res://items/tools/explosives/stickyBomb.png" id="2_a4dl7"]
+
+[resource]
+script = ExtResource("1_1dg6i")
+radius = 3
+delay = 4.0
+sticky = true
+speed = 300
+bounce = 0.5
+itemName = "Sticky Bomb"
+subtext = ""
+desc = ""
+texture = ExtResource("2_a4dl7")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

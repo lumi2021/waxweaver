@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://bak5ax47kioc"]
+
+[ext_resource type="Script" uid="uid://cuvdxt7j1u1ju" path="res://item_resources/Item.gd" id="1_6afon"]
+[ext_resource type="Texture2D" uid="uid://caq813so6f74l" path="res://items/blocks/ores/ironOreDrop.png" id="2_ni6o3"]
+
+[resource]
+script = ExtResource("1_6afon")
+itemName = "Iron Ore"
+subtext = ""
+desc = ""
+texture = ExtResource("2_ni6o3")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

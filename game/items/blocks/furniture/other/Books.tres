@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ItemRandomBlock" load_steps=3 format=3 uid="uid://dmb3hf277w3py"]
+
+[ext_resource type="Script" uid="uid://co3hgtfx2vm" path="res://item_resources/item_classes/ItemRandomBlock.gd" id="1_iueb8"]
+[ext_resource type="Texture2D" uid="uid://dfn1l0em01utn" path="res://items/blocks/furniture/other/bookItem.png" id="2_k7o8u"]
+
+[resource]
+script = ExtResource("1_iueb8")
+blockID = 121
+multiTileRange = 8
+itemName = "Book"
+subtext = ""
+desc = "Can be placed"
+texture = ExtResource("2_k7o8u")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

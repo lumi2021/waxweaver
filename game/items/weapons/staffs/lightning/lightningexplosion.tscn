@@ -1,0 +1,59 @@
+[gd_scene load_steps=6 format=3 uid="uid://bh3ofcvtcs2ck"]
+
+[ext_resource type="Script" uid="uid://dg3n7smbmwj4o" path="res://items/weapons/staffs/lightning/lightningexplosion.gd" id="1_v6onb"]
+[ext_resource type="PackedScene" uid="uid://8jw6pruiu3cf" path="res://object_scenes/entity/components/hurtbox.tscn" id="1_vofra"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_j0fbk"]
+radius = 19.0
+
+[sub_resource type="Curve" id="Curve_bjt6o"]
+_limits = [0.0, 6.0, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0441176, 2.40634), -9.18931, -9.18931, 0, 0, Vector2(0.224265, 0), 0.0, 0.0, 0, 0, Vector2(0.356618, 3.6435), -5.46279, -5.46279, 0, 0, Vector2(0.4375, 0), 0.0, 0.0, 0, 0, Vector2(0.621323, 3.40786), 0.0, 0.0, 0, 0, Vector2(0.992647, 0), 0.0, 0.0, 0, 0]
+point_count = 7
+
+[sub_resource type="Gradient" id="Gradient_hbjo4"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.401639, 0.680328, 0.844262, 0.913934, 0.963115)
+colors = PackedColorArray(1, 1, 1, 1, 0.666667, 1, 1, 1, 0.298039, 0.792157, 1, 0.478431, 0.298039, 0.792157, 1, 0, 0.298039, 0.792157, 1, 0.478431, 0.298039, 0.792157, 1, 0)
+
+[node name="lightningexplosion" type="Node2D"]
+script = ExtResource("1_v6onb")
+
+[node name="Hurtbox" parent="." instance=ExtResource("1_vofra")]
+damage = 30
+knockback = 4.0
+enemyName = "lightning"
+damageType = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("CircleShape2D_j0fbk")
+
+[node name="Hurtbox2" parent="." instance=ExtResource("1_vofra")]
+enemyBox = false
+damage = 25
+knockback = 2.0
+enemyName = "lightning"
+damageType = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox2"]
+shape = SubResource("CircleShape2D_j0fbk")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 32
+lifetime = 0.7
+one_shot = true
+explosiveness = 0.71
+lifetime_randomness = 0.39
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 27.4
+initial_velocity_max = 204.89
+angular_velocity_min = -572.05
+angular_velocity_max = 562.19
+orbit_velocity_min = -1.0
+orbit_velocity_max = 1.0
+angle_min = -720.0
+angle_max = 720.0
+scale_amount_curve = SubResource("Curve_bjt6o")
+color_ramp = SubResource("Gradient_hbjo4")

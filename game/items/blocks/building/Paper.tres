@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemBlock" load_steps=3 format=3 uid="uid://dw0eu40wr8mj0"]
+
+[ext_resource type="Script" uid="uid://dtm3y7ouvvwk6" path="res://item_resources/item_classes/ItemBlock.gd" id="1_bohkt"]
+[ext_resource type="Texture2D" uid="uid://wtho4au3qf05" path="res://items/blocks/building/paper.png" id="2_ai84j"]
+
+[resource]
+script = ExtResource("1_bohkt")
+blockID = 61
+itemName = "Paper Block"
+subtext = ""
+desc = ""
+texture = ExtResource("2_ai84j")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

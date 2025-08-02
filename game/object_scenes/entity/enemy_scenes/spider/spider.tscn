@@ -1,0 +1,84 @@
+[gd_scene load_steps=16 format=3 uid="uid://xt3vfsegvgjj"]
+
+[ext_resource type="Script" uid="uid://dajpkprmp57mn" path="res://object_scenes/entity/enemy_scenes/spider/spider.gd" id="1_rpbfy"]
+[ext_resource type="Texture2D" uid="uid://b6xs2nif25drt" path="res://object_scenes/entity/enemy_scenes/spider/sprite.png" id="2_cn8la"]
+[ext_resource type="PackedScene" uid="uid://84sah16y8gwq" path="res://object_scenes/entity/components/delete_me_outside_of_chunk.tscn" id="3_f6yp8"]
+[ext_resource type="Script" uid="uid://druwkya4fdlbt" path="res://object_scenes/entity/components/health_component.gd" id="3_gfi00"]
+[ext_resource type="PackedScene" uid="uid://c05kukkqfrg40" path="res://object_scenes/entity/components/hitbox.tscn" id="4_ei6ps"]
+[ext_resource type="Script" uid="uid://1b40bx8yjosq" path="res://object_scenes/specialResource/lootTables/LootTable.gd" id="5_ba1cl"]
+[ext_resource type="PackedScene" uid="uid://8jw6pruiu3cf" path="res://object_scenes/entity/components/hurtbox.tscn" id="5_tyfpu"]
+[ext_resource type="Script" uid="uid://cibriy4spaxs8" path="res://object_scenes/specialResource/lootTables/RollableItem.gd" id="6_nwrfc"]
+[ext_resource type="Script" uid="uid://tywvedof2je2" path="res://object_scenes/specialResource/statusEffects/StatusInflictor.gd" id="9_nx6ue"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_arcvd"]
+radius = 3.8
+
+[sub_resource type="Resource" id="Resource_cleda"]
+script = ExtResource("6_nwrfc")
+id = 3004
+amountMin = 2
+amountMax = 3
+weight = 1000
+
+[sub_resource type="Resource" id="Resource_igsjl"]
+script = ExtResource("5_ba1cl")
+rollType = 2
+rollCount = 1
+table = Array[ExtResource("6_nwrfc")]([SubResource("Resource_cleda")])
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k1ben"]
+radius = 7.0
+
+[sub_resource type="Resource" id="Resource_swkgj"]
+script = ExtResource("9_nx6ue")
+effectName = "poison"
+seconds = 5.0
+chance = 25
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bm3sh"]
+radius = 6.0
+
+[node name="spider" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "healthComp")]
+collision_layer = 128
+script = ExtResource("1_rpbfy")
+sprite = NodePath("Sprite")
+healthComp = NodePath("HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_arcvd")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_cn8la")
+hframes = 4
+
+[node name="wallcast" type="RayCast2D" parent="Sprite"]
+target_position = Vector2(7, 0)
+
+[node name="DeleteMeOutsideOfChunk" parent="." instance=ExtResource("3_f6yp8")]
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("3_gfi00")
+maxHealth = 15
+defense = 4
+loottable = SubResource("Resource_igsjl")
+moneyToDrop = 8
+
+[node name="Hitbox" parent="." node_paths=PackedStringArray("healthComponent", "colliderShape") instance=ExtResource("4_ei6ps")]
+healthComponent = NodePath("../HealthComponent")
+enemyBox = null
+invincTime = null
+colliderShape = NodePath("CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_k1ben")
+
+[node name="Hurtbox" parent="." instance=ExtResource("5_tyfpu")]
+damage = 16
+knockback = 0.2
+enemyName = "spider"
+statusInflictors = Array[ExtResource("9_nx6ue")]([SubResource("Resource_swkgj")])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("CircleShape2D_bm3sh")
+
+[connection signal="smacked" from="HealthComponent" to="." method="_on_health_component_smacked"]

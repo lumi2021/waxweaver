@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ItemSpear" load_steps=3 format=3 uid="uid://bxyx5lbf6hcqs"]
+
+[ext_resource type="Script" uid="uid://40chpeeclaww" path="res://item_resources/item_classes/ItemSpear.gd" id="1_u3fvw"]
+[ext_resource type="Texture2D" uid="uid://bfih7vctuepvx" path="res://items/weapons/spears/ancientSpear.png" id="2_hts03"]
+
+[resource]
+script = ExtResource("1_u3fvw")
+damage = 40
+speedMult = 0.8
+itemName = "Ancient Spear"
+subtext = ""
+desc = "damage:  40"
+texture = ExtResource("2_hts03")
+maxStackSize = 1
+clickToUse = false
+infiniteReach = false

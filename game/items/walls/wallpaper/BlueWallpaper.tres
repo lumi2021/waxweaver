@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemWall" load_steps=3 format=3 uid="uid://cv16u1u1fv4os"]
+
+[ext_resource type="Script" uid="uid://ciejd0y16fbmh" path="res://item_resources/item_classes/ItemWall.gd" id="1_7cigm"]
+[ext_resource type="Texture2D" uid="uid://cy8kcg6twp6p4" path="res://items/walls/wallpaper/blueWallpaper.png" id="2_dnlor"]
+
+[resource]
+script = ExtResource("1_7cigm")
+blockID = -143
+itemName = "Blue Wallpaper"
+subtext = ""
+desc = ""
+texture = ExtResource("2_dnlor")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

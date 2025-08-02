@@ -1,0 +1,170 @@
+[gd_scene load_steps=27 format=3 uid="uid://cx52pej1x1k6c"]
+
+[ext_resource type="Script" uid="uid://dg4e7sktul0w4" path="res://object_scenes/entity/enemy_scenes/bosses/shipBossForest/boss_ship.gd" id="1_favl4"]
+[ext_resource type="PackedScene" uid="uid://meikam2oyy13" path="res://object_scenes/entity/components/health_component.tscn" id="2_7ituk"]
+[ext_resource type="Script" uid="uid://1b40bx8yjosq" path="res://object_scenes/specialResource/lootTables/LootTable.gd" id="3_l1vov"]
+[ext_resource type="PackedScene" uid="uid://84sah16y8gwq" path="res://object_scenes/entity/components/delete_me_outside_of_chunk.tscn" id="3_vg6w2"]
+[ext_resource type="Texture2D" uid="uid://boydqy3mcdk2v" path="res://object_scenes/entity/enemy_scenes/bosses/shipBossForest/idle.png" id="3_vvna7"]
+[ext_resource type="Script" uid="uid://cibriy4spaxs8" path="res://object_scenes/specialResource/lootTables/RollableItem.gd" id="4_7dmrj"]
+[ext_resource type="PackedScene" uid="uid://c05kukkqfrg40" path="res://object_scenes/entity/components/hitbox.tscn" id="4_rjc2y"]
+[ext_resource type="PackedScene" uid="uid://8jw6pruiu3cf" path="res://object_scenes/entity/components/hurtbox.tscn" id="5_rcdpc"]
+[ext_resource type="Texture2D" uid="uid://drre76kq8r6ee" path="res://object_scenes/entity/enemy_scenes/bosses/shipBossForest/angry.png" id="6_0c1kt"]
+
+[sub_resource type="Resource" id="Resource_2u0ia"]
+script = ExtResource("4_7dmrj")
+id = 3075
+amountMin = 1
+amountMax = 1
+weight = 1000
+
+[sub_resource type="Resource" id="Resource_64aa2"]
+script = ExtResource("4_7dmrj")
+id = 3003
+amountMin = 12
+amountMax = 26
+weight = 1000
+
+[sub_resource type="Resource" id="Resource_6200d"]
+script = ExtResource("4_7dmrj")
+id = 3150
+amountMin = 35
+amountMax = 40
+weight = 1000
+
+[sub_resource type="Resource" id="Resource_8dt1n"]
+script = ExtResource("4_7dmrj")
+id = 3170
+amountMin = 1
+amountMax = 1
+weight = 1000
+
+[sub_resource type="Resource" id="Resource_p26w1"]
+script = ExtResource("4_7dmrj")
+id = 3138
+amountMin = 1
+amountMax = 1
+weight = 100
+
+[sub_resource type="Resource" id="Resource_bs1u3"]
+script = ExtResource("4_7dmrj")
+id = 3177
+amountMin = 1
+amountMax = 1
+weight = 1000
+
+[sub_resource type="Resource" id="Resource_6idsn"]
+script = ExtResource("3_l1vov")
+rollType = 2
+rollCount = 1
+table = Array[ExtResource("4_7dmrj")]([SubResource("Resource_2u0ia"), SubResource("Resource_64aa2"), SubResource("Resource_6200d"), SubResource("Resource_8dt1n"), SubResource("Resource_p26w1"), SubResource("Resource_bs1u3")])
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lndia"]
+size = Vector2(54, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_voa27"]
+atlas = ExtResource("6_0c1kt")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ai31"]
+atlas = ExtResource("6_0c1kt")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ge6b6"]
+atlas = ExtResource("6_0c1kt")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p2sfa"]
+atlas = ExtResource("3_vvna7")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8dms0"]
+atlas = ExtResource("3_vvna7")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b3uyy"]
+atlas = ExtResource("3_vvna7")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ohjlr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_voa27")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ai31")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ge6b6")
+}],
+"loop": true,
+"name": &"angry",
+"speed": 19.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p2sfa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8dms0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b3uyy")
+}],
+"loop": true,
+"name": &"default",
+"speed": 19.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_w3ebs"]
+radius = 20.0
+height = 48.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_po3h3"]
+radius = 19.0
+height = 42.0
+
+[node name="BossShip" type="CharacterBody2D" node_paths=PackedStringArray("healthComp")]
+collision_layer = 128
+collision_mask = 0
+script = ExtResource("1_favl4")
+healthComp = NodePath("HealthComponent")
+
+[node name="HealthComponent" parent="." instance=ExtResource("2_7ituk")]
+maxHealth = 1000
+knockbackResist = 0.0
+defense = 6
+loottable = SubResource("Resource_6idsn")
+moneyToDrop = 600
+
+[node name="DeleteMeOutsideOfChunk" parent="." instance=ExtResource("3_vg6w2")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_lndia")
+
+[node name="axis" type="Node2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="axis"]
+sprite_frames = SubResource("SpriteFrames_ohjlr")
+
+[node name="Hitbox" parent="axis" node_paths=PackedStringArray("healthComponent", "colliderShape") instance=ExtResource("4_rjc2y")]
+position = Vector2(0, 4)
+healthComponent = NodePath("../../HealthComponent")
+colliderShape = NodePath("CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="axis/Hitbox"]
+shape = SubResource("CapsuleShape2D_w3ebs")
+
+[node name="ground" type="RayCast2D" parent="axis"]
+target_position = Vector2(0, 512)
+
+[node name="Hurtbox" parent="." instance=ExtResource("5_rcdpc")]
+damage = 28
+knockback = 0.8
+enemyName = "big praffin"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, 4)
+shape = SubResource("CapsuleShape2D_po3h3")
+
+[connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]

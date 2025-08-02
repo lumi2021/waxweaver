@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemBlock" load_steps=3 format=3 uid="uid://cio6fcda0g80h"]
+
+[ext_resource type="Script" uid="uid://dtm3y7ouvvwk6" path="res://item_resources/item_classes/ItemBlock.gd" id="1_p2ej1"]
+[ext_resource type="Texture2D" uid="uid://d2il8n52u1ayb" path="res://items/electrical/placer/placeritem1.png" id="2_dbdve"]
+
+[resource]
+script = ExtResource("1_p2ej1")
+blockID = 104
+itemName = "Placer"
+subtext = ""
+desc = "Places a block from a chest
+when energized.
+Interact to rotate."
+texture = ExtResource("2_dbdve")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

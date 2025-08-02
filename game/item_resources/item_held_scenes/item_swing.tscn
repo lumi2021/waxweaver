@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://bs18dnn7rrvnt"]
+
+[ext_resource type="Script" uid="uid://bu8epgckhiqpf" path="res://item_resources/item_held_scenes/item_swing.gd" id="1_vpor5"]
+[ext_resource type="Texture2D" uid="uid://bbhygnshkya87" path="res://object_scenes/player/hand.png" id="2_yqhsd"]
+[ext_resource type="PackedScene" uid="uid://8jw6pruiu3cf" path="res://object_scenes/entity/components/hurtbox.tscn" id="3_epa84"]
+[ext_resource type="Script" uid="uid://tywvedof2je2" path="res://object_scenes/specialResource/statusEffects/StatusInflictor.gd" id="4_lyabm"]
+
+[sub_resource type="Resource" id="Resource_m5oe3"]
+script = ExtResource("4_lyabm")
+effectName = ""
+seconds = 2.0
+chance = 100
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oq2lk"]
+size = Vector2(22, 4)
+
+[node name="itemSwing" type="Node2D" node_paths=PackedStringArray("sprite", "handSprite")]
+script = ExtResource("1_vpor5")
+sprite = NodePath("holder/sprite")
+handSprite = NodePath("holder/handSprite")
+
+[node name="holder" type="Node2D" parent="."]
+rotation = -1.0472
+
+[node name="sprite" type="Sprite2D" parent="holder"]
+position = Vector2(1, -1)
+offset = Vector2(8, -8)
+
+[node name="handSprite" type="Sprite2D" parent="holder"]
+modulate = Color(1, 0.784314, 0.333333, 1)
+position = Vector2(2, -2)
+texture = ExtResource("2_yqhsd")
+
+[node name="Hurtbox" parent="holder" instance=ExtResource("3_epa84")]
+rotation = -0.785398
+enemyBox = false
+enemyName = "player"
+statusInflictors = Array[ExtResource("4_lyabm")]([SubResource("Resource_m5oe3")])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="holder/Hurtbox"]
+position = Vector2(13, 0)
+shape = SubResource("RectangleShape2D_oq2lk")
+disabled = true

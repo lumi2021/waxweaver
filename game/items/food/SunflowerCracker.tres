@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="ItemFood" load_steps=4 format=3 uid="uid://xcmclf57m21q"]
+
+[ext_resource type="Script" uid="uid://cuotwfncnpc6y" path="res://item_resources/item_classes/ItemFood.gd" id="1_0d85f"]
+[ext_resource type="Texture2D" uid="uid://csnhh05pm3u5t" path="res://items/food/sunflowerCracker.png" id="2_0eigr"]
+[ext_resource type="Script" uid="uid://tywvedof2je2" path="res://object_scenes/specialResource/statusEffects/StatusInflictor.gd" id="2_6oejh"]
+
+[resource]
+script = ExtResource("1_0d85f")
+healingAmount = 10
+eatTime = 0.8
+particleColor = Color(0.890196, 0.52549, 0.341176, 1)
+statusInflictors = Array[ExtResource("2_6oejh")]([])
+itemName = "Sunflower Cracker"
+subtext = ""
+desc = ""
+texture = ExtResource("2_0eigr")
+maxStackSize = 5
+clickToUse = false
+infiniteReach = false

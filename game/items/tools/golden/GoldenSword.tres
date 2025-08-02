@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ItemDamage" load_steps=4 format=3 uid="uid://bghyg5ohox48c"]
+
+[ext_resource type="Script" uid="uid://cp5eh57k5q5nb" path="res://item_resources/item_classes/ItemDamage.gd" id="1_ustmt"]
+[ext_resource type="Script" uid="uid://tywvedof2je2" path="res://object_scenes/specialResource/statusEffects/StatusInflictor.gd" id="2_au7aa"]
+[ext_resource type="Texture2D" uid="uid://cu8x4j022wj4y" path="res://items/tools/golden/goldenSword.png" id="2_f5ad6"]
+
+[resource]
+script = ExtResource("1_ustmt")
+damage = 10
+animSpeed = 5.0
+knockbackMult = 1.0
+weaponScale = 1.0
+statusInflictors = Array[ExtResource("2_au7aa")]([])
+itemName = "Golden Sword"
+subtext = ""
+desc = ""
+texture = ExtResource("2_f5ad6")
+maxStackSize = 1
+clickToUse = false
+infiniteReach = false

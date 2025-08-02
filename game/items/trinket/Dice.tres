@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="ItemTrinket" load_steps=3 format=3 uid="uid://bwwbqybalkf5g"]
+
+[ext_resource type="Script" uid="uid://c3r1q3r34yi20" path="res://item_resources/item_classes/ItemTrinket.gd" id="1_myb8r"]
+[ext_resource type="Texture2D" uid="uid://li8xkhiegji7" path="res://items/trinket/dice.png" id="2_i465a"]
+
+[resource]
+script = ExtResource("1_myb8r")
+description = ""
+specialProperties = Array[String]([])
+sceneToLoad = ""
+addSpeed = 0.0
+addJump = 0.0
+addSwim = 0.0
+extraJumps = 0
+addDefense = 0
+addMeleeDamage = 0.0
+addRangedDamage = 0.0
+addHealingMultiplier = 0.0
+addKnockback = 0.0
+addAttackSpeed = 0.0
+addcriticalStrikeChance = 4
+miningMultiplier = 0.0
+statusImmunities = Array[String]([])
+itemName = "Dice"
+subtext = ""
+desc = "+4% critical strike chance"
+texture = ExtResource("2_i465a")
+maxStackSize = 1
+clickToUse = false
+infiniteReach = false

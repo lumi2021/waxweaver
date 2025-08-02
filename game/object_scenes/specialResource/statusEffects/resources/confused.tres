@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="StatusEffect" load_steps=4 format=3 uid="uid://cw8gul4dqoonw"]
+
+[ext_resource type="Texture2D" uid="uid://v8tem6oytp8o" path="res://object_scenes/specialResource/statusEffects/playerDisplayIcon/confused.png" id="1_iluip"]
+[ext_resource type="Script" uid="uid://be1sywj1qim6m" path="res://object_scenes/specialResource/statusEffects/StatusEffect.gd" id="1_ptu26"]
+[ext_resource type="PackedScene" uid="uid://bgkafiqwqag7t" path="res://object_scenes/specialResource/statusEffects/effectParticles/confusedpart.tscn" id="2_0vuys"]
+
+[resource]
+script = ExtResource("1_ptu26")
+displayName = "Confused"
+icon = ExtResource("1_iluip")
+description = "uuhh... derrr...."
+dyeColor = Color(1, 1, 1, 1)
+particle = ExtResource("2_0vuys")
+incompatibleEffects = Array[String]([])

@@ -1,0 +1,56 @@
+[gd_scene load_steps=6 format=3 uid="uid://6ika2h43wj5d"]
+
+[ext_resource type="Script" uid="uid://ddutffl7eb0il" path="res://item_resources/item_held_scenes/item_fish_rod.gd" id="1_yr84a"]
+[ext_resource type="Texture2D" uid="uid://dfpk6g4nr5ade" path="res://items/tools/fishingRods/woodRodNoLine.png" id="2_le6rl"]
+[ext_resource type="Texture2D" uid="uid://bbhygnshkya87" path="res://object_scenes/player/hand.png" id="3_d6b4d"]
+[ext_resource type="Texture2D" uid="uid://ccidpelhg6e3g" path="res://items/tools/fishingRods/bobber.png" id="4_45lth"]
+
+[sub_resource type="Curve" id="Curve_y2ub8"]
+_limits = [0.0, 4.0, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 47.2964, 0, 0, Vector2(0.0992647, 1.87915), 1.52611, 1.52611, 0, 0, Vector2(1, 0), -4.24883, 0.0, 0, 0]
+point_count = 3
+
+[node name="itemFishRod" type="Node2D" node_paths=PackedStringArray("handSprite")]
+script = ExtResource("1_yr84a")
+handSprite = NodePath("pivot/handSprite")
+
+[node name="pivot" type="Node2D" parent="."]
+
+[node name="sprite" type="Sprite2D" parent="pivot"]
+position = Vector2(10, -2)
+texture = ExtResource("2_le6rl")
+
+[node name="handSprite" type="Sprite2D" parent="pivot"]
+modulate = Color(1, 0.784314, 0.333333, 1)
+position = Vector2(4, 2)
+texture = ExtResource("3_d6b4d")
+
+[node name="Bobber" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(17, -5)
+texture = ExtResource("4_45lth")
+offset = Vector2(0, 1)
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+modulate = Color(0.368627, 0.701961, 0.796078, 1)
+position = Vector2(17, -5)
+emitting = false
+amount = 2
+lifetime = 0.7
+local_coords = true
+emission_shape = 1
+emission_sphere_radius = 2.0
+direction = Vector2(0, -1)
+spread = 14.73
+gravity = Vector2(0, 100)
+initial_velocity_min = 34.28
+initial_velocity_max = 41.33
+angular_velocity_min = -20.15
+angular_velocity_max = 11.7
+angle_min = -720.0
+angle_max = 720.0
+scale_amount_curve = SubResource("Curve_y2ub8")
+
+[node name="Line2D" type="Line2D" parent="."]
+position = Vector2(16, -7)
+width = 1.0

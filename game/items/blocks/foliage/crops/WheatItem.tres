@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://ublwiisl8un6"]
+
+[ext_resource type="Script" uid="uid://cuvdxt7j1u1ju" path="res://item_resources/Item.gd" id="1_okxjy"]
+[ext_resource type="Texture2D" uid="uid://c4kcwxd5j3t1s" path="res://items/blocks/foliage/crops/wheatItem.png" id="2_0boha"]
+
+[resource]
+script = ExtResource("1_okxjy")
+itemName = "Wheat"
+subtext = ""
+desc = ""
+texture = ExtResource("2_0boha")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

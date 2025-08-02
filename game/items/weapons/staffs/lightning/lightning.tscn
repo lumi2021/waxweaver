@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://dsfhpye1k1fbr"]
+
+[ext_resource type="Script" uid="uid://dv6tgdgxdo5a2" path="res://items/weapons/staffs/lightning/lightning.gd" id="1_7yn3o"]
+[ext_resource type="Texture2D" uid="uid://bq73qac5rj7bq" path="res://items/weapons/staffs/lightning/zap.png" id="2_mnrwm"]
+
+[sub_resource type="Curve" id="Curve_rmchv"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.21831, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -4.5701, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_8qxjh"]
+offsets = PackedFloat32Array(0, 0.454918)
+colors = PackedColorArray(0.52549, 1, 1, 0.2, 1, 1, 1, 1)
+
+[node name="Lightning" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_7yn3o")
+creatureSlots = 0
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(160, 0)
+collision_mask = 641
+collide_with_areas = true
+
+[node name="Line2D" type="Line2D" parent="."]
+z_index = 3
+width = 6.0
+width_curve = SubResource("Curve_rmchv")
+gradient = SubResource("Gradient_8qxjh")
+texture = ExtResource("2_mnrwm")
+texture_mode = 2
+
+[node name="Line2D2" type="Line2D" parent="."]
+z_index = 3
+width = 6.0
+width_curve = SubResource("Curve_rmchv")
+gradient = SubResource("Gradient_8qxjh")
+texture = ExtResource("2_mnrwm")
+texture_mode = 2

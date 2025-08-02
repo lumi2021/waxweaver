@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="StatusEffect" load_steps=3 format=3 uid="uid://by05fxyntxfc5"]
+
+[ext_resource type="Script" uid="uid://be1sywj1qim6m" path="res://object_scenes/specialResource/statusEffects/StatusEffect.gd" id="1_f7st7"]
+[ext_resource type="Texture2D" uid="uid://d0b0advist7p8" path="res://object_scenes/specialResource/statusEffects/playerDisplayIcon/fragile.png" id="1_ut0hq"]
+
+[resource]
+script = ExtResource("1_f7st7")
+displayName = "Fragile"
+icon = ExtResource("1_ut0hq")
+description = "defense halved!"
+dyeColor = Color(1, 0.686275, 0.662745, 1)
+incompatibleEffects = Array[String]([])

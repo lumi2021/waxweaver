@@ -1,0 +1,63 @@
+[gd_scene load_steps=8 format=3 uid="uid://doctvq0wxktvg"]
+
+[ext_resource type="Script" uid="uid://7818ksmncpyc" path="res://ui_scenes/shop/shop_slot.gd" id="1_p7alp"]
+[ext_resource type="Texture2D" uid="uid://bodffw8kjtfe2" path="res://ui_scenes/shop/soldOut.png" id="2_fa33f"]
+[ext_resource type="Texture2D" uid="uid://dsx26qk658wlo" path="res://items/food/bread.png" id="2_qtxcn"]
+[ext_resource type="Texture2D" uid="uid://cfpnwrfbjmq36" path="res://ui_scenes/playerHUD/crafting/craftingIcon.png" id="2_uj81g"]
+[ext_resource type="FontFile" uid="uid://c3vw44vws5n61" path="res://zeeg/font/I-pixel-u.ttf" id="5_n4pi8"]
+[ext_resource type="Texture2D" uid="uid://fg673m7x5i6d" path="res://ui_scenes/shop/sale.png" id="6_rayae"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_d8r6e"]
+font = ExtResource("5_n4pi8")
+font_size = 8
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[node name="ShopSlot" type="ColorRect"]
+custom_minimum_size = Vector2(24, 24)
+offset_right = 24.0
+offset_bottom = 24.0
+color = Color(1, 1, 1, 0)
+script = ExtResource("1_p7alp")
+
+[node name="bg" type="Sprite2D" parent="."]
+position = Vector2(12, 12)
+texture = ExtResource("2_uj81g")
+
+[node name="itemSprite" type="Sprite2D" parent="."]
+position = Vector2(12, 12)
+texture = ExtResource("2_qtxcn")
+
+[node name="soldOutSprite" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(12, 12)
+texture = ExtResource("2_fa33f")
+
+[node name="price" type="Label" parent="."]
+layout_mode = 0
+offset_left = -5.0
+offset_top = 17.0
+offset_right = 24.0
+offset_bottom = 32.0
+text = "$123"
+label_settings = SubResource("LabelSettings_d8r6e")
+horizontal_alignment = 2
+
+[node name="purchase" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 22.0
+offset_bottom = 22.0
+mouse_filter = 1
+flat = true
+
+[node name="Sale" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(12, 12)
+texture = ExtResource("6_rayae")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="pressed" from="purchase" to="." method="_on_purchase_pressed"]

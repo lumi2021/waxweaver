@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemBonemeal" load_steps=3 format=3 uid="uid://dbd85cw00avun"]
+
+[ext_resource type="Script" uid="uid://ppy05yj2fmuw" path="res://item_resources/item_classes/ItemBonemeal.gd" id="1_aq3ls"]
+[ext_resource type="Texture2D" uid="uid://4mgvi28tonqj" path="res://items/material/bonemeal/bonemeal.png" id="2_iow4k"]
+
+[resource]
+script = ExtResource("1_aq3ls")
+strength = 4500
+itemName = "Fertilizer"
+subtext = ""
+desc = "Ages any block half a day"
+texture = ExtResource("2_iow4k")
+maxStackSize = 99
+clickToUse = true
+infiniteReach = false

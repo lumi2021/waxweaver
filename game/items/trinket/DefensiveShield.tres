@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="ItemTrinket" load_steps=3 format=3 uid="uid://d3ibiac8h4ydw"]
+
+[ext_resource type="Script" uid="uid://c3r1q3r34yi20" path="res://item_resources/item_classes/ItemTrinket.gd" id="1_dw53k"]
+[ext_resource type="Texture2D" uid="uid://brun8s10hnwou" path="res://items/trinket/defensiveShield.png" id="2_e3818"]
+
+[resource]
+script = ExtResource("1_dw53k")
+description = ""
+specialProperties = Array[String]([])
+sceneToLoad = ""
+addSpeed = 0.0
+addJump = 0.0
+addSwim = 0.0
+extraJumps = 0
+addDefense = 2
+addMeleeDamage = 0.0
+addRangedDamage = 0.0
+addHealingMultiplier = 0.0
+addKnockback = 0.15
+addAttackSpeed = 0.0
+addcriticalStrikeChance = 0
+miningMultiplier = 0.0
+statusImmunities = Array[String]([])
+itemName = "Defensive Shield"
+subtext = ""
+desc = "+15% knockback
++2 defense"
+texture = ExtResource("2_e3818")
+maxStackSize = 1
+clickToUse = false
+infiniteReach = false

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://ckua6p88myjmx"]
+
+[ext_resource type="Script" uid="uid://cuvdxt7j1u1ju" path="res://item_resources/Item.gd" id="1_dw2um"]
+[ext_resource type="Texture2D" uid="uid://dfli6hpcyyqbl" path="res://items/blocks/ores/copperOreDrop.png" id="2_su6nr"]
+
+[resource]
+script = ExtResource("1_dw2um")
+itemName = "Copper Ore"
+subtext = ""
+desc = ""
+texture = ExtResource("2_su6nr")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

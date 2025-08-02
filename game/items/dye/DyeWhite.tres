@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://c1adkakcvwf5q"]
+
+[ext_resource type="Script" uid="uid://cuvdxt7j1u1ju" path="res://item_resources/Item.gd" id="1_p5k3k"]
+[ext_resource type="Texture2D" uid="uid://w1gof4o11nxi" path="res://items/dye/dyeWhite.png" id="2_mey21"]
+
+[resource]
+script = ExtResource("1_p5k3k")
+itemName = "White Dye"
+subtext = ""
+desc = ""
+texture = ExtResource("2_mey21")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

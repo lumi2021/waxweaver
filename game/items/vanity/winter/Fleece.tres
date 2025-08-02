@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemArmorLegs" load_steps=4 format=3 uid="uid://dtyi6j40awrfk"]
+
+[ext_resource type="Script" uid="uid://dg75m766w7qry" path="res://item_resources/item_classes/ItemArmorLegs.gd" id="1_b5rda"]
+[ext_resource type="Texture2D" uid="uid://35rxd08mqm3a" path="res://items/vanity/winter/fleeceArmor.png" id="1_jl12l"]
+[ext_resource type="Texture2D" uid="uid://ce7r3lilqbsr5" path="res://items/vanity/winter/fleece.png" id="3_lngqx"]
+
+[resource]
+script = ExtResource("1_b5rda")
+defense = 1
+armorTexture = ExtResource("1_jl12l")
+itemName = "Fleece"
+subtext = ""
+desc = "( goes on the legs )"
+texture = ExtResource("3_lngqx")
+maxStackSize = 1
+clickToUse = false
+infiniteReach = false

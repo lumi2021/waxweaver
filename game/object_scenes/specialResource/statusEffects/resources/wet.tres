@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="StatusEffect" load_steps=4 format=3 uid="uid://c1hk48y517b8m"]
+
+[ext_resource type="PackedScene" uid="uid://c3u73ljmpakkl" path="res://object_scenes/specialResource/statusEffects/effectParticles/wetPart.tscn" id="1_36fxg"]
+[ext_resource type="Texture2D" uid="uid://bhqqxawgw2nne" path="res://object_scenes/specialResource/statusEffects/playerDisplayIcon/wet.png" id="1_a6kh5"]
+[ext_resource type="Script" uid="uid://be1sywj1qim6m" path="res://object_scenes/specialResource/statusEffects/StatusEffect.gd" id="1_r7sbl"]
+
+[resource]
+script = ExtResource("1_r7sbl")
+displayName = "Wet"
+icon = ExtResource("1_a6kh5")
+description = "you're wet!"
+dyeColor = Color(0.811765, 0.811765, 0.811765, 1)
+particle = ExtResource("1_36fxg")
+incompatibleEffects = Array[String]([])

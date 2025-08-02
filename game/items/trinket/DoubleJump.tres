@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="ItemTrinket" load_steps=3 format=3 uid="uid://gnp3ikbbpvig"]
+
+[ext_resource type="Script" uid="uid://c3r1q3r34yi20" path="res://item_resources/item_classes/ItemTrinket.gd" id="1_e8i5u"]
+[ext_resource type="Texture2D" uid="uid://cyotp4dmr634p" path="res://items/trinket/doubleJump.png" id="2_0erva"]
+
+[resource]
+script = ExtResource("1_e8i5u")
+description = ""
+specialProperties = Array[String]([])
+sceneToLoad = ""
+addSpeed = 0.0
+addJump = 0.0
+addSwim = 0.0
+extraJumps = 1
+addDefense = 0
+addMeleeDamage = 0.0
+addRangedDamage = 0.0
+addHealingMultiplier = 0.0
+addKnockback = 0.0
+addAttackSpeed = 0.0
+addcriticalStrikeChance = 0
+miningMultiplier = 0.0
+statusImmunities = Array[String]([])
+itemName = "Cool Feather"
+subtext = ""
+desc = "Gain an additional jump"
+texture = ExtResource("2_0erva")
+maxStackSize = 1
+clickToUse = false
+infiniteReach = false

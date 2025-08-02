@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://cdj1vc8at07ig"]
+
+[ext_resource type="Script" uid="uid://cuvdxt7j1u1ju" path="res://item_resources/Item.gd" id="1_mrhxf"]
+[ext_resource type="Texture2D" uid="uid://c8awvkihikd6x" path="res://items/material/toughWax.png" id="2_fe8c8"]
+
+[resource]
+script = ExtResource("1_mrhxf")
+itemName = "Sticky Wax"
+subtext = ""
+desc = ""
+texture = ExtResource("2_fe8c8")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

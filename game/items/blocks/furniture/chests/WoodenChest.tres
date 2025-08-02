@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemBlock" load_steps=3 format=3 uid="uid://8sq27vjwgdvf"]
+
+[ext_resource type="Script" uid="uid://dtm3y7ouvvwk6" path="res://item_resources/item_classes/ItemBlock.gd" id="1_onpts"]
+[ext_resource type="Texture2D" uid="uid://c5xocmxovs4vm" path="res://items/blocks/furniture/chests/woodenChest.png" id="2_apjhx"]
+
+[resource]
+script = ExtResource("1_onpts")
+blockID = 33
+itemName = "Wooden Chest"
+subtext = ""
+desc = ""
+texture = ExtResource("2_apjhx")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

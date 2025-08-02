@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="ItemMultitile" load_steps=3 format=3 uid="uid://cjsqbfq6f62lc"]
+
+[ext_resource type="Script" uid="uid://cjb3fu57wnodq" path="res://item_resources/item_classes/ItemMultitile.gd" id="1_e3y4v"]
+[ext_resource type="Texture2D" uid="uid://d38fawnds3s38" path="res://items/blocks/furniture/pinwheel/item.png" id="2_3idp1"]
+
+[resource]
+script = ExtResource("1_e3y4v")
+blockID = 168
+size = Vector2i(1, 1)
+grounded = true
+needsWalls = false
+runLoad = true
+itemName = "Pinwheel"
+subtext = ""
+desc = ""
+texture = ExtResource("2_3idp1")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

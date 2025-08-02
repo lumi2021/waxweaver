@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ItemHammer" load_steps=4 format=3 uid="uid://drnm00u6tt71w"]
+
+[ext_resource type="Script" uid="uid://wvwt1oeruroq" path="res://item_resources/item_classes/ItemHammer.gd" id="1_su2bb"]
+[ext_resource type="Texture2D" uid="uid://d2madsks052wm" path="res://items/tools/flimsy/flimsyHammer.png" id="2_56rkj"]
+[ext_resource type="Script" uid="uid://tywvedof2je2" path="res://object_scenes/specialResource/statusEffects/StatusInflictor.gd" id="2_wemhw"]
+
+[resource]
+script = ExtResource("1_su2bb")
+damage = 50
+animSpeed = 10.0
+knockbackMult = 1.0
+weaponScale = 1.0
+statusInflictors = Array[ExtResource("2_wemhw")]([])
+itemName = "Flimsy Hammer"
+subtext = ""
+desc = ""
+texture = ExtResource("2_56rkj")
+maxStackSize = 1
+clickToUse = true
+infiniteReach = false

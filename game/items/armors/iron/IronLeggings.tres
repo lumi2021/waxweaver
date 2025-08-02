@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemArmorLegs" load_steps=4 format=3 uid="uid://dn5pj50bbii0v"]
+
+[ext_resource type="Texture2D" uid="uid://wlnembq2aq07" path="res://items/armors/iron/ironLegs.png" id="1_ejnwt"]
+[ext_resource type="Script" uid="uid://dg75m766w7qry" path="res://item_resources/item_classes/ItemArmorLegs.gd" id="1_xjhpb"]
+[ext_resource type="Texture2D" uid="uid://kle4j243ot1t" path="res://items/armors/iron/ironFeet.png" id="3_k8i3g"]
+
+[resource]
+script = ExtResource("1_xjhpb")
+defense = 4
+armorTexture = ExtResource("1_ejnwt")
+itemName = "Iron Leggings"
+subtext = ""
+desc = ""
+texture = ExtResource("3_k8i3g")
+maxStackSize = 1
+clickToUse = false
+infiniteReach = false

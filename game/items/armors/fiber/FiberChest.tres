@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemArmorChest" load_steps=4 format=3 uid="uid://qh4c2vhh4dbv"]
+
+[ext_resource type="Script" uid="uid://dbxw3bntn8ipr" path="res://item_resources/item_classes/ItemArmorChest.gd" id="1_ekx6h"]
+[ext_resource type="Texture2D" uid="uid://dlnjqi5jkbp06" path="res://items/armors/fiber/fibercuirass.png" id="1_pr4ky"]
+[ext_resource type="Texture2D" uid="uid://b2k2u5bxf361l" path="res://items/armors/fiber/chest.png" id="3_f2t6w"]
+
+[resource]
+script = ExtResource("1_ekx6h")
+defense = 9
+armorTexture = ExtResource("1_pr4ky")
+itemName = "Fiber Chestplate"
+subtext = ""
+desc = ""
+texture = ExtResource("3_f2t6w")
+maxStackSize = 1
+clickToUse = false
+infiniteReach = false

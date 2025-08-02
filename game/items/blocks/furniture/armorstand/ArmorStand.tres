@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ItemArmorStand" load_steps=3 format=3 uid="uid://cs7vd873kxdh6"]
+
+[ext_resource type="Script" uid="uid://cjspwu3mlj4kn" path="res://item_resources/item_classes/ItemArmorStand.gd" id="1_31wfm"]
+[ext_resource type="Texture2D" uid="uid://5vxwn4ebdq8o" path="res://items/blocks/furniture/armorstand/armorstand.png" id="2_fd2f5"]
+
+[resource]
+script = ExtResource("1_31wfm")
+blockID = 167
+size = Vector2i(1, 2)
+grounded = true
+needsWalls = false
+runLoad = true
+itemName = "Armor Stand"
+subtext = ""
+desc = "Right click with armor
+or vanity items to place
+it on the stand"
+texture = ExtResource("2_fd2f5")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ItemHammer" load_steps=4 format=3 uid="uid://bo4c00ruy0toy"]
+
+[ext_resource type="Script" uid="uid://wvwt1oeruroq" path="res://item_resources/item_classes/ItemHammer.gd" id="1_xwwjw"]
+[ext_resource type="Texture2D" uid="uid://dxgl85yvycnsg" path="res://items/tools/hammers/mallet.png" id="2_3m3pb"]
+[ext_resource type="Script" uid="uid://tywvedof2je2" path="res://object_scenes/specialResource/statusEffects/StatusInflictor.gd" id="2_5vxv4"]
+
+[resource]
+script = ExtResource("1_xwwjw")
+damage = 1
+animSpeed = 4.0
+knockbackMult = 1.0
+weaponScale = 1.0
+statusInflictors = Array[ExtResource("2_5vxv4")]([])
+itemName = "Mallet"
+subtext = ""
+desc = "used for breaking wall tiles"
+texture = ExtResource("2_3m3pb")
+maxStackSize = 1
+clickToUse = false
+infiniteReach = false

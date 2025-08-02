@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="ItemExplosive" load_steps=3 format=3 uid="uid://bisiedkqtjso7"]
+
+[ext_resource type="Script" uid="uid://c4or7dic44wno" path="res://item_resources/item_classes/ItemExplosive.gd" id="1_rtdwh"]
+[ext_resource type="Texture2D" uid="uid://b2dhl17qihee7" path="res://items/tools/explosives/dynamite.png" id="2_c7315"]
+
+[resource]
+script = ExtResource("1_rtdwh")
+radius = 5
+delay = 3.0
+sticky = false
+speed = 300
+bounce = 0.5
+itemName = "Dynamite"
+subtext = ""
+desc = ""
+texture = ExtResource("2_c7315")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

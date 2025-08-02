@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemArmorHelmet" load_steps=4 format=3 uid="uid://n7i8u3vtue76"]
+
+[ext_resource type="Script" uid="uid://beu3nk5m7mn2g" path="res://item_resources/item_classes/ItemArmorHelmet.gd" id="1_dx6l5"]
+[ext_resource type="Texture2D" uid="uid://7a7l6rqjfdgj" path="res://items/vanity/finalGroup/backwardshat.png" id="1_mmb5i"]
+[ext_resource type="Texture2D" uid="uid://3hq1b75mhvpd" path="res://items/vanity/finalGroup/backwardshatitem.png" id="3_kbost"]
+
+[resource]
+script = ExtResource("1_dx6l5")
+defense = 1
+armorTexture = ExtResource("1_mmb5i")
+itemName = "Backwards Cap"
+subtext = ""
+desc = ""
+texture = ExtResource("3_kbost")
+maxStackSize = 1
+clickToUse = false
+infiniteReach = false

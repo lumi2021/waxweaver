@@ -1,0 +1,139 @@
+[gd_scene load_steps=22 format=3 uid="uid://bp8oi2l7sxfwv"]
+
+[ext_resource type="Script" uid="uid://cwk7mpy4c7kk0" path="res://object_scenes/entity/enemy_scenes/evilBird/evil_bird.gd" id="1_6ektk"]
+[ext_resource type="PackedScene" uid="uid://meikam2oyy13" path="res://object_scenes/entity/components/health_component.tscn" id="2_myc62"]
+[ext_resource type="Texture2D" uid="uid://btuok63qm5xgd" path="res://object_scenes/entity/enemy_scenes/evilBird/spr.png" id="2_sj408"]
+[ext_resource type="Script" uid="uid://1b40bx8yjosq" path="res://object_scenes/specialResource/lootTables/LootTable.gd" id="3_int5s"]
+[ext_resource type="PackedScene" uid="uid://84sah16y8gwq" path="res://object_scenes/entity/components/delete_me_outside_of_chunk.tscn" id="3_nn12s"]
+[ext_resource type="Texture2D" uid="uid://bh3nbcrutgy0o" path="res://object_scenes/entity/enemy_scenes/evilBird/stand.png" id="4_85gly"]
+[ext_resource type="Script" uid="uid://cibriy4spaxs8" path="res://object_scenes/specialResource/lootTables/RollableItem.gd" id="4_rlqay"]
+[ext_resource type="PackedScene" uid="uid://c05kukkqfrg40" path="res://object_scenes/entity/components/hitbox.tscn" id="5_ly7sk"]
+[ext_resource type="PackedScene" uid="uid://8jw6pruiu3cf" path="res://object_scenes/entity/components/hurtbox.tscn" id="6_rqsjp"]
+
+[sub_resource type="Resource" id="Resource_ruqlv"]
+script = ExtResource("4_rlqay")
+id = 3095
+amountMin = 1
+amountMax = 1
+weight = 750
+
+[sub_resource type="Resource" id="Resource_jagty"]
+script = ExtResource("4_rlqay")
+id = 3036
+amountMin = 1
+amountMax = 1
+weight = 10
+
+[sub_resource type="Resource" id="Resource_pleow"]
+script = ExtResource("3_int5s")
+rollType = 2
+rollCount = 1
+table = Array[ExtResource("4_rlqay")]([SubResource("Resource_ruqlv"), SubResource("Resource_jagty")])
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_w7wf0"]
+radius = 3.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nph44"]
+atlas = ExtResource("4_85gly")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gkj0e"]
+atlas = ExtResource("2_sj408")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_laadu"]
+atlas = ExtResource("2_sj408")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_egi5n"]
+atlas = ExtResource("2_sj408")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b80hc"]
+atlas = ExtResource("2_sj408")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0ejhr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nph44")
+}],
+"loop": true,
+"name": &"chillin",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gkj0e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_laadu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_egi5n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b80hc")
+}],
+"loop": true,
+"name": &"default",
+"speed": 11.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sm5pu"]
+radius = 5.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_anxn3"]
+radius = 5.0
+
+[node name="EvilBird" type="CharacterBody2D" node_paths=PackedStringArray("healthComp")]
+collision_layer = 128
+collision_mask = 17
+script = ExtResource("1_6ektk")
+creatureSlots = 10
+healthComp = NodePath("HealthComponent")
+
+[node name="HealthComponent" parent="." instance=ExtResource("2_myc62")]
+maxHealth = 20
+knockbackResist = 0.8
+defense = 4
+loottable = SubResource("Resource_pleow")
+moneyToDrop = 10
+
+[node name="DeleteMeOutsideOfChunk" parent="." instance=ExtResource("3_nn12s")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_w7wf0")
+
+[node name="axis" type="Node2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="axis"]
+sprite_frames = SubResource("SpriteFrames_0ejhr")
+animation = &"chillin"
+autoplay = "chillin"
+offset = Vector2(0, -2)
+
+[node name="floorScanner" type="RayCast2D" parent="axis"]
+target_position = Vector2(0, 5)
+
+[node name="wallscanner" type="RayCast2D" parent="axis"]
+target_position = Vector2(5, 0)
+
+[node name="Hitbox" parent="." node_paths=PackedStringArray("healthComponent", "colliderShape") instance=ExtResource("5_ly7sk")]
+healthComponent = NodePath("../HealthComponent")
+colliderShape = NodePath("CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_sm5pu")
+
+[node name="Hurtbox" parent="." instance=ExtResource("6_rqsjp")]
+damage = 18
+enemyName = "bird"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("CircleShape2D_anxn3")
+
+[node name="pointAtPlayer" type="RayCast2D" parent="."]
+
+[connection signal="smacked" from="HealthComponent" to="." method="_on_health_component_smacked"]

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ItemBed" load_steps=3 format=3 uid="uid://bndpoduq5f1l1"]
+
+[ext_resource type="Script" uid="uid://m1mna1scp4om" path="res://item_resources/item_classes/ItemBed.gd" id="1_fl5fr"]
+[ext_resource type="Texture2D" uid="uid://bpbfsbe2ly8bf" path="res://items/blocks/furniture/beds/bed.png" id="2_am4hp"]
+
+[resource]
+script = ExtResource("1_fl5fr")
+blockID = 55
+grounded = true
+needsWalls = false
+bedType = 0
+itemName = "Bed"
+subtext = ""
+desc = "sets spawnpoint"
+texture = ExtResource("2_am4hp")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

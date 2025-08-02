@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=3 uid="uid://c1swhkiwcdnh6"]
+
+[ext_resource type="Texture2D" uid="uid://csibj827o7h0h" path="res://ui_scenes/mainMenu/saveSlot/rect.png" id="1_rfkhq"]
+[ext_resource type="Script" uid="uid://d2wrcu6bvdvjk" path="res://ui_scenes/achievements/medal_unlock_popup.gd" id="1_ri4u6"]
+[ext_resource type="Texture2D" uid="uid://bt5628hk1obw6" path="res://ui_scenes/achievements/icons/medal1.png" id="2_dmbfr"]
+
+[node name="medalUnlock" type="Node2D"]
+script = ExtResource("1_ri4u6")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+offset_left = -168.0
+offset_top = -60.0
+texture = ExtResource("1_rfkhq")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="icon" type="Sprite2D" parent="."]
+position = Vector2(-55, -55)
+texture = ExtResource("2_dmbfr")
+centered = false
+
+[node name="Label" type="Label" parent="."]
+modulate = Color(1, 0.784314, 0.333333, 1)
+offset_left = -160.0
+offset_top = -53.0
+offset_right = -59.0
+offset_bottom = -37.0
+text = "medal unlocked!"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+offset_left = -159.0
+offset_top = -31.0
+offset_right = -60.0
+offset_bottom = -12.0
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 0
+
+[node name="Label" type="Label" parent="ScrollContainer"]
+layout_mode = 2
+text = "pee pee pee pee pee poop!!"

@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ItemDamage" load_steps=4 format=3 uid="uid://b5oy8oawi5o0n"]
+
+[ext_resource type="Script" uid="uid://cp5eh57k5q5nb" path="res://item_resources/item_classes/ItemDamage.gd" id="1_1uiqy"]
+[ext_resource type="Script" uid="uid://tywvedof2je2" path="res://object_scenes/specialResource/statusEffects/StatusInflictor.gd" id="2_g6q24"]
+[ext_resource type="Texture2D" uid="uid://cl5p23exw5202" path="res://items/tools/copper/copperSword.png" id="2_knptb"]
+
+[resource]
+script = ExtResource("1_1uiqy")
+damage = 8
+animSpeed = 5.0
+knockbackMult = 1.0
+weaponScale = 1.0
+statusInflictors = Array[ExtResource("2_g6q24")]([])
+itemName = "Copper Sword"
+subtext = ""
+desc = ""
+texture = ExtResource("2_knptb")
+maxStackSize = 1
+clickToUse = false
+infiniteReach = false

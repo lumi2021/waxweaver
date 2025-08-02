@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemBlock" load_steps=3 format=3 uid="uid://dkhadwn0uq615"]
+
+[ext_resource type="Script" uid="uid://dtm3y7ouvvwk6" path="res://item_resources/item_classes/ItemBlock.gd" id="1_4kbie"]
+[ext_resource type="Texture2D" uid="uid://c1j74l4gdycej" path="res://items/blocks/natural/gravel.png" id="2_5g82v"]
+
+[resource]
+script = ExtResource("1_4kbie")
+blockID = 28
+itemName = "Gravel"
+subtext = ""
+desc = ""
+texture = ExtResource("2_5g82v")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemPlant" load_steps=3 format=3 uid="uid://cwimenvatqmax"]
+
+[ext_resource type="Script" uid="uid://c8bm37aoe7cax" path="res://item_resources/item_classes/ItemPlant.gd" id="1_dbgm0"]
+[ext_resource type="Texture2D" uid="uid://cosakwl5ub3rv" path="res://items/blocks/foliage/crops/lettuceSeeds.png" id="2_yvmn0"]
+
+[resource]
+script = ExtResource("1_dbgm0")
+blockToPlace = 148
+acceptableBlocks = Array[int]([35])
+descCanPlaceOn = "wet soil"
+itemName = "Lettuce Seed"
+subtext = ""
+desc = ""
+texture = ExtResource("2_yvmn0")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

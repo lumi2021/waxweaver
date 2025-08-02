@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="ItemBlock" load_steps=6 format=3 uid="uid://d26xhyacoiqys"]
+
+[ext_resource type="Script" uid="uid://dtm3y7ouvvwk6" path="res://item_resources/item_classes/ItemBlock.gd" id="1_uqyxp"]
+[ext_resource type="Texture2D" uid="uid://doncpofxu2t34" path="res://items/electrical/spitter/sucker1.png" id="2_7fg7y"]
+[ext_resource type="Texture2D" uid="uid://cafgme14l74eg" path="res://items/electrical/spitter/sucker2.png" id="3_hq4gf"]
+[ext_resource type="Texture2D" uid="uid://mdkt26qgphik" path="res://items/electrical/spitter/sucker3.png" id="4_urcjo"]
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_0i31o"]
+frames = 3
+speed_scale = 3.0
+frame_0/texture = ExtResource("2_7fg7y")
+frame_1/texture = ExtResource("3_hq4gf")
+frame_1/duration = 1.0
+frame_2/texture = ExtResource("4_urcjo")
+frame_2/duration = 1.0
+
+[resource]
+script = ExtResource("1_uqyxp")
+blockID = 161
+itemName = "Sucker"
+subtext = ""
+desc = "Sucks in the nearest block
+when energized. Has a max
+range of 16 blocks.
+Interact to rotate."
+texture = SubResource("AnimatedTexture_0i31o")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

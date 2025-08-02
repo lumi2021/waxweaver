@@ -1,0 +1,57 @@
+[gd_scene load_steps=8 format=3 uid="uid://bqrhlj054mkga"]
+
+[ext_resource type="Script" uid="uid://cyc45koh8bayp" path="res://items/weapons/staffs/bouncer/bouncer.gd" id="1_b0n1h"]
+[ext_resource type="PackedScene" uid="uid://8jw6pruiu3cf" path="res://object_scenes/entity/components/hurtbox.tscn" id="2_lx72p"]
+[ext_resource type="Texture2D" uid="uid://mf6pwpiprm5c" path="res://items/material/string.png" id="4_x2nqm"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wrhcr"]
+radius = 2.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vb75v"]
+radius = 5.0
+
+[sub_resource type="Curve" id="Curve_sbrhw"]
+_limits = [0.0, 0.5, 0.0, 1.0]
+_data = [Vector2(0, 0.0139728), 0.0, 1.52611, 0, 0, Vector2(0.0661765, 0.337991), 1.00151, 1.00151, 0, 0, Vector2(1, 0), -0.995804, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_27rrj"]
+offsets = PackedFloat32Array(0, 0.27459, 1)
+colors = PackedColorArray(0.482353, 0.301961, 1, 1, 0.987334, 0.24, 1, 1, 1, 1, 1, 1)
+
+[node name="bouncer" type="CharacterBody2D"]
+collision_layer = 0
+script = ExtResource("1_b0n1h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_wrhcr")
+
+[node name="Hurtbox" parent="." instance=ExtResource("2_lx72p")]
+enemyBox = false
+damage = 3
+enemyName = "bounce"
+damageType = 2
+ignoreDefense = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("CircleShape2D_vb75v")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(0, 1)
+hit_from_inside = true
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 32
+lifetime = 0.2
+texture = ExtResource("4_x2nqm")
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_max = 2.55
+angular_velocity_min = -720.0
+angular_velocity_max = 720.0
+orbit_velocity_min = -0.2
+orbit_velocity_max = 0.2
+scale_amount_curve = SubResource("Curve_sbrhw")
+color_ramp = SubResource("Gradient_27rrj")
+
+[connection signal="hitsomething" from="Hurtbox" to="." method="_on_hurtbox_hitsomething"]

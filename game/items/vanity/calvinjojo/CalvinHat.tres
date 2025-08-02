@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemArmorHelmet" load_steps=4 format=3 uid="uid://ck8iyyfi8623u"]
+
+[ext_resource type="Script" uid="uid://beu3nk5m7mn2g" path="res://item_resources/item_classes/ItemArmorHelmet.gd" id="1_baj6p"]
+[ext_resource type="Texture2D" uid="uid://7oxu17wgl21j" path="res://items/vanity/calvinjojo/calvinOutfitHead.png" id="1_kuy73"]
+[ext_resource type="Texture2D" uid="uid://nxuvoya6xmw" path="res://items/vanity/calvinjojo/hat.png" id="3_p1hjs"]
+
+[resource]
+script = ExtResource("1_baj6p")
+defense = 1
+armorTexture = ExtResource("1_kuy73")
+itemName = "Calvin's hat"
+subtext = ""
+desc = ""
+texture = ExtResource("3_p1hjs")
+maxStackSize = 1
+clickToUse = false
+infiniteReach = false

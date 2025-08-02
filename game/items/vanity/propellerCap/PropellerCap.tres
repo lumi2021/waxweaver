@@ -1,0 +1,39 @@
+[gd_resource type="Resource" script_class="ItemArmorHelmet" load_steps=10 format=3 uid="uid://dgn3a16qihwwc"]
+
+[ext_resource type="Texture2D" uid="uid://cwu5q21yyejfp" path="res://items/vanity/propellerCap/capFrame1.png" id="1_1l3vc"]
+[ext_resource type="Script" uid="uid://beu3nk5m7mn2g" path="res://item_resources/item_classes/ItemArmorHelmet.gd" id="1_idpdy"]
+[ext_resource type="Texture2D" uid="uid://dwqq5wnwegk3q" path="res://items/vanity/propellerCap/capFrame2.png" id="2_8pbxj"]
+[ext_resource type="Texture2D" uid="uid://c5o8kade3goe2" path="res://items/vanity/propellerCap/capFrame3.png" id="3_tg5sx"]
+[ext_resource type="Texture2D" uid="uid://cigla5jj082km" path="res://items/vanity/propellerCap/capItem1.png" id="5_lnmlg"]
+[ext_resource type="Texture2D" uid="uid://dt18mfx7b6ojq" path="res://items/vanity/propellerCap/capItem2.png" id="6_vqfvy"]
+[ext_resource type="Texture2D" uid="uid://cqmsnt4sxv44x" path="res://items/vanity/propellerCap/capItem3.png" id="7_x10ox"]
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_snwvq"]
+frames = 3
+frame_0/texture = ExtResource("1_1l3vc")
+frame_0/duration = 0.1
+frame_1/texture = ExtResource("2_8pbxj")
+frame_1/duration = 0.1
+frame_2/texture = ExtResource("3_tg5sx")
+frame_2/duration = 0.1
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_brefw"]
+frames = 3
+frame_0/texture = ExtResource("5_lnmlg")
+frame_0/duration = 0.1
+frame_1/texture = ExtResource("6_vqfvy")
+frame_1/duration = 0.1
+frame_2/texture = ExtResource("7_x10ox")
+frame_2/duration = 0.1
+
+[resource]
+script = ExtResource("1_idpdy")
+defense = 5
+armorTexture = SubResource("AnimatedTexture_snwvq")
+itemName = "Propeller Cap"
+subtext = ""
+desc = "\"yippee!!\""
+texture = SubResource("AnimatedTexture_brefw")
+maxStackSize = 1
+clickToUse = false
+infiniteReach = false

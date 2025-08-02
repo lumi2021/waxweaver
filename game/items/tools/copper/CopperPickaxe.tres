@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="ItemMining" load_steps=4 format=3 uid="uid://d0g6ere0mmink"]
+
+[ext_resource type="Script" uid="uid://c01agv76tdm1o" path="res://item_resources/item_classes/ItemMining.gd" id="1_kcyqg"]
+[ext_resource type="Script" uid="uid://tywvedof2je2" path="res://object_scenes/specialResource/statusEffects/StatusInflictor.gd" id="2_8ritl"]
+[ext_resource type="Texture2D" uid="uid://ds7qelhyem6yi" path="res://items/tools/copper/copperPickaxe.png" id="2_e2gfn"]
+
+[resource]
+script = ExtResource("1_kcyqg")
+miningMultiplier = 1.2
+miningLevel = 1
+damage = 1
+animSpeed = 6.0
+knockbackMult = 1.3
+weaponScale = 1.0
+statusInflictors = Array[ExtResource("2_8ritl")]([])
+itemName = "Copper Pickaxe"
+subtext = ""
+desc = "can mine gold"
+texture = ExtResource("2_e2gfn")
+maxStackSize = 1
+clickToUse = false
+infiniteReach = false

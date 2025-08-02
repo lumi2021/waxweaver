@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://bvqs7dlcx3rq6"]
+
+[ext_resource type="Script" uid="uid://cuvdxt7j1u1ju" path="res://item_resources/Item.gd" id="1_va4de"]
+[ext_resource type="Texture2D" uid="uid://1floemitm6gf" path="res://items/dye/dyePink.png" id="2_f7vt7"]
+
+[resource]
+script = ExtResource("1_va4de")
+itemName = "Pink Dye"
+subtext = ""
+desc = ""
+texture = ExtResource("2_f7vt7")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

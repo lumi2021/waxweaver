@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemBlock" load_steps=3 format=3 uid="uid://dequew3mkkrte"]
+
+[ext_resource type="Script" uid="uid://dtm3y7ouvvwk6" path="res://item_resources/item_classes/ItemBlock.gd" id="1_6cgfc"]
+[ext_resource type="Texture2D" uid="uid://bgbbxn44kg676" path="res://items/blocks/building/pinkWood.png" id="2_bxkft"]
+
+[resource]
+script = ExtResource("1_6cgfc")
+blockID = 136
+itemName = "Pink Wood"
+subtext = ""
+desc = ""
+texture = ExtResource("2_bxkft")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false

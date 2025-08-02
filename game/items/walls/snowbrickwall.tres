@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemWall" load_steps=3 format=3 uid="uid://bijyrge8d6tfw"]
+
+[ext_resource type="Script" uid="uid://ciejd0y16fbmh" path="res://item_resources/item_classes/ItemWall.gd" id="1_0114h"]
+[ext_resource type="Texture2D" uid="uid://crqjqliyc8n5u" path="res://items/walls/snowbrickwall.png" id="2_01o5s"]
+
+[resource]
+script = ExtResource("1_0114h")
+blockID = -109
+itemName = "Snow Brick Wall"
+subtext = ""
+desc = ""
+texture = ExtResource("2_01o5s")
+maxStackSize = 99
+clickToUse = false
+infiniteReach = false
